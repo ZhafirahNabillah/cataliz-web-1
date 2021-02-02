@@ -13,25 +13,17 @@
         <div class="shadow-bottom"></div>
         <div class="main-menu-content">
             <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i data-feather="home"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Dashboards</span><span class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
-                    <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="dashboard-analytics.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="Analytics">Analytics</span></a>
-                        </li>
-                        <li class="active"><a class="d-flex align-items-center" href="dashboard-ecommerce.html"><i data-feather="circle"></i><span class="menu-item" data-i18n="eCommerce">eCommerce</span></a>
-                        </li>
-                    </ul>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
                 </li>
-                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
+                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Management</span><i data-feather="more-horizontal"></i>
                 </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="monitor"></i><span class="menu-title text-truncate" data-i18n="Email">Users</span></a>
+                <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Clients</span></a>
                 </li>
-				<li class=" nav-item"><a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Clients</span></a>
+				        <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Plans</span></a>
                 </li>
-				<li class=" nav-item"><a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Plans</span></a>
+				        <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Todo">Agenda</span></a>
                 </li>
-				<li class=" nav-item"><a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Todo">Agenda</span></a>
-                </li>
-				<li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
+				        <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>
                 </li>
@@ -348,7 +340,7 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/documentation"><i data-feather="folder"></i><span class="menu-title text-truncate" data-i18n="Documentation">Documentation</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="https://pixinvent.ticksy.com/"><i data-feather="life-buoy"></i><span class="menu-title text-truncate" data-i18n="Raise Support">Raise Support</span></a>
-                </li>
+                </li> -->
             </ul>
         </div>
     </div>

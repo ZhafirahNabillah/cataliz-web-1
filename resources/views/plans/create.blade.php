@@ -47,7 +47,7 @@
             <div class="content-body">
 				@if ($message = Session::get('success'))
 				<div class="alert alert-success alert-dissmisable">
-				  <h4 class="alert-heading">Success</h4>	
+				  <h4 class="alert-heading">Success</h4>
 				  <div class="alert-body">{{ $message }}</div>
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
@@ -55,9 +55,9 @@
 				</div>
 				@endif
                 <div class="row">
-                   
-					
-					
+
+
+
                 </div>
                 <!-- Basic table -->
                 <section id="basic-datatable">
@@ -68,7 +68,6 @@
 									  <h4 class="card-title">Create Plan</h4>
 								</div>
 								<div class="card-body">
-									<p class="card-text">Basic Information.</p>
 									<div class="row">
 										<div class="col-md-12 form-group">
 											<label for="fp-default">Full Name</label>
@@ -80,23 +79,48 @@
 											<label for="fp-default">Organization</label>
 											<input class="form-control" name="organization" id="organization"></input>
 										</div>
-										<div class="col-md-6 form-group">
-											<label for="fp-default">Program</label>
-											<input class="form-control" name="program" id="program"></input>
+                    <div class="col-md-6 form-group">
+											<label for="fp-default">Tanggal Kegiatan</label>
+											<input  type="date" class="form-control" name="organization" id="organization"></input>
 										</div>
+                      </div>
+                      <div class="row">
+    										<div class="col-md-12 form-group">
+    											<label for="fp-default">Objektif</label>
+                          <input class="form-control" name="organization" id="organization"></input>
+    										</div>
+    									</div>
+                      <div class="row">
+    										<div class="col-md-12 form-group">
+    											<label for="fp-default">Sukses Indikator</label>
+                          <input class="form-control" name="organization" id="organization"></input>
+    										</div>
+    									</div>
+                      <div class="row">
+    										<div class="col-md-12 form-group">
+    											<label for="fp-default">Pengembangan Area</label>
+                          <input class="form-control" name="organization" id="organization"></input>
+    										</div>
+    									</div>
+                      <div class="row">
+    										<div class="col-md-12 form-group">
+    											<label for="fp-default">Support</label>
+                          <input class="form-control" name="organization" id="organization"></input>
+    										</div>
+    									</div>
+                      <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
 									</div>
-								</div>	
-									<input class="form-control" name="name" id="mname"></input>
-								</div>	
+								</div>
+								</div>
 							</div>
 						</div>
-					</div>		
-					
+					</div>
+
                     <!-- Modal to add new record -->
                     <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
                         <div class="modal-dialog sidebar-sm">
                             <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-							
+
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                                 <div class="modal-header mb-1">
                                     <h5 class="modal-title" id="modalHeading"></h5>
@@ -131,26 +155,26 @@
                                         <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
                                         <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
                                     </div>
-                                    
+
                                     <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                                     <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                            <!-- </form>-->
-						   
+
                         </div>
                     </div>
 					<!-- End Modal -->
                 </section>
                 <!--/ Basic table -->
 
-                
+
 
             </div>
         </div>
     </div>
     <!-- END: Content-->
  @endsection
- 
+
  @push('scripts')
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
  <script type="text/javascript">
@@ -176,7 +200,7 @@
             cache: true
         }
     });
-	
+
 	$(".livesearch").on('change', function(e) {
     // Access to full data
     console.log($(this).select2('data'));
@@ -184,9 +208,9 @@
 	var dd = $(this).select2('data')[0];
 	$('#organization').val(dd.org);
 	$('#program').val(dd.pro);
-	
+
 	});
- 
+
   $(function () {
 
       $.ajaxSetup({
@@ -205,9 +229,9 @@
             {data: 'program', name: 'program'},
             {data: 'phone', name: 'phone'},
 			{
-                data: 'action', 
-                name: 'action', 
-                orderable: true, 
+                data: 'action',
+                name: 'action',
+                orderable: true,
                 searchable: true
             },
         ],
@@ -263,7 +287,7 @@
 				var $phone = full['phone'],
 					$output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
 							  '</div>';
-				return $output;				
+				return $output;
 			}
 		}
 		],
@@ -273,13 +297,13 @@
 		  displayLength: 7,
 		  lengthMenu: [7, 10, 25, 50, 75, 100],
 		  buttons: [
-			
+
 			{
 			  text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add Client',
 			  className: 'create-new btn btn-primary createNewClient',
 			  attr: {
 				'data-toggle': 'modal'
-				
+
 			  },
 			  init: function (api, node, config) {
 				$(node).removeClass('btn-secondary');
@@ -328,9 +352,9 @@
 			search: "<i data-feather='search'></i>",
 			searchPlaceholder: "Search records"
 		  }
-    
+
     });
-	
+
 	// create
 	$('body').on('click', '.createNewClient', function () {
 		$('#saveBtn').val("create-Client");
@@ -338,8 +362,8 @@
         $('#ClientForm').trigger("reset");
         $('#modalHeading').html("Create New Client");
 		$('#modals-slide-in').modal('show');
-	});	
-	
+	});
+
 	// edit
 	$('body').on('click', '.editClient', function () {
       var Client_id = $(this).data('id');
@@ -356,7 +380,7 @@
           $('#occupation').val(data.occupation);
       })
 	});
-	
+
 	// save data
 	$('#saveBtn').click(function (e) {
         e.preventDefault();
@@ -381,7 +405,7 @@
           }
       });
     });
-	
+
 	// delete
 	$('body').on('click', '.deleteClient', function (e) {
 
@@ -402,7 +426,15 @@
 			e.preventDefault();
 		}
     });
-	
-  });	
+
+  });
+
+
+  $(function () {
+        $('#datetimepicker11').datetimepicker({
+          daysOfWeekDisabled: [0, 6]
+        });
+  });
+
  </script>
  @endpush
