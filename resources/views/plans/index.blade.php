@@ -40,7 +40,7 @@
             <div class="content-body">
 				@if ($message = Session::get('success'))
 				<div class="alert alert-success alert-dissmisable">
-				  <h4 class="alert-heading">Success</h4>	
+				  <h4 class="alert-heading">Success</h4>
 				  <div class="alert-body">{{ $message }}</div>
 				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                 <span aria-hidden="true">×</span>
@@ -48,12 +48,13 @@
 				</div>
 				@endif
                 <div class="row">
-                   
+
 					<div class="col-12">
                         <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
                     </div>
-					
+
                 </div>
+                <br>
                 <!-- Basic table -->
                 <section id="basic-datatable">
                     <div class="row">
@@ -65,9 +66,8 @@
 											<th>No</th>
 											<th>Name</th>
 											<th>Organization</th>
-											<th>Coaching Program</th>
-											<th>Attachment</th>
-											<th>Date</th>
+											<th>Email</th>
+											<th>Handphone</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -76,13 +76,13 @@
 								</table>
 							</div>
 						</div>
-					</div>		
-					
+					</div>
+
                     <!-- Modal to add new record -->
                     <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
                         <div class="modal-dialog sidebar-sm">
                             <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-							
+
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                                 <div class="modal-header mb-1">
                                     <h5 class="modal-title" id="modalHeading"></h5>
@@ -117,26 +117,26 @@
                                         <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
                                         <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
                                     </div>
-                                    
+
                                     <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                                     <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                                 </div>
                            <!-- </form>-->
-						   
+
                         </div>
                     </div>
 					<!-- End Modal -->
                 </section>
                 <!--/ Basic table -->
 
-                
+
 
             </div>
         </div>
     </div>
     <!-- END: Content-->
  @endsection
- 
+
  @push('scripts')
  <script type="text/javascript">
   $(function () {
@@ -157,9 +157,9 @@
             {data: 'program', name: 'program'},
             {data: 'phone', name: 'phone'},
 			{
-                data: 'action', 
-                name: 'action', 
-                orderable: true, 
+                data: 'action',
+                name: 'action',
+                orderable: true,
                 searchable: true
             },
         ],
@@ -215,7 +215,7 @@
 				var $phone = full['phone'],
 					$output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
 							  '</div>';
-				return $output;				
+				return $output;
 			}
 		}
 		],
@@ -225,13 +225,13 @@
 		  displayLength: 7,
 		  lengthMenu: [7, 10, 25, 50, 75, 100],
 		  buttons: [
-			
+
 			{
 			  text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add Client',
 			  className: 'create-new btn btn-primary createNewClient',
 			  attr: {
 				'data-toggle': 'modal'
-				
+
 			  },
 			  init: function (api, node, config) {
 				$(node).removeClass('btn-secondary');
@@ -280,9 +280,9 @@
 			search: "<i data-feather='search'></i>",
 			searchPlaceholder: "Search records"
 		  }
-    
+
     });
-	
+
 	// create
 	$('body').on('click', '.createNewClient', function () {
 		$('#saveBtn').val("create-Client");
@@ -290,8 +290,8 @@
         $('#ClientForm').trigger("reset");
         $('#modalHeading').html("Create New Client");
 		$('#modals-slide-in').modal('show');
-	});	
-	
+	});
+
 	// edit
 	$('body').on('click', '.editClient', function () {
       var Client_id = $(this).data('id');
@@ -308,7 +308,7 @@
           $('#occupation').val(data.occupation);
       })
 	});
-	
+
 	// save data
 	$('#saveBtn').click(function (e) {
         e.preventDefault();
@@ -333,7 +333,7 @@
           }
       });
     });
-	
+
 	// delete
 	$('body').on('click', '.deleteClient', function (e) {
 
@@ -354,7 +354,7 @@
 			e.preventDefault();
 		}
     });
-	
-  });	
+
+  });
  </script>
  @endpush
