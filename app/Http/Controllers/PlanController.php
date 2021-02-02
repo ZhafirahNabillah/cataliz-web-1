@@ -52,8 +52,9 @@ class PlanController extends Controller
     {
         //
 		return view('plans.create');
+
     }
-	
+
 	public function ajaxClients(Request $request){
 		$clients= [];
 		if($request->has('q')){
@@ -65,7 +66,7 @@ class PlanController extends Controller
 			$clients =Client::orderby('name','asc')
 					->where('owner_id',Auth::user()->id)
             		->get();
-			
+
 		}
 	  /* $search = $request->search;
 
@@ -127,7 +128,7 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
