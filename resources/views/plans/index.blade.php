@@ -165,7 +165,6 @@
 <script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(function () {
-
         $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -201,7 +200,7 @@
 			}
 		}
         ],
-        
+
 		  language: {
 			paginate: {
 			  // remove previous & next text from pagination
@@ -211,9 +210,7 @@
 			search: "<i data-feather='search'></i>",
 			searchPlaceholder: "Search records"
 		  }
-
     });
-
 	// create
 	$('body').on('click', '.createNewClient', function () {
 		$('#saveBtn').val("create-Client");
@@ -222,7 +219,6 @@
         $('#modalHeading').html("Create New Client");
 		$('#modals-slide-in').modal('show');
 	});
-
 	// edit
 	$('body').on('click', '.editClient', function () {
       var Client_id = $(this).data('id');
@@ -239,24 +235,20 @@
           $('#occupation').val(data.occupation);
       })
 	});
-
 	// save data
 	$('#saveBtn').click(function (e) {
         e.preventDefault();
         $(this).html('Sending..');
-
         $.ajax({
           data: $('#ClientForm').serialize(),
           url: "",
           type: "POST",
           dataType: 'json',
           success: function (data) {
-
               $('#ClientForm').trigger("reset");
 			  $('#saveBtn').html('Submit');
               $('#modals-slide-in').modal('hide');
               table.draw();
-
           },
           error: function (data) {
               console.log('Error:', data);
@@ -264,13 +256,10 @@
           }
       });
     });
-
 	// delete
 	$('body').on('click', '.deleteClient', function (e) {
-
         var Client_id = $(this).data("id");
         if(confirm("Are You sure want to delete !")){
-
         $.ajax({
             type: "DELETE",
             url: ""+'/clients/'+Client_id,
@@ -285,7 +274,7 @@
 			e.preventDefault();
 		}
     });
-
   });
 </script>
+
 @endpush
