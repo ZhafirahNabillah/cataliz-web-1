@@ -94,8 +94,8 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'client_id' => 'required',
-            'organization' => 'required',
+            // 'client_id' => 'required',
+            // 'organization' => 'required',
             'date' => 'required',
             'objective' => 'required',
             'success_indicator' => 'required',
@@ -106,10 +106,10 @@ class PlanController extends Controller
         $plan = new Plan;
         $plan->client_id = $request->livesearch;
         $plan->date = $request->date;
-        $plan->objective = $request->objective;
-        $plan->success_indicator = $request->success_indicator;
-        $plan->development_areas = $request->development_areas;
-        $plan->support = $request->support;
+        $plan->objective = strip_tags($request->objective);
+        $plan->success_indicator = strip_tags($request->success_indicator);
+        $plan->development_areas = strip_tags($request->development_areas);
+        $plan->support = strip_tags($request->support);
         $plan->owner_id = Auth::user()->id;
         $plan->save();
 
