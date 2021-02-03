@@ -4,7 +4,7 @@
 
 @push('styles')
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -13,164 +13,220 @@
 
 @include('panels.sidemenu')
 <!-- BEGIN: Content-->
-    <div class="app-content content ">
-        <div class="content-overlay"></div>
-        <div class="header-navbar-shadow"></div>
-        <div class="content-wrapper">
-            <div class="content-header row">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                        <div class="col-12">
-                            <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
-                            <div class="breadcrumb-wrapper">
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="/">Home</a>
-                                    </li>
-									<li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Create Coaching Plans
-                                    </li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<div class="app-content content ">
+  <div class="content-overlay"></div>
+  <div class="header-navbar-shadow"></div>
+  <div class="content-wrapper">
+    <div class="content-header row">
+      <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+          <div class="col-12">
+            <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
+            <div class="breadcrumb-wrapper">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a>
+                </li>
+                <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
+                </li>
+                <li class="breadcrumb-item active">Create Coaching Plans
+                </li>
+              </ol>
             </div>
-            <div class="content-body">
-				@if ($message = Session::get('success'))
-				<div class="alert alert-success alert-dissmisable">
-				  <h4 class="alert-heading">Success</h4>
-				  <div class="alert-body">{{ $message }}</div>
-				  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">×</span>
-                                            </button>
-				</div>
-				@endif
-                <div class="row">
+          </div>
+        </div>
+      </div>
+    </div>
 
+    <div class="content-body">
+      @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-dissmisable">
+        <h4 class="alert-heading">Success</h4>
+        <div class="alert-body">{{ $message }}</div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      @endif
 
+      <!-- Basic table -->
+      <section id="basic-datatable">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Create Plan</h4>
+              </div>
+              <form action="{{route('plans.store')}}" method="post">
+                @csrf
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Full Name</label>
+                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror"
+                        name="livesearch" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                      </select>
+                      @error('livesearch')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
 
-                </div>
-                <!-- Basic table -->
-                <section id="basic-datatable">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card">
-								<div class="card-header">
-									  <h4 class="card-title">Create Plan</h4>
-								</div>
-								<div class="card-body">
-									<div class="row">
-										<div class="col-md-12 form-group">
-											<label for="fp-default">Full Name</label>
-											<select class="livesearch form-control" name="livesearch"></select>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-6 form-group">
-											<label for="fp-default">Organization</label>
-											<input class="form-control" name="organization" id="organization"></input>
-										</div>
+                  <div class="row">
                     <div class="col-md-6 form-group">
-											<label for="fp-default">Tanggal Kegiatan</label>
-											<input  type="date" class="form-control" name="organization" id="organization"></input>
-										</div>
-                      </div>
-                      <div class="row">
-    										<div class="col-md-12 form-group">
-    											<label for="fp-default">Objektif</label>
-                           <textarea class="form-control"> </textarea>
-    										</div>
-    									</div>
-                      <div class="row">
-    										<div class="col-md-12 form-group">
-    											<label for="fp-default">Sukses Indikator</label>
-                          <textarea class="form-control"> </textarea>
-    										</div>
-    									</div>
-                      <div class="row">
-    										<div class="col-md-12 form-group">
-    											<label for="fp-default">Pengembangan Area</label>
-                          <textarea class="form-control"> </textarea>
-    										</div>
-    									</div>
-                      <div class="row">
-    										<div class="col-md-12 form-group">
-    											<label for="fp-default">Support</label>
-                          <textarea class="form-control"> </textarea>
-    										</div>
-    									</div>
-                      <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-									</div>
-								</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-                    <!-- Modal to add new record -->
-                    <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-                        <div class="modal-dialog sidebar-sm">
-                            <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                                <div class="modal-header mb-1">
-                                    <h5 class="modal-title" id="modalHeading"></h5>
-                                </div>
-								<input type="hidden" name="Client_id" id="Client_id">
-                                <div class="modal-body flex-grow-1">
-                                    <div class="form-group">
-                                        <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                                        <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-                                    </div>
-									<label class="form-label" for="basic-icon-default-post">Phone</label>
-									<div class="input-group input-group-merge mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text" id="basic-addon5">+62</span>
-                                        </div>
-                                        <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone" >
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="basic-icon-default-email">Email</label>
-                                        <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-                                        <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-                                    </div>
-									<div class="form-group">
-                                        <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                                        <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-                                    </div>
-									<div class="form-group">
-                                        <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                                        <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-                                    </div>
-									<div class="form-group">
-                                        <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                                        <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                                    <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                                </div>
-                           <!-- </form>-->
-
-                        </div>
+                      <label for="fp-default">Organization</label>
+                      <input class="form-control" name="organization" id="organization" disabled>
                     </div>
-					<!-- End Modal -->
-                </section>
-                <!--/ Basic table -->
 
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Tanggal Kegiatan</label>
+                      <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
+                        value="{{ old('date') }}" autocomplete="date" autofocus>
+                      @error('date')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
 
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Objektif</label>
+                      <textarea class="form-control @error('objective') is-invalid @enderror" name="objective"
+                        id="objective" value="{{ old('objective') }}" autocomplete="objective"></textarea>
 
+                      @error('objective')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Sukses Indikator</label>
+                      <textarea class="form-control @error('success_indicator') is-invalid @enderror"
+                        name="success_indicator" id="success_indicator" value="{{ old('success_indicator') }}"
+                        autocomplete="success_indicator"></textarea>
+
+                      @error('success_indicator')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Pengembangan Area</label>
+                      <textarea class="form-control @error('development_areas') is-invalid @enderror"
+                        name="development_areas" id="development_areas" value="{{ old('development_areas') }}"
+                        autocomplete="development_areas"></textarea>
+
+                      @error('development_areas')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Support</label>
+                      <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
+                        value="{{ old('support') }}" autocomplete="support"></textarea>
+
+                      @error('support')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
+                </div>
+              </form>
             </div>
+          </div>
         </div>
     </div>
-    <!-- END: Content-->
- @endsection
+  </div>
 
- @push('scripts')
- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
- <script type="text/javascript">
-	 $('.livesearch').select2({
+  <!-- Modal to add new record -->
+  <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+    <div class="modal-dialog sidebar-sm">
+      <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+        <div class="modal-header mb-1">
+          <h5 class="modal-title" id="modalHeading"></h5>
+        </div>
+        <input type="hidden" name="Client_id" id="Client_id">
+        <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+            <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname"
+              placeholder="John Doe" aria-label="John Doe" />
+          </div>
+          <label class="form-label" for="basic-icon-default-post">Phone</label>
+          <div class="input-group input-group-merge mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon5">+62</span>
+            </div>
+            <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-email">Email</label>
+            <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+              placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+            <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-fullname">Organization</label>
+            <input id="organization" name="organization" type="text" class="form-control dt-full-name"
+              id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-fullname">Company</label>
+            <input id="company" name="company" type="text" class="form-control dt-full-name"
+              id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+            <input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+              id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+          </div>
+
+          <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+          <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+        </div>
+        <!-- </form>-->
+
+    </div>
+  </div>
+  <!-- End Modal -->
+  </section>
+  <!--/ Basic table -->
+
+
+
+</div>
+</div>
+</div>
+<!-- END: Content-->
+@endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script type="text/javascript">
+  $('.livesearch').select2({
         placeholder: 'Select clients',
         ajax: {
             url: "{{route('clients.search')}}",
@@ -428,5 +484,5 @@
         });
   });
 
- </script>
- @endpush
+</script>
+@endpush

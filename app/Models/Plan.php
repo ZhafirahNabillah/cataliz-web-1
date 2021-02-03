@@ -7,9 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Plan extends Model
 {
-    use HasFactory;
-	
-	public function client() {
+	use HasFactory;
+
+	protected $fillable = [
+		'client_id',
+		'date',
+		'objective',
+		'success_indicator',
+		'development_area',
+		'support',
+		'owner_id'
+	];
+
+	public function client()
+	{
 		return $this->belongsTo('App\Models\Client');
 	}
 }
