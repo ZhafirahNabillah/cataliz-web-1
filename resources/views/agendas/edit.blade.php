@@ -28,7 +28,7 @@
                                     </li>
 									<li class="breadcrumb-item"><a href="#">Agenda</a>
                                     </li>
-                                    <li class="breadcrumb-item active">Create Agenda
+                                    <li class="breadcrumb-item active">Edit Agenda
                                     </li>
                                 </ol>
                             </div>
@@ -60,37 +60,48 @@
                         <div class="col-12">
                             <div class="card">
                               <div class="card-header">
-									              <h4 class="card-title">Create Agenda</h4>
+									              <h4 class="card-title">Edit Agenda</h4>
 								            </div>
 								            <div class="card-body">
                               <div class="row">
                                 <div class="col-md-12 form-group">
                                   <label for="fp-default">Full Name</label>
                                   <select class="livesearch form-control" name="client_id"></select>
+                                  <input type="hidden" name="id" value="{{$agenda->id}}">
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="col-md-12 form-group">
                                   <label for="fp-default">Pilih Sesi</label>
                                   <select class="form-control" aria-label=".form-select-lg example" name="session">
-                                    <option selected hidden>Pilih Sesi</option>
-                                    <option value="1">Sesi 1</option>
-                                    <option value="2">Sesi 2</option>
-                                    <option value="3">Sesi 3</option>
-                                    <option value="4">Sesi 4</option>
-                                    <option value="5">Sesi 5</option>
-                                    <option value="6">Sesi 6</option>
+                                    <option selected>Pilih Sesi</option>
+                                    <option value="1" @if($agenda->session == 1) selected @endif>Sesi 1</option>
+                                    <option value="2" @if($agenda->session == 2) selected @endif>Sesi 2</option>
+                                    <option value="3" @if($agenda->session == 3) selected @endif>Sesi 3</option>
+                                    <option value="4" @if($agenda->session == 4) selected @endif>Sesi 4</option>
+                                    <option value="5" @if($agenda->session == 5) selected @endif>Sesi 5</option>
+                                    <option value="6" @if($agenda->session == 6) selected @endif>Sesi 6</option>
                                   </select>
                                 </div>
                               </div>
                               <div class="row">
-                                <div class="col-md-12 form-group">
+                                <div class="col-md-6 form-group">
                                   <label for="fp-default">Tipe Sesi</label>
                                   <select class="form-control" aria-label=".form-select-lg example" name="type_session">
-                                    <option selected hidden>Pilih Tipe Sesi</option>
-                                    <option value="Free">Free</option>
-                                    <option value="Paid">Paid</option>
+                                    <option selected>Pilih Tipe Sesi</option>
+                                    <option value="Free" @if($agenda->type_session == 'Free') selected @endif>Free</option>
+                                    <option value="Paid" @if($agenda->type_session == 'Paid') selected @endif>Paid</option>
                                   </select>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                  <label for="fp-default">Tanggal Kegiatan</label>
+                                  <input type="date" id="datepicker" class="form-control" name="date" value="{{ $agenda->date }}"></input>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12 form-group">
+                                  <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
+                                  <input name="duration" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Masukkan Lama Durasi Sesinya" value="{{ $agenda->duration }}"/>
                                 </div>
                               </div>
                               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>

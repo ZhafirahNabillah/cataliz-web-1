@@ -39,9 +39,9 @@
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 								</div>
 							@endif
-							<div class="row">
+							<div class="row mb-2">
 								<div class="col-12">
-									<a href='#' class="create-new btn btn-primary">Add New</a>
+									<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
 								</div>
 							</div>
 
@@ -49,7 +49,7 @@
 								<section id="basic-datatable">
 									<div class="row">
 										<div class="col-12">
-											<div class="card">
+											<div class="card py-1 px-2">
 												<table class="datatables-basic table yajra-datatable">
 													<thead>
 														<tr>
@@ -126,8 +126,6 @@
  @endsection
  
  @push('scripts')
- 	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
-	<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
  	<script type="text/javascript">
 	$(function () {
 
@@ -137,10 +135,11 @@
 			ajax: "",
 			columns: [
 				{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-				{data: 'session', name: 'session'},
-				{data: 'type_session', name: 'type_session'},
-				{data: 'attachment', name: 'attachment'},
 				{data: 'client.name', name: 'client.name'},
+				{data: 'session', name: 'session'},
+				{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
+				{data: 'duration', name: 'duration', defaultContent: '<i>-</i>'},
+				{data: 'status', name: 'status'},
 				{
                 data: 'action',
                 name: 'action',
@@ -148,6 +147,33 @@
                 searchable: true
       	},
 			]
+		});
+
+		$('body').on('click', '.deleteAgenda', function (e) {
+
+			var agenda_id = $(this).data("id");
+			console.log(agenda_id);
+			if(confirm("Are You sure want to delete !")){
+
+			$.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+    	});
+
+			$.ajax({
+					type: "DELETE",
+					url: ""+'/agendas/'+agenda_id,
+					success: function (data) {
+							table.draw();
+					},
+					error: function (data) {
+							console.log('Error:', data);
+					}
+			});
+			} else {
+			e.preventDefault();
+			}
 		});
 	});
  </script>
