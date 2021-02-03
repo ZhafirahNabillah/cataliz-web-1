@@ -34,13 +34,14 @@
 						<div class="content-body">
 							@if ($message = Session::get('success'))
 								<div class="alert alert-success alert-dissmisable">
-									<h4 class="alert-heading">Success</h4>
-									<div class="alert-body">{{ $message }}</div>
-									<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+										<h4 class="alert-heading">Success</h4>
+										<div class="alert-body">{{ $message }}</div>
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 								</div>
 							@endif
-							<div class="row mb-2">
-								<div class="col-12">
+
+							<div class="row mb-1 no-gutters">
+								<div class="col-md-12">
 									<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
 								</div>
 							</div>

@@ -66,7 +66,9 @@
                               <div class="row">
                                 <div class="col-md-12 form-group">
                                   <label for="fp-default">Full Name</label>
-                                  <select class="livesearch form-control" name="client_id"></select>
+                                  <select class="livesearch form-control" name="client_id">
+                                    <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
+                                  </select>
                                   <input type="hidden" name="id" value="{{$agenda->id}}">
                                 </div>
                               </div>
