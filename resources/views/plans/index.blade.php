@@ -163,7 +163,6 @@
 @push('scripts')
 <script type="text/javascript">
     $(function () {
-
         $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -199,7 +198,7 @@
 			}
 		}
         ],
-        
+
 		  language: {
 			paginate: {
 			  // remove previous & next text from pagination
@@ -209,9 +208,8 @@
 			search: "<i data-feather='search'></i>",
 			searchPlaceholder: "Search records"
 		  }
-
     });
-
   });
 </script>
+
 @endpush

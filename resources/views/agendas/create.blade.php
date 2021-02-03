@@ -35,14 +35,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
-                    <div class="form-group breadcrumb-right">
-                        <div class="dropdown">
-                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
-                            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i class="mr-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="mr-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="mr-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="content-body">
 				@if ($message = Session::get('success'))
@@ -68,14 +61,17 @@
 									  <h4 class="card-title">Create Agenda</h4>
 								</div>
 								<div class="card-body">
+                  <div class="row">
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Full Name</label>
                     <select class="livesearch form-control" name="livesearch"></select>
                   </div>
+                  </div>
+                  <div class="row">
                   <div class="col-md-12 form-group">
                   <label for="fp-default">Pilih Sesi</label>
                   <select class="form-control" aria-label=".form-select-lg example">
-                    <option selected>Open this select menu</option>
+                    <option selected>Pilih Sesi</option>
                     <option value="">Sesi 1</option>
                     <option value="">Sesi 2</option>
                     <option value="">Sesi 3</option>
@@ -84,15 +80,29 @@
                     <option value="">Sesi 6</option>
                   </select>
                   </div>
-                  <div class="col-md-12 form-group">
+                  </div>
+                  <div class="row">
+                  <div class="col-md-6 form-group">
                   <label for="fp-default">Tipe Sesi</label>
                   <select class="form-control" aria-label=".form-select-lg example">
+                    <option selected>Pilih Tipe Sesi</option>
                     <option value="">Free</option>
                     <option value="">Paid</option>
                   </select>
                   </div>
-                  <br>
-                  <br>
+                  <div class="col-md-6 form-group">
+                    <label for="fp-default">Tanggal Kegiatan</label>
+                    <input  type="date" class="form-control" name="" id=""></input>
+                  </div>
+                  </div>
+
+                    <div class="form-group">
+                            <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
+                            <input id="" name="" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Masukkan Lama Durasi Sesinya" aria-label="John Doe" />
+
+
+                  </div>
+
                       <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
 									</div>
 								</div>
