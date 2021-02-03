@@ -30,7 +30,6 @@
 												</div>
 										</div>
 								</div>
-
 						</div>
 						<div class="content-body">
 							@if ($message = Session::get('success'))
@@ -61,10 +60,6 @@
 															<th>Duration</th>
 															<th>Status</th>
 															<th>Action</th>
-															<!-- <th>Date</th>
-															<th>Duration</th>
-															<th>Status</th>
-															<th>Action</th> -->
 														</tr>
 													</thead>
 													<tbody>
@@ -129,7 +124,7 @@
 		</div>
 		<!-- END: Content-->
  @endsection
-
+ 
  @push('scripts')
  	<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css"/>
 	<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>

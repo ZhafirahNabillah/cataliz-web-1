@@ -170,6 +170,7 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
           }
         });
+
 	var table = $('.yajra-datatable').DataTable({
         processing: true,
         serverSide: true,
@@ -187,6 +188,7 @@
                 searchable: true
             },
         ],
+
 		columnDefs: [
 		{
 			targets: 4,
@@ -274,4 +276,5 @@
     });
   });
 </script>
+
 @endpush
