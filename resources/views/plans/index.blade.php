@@ -188,6 +188,51 @@
         ],
 
 		columnDefs: [
+            {
+          // Avatar image/badge, Name and post
+          targets: 1,
+          responsivePriority: 4,
+          render: function (data, type, full, meta) {
+            var $user_img = full['avatar'],
+              $name = full['client']['name'],
+              $post = full['client']['company'];
+			  $org = full['client']['organization'];
+            if ($user_img) {
+              // For Avatar image
+              var $output =
+                '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
+            } else {
+              // For Avatar badge
+              var stateNum = full['status'];
+              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+              var $state = states[stateNum],
+                $name = full['client']['name'],
+                $initials = $name.match(/\b\w/g) || [];
+              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+              $output = '<span class="avatar-content">' + $initials + '</span>';
+            }
+
+            var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
+            // Creates full output for row
+            var $row_output =
+              '<div class="d-flex justify-content-left align-items-center">' +
+              '<div class="avatar ' +
+              colorClass +
+              ' mr-1">' +
+              $output +
+              '</div>' +
+              '<div class="d-flex flex-column">' +
+              '<span class="emp_name text-truncate font-weight-bold">' +
+              $name +
+              '</span>' +
+              '<small class="emp_post text-truncate text-muted">' +
+              $post + ' - ' + $org +
+              '</small>' +
+              '</div>' +
+              '</div>';
+            return $row_output;
+          }
+        },
 		{
 			targets: 4,
 			render: function (data, type, full, meta) {
@@ -198,6 +243,60 @@
 			}
 		}
         ],
+
+        order: [[2, 'desc']],
+		dom:
+        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+		//   displayLength: 7,
+		//   lengthMenu: [7, 10, 25, 50, 75, 100],
+		//   buttons: [
+			
+		// 	{
+		// 	  text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add Client',
+		// 	  className: 'create-new btn btn-primary createNewClient',
+		// 	  attr: {
+		// 		'data-toggle': 'modal'
+				
+		// 	  },
+		// 	  init: function (api, node, config) {
+		// 		$(node).removeClass('btn-secondary');
+		// 	  }
+		// 	}
+		//   ],
+
+        responsive: {
+			details: {
+			  display: $.fn.dataTable.Responsive.display.modal({
+				header: function (row) {
+				  var data = row.data();
+				  return 'Details of ' + data['client']['name'];
+				}
+			  }),
+			  type: 'column',
+			  renderer: function (api, rowIdx, columns) {
+				var data = $.map(columns, function (col, i) {
+				  console.log(columns);
+				  return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+					? '<tr data-dt-row="' +
+						col.rowIndex +
+						'" data-dt-column="' +
+						col.columnIndex +
+						'">' +
+						'<td>' +
+						col.title +
+						':' +
+						'</td> ' +
+						'<td>' +
+						col.data +
+						'</td>' +
+						'</tr>'
+					: '';
+				}).join('');
+
+				return data ? $('<table class="table"/>').append(data) : false;
+			  }
+			}
+		  },
 
 		  language: {
 			paginate: {
