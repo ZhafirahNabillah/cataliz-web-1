@@ -161,8 +161,6 @@
 @endsection
 
 @push('scripts')
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
-<script src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript">
     $(function () {
 
@@ -212,78 +210,6 @@
 			searchPlaceholder: "Search records"
 		  }
 
-    });
-
-	// create
-	$('body').on('click', '.createNewClient', function () {
-		$('#saveBtn').val("create-Client");
-        $('#Customer_id').val('');
-        $('#ClientForm').trigger("reset");
-        $('#modalHeading').html("Create New Client");
-		$('#modals-slide-in').modal('show');
-	});
-
-	// edit
-	$('body').on('click', '.editClient', function () {
-      var Client_id = $(this).data('id');
-      $.get("" +'/clients/' + Client_id +'/edit', function (data) {
-          $('#modalHeading').html("Edit Client");
-          $('#saveBtn').val("edit-user");
-          $('#modals-slide-in').modal('show');
-          $('#Client_id').val(data.id);
-          $('#name').val(data.name);
-          $('#phone').val(data.phone);
-          $('#email').val(data.email);
-          $('#company').val(data.company);
-          $('#organization').val(data.organization);
-          $('#occupation').val(data.occupation);
-      })
-	});
-
-	// save data
-	$('#saveBtn').click(function (e) {
-        e.preventDefault();
-        $(this).html('Sending..');
-
-        $.ajax({
-          data: $('#ClientForm').serialize(),
-          url: "",
-          type: "POST",
-          dataType: 'json',
-          success: function (data) {
-
-              $('#ClientForm').trigger("reset");
-			  $('#saveBtn').html('Submit');
-              $('#modals-slide-in').modal('hide');
-              table.draw();
-
-          },
-          error: function (data) {
-              console.log('Error:', data);
-              $('#saveBtn').html('Submit');
-          }
-      });
-    });
-
-	// delete
-	$('body').on('click', '.deleteClient', function (e) {
-
-        var Client_id = $(this).data("id");
-        if(confirm("Are You sure want to delete !")){
-
-        $.ajax({
-            type: "DELETE",
-            url: ""+'/clients/'+Client_id,
-            success: function (data) {
-                table.draw();
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
-        });
-		} else {
-			e.preventDefault();
-		}
     });
 
   });
