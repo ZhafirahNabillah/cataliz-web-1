@@ -30,6 +30,11 @@
             </div>
         </div>
         <div class="content-body">
+            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
             @if ($message = Session::get('success'))
             <div class="alert alert-success alert-dissmisable">
                 <h4 class="alert-heading">Success</h4>
@@ -273,6 +278,39 @@
 			search: "<i data-feather='search'></i>",
 			searchPlaceholder: "Search records"
 		  }
+    });
+
+    $('body').on('click', '.deletePlan', function (e) {
+
+        var plan_id = $(this).data("id");
+        console.log(plan_id);
+        if(confirm("Are You sure want to delete !")){
+
+        $.ajaxSetup({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+        });
+
+        $.ajax({
+                type: "DELETE",
+                url: ""+'/plans/'+plan_id,
+                success: function (data) {
+                        table.draw();
+                        $(".alert-danger").css("display", "block");
+                        $(".alert-danger").css("height", "50px");
+                        $(".alert-danger").css("padding-left", "12px");
+                        $(".alert-danger").css("padding-top", "12px");
+                        $(".alert-danger").css("padding-right", "12px");
+                        $(".alert-danger").append("<P>Data berhasil dihapus!");
+                },
+                error: function (data) {
+                        console.log('Error:', data);
+                }
+        }); 
+        } else {
+        e.preventDefault();
+        }
     });
   });
 </script>

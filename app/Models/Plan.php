@@ -14,7 +14,7 @@ class Plan extends Model
 		'date',
 		'objective',
 		'success_indicator',
-		'development_area',
+		'development_areas',
 		'support',
 		'owner_id'
 	];

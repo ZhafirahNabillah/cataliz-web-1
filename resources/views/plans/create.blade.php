@@ -56,7 +56,7 @@
               <div class="card-header">
                 <h4 class="card-title">Create Plan</h4>
               </div>
-              <form action="{{route('plans.store')}}" method="post">
+              <form action="{{url('/plans')}}" method="post">
                 @csrf
                 <div class="card-body">
                   <div class="row">
