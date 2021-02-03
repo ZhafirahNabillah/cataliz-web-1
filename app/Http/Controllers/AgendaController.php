@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Agenda;
+use App\Models\Client;
 use DataTables;
 
 class AgendaController extends Controller
@@ -106,8 +107,9 @@ class AgendaController extends Controller
      */
     public function edit(Agenda $agenda)
     {
-        //  
-        return view('agendas.edit',compact('agenda'));
+        //
+        $client = Client::where('id',$agenda->client_id)->first();
+        return view('agendas.edit',compact('agenda','client'));
     }
 
     /**
