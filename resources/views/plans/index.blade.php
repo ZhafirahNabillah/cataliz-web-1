@@ -58,11 +58,11 @@
             </div>
             @endif
             <div class="row">
-                <!--
+
                 <div class="col-12">
                     <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
                 </div>
-            -->
+
             </div>
             <br>
             <!-- Basic table -->
