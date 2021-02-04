@@ -4,6 +4,8 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\Agenda_detail;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,7 +26,18 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $time_now = Carbon::now()->setTimezone('Asia/Jakarta')->format('h:i:s');
+            $date_now = Carbon::now()->toDateString();
+
+            Agenda_detail::where('date', $date_now)->where('time', '<', $time_now)->orWhere('status', 'scheduled')->update(['status' => 'canceled']);
+
+            Agenda_detail::where('date', $date_now)->where('time', '<', $time_now)->orWhere('status', 'rescheduled')->update(['status' => 'canceled']);
+            // if ($date_now == $agenda_detail->date && $time_now > $agenda_detail->time && ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled')) {
+            //     $agenda_detail->status = 'Cancelled';
+            //     $agenda_detail->update();
+            // }
+        })->everyMinute();
     }
 
     /**
@@ -34,7 +47,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
