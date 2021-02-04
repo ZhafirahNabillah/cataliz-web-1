@@ -32,6 +32,11 @@
 			</div>
 		</div>
 		<div class="content-body">
+			<div class="alert alert-danger alert-dissmisable fade show p-1" style="display:none" role="alert">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">×</span>
+					</button>
+			</div>
 			@if ($message = Session::get('success'))
 			<div class="alert alert-success alert-dissmisable">
 				<h4 class="alert-heading">Success</h4>
@@ -167,6 +172,8 @@ $(function () {
 				url: ""+'/agendas/'+agenda_id,
 				success: function (data) {
 					table.draw();
+					$(".alert-danger").css("display", "block");
+					$(".alert-danger").append("<P>Data berhasil dihapus!");
 				},
 				error: function (data) {
 					console.log('Error:', data);
