@@ -96,7 +96,7 @@ class AgendaController extends Controller
   */
   public function show($id)
   {
-    //
+    return view('agendas.detail');
   }
 
   /**
