@@ -62,7 +62,8 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
                       <select class="livesearch form-control @error('livesearch') is-invalid @enderror"
-                        name="livesearch" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                        name="livesearch" id="livesearch" autocomplete="livesearch" disabled>
+                        <option selected hidden value="{{ $plan->id }}" disabled>{{ $client->name }}</option>
                       </select>
                       @error('livesearch')
                       <span class="invalid-feedback" role="alert">
@@ -75,13 +76,14 @@
                   <div class="row">
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Organization</label>
-                      <input class="form-control" name="organization" id="organization" disabled>
+                      <input class="form-control" name="organization" id="organization" disabled
+                        value="{{ $client->organization }}">
                     </div>
 
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
                       <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
-                        value="{{ old('date') }}" autocomplete="date" autofocus>
+                        value="{{ $plan->date }}" autocomplete="date" autofocus>
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -94,7 +96,7 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Objektif</label>
                       <textarea class="form-control @error('objective') is-invalid @enderror" name="objective"
-                        id="objective" value="{{ old('objective') }}" autocomplete="objective"></textarea>
+                        id="objective" autocomplete="objective">{{ $plan->objective }}</textarea>
 
                       @error('objective')
                       <span class="invalid-feedback" role="alert">
@@ -108,8 +110,8 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Sukses Indikator</label>
                       <textarea class="form-control @error('success_indicator') is-invalid @enderror"
-                        name="success_indicator" id="success_indicator" value="{{ old('success_indicator') }}"
-                        autocomplete="success_indicator"></textarea>
+                        name="success_indicator" id="success_indicator"
+                        autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
 
                       @error('success_indicator')
                       <span class="invalid-feedback" role="alert">
@@ -123,8 +125,8 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Pengembangan Area</label>
                       <textarea class="form-control @error('development_areas') is-invalid @enderror"
-                        name="development_areas" id="development_areas" value="{{ old('development_areas') }}"
-                        autocomplete="development_areas"></textarea>
+                        name="development_areas" id="development_areas"
+                        autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
 
                       @error('development_areas')
                       <span class="invalid-feedback" role="alert">
@@ -138,7 +140,7 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Support</label>
                       <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
-                        value="{{ old('support') }}" autocomplete="support"></textarea>
+                        autocomplete="support">{{ $plan->support }}</textarea>
 
                       @error('support')
                       <span class="invalid-feedback" role="alert">

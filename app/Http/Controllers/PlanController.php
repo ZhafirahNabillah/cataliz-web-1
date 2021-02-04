@@ -137,7 +137,8 @@ class PlanController extends Controller
      */
     public function edit(Plan $plan)
     {
-        return view('plans.edit', compact('plan'));
+        $client = Client::where('id', $plan->client_id)->first();
+        return view('plans.edit', compact('plan', 'client'));
     }
 
     /**
