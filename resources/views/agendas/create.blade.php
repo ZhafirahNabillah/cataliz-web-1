@@ -70,6 +70,16 @@
                     </div>
                   </div>
                   <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Organization</label>
+                      <input class="form-control" type="text" value="" id="organization">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Company</label>
+                      <input class="form-control" type="text" value="" id="company">
+                    </div>
+                  </div>
+                  <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Pilih Sesi</label>
                       <select class="form-control" aria-label=".form-select-lg example" name="session">
@@ -124,7 +134,7 @@ $('.livesearch').select2({
             text: item.name,
             id: item.id,
             org: item.organization,
-            pro: item.program
+            co: item.company
           }
         })
       };
@@ -139,7 +149,7 @@ $(".livesearch").on('change', function(e) {
   console.log($(this).select2('data')[0].id);
   var dd = $(this).select2('data')[0];
   $('#organization').val(dd.org);
-  $('#program').val(dd.pro);
+  $('#company').val(dd.co);
 });
 
 $(".")

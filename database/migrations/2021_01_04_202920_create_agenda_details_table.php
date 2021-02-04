@@ -16,12 +16,12 @@ class CreateAgendaDetailsTable extends Migration
         Schema::create('agenda_details', function (Blueprint $table) {
             $table->id();
 			$table->integer('agenda_id');
-			$table->string('topic');
-			$table->date('date');
-			$table->time('time');
+			$table->string('topic')->nullable();
+			$table->date('date')->nullable();
+			$table->time('time')->nullable();
 			$table->string('media')->nullable();
 			$table->string('media_url')->nullable();
-			$table->integer('duration');
+			$table->integer('duration')->nullable();
 			$table->string('status');
 			$table->timestamps();
         });

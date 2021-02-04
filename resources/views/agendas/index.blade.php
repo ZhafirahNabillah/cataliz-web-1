@@ -55,7 +55,7 @@
 			<section id="basic-datatable">
 				<div class="row">
 					<div class="col-12">
-						<div class="card py-1 px-2">
+						<div class="card">
 							<table class="datatables-basic table yajra-datatable">
 								<thead>
 									<tr>
@@ -135,24 +135,39 @@
 <script type="text/javascript">
 $(function () {
 
+
 	var table = $('.yajra-datatable').DataTable({
 		processing: true,
 		serverSide: true,
 		ajax: "",
 		columns: [
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'client.name', name: 'client.name'},
-			{data: 'session', name: 'session'},
+			{data: 'name', name: 'name'},
+			{data: 'session_name', name: 'session_name'},
 			{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
 			{data: 'duration', name: 'duration', defaultContent: '<i>-</i>'},
-			{data: 'status', name: 'status'},
+			{
+				data: 'status',
+				name: 'status'
+			},
 			{
 				data: 'action',
 				name: 'action',
 				orderable: true,
 				searchable: true
 			},
-		]
+		],
+		dom:
+        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+		language: {
+			paginate: {
+			  // remove previous & next text from pagination
+			  previous: '&nbsp;',
+			  next: '&nbsp;'
+			},
+			search: "<i data-feather='search'></i>",
+			searchPlaceholder: "Search records"
+		}
 	});
 
 	$('body').on('click', '.deleteAgenda', function (e) {

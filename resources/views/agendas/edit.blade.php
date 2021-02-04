@@ -54,7 +54,7 @@
       </div>
       <!-- Basic table -->
       <section id="basic-datatable">
-        <form action="{{ url('/agendas')}}" method="POST">
+        <form action="{{ route('agendas.update', $agenda_detail->id) }}" method="POST">
           @csrf
           <div class="row">
             <div class="col-12">
@@ -66,16 +66,26 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control" name="client_id">
+                      <select class="livesearch form-control" name="client_id" disabled>
                         <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
                       </select>
                       <input type="hidden" name="id" value="{{$agenda->id}}">
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-12 form-group">
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Organization</label>
+                      <input class="form-control" value="{{$client->organization}}" disabled>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Company</label>
+                      <input class="form-control" value="{{$client->company}}" disabled>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
                       <label for="fp-default">Pilih Sesi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="session">
+                      <select class="form-control" aria-label=".form-select-lg example" name="session" disabled>
                         <option selected>Pilih Sesi</option>
                         <option value="1" @if($agenda->session == 1) selected @endif>Sesi 1</option>
                         <option value="2" @if($agenda->session == 2) selected @endif>Sesi 2</option>
@@ -85,25 +95,52 @@
                         <option value="6" @if($agenda->session == 6) selected @endif>Sesi 6</option>
                       </select>
                     </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Tipe Sesi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="type_session">
+                      <select class="form-control" aria-label=".form-select-lg example" name="type_session" disabled>
                         <option selected>Pilih Tipe Sesi</option>
-                        <option value="Free" @if($agenda->type_session == 'Free') selected @endif>Free</option>
-                        <option value="Paid" @if($agenda->type_session == 'Paid') selected @endif>Paid</option>
+                        <option value="Free" @if($agenda->type_session == '1') selected @endif>Free</option>
+                        <option value="Paid" @if($agenda->type_session == '2') selected @endif>Paid</option>
                       </select>
                     </div>
-                    <div class="col-md-6 form-group">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Topic</label>
+                      <input type="text" class="form-control" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic..."></input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Media</label>
+                      <input type="text" class="form-control" name="media" value="{{ $agenda_detail->media }}" placeholder="Masukkan media..."></input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Media url</label>
+                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Masukkan media url..."></input>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" id="datepicker" class="form-control" name="date" value="{{ $agenda->date }}"></input>
+                      <input type="date" id="datepicker" class="form-control" name="date" value="{{ $agenda_detail->date }}"></input>
+                    </div>
+                    <div class="col-md-4 form-group">
+                      <label for="fp-default">Waktu Kegiatan</label>
+                      <input type="time" class="form-control" name="time" value="{{ $agenda_detail->time }}"></input>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
-                      <input name="duration" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Masukkan Lama Durasi Sesinya" value="{{ $agenda->duration }}"/>
+                      <select class="form-control" aria-label=".form-select-lg example" name="duration">
+                        <option selected>Pilih Durasi</option>
+                        <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Menit</option>
+                        <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Menit</option>
+                        <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Menit</option>
+                      </select>
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>

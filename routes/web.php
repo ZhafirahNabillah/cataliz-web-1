@@ -58,7 +58,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('clients', ClientController::class);
     Route::resource('agendas', AgendaController::class);
     Route::resource('plans', PlanController::class);
-    Route::get('/ajaxClients',[ PlanController::class, 'ajaxClients'])->name('clients.search');
+		Route::get('/ajaxClients',[ PlanController::class, 'ajaxClients'])->name('clients.search');
+		Route::post('/agendas/{id}/update',[ AgendaController::class, 'update' ])->name('agendas.update');
+		Route::get('/agendas/{id}/edit',[ AgendaController::class, 'edit' ])->name('agendas.edit');
 	
 	//Route::get('clients/all', [ClientController::class, 'getAll'])->name('clients.all');
 });
