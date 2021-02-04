@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDurationDateStatusToAgendasTable extends Migration
+class AddFeedbackToAgendas extends Migration
 {
     /**
      * Run the migrations.
@@ -15,9 +15,7 @@ class AddDurationDateStatusToAgendasTable extends Migration
     {
         Schema::table('agendas', function (Blueprint $table) {
             //
-            $table->string('duration',10)->nullable();
-            $table->date('date')->nullable();
-            $table->enum('status',['unschedule','scheduled'])->nullable();
+            $table->string('feedback',255)->nullable();
         });
     }
 
@@ -30,9 +28,7 @@ class AddDurationDateStatusToAgendasTable extends Migration
     {
         Schema::table('agendas', function (Blueprint $table) {
             //
-            $table->dropColumn('duration');
-            $table->dropColumn('date');
-            $table->dropColumn('status');
+            $table->dropColumn('feedback');
         });
     }
 }
