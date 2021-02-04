@@ -27,9 +27,9 @@ class AgendaController extends Controller
         ->join('clients', 'clients.id', '=', 'agendas.client_id')
         ->where('clients.owner_id', Auth::user()->id)
         ->get();
-      return DataTables::of($data)
-      ->addIndexColumn()
-      ->addColumn('action', function ($row) {
+        return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
         $actionBtn = '<div class="d-inline-flex">
         <a class="pr-1 dropdown-toggle hide-arrow text-primary"    data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
         <div class="dropdown-menu dropdown-menu-right">
@@ -136,11 +136,15 @@ class AgendaController extends Controller
     //
     $agenda_detail = Agenda_detail::where('id',$id)->first();
     $agenda_detail->topic = $request->topic;
-    if ($agenda_detail->date != $request->date) {
-      $agenda_detail->status = 'rescheduled';
-    } else if($agenda_detail->status == null) {
+
+    if ($agenda_detail->status == 'unschedule' && $agenda_detail->date == null) {
       $agenda_detail->status = 'scheduled';
     };
+
+    if ($agenda_detail->status == 'scheduled' && $agenda_detail->date != null && $request->date != $agenda_detail->date) {
+      $agenda_detail->status = 'rescheduled';
+    };
+
     $agenda_detail->date = $request->date;
     $agenda_detail->time = $request->time;
     $agenda_detail->media = $request->media;
