@@ -160,7 +160,7 @@ class AgendaController extends Controller
   public function destroy($id)
   {
     //
-    Agenda::find($id)->delete();
+    Agenda_detail::find($id)->delete();
     return response()->json(['success' => 'Agenda deleted!']);
   }
 }
