@@ -300,6 +300,7 @@
 								</p>
 							</div>
 							<!-- tab Session -->
+
 							<div class="tab-pane" id="session" aria-labelledby="about-tab" role="tabpanel">
 								<div class="content-header row">
 									<div class="content-header-left col-md-9 col-12 mb-2">
@@ -310,6 +311,8 @@
 										</div>
 									</div>
 								</div>
+								<div class="card">
+
 								<section id="basic-datatable">
 									<div class="row">
 										<div class="col-12">
@@ -337,6 +340,7 @@
 								</section>
 								<!--/ Basic table -->
 							</div>
+						</div>
 						</div>
 
 
