@@ -118,6 +118,15 @@
 								</span>
 								@enderror
 							</div>
+							
+							<div class="col-md-12 form-group">
+	              <label for="customFile1">Attachment file</label>
+	              <div class="custom-file">
+	                <input type="file" class="custom-file-input" id="" required />
+	                <label class="custom-file-label" for="customFile1">Choose file</label>
+	              </div>
+								</div>
+	            </div>
 						</div>
 						<!-- /Input Feedback -->
 						<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
