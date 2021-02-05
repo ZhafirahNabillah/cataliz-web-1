@@ -31,12 +31,7 @@ class Kernel extends ConsoleKernel
             $date_now = Carbon::now()->toDateString();
 
             Agenda_detail::where('date', $date_now)->where('time', '<', $time_now)->orWhere('status', 'scheduled')->update(['status' => 'canceled']);
-
             Agenda_detail::where('date', $date_now)->where('time', '<', $time_now)->orWhere('status', 'rescheduled')->update(['status' => 'canceled']);
-            // if ($date_now == $agenda_detail->date && $time_now > $agenda_detail->time && ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled')) {
-            //     $agenda_detail->status = 'Cancelled';
-            //     $agenda_detail->update();
-            // }
         })->everyMinute();
     }
 

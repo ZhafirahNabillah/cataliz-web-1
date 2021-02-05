@@ -84,7 +84,7 @@
 													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab" aria-selected="false">Sessions</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile" role="tab" aria-selected="false">Sessions</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
@@ -299,6 +299,48 @@
 									Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
 								</p>
 							</div>
+							<!-- tab Session -->
+
+							<div class="tab-pane" id="session" aria-labelledby="about-tab" role="tabpanel">
+								<div class="content-header row">
+									<div class="content-header-left col-md-9 col-12 mb-2">
+										<div class="row breadcrumbs-top">
+											<div class="col-12">
+												<h2 class="content-header-title float-left mb-0">Your Sessions</h2>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="card">
+
+								<section id="basic-datatable">
+									<div class="row">
+										<div class="col-12">
+											<div class="card">
+												<table class="datatables-basic table yajra-datatable">
+													<thead>
+														<tr>
+															<th>NO</th>
+															<th>TOPIC</th>
+															<th>SESSION</th>
+															<th>Date</th>
+															<th>TIME</th>
+															<th>DURATION</th>
+															<th>ACTION</th>
+														</tr>
+													</thead>
+													<tbody>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+						<!-- /tab Session -->
+
+								</section>
+								<!--/ Basic table -->
+							</div>
+						</div>
 						</div>
 
 
@@ -365,13 +407,11 @@
 			@push('scripts')
 			<script type="text/javascript">
 			$(function () {
-
 				$.ajaxSetup({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					}
 				});
-
 				// edit
 				$('.editClient').click(function () {
 					var Client_id = $(this).data('id');
@@ -388,7 +428,6 @@
 						$('#occupation').val(data.occupation);
 					})
 				});
-
 			});
 			</script>
 			@endpush

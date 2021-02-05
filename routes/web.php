@@ -32,23 +32,23 @@ Route::group(['middleware'=>['auth','admin']], function(){
 		Route::get('/dashboard', function() {
 			return view('admin.dashboard');
 		});
-		
+
 		Route::get('client', function() {
 			return view('clients.index');
 		});
-		
-		
-		
+
+
+
 });
 
 	Route::get('clients', [App\Http\Controllers\ClientController::class, 'index'])->name('clients'); */
-	
 
-  
+
+
 Auth::routes();
-  
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-//Route::get('clients/list', [ClientController::class, 'getClients'])->name('clients.list');  
+//Route::get('clients/list', [ClientController::class, 'getClients'])->name('clients.list');
 Route::group(['middleware' => ['auth']], function() {
 	Route::get('/', function () {
 		return redirect('/home');
@@ -61,6 +61,9 @@ Route::group(['middleware' => ['auth']], function() {
 		Route::get('/ajaxClients',[ PlanController::class, 'ajaxClients'])->name('clients.search');
 		Route::post('/agendas/{id}/update',[ AgendaController::class, 'update' ])->name('agendas.update');
 		Route::get('/agendas/{id}/edit',[ AgendaController::class, 'edit' ])->name('agendas.edit');
-	
+
+		Route::post('/agendas/{id}/agenda_update',[AgendaController::class, 'agenda_update'])->name('agendas.agenda_update');
+		Route::get('/agendas/{id}/download',[AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
+
 	//Route::get('clients/all', [ClientController::class, 'getAll'])->name('clients.all');
 });

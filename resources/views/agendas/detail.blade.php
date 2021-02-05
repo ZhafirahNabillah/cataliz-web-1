@@ -16,12 +16,12 @@
 			<div class="content-header-left col-md-9 col-12 mb-2">
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
-						<h2 class="content-header-title float-left mb-0">Agendas</h2>
+						<h2 class="content-header-title float-left mb-0">Agenda</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.html">Home</a>
 								</li>
-								<li class="breadcrumb-item"><a href="#">Agendas</a>
+								<li class="breadcrumb-item"><a href="#">Agenda</a>
 								</li>
 								<li class="breadcrumb-item active">Detail Agenda
 								</li>
@@ -44,7 +44,7 @@
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			@endif
-			<div class="row match-height">
+			<div class="row">
 				<div class="col-sm-12 col-md-6">
 					<div class="card">
 						<div class="card-header">
@@ -63,11 +63,31 @@
 							</div>
 							<div class="mt-2">
 								<h5 class="mb-75">Session:</h5>
-								<p class="card-text"> {{ $agenda_detail->session_name }} </p>
+								<p class="card-text">{{ $agenda_detail->session_name }}</p>
 							</div>
 							<div class="mt-2">
 								<h5 class="mb-75">Topic:</h5>
-								<p class="card-text">{{ $agenda_detail->topic }}</p>
+								<p class="card-text">{{ $agenda_detail->topic }}	@if($agenda_detail->topic == null) - @endif</p>
+							</div>
+							<div class="mt-2">
+								<h5 class="mb-75">Date:</h5>
+								<p class="card-text">{{$agenda_detail->date}}	@if($agenda_detail->date == null) - @endif</p>
+							</div>
+							<div class="mt-2">
+								<h5 class="mb-75">Time:</h5>
+								<p class="card-text">{{$agenda_detail->time}}	@if($agenda_detail->time == null) - @endif</p>
+							</div>
+							<div class="mt-2">
+								<h5 class="mb-75">Media:</h5>
+								<p class="card-text">{{$agenda_detail->media}}	@if($agenda_detail->media == null) - @endif</p>
+							</div>
+							<div class="mt-2">
+								<h5 class="mb-75">Media Url:</h5>
+								<p class="card-text">{{$agenda_detail->media_url}}	@if($agenda_detail->media_url == null) - @endif</p>
+							</div>
+							<div class="mt-2">
+								<h5 class="mb-75">Duration:</h5>
+								<p class="card-text">{{$agenda_detail->duration}}	@if($agenda_detail->duration == null) - @endif Menit</p>
 							</div>
 						</div>
 					</div>
@@ -76,55 +96,64 @@
 				<div class="col-sm-12 col-md-6">
 					<div class="card">
 						<div class="card-header">
-							<h6 class="card-title">_______________________________________________________________________________</h6>
+							<h6 class="card-title">Feedback and Notes</h6>
 						</div>
 						<div class="card-body">
-							<h5 class="mb-75">Date:</h5>
-							<p class="card-text">{{$agenda_detail->date}}</p>
-							<div class="mt-2">
-								<h5 class="mb-75">Time:</h5>
-								<p class="card-text">{{$agenda_detail->time}}</p>
-							</div>
-							<div class="mt-2">
-								<h5 class="mb-75">Media:</h5>
-								<p class="card-text">{{$agenda_detail->media}}</p>
-							</div>
-							<div class="mt-2">
-								<h5 class="mb-75">Media Url:</h5>
-								<p class="card-text">{{$agenda_detail->media_url}}</p>
-							</div>
-							<div class="mt-2">
-								<h5 class="mb-75">Duration:</h5>
-								<p class="card-text">{{$agenda_detail->duration}} Minutes</p>
-							</div>
+							@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) > (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
+								<span>Feedback dan notes belum tersedia</span>
+							@elseif($agenda_detail->status == 'canceled')
+								<span>Feedback dan notes tidak tersedia</span>
+							@else
+							<form action="{{ route('agendas.agenda_update',$agenda_detail->id) }}" method="post" enctype="multipart/form-data">
+								<div class="row">
+									@csrf
+									<div class="col-md-12 form-group">
+										<label for="fp-default">Feedback</label>
+										@if($agenda->feedback == null)
+											<textarea class="form-control @error('feedback') is-invalid @enderror" name="feedback"></textarea>
+										@endif
+										@error('feedback')
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $message }}</strong>
+										</span>
+										@enderror
+										@if($agenda->feedback != null)
+											<div class="overflow-auto p-2" style="max-height: 300px;">
+												{!! $agenda->feedback !!}
+											</div>
+										@endif
+									</div>
+									<div class="col-md-12 form-group">
+										<label for="customFile1">Attachment file</label>
+										@if($agenda->attachment == null)
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" name="attachment"/>
+											<label class="custom-file-label" for="customFile1">Choose file</label>
+										</div>
+										@endif
+										@if($agenda->attachment != null)
+										<div class="row">
+											<div class="col-10">
+												<input type="text" class="form-control" value="{{ $agenda->attachment }}" disabled>
+											</div>
+											<a href="{{ route('agendas.feedback_download',$agenda->id) }}" class="btn btn-primary col-auto">Download</a>
+										</div>
+										@endif
+									</div>
+									<div class="col-md-12 form-group">
+										<label for="notes">Notes</label>
+										<textarea name="notes" rows="8" cols="80" readonly>{{ $agenda->notes }}</textarea>
+									</div>
+									<div class="col-md-12 text-right">
+										<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
+									</div>
+								</div>
+							</form>
+							@endif
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="card">
-				<div class="card-header">
-					<form action="#" method="#">
-						@csrf
-						<!-- Input Feedbacks -->
-						<div class="row">
-							<div class="col-md-12 form-group">
-								<label for="fp-default">Feedback</label>
-								<textarea class="form-control @error('feedback') is-invalid @enderror" name="feedback"
-								id="feedback" value="#" autocomplete="feedback"></textarea>
-								@error('feedback')
-								<span class="invalid-feedback" role="alert">
-									<strong>{{ $message }}</strong>
-								</span>
-								@enderror
-							</div>
-						</div>
-						<!-- /Input Feedback -->
-						<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-						value="create">Submit</button>
-					</div>
-
-				</form>
 			</div>
 		</div>
 	</div>
@@ -134,9 +163,6 @@
 
 @push('scripts')
 <script type="text/javascript">
-$(function () {
 
-
-});
 </script>
 @endpush
