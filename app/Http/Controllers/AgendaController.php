@@ -9,6 +9,7 @@ use App\Models\Agenda;
 use App\Models\Agenda_detail;
 use App\Models\Client;
 use DataTables;
+use Illuminate\Support\Facades\Storage;
 
 class AgendaController extends Controller
 {
@@ -109,6 +110,13 @@ class AgendaController extends Controller
   {
     $agenda_detail = Agenda_detail::where('id',$id)->first();
     $agenda = Agenda::with('client')->where('id',$agenda_detail->agenda_id)->first();
+
+    // $time = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s');
+    // $time2 = $agenda_detail->date.' '.$agenda_detail->time;
+    // if ($time2 > $time) {
+    //   return("true");
+    // }
+
     return view('agendas.detail',compact('agenda_detail','agenda'));
   }
 
@@ -124,6 +132,7 @@ class AgendaController extends Controller
     $agenda_detail = Agenda_detail::where('id',$id)->first();
     $agenda = Agenda::where('id',$agenda_detail->agenda_id)->first();
     $client = Client::where('id',$agenda->client_id)->first();
+
     return view('agendas.edit',compact('agenda','client','agenda_detail'));
   }
 
@@ -144,7 +153,7 @@ class AgendaController extends Controller
       $agenda_detail->status = 'scheduled';
     };
 
-    if ($agenda_detail->status == 'scheduled' && $agenda_detail->date != null && $request->date != $agenda_detail->date) {
+    if ($agenda_detail->status == 'scheduled' && $agenda_detail->date != null && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
       $agenda_detail->status = 'rescheduled';
     };
 
@@ -169,5 +178,43 @@ class AgendaController extends Controller
     //
     Agenda_detail::find($id)->delete();
     return response()->json(['success' => 'Agenda deleted!']);
+  }
+
+  public function agenda_update(Request $request, $id){
+    // dd($request);
+    $agenda_detail = Agenda_detail::where('id',$id)->first();
+    $agenda = Agenda::where('id',$agenda_detail->agenda_id)->first();
+
+    if ($request->has('feedback')) {
+      $agenda->feedback = $request->feedback;
+      $agenda_detail->status = 'finished';
+      $agenda_detail->update();
+    }
+
+    if ($request->hasFile('attachment')) {
+      $filenameWithExt = $request->file('attachment')->getClientOriginalName();
+      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+      $extension = $request->file('attachment')->getClientOriginalExtension();
+      $filenameSave = $filename.'_'.time().'.'.$extension;
+      $path = $request->file('attachment')->storeAs('public/attachment', $filenameSave);
+      $agenda->attachment = $filenameSave;
+      $agenda_detail->status = 'finished';
+      $agenda_detail->update();
+    }
+
+    $agenda->notes = $request->notes;
+    $agenda->update();
+
+    if ($request->hasAny(['feedback','attachment'])) {
+      return redirect('/agendas')->with('success','Feedback dan notes berhasil disimpan!');
+    } else {
+      return redirect('/agendas')->with('success','Notes berhasil disimpan!');
+    }
+
+  }
+
+  public function feedback_download($id){
+    $agenda = Agenda::where('id',$id)->first();
+    return response()->download(storage_path('app/public/attachment/'.$agenda->attachment));
   }
 }
