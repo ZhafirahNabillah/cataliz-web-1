@@ -89,10 +89,33 @@
                         placeholder="Masukkan topic...">
                     </div>
                   </div>
+
+                  @if ($agenda_detail->media == 'Whatsapp')
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control" id="media" aria-label=".form-select-lg example" name="media">
+                      <select class="form-control" id="media1" aria-label=".form-select-lg example" name="media">
+                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
+                          Room')
+                          @endif>Meeting Room</option>
+                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
+                          @endif>Whatsapp
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row media_url1" style="display: none">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Media url</label>
+                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}"
+                        placeholder="Masukkan media url...">
+                    </div>
+                  </div>
+                  @else
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label class="form-label" for="basic-icon-default-fullname">Media</label>
+                      <select class="form-control" id="media2" aria-label=".form-select-lg example" name="media">
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
                           @endif>Whatsapp
                         </option>
@@ -102,13 +125,15 @@
                       </select>
                     </div>
                   </div>
-                  <div class="row  media_url">
+                  <div class="row media_url2">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
                       <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}"
                         placeholder="Masukkan media url...">
                     </div>
                   </div>
+                  @endif
+
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
@@ -149,12 +174,17 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function () {
-    $("#media").on('change', function () {
-        $(".media_url").toggle(500);
+    $("#media1").on('change', function () {
+        $(".media_url1").toggle(500);
+    });
+  });
+  
+  $(document).ready(function () {
+    $("#media2").on('change', function () {
+        $(".media_url2").toggle(500);
     });
   });
 </script>
