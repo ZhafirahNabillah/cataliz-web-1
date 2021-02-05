@@ -83,53 +83,41 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Pilih Sesi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="session" disabled>
-                        <option selected>Pilih Sesi</option>
-                        <option value="1" @if($agenda->session == 1) selected @endif>Sesi 1</option>
-                        <option value="2" @if($agenda->session == 2) selected @endif>Sesi 2</option>
-                        <option value="3" @if($agenda->session == 3) selected @endif>Sesi 3</option>
-                        <option value="4" @if($agenda->session == 4) selected @endif>Sesi 4</option>
-                        <option value="5" @if($agenda->session == 5) selected @endif>Sesi 5</option>
-                        <option value="6" @if($agenda->session == 6) selected @endif>Sesi 6</option>
-                      </select>
-                    </div>
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Tipe Sesi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="type_session" disabled>
-                        <option selected>Pilih Tipe Sesi</option>
-                        <option value="Free" @if($agenda->type_session == '1') selected @endif>Free</option>
-                        <option value="Paid" @if($agenda->type_session == '2') selected @endif>Paid</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic..."></input>
+                      <input type="text" class="form-control" name="topic" value="{{ $agenda_detail->topic }}"
+                        placeholder="Masukkan topic...">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Media</label>
-                      <input type="text" class="form-control" name="media" value="{{ $agenda_detail->media }}" placeholder="Masukkan media..."></input>
+                      <label class="form-label" for="basic-icon-default-fullname">Media</label>
+                      <select class="form-control" id="media" aria-label=".form-select-lg example" name="media">
+                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
+                          @endif>Whatsapp
+                        </option>
+                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
+                          Room')
+                          @endif>Meeting Room</option>
+                      </select>
                     </div>
                   </div>
-                  <div class="row">
+                  <div class="row  media_url">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Masukkan media url..."></input>
+                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}"
+                        placeholder="Masukkan media url...">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" id="datepicker" class="form-control" name="date" value="{{ $agenda_detail->date }}"></input>
+                      <input type="date" id="datepicker" class="form-control" name="date"
+                        value="{{ $agenda_detail->date }}">
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="fp-default">Waktu Kegiatan</label>
-                      <input type="time" class="form-control" name="time" value="{{ $agenda_detail->time }}"></input>
+                      <input type="time" class="form-control" name="time" value="{{ $agenda_detail->time }}">
                     </div>
                   </div>
                   <div class="row">
@@ -140,10 +128,12 @@
                         <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Menit</option>
                         <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Menit</option>
                         <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Menit</option>
+                        <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Menit</option>
                       </select>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
                 </div>
               </div>
             </div>
@@ -159,8 +149,18 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
-$('.livesearch').select2({
+  $(document).ready(function () {
+    $("#media").on('change', function () {
+        $(".media_url").toggle(500);
+    });
+  });
+</script>
+
+<script type="text/javascript">
+  $('.livesearch').select2({
   placeholder: 'Select clients',
   ajax: {
     url: "{{route('clients.search')}}",
@@ -199,6 +199,5 @@ $(function () {
     daysOfWeekDisabled: [0, 6]
   });
 });
-
 </script>
 @endpush

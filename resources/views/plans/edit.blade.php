@@ -61,15 +61,10 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror"
-                        name="livesearch" id="livesearch" autocomplete="livesearch" disabled>
-                        <option selected hidden value="{{ $plan->id }}" disabled>{{ $client->name }}</option>
+                      <select class="livesearch form-control" name="client_id" id="client_id" disabled>
+                        <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
                       </select>
-                      @error('livesearch')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
+                      <input type="hidden" name="client_id" value="{{ $client->id }}">
                     </div>
                   </div>
 

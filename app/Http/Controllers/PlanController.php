@@ -107,14 +107,13 @@ class PlanController extends Controller
         $support = strip_tags($request->support);
 
         Plan::updateOrCreate(['id' => $request->id], [
-            'client_id' => $request->livesearch,
+            'client_id' => $request->client_id,
             'date' => $request->date,
             'objective' => $objective,
             'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
             'support' => $support,
             'owner_id' => Auth::user()->id
         ]);
-
         return redirect('/plans')->with('success', 'Data berhasil disimpan!');
     }
 
