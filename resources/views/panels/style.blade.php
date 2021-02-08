@@ -21,7 +21,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
 <!-- END: Custom CSS-->
 
-@elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index']))
+@elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show']))
 
 <!-- BEGIN: Vendor CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/vendors.min.css') }}">

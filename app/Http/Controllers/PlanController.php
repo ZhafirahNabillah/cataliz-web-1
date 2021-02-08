@@ -92,8 +92,7 @@ class PlanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            // 'client_id' => 'required',
-            // 'organization' => 'required',
+            'client_id' => 'required',
             'date' => 'required',
             'objective' => 'required',
             'success_indicator' => 'required',

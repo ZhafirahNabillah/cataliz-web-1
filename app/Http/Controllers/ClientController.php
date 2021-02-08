@@ -6,6 +6,9 @@ use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Agenda_detail;
+use App\Models\Agenda;
+use App\Models\Plan;
 use DataTables;
 
 class ClientController extends Controller
@@ -20,6 +23,7 @@ class ClientController extends Controller
         //
 		/* $data = Client::orderBy('id','DESC')->get();
 		return view('clients.index',compact('data')); */
+
 		if ($request->ajax()) {
             $data = Client::where('owner_id',Auth::user()->id)->latest()->get();
             return Datatables::of($data)
@@ -40,7 +44,7 @@ class ClientController extends Controller
         }
 		return view('clients.index');
     }
-	       
+
 
     /**
      * Show the form for creating a new resource.
@@ -63,13 +67,13 @@ class ClientController extends Controller
     {
 		//dd($request->all());
         //
-		
+
 		/* $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
         ]);
-		
+
 		$client = new Client;
 		$client->name = $request->name;
 		$client->email = $request->email;
@@ -80,14 +84,14 @@ class ClientController extends Controller
 		$client->program = 'Starco';
 		$client->owner_id = Auth::user()->id;
 		$client->save();
-		
+
 		return redirect()->route('clients.index')
                         ->with('success','Add new client successfully'); */
-						
-		Client::updateOrCreate(['id' => $request->Client_id],
-                ['name' => $request->name, 'email' => $request->email, 'phone' =>  $request->phone, 'organization' => $request->organization, 'company' => $request->company, 'occupation' => $request->occupation, 'program' => 'Starco', 'owner_id' => Auth::user()->id]);        
 
-        return response()->json(['success'=>'Customer saved successfully!']);				
+		Client::updateOrCreate(['id' => $request->Client_id],
+                ['name' => $request->name, 'email' => $request->email, 'phone' =>  $request->phone, 'organization' => $request->organization, 'company' => $request->company, 'occupation' => $request->occupation, 'program' => 'Starco', 'owner_id' => Auth::user()->id]);
+
+        return response()->json(['success'=>'Customer saved successfully!']);
     }
 
     /**
@@ -100,7 +104,48 @@ class ClientController extends Controller
     {
         //
 		//$client = Client::find($id);
+
 		return view('clients.show',compact('client'));
+    }
+
+    public function show_sessions_data(Request $request, Client $client){
+      if ($request->ajax()) {
+          $data = Agenda_detail::select('agenda_details.id', 'agenda_details.time', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.topic','agenda_details.created_at')
+            ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+            ->join('clients', 'clients.id', '=', 'agendas.client_id')
+            ->where('clients.id', $client->id)->latest()
+            ->get();
+
+          return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+              $actionBtn = '<a href="'. route('agendas.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
+              return $actionBtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+      }
+
+    }
+
+    public function show_plans_data(Request $request, Client $client){
+      if ($request->ajax()) {
+          $data = Plan::with('client')->where('owner_id', Auth::user()->id)->latest()->get();
+          return Datatables::of($data)
+              ->addIndexColumn()
+              ->addColumn('action', function ($row) {
+                  $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                <a href="' . route('plans.edit', $row->id) . '" class="dropdown-item editClient"  data-id="' . $row->id . '" data-original-title="Edit"><i data-feather="edit"></i> Edit</a>
+                <a href="https://wa.me/62' . $row->client['phone'] . '" class="dropdown-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Kirim WA</a>
+                <a href="javascript:;" class="dropdown-item deletePlan" data-id="' . $row->id . '" data-original-title="Delete" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>Delete</a>
+                </div></div>';
+                  return $actionBtn;
+              })
+              ->rawColumns(['action'])
+              ->make(true);
+      }
+
     }
 
     /**

@@ -63,7 +63,7 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
                       <select class="livesearch form-control @error('livesearch') is-invalid @enderror"
-                        name="livesearch" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                        name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                       </select>
                       @error('livesearch')
                       <span class="invalid-feedback" role="alert">
@@ -168,7 +168,7 @@
         <div class="modal-header mb-1">
           <h5 class="modal-title" id="modalHeading"></h5>
         </div>
-        <input type="hidden" name="Client_id" id="Client_id">
+        <input type="hidden" name="client_id" id="client_id">
         <div class="modal-body flex-grow-1">
           <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
