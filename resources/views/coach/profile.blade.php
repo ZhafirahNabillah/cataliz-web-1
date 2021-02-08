@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/page-profile.css') }}">
 @endpush
 
-@section('title','Client')
+@section('title','Profil')
 
 @section('content')
 
@@ -28,7 +28,7 @@
 								</li>
 								<li class="breadcrumb-item"><a href="{{route('clients.index')}}">Profile</a>
 								</li>
-								<li class="breadcrumb-item active">Coach Name
+								<li class="breadcrumb-item active">{{$client->name}}
 								</li>
 							</ol>
 						</div>
@@ -44,19 +44,22 @@
 					<div class="col-12">
 						<div class="card profile-header mb-2">
 							<!-- profile cover photo -->
-							<img class="card-img-top" src="https://image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg" alt="User Profile Image" />
+							<img class="card-img-top"
+								src="https://image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg"
+								alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{asset('assets/images/avatars/cataliz.jpg') }}" class="rounded img-fluid" alt="Card image" />
+										<img src="{{asset('assets/images/avatars/cataliz.jpg') }}" class="rounded img-fluid"
+											alt="Card image" />
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
-										<h2 class="text-white">#coachName</h2>
-										<p class="text-white">Coach occupation coach company</p>
+										<h2 class="text-white">{{$client->name}}</h2>
+										<p class="text-white">{{$client->occupation}} {{$client->company}}</p>
 									</div>
 								</div>
 							</div>
@@ -65,7 +68,9 @@
 							<div class="profile-header-nav">
 								<!-- navbar -->
 								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
+										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+										aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -74,7 +79,8 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
+														role="tab" aria-selected="true">Home</a>
 												</li>
 											</ul>
 
@@ -102,25 +108,25 @@
 									<div class="card">
 										<div class="card-body">
 											<h5 class="mb-75">Joined:</h5>
-											<p class="card-text">coach created_at</p>
+											<p class="card-text">{{\Carbon\Carbon::parse($client->created_at)->format('F d, Y')}}</p>
 
 											<div class="mt-2">
 												<h5 class="mb-75">Phone:</h5>
-												<p class="card-text">coach phone</p>
+												<p class="card-text">+62{{$client->phone}}</p>
 											</div>
 											<div class="mt-2">
 												<h5 class="mb-75">Email:</h5>
-												<p class="card-text">coach email</p>
+												<p class="card-text">{{$client->email}}</p>
 											</div>
 											<div class="mt-2">
 												<h5 class="mb-75">Company:</h5>
-												<p class="card-text">coach company</p>
+												<p class="card-text">{{$client->company}}</p>
 											</div>
 											<div class="mt-2">
 												<h5 class="mb-50">Occupation:</h5>
-												<p class="card-text mb-0">coach occupation</p>
+												<p class="card-text mb-0">{{$client->occupation}}</p>
 											</div>
-                    </div>
+										</div>
 									</div>
 									<!--/ about -->
 								</div>
@@ -129,54 +135,88 @@
 								<!-- center profile info section -->
 
 								<div class="col-lg-8 col-`4` order-1 order-lg-2">
-                  <form action="#" method="">
-                    @csrf
-									<div class="row match-height">
-                     <div class="col-sm-12 col-md-6">
-            					<div class="card">
-            						<div class="card-header">
-            							<h4 class="card-title">Change Password</h4>
-            						</div>
-                        <div class="col-md-6 form-group">
-                          <label for="fp-default">Old password</label>
-                          <input class="form-control" value="#">
-                        </div>
-                        <div class="col-md-6 form-group">
-                          <label for="fp-default">New Password</label>
-                          <input class="form-control" value="#">
-                        </div>
-                        <div class="col-md-6 form-group">
-                          <label for="fp-default">Confirm New Password</label>
-                          <input class="form-control" value="#">
-                        </div>
-                        <div class="col-md-6 form-group">
-                        <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                          value="create">Save Change</button>
-                          </div>
-            						</div>
-            					</div>
-            				</div>
+									<form action="{{route('coachs.simpan_password', Auth::user()->id)}}" method="post">
+										@csrf
+										<div class="row match-height">
+											<div class="col-sm-12 col-md-12">
+												<div class="card">
+													<div class="card-header">
+														<h4 class="card-title">Change Password</h4>
+													</div>
+													<div class="container">
+														@if ($message = Session::get('success'))
+														<div class="alert alert-success alert-dissmisable">
+															<h4 class="alert-heading">Success</h4>
+															<div class="alert-body">{{ $message }}</div>
+															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														@endif
+													</div>
+
+													<div class="col-md-12 form-group">
+														<label for="fp-default">Old password</label>
+														<input class="form-control @error('old_password') is-invalid @enderror" type="password"
+															name="old_password" placeholder="Type old password here...">
+														@error('old_password')
+														<span class="invalid-feedback" role="alert">
+															<strong>{{ $message }}</strong>
+														</span>
+														@enderror
+													</div>
+
+													<div class="col-md-12 form-group">
+														<label for="fp-default">New Password</label>
+														<input class="form-control @error('new_password') is-invalid @enderror" type="password"
+															name="new_password" placeholder="Type new password here...">
+														@error('new_password')
+														<span class="invalid-feedback" role="alert">
+															<strong>{{ $message }}</strong>
+														</span>
+														@enderror
+													</div>
+
+													<div class="col-md-12 form-group">
+														<label for="fp-default">Confirm New Password</label>
+														<input class="form-control @error('new_confirm_password') is-invalid @enderror"
+															type="password" name="new_confirm_password" placeholder="New password confirmation">
+														@error('new_confirm_password')
+														<span class="invalid-feedback" role="alert">
+															<strong>{{ $message }}</strong>
+														</span>
+														@enderror
+													</div>
+
+													<div class="col-md-12 form-group">
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+															value="create">Save Change</button>
+													</div>
 												</div>
 											</div>
 										</div>
-										<!--/ center profile info section -->
-									</div>
-
-								</section>
-								<!--/ profile info section -->
+									</form>
+								</div>
 							</div>
-
-				</div>
-				<!---End Content Body -->
 					</div>
+					<!--/ center profile info section -->
+				</div>
+
+				</section>
+				<!--/ profile info section -->
 			</div>
-			<!-- END: Content-->
-			@endsection
 
-			@push('scripts')
+		</div>
+		<!---End Content Body -->
+	</div>
+</div>
+<!-- END: Content-->
+@endsection
 
-			<script type="text/javascript">
-			$(function () {
+@push('scripts')
+
+<script type="text/javascript">
+	$(function () {
 
 				//ajax declaration with csrf
 				$.ajaxSetup({
@@ -185,7 +225,7 @@
 					}
 				});
 
-				//datatable for sessions table
+				datatable for sessions table
 				var table = $('.yajra-datatable-1').DataTable({
 					processing: true,
 					serverSide: true,
@@ -220,7 +260,7 @@
 					}
 				});
 
-				//datatable for plans table
+				datatable for plans table
 				var table = $('.yajra-datatable-2').DataTable({
 					processing: true,
 					serverSide: true,
@@ -266,5 +306,5 @@
 					})
 				});
 			});
-			</script>
-			@endpush
+</script>
+@endpush

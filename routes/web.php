@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 //use App\Http\Controllers\RoleController;
-//use App\Http\Controllers\UserController;
+use App\Http\Controllers\CoachController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\PlanController;
@@ -49,23 +49,26 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 //Route::get('clients/list', [ClientController::class, 'getClients'])->name('clients.list');
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
 	Route::get('/', function () {
 		return redirect('/home');
 	});
-    //Route::resource('roles', RoleController::class);
-    //Route::resource('users', UserController::class);
-    Route::resource('clients', ClientController::class);
-    Route::resource('agendas', AgendaController::class);
-    Route::resource('plans', PlanController::class);
-		Route::get('/ajaxClients',[ PlanController::class, 'ajaxClients'])->name('clients.search');
-		Route::post('/agendas/{id}/update',[ AgendaController::class, 'update' ])->name('agendas.update');
-		Route::get('/agendas/{id}/edit',[ AgendaController::class, 'edit' ])->name('agendas.edit');
+	//Route::resource('roles', RoleController::class);
+	Route::resource('coachs', CoachController::class);
+	Route::get('/coachs/{id}/profil', [CoachController::class, 'profil'])->name('coachs.profil');
+	Route::post('/coachs/{id}/change-password', [CoachController::class, 'simpan_password'])->name('coachs.simpan_password');
 
-		Route::post('/agendas/{id}/agenda_update',[AgendaController::class, 'agenda_update'])->name('agendas.agenda_update');
-		Route::get('/agendas/{id}/download',[AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
-		Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_sessions_data'])->name('clients.show_agendas');
-		Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
+	Route::resource('clients', ClientController::class);
+	Route::resource('agendas', AgendaController::class);
+	Route::resource('plans', PlanController::class);
+	Route::get('/ajaxClients', [PlanController::class, 'ajaxClients'])->name('clients.search');
+	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
+	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
+
+	Route::post('/agendas/{id}/agenda_update', [AgendaController::class, 'agenda_update'])->name('agendas.agenda_update');
+	Route::get('/agendas/{id}/download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
+	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_sessions_data'])->name('clients.show_agendas');
+	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
 
 	//Route::get('clients/all', [ClientController::class, 'getAll'])->name('clients.all');
 });
