@@ -307,7 +307,7 @@
 									<div class="content-header-left col-md-9 col-12 mb-2">
 										<div class="row breadcrumbs-top">
 											<div class="col-12">
-												<h4 class="content-header-title float-left mb-0">Your Sessions</h4>
+												<h4 class="breadcrumb-item active">Sessions</h4>
 											</div>
 										</div>
 									</div>
@@ -347,7 +347,7 @@
 								<div class="content-header-left col-md-9 col-12 mb-2">
 									<div class="row breadcrumbs-top">
 										<div class="col-12">
-											<h4 class="content-header-title float-left mb-0">Your Coaching Plans</h4>
+											<h4 class="breadcrumb-item active">Coaching Plans</h4>
 										</div>
 									</div>
 								</div>
@@ -383,6 +383,7 @@
 
 					</div>
 					</div>
+
 					<!-- Tab coaching plans -->
 
 					<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
@@ -390,14 +391,14 @@
 							<div class="content-header-left col-md-9 col-12 mb-2">
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
-										<h4 class="content-header-title float-left mb-0">Your Coaching Notes</h4>
+										<h4 class="breadcrumb-item active">Coaching Notes</h4>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="card">
 							<div class="row">
-								<div class="col-sm-12 col-md-6">
+								<div class="col-sm-12 col-md-12">
 									<div class="card">
 										<div class="card-header">
 											<h6 class="card-title">Subject Note</h6>
@@ -417,6 +418,9 @@
 							</div>
 
 					<!-- /tab coaching plans -->
+
+
+
 					<!--End profile-->
 				</div>
 				<!---End Content Body -->
