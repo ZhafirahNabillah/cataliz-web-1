@@ -41,7 +41,7 @@
 			<div id="user-profile">
 				<!-- profile header -->
 				<div class="row">
-					<div class="col-12">
+					<div class="col-sm-12">
 						<div class="card profile-header mb-2">
 							<!-- profile cover photo -->
 							<img class="card-img-top"
@@ -83,10 +83,27 @@
 														role="tab" aria-selected="true">Home</a>
 												</li>
 											</ul>
-
-											<!-- edit button -->
-
 										</div>
+										</div>
+											<!-- edit button -->
+											<div class="btn-group dropleft ">
+				                <button
+				                  type="button"
+				                  class="btn btn-primary dropdown-toggle"
+				                  data-toggle="dropdown"
+				                  aria-haspopup="true"
+													aria-expanded="false"
+												>
+				                  Edit
+				                </button>
+
+				                <div class="dropdown-menu position-relative">
+				                  <a class="dropdown-item" href="#">Profile Picture</a>
+				                  <a class="dropdown-item" href="#">Cover Picture</a>
+
+				              </div>
+											<!-- /edit button -->
+
 									</div>
 									<!--/ collapse  -->
 								</nav>

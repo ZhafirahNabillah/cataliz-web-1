@@ -307,7 +307,7 @@
 									<div class="content-header-left col-md-9 col-12 mb-2">
 										<div class="row breadcrumbs-top">
 											<div class="col-12">
-												<h4 class="content-header-title float-left mb-0">Your Sessions</h4>
+												<h4 class="breadcrumb-item active">Sessions</h4>
 											</div>
 										</div>
 									</div>
@@ -347,7 +347,7 @@
 								<div class="content-header-left col-md-9 col-12 mb-2">
 									<div class="row breadcrumbs-top">
 										<div class="col-12">
-											<h4 class="content-header-title float-left mb-0">Your Coaching Plans</h4>
+											<h4 class="breadcrumb-item active">Coaching Plans</h4>
 										</div>
 									</div>
 								</div>
@@ -383,6 +383,7 @@
 
 					</div>
 					</div>
+
 					<!-- Tab coaching plans -->
 
 					<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
@@ -390,11 +391,12 @@
 							<div class="content-header-left col-md-9 col-12 mb-2">
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
-										<h4 class="content-header-title float-left mb-0">Your Coaching Notes</h4>
+										<h4 class="breadcrumb-item active">Coaching Notes</h4>
 									</div>
 								</div>
 							</div>
 						</div>
+<<<<<<< HEAD
 						@foreach($coaching_note as $data)
 								<div class="row">
 									<div class="col-sm-6 col-md-12">
@@ -407,6 +409,23 @@
 								        </div>
 								        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 								      </div>
+=======
+						<div class="card">
+							<div class="row">
+								<div class="col-sm-12 col-md-12">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">Subject Note</h6>
+											<div class="media-body">
+												<span class="text-muted ml-50 mr-25">|</span>
+					              <small class="text-muted mr-25">Created at </small>
+					              <small class="text-muted">ddmmyy</small>
+					            </div>
+											<div class="mt-2">
+												<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+											</div>
+											</div>
+>>>>>>> ab9f1c1643834930f440993d7de63a86cb346721
 									</div>
 								</div>
 							</div>
@@ -414,6 +433,9 @@
 					</div>
 
 					<!-- /tab coaching plans -->
+
+
+
 					<!--End profile-->
 				</div>
 				<!---End Content Body -->
