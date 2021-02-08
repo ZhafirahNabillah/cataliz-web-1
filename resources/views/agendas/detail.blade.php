@@ -94,64 +94,162 @@
 				</div>
 				<!--/ Show Detail Agendas -->
 				<div class="col-sm-12 col-md-6">
-					<div class="card">
-						<div class="card-header">
-							<h6 class="card-title">Feedback and Notes</h6>
-						</div>
-						<div class="card-body">
-							@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) > (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
-								<span>Feedback dan notes belum tersedia</span>
-							@elseif($agenda_detail->status == 'canceled')
-								<span>Feedback dan notes tidak tersedia</span>
-							@else
-							<form action="{{ route('agendas.agenda_update',$agenda_detail->id) }}" method="post" enctype="multipart/form-data">
+					<form action="{{ route('agendas.agenda_detail_update',$agenda_detail->id) }}" method="post" enctype="multipart/form-data">
+						<div class="card">
+							<div class="card-header">
+								<h6 class="card-title">Feedback</h6>
+							</div>
+							<div class="card-body">
+								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) > (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
+								<span>Feedback belum tersedia</span>
+								@elseif($agenda_detail->status == 'canceled')
+								<span>Feedback tidak tersedia</span>
+								@else
 								<div class="row">
 									@csrf
 									<div class="col-md-12 form-group">
 										<label for="fp-default">Feedback</label>
-										@if($agenda->feedback == null)
-											<textarea class="form-control @error('feedback') is-invalid @enderror" name="feedback"></textarea>
+										@if($agenda_detail->feedback == null)
+										<textarea class="form-control @error('feedback') is-invalid @enderror" name="feedback"></textarea>
 										@endif
 										@error('feedback')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
 										@enderror
-										@if($agenda->feedback != null)
-											<div class="overflow-auto p-2" style="max-height: 300px;">
-												{!! $agenda->feedback !!}
-											</div>
+										@if($agenda_detail->feedback != null)
+										<div class="overflow-auto p-2" style="max-height: 300px;">
+											{!! $agenda_detail->feedback !!}
+										</div>
 										@endif
 									</div>
 									<div class="col-md-12 form-group">
 										<label for="customFile1">Attachment file</label>
-										@if($agenda->attachment == null)
+										@if($agenda_detail->attachment == null)
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" name="attachment"/>
+											<input type="file" class="custom-file-input" name="feedback_attachment"/>
 											<label class="custom-file-label" for="customFile1">Choose file</label>
 										</div>
 										@endif
-										@if($agenda->attachment != null)
+										@if($agenda_detail->attachment != null)
 										<div class="row">
-											<div class="col-10">
-												<input type="text" class="form-control" value="{{ $agenda->attachment }}" disabled>
+											<div class="col-md-10">
+												<input type="text" class="form-control" value="{{ $agenda_detail->attachment }}" disabled>
 											</div>
-											<a href="{{ route('agendas.feedback_download',$agenda->id) }}" class="btn btn-primary col-auto">Download</a>
+											<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}" class="btn btn-primary col-auto">Download</a>
 										</div>
 										@endif
 									</div>
+
+								</div>
+								@endif
+							</div>
+						</div>
+						@if($coaching_note == null)
+						<div class="card">
+							<div class="card-header">
+								<h6 class="card-title">Notes</h6>
+							</div>
+							<div class="card-body">
+								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) > (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
+								<span>Notes belum tersedia</span>
+								@elseif($agenda_detail->status == 'canceled')
+								<span>Notes tidak tersedia</span>
+								@else
+								<div class="row">
+									@csrf
 									<div class="col-md-12 form-group">
-										<label for="notes">Notes</label>
-										<textarea name="notes" rows="8" cols="80" readonly>{{ $agenda->notes }}</textarea>
+										<label for="fp-default">Subject</label>
+										<input type="text" class="form-control @error('feedback') is-invalid @enderror" name="subject">
+										@error('feedback')
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $message }}</strong>
+										</span>
+										@enderror
 									</div>
-									<div class="col-md-12 text-right">
-										<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
+									<div class="col-md-12 form-group">
+										<label for="fp-default">Summary</label>
+										<textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
+										@error('summary')
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $message }}</strong>
+										</span>
+										@enderror
+									</div>
+									<div class="col-md-12 form-group">
+										<label for="customFile1">Attachment file</label>
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" name="note_attachment"/>
+											<label class="custom-file-label" for="customFile1">Choose file</label>
+										</div>
 									</div>
 								</div>
-							</form>
-							@endif
+								@endif
+							</div>
 						</div>
-					</div>
+						<div class="col-md-12 text-right">
+							<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
+						</div>
+						@elseif($coaching_note != null)
+						<div class="card">
+							<div class="card-header">
+								<h6 class="card-title">Notes</h6>
+							</div>
+							<div class="card-body">
+								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) > (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
+								<span>Notes belum tersedia</span>
+								@elseif($agenda_detail->status == 'canceled')
+								<span>Notes tidak tersedia</span>
+								@else
+								<div class="row">
+									@csrf
+									<div class="col-md-12 form-group">
+										<label for="fp-default">Subject</label>
+										<input type="text" class="form-control @error('feedback') is-invalid @enderror" name="subject" value="{{$coaching_note->subject}}">
+										@error('feedback')
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $message }}</strong>
+										</span>
+										@enderror
+									</div>
+									<div class="col-md-12 form-group">
+										<label for="fp-default">Summary</label>
+										<textarea class="form-control @error('summary') is-invalid @enderror" name="summary">{{$coaching_note->summary}}</textarea>
+										@error('summary')
+										<span class="invalid-feedback" role="alert">
+											<strong>{{ $message }}</strong>
+										</span>
+										@enderror
+									</div>
+									<div class="col-md-12 form-group">
+										<label for="customFile1">Attachment file</label>
+										@if($coaching_note->attachment == null)
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" name="note_attachment"/>
+											<label class="custom-file-label" for="customFile1">Choose file</label>
+										</div>
+										@endif
+										@if($coaching_note->attachment != null)
+										<div class="row">
+											<div class="col-md-10">
+												<input type="text" class="form-control" value="{{ $coaching_note->attachment }}" disabled>
+											</div>
+											<a href="{{ route('agendas.note_download',$coaching_note->id) }}" class="btn btn-primary col-auto">Download</a>
+										</div>
+										@endif
+									</div>
+								</div>
+								@endif
+							</div>
+						</div>
+						<div class="col-md-12 text-right">
+							<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
+						</div>
+						@endif
+						@if(empty([$agenda_detail->feedback, $agenda_detail->attachment]))
+
+						@endif
+					</form>
 				</div>
 			</div>
 			</div>

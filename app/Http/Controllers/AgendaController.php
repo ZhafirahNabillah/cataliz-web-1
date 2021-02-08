@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Agenda;
 use App\Models\Agenda_detail;
+use App\Models\Coaching_note;
 use App\Models\Client;
 use DataTables;
 use Illuminate\Support\Facades\Storage;
@@ -110,6 +111,7 @@ class AgendaController extends Controller
   {
     $agenda_detail = Agenda_detail::where('id',$id)->first();
     $agenda = Agenda::with('client')->where('id',$agenda_detail->agenda_id)->first();
+    $coaching_note = Coaching_note::where('agenda_detail_id',$id)->first();
 
     // $time = \Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s');
     // $time2 = $agenda_detail->date.' '.$agenda_detail->time;
@@ -117,7 +119,7 @@ class AgendaController extends Controller
     //   return("true");
     // }
 
-    return view('agendas.detail',compact('agenda_detail','agenda'));
+    return view('agendas.detail',compact('agenda_detail','agenda','coaching_note'));
   }
 
   /**
@@ -180,41 +182,66 @@ class AgendaController extends Controller
     return response()->json(['success' => 'Agenda deleted!']);
   }
 
-  public function agenda_update(Request $request, $id){
+  public function agenda_detail_update(Request $request, $id){
     // dd($request);
     $agenda_detail = Agenda_detail::where('id',$id)->first();
-    $agenda = Agenda::where('id',$agenda_detail->agenda_id)->first();
 
     if ($request->has('feedback')) {
-      $agenda->feedback = $request->feedback;
+      $agenda_detail->feedback = $request->feedback;
       $agenda_detail->status = 'finished';
-      $agenda_detail->update();
     }
 
-    if ($request->hasFile('attachment')) {
-      $filenameWithExt = $request->file('attachment')->getClientOriginalName();
+    if ($request->hasFile('feedback_attachment')) {
+      $filenameWithExt = $request->file('feedback_attachment')->getClientOriginalName();
       $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-      $extension = $request->file('attachment')->getClientOriginalExtension();
+      $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
       $filenameSave = $filename.'_'.time().'.'.$extension;
-      $path = $request->file('attachment')->storeAs('public/attachment', $filenameSave);
-      $agenda->attachment = $filenameSave;
+      $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
+      $agenda_detail->attachment = $filenameSave;
       $agenda_detail->status = 'finished';
-      $agenda_detail->update();
+    }
+    $agenda_detail->update();
+
+    // if ($request->has('subject','summary')) {
+    //   $agenda_detail->coaching_note->subject = $request->subject;
+    //   $agenda_detail->coaching_note->summary = $request->summary;
+    //   $agenda_detail->coaching_note->owner_id = Auth::user()->id;
+    //   if ($request->hasFile('note_attachment')) {
+    //     $filenameWithExt = $request->file('note_attachment')->getClientOriginalName();
+    //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+    //     $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
+    //     $filenameSave = $filename.'_'.time().'.'.$extension;
+    //     $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
+    //     $agenda_detail->coaching_note->attachment = $filenameSave;
+    //   }
+    //
+    //   $agenda_detail->coaching_note->update();
+    // }
+
+    $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id],['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
+
+    if ($request->hasFile('note_attachment')) {
+      $filenameWithExt = $request->file('note_attachment')->getClientOriginalName();
+      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+      $extension = $request->file('note_attachment')->getClientOriginalExtension();
+      $filenameSave = $filename.'_'.time().'.'.$extension;
+      $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
+      $coaching_note->attachment = $filenameSave;
+      $coaching_note->update();
     }
 
-    $agenda->notes = $request->notes;
-    $agenda->update();
 
-    if ($request->hasAny(['feedback','attachment'])) {
-      return redirect('/agendas')->with('success','Feedback dan notes berhasil disimpan!');
-    } else {
-      return redirect('/agendas')->with('success','Notes berhasil disimpan!');
-    }
+    return redirect('/agendas')->with('success','Feedback berhasil disimpan!');
 
   }
 
   public function feedback_download($id){
-    $agenda = Agenda::where('id',$id)->first();
-    return response()->download(storage_path('app/public/attachment/'.$agenda->attachment));
+    $agenda_detail = Agenda_detail::where('id',$id)->first();
+    return response()->download(storage_path('app/public/attachment/'.$agenda_detail->attachment));
+  }
+
+  public function note_download($id){
+    $coaching_note = Coaching_note::where('id',$id)->first();
+    return response()->download(storage_path('app/public/attachment/'.$coaching_note->attachment));
   }
 }

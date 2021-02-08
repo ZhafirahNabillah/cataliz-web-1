@@ -65,8 +65,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
 	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
 
-	Route::post('/agendas/{id}/agenda_update', [AgendaController::class, 'agenda_update'])->name('agendas.agenda_update');
-	Route::get('/agendas/{id}/download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
+	Route::post('/agendas/{id}/agenda_detail_update', [AgendaController::class, 'agenda_detail_update'])->name('agendas.agenda_detail_update');
+	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
+	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
 	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_sessions_data'])->name('clients.show_agendas');
 	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
 

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Agenda_detail;
+use App\Models\Coaching_note;
 use App\Models\Agenda;
 use App\Models\Plan;
 use DataTables;
@@ -106,8 +107,12 @@ class ClientController extends Controller
     {
         //
 		//$client = Client::find($id);
+    $agenda_id = Agenda::where('client_id',$client->id)->pluck('id');
+    $agenda_detail_id = Agenda_detail::whereIn('agenda_id',$agenda_id)->pluck('id');
+    $coaching_note = Coaching_note::whereIn('agenda_detail_id',$agenda_detail_id)->get();
+    // return($coaching_note);
 
-		return view('clients.show',compact('client'));
+		return view('clients.show',compact('client','coaching_note'));
     }
 
     public function show_sessions_data(Request $request, Client $client){
