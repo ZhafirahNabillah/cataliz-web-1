@@ -87,7 +87,7 @@
 													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile" role="tab" aria-selected="false">Sessions</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingPlan" aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
 												</li>
 												<li class="nav-item">
 													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
@@ -299,6 +299,7 @@
 									Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
 								</p>
 							</div>
+
 							<!-- tab Session -->
 
 							<div class="tab-pane" id="session" aria-labelledby="about-tab" role="tabpanel">
@@ -335,16 +336,51 @@
 											</div>
 										</div>
 									</div>
-						<!-- /tab Session -->
-
 								</section>
-								<!--/ Basic table -->
 							</div>
 						</div>
-						</div>
+						<!-- /tab Session -->
+						<!-- Tab coaching plans -->
+
+						<div class="tab-pane" id="coachingPlan" aria-labelledby="about-tab" role="tabpanel">
+							<div class="content-header row">
+								<div class="content-header-left col-md-9 col-12 mb-2">
+									<div class="row breadcrumbs-top">
+										<div class="col-12">
+											<h2 class="content-header-title float-left mb-0">Your Coaching Plans</h2>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="card">
+
+							<section id="basic-datatable">
+								<div class="row">
+									<div class="col-12">
+										<div class="card">
+											<table class="datatables-basic table yajra-datatable">
+												<thead>
+													<tr>
+														<th>NO</th>
+														<th>OBJEKTIF</th>
+														<th>Tanggal Pelaksanaan</th>
+														<th>ACTION</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+						<!-- /tab coaching plans -->
 
 
 
+
+
+
+					</div>
 					</div>
 					<!--End profile-->
 				</div>
