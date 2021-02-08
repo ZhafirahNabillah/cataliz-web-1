@@ -135,7 +135,7 @@
                      <div class="col-sm-12 col-md-6">
             					<div class="card">
             						<div class="card-header">
-            							<h6 class="card-title">Change Password</h6>
+            							<h4 class="card-title">Change Password</h4>
             						</div>
                         <div class="col-md-6 form-group">
                           <label for="fp-default">Old password</label>
@@ -168,10 +168,7 @@
 
 				</div>
 				<!---End Content Body -->
-
-				
-
-				</div>
+					</div>
 			</div>
 			<!-- END: Content-->
 			@endsection
