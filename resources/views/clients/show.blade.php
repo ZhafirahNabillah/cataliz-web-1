@@ -318,7 +318,7 @@
 									<div class="row">
 										<div class="col-12">
 											<div class="card">
-												<table class="datatables-basic table yajra-datatable">
+												<table class="datatables-basic table yajra-datatable-1">
 													<thead>
 														<tr>
 															<th>NO</th>
@@ -358,7 +358,7 @@
 								<div class="row">
 									<div class="col-12">
 										<div class="card">
-											<table class="datatables-basic table yajra-datatable">
+											<table class="datatables-basic table yajra-datatable-2">
 												<thead>
 													<tr>
 														<th>NO</th>
@@ -476,13 +476,81 @@
 			@endsection
 
 			@push('scripts')
+
 			<script type="text/javascript">
 			$(function () {
+
+				//ajax declaration with csrf
 				$.ajaxSetup({
 					headers: {
 						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 					}
 				});
+
+				//datatable for sessions table
+				var table = $('.yajra-datatable-1').DataTable({
+					processing: true,
+					serverSide: true,
+					ajax: "{{route('clients.show_agendas', $client->id)}}",
+					columns: [
+						{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+						{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
+						{data: 'session_name', name: 'session_name'},
+						{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
+						{data: 'time', name: 'time', defaultContent: '<i>-</i>'},
+						{
+							data: 'duration',
+							name: 'duration'
+						},
+						{
+							data: 'action',
+							name: 'action',
+							orderable: true,
+							searchable: true
+						},
+					],
+					dom:
+			        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+					language: {
+						paginate: {
+						  // remove previous & next text from pagination
+						  previous: '&nbsp;',
+						  next: '&nbsp;'
+						},
+						search: "<i data-feather='search'></i>",
+						searchPlaceholder: "Search records"
+					}
+				});
+
+				//datatable for plans table
+				var table = $('.yajra-datatable-2').DataTable({
+					processing: true,
+					serverSide: true,
+					ajax: "{{route('clients.show_plans', $client->id)}}",
+					columns: [
+						{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+						{data: 'objective', name: 'objective', defaultContent: '<i>-</i>'},
+						{data: 'date', name: 'date'},
+						{
+							data: 'action',
+							name: 'action',
+							orderable: true,
+							searchable: true
+						},
+					],
+					dom:
+			        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+					language: {
+						paginate: {
+						  // remove previous & next text from pagination
+						  previous: '&nbsp;',
+						  next: '&nbsp;'
+						},
+						search: "<i data-feather='search'></i>",
+						searchPlaceholder: "Search records"
+					}
+				});
+
 				// edit
 				$('.editClient').click(function () {
 					var Client_id = $(this).data('id');
