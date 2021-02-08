@@ -187,9 +187,6 @@
 								@endif
 							</div>
 						</div>
-						<div class="col-md-12 text-right">
-							<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
-						</div>
 						@elseif($coaching_note != null)
 						<div class="card">
 							<div class="card-header">
@@ -242,12 +239,11 @@
 								@endif
 							</div>
 						</div>
+						@endif
+						@if(empty([$agenda_detail->feedback, $agenda_detail->attachment]))
 						<div class="col-md-12 text-right">
 							<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
 						</div>
-						@endif
-						@if(empty([$agenda_detail->feedback, $agenda_detail->attachment]))
-
 						@endif
 					</form>
 				</div>
