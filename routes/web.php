@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::resource('coachs', CoachController::class);
 	Route::get('/coachs/{id}/profil', [CoachController::class, 'profil'])->name('coachs.profil');
 	Route::post('/coachs/{id}/change-password', [CoachController::class, 'simpan_password'])->name('coachs.simpan_password');
+	Route::post('/coachs/{id}/update_profil', [CoachController::class, 'update_profil'])->name('coachs.update_profil');
+	Route::post('/coachs/{id}/update_background', [CoachController::class, 'update_background'])->name('coachs.update_background');
 
 	Route::resource('clients', ClientController::class);
 	Route::resource('agendas', AgendaController::class);

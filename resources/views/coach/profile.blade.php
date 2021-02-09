@@ -28,7 +28,7 @@
 								</li>
 								<li class="breadcrumb-item"><a href="{{route('clients.index')}}">Profile</a>
 								</li>
-								<li class="breadcrumb-item active">{{$client->name}}
+								<li class="breadcrumb-item active">{{$user->name}}
 								</li>
 							</ol>
 						</div>
@@ -40,12 +40,20 @@
 		<div class="content-body">
 			<div id="user-profile">
 				<!-- profile header -->
+				@if ($message = Session::get('success2'))
+				<div class="alert alert-success alert-dissmisable">
+					<h4 class="alert-heading">Success</h4>
+					<div class="alert-body">{{ $message }}</div>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				@endif
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="card profile-header mb-2">
 							<!-- profile cover photo -->
-							<img class="card-img-top"
-								src="https://image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg"
+							<img class="card-img-top" src="{{ url('storage/profil/'.$user->profil_picture) }}"
 								alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
@@ -53,13 +61,12 @@
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{asset('assets/images/avatars/cataliz.jpg') }}" class="rounded img-fluid"
-											alt="Card image" />
+										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid"
+											alt="Card image" id="profil" />
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
-										<h2 class="text-white">{{$client->name}}</h2>
-										<p class="text-white">{{$client->occupation}} {{$client->company}}</p>
+										<h2 class="text-white">{{$user->name}}</h2>
 									</div>
 								</div>
 							</div>
@@ -84,141 +91,186 @@
 												</li>
 											</ul>
 										</div>
-										<!-- edit button -->
-														<div class="demo-inline-spacing">
-															<button type="button" class="btn btn-outline-info round">Edit Profile</button>
 
-														</div>
-														<div class="demo-inline-spacing">
-															<button type="button" class="btn btn-outline-info round">Edit Cover</button>
-														</div>
+										<!-- edit button -->
+										<div class="demo-inline-spacing">
+											<button class="btn btn-outline-info round mt-0" data-toggle="modal"
+												data-target="#exampleModal">Upload Foto</button>
+										</div>
+
+										<div class="demo-inline-spacing">
+											<button class="btn btn-outline-info round mt-0" data-toggle="modal"
+												data-target="#exampleModal2">Upload Background</button>
+										</div>
 										<!-- /edit button -->
 
-									</div>
-
-
-									</div>
-									<!--/ collapse  -->
-								</nav>
-								<!--/ navbar -->
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--/ profile header -->
-
-				<div class="tab-content">
-					<div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-						<!-- profile info section -->
-						<section id="profile-info">
-							<div class="row">
-								<!-- left profile info section -->
-								<div class="col-lg-4 col-12 order-2 order-lg-1">
-									<!-- about -->
-									<div class="card">
-										<div class="card-body">
-											<h5 class="mb-75">Joined:</h5>
-											<p class="card-text">{{\Carbon\Carbon::parse($client->created_at)->format('F d, Y')}}</p>
-
-											<div class="mt-2">
-												<h5 class="mb-75">Phone:</h5>
-												<p class="card-text">+62{{$client->phone}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-75">Email:</h5>
-												<p class="card-text">{{$client->email}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-75">Company:</h5>
-												<p class="card-text">{{$client->company}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-50">Occupation:</h5>
-												<p class="card-text mb-0">{{$client->occupation}}</p>
-											</div>
-										</div>
-									</div>
-									<!--/ about -->
-								</div>
-								<!--/ left profile info section -->
-
-								<!-- center profile info section -->
-
-								<div class="col-lg-8 col-`4` order-1 order-lg-2">
-									<form action="{{route('coachs.simpan_password', Auth::user()->id)}}" method="post">
-										@csrf
-										<div class="row match-height">
-											<div class="col-sm-12 col-md-12">
-												<div class="card">
-													<div class="card-header">
-														<h4 class="card-title">Change Password</h4>
-													</div>
-													<div class="container">
-														@if ($message = Session::get('success'))
-														<div class="alert alert-success alert-dissmisable">
-															<h4 class="alert-heading">Success</h4>
-															<div class="alert-body">{{ $message }}</div>
-															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-																<span aria-hidden="true">×</span>
-															</button>
-														</div>
-														@endif
+										<!-- Modal Profil-->
+										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+											aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Update Foto Profil</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
 													</div>
 
-													<div class="col-md-12 form-group">
-														<label for="fp-default">Old password</label>
-														<input class="form-control @error('old_password') is-invalid @enderror" type="password"
-															name="old_password" placeholder="Type old password here...">
-														@error('old_password')
-														<span class="invalid-feedback" role="alert">
-															<strong>{{ $message }}</strong>
-														</span>
-														@enderror
+													<div class="modal-body">
+														<form action="{{route('coachs.update_profil', Auth::user()->id)}}" method="POST"
+															enctype="multipart/form-data">
+															@csrf
+															<input type="file" name="profil_picture" id="profil_picture">
 													</div>
-
-													<div class="col-md-12 form-group">
-														<label for="fp-default">New Password</label>
-														<input class="form-control @error('new_password') is-invalid @enderror" type="password"
-															name="new_password" placeholder="Type new password here...">
-														@error('new_password')
-														<span class="invalid-feedback" role="alert">
-															<strong>{{ $message }}</strong>
-														</span>
-														@enderror
-													</div>
-
-													<div class="col-md-12 form-group">
-														<label for="fp-default">Confirm New Password</label>
-														<input class="form-control @error('new_confirm_password') is-invalid @enderror"
-															type="password" name="new_confirm_password" placeholder="New password confirmation">
-														@error('new_confirm_password')
-														<span class="invalid-feedback" role="alert">
-															<strong>{{ $message }}</strong>
-														</span>
-														@enderror
-													</div>
-
-													<div class="col-md-12 form-group">
-														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-															value="create">Save Change</button>
+													<div class="modal-footer">
+														<button type="submit" class="btn btn-primary">Simpan</button>
+														</form>
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 													</div>
 												</div>
 											</div>
 										</div>
-									</form>
-								</div>
-							</div>
-					</div>
-					<!--/ center profile info section -->
-				</div>
+										<!--/ Modal Profil -->
 
-				</section>
-				<!--/ profile info section -->
+										<!-- Modal Background-->
+										<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
+											aria-hidden="true">
+											<div class="modal-dialog">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Update Background</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														...
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+														<button type="button" class="btn btn-primary" name="background_picture">Simpan</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!--/ Modal Background -->
+
+									</div>
+							</div>
+							<!--/ collapse  -->
+							</nav>
+							<!--/ navbar -->
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ profile header -->
+
+			<div class="tab-content">
+				<div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
+					<!-- profile info section -->
+					<section id="profile-info">
+						<div class="row">
+							<!-- left profile info section -->
+							<div class="col-lg-4 col-12 order-2 order-lg-1">
+								<!-- about -->
+								<div class="card">
+									<div class="card-body">
+										<h5 class="mb-75">Joined:</h5>
+										<p class="card-text">{{\Carbon\Carbon::parse($user->created_at)->format('F d, Y')}}</p>
+
+										<div class="mt-2">
+											<h5 class="mb-75">Phone:</h5>
+											<p class="card-text">+62{{$user->phone}}</p>
+										</div>
+										<div class="mt-2">
+											<h5 class="mb-75">Email:</h5>
+											<p class="card-text">{{$user->email}}</p>
+										</div>
+									</div>
+								</div>
+								<!--/ about -->
+							</div>
+							<!--/ left profile info section -->
+
+							<!-- center profile info section -->
+
+							<div class="col-lg-8 col-`4` order-1 order-lg-2">
+								<form action="{{route('coachs.simpan_password', Auth::user()->id)}}" method="post">
+									@csrf
+									<div class="row match-height">
+										<div class="col-sm-12 col-md-12">
+											<div class="card">
+												<div class="card-header">
+													<h4 class="card-title">Change Password</h4>
+												</div>
+												<div class="container">
+													@if ($message = Session::get('success'))
+													<div class="alert alert-success alert-dissmisable">
+														<h4 class="alert-heading">Success</h4>
+														<div class="alert-body">{{ $message }}</div>
+														<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+															<span aria-hidden="true">×</span>
+														</button>
+													</div>
+													@endif
+												</div>
+
+												<div class="col-md-12 form-group">
+													<label for="fp-default">Old password</label>
+													<input class="form-control @error('old_password') is-invalid @enderror" type="password"
+														name="old_password" placeholder="Type old password here...">
+													@error('old_password')
+													<span class="invalid-feedback" role="alert">
+														<strong>{{ $message }}</strong>
+													</span>
+													@enderror
+												</div>
+
+												<div class="col-md-12 form-group">
+													<label for="fp-default">New Password</label>
+													<input class="form-control @error('new_password') is-invalid @enderror" type="password"
+														name="new_password" placeholder="Type new password here...">
+													@error('new_password')
+													<span class="invalid-feedback" role="alert">
+														<strong>{{ $message }}</strong>
+													</span>
+													@enderror
+												</div>
+
+												<div class="col-md-12 form-group">
+													<label for="fp-default">Confirm New Password</label>
+													<input class="form-control @error('new_confirm_password') is-invalid @enderror"
+														type="password" name="new_confirm_password" placeholder="New password confirmation">
+													@error('new_confirm_password')
+													<span class="invalid-feedback" role="alert">
+														<strong>{{ $message }}</strong>
+													</span>
+													@enderror
+												</div>
+
+												<div class="col-md-12 form-group">
+													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+														value="create">Save
+														Change</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+				</div>
+				<!--/ center profile info section -->
 			</div>
 
+			</section>
+			<!--/ profile info section -->
 		</div>
-		<!---End Content Body -->
+
 	</div>
+	<!---End Content Body -->
+</div>
 </div>
 <!-- END: Content-->
 @endsection
@@ -228,93 +280,7 @@
 <script type="text/javascript">
 	$(function () {
 
-				//ajax declaration with csrf
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
-
-				datatable for sessions table
-				var table = $('.yajra-datatable-1').DataTable({
-					processing: true,
-					serverSide: true,
-					ajax: "{{route('clients.show_agendas', $client->id)}}",
-					columns: [
-						{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-						{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
-						{data: 'session_name', name: 'session_name'},
-						{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
-						{data: 'time', name: 'time', defaultContent: '<i>-</i>'},
-						{
-							data: 'duration',
-							name: 'duration'
-						},
-						{
-							data: 'action',
-							name: 'action',
-							orderable: true,
-							searchable: true
-						},
-					],
-					dom:
-			        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-					language: {
-						paginate: {
-						  // remove previous & next text from pagination
-						  previous: '&nbsp;',
-						  next: '&nbsp;'
-						},
-						search: "<i data-feather='search'></i>",
-						searchPlaceholder: "Search records"
-					}
-				});
-
-				datatable for plans table
-				var table = $('.yajra-datatable-2').DataTable({
-					processing: true,
-					serverSide: true,
-					ajax: "{{route('clients.show_plans', $client->id)}}",
-					columns: [
-						{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-						{data: 'objective', name: 'objective', defaultContent: '<i>-</i>'},
-						{data: 'date', name: 'date'},
-						{
-							data: 'action',
-							name: 'action',
-							orderable: true,
-							searchable: true
-						},
-					],
-					dom:
-			        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-					language: {
-						paginate: {
-						  // remove previous & next text from pagination
-						  previous: '&nbsp;',
-						  next: '&nbsp;'
-						},
-						search: "<i data-feather='search'></i>",
-						searchPlaceholder: "Search records"
-					}
-				});
-
-				// edit
-				$('.editClient').click(function () {
-					var Client_id = $(this).data('id');
-					$.get("" +'/clients/' + Client_id +'/edit', function (data) {
-						$('#modalHeading').html("Edit Client");
-						$('#saveBtn').val("edit-user");
-						$('#modals-slide-in').modal('show');
-						$('#Client_id').val(data.id);
-						$('#name').val(data.name);
-						$('#phone').val(data.phone);
-						$('#email').val(data.email);
-						$('#company').val(data.company);
-						$('#organization').val(data.organization);
-						$('#occupation').val(data.occupation);
-					})
-				});
+				
 			});
 </script>
 @endpush

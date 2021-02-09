@@ -9,6 +9,8 @@ use app\Models\User;
 use App\Models\Client;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 
 class CoachController extends Controller
 {
@@ -29,7 +31,7 @@ class CoachController extends Controller
         return view('coach.profile', compact('user', 'client'));
     }
 
-    public function simpan_password(Request $request)
+    public function simpan_password(Request $request, $id)
     {
         $request->validate([
             'old_password' => ['required', new MatchOldPassword],
@@ -40,6 +42,41 @@ class CoachController extends Controller
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
         return redirect(route('coachs.profil', Auth::user()->id))->with('success', 'Password berhasil diubah!');
+    }
+
+    public function update_profil(Request $request, $id)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        if ($request->has('profil_picture')) {
+            if ($request->hasFile('profil_picture')) {
+                $filenameWithExt = $request->file('profil_picture')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('profil_picture')->getClientOriginalExtension();
+                $filenameSave = $filename . '_' . time() . '.' . $extension;
+                $path = $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
+                $user->profil_picture = $filenameSave;
+            }
+        }
+        $user->update();
+
+        return redirect(route('coachs.profil', Auth::user()->id))->with('success2', 'Foto profil berhasil diubah!');
+    }
+
+    public function update_background(Request $request)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+
+        if ($request->hasFile('background_picture')) {
+            $filenameWithExt = $request->file('background_picture')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extension = $request->file('background_picture')->getClientOriginalExtension();
+            $filenameSave = $filename . '_' . time() . '.' . $extension;
+            $path = $request->file('background_picture')->storeAs('public/background', $filenameSave);
+            $user->profil_picture = $filenameSave;
+            $user->update();
+        }
+        return redirect(route('coachs.profil', Auth::user()->id))->with('success2', 'Background berhasil diubah!');
     }
 
     /**

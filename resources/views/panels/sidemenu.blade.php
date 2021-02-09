@@ -1,29 +1,40 @@
 <!-- BEGIN: Main Menu-->
-    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
-        <div class="navbar-header">
-            <ul class="nav navbar-nav flex-row">
-                <li class="nav-item mr-auto">
-					<a class="navbar-brand" href="{{route('home')}}">
-                            @include('panels.logo')
-                    </a>
-				</li>
-                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
-            </ul>
-        </div>
-        <div class="shadow-bottom"></div>
-        <div class="main-menu-content">
-            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
-                </li>
-                <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Management</span><i data-feather="more-horizontal"></i>
-                </li>
-                <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Clients</span></a>
-                </li>
-				        <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Plans</span></a>
-                </li>
-				        <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Todo">Agenda</span></a>
-                </li>
-				        <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+    <div class="navbar-header">
+        <ul class="nav navbar-nav flex-row">
+            <li class="nav-item mr-auto">
+                <a class="navbar-brand" href="{{route('home')}}">
+                    @include('panels.logo')
+                </a>
+            </li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                        class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i
+                        class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc"
+                        data-ticon="disc"></i></a></li>
+        </ul>
+    </div>
+    <div class="shadow-bottom"></div>
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('home')}}"><i
+                        data-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
+            </li>
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Management</span><i
+                    data-feather="more-horizontal"></i>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('clients.index')}}"><i
+                        data-feather="user"></i><span class="menu-title text-truncate"
+                        data-i18n="Email">Clients</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('plans.index')}}"><i
+                        data-feather="check-square"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Plans</span></a>
+            </li>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i
+                        data-feather="calendar"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Agenda</span></a>
+            </li>
+            <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>
                 </li>
@@ -341,7 +352,7 @@
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="https://pixinvent.ticksy.com/"><i data-feather="life-buoy"></i><span class="menu-title text-truncate" data-i18n="Raise Support">Raise Support</span></a>
                 </li> -->
-            </ul>
-        </div>
+        </ul>
     </div>
-    <!-- END: Main Menu-->
+</div>
+<!-- END: Main Menu-->
