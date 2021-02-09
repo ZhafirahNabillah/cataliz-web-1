@@ -69,19 +69,15 @@ class AgendaController extends Controller
   public function store(Request $request)
   {
     //
-
-    // return($request);
-    // $agenda = Agenda::updateOrCreate(['id' => $request->id], ['client_id' => $request->client_id, 'session' => $request->session, 'type_session' => $request->type_session, 'date' =>  $request->date, 'duration' => $request->duration, 'status' => $request->status, 'owner_id' => Auth::user()->id]);
-    //
-    // if ($agenda->wasChanged()) {
-    //   $agenda->status = 'scheduled';
-    //   $agenda->update();
-    // }
-    //
-    // if ($agenda->wasRecentlyCreated) {
-    //   $agenda->status = 'unschedule';
-    //   $agenda->update();
-    // }
+    $this->validate($request, [
+      'client_id'     => 'required',
+      'session'       => 'required',
+      'type_session'  => 'required',
+    ],[
+      'client_id.required'           => "Silahkan pilih client anda terlebih dahulu!",
+      'session.required'       => "Silahkan pilih banyaknya sesi terlebih dahulu!",
+      'type_session.required'          => "Silahkan pilih tipe sesi terlebih dahulu!",
+    ]);
 
     $agenda = new Agenda;
     $agenda->client_id = $request->client_id;
@@ -148,6 +144,18 @@ class AgendaController extends Controller
   public function update(Request $request, $id)
   {
     //
+    $this->validate($request, [
+      'topic'         => 'required',
+      'date'          => 'required',
+      'time'          => 'required',
+      'duration'      => 'required',
+    ],[
+      'topic.required'            => "Silahkan isi topic sesi terlebih dahulu!",
+      'date.required'             => "Silahkan isi tanggal sesi terlebih dahulu!",
+      'time.required'             => "Silahkan isi waktu sesi terlebih dahulu!",
+      'duration.required'         => "Silahkan isi durasi sesi terlebih dahulu!",
+    ]);
+
     $agenda_detail = Agenda_detail::where('id',$id)->first();
     $agenda_detail->topic = $request->topic;
 
@@ -184,6 +192,15 @@ class AgendaController extends Controller
 
   public function agenda_detail_update(Request $request, $id){
     // dd($request);
+
+    $this->validate($request, [
+      'subject'       => 'required',
+      'summary'       => 'required',
+    ],[
+      'subject.required'       => "Silahkan isi subject note anda terlebih dahulu!",
+      'summary.required'       => "Silahkan isi summary note anda terlebih dahulu!",
+    ]);
+
     $agenda_detail = Agenda_detail::where('id',$id)->first();
 
     if ($request->has('feedback')) {

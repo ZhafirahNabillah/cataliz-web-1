@@ -85,8 +85,12 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control" name="topic" value="{{ $agenda_detail->topic }}"
-                        placeholder="Masukkan topic...">
+                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic...">
+                      @error('topic')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                   </div>
 
@@ -95,12 +99,8 @@
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
                       <select class="form-control" id="media1" aria-label=".form-select-lg example" name="media">
-                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
-                          Room')
-                          @endif>Meeting Room</option>
-                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
-                          @endif>Whatsapp
-                        </option>
+                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting Room')@endif>Meeting Room</option>
+                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')@endif>Whatsapp</option>
                       </select>
                     </div>
                   </div>
@@ -137,28 +137,42 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" id="datepicker" class="form-control" name="date"
-                        value="{{ $agenda_detail->date }}">
+                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $agenda_detail->date }}">
+                      @error('date')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="fp-default">Waktu Kegiatan</label>
-                      <input type="time" class="form-control" name="time" value="{{ $agenda_detail->time }}">
+                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}">
+                      @error('time')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="duration">
-                        <option selected>Pilih Durasi</option>
+                      <select class="form-control @error('duration') is-invalid @enderror" aria-label=".form-select-lg example" name="duration">
+                        <option hidden selected value>Pilih Durasi</option>
                         <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Menit</option>
                         <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Menit</option>
                         <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Menit</option>
                         <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Menit</option>
                       </select>
+                      @error('duration')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                    value="create">Submit</button>
+                  <a href="{{route('agendas.index')}}" class="btn btn-secondary">Kembali</a>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                 </div>
               </div>
             </div>
@@ -181,7 +195,7 @@
         $(".media_url1").toggle(500);
     });
   });
-  
+
   $(document).ready(function () {
     $("#media2").on('change', function () {
         $(".media_url2").toggle(500);
