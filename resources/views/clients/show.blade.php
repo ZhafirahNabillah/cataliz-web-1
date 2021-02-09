@@ -410,6 +410,8 @@
 												</div>
 											</div>
 										</div>
+										<!-- /tab coaching note -->
+
 
 										<!-- coaching note detail modal -->
 										<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -424,16 +426,24 @@
 													<div class="modal-body">
 														<div class="container">
 															<div class="row">
-																<div class="col-md-12">
-																	<div class="row">
-																		<div class="col-md-12">
-																			<small class="text-muted">Subject</small>
-																			<h4>{{$data->subject}}</h4>
-																		</div>
-																		<div class="col-md-12">
-																			<small class="text-muted">Summary</small>
-																			{!! $data->summary !!}
-																		</div>
+																<div class="card-body">
+																		<dl class="row">
+																			<dt class="col-sm-3">Subject</dt>
+																			<dd class="col-sm-9">{{$data->subject}}</dd>
+																		</dl>
+																		<dl class="row">
+																			<dt class="col-sm-3">Created at</dt>
+																			<dd class="col-sm-9">{{$data->created_at}}</dd>
+																		</dl>
+																		<dl class="row">
+																			<dt class="col-sm-3">Session</dt>
+																			<dd class="col-sm-9">#</dd>
+																		</dl>
+																		<dl class="row">
+																			<dt class="col-sm-3">Note</dt>
+																			<span class="d-block my-1"></span>
+																			<dd class="col-sm-9 text-justify">	{!! $data->summary !!}</dd>
+																		</dl>
 																		<div class="col-md-12">
 																			<small class="d-block text-muted">Note Attachment</small>
 																			@if($data->attachment != null)
@@ -444,7 +454,6 @@
 																			@endif
 																		</div>
 																	</div>
-																</div>
 															</div>
 														</div>
 													</div>
@@ -466,54 +475,79 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-sm-6 col-md-12">
-											<div class="card">
-												<div class="card-body">
-													<h5 class="card-title mb-0" id="feedback"
-													data-target="detailNotes">Subject</h5>
-													<small class="text-muted">created at </small>
-													<div class="card-text">
-														Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /tab Feedback->
-
-								<!-- Modal detail feedback -->
-								<div class="modal fade text-left" id="detailFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h4 class="modal-title" id="myModalLabel17">#</h4>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="row">
-												<div class="col-sm-6 col-md-12">
-													<div class="card">
-														<div class="card-body">
-															<div class="mt-2">
-																<h5 class="mb-75">created at #</h5>
+										<!-- Feedback card -->
+										<div class="row">
+											<div class="col-sm-12 col-md-12">
+												<div class="card">
+													<div class="card-body">
+														<div class="row align-items-center">
+															<div class="col-md-12">
+																<h5 class="card-title mb-0" id="detailNotes"
+																data-target="detailNotes" >Topic Session: </h5>
+																<small class="text-muted">created at </small>
+																<p class="text-justify" >Feedback session Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. </p>
 															</div>
-															<div class="modal-body">
-																Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+															<div class="col-md-6 text-right ">
+																<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#show_feedback">
+																	Detail
+																</button>
 															</div>
 														</div>
+														<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 													</div>
 												</div>
 											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
-											</div>
 										</div>
+										<!-- /Feedback note -->
+
+								<!-- Feedback detail modal -->
+								<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLongTitle">Note</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="container">
+																<div class="row">
+																	<div class="card-body">
+																			<dl class="row">
+														            <dt class="col-sm-3">Topic</dt>
+														            <dd class="col-sm-9">Belajar Laravel</dd>
+														          </dl>
+																			<dl class="row">
+														            <dt class="col-sm-3">Created at</dt>
+														            <dd class="col-sm-9">2021-02-09 03:06:45</dd>
+														          </dl>
+																			<dl class="row">
+														            <dt class="col-sm-3">Session</dt>
+														            <dd class="col-sm-9">3</dd>
+														          </dl>
+																			<dl class="row">
+														            <dt class="col-sm-3">Feedback</dt>
+																				<span class="d-block my-1"></span>
+														            <dd class="col-sm-9 text-justify">Feedback Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci.</dd>
+														          </dl>
+																			<dl class="row">
+														            <small class="col-sm-6 d-block text-muted">Note Attachment</small>
+														          </dl>
+																			<dl class="row">
+																				<span class="d-block my-1"></span>
+																				<a href="#" class="btn btn-primary">Download</a>
+																				<span class="d-block font-italic">Tidak ada file</span>
+														          </dl>
+																		</div>
+																</div>
+															</div>
+															</div>
+													</div>
+												</div>
+											</div>
 									</div>
-								</div>
-								<!-- /modal detail feedback -->
+									<!-- /modal Feedback-->
 
 
 								<!--End profile-->
