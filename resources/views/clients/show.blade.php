@@ -389,81 +389,84 @@
 										</div>
 									</div>
 									@foreach($coaching_note as $data)
-										<!-- coaching note card -->
-										<div class="row">
-											<div class="col-sm-12 col-md-12">
-												<div class="card">
-													<div class="card-body">
-														<div class="row align-items-center">
-															<div class="col-md-6">
-																<h5 class="card-title mb-0" id="detailNotes"
-																data-target="detailNotes" >{{$data->subject}}</h5>
-																<small class="text-muted">created at {{$data->created_at}}</small>
-															</div>
-															<div class="col-md-6 text-right">
-																<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#show_note_{{$data->id}}">
-																	Detail
-																</button>
+									<!-- coaching note card -->
+									<div class="row">
+										<div class="col-sm-12 col-md-12">
+											<div class="card">
+												<div class="card-body">
+													<div class="row align-items-center">
+														<div class="col-md-6">
+															<h5 class="card-title mb-0" id="detailNotes"
+															data-target="detailNotes" >{{$data->subject}}</h5>
+															<small class="text-muted">created at {{$data->created_at}}</small>
+														</div>
+														<div class="col-md-6 text-right">
+															<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#show_note_{{$data->id}}">
+																Detail
+															</button>
+														</div>
+													</div>
+													<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+												</div>
+											</div>
+										</div>
+									</div>
+									<!-- /tab coaching note -->
+
+
+									<!-- coaching note detail modal -->
+									<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="container">
+														<div class="row">
+															<div class="card-body">
+																<dl class="row">
+																	<dt class="col-sm-3">Subject</dt>
+																	<dd class="col-sm-9">{{$data->subject}}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-sm-3">Created at</dt>
+																	<dd class="col-sm-9">{{$data->created_at}}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-sm-3">Session</dt>
+																	<dd class="col-sm-9">{{$data->agenda_detail->session_name}}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-sm-3">Note</dt>
+																	<span class="d-block my-1"></span>
+																	<dd class="col-sm-9 text-justify">	{!! $data->summary !!}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-md-12">
+																		<small class="d-block text-muted">Note Attachment</small>
+																		@if($data->attachment != null)
+																		<span class="d-block my-1">{{$data->attachment}}</span>
+																		<a href="{{ route('agendas.note_download',$data->id) }}" class="btn btn-primary">Download</a>
+																		@else
+																		<span class="d-block font-italic">Tidak ada file</span>
+																		@endif
+																	</dt>
+																</dl>
 															</div>
 														</div>
-														<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 													</div>
 												</div>
 											</div>
 										</div>
-										<!-- /tab coaching note -->
-
-
-										<!-- coaching note detail modal -->
-										<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<div class="container">
-															<div class="row">
-																<div class="card-body">
-																		<dl class="row">
-																			<dt class="col-sm-3">Subject</dt>
-																			<dd class="col-sm-9">{{$data->subject}}</dd>
-																		</dl>
-																		<dl class="row">
-																			<dt class="col-sm-3">Created at</dt>
-																			<dd class="col-sm-9">{{$data->created_at}}</dd>
-																		</dl>
-																		<dl class="row">
-																			<dt class="col-sm-3">Session</dt>
-																			<dd class="col-sm-9">#</dd>
-																		</dl>
-																		<dl class="row">
-																			<dt class="col-sm-3">Note</dt>
-																			<span class="d-block my-1"></span>
-																			<dd class="col-sm-9 text-justify">	{!! $data->summary !!}</dd>
-																		</dl>
-																		<div class="col-md-12">
-																			<small class="d-block text-muted">Note Attachment</small>
-																			@if($data->attachment != null)
-																				<span class="d-block my-1">{{$data->attachment}}</span>
-																				<a href="#" class="btn btn-primary">Download</a>
-																			@else
-																				<span class="d-block font-italic">Tidak ada file</span>
-																			@endif
-																		</div>
-																	</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
+									</div>
 									@endforeach
 								</div>
 								<!-- /tab coaching Notes-->
+
 
 								<!-- Tab Feedback -->
 								<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
@@ -476,79 +479,83 @@
 											</div>
 										</div>
 									</div>
-										<!-- Feedback card -->
-										<div class="row">
-											<div class="col-sm-12 col-md-12">
-												<div class="card">
-													<div class="card-body">
-														<div class="row align-items-center">
-															<div class="col-md-12">
-																<h5 class="card-title mb-0" id="detailNotes"
-																data-target="detailNotes" >Topic Session: </h5>
-																<small class="text-muted">created at </small>
-																<p class="text-justify" >Feedback session Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. </p>
-															</div>
-															<div class="col-md-6 text-right ">
-																<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#show_feedback">
-																	Detail
-																</button>
-															</div>
+									@foreach($agenda_detail as $data)
+									<!-- Feedback card -->
+									<div class="row">
+										<div class="col-sm-12 col-md-12">
+											<div class="card">
+												<div class="card-body">
+													<div class="row align-items-center">
+														<div class="col-md-12">
+															<h5 class="card-title mb-0" id="detailNotes"
+															data-target="detailNotes">Topic Session: {{$data->topic}} </h5>
+															<small class="text-muted">created at {{$data->created_at}}</small>
+															<p class="text-justify">{!!$data->feedback!!}</p>
 														</div>
-														<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+														<div class="col-md-12 text-right ">
+															<button type="button" class="btn btn-primary " data-toggle="modal" data-target="#show_feedback-{{$data->id}}">
+																Detail
+															</button>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-										<!-- /Feedback note -->
+									</div>
+									<!-- /Feedback note -->
 
-								<!-- Feedback detail modal -->
-								<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">&times;</span>
-															</button>
+									<!-- Feedback detail modal -->
+									<div class="modal fade" id="show_feedback-{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<div class="modal-body">
+													<div class="container">
+														<div class="row">
+															<div class="card-body">
+																<dl class="row">
+																	<dt class="col-sm-3">Topic</dt>
+																	<dd class="col-sm-9">{{$data->topic}}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-sm-3">Created at</dt>
+																	<dd class="col-sm-9">{{$data->created_at}}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-sm-3">Session</dt>
+																	<dd class="col-sm-9">{{$data->session_name}}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-sm-3">Feedback</dt>
+																	<span class="d-block my-1"></span>
+																	<dd class="col-sm-9 text-justify">{!! $data->feedback !!}</dd>
+																</dl>
+																<dl class="row">
+																	<dt class="col-md-12">
+																		<small class="d-block text-muted">Feedback Attachment</small>
+																		@if($data->attachment != null)
+																		<span class="d-block my-1">{{$data->attachment}}</span>
+																		<a href="{{ route('agendas.feedback_download',$data->id) }}" class="btn btn-primary">Download</a>
+																		@else
+																		<span class="d-block font-italic">Tidak ada file</span>
+																		@endif
+																	</dt>
+																</dl>
+															</div>
 														</div>
-														<div class="modal-body">
-															<div class="container">
-																<div class="row">
-																	<div class="card-body">
-																			<dl class="row">
-														            <dt class="col-sm-3">Topic</dt>
-														            <dd class="col-sm-9">Belajar Laravel</dd>
-														          </dl>
-																			<dl class="row">
-														            <dt class="col-sm-3">Created at</dt>
-														            <dd class="col-sm-9">2021-02-09 03:06:45</dd>
-														          </dl>
-																			<dl class="row">
-														            <dt class="col-sm-3">Session</dt>
-														            <dd class="col-sm-9">3</dd>
-														          </dl>
-																			<dl class="row">
-														            <dt class="col-sm-3">Feedback</dt>
-																				<span class="d-block my-1"></span>
-														            <dd class="col-sm-9 text-justify">Feedback Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci.</dd>
-														          </dl>
-																			<dl class="row">
-														            <small class="col-sm-6 d-block text-muted">Note Attachment</small>
-														          </dl>
-																			<dl class="row">
-																				<span class="d-block my-1"></span>
-																				<a href="#" class="btn btn-primary">Download</a>
-																				<span class="d-block font-italic">Tidak ada file</span>
-														          </dl>
-																		</div>
-																</div>
-															</div>
-															</div>
 													</div>
 												</div>
 											</div>
+										</div>
 									</div>
-									<!-- /modal Feedback-->
+									@endforeach
+								</div>
+								<!-- /modal Feedback-->
 
 
 								<!--End profile-->

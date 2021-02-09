@@ -109,10 +109,11 @@ class ClientController extends Controller
 		//$client = Client::find($id);
     $agenda_id = Agenda::where('client_id',$client->id)->pluck('id');
     $agenda_detail_id = Agenda_detail::whereIn('agenda_id',$agenda_id)->pluck('id');
-    $coaching_note = Coaching_note::whereIn('agenda_detail_id',$agenda_detail_id)->get();
+    $coaching_note = Coaching_note::with('agenda_detail')->whereIn('agenda_detail_id',$agenda_detail_id)->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id',$agenda_id)->where('status','finished')->get();
     // return($coaching_note);
 
-		return view('clients.show',compact('client','coaching_note'));
+		return view('clients.show',compact('client','coaching_note','agenda_detail'));
     }
 
     public function show_sessions_data(Request $request, Client $client){
