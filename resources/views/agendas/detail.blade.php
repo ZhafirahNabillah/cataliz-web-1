@@ -193,7 +193,7 @@
 								<h6 class="card-title">Notes</h6>
 							</div>
 							<div class="card-body">
-								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) > (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
+								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
 								<span>Notes belum tersedia</span>
 								@elseif($agenda_detail->status == 'canceled')
 								<span>Notes tidak tersedia</span>
@@ -240,7 +240,7 @@
 							</div>
 						</div>
 						@endif
-						@if(empty([$agenda_detail->feedback, $agenda_detail->attachment]))
+						@if((($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'finished') && ($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
 						<div class="col-md-12 text-right">
 							<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
 						</div>

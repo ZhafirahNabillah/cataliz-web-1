@@ -202,22 +202,6 @@ class AgendaController extends Controller
     }
     $agenda_detail->update();
 
-    // if ($request->has('subject','summary')) {
-    //   $agenda_detail->coaching_note->subject = $request->subject;
-    //   $agenda_detail->coaching_note->summary = $request->summary;
-    //   $agenda_detail->coaching_note->owner_id = Auth::user()->id;
-    //   if ($request->hasFile('note_attachment')) {
-    //     $filenameWithExt = $request->file('note_attachment')->getClientOriginalName();
-    //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-    //     $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
-    //     $filenameSave = $filename.'_'.time().'.'.$extension;
-    //     $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
-    //     $agenda_detail->coaching_note->attachment = $filenameSave;
-    //   }
-    //
-    //   $agenda_detail->coaching_note->update();
-    // }
-
     $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id],['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
 
     if ($request->hasFile('note_attachment')) {
@@ -231,7 +215,7 @@ class AgendaController extends Controller
     }
 
 
-    return redirect('/agendas')->with('success','Feedback berhasil disimpan!');
+    return redirect('/agendas')->with('success','Feedback dan notes berhasil disimpan!');
 
   }
 
