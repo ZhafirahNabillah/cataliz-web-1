@@ -100,7 +100,6 @@
 
 											<!-- edit button -->
 											<a href="javascript:;"class="btn btn-primary editClient" data-id={{$client->id}}>
-
 												<span class="font-weight-bold d-none d-md-block">Edit</span>
 											</a>
 										</div>
@@ -314,372 +313,358 @@
 								</div>
 								<div class="card">
 
-								<section id="basic-datatable">
-									<div class="row">
-										<div class="col-12">
-											<div class="card">
-												<table class="datatables-basic table yajra-datatable-1">
-													<thead>
-														<tr>
-															<th>NO</th>
-															<th>TOPIC</th>
-															<th>SESSION</th>
-															<th>Date</th>
-															<th>TIME</th>
-															<th>DURATION</th>
-															<th>ACTION</th>
-														</tr>
-													</thead>
-													<tbody>
-													</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</section>
-							</div>
-						</div>
-						<!-- /tab Session -->
-						<!-- Tab coaching plans -->
-
-						<div class="tab-pane" id="coachingPlan" aria-labelledby="about-tab" role="tabpanel">
-							<div class="content-header row">
-								<div class="content-header-left col-md-9 col-12 mb-2">
-									<div class="row breadcrumbs-top">
-										<div class="col-12">
-											<h4 class="breadcrumb-item active">Coaching Plans</h4>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="card">
-
-							<section id="basic-datatable">
-								<div class="row">
-									<div class="col-12">
-										<div class="card">
-											<table class="datatables-basic table yajra-datatable-2">
-												<thead>
-													<tr>
-														<th>NO</th>
-														<th>OBJEKTIF</th>
-														<th>Tanggal Pelaksanaan</th>
-														<th>ACTION</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-						<!-- /tab coaching plans -->
-
-
-
-
-
-
-
-					</div>
-					</div>
-
-					<!-- Tab coaching Notes -->
-
-					<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
-						<div class="content-header row">
-							<div class="content-header-left col-md-9 col-12 mb-2">
-								<div class="row breadcrumbs-top">
-									<div class="col-12">
-										<h4 class="breadcrumb-item active">Coaching Notes</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-						@foreach($coaching_note as $data)
-								<div class="row">
-									<div class="col-sm-6 col-md-12">
-										<div class="card">
-											<div class="card-body">
-								        <h5 class="card-title mb-0" id="detailNotes"
-				                data-target="detailNotes" >{{$data->subject}}</h5>
-												<small class="text-muted">created at {{$data->created_at}}</small>
-								        <div class="card-text">
-													{!!$data->summary!!}
-								        </div>
-								        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-								      </div>
-									</div>
-								</div>
-							</div>
-						@endforeach
-					</div>
-
-					<!-- /tab coaching Notes-->
-
-					<!-- Tab Feedback -->
-
-					<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
-						<div class="content-header row">
-							<div class="content-header-left col-md-9 col-12 mb-2">
-								<div class="row breadcrumbs-top">
-									<div class="col-12">
-										<h4 class="breadcrumb-item active">Feedback</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-							<div class="row">
-									<div class="col-sm-6 col-md-12">
-										<div class="card">
-											<div class="card-body">
-								        <h5 class="card-title mb-0" id="feedback"
-				                data-target="detailNotes">Subject</h5>
-												<small class="text-muted">created at </small>
-								        <div class="card-text">
-													Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
-								        </div>
-								      </div>
-									</div>
-								</div>
-							</div>
-
-					</div>
-
-					<!-- /tab Feedback->
-
-					<!-- detail Notes -->
-					<div
-						class="modal fade text-left"
-						id="detailNotes"
-						tabindex="-1"
-						role="dialog"
-						aria-labelledby="myModalLabel17"
-						aria-hidden="true"
-					>
-						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel17">#</h4>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="row">
-									<div class="col-sm-6 col-md-12">
-										<div class="card">
-											<div class="card-body">
-												<div class="mt-2">
-													<h5 class="mb-75">created at #</h5>
+									<section id="basic-datatable">
+										<div class="row">
+											<div class="col-12">
+												<div class="card">
+													<table class="datatables-basic table yajra-datatable-1">
+														<thead>
+															<tr>
+																<th>NO</th>
+																<th>TOPIC</th>
+																<th>SESSION</th>
+																<th>Date</th>
+																<th>TIME</th>
+																<th>DURATION</th>
+																<th>ACTION</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+													</table>
 												</div>
-								        <div class="modal-body">
-													Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
-								        </div>
-								        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-								      </div>
-									</div>
-								</div>
-							</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /modal detail notes -->
-
-				<!-- Modal detail feedback -->
-				<div
-					class="modal fade text-left"
-					id="detailFeedback"
-					tabindex="-1"
-					role="dialog"
-					aria-labelledby="myModalLabel17"
-					aria-hidden="true"
-				>
-					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title" id="myModalLabel17">#</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="row">
-								<div class="col-sm-6 col-md-12">
-									<div class="card">
-										<div class="card-body">
-											<div class="mt-2">
-												<h5 class="mb-75">created at #</h5>
-											</div>
-											<div class="modal-body">
-												Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
 											</div>
 										</div>
+									</section>
 								</div>
 							</div>
-						</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				</div>
-				<!-- /modal detail feedback -->
+							<!-- /tab Session -->
+							<!-- Tab coaching plans -->
 
-
-					<!--End profile-->
-				</div>
-				<!---End Content Body -->
-
-				<!-- Modal to add new record -->
-				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-							<div class="modal-header mb-1">
-								<h5 class="modal-title" id="modalHeading"></h5>
-							</div>
-							<input type="hidden" name="Client_id" id="Client_id">
-							<div class="modal-body flex-grow-1">
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-								</div>
-								<label class="form-label" for="basic-icon-default-post">Phone</label>
-								<div class="input-group input-group-merge mb-2">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon5">+62</span>
+							<div class="tab-pane" id="coachingPlan" aria-labelledby="about-tab" role="tabpanel">
+								<div class="content-header row">
+									<div class="content-header-left col-md-9 col-12 mb-2">
+										<div class="row breadcrumbs-top">
+											<div class="col-12">
+												<h4 class="breadcrumb-item active">Coaching Plans</h4>
+											</div>
+										</div>
 									</div>
-									<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone" >
 								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-email">Email</label>
-									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-									<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Company</label>
-									<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-									<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+								<div class="card">
+
+									<section id="basic-datatable">
+										<div class="row">
+											<div class="col-12">
+												<div class="card">
+													<table class="datatables-basic table yajra-datatable-2">
+														<thead>
+															<tr>
+																<th>NO</th>
+																<th>OBJEKTIF</th>
+																<th>Tanggal Pelaksanaan</th>
+																<th>ACTION</th>
+															</tr>
+														</thead>
+														<tbody>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+										<!-- /tab coaching plans -->
+									</div>
 								</div>
 
-								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+								<!-- Tab coaching Notes -->
+								<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
+									<div class="content-header row">
+										<div class="content-header-left col-md-9 col-12 mb-2">
+											<div class="row breadcrumbs-top">
+												<div class="col-12">
+													<h4 class="breadcrumb-item active">Coaching Notes</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									@foreach($coaching_note as $data)
+										<!-- coaching note card -->
+										<div class="row">
+											<div class="col-sm-12 col-md-12">
+												<div class="card">
+													<div class="card-body">
+														<div class="row align-items-center">
+															<div class="col-md-6">
+																<h5 class="card-title mb-0" id="detailNotes"
+																data-target="detailNotes" >{{$data->subject}}</h5>
+																<small class="text-muted">created at {{$data->created_at}}</small>
+															</div>
+															<div class="col-md-6 text-right">
+																<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#show_note_{{$data->id}}">
+																	Detail
+																</button>
+															</div>
+														</div>
+														<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<!-- coaching note detail modal -->
+										<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal-dialog modal-dialog-centered" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLongTitle">Note</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<div class="container">
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="row">
+																		<div class="col-md-12">
+																			<small class="text-muted">Subject</small>
+																			<h4>{{$data->subject}}</h4>
+																		</div>
+																		<div class="col-md-12">
+																			<small class="text-muted">Summary</small>
+																			{!! $data->summary !!}
+																		</div>
+																		<div class="col-md-12">
+																			<small class="d-block text-muted">Note Attachment</small>
+																			@if($data->attachment != null)
+																				<span class="d-block my-1">{{$data->attachment}}</span>
+																				<a href="#" class="btn btn-primary">Download</a>
+																			@else
+																				<span class="d-block font-italic">Tidak ada file</span>
+																			@endif
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									@endforeach
+								</div>
+								<!-- /tab coaching Notes-->
+
+								<!-- Tab Feedback -->
+								<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
+									<div class="content-header row">
+										<div class="content-header-left col-md-9 col-12 mb-2">
+											<div class="row breadcrumbs-top">
+												<div class="col-12">
+													<h4 class="breadcrumb-item active">Feedback</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6 col-md-12">
+											<div class="card">
+												<div class="card-body">
+													<h5 class="card-title mb-0" id="feedback"
+													data-target="detailNotes">Subject</h5>
+													<small class="text-muted">created at </small>
+													<div class="card-text">
+														Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /tab Feedback->
+
+								<!-- Modal detail feedback -->
+								<div class="modal fade text-left" id="detailFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myModalLabel17">#</h4>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="row">
+												<div class="col-sm-6 col-md-12">
+													<div class="card">
+														<div class="card-body">
+															<div class="mt-2">
+																<h5 class="mb-75">created at #</h5>
+															</div>
+															<div class="modal-body">
+																Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /modal detail feedback -->
+
+
+								<!--End profile-->
 							</div>
-							<!-- </form>-->
+							<!---End Content Body -->
 
+							<!-- Modal to add new record -->
+							<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+								<div class="modal-dialog sidebar-sm">
+									<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+										<div class="modal-header mb-1">
+											<h5 class="modal-title" id="modalHeading"></h5>
+										</div>
+										<input type="hidden" name="Client_id" id="Client_id">
+										<div class="modal-body flex-grow-1">
+											<div class="form-group">
+												<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+												<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+											</div>
+											<label class="form-label" for="basic-icon-default-post">Phone</label>
+											<div class="input-group input-group-merge mb-2">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon5">+62</span>
+												</div>
+												<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone" >
+											</div>
+											<div class="form-group">
+												<label class="form-label" for="basic-icon-default-email">Email</label>
+												<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+												<small class="form-text text-muted"> You can use letters, numbers & periods </small>
+											</div>
+											<div class="form-group">
+												<label class="form-label" for="basic-icon-default-fullname">Organization</label>
+												<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+											</div>
+											<div class="form-group">
+												<label class="form-label" for="basic-icon-default-fullname">Company</label>
+												<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+											</div>
+											<div class="form-group">
+												<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+												<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+											</div>
+
+											<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+											<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+										</div>
+										<!-- </form>-->
+									</div>
+								</div>
+								<!-- End Modal -->
+
+							</div>
 						</div>
-					</div>
-					<!-- End Modal -->
+						<!-- END: Content-->
+						@endsection
 
-				</div>
-			</div>
-			<!-- END: Content-->
-			@endsection
+						@push('scripts')
 
-			@push('scripts')
+						<script type="text/javascript">
+						$(function () {
 
-			<script type="text/javascript">
-			$(function () {
+							//ajax declaration with csrf
+							$.ajaxSetup({
+								headers: {
+									'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+								}
+							});
 
-				//ajax declaration with csrf
-				$.ajaxSetup({
-					headers: {
-						'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-					}
-				});
+							//datatable for sessions table
+							var table = $('.yajra-datatable-1').DataTable({
+								processing: true,
+								serverSide: true,
+								ajax: "{{route('clients.show_agendas', $client->id)}}",
+								columns: [
+									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+									{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
+									{data: 'session_name', name: 'session_name'},
+									{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
+									{data: 'time', name: 'time', defaultContent: '<i>-</i>'},
+									{
+										data: 'duration',
+										name: 'duration'
+									},
+									{
+										data: 'action',
+										name: 'action',
+										orderable: true,
+										searchable: true
+									},
+								],
+								dom:
+								'<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+								language: {
+									paginate: {
+										// remove previous & next text from pagination
+										previous: '&nbsp;',
+										next: '&nbsp;'
+									},
+									search: "<i data-feather='search'></i>",
+									searchPlaceholder: "Search records"
+								}
+							});
 
-				//datatable for sessions table
-				var table = $('.yajra-datatable-1').DataTable({
-					processing: true,
-					serverSide: true,
-					ajax: "{{route('clients.show_agendas', $client->id)}}",
-					columns: [
-						{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-						{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
-						{data: 'session_name', name: 'session_name'},
-						{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
-						{data: 'time', name: 'time', defaultContent: '<i>-</i>'},
-						{
-							data: 'duration',
-							name: 'duration'
-						},
-						{
-							data: 'action',
-							name: 'action',
-							orderable: true,
-							searchable: true
-						},
-					],
-					dom:
-			        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-					language: {
-						paginate: {
-						  // remove previous & next text from pagination
-						  previous: '&nbsp;',
-						  next: '&nbsp;'
-						},
-						search: "<i data-feather='search'></i>",
-						searchPlaceholder: "Search records"
-					}
-				});
+							//datatable for plans table
+							var table = $('.yajra-datatable-2').DataTable({
+								processing: true,
+								serverSide: true,
+								ajax: "{{route('clients.show_plans', $client->id)}}",
+								columns: [
+									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+									{data: 'objective', name: 'objective', defaultContent: '<i>-</i>'},
+									{data: 'date', name: 'date'},
+									{
+										data: 'action',
+										name: 'action',
+										orderable: true,
+										searchable: true
+									},
+								],
+								dom:
+								'<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+								language: {
+									paginate: {
+										// remove previous & next text from pagination
+										previous: '&nbsp;',
+										next: '&nbsp;'
+									},
+									search: "<i data-feather='search'></i>",
+									searchPlaceholder: "Search records"
+								}
+							});
 
-				//datatable for plans table
-				var table = $('.yajra-datatable-2').DataTable({
-					processing: true,
-					serverSide: true,
-					ajax: "{{route('clients.show_plans', $client->id)}}",
-					columns: [
-						{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-						{data: 'objective', name: 'objective', defaultContent: '<i>-</i>'},
-						{data: 'date', name: 'date'},
-						{
-							data: 'action',
-							name: 'action',
-							orderable: true,
-							searchable: true
-						},
-					],
-					dom:
-			        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-					language: {
-						paginate: {
-						  // remove previous & next text from pagination
-						  previous: '&nbsp;',
-						  next: '&nbsp;'
-						},
-						search: "<i data-feather='search'></i>",
-						searchPlaceholder: "Search records"
-					}
-				});
-
-				// edit
-				$('.editClient').click(function () {
-					var Client_id = $(this).data('id');
-					$.get("" +'/clients/' + Client_id +'/edit', function (data) {
-						$('#modalHeading').html("Edit Client");
-						$('#saveBtn').val("edit-user");
-						$('#modals-slide-in').modal('show');
-						$('#Client_id').val(data.id);
-						$('#name').val(data.name);
-						$('#phone').val(data.phone);
-						$('#email').val(data.email);
-						$('#company').val(data.company);
-						$('#organization').val(data.organization);
-						$('#occupation').val(data.occupation);
-					})
-				});
-			});
-			</script>
-			@endpush
+							// edit
+							$('.editClient').click(function () {
+								var Client_id = $(this).data('id');
+								$.get("" +'/clients/' + Client_id +'/edit', function (data) {
+									$('#modalHeading').html("Edit Client");
+									$('#saveBtn').val("edit-user");
+									$('#modals-slide-in').modal('show');
+									$('#Client_id').val(data.id);
+									$('#name').val(data.name);
+									$('#phone').val(data.phone);
+									$('#email').val(data.email);
+									$('#company').val(data.company);
+									$('#organization').val(data.organization);
+									$('#occupation').val(data.occupation);
+								})
+							});
+						});
+						</script>
+						@endpush
