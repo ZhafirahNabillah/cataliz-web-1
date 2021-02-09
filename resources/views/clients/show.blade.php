@@ -93,7 +93,7 @@
 													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingNotes" aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="about-tab" data-toggle="tab" href="#about" aria-controls="about" role="tab" aria-selected="false">Feedbacks</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedbacks</a>
 												</li>
 
 											</ul>
@@ -384,7 +384,7 @@
 					</div>
 					</div>
 
-					<!-- Tab coaching plans -->
+					<!-- Tab coaching Notes -->
 
 					<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
 						<div class="content-header row">
@@ -401,7 +401,8 @@
 									<div class="col-sm-6 col-md-12">
 										<div class="card">
 											<div class="card-body">
-								        <h5 class="card-title mb-0">{{$data->subject}}</h5>
+								        <h5 class="card-title mb-0" id="detailNotes"
+				                data-target="detailNotes">{{$data->subject}}</h5>
 												<small class="text-muted">created at {{$data->created_at}}</small>
 								        <div class="card-text">
 													{!!$data->summary!!}
@@ -414,8 +415,119 @@
 						@endforeach
 					</div>
 
-					<!-- /tab coaching plans -->
+					<!-- /tab coaching Notes-->
 
+					<!-- Tab Feedback -->
+
+					<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
+						<div class="content-header row">
+							<div class="content-header-left col-md-9 col-12 mb-2">
+								<div class="row breadcrumbs-top">
+									<div class="col-12">
+										<h4 class="breadcrumb-item active">Feedback</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+							<div class="row">
+									<div class="col-sm-6 col-md-12">
+										<div class="card">
+											<div class="card-body">
+								        <h5 class="card-title mb-0" id="feedback"
+				                data-target="detailNotes">Subject</h5>
+												<small class="text-muted">created at </small>
+								        <div class="card-text">
+													Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+								        </div>
+								      </div>
+									</div>
+								</div>
+							</div>
+
+					</div>
+
+					<!-- /tab Feedback->
+
+					<!-- Modal detail notes -->
+					<div
+						class="modal fade text-left"
+						id="detailNotes"
+						tabindex="-1"
+						role="dialog"
+						aria-labelledby="myModalLabel17"
+						aria-hidden="true"
+					>
+						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="myModalLabel17">#</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="row">
+									<div class="col-sm-6 col-md-12">
+										<div class="card">
+											<div class="card-body">
+												<div class="mt-2">
+													<h5 class="mb-75">created at #</h5>
+												</div>
+								        <div class="modal-body">
+													Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+								        </div>
+								        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+								      </div>
+									</div>
+								</div>
+							</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /modal detail notes -->
+
+				<!-- Modal detail feedback -->
+				<div
+					class="modal fade text-left"
+					id="detailFeedback"
+					tabindex="-1"
+					role="dialog"
+					aria-labelledby="myModalLabel17"
+					aria-hidden="true"
+				>
+					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title" id="myModalLabel17">#</h4>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="row">
+								<div class="col-sm-6 col-md-12">
+									<div class="card">
+										<div class="card-body">
+											<div class="mt-2">
+												<h5 class="mb-75">created at #</h5>
+											</div>
+											<div class="modal-body">
+												Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+											</div>
+										</div>
+								</div>
+							</div>
+						</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				<!-- /modal detail feedback -->
 
 
 					<!--End profile-->
