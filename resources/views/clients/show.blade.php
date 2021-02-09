@@ -117,7 +117,6 @@
 
 											<!-- edit button -->
 											<a href="javascript:;" class="btn btn-primary editClient" data-id={{$client->id}}>
-
 												<span class="font-weight-bold d-none d-md-block">Edit</span>
 											</a>
 										</div>
@@ -173,11 +172,9 @@
 								<!-- center profile info section -->
 
 								<div class="col-lg-8 col-12 order-1 order-lg-2">
-
 									<div class="row match-height">
-
-										<!-- Subscribers Chart Card starts -->
-										<div class="col-lg-6 col-sm-6 col-12">
+										<!-- Number of Coaching -->
+										<div class="col-lg-4 col-sm-4 col-6">
 											<div class="card">
 												<div class="card-header flex-column align-items-start pb-0">
 													<div class="avatar bg-light-primary p-50 m-0">
@@ -192,8 +189,6 @@
 															</svg>
 														</div>
 													</div>
-													<h2 class="font-weight-bolder mt-1">92.6k</h2>
-													<p class="card-text">Subscribers Gained</p>
 												</div>
 												<div id="gained-chart" style="min-height: 100px;">
 													<div id="apexcharts5fabf9yah"
@@ -707,179 +702,179 @@
 					<!-- /tab coaching Notes-->
 
 					<!-- Tab Feedback -->
-
-					<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
+					<!-- Tab coaching Notes -->
+					<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
 						<div class="content-header row">
 							<div class="content-header-left col-md-9 col-12 mb-2">
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
-										<h4 class="breadcrumb-item active">Feedback</h4>
+										<h4 class="breadcrumb-item active">Coaching Notes</h4>
 									</div>
 								</div>
 							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6 col-md-12">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title mb-0" id="feedback" data-target="detailNotes">Subject</h5>
+							<small class="text-muted">created at </small>
+							<div class="card-text">
+								Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon
+								bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée.
+								Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice
+								cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping
+								powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- /tab Feedback->
+
+					<!-- detail Notes -->
+			<div class="modal fade text-left" id="detailNotes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="myModalLabel17">#</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
 						</div>
 						<div class="row">
 							<div class="col-sm-6 col-md-12">
 								<div class="card">
 									<div class="card-body">
-										<h5 class="card-title mb-0" id="feedback" data-target="detailNotes">Subject</h5>
-										<small class="text-muted">created at </small>
-										<div class="card-text">
+										<div class="mt-2">
+											<h5 class="mb-75">created at #</h5>
+										</div>
+										<div class="modal-body">
 											Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon
-											bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée.
-											Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice
-											cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping
-											powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+											bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies
+											dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll
+											donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate
+											cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop
+											cotton candy.
 										</div>
+										<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 									</div>
 								</div>
 							</div>
 						</div>
-
-					</div>
-
-					<!-- /tab Feedback->
-
-					<!-- detail Notes -->
-					<div class="modal fade text-left" id="detailNotes" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel17" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h4 class="modal-title" id="myModalLabel17">#</h4>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="row">
-									<div class="col-sm-6 col-md-12">
-										<div class="card">
-											<div class="card-body">
-												<div class="mt-2">
-													<h5 class="mb-75">created at #</h5>
-												</div>
-												<div class="modal-body">
-													Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon
-													bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies
-													dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll
-													donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate
-													cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop
-													cotton candy.
-												</div>
-												<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /modal detail notes -->
-
-				<!-- Modal detail feedback -->
-				<div class="modal fade text-left" id="detailFeedback" tabindex="-1" role="dialog"
-					aria-labelledby="myModalLabel17" aria-hidden="true">
-					<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h4 class="modal-title" id="myModalLabel17">#</h4>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="row">
-								<div class="col-sm-6 col-md-12">
-									<div class="card">
-										<div class="card-body">
-											<div class="mt-2">
-												<h5 class="mb-75">created at #</h5>
-											</div>
-											<div class="modal-body">
-												Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon
-												bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies
-												dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll
-												donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate
-												cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton
-												candy.
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
-							</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- /modal detail feedback -->
-
-
-			<!--End profile-->
 		</div>
-		<!---End Content Body -->
+		<!-- /modal detail notes -->
 
-		<!-- Modal to add new record -->
-		<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-			<div class="modal-dialog sidebar-sm">
-				<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-					<div class="modal-header mb-1">
-						<h5 class="modal-title" id="modalHeading"></h5>
+		<!-- Modal detail feedback -->
+		<div class="modal fade text-left" id="detailFeedback" tabindex="-1" role="dialog" aria-labelledby="myModalLabel17"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel17">#</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-					<input type="hidden" name="Client_id" id="Client_id">
-					<div class="modal-body flex-grow-1">
-						<div class="form-group">
-							<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-							<input id="name" name="name" type="text" class="form-control dt-full-name"
-								id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-						</div>
-						<label class="form-label" for="basic-icon-default-post">Phone</label>
-						<div class="input-group input-group-merge mb-2">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon5">+62</span>
+					<div class="row">
+						<div class="col-sm-6 col-md-12">
+							<div class="card">
+								<div class="card-body">
+									<div class="mt-2">
+										<h5 class="mb-75">created at #</h5>
+									</div>
+									<div class="modal-body">
+										Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon
+										bonbon carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies
+										dragée. Donut bear claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll
+										donut ice cream.Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate
+										cake topping powder. Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton
+										candy.
+									</div>
+								</div>
 							</div>
-							<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
-								aria-label="Phone">
 						</div>
-						<div class="form-group">
-							<label class="form-label" for="basic-icon-default-email">Email</label>
-							<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-								placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-							<small class="form-text text-muted"> You can use letters, numbers & periods </small>
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-							<input id="organization" name="organization" type="text" class="form-control dt-full-name"
-								id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="basic-icon-default-fullname">Company</label>
-							<input id="company" name="company" type="text" class="form-control dt-full-name"
-								id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-						</div>
-						<div class="form-group">
-							<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-							<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-								id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-						</div>
-
-						<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-						<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 					</div>
-					<!-- </form>-->
-
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Back</button>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!-- End Modal -->
+	</div>
+	<!-- /modal detail feedback -->
+
+
+	<!--End profile-->
+</div>
+<!---End Content Body -->
+
+<!-- Modal to add new record -->
+<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+	<div class="modal-dialog sidebar-sm">
+		<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+			<div class="modal-header mb-1">
+				<h5 class="modal-title" id="modalHeading"></h5>
+			</div>
+			<input type="hidden" name="Client_id" id="Client_id">
+			<div class="modal-body flex-grow-1">
+				<div class="form-group">
+					<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+					<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname"
+						placeholder="John Doe" aria-label="John Doe" />
+				</div>
+				<label class="form-label" for="basic-icon-default-post">Phone</label>
+				<div class="input-group input-group-merge mb-2">
+					<div class="input-group-prepend">
+						<span class="input-group-text" id="basic-addon5">+62</span>
+					</div>
+					<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="basic-icon-default-email">Email</label>
+					<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+						placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+					<small class="form-text text-muted"> You can use letters, numbers & periods </small>
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="basic-icon-default-fullname">Organization</label>
+					<input id="organization" name="organization" type="text" class="form-control dt-full-name"
+						id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="basic-icon-default-fullname">Company</label>
+					<input id="company" name="company" type="text" class="form-control dt-full-name"
+						id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+				</div>
+				<div class="form-group">
+					<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+					<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+						id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+				</div>
+
+				<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+				<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+			</div>
+			<!-- </form>-->
 
 	</div>
+</div>
+<!-- End Modal -->
+
+</div>
 </div>
 <!-- END: Content-->
 @endsection
