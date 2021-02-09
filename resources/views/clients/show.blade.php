@@ -155,113 +155,110 @@
 								<!-- center profile info section -->
 
 								<div class="col-lg-8 col-12 order-1 order-lg-2">
-
 									<div class="row match-height">
-
-										<!-- Subscribers Chart Card starts -->
-										<div class="col-lg-6 col-sm-6 col-12">
+										<!-- Number of Coaching -->
+										<div class="col-lg-4 col-sm-4 col-6">
 											<div class="card">
-												<div class="card-header flex-column align-items-start pb-0">
-													<div class="avatar bg-light-primary p-50 m-0">
-														<div class="avatar-content">
-
-															<img width="14" height="14" src="assets\images\icons\Group 74.jpg" alt="Card image cap" />
-														</div>
+												<div class="card-header">
+													<div class="card-body flex-column align-items-start pb-0">
+	                            <img class="rounded float-right width="45" height="45"" src="{{asset('assets\images\icons\Group 74.jpg') }}" alt="Card image cap"/>
 													</div>
-													<h2 class="font-weight-bolder mt-1">92.6k</h2>
-													<p class="card-text">Subscribers Gained</p>
-												</div>
-												<div id="gained-chart" style="min-height: 100px;"><div id="apexcharts5fabf9yah" class="apexcharts-canvas apexcharts5fabf9yah apexcharts-theme-light" style="width: 350px; height: 100px;"><svg id="SvgjsSvg1367" width="225" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1369" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1368"><clipPath id="gridRectMask5fabf9yah"><rect id="SvgjsRect1374" width="231.5" height="102.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMask5fabf9yah"><rect id="SvgjsRect1375" width="229" height="104" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1380" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1381" stop-opacity="0.7" stop-color="rgba(115,103,240,0.7)" offset="0"></stop><stop id="SvgjsStop1382" stop-opacity="0.5" stop-color="rgba(241,240,254,0.5)" offset="0.8"></stop><stop id="SvgjsStop1383" stop-opacity="0.5" stop-color="rgba(241,240,254,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1373" x1="0" y1="0" x2="0" y2="100" stroke="#b6b6b6" stroke-dasharray="3" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="100" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1386" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1387" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1389" class="apexcharts-grid"><g id="SvgjsG1390" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1392" x1="0" y1="0" x2="225" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1393" x1="0" y1="20" x2="225" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1394" x1="0" y1="40" x2="225" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1395" x1="0" y1="60" x2="225" y2="60" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1396" x1="0" y1="80" x2="225" y2="80" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1397" x1="0" y1="100" x2="225" y2="100" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1391" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1399" x1="0" y1="100" x2="225" y2="100" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1398" x1="0" y1="1" x2="0" y2="100" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1376" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1377" class="apexcharts-series" seriesName="Subscribers" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1384" d="M 0 100L 0 77.77777777777777C 13.125 77.77777777777777 24.375 51.111111111111114 37.5 51.111111111111114C 50.625 51.111111111111114 61.875 60 75 60C 88.125 60 99.37499999999999 24.444444444444443 112.49999999999999 24.444444444444443C 125.62499999999999 24.444444444444443 136.875 55.55555555555556 150 55.55555555555556C 163.125 55.55555555555556 174.375 6.666666666666657 187.5 6.666666666666657C 200.625 6.666666666666657 211.87499999999997 17.777777777777786 224.99999999999997 17.777777777777786C 224.99999999999997 17.777777777777786 224.99999999999997 17.777777777777786 224.99999999999997 100M 224.99999999999997 17.777777777777786z" fill="url(#SvgjsLinearGradient1380)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask5fabf9yah)" pathTo="M 0 100L 0 77.77777777777777C 13.125 77.77777777777777 24.375 51.111111111111114 37.5 51.111111111111114C 50.625 51.111111111111114 61.875 60 75 60C 88.125 60 99.37499999999999 24.444444444444443 112.49999999999999 24.444444444444443C 125.62499999999999 24.444444444444443 136.875 55.55555555555556 150 55.55555555555556C 163.125 55.55555555555556 174.375 6.666666666666657 187.5 6.666666666666657C 200.625 6.666666666666657 211.87499999999997 17.777777777777786 224.99999999999997 17.777777777777786C 224.99999999999997 17.777777777777786 224.99999999999997 17.777777777777786 224.99999999999997 100M 224.99999999999997 17.777777777777786z" pathFrom="M -1 140L -1 140L 37.5 140L 75 140L 112.49999999999999 140L 150 140L 187.5 140L 224.99999999999997 140"></path><path id="SvgjsPath1385" d="M 0 77.77777777777777C 13.125 77.77777777777777 24.375 51.111111111111114 37.5 51.111111111111114C 50.625 51.111111111111114 61.875 60 75 60C 88.125 60 99.37499999999999 24.444444444444443 112.49999999999999 24.444444444444443C 125.62499999999999 24.444444444444443 136.875 55.55555555555556 150 55.55555555555556C 163.125 55.55555555555556 174.375 6.666666666666657 187.5 6.666666666666657C 200.625 6.666666666666657 211.87499999999997 17.777777777777786 224.99999999999997 17.777777777777786" fill="none" fill-opacity="1" stroke="#7367f0" stroke-opacity="1" stroke-linecap="butt" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMask5fabf9yah)" pathTo="M 0 77.77777777777777C 13.125 77.77777777777777 24.375 51.111111111111114 37.5 51.111111111111114C 50.625 51.111111111111114 61.875 60 75 60C 88.125 60 99.37499999999999 24.444444444444443 112.49999999999999 24.444444444444443C 125.62499999999999 24.444444444444443 136.875 55.55555555555556 150 55.55555555555556C 163.125 55.55555555555556 174.375 6.666666666666657 187.5 6.666666666666657C 200.625 6.666666666666657 211.87499999999997 17.777777777777786 224.99999999999997 17.777777777777786" pathFrom="M -1 140L -1 140L 37.5 140L 75 140L 112.49999999999999 140L 150 140L 187.5 140L 224.99999999999997 140"></path><g id="SvgjsG1378" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1405" r="0" cx="0" cy="0" class="apexcharts-marker wpn16ib2 no-pointer-events" stroke="#ffffff" fill="#7367f0" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1379" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1400" x1="0" y1="0" x2="225" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1401" x1="0" y1="0" x2="225" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1402" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1403" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1404" class="apexcharts-point-annotations"></g></g><rect id="SvgjsRect1372" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1388" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1370" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(115, 103, 240);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
-												<div class="resize-triggers"><div class="expand-trigger"><div style="width: 226px; height: 238px;"></div></div><div class="contract-trigger"></div></div></div>
-											</div>
-											<!-- Subscribers Chart Card ends -->
 
-											<!-- Orders Chart Card starts -->
-											<div class="col-lg-6 col-sm-6 col-12">
+												</div>
+												<div class="row">
+														<div class="card-body">
+																<h1 class="display-1 text-primary card text-center">22</h1>
+																<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
+														</div>
+												</div>
+											</div>
+											</div>
+											<!-- Number of Coaching ends -->
+
+											<!-- Number of Agenda -->
+											<div class="col-lg-4 col-sm-4 col-6">
 												<div class="card">
-													<div class="card-header flex-column align-items-start pb-0">
-														<div class="avatar bg-light-warning p-50 m-0">
-															<div class="avatar-content">
-																<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package font-medium-5"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-															</div>
+													<div class="card-header mb-0">
+														<div class="card-body flex-column align-items-start pb-0">
+		                            <img class="rounded float-right width="45" height="45"" src="{{asset('assets\images\icons\Group 110.jpg') }}" alt="Card image cap"/>
 														</div>
-														<h2 class="font-weight-bolder mt-1">38.4K</h2>
-														<p class="card-text">Orders Received</p>
 													</div>
-													<div id="order-chart" style="min-height: 100px;"><div id="apexchartsxbnk5acc" class="apexcharts-canvas apexchartsxbnk5acc apexcharts-theme-light" style="width: 225px; height: 100px;"><svg id="SvgjsSvg1407" width="225" height="100" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" class="apexcharts-svg" xmlns:data="ApexChartsNS" transform="translate(0, 0)" style="background: transparent;"><g id="SvgjsG1409" class="apexcharts-inner apexcharts-graphical" transform="translate(0, 0)"><defs id="SvgjsDefs1408"><clipPath id="gridRectMaskxbnk5acc"><rect id="SvgjsRect1414" width="231.5" height="102.5" x="-3.25" y="-1.25" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><clipPath id="gridRectMarkerMaskxbnk5acc"><rect id="SvgjsRect1415" width="229" height="104" x="-2" y="-2" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fff"></rect></clipPath><linearGradient id="SvgjsLinearGradient1420" x1="0" y1="0" x2="0" y2="1"><stop id="SvgjsStop1421" stop-opacity="0.7" stop-color="rgba(255,159,67,0.7)" offset="0"></stop><stop id="SvgjsStop1422" stop-opacity="0.5" stop-color="rgba(255,245,236,0.5)" offset="0.8"></stop><stop id="SvgjsStop1423" stop-opacity="0.5" stop-color="rgba(255,245,236,0.5)" offset="1"></stop></linearGradient></defs><line id="SvgjsLine1413" x1="0" y1="0" x2="0" y2="100" stroke="#b6b6b6" stroke-dasharray="3" class="apexcharts-xcrosshairs" x="0" y="0" width="1" height="100" fill="#b1b9c4" filter="none" fill-opacity="0.9" stroke-width="1"></line><g id="SvgjsG1426" class="apexcharts-xaxis" transform="translate(0, 0)"><g id="SvgjsG1427" class="apexcharts-xaxis-texts-g" transform="translate(0, -4)"></g></g><g id="SvgjsG1429" class="apexcharts-grid"><g id="SvgjsG1430" class="apexcharts-gridlines-horizontal" style="display: none;"><line id="SvgjsLine1432" x1="0" y1="0" x2="225" y2="0" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1433" x1="0" y1="20" x2="225" y2="20" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1434" x1="0" y1="40" x2="225" y2="40" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1435" x1="0" y1="60" x2="225" y2="60" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1436" x1="0" y1="80" x2="225" y2="80" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line><line id="SvgjsLine1437" x1="0" y1="100" x2="225" y2="100" stroke="#e0e0e0" stroke-dasharray="0" class="apexcharts-gridline"></line></g><g id="SvgjsG1431" class="apexcharts-gridlines-vertical" style="display: none;"></g><line id="SvgjsLine1439" x1="0" y1="100" x2="225" y2="100" stroke="transparent" stroke-dasharray="0"></line><line id="SvgjsLine1438" x1="0" y1="1" x2="0" y2="100" stroke="transparent" stroke-dasharray="0"></line></g><g id="SvgjsG1416" class="apexcharts-area-series apexcharts-plot-series"><g id="SvgjsG1417" class="apexcharts-series" seriesName="Orders" data:longestSeries="true" rel="1" data:realIndex="0"><path id="SvgjsPath1424" d="M 0 100L 0 60C 13.125 60 24.375 10 37.5 10C 50.625 10 61.875 80 75 80C 88.125 80 99.37499999999999 10 112.49999999999999 10C 125.62499999999999 10 136.875 90 150 90C 163.125 90 174.375 40 187.5 40C 200.625 40 211.87499999999997 80 224.99999999999997 80C 224.99999999999997 80 224.99999999999997 80 224.99999999999997 100M 224.99999999999997 80z" fill="url(#SvgjsLinearGradient1420)" fill-opacity="1" stroke-opacity="1" stroke-linecap="butt" stroke-width="0" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskxbnk5acc)" pathTo="M 0 100L 0 60C 13.125 60 24.375 10 37.5 10C 50.625 10 61.875 80 75 80C 88.125 80 99.37499999999999 10 112.49999999999999 10C 125.62499999999999 10 136.875 90 150 90C 163.125 90 174.375 40 187.5 40C 200.625 40 211.87499999999997 80 224.99999999999997 80C 224.99999999999997 80 224.99999999999997 80 224.99999999999997 100M 224.99999999999997 80z" pathFrom="M -1 160L -1 160L 37.5 160L 75 160L 112.49999999999999 160L 150 160L 187.5 160L 224.99999999999997 160"></path><path id="SvgjsPath1425" d="M 0 60C 13.125 60 24.375 10 37.5 10C 50.625 10 61.875 80 75 80C 88.125 80 99.37499999999999 10 112.49999999999999 10C 125.62499999999999 10 136.875 90 150 90C 163.125 90 174.375 40 187.5 40C 200.625 40 211.87499999999997 80 224.99999999999997 80" fill="none" fill-opacity="1" stroke="#ff9f43" stroke-opacity="1" stroke-linecap="butt" stroke-width="2.5" stroke-dasharray="0" class="apexcharts-area" index="0" clip-path="url(#gridRectMaskxbnk5acc)" pathTo="M 0 60C 13.125 60 24.375 10 37.5 10C 50.625 10 61.875 80 75 80C 88.125 80 99.37499999999999 10 112.49999999999999 10C 125.62499999999999 10 136.875 90 150 90C 163.125 90 174.375 40 187.5 40C 200.625 40 211.87499999999997 80 224.99999999999997 80" pathFrom="M -1 160L -1 160L 37.5 160L 75 160L 112.49999999999999 160L 150 160L 187.5 160L 224.99999999999997 160"></path><g id="SvgjsG1418" class="apexcharts-series-markers-wrap" data:realIndex="0"><g class="apexcharts-series-markers"><circle id="SvgjsCircle1445" r="0" cx="0" cy="0" class="apexcharts-marker wgiv25d8q no-pointer-events" stroke="#ffffff" fill="#ff9f43" fill-opacity="1" stroke-width="2" stroke-opacity="0.9" default-marker-size="0"></circle></g></g></g><g id="SvgjsG1419" class="apexcharts-datalabels" data:realIndex="0"></g></g><line id="SvgjsLine1440" x1="0" y1="0" x2="225" y2="0" stroke="#b6b6b6" stroke-dasharray="0" stroke-width="1" class="apexcharts-ycrosshairs"></line><line id="SvgjsLine1441" x1="0" y1="0" x2="225" y2="0" stroke-dasharray="0" stroke-width="0" class="apexcharts-ycrosshairs-hidden"></line><g id="SvgjsG1442" class="apexcharts-yaxis-annotations"></g><g id="SvgjsG1443" class="apexcharts-xaxis-annotations"></g><g id="SvgjsG1444" class="apexcharts-point-annotations"></g></g><rect id="SvgjsRect1412" width="0" height="0" x="0" y="0" rx="0" ry="0" opacity="1" stroke-width="0" stroke="none" stroke-dasharray="0" fill="#fefefe"></rect><g id="SvgjsG1428" class="apexcharts-yaxis" rel="0" transform="translate(-18, 0)"></g><g id="SvgjsG1410" class="apexcharts-annotations"></g></svg><div class="apexcharts-legend" style="max-height: 50px;"></div><div class="apexcharts-tooltip apexcharts-theme-light"><div class="apexcharts-tooltip-series-group" style="order: 1;"><span class="apexcharts-tooltip-marker" style="background-color: rgb(255, 159, 67);"></span><div class="apexcharts-tooltip-text" style="font-family: Helvetica, Arial, sans-serif; font-size: 12px;"><div class="apexcharts-tooltip-y-group"><span class="apexcharts-tooltip-text-label"></span><span class="apexcharts-tooltip-text-value"></span></div><div class="apexcharts-tooltip-z-group"><span class="apexcharts-tooltip-text-z-label"></span><span class="apexcharts-tooltip-text-z-value"></span></div></div></div></div><div class="apexcharts-yaxistooltip apexcharts-yaxistooltip-0 apexcharts-yaxistooltip-left apexcharts-theme-light"><div class="apexcharts-yaxistooltip-text"></div></div></div></div>
-													<div class="resize-triggers"><div class="expand-trigger"><div style="width: 226px; height: 238px;"></div></div><div class="contract-trigger"></div></div></div>
+													<div class="row mb-auto">
+															<div class="card-body">
+																	<h1 class="display-1 text-primary card text-center">5</h1>
+																	<h3 class="font-weight-bolder text-center">Agenda</h3>
+															</div>
+													</div>
 												</div>
-												<!-- Orders Chart Card ends -->
-											</div>
+												</div>
+												<!-- Number of Agenda End -->
 
+
+												<!-- Number of Event -->
+												<div class="col-lg-4 col-sm-4 col-6">
+													<div class="card">
+														<div class="card-header">
+															<div class="card-body flex-column align-items-start pb-0">
+			                            <img class="rounded float-right width="45" height="45"" src="{{asset('assets\images\icons\Group 129.jpg') }}" alt="Card image cap"/>
+															</div>
+
+														</div>
+														<div class="row">
+																<div class="card-body">
+																		<h1 class="display-1 text-primary card text-center">22</h1>
+																		<h3 class="font-weight-bolder text-center">Event</h3>
+																</div>
+														</div>
+													</div>
+													</div>
+													<!-- Number of Event End -->
+
+
+											</div>
 
 											<div class="row">
-												<div class="col-lg-6 col-12 order-1 order-lg-2">
-													<!-- post 1 -->
+												<div class="col-lg-12 col-12 order-1 order-lg-2">
+													<!-- Upcoming event -->
 													<div class="card">
-														<div class="card-body">
-															<div class="d-flex justify-content-start align-items-center mb-1">
-																<div class="profile-user-info">
-																	<h6 class="mb-0">Sessions</h6>
-																</div>
-															</div>
-															<p class="card-text">
-																Wonderful Machine· A well-written bio allows viewers to get to know a photographer beyond the work. This
-																can make the difference when presenting to clients who are looking for the perfect fit.
-															</p>
-														</div>
-													</div>
-													<!--/ post 1 -->
+		                        <div class="card-body">
+		                          		<h5 class="card-title mb-1">Upcoming Event</h5>
+				                          <table class="datatables-basic table yajra-datatable">
+				            								<thead>
+				            									<tr>
+				            										<th>No</th>
+				            										<th>Name</th>
+				            										<th>Date</th>
+				            										<th>Time</th>
+				            										<th>Session</th>
+				            									</tr>
+				            								</thead>
+				            								<tbody>
+				            								</tbody>
+				            							</table>
+		                        </div>
+		                      </div>
+													<!--/Upcoming Event -->
 
-													<!-- post 2 -->
+													<!-- List Agenda-->
 													<div class="card">
-														<div class="card-body">
-															<div class="d-flex justify-content-start align-items-center mb-1">
-																<div class="profile-user-info">
-																	<h6 class="mb-0">Coaching Plans</h6>
-																</div>
-															</div>
-															<p class="card-text">
-																Wonderful Machine· A well-written bio allows viewers to get to know a photographer beyond the work. This
-																can make the difference when presenting to clients who are looking for the perfect fit.
-															</p>
-														</div>
-													</div>
-													<!--/ post 2 -->
-												</div>
-
-												<div class="col-lg-6 col-12 order-1 order-lg-2">
-													<!-- post 1 -->
-													<div class="card">
-														<div class="card-body">
-															<div class="d-flex justify-content-start align-items-center mb-1">
-																<div class="profile-user-info">
-																	<h6 class="mb-0">Sessions</h6>
-																</div>
-															</div>
-															<p class="card-text">
-																Wonderful Machine· A well-written bio allows viewers to get to know a photographer beyond the work. This
-																can make the difference when presenting to clients who are looking for the perfect fit.
-															</p>
-														</div>
-													</div>
-													<!--/ post 1 -->
-
-													<!-- post 2 -->
-													<div class="card">
-														<div class="card-body">
-															<div class="d-flex justify-content-start align-items-center mb-1">
-																<div class="profile-user-info">
-																	<h6 class="mb-0">Coaching Plans</h6>
-																</div>
-															</div>
-															<p class="card-text">
-																Wonderful Machine· A well-written bio allows viewers to get to know a photographer beyond the work. This
-																can make the difference when presenting to clients who are looking for the perfect fit.
-															</p>
-														</div>
-													</div>
-													<!--/ post 2 -->
+		                        <div class="card-body">
+		                          <h5 class="card-title mb-1">List Agenda</h5>
+		                          <table class="datatables-basic table yajra-datatable">
+		                            <thead>
+		                              <tr>
+		                                <th>No</th>
+		                                <th>Name</th>
+		                                <th>Date</th>
+		                                <th>Time</th>
+		                                <th>Duration</th>
+		                              </tr>
+		                            </thead>
+		                            <tbody>
+		                            </tbody>
+		                          </table>
+		                        </div>
+		                      </div>
+													<!--/List Agenda-->
 												</div>
 											</div>
 										</div>
