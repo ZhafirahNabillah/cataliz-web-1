@@ -164,7 +164,8 @@
 												<div class="card-header flex-column align-items-start pb-0">
 													<div class="avatar bg-light-primary p-50 m-0">
 														<div class="avatar-content">
-															<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users font-medium-5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+
+															<img width="14" height="14" src="assets\images\icons\Group 74.jpg" alt="Card image cap" />
 														</div>
 													</div>
 													<h2 class="font-weight-bolder mt-1">92.6k</h2>
@@ -415,10 +416,10 @@
 
 										<!-- coaching note detail modal -->
 										<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-											<div class="modal-dialog modal-dialog-centered" role="document">
+											<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLongTitle">Note</h5>
+														<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
 														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 															<span aria-hidden="true">&times;</span>
 														</button>
@@ -470,7 +471,7 @@
 										<div class="content-header-left col-md-9 col-12 mb-2">
 											<div class="row breadcrumbs-top">
 												<div class="col-12">
-													<h4 class="breadcrumb-item active">Feedback</h4>
+													<h4 class="breadcrumb-item active">Detail Feedback</h4>
 												</div>
 											</div>
 										</div>
@@ -502,10 +503,10 @@
 
 								<!-- Feedback detail modal -->
 								<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
+									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 													<div class="modal-content">
 														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLongTitle">Note</h5>
+															<h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
 															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 																<span aria-hidden="true">&times;</span>
 															</button>
