@@ -68,14 +68,17 @@ class CoachController extends Controller
         $user = User::where('id', Auth::user()->id)->first();
 
         if ($request->hasFile('background_picture')) {
-            $filenameWithExt = $request->file('background_picture')->getClientOriginalName();
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            $extension = $request->file('background_picture')->getClientOriginalExtension();
-            $filenameSave = $filename . '_' . time() . '.' . $extension;
-            $path = $request->file('background_picture')->storeAs('public/background', $filenameSave);
-            $user->profil_picture = $filenameSave;
-            $user->update();
+            if ($request->hasFile('background_picture')) {
+                $filenameWithExt = $request->file('background_picture')->getClientOriginalName();
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension = $request->file('background_picture')->getClientOriginalExtension();
+                $filenameSave = $filename . '_' . time() . '.' . $extension;
+                $path = $request->file('background_picture')->storeAs('public/background', $filenameSave);
+                $user->background_picture = $filenameSave;
+            }
         }
+        $user->update();
+
         return redirect(route('coachs.profil', Auth::user()->id))->with('success2', 'Background berhasil diubah!');
     }
 

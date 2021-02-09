@@ -53,7 +53,7 @@
 					<div class="col-sm-12">
 						<div class="card profile-header mb-2">
 							<!-- profile cover photo -->
-							<img class="card-img-top" src="{{ url('storage/profil/'.$user->profil_picture) }}"
+							<img class="card-img-top" src="{{ asset('storage/background/'.$user->background_picture) }}"
 								alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
@@ -144,11 +144,15 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														...
+														<form action="{{route('coachs.update_background', Auth::user()->id)}}" method="POST"
+															enctype="multipart/form-data">
+															@csrf
+															<input type="file" name="background_picture" id="background_picture">
 													</div>
 													<div class="modal-footer">
+														<button type="submit" class="btn btn-primary">Simpan</button>
+														</form>
 														<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-														<button type="button" class="btn btn-primary" name="background_picture">Simpan</button>
 													</div>
 												</div>
 											</div>
