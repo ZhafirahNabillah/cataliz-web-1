@@ -110,13 +110,8 @@
 									<div class="col-md-12 form-group">
 										<label for="fp-default">Feedback</label>
 										@if($agenda_detail->feedback == null)
-										<textarea class="form-control @error('feedback') is-invalid @enderror" name="feedback"></textarea>
+										<textarea class="form-control" name="feedback"></textarea>
 										@endif
-										@error('feedback')
-										<span class="invalid-feedback" role="alert">
-											<strong>{{ $message }}</strong>
-										</span>
-										@enderror
 										@if($agenda_detail->feedback != null)
 										<div class="overflow-auto p-2" style="max-height: 300px;">
 											{!! $agenda_detail->feedback !!}
@@ -160,8 +155,8 @@
 									@csrf
 									<div class="col-md-12 form-group">
 										<label for="fp-default">Subject</label>
-										<input type="text" class="form-control @error('feedback') is-invalid @enderror" name="subject">
-										@error('feedback')
+										<input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject">
+										@error('subject')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
@@ -193,17 +188,12 @@
 								<h6 class="card-title">Notes</h6>
 							</div>
 							<div class="card-body">
-								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
-								<span>Notes belum tersedia</span>
-								@elseif($agenda_detail->status == 'canceled')
-								<span>Notes tidak tersedia</span>
-								@else
 								<div class="row">
 									@csrf
 									<div class="col-md-12 form-group">
 										<label for="fp-default">Subject</label>
-										<input type="text" class="form-control @error('feedback') is-invalid @enderror" name="subject" value="{{$coaching_note->subject}}">
-										@error('feedback')
+										<input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{$coaching_note->subject}}">
+										@error('subject')
 										<span class="invalid-feedback" role="alert">
 											<strong>{{ $message }}</strong>
 										</span>
@@ -236,13 +226,15 @@
 										@endif
 									</div>
 								</div>
-								@endif
 							</div>
 						</div>
 						@endif
 						@if((($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'finished') && ($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
-						<div class="col-md-12 text-right">
-							<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
+						<div class="row">
+							<div class="col-md-12 text-right">
+								<a href="{{route('agendas.index')}}" class="btn btn-secondary">Kembali</a>
+								<button type="submit" class="btn btn-primary data-submit" id="saveBtn" >Submit</button>
+							</div>
 						</div>
 						@endif
 					</form>

@@ -66,7 +66,12 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control" name="client_id"></select>
+                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id"></select>
+                      @error('client_id')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                   </div>
                   <div class="row">
@@ -82,8 +87,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Pilih Sesi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="session">
-                        <option selected hidden>Pilih Sesi</option>
+                      <select class="form-control @error('session') is-invalid @enderror" aria-label=".form-select-lg example" name="session">
+                        <option selected value hidden>Pilih Sesi</option>
                         <option value="1">Sesi 1</option>
                         <option value="2">Sesi 2</option>
                         <option value="3">Sesi 3</option>
@@ -91,16 +96,26 @@
                         <option value="5">Sesi 5</option>
                         <option value="6">Sesi 6</option>
                       </select>
+                      @error('session')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Tipe Sesi</label>
-                      <select class="form-control" aria-label=".form-select-lg example" name="type_session">
-                        <option selected hidden>Pilih Tipe Sesi</option>
+                      <select class="form-control @error('type_session') is-invalid @enderror" aria-label=".form-select-lg example" name="type_session">
+                        <option selected value hidden>Pilih Tipe Sesi</option>
                         <option value="Free">Free</option>
                         <option value="Paid">Paid</option>
                       </select>
+                      @error('type_session')
+  										<span class="invalid-feedback" role="alert">
+  											<strong>{{ $message }}</strong>
+  										</span>
+  										@enderror
                     </div>
                   </div>
                   <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
