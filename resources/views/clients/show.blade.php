@@ -263,7 +263,7 @@
 											<div class="card">
 												<div class="card-body">
 													<h5 class="card-title mb-1">List Agenda</h5>
-													<table class="datatables-basic table yajra-datatable">
+													<table class="datatables-basic table yajra-datatable1">
 														<thead>
 															<tr>
 																<th>No</th>
@@ -653,6 +653,55 @@
 							$.ajaxSetup({
 								headers: {
 									'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+								}
+							});
+
+							// datatable for home table
+							var table = $('.yajra-datatable').DataTable({
+								processing: true,
+								serverSide: true,
+								ajax: "",
+								columns: [
+									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+									{data: 'name', name: 'name'},
+									{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
+    						  {data: 'time', name: 'time', defaultContent: '<i>-</i>'},
+									{data: 'session_name', name: 'session_name', defaultContent: '<i>-</i>'},
+								],
+								dom:
+    						    '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+								language: {
+									paginate: {
+									  // remove previous & next text from pagination
+									  previous: '&nbsp;',
+									  next: '&nbsp;'
+									},
+									search: "<i data-feather='search'></i>",
+									searchPlaceholder: "Search records"
+								}
+							});
+
+							var table = $('.yajra-datatable1').DataTable({
+								processing: true,
+								serverSide: true,
+								ajax: "",
+								columns: [
+									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+									{data: 'name', name: 'name'},
+									{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
+  						    {data: 'time', name: 'time', defaultContent: '<i>-</i>'},
+									{data: 'duration', name: 'duration', defaultContent: '<i>-</i>'},
+								],
+								dom:
+  						      '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+								language: {
+									paginate: {
+									  // remove previous & next text from pagination
+									  previous: '&nbsp;',
+									  next: '&nbsp;'
+									},
+									search: "<i data-feather='search'></i>",
+									searchPlaceholder: "Search records"
 								}
 							});
 
