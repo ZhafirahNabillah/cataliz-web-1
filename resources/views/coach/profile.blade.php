@@ -84,25 +84,18 @@
 												</li>
 											</ul>
 										</div>
-										</div>
-											<!-- edit button -->
-											<div class="btn-group dropleft ">
-				                <button
-				                  type="button"
-				                  class="btn btn-primary dropdown-toggle"
-				                  data-toggle="dropdown"
-				                  aria-haspopup="true"
-													aria-expanded="false"
-												>
-				                  Edit
-				                </button>
+										<!-- edit button -->
+														<div class="demo-inline-spacing">
+															<button type="button" class="btn btn-outline-info round">Edit Profile</button>
 
-				                <div class="dropdown-menu position-relative">
-				                  <a class="dropdown-item" href="#">Profile Picture</a>
-				                  <a class="dropdown-item" href="#">Cover Picture</a>
+														</div>
+														<div class="demo-inline-spacing">
+															<button type="button" class="btn btn-outline-info round">Edit Cover</button>
+														</div>
+										<!-- /edit button -->
 
-				              </div>
-											<!-- /edit button -->
+									</div>
+
 
 									</div>
 									<!--/ collapse  -->

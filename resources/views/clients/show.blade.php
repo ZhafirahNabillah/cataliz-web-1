@@ -402,7 +402,7 @@
 										<div class="card">
 											<div class="card-body">
 								        <h5 class="card-title mb-0" id="detailNotes"
-				                data-target="detailNotes">{{$data->subject}}</h5>
+				                data-target="detailNotes" >{{$data->subject}}</h5>
 												<small class="text-muted">created at {{$data->created_at}}</small>
 								        <div class="card-text">
 													{!!$data->summary!!}
@@ -448,7 +448,7 @@
 
 					<!-- /tab Feedback->
 
-					<!-- Modal detail notes -->
+					<!-- detail Notes -->
 					<div
 						class="modal fade text-left"
 						id="detailNotes"
