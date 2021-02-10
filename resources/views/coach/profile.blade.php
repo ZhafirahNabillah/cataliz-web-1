@@ -50,8 +50,8 @@
 				</div>
 				@endif
 				<div class="row">
-					<div class="col-sm-12">
-						<div class="card profile-header mb-2">
+					<div class="col-sm-12 ">
+						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
 							<img class="card-img-top" src="{{ asset('storage/background/'.$user->background_picture) }}"
 								alt="User Profile Image" />
@@ -72,9 +72,9 @@
 							</div>
 
 							<!-- tabs pill -->
-							<div class="profile-header-nav">
+							<div class="profile-header-nav position-relative">
 								<!-- navbar -->
-								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
+								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
 									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
 										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
 										aria-label="Toggle navigation">
@@ -93,15 +93,26 @@
 										</div>
 
 										<!-- edit button -->
-										<div class="demo-inline-spacing">
-											<button class="btn btn-outline-info round mt-0" data-toggle="modal"
-												data-target="#exampleModal">Upload Foto</button>
-										</div>
+													<div class="btn-group dropleft position-relative "style="z-index:99" >
+							              <button
+							                type="button"
+							                class="btn btn-primary dropdown-toggle"
+							                data-toggle="dropdown"
+							                aria-haspopup="true"
+							                aria-expanded="false"
+							              >
+							                Edit Profile
+							              </button>
+							              <div class="dropdown-menu position-relative" style="z-index:99">
+							                <a class="dropdown-item" data-toggle="modal"
+																data-target="#exampleModal">Edit Foto
+															</a>
+							                <a class="dropdown-item" data-toggle="modal"
+																data-target="#exampleModal2">Edit Background
+															</a>
+							              </div>
+													</div>
 
-										<div class="demo-inline-spacing">
-											<button class="btn btn-outline-info round mt-0" data-toggle="modal"
-												data-target="#exampleModal2">Upload Background</button>
-										</div>
 										<!-- /edit button -->
 
 										<!-- Modal Profil-->
@@ -284,7 +295,7 @@
 <script type="text/javascript">
 	$(function () {
 
-				
+
 			});
 </script>
 @endpush
