@@ -68,33 +68,11 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-		//dd($request->all());
-        //
 
-		/* $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-        ]);
+      Client::updateOrCreate(['id' => $request->Client_id],
+      ['name' => $request->name, 'email' => $request->email, 'phone' =>  $request->phone, 'organization' => $request->organization, 'company' => $request->company, 'occupation' => $request->occupation, 'program' => 'Starco', 'owner_id' => Auth::user()->id]);
 
-		$client = new Client;
-		$client->name = $request->name;
-		$client->email = $request->email;
-		$client->phone = $request->phone;
-		$client->organization = $request->organization;
-		$client->company = $request->company;
-		$client->occupation = $request->occupation;
-		$client->program = 'Starco';
-		$client->owner_id = Auth::user()->id;
-		$client->save();
-
-		return redirect()->route('clients.index')
-                        ->with('success','Add new client successfully'); */
-
-		Client::updateOrCreate(['id' => $request->Client_id],
-                ['name' => $request->name, 'email' => $request->email, 'phone' =>  $request->phone, 'organization' => $request->organization, 'company' => $request->company, 'occupation' => $request->occupation, 'program' => 'Starco', 'owner_id' => Auth::user()->id]);
-
-        return response()->json(['success'=>'Customer saved successfully!']);
+      return response()->json(['success'=>'Customer saved successfully!']);
     }
 
     /**

@@ -42,12 +42,10 @@
                 <img class="rounded mx-auto d-block center" src="assets\images\icons\Group 88.jpg"
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coaching Hour</small>
-                @if ($hours == 0)
-                <h2 class="font-weight-bolder text-center">{{$hours}}
-                  Hours</h2>
+                @if ($hours == null)
+                <h2 class="font-weight-bolder text-center">0 Hours</h2>
                 @else
-                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}
-                  Hours</h2>
+                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}Hours</h2>
                 @endif
               </div>
             </div>
