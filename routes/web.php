@@ -21,7 +21,8 @@ use App\Http\Controllers\Auth\LoginController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function() {
+
+Route::get('/', function () {
 	return redirect('login');
 });
 
@@ -35,21 +36,21 @@ Route::post('/register/coachee', [RegisterController::class, 'create_coachee'])-
 Route::get('/logout', [LoginController::class, 'logout']);
 
 //Middleware group for coachee page
-Route::group(['middleware' => ['auth','role:coachee']], function (){
-	Route::get('/coachee/dashboard', function() {
+Route::group(['middleware' => ['auth', 'role:coachee']], function () {
+	Route::get('/coachee/dashboard', function () {
 		return 'Dashboard Coachee';
 	})->name('dashboard.coachee');
 });
 
 //Middleware group for admin page
-Route::group(['middleware' => ['auth','role:admin']], function (){
-	Route::get('/admin/dashboard', function() {
+Route::group(['middleware' => ['auth', 'role:admin']], function () {
+	Route::get('/admin/dashboard', function () {
 		return 'Dashboard Admin';
 	})->name('dashboard.admin');
 });
 
 //Middleware group for coach page
-Route::group(['middleware' => ['auth','role:coach']], function () {
+Route::group(['middleware' => ['auth', 'role:coach']], function () {
 	Route::get('/coach/dashboard', [HomeController::class, 'index'])->name('dashboard.coach');
 	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
 	//Route::resource('roles', RoleController::class);
@@ -65,6 +66,7 @@ Route::group(['middleware' => ['auth','role:coach']], function () {
 	Route::get('/ajaxClients', [PlanController::class, 'ajaxClients'])->name('clients.search');
 	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
 	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
+	Route::get('/ajaxPlans', [AgendaController::class, 'ajaxPlans'])->name('plans.search');
 
 	Route::post('/agendas/{id}/agenda_detail_update', [AgendaController::class, 'agenda_detail_update'])->name('agendas.agenda_detail_update');
 	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
@@ -72,5 +74,4 @@ Route::group(['middleware' => ['auth','role:coach']], function () {
 	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_sessions_data'])->name('clients.show_agendas');
 	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
 	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
-
 });

@@ -65,6 +65,14 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12 form-group">
+                      <label for="fp-default">Plan</label>
+                      <select class="livesearch form-control" name="plan_id" disabled>
+                        <option selected hidden value="{{ $plan->id }}">{{ $plan->objective }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
                       <select class="livesearch form-control" name="client_id" disabled>
                         <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
@@ -85,12 +93,13 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic...">
+                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic"
+                        value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic...">
                       @error('topic')
-  										<span class="invalid-feedback" role="alert">
-  											<strong>{{ $message }}</strong>
-  										</span>
-  										@enderror
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
 
@@ -99,8 +108,10 @@
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
                       <select class="form-control" id="media1" aria-label=".form-select-lg example" name="media">
-                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting Room')@endif>Meeting Room</option>
-                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')@endif>Whatsapp</option>
+                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
+                          Room')@endif>Meeting Room</option>
+                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
+                          'Whatsapp')@endif>Whatsapp</option>
                       </select>
                     </div>
                   </div>
@@ -137,27 +148,30 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $agenda_detail->date }}">
+                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror"
+                        name="date" value="{{ $agenda_detail->date }}">
                       @error('date')
-  										<span class="invalid-feedback" role="alert">
-  											<strong>{{ $message }}</strong>
-  										</span>
-  										@enderror
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="fp-default">Waktu Kegiatan</label>
-                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}">
+                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time"
+                        value="{{ $agenda_detail->time }}">
                       @error('time')
-  										<span class="invalid-feedback" role="alert">
-  											<strong>{{ $message }}</strong>
-  										</span>
-  										@enderror
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
-                      <select class="form-control @error('duration') is-invalid @enderror" aria-label=".form-select-lg example" name="duration">
+                      <select class="form-control @error('duration') is-invalid @enderror"
+                        aria-label=".form-select-lg example" name="duration">
                         <option hidden selected value>Pilih Durasi</option>
                         <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Menit</option>
                         <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Menit</option>
@@ -165,14 +179,15 @@
                         <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Menit</option>
                       </select>
                       @error('duration')
-  										<span class="invalid-feedback" role="alert">
-  											<strong>{{ $message }}</strong>
-  										</span>
-  										@enderror
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
                   <a href="{{route('agendas.index')}}" class="btn btn-secondary">Kembali</a>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
                 </div>
               </div>
             </div>
@@ -234,6 +249,34 @@ $(".livesearch").on('change', function(e) {
   var dd = $(this).select2('data')[0];
   $('#organization').val(dd.org);
   $('#program').val(dd.pro);
+});
+
+$('.livesearch-plans').select2({
+  placeholder: 'Select plans',
+  ajax: {
+    url: "{{route('plans.search')}}",
+    dataType: 'json',
+    delay: 250,
+    processResults: function (data) {
+      return {
+        results: $.map(data, function (item) {
+          console.log(item)
+          return {
+            text: item.objective,
+            id: item.id,
+          }
+        })
+      };
+    },
+    cache: true
+  }
+});
+
+$(".livesearch-plans").on('change', function(e) {
+  // Access to full data
+  console.log($(this).select2('data'));
+  console.log($(this).select2('data')[0].id);
+  var dd = $(this).select2('data')[0];
 });
 
 $(".")
