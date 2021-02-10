@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -63,13 +64,39 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    protected function show_form_coach(){
+      return view('auth.register');
+    }
+
+    protected function show_form_coachee(){
+      return view('auth.register');
+    }
+
+    protected function create_coach(Request $request)
     {
-        return User::create([
+        $user = User::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $user->assignRole('coach');
+
+        return redirect('login');
+    }
+
+    protected function create_coachee(array $data)
+    {
+        $user = User::create([
             'name' => $data['name'],
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->assignRole('coachee');
+
+        return $user;
     }
 }

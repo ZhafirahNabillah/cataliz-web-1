@@ -6,6 +6,7 @@ use Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -29,7 +30,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-	
+
     /**
      * Create a new controller instance.
      *
@@ -39,4 +40,20 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    protected function authenticated(Request $request, $user){
+      if ($user->hasRole('admin')) {
+        return redirect()->route('dashboard.admin');
+      } elseif ($user->hasRole('coach')) {
+        return redirect()->route('dashboard.coach');
+      } elseif ($user->hasRole('coachee')) {
+        return redirect()->route('dashboard.coachee');
+      }
+    }
+
+    public function logout(Request $request) {
+      Auth::logout();
+      return redirect('/login');
+    }
+
 }

@@ -39,7 +39,7 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded mx-auto d-block center" src="assets\images\icons\Group 88.jpg"
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}"
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coaching Hour</small>
                 @if ($hours == null)
@@ -53,7 +53,7 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded mx-auto d-block center" src="assets\images\icons\Group 84.jpg"
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 84.jpg') }}"
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coachee</small>
                 <h2 class="font-weight-bolder text-center">{{$client}} Clients</h2>
@@ -64,7 +64,7 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded mx-auto d-block center" src="assets\images\icons\Group 82.jpg"
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 82.jpg') }}"
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating</small>
                 <h2 class="font-weight-bolder text-center">21 Rating</h2>
@@ -75,7 +75,7 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded mx-auto d-block center" src="assets\images\icons\Group 90.jpg"
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}"
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Session</small>
                 <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>

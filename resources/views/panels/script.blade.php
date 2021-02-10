@@ -1,4 +1,4 @@
-@if (in_array(Route::currentRouteName(), ['login', 'register']))
+@if (in_array(Route::currentRouteName(), ['login', 'show_register.coach','show_register.coachee']))
 <!-- BEGIN: Vendor JS-->
 
 <!-- BEGIN Vendor JS-->
@@ -27,7 +27,7 @@
         })
 </script>
 
-@elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show', 'home']))
+@elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show', 'dashboard.coach']))
 
 
 <!-- BEGIN: Vendor JS-->

@@ -19,5 +19,6 @@
 <body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
     @yield('content')
     @include('panels.script')
+    @stack('scripts')
 </body>
 </html>

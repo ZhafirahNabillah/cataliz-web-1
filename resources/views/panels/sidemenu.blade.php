@@ -3,7 +3,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="{{route('home')}}">
+                <a class="navbar-brand" href="{{route('dashboard.coach')}}">
                     @include('panels.logo')
                 </a>
             </li>
@@ -16,7 +16,7 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('home')}}"><i
+            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('dashboard.coach')}}"><i
                         data-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Management</span><i
