@@ -45,34 +45,6 @@ class ClientController extends Controller
         ->rawColumns(['action'])
         ->make(true);
     }
-<<<<<<< HEAD
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-		return view('clients.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-
-      Client::updateOrCreate(['id' => $request->Client_id],
-      ['name' => $request->name, 'email' => $request->email, 'phone' =>  $request->phone, 'organization' => $request->organization, 'company' => $request->company, 'occupation' => $request->occupation, 'program' => 'Starco', 'owner_id' => Auth::user()->id]);
-
-      return response()->json(['success'=>'Customer saved successfully!']);
-=======
     return view('clients.index');
   }
 
@@ -164,7 +136,6 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->make(true);
->>>>>>> 2ae136ecf1d155db7ce253496e4735f2942b434d
     }
     // return $total_event;
     return view('clients.show', compact('client', 'coaching_note', 'agenda_detail', 'total_event', 'total_agenda'));
