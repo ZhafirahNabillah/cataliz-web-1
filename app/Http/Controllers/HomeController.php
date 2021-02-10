@@ -37,9 +37,6 @@ class HomeController extends Controller
                 ['agendas.owner_id', Auth::user()->id],
                 ['status', 'finished'],
             ])->first();
-        if ($hours == null) {
-            $hours = 0;
-        }
         $session = Agenda::selectRaw('sum(session) as sum')->where('owner_id', Auth::user()->id)->first();
 
         // Bawah
