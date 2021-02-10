@@ -138,7 +138,7 @@
 								<!-- left profile info section -->
 								<div class="col-lg-4 col-12 order-2 order-lg-1">
 									<!-- about -->
-									<div class="card">
+									<div class="card" style="border-radius: 11px">
 										<div class="card-body">
 											<h5 class="mb-75">Joined:</h5>
 											<p class="card-text">{{\Carbon\Carbon::parse($client->created_at)->format('F d, Y')}}</p>
@@ -152,16 +152,16 @@
 												<p class="card-text">{{$client->email}}</p>
 											</div>
 											<div class="mt-2">
+												<h5 class="mb-75">Organization:</h5>
+												<p class="card-text">{{$client->organization}}</p>
+											</div>
+											<div class="mt-2">
 												<h5 class="mb-75">Company:</h5>
 												<p class="card-text">{{$client->company}}</p>
 											</div>
 											<div class="mt-2">
 												<h5 class="mb-50">Occupation:</h5>
 												<p class="card-text mb-0">{{$client->occupation}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-50">Website:</h5>
-												<p class="card-text mb-0">www.pixinvent.com</p>
 											</div>
 										</div>
 									</div>
@@ -175,7 +175,7 @@
 									<div class="row match-height">
 										<!-- Number of Coaching -->
 										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card">
+											<div class="card style="width: 18rem;" style="border-radius: 11px"">
 												<div class="card-header">
 													<div class="card-body flex-column align-items-start pb-0">
 														<img class="rounded float-right width=" 45" height="45"" src="
@@ -195,7 +195,7 @@
 
 										<!-- Number of Agenda -->
 										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card">
+											<div class="card style="width: 18rem;" style="border-radius: 11px"">
 												<div class="card-header mb-0">
 													<div class="card-body flex-column align-items-start pb-0">
 														<img class="rounded float-right width=" 45" height="45"" src="
@@ -215,7 +215,7 @@
 
 										<!-- Number of Event -->
 										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card">
+											<div class="card style="width: 18rem;" style="border-radius: 11px"">
 												<div class="card-header">
 													<div class="card-body flex-column align-items-start pb-0">
 														<img class="rounded float-right width=" 45" height="45"" src="
@@ -239,7 +239,7 @@
 									<div class="row">
 										<div class="col-lg-12 col-12 order-1 order-lg-2">
 											<!-- Upcoming event -->
-											<div class="card">
+											<div class="card" style="border-radius: 11px">
 												<div class="card-body">
 													<h5 class="card-title mb-1">Upcoming Event</h5>
 													<table class="datatables-basic table yajra-datatable">
@@ -260,7 +260,7 @@
 											<!--/Upcoming Event -->
 
 											<!-- List Agenda-->
-											<div class="card">
+											<div class="card" style="border-radius: 11px">
 												<div class="card-body">
 													<h5 class="card-title mb-1">List Agenda</h5>
 													<table class="datatables-basic table yajra-datatable1">
@@ -329,7 +329,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="card">
+						<div class="card" style="border-radius: 11px">
 
 							<section id="basic-datatable">
 								<div class="row">
@@ -369,7 +369,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="card">
+						<div class="card" style="border-radius: 11px">
 
 							<section id="basic-datatable">
 								<div class="row">
@@ -409,11 +409,11 @@
 						<!-- coaching note card -->
 						<div class="row">
 							<div class="col-sm-12 col-md-12">
-								<div class="card">
+								<div class="card" style="border-radius: 11px">
 									<div class="card-body">
 										<div class="row align-items-center">
 											<div class="col-md-6">
-												<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">{{$data->subject}}</h5>
+												<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">{{$data->topic}}</h5>
 															<small class="text-muted">created at {{$data->created_at}}</small>
 													</div>
 													<div class="col-md-6 text-right">
@@ -445,18 +445,22 @@
 											<div class="modal-body">
 												<div class="container">
 													<div class="row">
-														<div class="card-body">
+														<div class="card-body" style="border-radius: 11px">
 															<dl class="row">
-																<dt class="col-sm-3">Subject</dt>
-																<dd class="col-sm-9">{{$data->subject}}</dd>
+																<dt class="col-sm-3">Topic</dt>
+																<dd class="col-sm-9">{{$data->topic}}</dd>
 															</dl>
 															<dl class="row">
-																<dt class="col-sm-3">Created at</dt>
+																<dt class="col-sm-3">Coach Name</dt>
 																<dd class="col-sm-9">{{$data->created_at}}</dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Session</dt>
 																<dd class="col-sm-9">{{$data->agenda_detail->session_name}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Subject</dt>
+																<dd class="col-sm-9">{{$data->subject}}</dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Note</dt>
@@ -493,7 +497,7 @@
 									<div class="content-header-left col-md-9 col-12 mb-2">
 										<div class="row breadcrumbs-top">
 											<div class="col-12">
-												<h4 class="breadcrumb-item active">Detail Feedback</h4>
+												<h4 class="breadcrumb-item active">Feedback</h4>
 											</div>
 										</div>
 									</div>
@@ -509,7 +513,6 @@
 														<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">Topic Session:
 															{{$data->topic}} </h5>
 														<small class="text-muted">created at {{$data->created_at}}</small>
-														<p class="text-justify">{!!$data->feedback!!}</p>
 													</div>
 													<div class="col-md-12 text-right ">
 														<button type="button" class="btn btn-primary " data-toggle="modal"
@@ -544,7 +547,7 @@
 																<dd class="col-sm-9">{{$data->topic}}</dd>
 															</dl>
 															<dl class="row">
-																<dt class="col-sm-3">Created at</dt>
+																<dt class="col-sm-3">Coach Name</dt>
 																<dd class="col-sm-9">{{$data->created_at}}</dd>
 															</dl>
 															<dl class="row">

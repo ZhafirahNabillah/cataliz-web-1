@@ -69,7 +69,7 @@
       <section id="basic-datatable">
         <div class="row">
           <div class="col-12">
-            <div class="card">
+            <div class="card style="border-radius: 15px;>
               <table class="datatables-basic table yajra-datatable">
                 <thead>
                   <tr>
@@ -250,7 +250,7 @@
 
         {
           text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add Client',
-          className: 'create-new btn btn-primary createNewClient',
+          className: 'create-new btn btn-primary createNewClient ',
           attr: {
             'data-toggle': 'modal'
 
