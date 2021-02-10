@@ -178,7 +178,7 @@
 	var table = $('.yajra-datatable1').DataTable({
 		processing: true,
 		serverSide: true,
-		ajax: "",
+		ajax: "{{route('home.show_agendas_list')}}",
 		columns: [
 			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 			{data: 'name', name: 'name'},

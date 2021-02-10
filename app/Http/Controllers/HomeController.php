@@ -44,10 +44,12 @@ class HomeController extends Controller
 
         // Bawah
         if ($request->ajax()) {
-            $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.session_name', 'agenda_details.duration')
+            //agenda
+            $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.session_name')
                 ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
                 ->join('clients', 'clients.id', '=', 'agendas.client_id')
-                ->where('clients.owner_id', Auth::user()->id)->orderBy('date', 'asc')->orderBy('time', 'asc')
+                ->where('status', 'scheduled')
+                ->orderBy('date', 'asc')->orderBy('time', 'asc')
                 ->get();
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -56,5 +58,21 @@ class HomeController extends Controller
 
         // return $hours;
         return view('home', compact('client', 'hours', 'session'));
+    }
+
+    public function show_agendas_data(Request $request, Client $client)
+    {
+        // upcoming
+        if ($request->ajax()) {
+
+            $data2 = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.duration')
+                ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+                ->join('clients', 'clients.id', '=', 'agendas.client_id')
+                ->where('clients.owner_id', Auth::user()->id)->orderBy('date', 'asc')->orderBy('time', 'asc')
+                ->get();
+            return DataTables::of($data2)
+                ->addIndexColumn()
+                ->make(true);
+        }
     }
 }

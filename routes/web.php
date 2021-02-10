@@ -53,6 +53,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/', function () {
 		return redirect('/home');
 	});
+	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
 	//Route::resource('roles', RoleController::class);
 	Route::resource('coachs', CoachController::class);
 	Route::get('/coachs/{id}/profil', [CoachController::class, 'profil'])->name('coachs.profil');
