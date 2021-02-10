@@ -45,7 +45,7 @@
                 @if ($hours == null)
                 <h2 class="font-weight-bolder text-center">0 Hours</h2>
                 @else
-                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}Hours</h2>
+                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}} Hours</h2>
                 @endif
               </div>
             </div>

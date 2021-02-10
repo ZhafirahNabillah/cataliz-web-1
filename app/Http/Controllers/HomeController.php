@@ -30,8 +30,7 @@ class HomeController extends Controller
     {
         // Atas
         $client = Client::where('owner_id', Auth::user()->id)->count();
-        $hours = Agenda::groupBy('agendas.id')
-            ->selectRaw('sum(agenda_details.duration)/60 as sum')
+        $hours = Agenda::selectRaw('sum(agenda_details.duration)/60 as sum')
             ->join('agenda_details', 'agenda_id', '=', 'agendas.id')
             ->where([
                 ['agendas.owner_id', Auth::user()->id],
