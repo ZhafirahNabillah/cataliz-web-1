@@ -204,7 +204,7 @@
 												</div>
 												<div class="row mb-auto">
 													<div class="card-body">
-														<h1 class="display-1 text-primary card text-center">5</h1>
+														<h1 class="display-1 text-primary card text-center">{{$total_agenda->sum}}</h1>
 														<h3 class="font-weight-bolder text-center">Agenda</h3>
 													</div>
 												</div>
@@ -225,7 +225,7 @@
 												</div>
 												<div class="row">
 													<div class="card-body">
-														<h1 class="display-1 text-primary card text-center">22</h1>
+														<h1 class="display-1 text-primary card text-center">{{$total_event}}</h1>
 														<h3 class="font-weight-bolder text-center">Event</h3>
 													</div>
 												</div>
@@ -414,240 +414,241 @@
 										<div class="row align-items-center">
 											<div class="col-md-6">
 												<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">{{$data->subject}}</h5>
-												<small class="text-muted">created at {{$data->created_at}}</small>
-											</div>
-											<div class="col-md-6 text-right">
-												<button type="button" class="btn btn-primary" data-toggle="modal"
-													data-target="#show_note_{{$data->id}}">
-													Detail
-												</button>
+															<small class="text-muted">created at {{$data->created_at}}</small>
+													</div>
+													<div class="col-md-6 text-right">
+														<button type="button" class="btn btn-primary" data-toggle="modal"
+															data-target="#show_note_{{$data->id}}">
+															Detail
+														</button>
+													</div>
+												</div>
+												<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 											</div>
 										</div>
-										<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
 									</div>
 								</div>
-							</div>
-						</div>
-						<!-- /tab coaching note -->
+								<!-- /tab coaching note -->
 
 
-						<!-- coaching note detail modal -->
-						<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<div class="container">
-											<div class="row">
-												<div class="card-body">
-													<dl class="row">
-														<dt class="col-sm-3">Subject</dt>
-														<dd class="col-sm-9">{{$data->subject}}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-sm-3">Created at</dt>
-														<dd class="col-sm-9">{{$data->created_at}}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-sm-3">Session</dt>
-														<dd class="col-sm-9">{{$data->agenda_detail->session_name}}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-sm-3">Note</dt>
-														<span class="d-block my-1"></span>
-														<dd class="col-sm-9 text-justify"> {!! $data->summary !!}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-md-12">
-															<small class="d-block text-muted">Note Attachment</small>
-															@if($data->attachment != null)
-															<span class="d-block my-1">{{$data->attachment}}</span>
-															<a href="{{ route('agendas.note_download',$data->id) }}"
-																class="btn btn-primary">Download</a>
-															@else
-															<span class="d-block font-italic">Tidak ada file</span>
-															@endif
-														</dt>
-													</dl>
+								<!-- coaching note detail modal -->
+								<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="container">
+													<div class="row">
+														<div class="card-body">
+															<dl class="row">
+																<dt class="col-sm-3">Subject</dt>
+																<dd class="col-sm-9">{{$data->subject}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Created at</dt>
+																<dd class="col-sm-9">{{$data->created_at}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Session</dt>
+																<dd class="col-sm-9">{{$data->agenda_detail->session_name}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Note</dt>
+																<span class="d-block my-1"></span>
+																<dd class="col-sm-9 text-justify"> {!! $data->summary !!}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-md-12">
+																	<small class="d-block text-muted">Note Attachment</small>
+																	@if($data->attachment != null)
+																	<span class="d-block my-1">{{$data->attachment}}</span>
+																	<a href="{{ route('agendas.note_download',$data->id) }}"
+																		class="btn btn-primary">Download</a>
+																	@else
+																	<span class="d-block font-italic">Tidak ada file</span>
+																	@endif
+																</dt>
+															</dl>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+								@endforeach
 							</div>
-						</div>
-						@endforeach
-					</div>
-					<!-- /tab coaching Notes-->
+							<!-- /tab coaching Notes-->
 
 
-					<!-- Tab Feedback -->
-					<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
-						<div class="content-header row">
-							<div class="content-header-left col-md-9 col-12 mb-2">
-								<div class="row breadcrumbs-top">
-									<div class="col-12">
-										<h4 class="breadcrumb-item active">Detail Feedback</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-						@foreach($agenda_detail as $data)
-						<!-- Feedback card -->
-						<div class="row">
-							<div class="col-sm-12 col-md-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="row align-items-center">
-											<div class="col-md-12">
-												<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">Topic Session:
-													{{$data->topic}} </h5>
-												<small class="text-muted">created at {{$data->created_at}}</small>
-												<p class="text-justify">{!!$data->feedback!!}</p>
-											</div>
-											<div class="col-md-12 text-right ">
-												<button type="button" class="btn btn-primary " data-toggle="modal"
-													data-target="#show_feedback-{{$data->id}}">
-													Detail
-												</button>
+							<!-- Tab Feedback -->
+							<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
+								<div class="content-header row">
+									<div class="content-header-left col-md-9 col-12 mb-2">
+										<div class="row breadcrumbs-top">
+											<div class="col-12">
+												<h4 class="breadcrumb-item active">Detail Feedback</h4>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<!-- /Feedback note -->
-
-						<!-- Feedback detail modal -->
-						<div class="modal fade" id="show_feedback-{{$data->id}}" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-											<span aria-hidden="true">&times;</span>
-										</button>
-									</div>
-									<div class="modal-body">
-										<div class="container">
-											<div class="row">
-												<div class="card-body">
-													<dl class="row">
-														<dt class="col-sm-3">Topic</dt>
-														<dd class="col-sm-9">{{$data->topic}}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-sm-3">Created at</dt>
-														<dd class="col-sm-9">{{$data->created_at}}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-sm-3">Session</dt>
-														<dd class="col-sm-9">{{$data->session_name}}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-sm-3">Feedback</dt>
-														<span class="d-block my-1"></span>
-														<dd class="col-sm-9 text-justify">{!! $data->feedback !!}</dd>
-													</dl>
-													<dl class="row">
-														<dt class="col-md-12">
-															<small class="d-block text-muted">Feedback Attachment</small>
-															@if($data->attachment != null)
-															<span class="d-block my-1">{{$data->attachment}}</span>
-															<a href="{{ route('agendas.feedback_download',$data->id) }}"
-																class="btn btn-primary">Download</a>
-															@else
-															<span class="d-block font-italic">Tidak ada file</span>
-															@endif
-														</dt>
-													</dl>
+								@foreach($agenda_detail as $data)
+								<!-- Feedback card -->
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<div class="card">
+											<div class="card-body">
+												<div class="row align-items-center">
+													<div class="col-md-12">
+														<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">Topic Session:
+															{{$data->topic}} </h5>
+														<small class="text-muted">created at {{$data->created_at}}</small>
+														<p class="text-justify">{!!$data->feedback!!}</p>
+													</div>
+													<div class="col-md-12 text-right ">
+														<button type="button" class="btn btn-primary " data-toggle="modal"
+															data-target="#show_feedback-{{$data->id}}">
+															Detail
+														</button>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						@endforeach
-					</div>
-					<!-- /modal Feedback-->
+								<!-- /Feedback note -->
 
-
-					<!--End profile-->
-				</div>
-				<!---End Content Body -->
-
-				<!-- Modal to add new record -->
-				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-							<div class="modal-header mb-1">
-								<h5 class="modal-title" id="modalHeading"></h5>
-							</div>
-							<input type="hidden" name="Client_id" id="Client_id">
-							<div class="modal-body flex-grow-1">
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-								</div>
-								<label class="form-label" for="basic-icon-default-post">Phone</label>
-								<div class="input-group input-group-merge mb-2">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon5">+62</span>
+								<!-- Feedback detail modal -->
+								<div class="modal fade" id="show_feedback-{{$data->id}}" tabindex="-1" role="dialog"
+									aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="container">
+													<div class="row">
+														<div class="card-body">
+															<dl class="row">
+																<dt class="col-sm-3">Topic</dt>
+																<dd class="col-sm-9">{{$data->topic}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Created at</dt>
+																<dd class="col-sm-9">{{$data->created_at}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Session</dt>
+																<dd class="col-sm-9">{{$data->session_name}}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-sm-3">Feedback</dt>
+																<span class="d-block my-1"></span>
+																<dd class="col-sm-9 text-justify">{!! $data->feedback !!}</dd>
+															</dl>
+															<dl class="row">
+																<dt class="col-md-12">
+																	<small class="d-block text-muted">Feedback Attachment</small>
+																	@if($data->attachment != null)
+																	<span class="d-block my-1">{{$data->attachment}}</span>
+																	<a href="{{ route('agendas.feedback_download',$data->id) }}"
+																		class="btn btn-primary">Download</a>
+																	@else
+																	<span class="d-block font-italic">Tidak ada file</span>
+																	@endif
+																</dt>
+															</dl>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
-										aria-label="Phone">
 								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-email">Email</label>
-									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-										placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-									<input id="organization" name="organization" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Company</label>
-									<input id="company" name="company" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-								</div>
-								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-									<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-								</div>
-
-								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-									value="create">Submit</button>
-								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+								@endforeach
 							</div>
-							<!-- </form>-->
-					</div>
-				</div>
-				<!-- End Modal -->
+							<!-- /modal Feedback-->
 
+
+							<!--End profile-->
+					</div>
+					<!---End Content Body -->
+
+					<!-- Modal to add new record -->
+					<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+						<div class="modal-dialog sidebar-sm">
+							<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+								<div class="modal-header mb-1">
+									<h5 class="modal-title" id="modalHeading"></h5>
+								</div>
+								<input type="hidden" name="Client_id" id="Client_id">
+								<div class="modal-body flex-grow-1">
+									<div class="form-group">
+										<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+										<input id="name" name="name" type="text" class="form-control dt-full-name"
+											id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+									</div>
+									<label class="form-label" for="basic-icon-default-post">Phone</label>
+									<div class="input-group input-group-merge mb-2">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon5">+62</span>
+										</div>
+										<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
+											aria-label="Phone">
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="basic-icon-default-email">Email</label>
+										<input id="email" name="email" type="text" id="basic-icon-default-email"
+											class="form-control dt-email" placeholder="john.doe@example.com"
+											aria-label="john.doe@example.com" />
+										<small class="form-text text-muted"> You can use letters, numbers & periods </small>
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="basic-icon-default-fullname">Organization</label>
+										<input id="organization" name="organization" type="text" class="form-control dt-full-name"
+											id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="basic-icon-default-fullname">Company</label>
+										<input id="company" name="company" type="text" class="form-control dt-full-name"
+											id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+									</div>
+									<div class="form-group">
+										<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+										<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+											id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+									</div>
+
+									<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+										value="create">Submit</button>
+									<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+								</div>
+								<!-- </form>-->
+						</div>
+					</div>
+					<!-- End Modal -->
+
+				</div>
 			</div>
-		</div>
-		<!-- END: Content-->
-		@endsection
+			<!-- END: Content-->
+			@endsection
 
-		@push('scripts')
+			@push('scripts')
 
-		<script type="text/javascript">
-			$(function () {
+			<script type="text/javascript">
+				$(function () {
 
 							//ajax declaration with csrf
 							$.ajaxSetup({
@@ -656,7 +657,7 @@
 								}
 							});
 
-							// datatable for home table
+							// datatable for upcoming table
 							var table = $('.yajra-datatable').DataTable({
 								processing: true,
 								serverSide: true,
@@ -681,10 +682,11 @@
 								}
 							});
 
+							// datatable for event table
 							var table = $('.yajra-datatable1').DataTable({
 								processing: true,
 								serverSide: true,
-								ajax: "",
+								ajax: "{{route('clients.show_agendas_list', $client->id)}}",
 								columns: [
 									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 									{data: 'name', name: 'name'},
@@ -786,5 +788,5 @@
 								})
 							});
 						});
-		</script>
-		@endpush
+			</script>
+			@endpush

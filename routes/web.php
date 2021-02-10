@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
 	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_sessions_data'])->name('clients.show_agendas');
 	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
+	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
 
 	//Route::get('clients/all', [ClientController::class, 'getAll'])->name('clients.all');
 });
