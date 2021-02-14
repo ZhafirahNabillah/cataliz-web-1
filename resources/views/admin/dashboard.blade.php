@@ -7,11 +7,13 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }} Admin</div>
 
+                <a href="{{route('manajemen_user.admin')}}">Klik</a>
+
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
                     @endif
 
                     {{ __('You are logged in!') }} as {{Auth::user()->name}}
