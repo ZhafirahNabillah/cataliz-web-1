@@ -48,7 +48,9 @@
 
 			<div class="row mb-1 no-gutters">
 				<div class="col-md-12">
+					@can('create-agendas')
 					<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
+					@endcan
 				</div>
 			</div>
 
@@ -75,8 +77,6 @@
 						</div>
 					</div>
 				</div>
-
-
 			</section>
 			<!--/ Basic table -->
 		</div>

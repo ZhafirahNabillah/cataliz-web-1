@@ -246,6 +246,7 @@
       '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       lengthMenu: [7, 10, 25, 50, 75, 100],
+      @can('create-clients')
       buttons: [
 
         {
@@ -260,6 +261,7 @@
           }
         }
       ],
+      @endcan
       responsive: {
         details: {
           display: $.fn.dataTable.Responsive.display.modal({

@@ -45,11 +45,11 @@
             </div>
             @endif
             <div class="row">
-
                 <div class="col-12">
+                  @can('create-plans')
                     <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
+                  @endcan
                 </div>
-
             </div>
             <br>
             <!-- Basic table -->
@@ -307,7 +307,7 @@
                 error: function (data) {
                         console.log('Error:', data);
                 }
-        }); 
+        });
         } else {
         e.preventDefault();
         }
