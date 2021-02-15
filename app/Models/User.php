@@ -42,13 +42,13 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-	
+
 	public function initials(){
 		$words = explode(" ", $this->name );
 		$initials = null;
 		foreach ($words as $w) {
 			$initials .= $w[0];
 		}
-		return strtoupper($initials);
+		return strtoupper(substr($words[0], 0, 1) . substr(end($words), 0, 1));
 	 }
 }
