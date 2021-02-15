@@ -31,7 +31,7 @@
             @if (Route::currentRouteName() == "show_register.coach")
             <form class="auth-register-form mt-2" method="POST" action="{{ route('register.coach') }}">
               @csrf
-              <h5>Register Coach</h5>
+
               <div class="form-group">
                 <label class="form-label" for="register-username">Fullname</label>
                 <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="John Doe" aria-describedby="name" value="{{ old('name') }}" required autocomplete="name" autofocus tabindex="1" />
@@ -89,7 +89,6 @@
             @else
             <form class="auth-register-form mt-2" method="POST" action="{{ route('register.coachee') }}">
               @csrf
-              <h5>Register Coachee</h5>
               <div class="form-group">
                 <label class="form-label" for="register-username">Fullname</label>
                 <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="John Doe" aria-describedby="name" value="{{ old('name') }}" required autocomplete="name" autofocus tabindex="1" />
@@ -136,6 +135,19 @@
                   <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                 </div>
               </div>
+              <h5>Register as</h5>
+              <div class="form-group demo-inline-spacing">
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked />
+                          <label class="custom-control-label" for="customRadio1">Coach</label>
+                        </div>
+                        <div class="custom-control custom-radio">
+                          <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
+                          <label class="custom-control-label" for="customRadio2">Coachee</label>
+                        </div>
+              </div>
+
+
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
                   <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />

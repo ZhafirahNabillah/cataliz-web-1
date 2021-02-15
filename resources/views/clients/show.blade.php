@@ -178,17 +178,15 @@
 											<div class="card style="width: 18rem;" style="border-radius: 11px"">
 												<div class="card-header">
 													<div class="card-body flex-column align-items-start pb-0">
-														<img class="rounded float-right width=" 45" height="45"" src="
-															{{asset('assets\images\icons\Group 74.jpg') }}" alt="Card image cap" />
+														<img class="rounded float-right width="60" height="60"" src="
+															{{asset('assets\images\icons\dollar.jpg') }}" alt="Card image cap" />
 													</div>
 
 												</div>
-												<div class="row">
 													<div class="card-body">
 														<h1 class="display-1 text-primary card text-center">22</h1>
 														<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
 													</div>
-												</div>
 											</div>
 										</div>
 										<!-- Number of Coaching ends -->
@@ -198,16 +196,14 @@
 											<div class="card style="width: 18rem;" style="border-radius: 11px"">
 												<div class="card-header mb-0">
 													<div class="card-body flex-column align-items-start pb-0">
-														<img class="rounded float-right width=" 45" height="45"" src="
-															{{asset('assets\images\icons\Group 110.jpg') }}" alt="Card image cap" />
+														<img class="rounded float-right width="55" height="55"" src="
+															{{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
 													</div>
 												</div>
-												<div class="row mb-auto">
 													<div class="card-body">
 														<h1 class="display-1 text-primary card text-center">{{$total_agenda->sum}}</h1>
 														<h3 class="font-weight-bolder text-center">Agenda</h3>
 													</div>
-												</div>
 											</div>
 										</div>
 										<!-- Number of Agenda End -->
@@ -218,17 +214,14 @@
 											<div class="card style="width: 18rem;" style="border-radius: 11px"">
 												<div class="card-header">
 													<div class="card-body flex-column align-items-start pb-0">
-														<img class="rounded float-right width=" 45" height="45"" src="
-															{{asset('assets\images\icons\Group 129.jpg') }}" alt="Card image cap" />
+														<img class="rounded float-right width="60" height="60"" src="
+															{{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
 													</div>
-
 												</div>
-												<div class="row">
 													<div class="card-body">
 														<h1 class="display-1 text-primary card text-center">{{$total_event}}</h1>
 														<h3 class="font-weight-bolder text-center">Event</h3>
 													</div>
-												</div>
 											</div>
 										</div>
 										<!-- Number of Event End -->
@@ -408,26 +401,25 @@
 						@foreach($coaching_note as $data)
 						<!-- coaching note card -->
 						<div class="row">
-							<div class="col-sm-12 col-md-12">
-								<div class="card" style="border-radius: 11px">
-									<div class="card-body">
-										<div class="row align-items-center">
-											<div class="col-md-6">
-												<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">{{$data->topic}}</h5>
-															<small class="text-muted">created at {{$data->created_at}}</small>
-													</div>
-													<div class="col-md-6 text-right">
-														<button type="button" class="btn btn-primary" data-toggle="modal"
-															data-target="#show_note_{{$data->id}}">
-															Detail
-														</button>
-													</div>
-												</div>
-												<!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-											</div>
-										</div>
+							<div class="col-12">
+									<div class="card">
+										<table class="datatables-basic table yajra-datatable-2">
+											<thead>
+												<tr>
+													<th>NO</th>
+													<th>Coach Name</th>
+													<th>Session</th>
+													<th>Topic</th>
+													<th>Subject</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
 									</div>
 								</div>
+							</div>
 								<!-- /tab coaching note -->
 
 
@@ -505,23 +497,21 @@
 								@foreach($agenda_detail as $data)
 								<!-- Feedback card -->
 								<div class="row">
-									<div class="col-sm-12 col-md-12">
+									<div class="col-12">
 										<div class="card">
-											<div class="card-body">
-												<div class="row align-items-center">
-													<div class="col-md-12">
-														<h5 class="card-title mb-0" id="detailNotes" data-target="detailNotes">Topic Session:
-															{{$data->topic}} </h5>
-														<small class="text-muted">created at {{$data->created_at}}</small>
-													</div>
-													<div class="col-md-12 text-right ">
-														<button type="button" class="btn btn-primary " data-toggle="modal"
-															data-target="#show_feedback-{{$data->id}}">
-															Detail
-														</button>
-													</div>
-												</div>
-											</div>
+											<table class="datatables-basic table yajra-datatable-2">
+												<thead>
+													<tr>
+														<th>NO</th>
+														<th>Coach Name</th>
+														<th>Session</th>
+														<th>Topic</th>
+														<th>Action</th>
+													</tr>
+												</thead>
+												<tbody>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>

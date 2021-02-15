@@ -63,14 +63,7 @@
               </div>
               <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
             </form>
-            <p class="text-center mt-2"><span>New on our platform?</span><a href="#" id="btn-register-choice"><span>&nbsp;Create an account</span></a></p>
-            <div class="row register_choice" id="register_choice" style="display: none">
-              <div class="col-md-12 text-center">
-                <p>Mendaftar sebagai:</p>
-                <a href="{{route('show_register.coachee')}}" class="btn btn-primary">Coachee</a>
-                <a href="{{route('show_register.coach')}}" class="btn btn-primary">Coach</a>
-              </div>
-            </div>
+            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{route('show_register.coachee')}}" id="btn-register-choice"><span>&nbsp;Create an account</span></a></p>
             <!--
             <div class="divider my-2">
             <div class="divider-text">or</div>
