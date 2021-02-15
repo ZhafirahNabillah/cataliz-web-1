@@ -46,7 +46,7 @@
             @endif
             <div class="row">
                 <div class="col-12">
-                  @can('create-plans')
+                  @can('create-plan')
                     <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
                   @endcan
                 </div>

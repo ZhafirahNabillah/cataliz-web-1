@@ -15,31 +15,24 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         //crud clients
-        Permission::create(['name' => 'create-clients']);
-        Permission::create(['name' => 'update-clients']);
-        Permission::create(['name' => 'delete-clients']);
+        Permission::create(['name' => 'list-client']);
+        Permission::create(['name' => 'create-client']);
+        Permission::create(['name' => 'update-client']);
+        Permission::create(['name' => 'detail-client']);
+        Permission::create(['name' => 'delete-client']);
 
         //crud plans
-        Permission::create(['name' => 'create-plans']);
-        Permission::create(['name' => 'update-plans']);
-        Permission::create(['name' => 'delete-plans']);
+        Permission::create(['name' => 'list-plan']);
+        Permission::create(['name' => 'create-plan']);
+        Permission::create(['name' => 'update-plan']);
+        Permission::create(['name' => 'detail-plan']);
+        Permission::create(['name' => 'delete-plan']);
 
-        //crud Agendas
-        Permission::create(['name' => 'create-agendas']);
-        Permission::create(['name' => 'update-agendas']);
-        Permission::create(['name' => 'delete-agendas']);
-
-        //crud Sessions
-        Permission::create(['name' => 'create-sessions']);
-        Permission::create(['name' => 'update-sessions']);
-        Permission::create(['name' => 'delete-sessions']);
-
-        //create, update feedback
-        Permission::create(['name' => 'create-feedbacks']);
-        Permission::create(['name' => 'update-feedbacks']);
-
-        //create, update coaching notes
-        Permission::create(['name' => 'create-coaching-notes']);
-        Permission::create(['name' => 'update-coaching-notes']);
+        //crud agendas
+        Permission::create(['name' => 'list-agenda']);
+        Permission::create(['name' => 'create-agenda']);
+        Permission::create(['name' => 'update-agenda']);
+        Permission::create(['name' => 'detail-agenda']);
+        Permission::create(['name' => 'delete-agenda']);
     }
 }

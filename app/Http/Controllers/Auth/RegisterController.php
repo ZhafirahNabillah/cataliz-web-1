@@ -86,7 +86,7 @@ class RegisterController extends Controller
         return redirect('login');
     }
 
-    protected function create_coachee(array $data)
+    protected function create_coachee(Request $request)
     {
         $user = User::create([
             'name' => $data['name'],
