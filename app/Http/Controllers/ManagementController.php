@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role as ModelsRole;
+use Spatie\Permission\Models\Permission;
 
 class ManagementController extends Controller
 {
@@ -27,9 +31,33 @@ class ManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create_permissions(Request $request)
     {
-        //
+        //     $this->validate($request, [
+        //         'name' => 'required|string|unique:permissions'
+        //     ]);
+        // ​
+        //     $permission = Permission::firstOrCreate([
+        //         'name' => $request->name
+        //     ]);
+        //     return redirect()->back();
+
+        // $permission1 = Permission::create(['name' => 'create agendas'])
+        // $permission1 = Permission::create(['name' => 'create plans'])
+        // $permission1 = Permission::create(['name' => 'create clients'])
+    }
+
+    public function ajaxAdmin(Request $request)
+    {
+        $admins = [];
+        if ($request->has('q')) {
+            $search = $request->q;
+            $admins = ModelsRole::where('name', 'LIKE', "%$search%")
+                ->get();
+        } else {
+            $admins = ModelsRole::orderby('id', 'asc')->get();
+        }
+        return response()->json($admins);
     }
 
     /**

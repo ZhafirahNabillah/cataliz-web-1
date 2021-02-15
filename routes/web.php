@@ -47,6 +47,7 @@ Route::group(['middleware' => ['auth', 'role:coachee']], function () {
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
 	Route::get('/admin/dashboard', [ManagementController::class, 'index'])->name('dashboard.admin');
 	Route::get('/admin/manajemen_user', [ManagementController::class, 'manajemen_user'])->name('manajemen_user.admin');
+	Route::get('/admin/manajemen_user/search', [ManagementController::class, 'ajaxAdmin'])->name('users_search.admin');
 });
 
 //Middleware group for coach page

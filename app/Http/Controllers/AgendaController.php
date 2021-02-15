@@ -44,6 +44,8 @@ class AgendaController extends Controller
         ->where('clients.owner_id', Auth::user()->id)->latest()
         ->get();
 
+        // dd($data);
+
       //return data as datatable json
       return DataTables::of($data)
         ->addIndexColumn()

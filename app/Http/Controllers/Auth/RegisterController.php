@@ -64,12 +64,14 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function show_form_coach(){
-      return view('auth.register');
+    protected function show_form_coach()
+    {
+        return view('auth.register');
     }
 
-    protected function show_form_coachee(){
-      return view('auth.register');
+    protected function show_form_coachee()
+    {
+        return view('auth.register');
     }
 
     protected function create_coach(Request $request)
@@ -89,14 +91,14 @@ class RegisterController extends Controller
     protected function create_coachee(Request $request)
     {
         $user = User::create([
-            'name' => $data['name'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'name' => $request['name'],
+            'phone' => $request['phone'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
         ]);
 
         $user->assignRole('coachee');
 
-        return $user;
+        return redirect('login');
     }
 }
