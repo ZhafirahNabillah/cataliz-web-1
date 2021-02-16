@@ -179,482 +179,462 @@
 									<div class="row match-height">
 										<!-- Number of Coaching -->
 										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card style="width: 18rem;" style="border-radius: 11px"">
-												<div class="card-header">
-													<div class="card-body flex-column align-items-start pb-0">
-														<img class="rounded float-right width="60" height="60"" src="
-															{{asset('assets\images\icons\dollar.jpg') }}" alt="Card image cap" />
-													</div>
-
+											<div class="card style=" width: 18rem;" style="border-radius: 11px"">
+												<div class=" card-header">
+												<div class="card-body flex-column align-items-start pb-0">
+													<img class="rounded float-right width=" 60" height="60"" src="
+														{{asset('assets\images\icons\dollar.jpg') }}" alt="Card image cap" />
 												</div>
-													<div class="card-body">
-														<h1 class="display-1 text-primary card text-center">22</h1>
-														<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
-													</div>
+
+											</div>
+											<div class="card-body">
+												<h1 class="display-1 text-primary card text-center">22</h1>
+												<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
 											</div>
 										</div>
-										<!-- Number of Coaching ends -->
-
-										<!-- Number of Agenda -->
-										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card style="width: 18rem;" style="border-radius: 11px"">
-												<div class="card-header mb-0">
-													<div class="card-body flex-column align-items-start pb-0">
-														<img class="rounded float-right width="55" height="55"" src="
-															{{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
-													</div>
-												</div>
-													<div class="card-body">
-														<h1 class="display-1 text-primary card text-center">{{$total_agenda->sum}}</h1>
-														<h3 class="font-weight-bolder text-center">Agenda</h3>
-													</div>
-											</div>
-										</div>
-										<!-- Number of Agenda End -->
-
-
-										<!-- Number of Event -->
-										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card style="width: 18rem;" style="border-radius: 11px"">
-												<div class="card-header">
-													<div class="card-body flex-column align-items-start pb-0">
-														<img class="rounded float-right width="60" height="60"" src="
-															{{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
-													</div>
-												</div>
-													<div class="card-body">
-														<h1 class="display-1 text-primary card text-center">{{$total_event}}</h1>
-														<h3 class="font-weight-bolder text-center">Event</h3>
-													</div>
-											</div>
-										</div>
-										<!-- Number of Event End -->
-
-
 									</div>
+									<!-- Number of Coaching ends -->
 
-									<div class="row">
-										<div class="col-lg-12 col-12 order-1 order-lg-2">
-											<!-- Upcoming event -->
-											<div class="card" style="border-radius: 11px">
-												<div class="card-body">
-													<h5 class="card-title mb-1">Upcoming Event</h5>
-													<table class="datatables-basic table yajra-datatable">
-														<thead>
-															<tr>
-																<th>No</th>
-																<th>Name</th>
-																<th>Date</th>
-																<th>Time</th>
-																<th>Session</th>
-															</tr>
-														</thead>
-														<tbody>
-														</tbody>
-													</table>
-												</div>
+									<!-- Number of Agenda -->
+									<div class="col-lg-4 col-sm-4 col-6">
+										<div class="card style=" width: 18rem;" style="border-radius: 11px"">
+												<div class=" card-header mb-0">
+											<div class="card-body flex-column align-items-start pb-0">
+												<img class="rounded float-right width=" 55" height="55"" src="
+													{{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
 											</div>
-											<!--/Upcoming Event -->
-
-											<!-- List Agenda-->
-											<div class="card" style="border-radius: 11px">
-												<div class="card-body">
-													<h5 class="card-title mb-1">List Agenda</h5>
-													<table class="datatables-basic table yajra-datatable1">
-														<thead>
-															<tr>
-																<th>No</th>
-																<th>Name</th>
-																<th>Date</th>
-																<th>Time</th>
-																<th>Duration</th>
-															</tr>
-														</thead>
-														<tbody>
-														</tbody>
-													</table>
-												</div>
-											</div>
-											<!--/List Agenda-->
+										</div>
+										<div class="card-body">
+											<h1 class="display-1 text-primary card text-center">{{$total_agenda->sum}}</h1>
+											<h3 class="font-weight-bolder text-center">Agenda</h3>
 										</div>
 									</div>
 								</div>
-								<!--/ center profile info section -->
-							</div>
+								<!-- Number of Agenda End -->
 
-						</section>
-						<!--/ profile info section -->
-					</div>
-					<div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
-						<p>
-							Dragée jujubes caramels tootsie roll gummies gummies icing bonbon. Candy jujubes cake cotton candy.
-							Jelly-o lollipop oat cake marshmallow fruitcake candy canes toffee. Jelly oat cake pudding jelly beans
-							brownie lemon drops ice cream halvah muffin. Brownie candy tiramisu macaroon tootsie roll danish.
-						</p>
-						<p>
-							Croissant pie cheesecake sweet roll. Gummi bears cotton candy tart jelly-o caramels apple pie jelly
-							danish marshmallow. Icing caramels lollipop topping. Bear claw powder sesame snaps.
-						</p>
-					</div>
-					<div class="tab-pane" id="disabled" aria-labelledby="disabled-tab" role="tabpanel">
-						<p>
-							Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee apple pie chocolate bar biscuit
-							tart croissant. Lemon drops danish cookie. Oat cake macaroon icing tart lollipop cookie sweet bear claw.
-						</p>
-					</div>
-					<div class="tab-pane" id="about" aria-labelledby="about-tab" role="tabpanel">
-						<p>
-							Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon
-							carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear
-							claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.
-						</p>
-						<p>
-							Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder.
-							Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
-						</p>
-					</div>
 
-					<!-- tab Session -->
-
-					<div class="tab-pane" id="session" aria-labelledby="about-tab" role="tabpanel">
-						<div class="content-header row">
-							<div class="content-header-left col-md-9 col-12 mb-2">
-								<div class="row breadcrumbs-top">
-									<div class="col-12">
-										<h4 class="breadcrumb-item active">Sessions
-											<img class="rounded float-right width="20" height="20"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-											data-content="Halaman ini menampilkan daftar session yang dimiliki oleh client yang dipilih."/>
-									</h4>
+								<!-- Number of Event -->
+								<div class="col-lg-4 col-sm-4 col-6">
+									<div class="card style=" width: 18rem;" style="border-radius: 11px"">
+												<div class=" card-header">
+										<div class="card-body flex-column align-items-start pb-0">
+											<img class="rounded float-right width=" 60" height="60"" src="
+												{{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
+										</div>
+									</div>
+									<div class="card-body">
+										<h1 class="display-1 text-primary card text-center">{{$total_event}}</h1>
+										<h3 class="font-weight-bolder text-center">Event</h3>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="card" style="border-radius: 11px">
+							<!-- Number of Event End -->
 
-							<section id="basic-datatable">
-								<div class="row">
-									<div class="col-12">
-										<div class="card">
-											<table class="datatables-basic table yajra-datatable-1">
-												<thead>
-													<tr>
-														<th>NO</th>
-														<th>TOPIC</th>
-														<th>SESSION</th>
-														<th>Date</th>
-														<th>TIME</th>
-														<th>DURATION</th>
-														<th>ACTION</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
-										</div>
-									</div>
+
+					</div>
+
+					<div class="row">
+						<div class="col-lg-12 col-12 order-1 order-lg-2">
+							<!-- Upcoming event -->
+							<div class="card" style="border-radius: 11px">
+								<div class="card-body">
+									<h5 class="card-title mb-1">Upcoming Event</h5>
+									<table class="datatables-basic table yajra-datatable">
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Name</th>
+												<th>Date</th>
+												<th>Time</th>
+												<th>Session</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
 								</div>
-							</section>
+							</div>
+							<!--/Upcoming Event -->
+
+							<!-- List Agenda-->
+							<div class="card" style="border-radius: 11px">
+								<div class="card-body">
+									<h5 class="card-title mb-1">List Agenda</h5>
+									<table class="datatables-basic table yajra-datatable1">
+										<thead>
+											<tr>
+												<th>No</th>
+												<th>Name</th>
+												<th>Date</th>
+												<th>Time</th>
+												<th>Duration</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!--/List Agenda-->
 						</div>
 					</div>
-					<!-- /tab Session -->
-					<!-- Tab coaching plans -->
+				</div>
+				<!--/ center profile info section -->
+			</div>
 
-					<div class="tab-pane" id="coachingPlan" aria-labelledby="about-tab" role="tabpanel">
-						<div class="content-header row">
-							<div class="content-header-left col-md-9 col-12 mb-2">
-								<div class="row breadcrumbs-top">
-									<div class="col-12">
-										<h4 class="breadcrumb-item active">Coaching Plans
-											<img class="rounded float-right width="20" height="20"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-											data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih."/>
-										</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card" style="border-radius: 11px">
+			</section>
+			<!--/ profile info section -->
+		</div>
+		<div class="tab-pane" id="profile" aria-labelledby="profile-tab" role="tabpanel">
+			<p>
+				Dragée jujubes caramels tootsie roll gummies gummies icing bonbon. Candy jujubes cake cotton candy.
+				Jelly-o lollipop oat cake marshmallow fruitcake candy canes toffee. Jelly oat cake pudding jelly beans
+				brownie lemon drops ice cream halvah muffin. Brownie candy tiramisu macaroon tootsie roll danish.
+			</p>
+			<p>
+				Croissant pie cheesecake sweet roll. Gummi bears cotton candy tart jelly-o caramels apple pie jelly
+				danish marshmallow. Icing caramels lollipop topping. Bear claw powder sesame snaps.
+			</p>
+		</div>
+		<div class="tab-pane" id="disabled" aria-labelledby="disabled-tab" role="tabpanel">
+			<p>
+				Chocolate croissant cupcake croissant jelly donut. Cheesecake toffee apple pie chocolate bar biscuit
+				tart croissant. Lemon drops danish cookie. Oat cake macaroon icing tart lollipop cookie sweet bear claw.
+			</p>
+		</div>
+		<div class="tab-pane" id="about" aria-labelledby="about-tab" role="tabpanel">
+			<p>
+				Gingerbread cake cheesecake lollipop topping bonbon chocolate sesame snaps. Dessert macaroon bonbon
+				carrot cake biscuit. Lollipop lemon drops cake gingerbread liquorice. Sweet gummies dragée. Donut bear
+				claw pie halvah oat cake cotton candy sweet roll. Cotton candy sweet roll donut ice cream.
+			</p>
+			<p>
+				Halvah bonbon topping halvah ice cream cake candy. Wafer gummi bears chocolate cake topping powder.
+				Sweet marzipan cheesecake jelly-o powder wafer lemon drops lollipop cotton candy.
+			</p>
+		</div>
 
-							<section id="basic-datatable">
-								<div class="row">
-									<div class="col-12">
-										<div class="card">
-											<table class="datatables-basic table yajra-datatable-2">
-												<thead>
-													<tr>
-														<th>NO</th>
-														<th>OBJEKTIF</th>
-														<th>Tanggal Pelaksanaan</th>
-														<th>ACTION</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								<!-- /tab coaching plans -->
-						</div>
-					</div>
+		<!-- tab Session -->
 
-					<!-- Tab coaching Notes -->
-					<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
-						<div class="content-header row">
-							<div class="content-header-left col-md-9 col-12 mb-2">
-								<div class="row breadcrumbs-top">
-									<div class="col-12">
-										<h4 class="breadcrumb-item active">Coaching Notes
-											<img class="rounded float-right width="20" height="20"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-											data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih."/>
-
-										</h4>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- coaching note card -->
-						<div class="row">
-							<div class="col-12">
-									<div class="card">
-										<table class="datatables-basic table yajra-datatable-notes">
-											<thead>
-												<tr>
-													<th>NO</th>
-													<th>Coach Name</th>
-													<th>Session</th>
-													<th>Topic</th>
-													<th>Subject</th>
-													<th>Action</th>
-												</tr>
-											</thead>
-											<tbody>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-
-								<!-- coaching note detail modal -->
-								<div class="modal fade" id="show_note" tabindex="-1" role="dialog"
-									aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<div class="container">
-													<div class="row">
-														<div class="card-body" style="border-radius: 11px">
-															<dl class="row">
-																<dt class="col-sm-3">Topic</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Coach Name</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Session</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Subject</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Note</dt>
-																<span class="d-block my-1"></span>
-																<dd class="col-sm-9 text-justify"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-md-12">
-																	<small class="d-block text-muted">Note Attachment</small>
-																	<span class="d-block my-1"></span>
-																	<a href="#"
-																		class="btn btn-primary">Download</a>
-
-																	<span class="d-block font-italic">Tidak ada file</span>
-
-																</dt>
-															</dl>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /tab coaching Notes-->
-
-
-							<!-- Tab Feedback -->
-							<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
-								<div class="content-header row">
-									<div class="content-header-left col-md-9 col-12 mb-2">
-										<div class="row breadcrumbs-top">
-											<div class="col-12">
-												<h4 class="breadcrumb-item active">Feedback
-													<img class="rounded float-right width="20" height="20"" src="
-													{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-													data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih."/>
-												</h4>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Feedback card -->
-								<div class="row">
-									<div class="col-12">
-										<div class="card">
-											<table class="datatables-basic table yajra-datatable-feedback">
-												<thead>
-													<tr>
-														<th>NO</th>
-														<th>Coach Name</th>
-														<th>Session</th>
-														<th>Topic</th>
-														<th>Action</th>
-													</tr>
-												</thead>
-												<tbody>
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								<!-- /Feedback note -->
-
-								<!-- Feedback detail modal -->
-								<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog"
-									aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="modalHeading"></h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<div class="container">
-													<div class="row">
-														<div class="card-body">
-															<dl class="row">
-																<dt class="col-sm-3">Topic</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Coach Name</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Session</dt>
-																<dd class="col-sm-9"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-sm-3">Feedback</dt>
-																<span class="d-block my-1"></span>
-																<dd class="col-sm-9 text-justify"></dd>
-															</dl>
-															<dl class="row">
-																<dt class="col-md-12">
-																	<small class="d-block text-muted">Feedback Attachment</small>
-
-																	<span class="d-block my-1"></span>
-																	<a href="#"
-																		class="btn btn-primary">Download</a>
-
-																	<span class="d-block font-italic">Tidak ada file</span>
-
-																</dt>
-															</dl>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /modal Feedback-->
-
-
-							<!--End profile-->
-					</div>
-					<!---End Content Body -->
-
-					<!-- Modal to add new record -->
-					<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-						<div class="modal-dialog sidebar-sm">
-							<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-								<div class="modal-header mb-1">
-									<h5 class="modal-title" id="modalHeading"></h5>
-								</div>
-								<input type="hidden" name="Client_id" id="Client_id">
-								<div class="modal-body flex-grow-1">
-									<div class="form-group">
-										<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-										<input id="name" name="name" type="text" class="form-control dt-full-name"
-											id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-									</div>
-									<label class="form-label" for="basic-icon-default-post">Phone</label>
-									<div class="input-group input-group-merge mb-2">
-										<div class="input-group-prepend">
-											<span class="input-group-text" id="basic-addon5">+62</span>
-										</div>
-										<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
-											aria-label="Phone">
-									</div>
-									<div class="form-group">
-										<label class="form-label" for="basic-icon-default-email">Email</label>
-										<input id="email" name="email" type="text" id="basic-icon-default-email"
-											class="form-control dt-email" placeholder="john.doe@example.com"
-											aria-label="john.doe@example.com" />
-										<small class="form-text text-muted"> You can use letters, numbers & periods </small>
-									</div>
-									<div class="form-group">
-										<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-										<input id="organization" name="organization" type="text" class="form-control dt-full-name"
-											id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-									</div>
-									<div class="form-group">
-										<label class="form-label" for="basic-icon-default-fullname">Company</label>
-										<input id="company" name="company" type="text" class="form-control dt-full-name"
-											id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-									</div>
-									<div class="form-group">
-										<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-										<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-											id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-									</div>
-
-									<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-										value="create">Submit</button>
-									<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-								</div>
-								<!-- </form>-->
+		<div class="tab-pane" id="session" aria-labelledby="about-tab" role="tabpanel">
+			<div class="content-header row">
+				<div class="content-header-left col-md-9 col-12 mb-2">
+					<div class="row breadcrumbs-top">
+						<div class="col-12">
+							<h4 class="breadcrumb-item active">Sessions</h4>
 						</div>
 					</div>
-					<!-- End Modal -->
-
 				</div>
 			</div>
-			<!-- END: Content-->
-			@endsection
+			<div class="card" style="border-radius: 11px">
 
-			@push('scripts')
-			<script type="text/javascript">
-				$(function () {
+				<section id="basic-datatable">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<table class="datatables-basic table yajra-datatable-1">
+									<thead>
+										<tr>
+											<th>NO</th>
+											<th>TOPIC</th>
+											<th>SESSION</th>
+											<th>Date</th>
+											<th>TIME</th>
+											<th>DURATION</th>
+											<th>ACTION</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<!-- /tab Session -->
+		<!-- Tab coaching plans -->
+
+		<div class="tab-pane" id="coachingPlan" aria-labelledby="about-tab" role="tabpanel">
+			<div class="content-header row">
+				<div class="content-header-left col-md-9 col-12 mb-2">
+					<div class="row breadcrumbs-top">
+						<div class="col-12">
+							<h4 class="breadcrumb-item active">Coaching Plans</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="card" style="border-radius: 11px">
+
+				<section id="basic-datatable">
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<table class="datatables-basic table yajra-datatable-2">
+									<thead>
+										<tr>
+											<th>NO</th>
+											<th>OBJEKTIF</th>
+											<th>Tanggal Pelaksanaan</th>
+											<th>ACTION</th>
+										</tr>
+									</thead>
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<!-- /tab coaching plans -->
+			</div>
+		</div>
+
+		<!-- Tab coaching Notes -->
+		<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
+			<div class="content-header row">
+				<div class="content-header-left col-md-9 col-12 mb-2">
+					<div class="row breadcrumbs-top">
+						<div class="col-12">
+							<h4 class="breadcrumb-item active">Coaching Notes</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- coaching note card -->
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<table class="datatables-basic table yajra-datatable-notes">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>Coach Name</th>
+									<th>Session</th>
+									<th>Topic</th>
+									<th>Subject</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<!-- coaching note detail modal -->
+			<div class="modal fade" id="show_note" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="container">
+								<div class="row">
+									<div class="card-body" style="border-radius: 11px">
+										<dl class="row">
+											<dt class="col-sm-3">Topic</dt>
+											<dd class="col-sm-9" id="topic"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Coach Name</dt>
+											<dd class="col-sm-9"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Session</dt>
+											<dd class="col-sm-9"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Subject</dt>
+											<dd class="col-sm-9"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Note</dt>
+											<span class="d-block my-1"></span>
+											<dd class="col-sm-9 text-justify"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-md-12">
+												<small class="d-block text-muted">Note Attachment</small>
+												<span class="d-block my-1"></span>
+												<a href="#" class="btn btn-primary">Download</a>
+
+												<span class="d-block font-italic">Tidak ada file</span>
+
+											</dt>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /tab coaching Notes-->
+
+
+		<!-- Tab Feedback -->
+		<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
+			<div class="content-header row">
+				<div class="content-header-left col-md-9 col-12 mb-2">
+					<div class="row breadcrumbs-top">
+						<div class="col-12">
+							<h4 class="breadcrumb-item active tes">Feedback</h4>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- Feedback card -->
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<table class="datatables-basic table yajra-datatable-feedback">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>Coach Name</th>
+									<th>Session</th>
+									<th>Topic</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<!-- /Feedback note -->
+
+			<!-- Feedback detail modal -->
+			<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="modalHeading"></h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="container">
+								<div class="row">
+									<div class="card-body">
+										<dl class="row">
+											<dt class="col-sm-3">Topic</dt>
+											<dd class="col-sm-9 topic"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Coach Name</dt>
+											<dd class="col-sm-9 coach_name"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Session</dt>
+											<dd class="col-sm-9 session"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-sm-3">Feedback</dt>
+											<span class="d-block my-1"></span>
+											<dd class="col-sm-9 text-justify"></dd>
+										</dl>
+										<dl class="row">
+											<dt class="col-md-12">
+												<small class="d-block text-muted">Feedback Attachment</small>
+
+												<span class="d-block my-1"></span>
+												<a href="#" class="btn btn-primary">Download</a>
+
+												<span class="d-block font-italic">Tidak ada file</span>
+
+											</dt>
+										</dl>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /modal Feedback-->
+
+
+		<!--End profile-->
+	</div>
+	<!---End Content Body -->
+
+	<!-- Modal to add new record -->
+	<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+		<div class="modal-dialog sidebar-sm">
+			<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+				<div class="modal-header mb-1">
+					<h5 class="modal-title" id="modalHeading"></h5>
+				</div>
+				<input type="hidden" name="Client_id" id="Client_id">
+				<div class="modal-body flex-grow-1">
+					<div class="form-group">
+						<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+						<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname"
+							placeholder="John Doe" aria-label="John Doe" />
+					</div>
+					<label class="form-label" for="basic-icon-default-post">Phone</label>
+					<div class="input-group input-group-merge mb-2">
+						<div class="input-group-prepend">
+							<span class="input-group-text" id="basic-addon5">+62</span>
+						</div>
+						<input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="basic-icon-default-email">Email</label>
+						<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+							placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+						<small class="form-text text-muted"> You can use letters, numbers & periods </small>
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="basic-icon-default-fullname">Organization</label>
+						<input id="organization" name="organization" type="text" class="form-control dt-full-name"
+							id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="basic-icon-default-fullname">Company</label>
+						<input id="company" name="company" type="text" class="form-control dt-full-name"
+							id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+					</div>
+					<div class="form-group">
+						<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+						<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+							id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+					</div>
+
+					<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+					<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+				</div>
+				<!-- </form>-->
+		</div>
+	</div>
+	<!-- End Modal -->
+
+</div>
+</div>
+<!-- END: Content-->
+@endsection
+
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script type="text/javascript">
+	$(function () {
 
 							//ajax declaration with csrf
 							$.ajaxSetup({
@@ -843,21 +823,20 @@
 					    })
 
 							// show_feedback
-							$('#detailFeedback').click(function () {
+							$(document).on("click", "#detailFeedback", function () {
 								console.log('masuk');
 								var detail_agenda_id = $(this).data('id');
 								$.get("" +'/clients/' + detail_agenda_id +'/show_detail_feedbacks', function (data) {
 									$('#modalHeading').html("Detail Feedbacks");
+									$('#name').text(data.name);
+									$('.session').html(data.session_name);
+									$('.coach_name').html(data.name);
+									$('.topic').html(data.topic);
 									$('#show_feedback').modal('show');
 									// $('#Client_id').val(data.id);
-									// $('#name').val(data.name);
-									// $('#phone').val(data.phone);
-									// $('#email').val(data.email);
-									// $('#company').val(data.company);
-									// $('#organization').val(data.organization);
-									// $('#occupation').val(data.occupation);
+							
 								})
 							});
 						});
-			</script>
-			@endpush
+</script>
+@endpush
