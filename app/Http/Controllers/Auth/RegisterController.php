@@ -64,16 +64,12 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function show_form_coach(){
+    protected function show_form_register(){
       return view('auth.register');
     }
 
-    protected function show_form_coachee(){
-      return view('auth.register');
-    }
-
-    protected function create_coach(Request $request)
-    {
+    protected function create(Request $request)
+    {        
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -81,22 +77,12 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        $user->assignRole('coach');
+        if ($request->role == 'coach') {
+          $user->assignRole('coach');
+        } elseif ($request->role == 'coachee') {
+          $user->assignRole('coachee');
+        }
 
-        return redirect('login');
-    }
-
-    protected function create_coachee(Request $request)
-    {
-        $user = User::create([
-            'name' => $data['name'],
-            'phone' => $data['phone'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
-
-        $user->assignRole('coachee');
-
-        return $user;
+        return redirect('login')->with('success','Registrasi berhasil, silahkan login!');
     }
 }

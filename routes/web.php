@@ -27,13 +27,10 @@ Route::get('/', function () {
 	return redirect('login');
 });
 
-//Authenticare route
+//Authenticate route
 Auth::routes();
-Route::get('/register/coach', [RegisterController::class, 'show_form_coach'])->name('show_register.coach');
-Route::get('/register/coachee', [RegisterController::class, 'show_form_coachee'])->name('show_register.coachee');
-
-Route::post('/register/coach', [RegisterController::class, 'create_coach'])->name('register.coach');
-Route::post('/register/coachee', [RegisterController::class, 'create_coachee'])->name('register.coachee');
+Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');
+Route::post('/register', [RegisterController::class, 'create'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout']);
 
 //Middleware group for coachee page
@@ -71,7 +68,12 @@ Route::group(['middleware' => ['auth', 'role:coach']], function () {
 	Route::post('/agendas/{id}/agenda_detail_update', [AgendaController::class, 'agenda_detail_update'])->name('agendas.agenda_detail_update');
 	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
 	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
-	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_sessions_data'])->name('clients.show_agendas');
+	Route::get('/clients/{client}/show_sessions', [ClientController::class, 'show_sessions_data'])->name('clients.show_sessions');
 	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
+	Route::get('/clients/{client}/show_feedbacks', [ClientController::class, 'show_feedbacks_data'])->name('clients.show_feedbacks');
+	Route::get('/clients/{client}/show_notes', [ClientController::class, 'show_notes_data'])->name('clients.show_notes');
 	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
+
+	Route::get('clients/{id}/show_detail_feedbacks', [ClientController::class, 'show_detail_feedbacks'])->name('clients.show_detail_feedbacks');
+	Route::get('clients/{id}/show_detail_notes', [ClientController::class, 'show_detail_notes'])->name('clients.show_detail_notes');
 });

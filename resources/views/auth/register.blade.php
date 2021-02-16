@@ -19,8 +19,8 @@
         </a>
         <!-- /Brand logo-->
         <!-- Left Text-->
-        <div class="">
-          <div class="align-items-center justify-content-center"><img class="img-fluid" src="{{asset('assets/images/pages/loginfix.png')}}" alt="Register V2" /></div>
+        <div class="position-relative">
+          <div class="align-items-center justify-content-center"><img class="img-fluid" src="{{asset('assets/images/pages/loginfix.png')}}" alt="Login V2" /></div>
         </div>
         <!-- /Left Text-->
         <!-- Register-->
@@ -28,66 +28,7 @@
           <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
             <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
             <p class="card-text mb-2">Make your app management easy and fun!</p>
-            @if (Route::currentRouteName() == "show_register.coach")
-            <form class="auth-register-form mt-2" method="POST" action="{{ route('register.coach') }}">
-              @csrf
-
-              <div class="form-group">
-                <label class="form-label" for="register-username">Fullname</label>
-                <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="John Doe" aria-describedby="name" value="{{ old('name') }}" required autocomplete="name" autofocus tabindex="1" />
-                @error('name')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="register-phone">Phone</label>
-                <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text" name="phone" placeholder="081xxxxx" aria-describedby="phone" value="{{ old('phone') }}" required autocomplete="phone" tabindex="2" />
-                @error('phone')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="register-email">Email</label>
-                <input class="form-control @error('email') is-invalid @enderror" id="email" type="text" name="email" placeholder="john@example.com" aria-describedby="email" value="{{ old('email') }}" required autocomplete="email" tabindex="3" />
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="register-password">Password</label>
-                <div class="input-group input-group-merge form-password-toggle">
-                  <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="password" type="password" name="password" required autocomplete="new-password" placeholder="············" aria-describedby="password" tabindex="3" />
-                  <div class="input-group-append"><span class="input-group-text cursor-pointer "><i data-feather="eye"></i></span></div>
-                  @error('password')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="register-password">Confirm Password</label>
-                <div class="input-group input-group-merge form-password-toggle">
-                  <input class="form-control form-control-merge" id="password-confirm" type="password" name="password_confirmation" placeholder="············" aria-describedby="password_confirmation" required autocomplete="new-password" tabindex="4" />
-                  <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
-                  <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:void(0);">&nbsp;privacy policy & terms</a></label>
-                </div>
-              </div>
-              <button class="btn btn-primary btn-block" tabindex="5">Sign up</button>
-            </form>
-            @else
-            <form class="auth-register-form mt-2" method="POST" action="{{ route('register.coachee') }}">
+            <form class="auth-register-form mt-2" method="POST" action="{{ route('register') }}">
               @csrf
               <div class="form-group">
                 <label class="form-label" for="register-username">Fullname</label>
@@ -136,18 +77,16 @@
                 </div>
               </div>
               <h5>Register as</h5>
-              <div class="form-group demo-inline-spacing">
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" checked />
-                          <label class="custom-control-label" for="customRadio1">Coach</label>
-                        </div>
-                        <div class="custom-control custom-radio">
-                          <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" />
-                          <label class="custom-control-label" for="customRadio2">Coachee</label>
-                        </div>
+              <div class="form-group">
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="role_coach" name="role" class="custom-control-input" value="coach"/>
+                  <label class="custom-control-label" for="role_coach">Coach</label>
+                </div>
+                <div class="custom-control custom-radio">
+                  <input type="radio" id="role_coachee" name="role" class="custom-control-input" value="coachee"/>
+                  <label class="custom-control-label" for="role_coachee">Coachee</label>
+                </div>
               </div>
-
-
               <div class="form-group">
                 <div class="custom-control custom-checkbox">
                   <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
@@ -156,7 +95,6 @@
               </div>
               <button class="btn btn-primary btn-block" tabindex="5">Sign up</button>
             </form>
-            @endif
             <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
             <!--
             <div class="divider my-2">
@@ -166,7 +104,6 @@
         -->
       </div>
     </div>
-    <!-- /Register-->
   </div>
 </div>
 </div>

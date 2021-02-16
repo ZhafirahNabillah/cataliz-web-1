@@ -183,6 +183,49 @@ class ClientController extends Controller
     }
   }
 
+  public function show_feedbacks_data(Request $request, Client $client)
+  {
+    if ($request->ajax()) {
+      $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic','agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('users','agendas.owner_id','=','users.id')
+        ->join('clients', 'clients.id', '=', 'agendas.client_id')
+        ->where('clients.id', $client->id)->latest()
+        ->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $actionBtn = '<a href="javascript:;" id="detailFeedback" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
+  public function show_notes_data(Request $request, Client $client)
+  {
+    if ($request->ajax()) {
+      $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic','coaching_notes.subject','agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('users','agendas.owner_id','=','users.id')
+        ->join('clients', 'clients.id', '=', 'agendas.client_id')
+        ->join('coaching_notes','coaching_notes.agenda_detail_id','=','agenda_details.id')
+        ->where('clients.id', $client->id)->latest()
+        ->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $actionBtn = '<a href="javascript:;" id="detailNote" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail note">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
   public function show_plans_data(Request $request, Client $client)
   {
     if ($request->ajax()) {
@@ -201,6 +244,17 @@ class ClientController extends Controller
         ->rawColumns(['action'])
         ->make(true);
     }
+  }
+
+  public function show_detail_feedbacks($id){
+    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic','agenda_details.created_at')
+      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+      ->join('users','agendas.owner_id','=','users.id')
+      ->join('clients', 'clients.id', '=', 'agendas.client_id')
+      ->where('agenda_details.id', $id)
+      ->first();
+
+    return response()->json($data);
   }
 
   /**

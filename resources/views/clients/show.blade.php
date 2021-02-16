@@ -398,12 +398,11 @@
 								</div>
 							</div>
 						</div>
-						@foreach($coaching_note as $data)
 						<!-- coaching note card -->
 						<div class="row">
 							<div class="col-12">
 									<div class="card">
-										<table class="datatables-basic table yajra-datatable-2">
+										<table class="datatables-basic table yajra-datatable-notes">
 											<thead>
 												<tr>
 													<th>NO</th>
@@ -420,11 +419,9 @@
 									</div>
 								</div>
 							</div>
-								<!-- /tab coaching note -->
-
 
 								<!-- coaching note detail modal -->
-								<div class="modal fade" id="show_note_{{$data->id}}" tabindex="-1" role="dialog"
+								<div class="modal fade" id="show_note" tabindex="-1" role="dialog"
 									aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 										<div class="modal-content">
@@ -440,35 +437,34 @@
 														<div class="card-body" style="border-radius: 11px">
 															<dl class="row">
 																<dt class="col-sm-3">Topic</dt>
-																<dd class="col-sm-9">{{$data->topic}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Coach Name</dt>
-																<dd class="col-sm-9">{{$data->created_at}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Session</dt>
-																<dd class="col-sm-9">{{$data->agenda_detail->session_name}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Subject</dt>
-																<dd class="col-sm-9">{{$data->subject}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Note</dt>
 																<span class="d-block my-1"></span>
-																<dd class="col-sm-9 text-justify"> {!! $data->summary !!}</dd>
+																<dd class="col-sm-9 text-justify"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-md-12">
 																	<small class="d-block text-muted">Note Attachment</small>
-																	@if($data->attachment != null)
-																	<span class="d-block my-1">{{$data->attachment}}</span>
-																	<a href="{{ route('agendas.note_download',$data->id) }}"
+																	<span class="d-block my-1"></span>
+																	<a href="#"
 																		class="btn btn-primary">Download</a>
-																	@else
+
 																	<span class="d-block font-italic">Tidak ada file</span>
-																	@endif
+
 																</dt>
 															</dl>
 														</div>
@@ -478,7 +474,6 @@
 										</div>
 									</div>
 								</div>
-								@endforeach
 							</div>
 							<!-- /tab coaching Notes-->
 
@@ -494,12 +489,11 @@
 										</div>
 									</div>
 								</div>
-								@foreach($agenda_detail as $data)
 								<!-- Feedback card -->
 								<div class="row">
 									<div class="col-12">
 										<div class="card">
-											<table class="datatables-basic table yajra-datatable-2">
+											<table class="datatables-basic table yajra-datatable-feedback">
 												<thead>
 													<tr>
 														<th>NO</th>
@@ -518,12 +512,12 @@
 								<!-- /Feedback note -->
 
 								<!-- Feedback detail modal -->
-								<div class="modal fade" id="show_feedback-{{$data->id}}" tabindex="-1" role="dialog"
+								<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog"
 									aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 									<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 										<div class="modal-content">
 											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLongTitle">Feedback</h5>
+												<h5 class="modal-title" id="modalHeading"></h5>
 												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
@@ -534,31 +528,31 @@
 														<div class="card-body">
 															<dl class="row">
 																<dt class="col-sm-3">Topic</dt>
-																<dd class="col-sm-9">{{$data->topic}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Coach Name</dt>
-																<dd class="col-sm-9">{{$data->created_at}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Session</dt>
-																<dd class="col-sm-9">{{$data->session_name}}</dd>
+																<dd class="col-sm-9"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-sm-3">Feedback</dt>
 																<span class="d-block my-1"></span>
-																<dd class="col-sm-9 text-justify">{!! $data->feedback !!}</dd>
+																<dd class="col-sm-9 text-justify"></dd>
 															</dl>
 															<dl class="row">
 																<dt class="col-md-12">
 																	<small class="d-block text-muted">Feedback Attachment</small>
-																	@if($data->attachment != null)
-																	<span class="d-block my-1">{{$data->attachment}}</span>
-																	<a href="{{ route('agendas.feedback_download',$data->id) }}"
+
+																	<span class="d-block my-1"></span>
+																	<a href="#"
 																		class="btn btn-primary">Download</a>
-																	@else
+
 																	<span class="d-block font-italic">Tidak ada file</span>
-																	@endif
+
 																</dt>
 															</dl>
 														</div>
@@ -568,7 +562,6 @@
 										</div>
 									</div>
 								</div>
-								@endforeach
 							</div>
 							<!-- /modal Feedback-->
 
@@ -639,7 +632,6 @@
 			@endsection
 
 			@push('scripts')
-
 			<script type="text/javascript">
 				$(function () {
 
@@ -704,7 +696,7 @@
 							var table = $('.yajra-datatable-1').DataTable({
 								processing: true,
 								serverSide: true,
-								ajax: "{{route('clients.show_agendas', $client->id)}}",
+								ajax: "{{route('clients.show_sessions', $client->id)}}",
 								columns: [
 									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
 									{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
@@ -764,20 +756,81 @@
 								}
 							});
 
-							// edit
-							$('.editClient').click(function () {
-								var Client_id = $(this).data('id');
-								$.get("" +'/clients/' + Client_id +'/edit', function (data) {
-									$('#modalHeading').html("Edit Client");
-									$('#saveBtn').val("edit-user");
-									$('#modals-slide-in').modal('show');
-									$('#Client_id').val(data.id);
-									$('#name').val(data.name);
-									$('#phone').val(data.phone);
-									$('#email').val(data.email);
-									$('#company').val(data.company);
-									$('#organization').val(data.organization);
-									$('#occupation').val(data.occupation);
+							//datatable for feedbacks table
+							var table = $('.yajra-datatable-feedback').DataTable({
+								processing: true,
+								serverSide: true,
+								ajax: "{{route('clients.show_feedbacks', $client->id)}}",
+								columns: [
+									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+									{data: 'name', name: 'name', defaultContent: '<i>-</i>'},
+									{data: 'session_name', name: 'session_name', defaultContent: '<i>-</i>'},
+									{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
+									{
+										data: 'action',
+										name: 'action',
+										orderable: true,
+										searchable: true
+									},
+								],
+								dom:
+								'<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+								language: {
+									paginate: {
+										// remove previous & next text from pagination
+										previous: '&nbsp;',
+										next: '&nbsp;'
+									},
+									search: "<i data-feather='search'></i>",
+									searchPlaceholder: "Search records"
+								}
+							});
+
+							//datatable for notes table
+							var table = $('.yajra-datatable-notes').DataTable({
+								processing: true,
+								serverSide: true,
+								ajax: "{{route('clients.show_notes', $client->id)}}",
+								columns: [
+									{data: 'DT_RowIndex', name: 'DT_RowIndex'},
+									{data: 'name', name: 'name', defaultContent: '<i>-</i>'},
+									{data: 'session_name', name: 'session_name', defaultContent: '<i>-</i>'},
+									{data: 'topic', name: 'topic', defaultContent: '<i>-</i>'},
+									{data: 'subject', name: 'subject', defaultContent: '<i>-</i>'},
+									{
+										data: 'action',
+										name: 'action',
+										orderable: true,
+										searchable: true
+									},
+								],
+								dom:
+								'<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+								language: {
+									paginate: {
+										// remove previous & next text from pagination
+										previous: '&nbsp;',
+										next: '&nbsp;'
+									},
+									search: "<i data-feather='search'></i>",
+									searchPlaceholder: "Search records"
+								}
+							});
+
+							// show_feedback
+							$('#detailFeedback').click(function () {
+								console.log('masuk');
+								var detail_agenda_id = $(this).data('id');
+								$.get("" +'/clients/' + detail_agenda_id +'/show_detail_feedbacks', function (data) {
+									$('#modalHeading').html("Detail Feedbacks");
+									$('#show_feedback').modal('show');
+									// $('#Client_id').val(data.id);
+									// $('#name').val(data.name);
+									// $('#phone').val(data.phone);
+									// $('#email').val(data.email);
+									// $('#company').val(data.company);
+									// $('#organization').val(data.organization);
+									// $('#occupation').val(data.occupation);
 								})
 							});
 						});
