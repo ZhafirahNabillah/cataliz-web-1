@@ -52,11 +52,12 @@ class RoleController extends Controller
         return response()->json(['success' => 'Customer saved successfully!']);
     }
 
+
     public function destroy($id){
       $role = Role::find($id);
       $role->syncPermissions();
       $role->delete();
-      
+
       return response()->json(['success' => 'Client deleted!']);
     }
 }

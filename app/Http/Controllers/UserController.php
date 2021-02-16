@@ -22,9 +22,9 @@ class UserController extends Controller
         return DataTables::of($data)
           ->addIndexColumn()
           ->addColumn('action', function ($row) {
-            $edit_btn = '<a href="javascript:;" id="editRole" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Update</a>';
-            $delete_btn = '<a href="javascript:;" id="deleteRole" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Delete</a>';
-            $actionBtn = $edit_btn.' '.$delete_btn;
+            $edit_btn = '<a href="javascript:;" id="editUser" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Update</a>';
+            // $delete_btn = '<a href="javascript:;" id="deleteUser" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Delete</a>';
+            $actionBtn = $edit_btn;
             return $actionBtn;
           })
           ->rawColumns(['action'])
@@ -32,5 +32,30 @@ class UserController extends Controller
       }
 
       return view('users.index');
+    }
+
+    public function edit($id)
+    {
+      //
+      $user = User::with('roles')->where('id',$id)->first();
+      return response()->json($user);
+    }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'name'  => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'role'  => 'required',
+        ]);
+
+        $user = User::where('id',$request->input('user_id'))->first();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+        $user->syncRoles($request->input('role'));
+        $user->save();
+
+        return response()->json(['success' => 'Customer saved successfully!']);
     }
 }
