@@ -16,11 +16,11 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Client List <img class="rounded float-right width="20" height="20"" src="
-              {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-              data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website."
-              data-trigger="client"
-              data-original-title="clientquestion"/></h2>
+            <h2 class="content-header-title float-left mb-0">Client List
+                <img class="rounded float-right width="20" height="20"" src="
+                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website."/>
+            </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a>
@@ -361,10 +361,7 @@
         }
       });
     });
-    // popover
-    $(function () {
-      $('[data-toggle="popover"]').popover()
-    })
+
 
     // delete
     $('body').on('click', '.deleteClient', function (e) {
@@ -386,6 +383,11 @@
         e.preventDefault();
       }
     });
+
+    // popover
+    $(function () {
+      $('[data-toggle="popover"]').popover()
+    })
 
   });
 </script>

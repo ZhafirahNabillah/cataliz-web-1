@@ -21,7 +21,11 @@
 			<div class="content-header-left col-md-9 col-12 mb-2">
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
-						<h2 class="content-header-title float-left mb-0">Profile</h2>
+						<h2 class="content-header-title float-left mb-0">Profile
+								<img class="rounded float-right width="20" height="20"" src="
+							{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+							data-content="Halaman ini menampilkan detail profile dari client yang dipilih"/>
+						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/">Home</a>
@@ -317,7 +321,11 @@
 							<div class="content-header-left col-md-9 col-12 mb-2">
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
-										<h4 class="breadcrumb-item active">Sessions</h4>
+										<h4 class="breadcrumb-item active">Sessions
+											<img class="rounded float-right width="20" height="20"" src="
+											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+											data-content="Halaman ini menampilkan daftar session yang dimiliki oleh client yang dipilih."/>
+									</h4>
 									</div>
 								</div>
 							</div>
@@ -357,7 +365,11 @@
 							<div class="content-header-left col-md-9 col-12 mb-2">
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
-										<h4 class="breadcrumb-item active">Coaching Plans</h4>
+										<h4 class="breadcrumb-item active">Coaching Plans
+											<img class="rounded float-right width="20" height="20"" src="
+											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+											data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih."/>
+										</h4>
 									</div>
 								</div>
 							</div>
@@ -393,7 +405,12 @@
 							<div class="content-header-left col-md-9 col-12 mb-2">
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
-										<h4 class="breadcrumb-item active">Coaching Notes</h4>
+										<h4 class="breadcrumb-item active">Coaching Notes
+											<img class="rounded float-right width="20" height="20"" src="
+											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+											data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih."/>
+
+										</h4>
 									</div>
 								</div>
 							</div>
@@ -484,7 +501,11 @@
 									<div class="content-header-left col-md-9 col-12 mb-2">
 										<div class="row breadcrumbs-top">
 											<div class="col-12">
-												<h4 class="breadcrumb-item active">Feedback</h4>
+												<h4 class="breadcrumb-item active">Feedback
+													<img class="rounded float-right width="20" height="20"" src="
+													{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+													data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih."/>
+												</h4>
 											</div>
 										</div>
 									</div>
@@ -816,6 +837,10 @@
 									searchPlaceholder: "Search records"
 								}
 							});
+							// popover
+					    $(function () {
+					      $('[data-toggle="popover"]').popover()
+					    })
 
 							// show_feedback
 							$('#detailFeedback').click(function () {
