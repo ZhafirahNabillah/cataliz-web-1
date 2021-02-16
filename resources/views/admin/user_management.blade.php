@@ -48,38 +48,41 @@
         </div>
       </div>
 
+      <form action="">
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="fp-default">Users</label>
+            <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="user_id"></select>
+            @error('user_id')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
+        </div>
+      </form>
+
       <!-- Basic table -->
       <section id="basic-datatable">
         <div class="row">
-          <div class="col-12">
+          <div class="col-6">
             <div class="card">
               <table class="datatables-basic table yajra-datatable">
                 <thead>
                   <tr>
-                    <th>Access</th>
-                    <th>Admin</th>
-                    <th>Coach</th>
-                    <th>Coachee</th>
+                    <th colspan="2">Access</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Access 1</td>
-                    <td>
+                    <td>Akses1
                       <div class="input-group mb-3">
                         <div class="input-group-text">
                           <input type="checkbox" aria-label="Checkbox for following text input">
                         </div>
                       </div>
                     </td>
-                    <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                    </td>
-                    <td>
+                    <td>Akses2
                       <div class="input-group mb-3">
                         <div class="input-group-text">
                           <input type="checkbox" aria-label="Checkbox for following text input">
@@ -87,52 +90,23 @@
                       </div>
                     </td>
                   </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="card">
+              <table class="datatables-basic table yajra-datatable">
+                <thead>
                   <tr>
-                    <td>Access 2</td>
-                    <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                    </td>
+                    <th colspan="2">Add Permissions</th>
                   </tr>
+                </thead>
+                <tbody>
                   <tr>
-                    <td>Access 3</td>
+                    <td>Name</td>
                     <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="input-group mb-3">
-                        <div class="input-group-text">
-                          <input type="checkbox" aria-label="Checkbox for following text input">
-                        </div>
-                      </div>
+                      <input class="form-control" type="text" value="" id="">
                     </td>
                   </tr>
                 </tbody>
@@ -150,73 +124,36 @@
 <!-- END: Content-->
 @endsection
 
-{{-- @push('scripts')
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 <script type="text/javascript">
-  $(function () {
+  $('.livesearch').select2({
+  placeholder: 'Select roles',
+  ajax: {
+    url: "{{route('users_search.admin')}}",
+    dataType: 'json',
+    delay: 250,
+    processResults: function (data) {
+      return {
+        results: $.map(data, function (item) {
+          console.log(item)
+          return {
+            text: item.name,
+            id: item.id
+          }
+        })
+      };
+    },
+    cache: true
+  }
+});
 
-
-	var table = $('.yajra-datatable').DataTable({
-		processing: true,
-		serverSide: true,
-		ajax: "",
-		columns: [
-			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'name', name: 'name'},
-			{data: 'session_name', name: 'session_name'},
-			{data: 'date', name: 'date', defaultContent: '<i>-</i>'},
-			{data: 'duration', name: 'duration', defaultContent: '<i>-</i>'},
-			{
-				data: 'status',
-				name: 'status'
-			},
-			{
-				data: 'action',
-				name: 'action',
-				orderable: true,
-				searchable: true
-			},
-		],
-		dom:
-        '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-		language: {
-			paginate: {
-			  // remove previous & next text from pagination
-			  previous: '&nbsp;',
-			  next: '&nbsp;'
-			},
-			search: "<i data-feather='search'></i>",
-			searchPlaceholder: "Search records"
-		}
-	});
-
-	$('body').on('click', '.deleteAgenda', function (e) {
-
-		var agenda_id = $(this).data("id");
-		console.log(agenda_id);
-		if(confirm("Are You sure want to delete !")){
-
-			$.ajaxSetup({
-				headers: {
-					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-				}
-			});
-
-			$.ajax({
-				type: "DELETE",
-				url: ""+'/agendas/'+agenda_id,
-				success: function (data) {
-					table.draw();
-					$(".alert-danger").css("display", "block");
-					$(".alert-danger").append("<P>Data berhasil dihapus!");
-				},
-				error: function (data) {
-					console.log('Error:', data);
-				}
-			});
-		} else {
-			e.preventDefault();
-		}
-	});
+$(".livesearch").on('change', function(e) {
+  // Access to full data
+  console.log($(this).select2('data'));
+  console.log($(this).select2('data')[0].id);
+  var dd = $(this).select2('data')[0];
 });
 </script>
-@endpush --}}
+@endpush

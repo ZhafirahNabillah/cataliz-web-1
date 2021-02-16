@@ -64,12 +64,13 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+
     protected function show_form_register(){
       return view('auth.register');
     }
 
     protected function create(Request $request)
-    {        
+    {
         $user = User::create([
             'name' => $request->name,
             'phone' => $request->phone,
