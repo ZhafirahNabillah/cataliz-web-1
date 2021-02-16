@@ -22,9 +22,9 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-								<img class="rounded float-right width="20" height="20"" src="
-							{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-							data-content="Halaman ini menampilkan detail profile dari client yang dipilih"/>
+							<img class="rounded float-right width=" 20" height="20"" src="
+								{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+								data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
@@ -544,16 +544,16 @@
 										<dl class="row">
 											<dt class="col-sm-3">Feedback</dt>
 											<span class="d-block my-1"></span>
-											<dd class="col-sm-9 text-justify"></dd>
+											<dd class="col-sm-9 text-justify feedback"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-md-12">
 												<small class="d-block text-muted">Feedback Attachment</small>
 
 												<span class="d-block my-1"></span>
-												<a href="#" class="btn btn-primary">Download</a>
+												<a class="btn btn-primary download_button">Download</a>
 
-												<span class="d-block font-italic">Tidak ada file</span>
+												<span class="d-block font-italic span_none">Tidak ada file</span>
 
 											</dt>
 										</dl>
@@ -826,16 +826,30 @@
 							$(document).on("click", "#detailFeedback", function () {
 								console.log('masuk');
 								var detail_agenda_id = $(this).data('id');
+
 								$.get("" +'/clients/' + detail_agenda_id +'/show_detail_feedbacks', function (data) {
 									$('#modalHeading').html("Detail Feedbacks");
 									$('#name').text(data.name);
 									$('.session').html(data.session_name);
 									$('.coach_name').html(data.name);
 									$('.topic').html(data.topic);
+									$('.feedback').html(data.feedback);
 									$('#show_feedback').modal('show');
-									// $('#Client_id').val(data.id);
-							
-								})
+
+									if (data.attachment == null) {
+										$('.download_button').css("display", "none");
+										$('.span_none').html('Tidak ada file');
+									} else {
+										$('.span_none').html('Unduh file di atas');
+										$('.download_button').removeAttr('style');
+										$('.download_button').css("display", "relative");
+									}
+
+									$('.download_button').on('click', function () {
+										window.location.href = ("" +'/agendas/' + detail_agenda_id + '/feedback_download');
+									});
+
+								});
 							});
 						});
 </script>

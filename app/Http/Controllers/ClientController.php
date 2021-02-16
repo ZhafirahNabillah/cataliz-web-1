@@ -248,7 +248,7 @@ class ClientController extends Controller
 
   public function show_detail_feedbacks($id)
   {
-    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.created_at')
+    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.feedback', 'agenda_details.attachment', 'agenda_details.created_at')
       ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
       ->join('users', 'agendas.owner_id', '=', 'users.id')
       ->join('clients', 'clients.id', '=', 'agendas.client_id')
