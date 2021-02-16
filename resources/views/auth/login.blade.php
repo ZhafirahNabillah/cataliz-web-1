@@ -28,6 +28,13 @@
         <!-- Login-->
         <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
           <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+            @if ($message = Session::get('success'))
+      			<div class="alert alert-success alert-dissmisable">
+      				<h4 class="alert-heading">Success</h4>
+      				<div class="alert-body">{{ $message }}</div>
+      				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><spanaria-hidden="true">×</span></button>
+      			</div>
+      			@endif
             <h4 class="card-title mb-1">Welcome to Cataliz! 👋</h4>
             <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
             <form class="auth-login-form mt-2" method="POST" action="{{ route('login') }}">
@@ -63,7 +70,7 @@
               </div>
               <button class="btn btn-primary btn-block" tabindex="4">Sign in</button>
             </form>
-            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{route('show_register.coachee')}}" id="btn-register-choice"><span>&nbsp;Create an account</span></a></p>
+            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{route('show_register')}}" id="btn-register-choice"><span>&nbsp;Create an account</span></a></p>
             <!--
             <div class="divider my-2">
             <div class="divider-text">or</div>
@@ -82,14 +89,5 @@
 @endsection
 
 @push('scripts')
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script type="text/javascript">
 
-  $(function () {
-    $('#btn-register-choice').on('click', function() {
-      console.log("ready");
-      $("#register_choice").slideToggle(500);
-    });
-  });
-  </script>
 @endpush

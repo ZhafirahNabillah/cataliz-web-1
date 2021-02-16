@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }} Admin</div>
 
-                <a href="{{route('manajemen_user.admin')}}">Klik</a>
+                <a href="{{route('roles.index')}}">Klik</a>
 
                 <div class="card-body">
                     @if (session('status'))
