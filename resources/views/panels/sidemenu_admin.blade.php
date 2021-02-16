@@ -22,8 +22,14 @@
       <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Management</span><i
           data-feather="more-horizontal"></i>
       </li>
-      <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('manajemen_user.admin')}}"><i
-            data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">User Management</span></a>
+      <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('roles.index')}}"><i
+            data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Role</span></a>
+      </li>
+      <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i
+            data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Permission</span></a>
+      </li>
+      <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('users.index')}}"><i
+            data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">User Role</span></a>
       </li>
       <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
               </li>

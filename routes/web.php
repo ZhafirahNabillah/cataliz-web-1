@@ -10,7 +10,9 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\ManagementController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +44,10 @@ Route::group(['middleware' => ['auth', 'role:coachee']], function () {
 
 //Middleware group for admin page
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
-	Route::get('/admin/dashboard', [ManagementController::class, 'index'])->name('dashboard.admin');
-	Route::get('/admin/manajemen_user', [ManagementController::class, 'manajemen_user'])->name('manajemen_user.admin');
-	Route::get('/admin/manajemen_user/search', [ManagementController::class, 'ajaxAdmin'])->name('users_search.admin');
+	Route::get('/admin/dashboard', [HomeController::class, 'index_admin'])->name('dashboard.admin');
+	Route::resource('roles', RoleController::class);
+	Route::resource('permissions', PermissionController::class);
+	Route::resource('users', UserController::class);
 });
 
 //Middleware group for coach page

@@ -21,7 +21,11 @@
 			<div class="content-header-left col-md-9 col-12 mb-2">
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
-						<h2 class="content-header-title float-left mb-0">Profile</h2>
+						<h2 class="content-header-title float-left mb-0">Profile
+							<img class="rounded float-right width="20" height="20"" src="
+							{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+							data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya."/>
+						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/">Home</a>
@@ -53,8 +57,9 @@
 					<div class="col-sm-12 ">
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
-							<img class="card-img-top" src="{{ asset('storage/background/'.$user->background_picture) }}"
-								alt="User Profile Image" />
+							<img class="card-img-top"  style="height: 569px;"
+								src="{{ asset('storage/background/'.$user->background_picture) }}"
+							alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
@@ -93,7 +98,7 @@
 										</div>
 
 										<!-- edit button -->
-													<div class="btn-group dropleft position-relative "style="z-index:99" >
+													<div class="btn-group dropleft "style="z-index:99" >
 							              <button
 							                type="button"
 							                class="btn btn-primary dropdown-toggle"
@@ -103,11 +108,11 @@
 							              >
 							                Edit Profile
 							              </button>
-							              <div class="dropdown-menu position-relative" style="z-index:99">
-							                <a class="dropdown-item" data-toggle="modal"
+							              <div class="dropdown-menu " style="z-index:99">
+							                <a class="dropdown-item" style="z-index:99" data-toggle="modal"
 																data-target="#exampleModal">Edit Foto
 															</a>
-							                <a class="dropdown-item" data-toggle="modal"
+							                <a class="dropdown-item position-relative" style="z-index:99" data-toggle="modal"
 																data-target="#exampleModal2">Edit Background
 															</a>
 							              </div>
@@ -217,7 +222,11 @@
 										<div class="col-sm-12 col-md-12">
 											<div class="card">
 												<div class="card-header">
-													<h4 class="card-title">Change Password</h4>
+													<h4 class="card-title">Change Password
+														<img class="rounded float-right width="20" height="20"" src="
+														{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+														data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya."/>
+													</h4>
 												</div>
 												<div class="container">
 													@if ($message = Session::get('success'))
@@ -297,5 +306,10 @@
 
 
 			});
+
+	// popover
+	$(function () {
+		$('[data-toggle="popover"]').popover()
+	})
 </script>
 @endpush
