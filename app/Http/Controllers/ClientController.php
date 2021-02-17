@@ -10,6 +10,7 @@ use App\Models\Agenda_detail;
 use App\Models\Coaching_note;
 use App\Models\Agenda;
 use App\Models\Plan;
+use App\User;
 use DataTables;
 
 class ClientController extends Controller
@@ -34,7 +35,11 @@ class ClientController extends Controller
 
     if ($request->ajax()) {
       //get data of table
-      $data = Client::where('owner_id', Auth::user()->id)->latest()->get();
+      if (auth()->user()->role('admin')) {
+        $data = Client::get();
+      } elseif (auth()->user()->role('coach')) {
+        $data = Client::where('owner_id', Auth::user()->id)->latest()->get();
+      }
 
       //return data as datatable json
       return Datatables::of($data)

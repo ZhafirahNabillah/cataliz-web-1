@@ -6,7 +6,7 @@
 
 @include('panels.navbar')
 
-@include('panels.sidemenu_admin')
+@include('panels.sidemenu')
 <!-- BEGIN: Content-->
 <div class="app-content content ">
 	<div class="content-overlay"></div>

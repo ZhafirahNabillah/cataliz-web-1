@@ -29,30 +29,27 @@ Route::get('/', function () {
 	return redirect('login');
 });
 
+Route::get('/home', function () {
+	return redirect('/');
+});
+
 //Authenticate route
 Auth::routes();
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout']);
 
-//Middleware group for coachee page
-Route::group(['middleware' => ['auth', 'role:coachee']], function () {
-	Route::get('/coachee/dashboard', function () {
-		return 'Dashboard Coachee';
-	})->name('dashboard.coachee');
-});
-
 //Middleware group for admin page
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
-	Route::get('/admin/dashboard', [HomeController::class, 'index_admin'])->name('dashboard.admin');
+Route::group(['middleware' => ['auth']], function () {
+
 	Route::resource('roles', RoleController::class);
 	Route::resource('permissions', PermissionController::class);
 	Route::resource('users', UserController::class);
 });
 
 //Middleware group for coach page
-Route::group(['middleware' => ['auth', 'role:coach']], function () {
-	Route::get('/coach/dashboard', [HomeController::class, 'index'])->name('dashboard.coach');
+Route::group(['middleware' => ['auth']], function () {
+	Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
 	//Route::resource('roles', RoleController::class);
 	Route::resource('coachs', CoachController::class);

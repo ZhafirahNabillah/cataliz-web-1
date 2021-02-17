@@ -22,7 +22,7 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-							<img class="rounded float-right width=" 20" height="20"" src="
+							<img class="rounded float-right width=" 15" height="15"" src="
 								{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
 								data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
 						</h2>
@@ -120,9 +120,10 @@
 											</ul>
 
 											<!-- edit button -->
-											<a href="javascript:;" class="btn btn-primary editClient" data-id={{$client->id}}>
-												<span class="font-weight-bold d-none d-md-block">Edit</span>
-											</a>
+											<button type="button" href="javascript:;" class="btn btn-primary editClient"
+												data-id={{$client->id}}>
+												Edit
+											</button>
 										</div>
 									</div>
 									<!--/ collapse  -->
@@ -180,10 +181,11 @@
 										<!-- Number of Coaching -->
 										<div class="col-lg-4 col-sm-4 col-6">
 											<div class="card style=" width: 18rem;" style="border-radius: 11px"">
+
 												<div class=" card-header">
 												<div class="card-body flex-column align-items-start pb-0">
 													<img class="rounded float-right width=" 60" height="60"" src="
-														{{asset('assets\images\icons\dollar.jpg') }}" alt="Card image cap" />
+														{{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
 												</div>
 
 											</div>
@@ -321,7 +323,11 @@
 				<div class="content-header-left col-md-9 col-12 mb-2">
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
-							<h4 class="breadcrumb-item active">Sessions</h4>
+							<h4 class="breadcrumb-item active">Sessions
+								<img class="rounded float-right width=" 15" height="15"" src="
+									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+									data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
+							</h4>
 						</div>
 					</div>
 				</div>
@@ -361,7 +367,12 @@
 				<div class="content-header-left col-md-9 col-12 mb-2">
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
-							<h4 class="breadcrumb-item active">Coaching Plans</h4>
+							<h4 class="breadcrumb-item active">Coaching Plans
+								<img class="rounded float-right width=" 15" height="15"" src="
+									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+									data-placement="top"
+									data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
+							</h4>
 						</div>
 					</div>
 				</div>
@@ -397,7 +408,12 @@
 				<div class="content-header-left col-md-9 col-12 mb-2">
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
-							<h4 class="breadcrumb-item active">Coaching Notes</h4>
+							<h4 class="breadcrumb-item active">Coaching Notes
+								<img class="rounded float-right width=" 15" height="15"" src="
+									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+									data-placement="top"
+									data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
+							</h4>
 						</div>
 					</div>
 				</div>
@@ -487,7 +503,12 @@
 				<div class="content-header-left col-md-9 col-12 mb-2">
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
-							<h4 class="breadcrumb-item active tes">Feedback</h4>
+							<h4 class="breadcrumb-item active tes">Feedback
+								<img class="rounded float-right width=" 15" height="15"" src="
+									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+									data-placement="top"
+									data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
+							</h4>
 						</div>
 					</div>
 				</div>

@@ -28,9 +28,15 @@ class PlanController extends Controller
 
     public function index(Request $request)
     {
-
         if ($request->ajax()) {
+
+
+          if (auth()->user()->role('admin')) {
+            $data = Plan::with('client')->get();
+          } elseif (auth()->user()->role('coach')) {
             $data = Plan::with('client')->where('owner_id', Auth::user()->id)->latest()->get();
+          }
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
