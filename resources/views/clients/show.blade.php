@@ -188,7 +188,7 @@
 
 											</div>
 											<div class="card-body">
-												<h1 class="display-1 text-primary card text-center">22</h1>
+												<h1 class="display-1 text-primary card text-center">{{$total_agenda->count}}</h1>
 												<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
 											</div>
 										</div>
@@ -205,7 +205,7 @@
 											</div>
 										</div>
 										<div class="card-body">
-											<h1 class="display-1 text-primary card text-center">{{$total_agenda->sum}}</h1>
+											<h1 class="display-1 text-primary card text-center">{{$total_session->sum}}</h1>
 											<h3 class="font-weight-bolder text-center">Agenda</h3>
 										</div>
 									</div>
@@ -441,32 +441,32 @@
 									<div class="card-body" style="border-radius: 11px">
 										<dl class="row">
 											<dt class="col-sm-3">Topic</dt>
-											<dd class="col-sm-9" id="topic"></dd>
+											<dd class="col-sm-9 topic_note"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Coach Name</dt>
-											<dd class="col-sm-9"></dd>
+											<dd class="col-sm-9 coach_name_note"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Session</dt>
-											<dd class="col-sm-9"></dd>
+											<dd class="col-sm-9 session_note"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Subject</dt>
-											<dd class="col-sm-9"></dd>
+											<dd class="col-sm-9 subject_note"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Note</dt>
 											<span class="d-block my-1"></span>
-											<dd class="col-sm-9 text-justify"></dd>
+											<dd class="col-sm-9 text-justify note"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-md-12">
 												<small class="d-block text-muted">Note Attachment</small>
 												<span class="d-block my-1"></span>
-												<a href="#" class="btn btn-primary">Download</a>
+												<a href="#" class="btn btn-primary download_button_note">Download</a>
 
-												<span class="d-block font-italic">Tidak ada file</span>
+												<span class="d-block font-italic span_none_note">Tidak ada file</span>
 
 											</dt>
 										</dl>
@@ -531,15 +531,15 @@
 									<div class="card-body">
 										<dl class="row">
 											<dt class="col-sm-3">Topic</dt>
-											<dd class="col-sm-9 topic"></dd>
+											<dd class="col-sm-9 topic_feedback"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Coach Name</dt>
-											<dd class="col-sm-9 coach_name"></dd>
+											<dd class="col-sm-9 coach_name_feedback"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Session</dt>
-											<dd class="col-sm-9 session"></dd>
+											<dd class="col-sm-9 session_feedback"></dd>
 										</dl>
 										<dl class="row">
 											<dt class="col-sm-3">Feedback</dt>
@@ -551,9 +551,9 @@
 												<small class="d-block text-muted">Feedback Attachment</small>
 
 												<span class="d-block my-1"></span>
-												<a class="btn btn-primary download_button">Download</a>
+												<a class="btn btn-primary download_button_feedback">Download</a>
 
-												<span class="d-block font-italic span_none">Tidak ada file</span>
+												<span class="d-block font-italic span_none_feedback">Tidak ada file</span>
 
 											</dt>
 										</dl>
@@ -822,30 +822,61 @@
 					      $('[data-toggle="popover"]').popover()
 					    })
 
+							// show coaching notes
+							$(document).on("click", "#detailNote", function () {
+								console.log('masuk');
+								let detail_agenda_id_note = $(this).data('id');
+								console.log(detail_agenda_id_note);
+
+								$.get("" +'/clients/' + detail_agenda_id_note +'/show_detail_notes', function (data) {
+									$('#modalHeading').html("Detail Notes");
+									$('#name').text(data.name);
+									$('.session_note').html(data.session_name);
+									$('.coach_name_note').html(data.name);
+									$('.topic_note').html(data.topic);
+									$('.subject_note').html(data.subject);
+									$('.note').html(data.summary);
+									$('#show_note').modal('show');
+
+									if (data.attachment == null) {
+										$('.download_button_note').css("display", "none");
+										$('.span_none_note').html('Tidak ada file');
+									} else {
+										$('.span_none_note').html('Unduh file di atas');
+										$('.download_button_note').removeAttr('style');
+										$('.download_button_note').css("display", "relative");
+									}
+
+									$('.download_button_note').on('click', function () {
+										window.location.href = ("" +'/agendas/' + detail_agenda_id_note + '/note_download');
+									});
+								});
+							})
+
 							// show_feedback
 							$(document).on("click", "#detailFeedback", function () {
 								console.log('masuk');
-								var detail_agenda_id = $(this).data('id');
+								let detail_agenda_id = $(this).data('id');
 
 								$.get("" +'/clients/' + detail_agenda_id +'/show_detail_feedbacks', function (data) {
 									$('#modalHeading').html("Detail Feedbacks");
 									$('#name').text(data.name);
-									$('.session').html(data.session_name);
-									$('.coach_name').html(data.name);
-									$('.topic').html(data.topic);
+									$('.session_feedback').html(data.session_name);
+									$('.coach_name_feedback').html(data.name);
+									$('.topic_feedback').html(data.topic);
 									$('.feedback').html(data.feedback);
 									$('#show_feedback').modal('show');
 
 									if (data.attachment == null) {
-										$('.download_button').css("display", "none");
-										$('.span_none').html('Tidak ada file');
+										$('.download_button_feedback').css("display", "none");
+										$('.span_none_feedback').html('Tidak ada file');
 									} else {
-										$('.span_none').html('Unduh file di atas');
-										$('.download_button').removeAttr('style');
-										$('.download_button').css("display", "relative");
+										$('.span_none_feedback').html('Unduh file di atas');
+										$('.download_button_feedback').removeAttr('style');
+										$('.download_button_feedback').css("display", "relative");
 									}
 
-									$('.download_button').on('click', function () {
+									$('.download_button_feedback').on('click', function () {
 										window.location.href = ("" +'/agendas/' + detail_agenda_id + '/feedback_download');
 									});
 
