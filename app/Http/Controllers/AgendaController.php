@@ -253,6 +253,12 @@ class AgendaController extends Controller
     }
 
     if ($request->hasFile('feedback_attachment')) {
+      $this->validate($request, [
+        'feedback_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
+      ], [
+        'feedback_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
+        'feedback_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
+      ]);
       $filenameWithExt = $request->file('feedback_attachment')->getClientOriginalName();
       $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
       $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
@@ -266,6 +272,12 @@ class AgendaController extends Controller
     $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id], ['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
 
     if ($request->hasFile('note_attachment')) {
+      $this->validate($request, [
+        'note_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
+      ], [
+        'note_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
+        'note_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
+      ]);
       $filenameWithExt = $request->file('note_attachment')->getClientOriginalName();
       $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
       $extension = $request->file('note_attachment')->getClientOriginalExtension();

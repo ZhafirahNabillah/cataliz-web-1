@@ -125,6 +125,9 @@
 											<input type="file" class="custom-file-input" name="feedback_attachment"/>
 											<label class="custom-file-label" for="customFile1">Choose file</label>
 										</div>
+										@error('feedback_attachment')
+										<strong class="text-danger">{{ $message }}</strong>
+										@enderror
 										@endif
 										@if($agenda_detail->attachment != null)
 										<div class="row">
@@ -177,6 +180,9 @@
 											<input type="file" class="custom-file-input" name="note_attachment"/>
 											<label class="custom-file-label" for="customFile1">Choose file</label>
 										</div>
+										@error('note_attachment')
+										<strong class="text-danger">{{ $message }}</strong>
+										@enderror
 									</div>
 								</div>
 								@endif
@@ -215,6 +221,9 @@
 											<input type="file" class="custom-file-input" name="note_attachment"/>
 											<label class="custom-file-label" for="customFile1">Choose file</label>
 										</div>
+										@error('note_attachment')
+										<strong class="text-danger">{{ $message }}</strong>
+										@enderror
 										@endif
 										@if($coaching_note->attachment != null)
 										<div class="row">

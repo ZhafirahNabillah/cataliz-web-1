@@ -105,8 +105,8 @@
 									<label class="form-label" for="basic-icon-default-fullname">Permission</label>
 									@foreach($permissions as $permission)
 									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value="{{$permission->name}}" name="permission[]" id="flexCheckDefault">
-										<label class="form-check-label" for="flexCheckDefault">
+										<input class="form-check-input" type="checkbox" value="{{$permission->name}}" name="permission[]" id="permission-check-{{$permission->id}}">
+										<label class="form-check-label" for="permission-check-{{$permission->id}}">
 											{{$permission->name}}
 										</label>
 									</div>
@@ -173,10 +173,10 @@
 
 		// create
 		$('body').on('click', '.createNewRole', function () {
-			$('#saveBtn').val("create-Client");
-			$('#Customer_id').val('');
-			$('#ClientForm').trigger("reset");
+			$('#saveBtn').val("create-role");
+			$('#role_id').val('');
 			$('#modalHeading').html("Create New Client");
+			$('#RoleForm').trigger("reset");
 			$('#modals-slide-in').modal('show');
 		});
 
@@ -187,9 +187,14 @@
 			$.get("" +'/roles/' + role_id +'/edit', function (data) {
 				$('#modalHeading').html("Edit Role");
 				$('#saveBtn').val("edit-role");
+				$('#RoleForm').trigger("reset");
 				$('#modals-slide-in').modal('show');
-				$('#role_id').val(data.id);
-				$('#name').val(data.name);
+				$('#role_id').val(data[0].id);
+				$('#name').val(data[0].name);
+				$.each(data[0].permissions, function(i, item) {
+					var permission_id = data[0].permissions[i].id;
+					$('#permission-check-'+permission_id).prop('checked', true);
+				});
 			})
 		});
 
