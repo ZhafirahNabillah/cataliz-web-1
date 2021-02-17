@@ -29,6 +29,10 @@ Route::get('/', function () {
 	return redirect('login');
 });
 
+Route::get('/home', function () {
+	return redirect('/');
+});
+
 //Authenticate route
 Auth::routes();
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');

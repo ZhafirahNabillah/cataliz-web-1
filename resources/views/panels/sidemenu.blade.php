@@ -16,17 +16,23 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item">
+            <li class="nav-item">
               <a class=" d-flex align-items-center" href="{{route('dashboard')}}"><idata-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Main Menu</span><i data-feather="more-horizontal"></i></li>
             @can('list-client')
-            <li class=" nav-item">
+            <li class="nav-item">
+              @role('admin')
+              <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate"data-i18n="Email">Users</span></a>
+              @endrole
+
+              @role('coach')
               <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate"data-i18n="Email">Clients</span></a>
+              @endrole
             </li>
             @endcan
             @can('list-plan')
-            <li class=" nav-item">
+            <li class="nav-item">
               <a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="check-square"></i><span class="menu-title text-truncate"data-i18n="Todo">Plans</span></a>
             </li>
             @endcan
