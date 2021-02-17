@@ -3,7 +3,7 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto">
-                <a class="navbar-brand" href="{{route('dashboard.coach')}}">
+                <a class="navbar-brand" href="{{route('dashboard')}}">
                     @include('panels.logo')
                 </a>
             </li>
@@ -16,24 +16,39 @@
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class=" d-flex align-items-center" href="{{route('dashboard.coach')}}"><i
-                        data-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
+            <li class=" nav-item">
+              <a class=" d-flex align-items-center" href="{{route('dashboard')}}"><idata-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span></a>
             </li>
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Management</span><i
-                    data-feather="more-horizontal"></i>
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Main Menu</span><i data-feather="more-horizontal"></i></li>
+            @can('list-client')
+            <li class=" nav-item">
+              <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate"data-i18n="Email">Clients</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('clients.index')}}"><i
-                        data-feather="user"></i><span class="menu-title text-truncate"
-                        data-i18n="Email">Clients</span></a>
+            @endcan
+            @can('list-plan')
+            <li class=" nav-item">
+              <a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="check-square"></i><span class="menu-title text-truncate"data-i18n="Todo">Plans</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('plans.index')}}"><i
-                        data-feather="check-square"></i><span class="menu-title text-truncate"
-                        data-i18n="Todo">Plans</span></a>
+            @endcan
+            @can('list-agenda')
+            <li class=" nav-item">
+              <a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i data-feather="calendar"></i><span class="menu-title text-truncate"data-i18n="Todo">Agenda</span></a>
             </li>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i
-                        data-feather="calendar"></i><span class="menu-title text-truncate"
-                        data-i18n="Todo">Agenda</span></a>
+            @endcan
+
+            @canany('list-role','list-permission')
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Role and Permission</span><i data-feather="more-horizontal"></i></li>
+            @endcan
+            @can('list-role')
+            <li class=" nav-item">
+              <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate"data-i18n="Email">Role</span></a>
             </li>
+            @endcan
+            @can('list-permission')
+            <li class=" nav-item">
+              <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate"data-i18n="Email">Permission</span></a>
+            </li>
+            @endcan
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>

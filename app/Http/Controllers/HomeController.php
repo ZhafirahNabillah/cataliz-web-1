@@ -71,8 +71,4 @@ class HomeController extends Controller
                 ->make(true);
         }
     }
-
-    public function index_admin(){
-      return view('admin.dashboard');
-    }
 }

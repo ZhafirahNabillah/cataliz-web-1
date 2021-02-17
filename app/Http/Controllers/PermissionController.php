@@ -28,4 +28,31 @@ class PermissionController extends Controller
 
       return view('permissions.index');
     }
+
+    public function edit($id)
+    {
+      //
+      $permission = Permission::find($id);
+      return response()->json($permission);
+    }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'name'  => 'required',
+        ]);
+
+        Permission::updateOrCreate(
+          ['id' => $request->input('permission_id')],
+          ['name' => $request->input('name')]
+        );
+
+        return response()->json(['success' => 'Permission saved successfully!']);
+    }
+
+    public function destroy($id){
+      $permission = Permission::find($id);
+      $permission->delete();
+
+      return response()->json(['success' => 'Permission deleted!']);
+    }
 }

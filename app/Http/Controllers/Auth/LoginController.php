@@ -42,13 +42,14 @@ class LoginController extends Controller
     }
 
     protected function authenticated(Request $request, $user){
-      if ($user->hasRole('admin')) {
-        return redirect()->route('dashboard.admin');
-      } elseif ($user->hasRole('coach')) {
-        return redirect()->route('dashboard.coach');
-      } elseif ($user->hasRole('coachee')) {
-        return redirect()->route('dashboard.coachee');
-      }
+      return redirect('dashboard');
+      // if ($user->hasRole('admin')) {
+      //   return redirect()->route('dashboard.admin');
+      // } elseif ($user->hasRole('coach')) {
+      //   return redirect()->route('dashboard.coach');
+      // } elseif ($user->hasRole('coachee')) {
+      //   return redirect()->route('dashboard.coachee');
+      // }
     }
 
     public function logout(Request $request) {

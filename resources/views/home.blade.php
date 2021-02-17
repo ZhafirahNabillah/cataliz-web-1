@@ -17,6 +17,10 @@
     <div class="content-body">
 
       <!--card -->
+      @role('admin')
+        <h5>Dashboard admin</h5>
+      @endrole
+      @role('coach')
       <section id="card-demo-example">
         <div class="row match-height">
           <div class="container">
@@ -143,7 +147,10 @@
         </div>
       </section>
       <!-- /card -->
-
+      @endrole
+      @role('coachee')
+        <h5>Dashboard Coachee</h5>
+      @endrole
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@
 
 @include('panels.navbar')
 
-@include('panels.sidemenu_admin')
+@include('panels.sidemenu')
 <!-- BEGIN: Content-->
 <div class="app-content content ">
 	<div class="content-overlay"></div>
@@ -70,7 +70,7 @@
 				<div class="row">
 					<div class="col-12">
 						<div class="card style="border-radius: 15px;>
-							<table class="datatables-basic table yajra-datatable-role">
+							<table class="datatables-basic table yajra-datatable-permission">
 								<thead>
 									<tr>
 										<th>No</th>
@@ -88,16 +88,16 @@
 				<!-- Modal to add new record -->
 				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="RoleForm" name="RoleForm">
+						<form class="add-new-record modal-content pt-0" id="PermissionForm" name="PermissionForm">
 
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 							<div class="modal-header mb-1">
 								<h5 class="modal-title" id="modalHeading"></h5>
 							</div>
-							<input type="hidden" name="role_id" id="role_id">
+							<input type="hidden" name="permission_id" id="permission_id">
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+									<label class="form-label" for="basic-icon-default-fullname">Permission Name</label>
 									<input id="name" name="name" type="text" class="form-control dt-full-name"
 									id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
 								</div>
@@ -132,7 +132,7 @@
 			}
 	});
 
-	var table = $('.yajra-datatable-role').DataTable({
+	var table = $('.yajra-datatable-permission').DataTable({
 		processing: true,
 		serverSide: true,
 		ajax: "",
@@ -160,23 +160,23 @@
 	});
 
 		// create
-		$('body').on('click', '.createNewRole', function () {
+		$('body').on('click', '.createNewPermission', function () {
 			$('#saveBtn').val("create-Client");
-			$('#Customer_id').val('');
-			$('#ClientForm').trigger("reset");
-			$('#modalHeading').html("Create New Client");
+			$('#permission_id').val('');
+			$('#PermissionForm').trigger("reset");
+			$('#modalHeading').html("Create New Permission");
 			$('#modals-slide-in').modal('show');
 		});
 
 		// edit
-		$('body').on('click', '#editRole', function () {
+		$('body').on('click', '#editPermission', function () {
 			console.log('tes');
-			var role_id = $(this).data('id');
-			$.get("" +'/roles/' + role_id +'/edit', function (data) {
-				$('#modalHeading').html("Edit Role");
-				$('#saveBtn').val("edit-role");
+			var permission_id = $(this).data('id');
+			$.get("" +'/permissions/' + permission_id +'/edit', function (data) {
+				$('#modalHeading').html("Edit Permission");
+				$('#saveBtn').val("edit-permission");
 				$('#modals-slide-in').modal('show');
-				$('#role_id').val(data.id);
+				$('#permission_id').val(data.id);
 				$('#name').val(data.name);
 			})
 		});
@@ -185,7 +185,7 @@
 		$('#saveBtn').click(function (e) {
 			e.preventDefault();
 			$(this).html('Sending..');
-			var data = $('#RoleForm').serialize();
+			var data = $('#PermissionForm').serialize();
 			console.log(data);
 
 			$.ajax({
@@ -195,7 +195,7 @@
 				dataType: 'json',
 				success: function (data) {
 
-					$('#RoleForm').trigger("reset");
+					$('#PermissionForm').trigger("reset");
 					$('#saveBtn').html('Submit');
 					$('#modals-slide-in').modal('hide');
 					table.draw();
@@ -209,14 +209,14 @@
 		});
 
 		// delete
-		$('body').on('click', '#deleteRole', function (e) {
+		$('body').on('click', '#deletePermission', function (e) {
 
-			var role_id = $(this).data("id");
+			var permission_id = $(this).data("id");
 			if(confirm("Are You sure want to delete !")){
 
 				$.ajax({
 					type: "DELETE",
-					url: ""+'/roles/'+role_id,
+					url: ""+'/permissions/'+permission_id,
 					success: function (data) {
 						table.draw();
 					},
