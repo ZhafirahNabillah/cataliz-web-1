@@ -17,9 +17,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Client List
-                <img class="rounded float-right width="20" height="20"" src="
-                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website."/>
+              <img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -36,34 +34,24 @@
       <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
         <div class="form-group breadcrumb-right">
           <div class="dropdown">
-            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-            data-feather="grid"></i></button>
-            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i
-              class="mr-1" data-feather="check-square"></i><span
-              class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i
-                class="mr-1" data-feather="message-square"></i><span
-                class="align-middle">Chat</span></a><a class="dropdown-item"
-                href="app-email.html"><i class="mr-1" data-feather="mail"></i><span
-                class="align-middle">Email</span></a><a class="dropdown-item"
-                href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span
-                class="align-middle">Calendar</span></a></div>
-              </div>
-            </div>
+            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+            <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i class="mr-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="mr-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="mr-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
           </div>
         </div>
-        <div class="content-body">
-          @if ($message = Session::get('success'))
-          <div class="alert alert-success alert-dissmisable">
-            <h4 class="alert-heading">Success</h4>
-            <div class="alert-body">{{ $message }}</div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          @endif
-          <div class="row">
-            <!--
+      </div>
+    </div>
+    <div class="content-body">
+      @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-dissmisable">
+        <h4 class="alert-heading">Success</h4>
+        <div class="alert-body">{{ $message }}</div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      @endif
+      <div class="row">
+        <!--
             <div class="col-12">
             <a href={{ route('clients.create')}} class="create-new btn btn-primary">Add New</a>
           </div>
@@ -73,7 +61,7 @@
       <section id="basic-datatable">
         <div class="row">
           <div class="col-12">
-            <div class="card style="border-radius: 15px;>
+            <div class="card style=" border-radius: 15px;>
               <table class="datatables-basic table yajra-datatable">
                 <thead>
                   <tr>
@@ -105,67 +93,55 @@
               <div class="modal-body flex-grow-1">
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                  <input id="name" name="name" type="text" class="form-control dt-full-name"
-                  id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+                  <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
                 </div>
                 <label class="form-label" for="basic-icon-default-post">Phone</label>
                 <div class="input-group input-group-merge mb-2">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon5">+62</span>
                   </div>
-                  <input id="phone" name="phone" type="text" class="form-control"
-                  placeholder="81xxxxxxx" aria-label="Phone">
+                  <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-email">Email</label>
-                  <input id="email" name="email" type="text" id="basic-icon-default-email"
-                  class="form-control dt-email" placeholder="john.doe@example.com"
-                  aria-label="john.doe@example.com" />
+                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
                   <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                  <input id="organization" name="organization" type="text"
-                  class="form-control dt-full-name" id="basic-icon-default-fullname"
-                  placeholder="Inbis Sample" aria-label="John Doe" />
+                  <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                  <input id="company" name="company" type="text" class="form-control dt-full-name"
-                  id="basic-icon-default-fullname" placeholder="Startup Name"
-                  aria-label="John Doe" />
+                  <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                  <input id="occupation" name="occupation" type="text"
-                  class="form-control dt-full-name" id="basic-icon-default-fullname"
-                  placeholder="CEO" aria-label="John Doe" />
+                  <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
                 </div>
 
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                value="create">Submit</button>
-                <button type="reset" class="btn btn-outline-secondary"
-                data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
               </div>
               <!-- </form>-->
 
-            </div>
           </div>
-          <!-- End Modal -->
-        </section>
-        <!--/ Basic table -->
+        </div>
+        <!-- End Modal -->
+      </section>
+      <!--/ Basic table -->
 
 
 
-      </div>
     </div>
   </div>
-  <!-- END: Content-->
-  @endsection
+</div>
+<!-- END: Content-->
+@endsection
 
-  @push('scripts')
-  <script type="text/javascript">
-  $(function () {
+@push('scripts')
+<script type="text/javascript">
+  $(function() {
 
     $.ajaxSetup({
       headers: {
@@ -176,12 +152,26 @@
       processing: true,
       serverSide: true,
       ajax: "",
-      columns: [
-        {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-        {data: 'name', name: 'name'},
-        {data: 'email', name: 'email'},
-        {data: 'program', name: 'program'},
-        {data: 'phone', name: 'phone'},
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'name',
+          name: 'name'
+        },
+        {
+          data: 'email',
+          name: 'email'
+        },
+        {
+          data: 'program',
+          name: 'program'
+        },
+        {
+          data: 'phone',
+          name: 'phone'
+        },
         {
           data: 'action',
           name: 'action',
@@ -189,27 +179,26 @@
           searchable: true
         },
       ],
-      columnDefs: [
-        {
+      columnDefs: [{
           // Avatar image/badge, Name and post
           targets: 1,
           responsivePriority: 4,
-          render: function (data, type, full, meta) {
+          render: function(data, type, full, meta) {
             var $user_img = full['avatar'],
-            $name = full['name'],
-            $post = full['company'];
+              $name = full['name'],
+              $post = full['company'];
             $org = full['organization'];
             if ($user_img) {
               // For Avatar image
               var $output =
-              '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
+                '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
             } else {
               // For Avatar badge
               var stateNum = full['status'];
               var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
               var $state = states[stateNum],
-              $name = full['name'],
-              $initials = $name.match(/\b\w/g) || [];
+                $name = full['name'],
+                $initials = $name.match(/\b\w/g) || [];
               $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
               $output = '<span class="avatar-content">' + $initials + '</span>';
             }
@@ -217,50 +206,53 @@
             var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
             // Creates full output for row
             var $row_output =
-            '<div class="d-flex justify-content-left align-items-center">' +
-            '<div class="avatar ' +
-            colorClass +
-            ' mr-1">' +
-            $output +
-            '</div>' +
-            '<div class="d-flex flex-column">' +
-            '<span class="emp_name text-truncate font-weight-bold">' +
-            $name +
-            '</span>' +
-            '<small class="emp_post text-truncate text-muted">' +
-            $post + ' - ' + $org +
-            '</small>' +
-            '</div>' +
-            '</div>';
+              '<div class="d-flex justify-content-left align-items-center">' +
+              '<div class="avatar ' +
+              colorClass +
+              ' mr-1">' +
+              $output +
+              '</div>' +
+              '<div class="d-flex flex-column">' +
+              '<span class="emp_name text-truncate font-weight-bold">' +
+              $name +
+              '</span>' +
+              '<small class="emp_post text-truncate text-muted">' +
+              $post + ' - ' + $org +
+              '</small>' +
+              '</div>' +
+              '</div>';
             return $row_output;
           }
         },
         {
           targets: 4,
-          render: function (data, type, full, meta) {
+          render: function(data, type, full, meta) {
             var $phone = full['phone'],
-            $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-            '</div>';
+              $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
+              '</div>';
             return $output;
           }
         }
       ],
-      order: [[2, 'desc']],
-      dom:
-      '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      order: [
+        [2, 'desc']
+      ],
+      dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       lengthMenu: [7, 10, 25, 50, 75, 100],
       @can('create-client')
       buttons: [
 
         {
-          text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add Client',
+          text: feather.icons['plus'].toSvg({
+            class: 'mr-50 font-small-4'
+          }) + 'Add Client',
           className: 'create-new btn btn-primary createNewClient ',
           attr: {
             'data-toggle': 'modal'
 
           },
-          init: function (api, node, config) {
+          init: function(api, node, config) {
             $(node).removeClass('btn-secondary');
           }
         }
@@ -269,30 +261,31 @@
       responsive: {
         details: {
           display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
+            header: function(row) {
               var data = row.data();
               return 'Details of ' + data['name'];
             }
           }),
           type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
+          renderer: function(api, rowIdx, columns) {
+            var data = $.map(columns, function(col, i) {
               console.log(columns);
               return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-              ? '<tr data-dt-row="' +
-              col.rowIndex +
-              '" data-dt-column="' +
-              col.columnIndex +
-              '">' +
-              '<td>' +
-              col.title +
-              ':' +
-              '</td> ' +
-              '<td>' +
-              col.data +
-              '</td>' +
-              '</tr>'
-              : '';
+                ?
+                '<tr data-dt-row="' +
+                col.rowIndex +
+                '" data-dt-column="' +
+                col.columnIndex +
+                '">' +
+                '<td>' +
+                col.title +
+                ':' +
+                '</td> ' +
+                '<td>' +
+                col.data +
+                '</td>' +
+                '</tr>' :
+                '';
             }).join('');
 
             return data ? $('<table class="table"/>').append(data) : false;
@@ -312,7 +305,7 @@
     });
 
     // create
-    $('body').on('click', '.createNewClient', function () {
+    $('body').on('click', '.createNewClient', function() {
       $('#saveBtn').val("create-Client");
       $('#Customer_id').val('');
       $('#ClientForm').trigger("reset");
@@ -321,9 +314,9 @@
     });
 
     // edit
-    $('body').on('click', '.editClient', function () {
+    $('body').on('click', '.editClient', function() {
       var Client_id = $(this).data('id');
-      $.get("" +'/clients/' + Client_id +'/edit', function (data) {
+      $.get("" + '/clients/' + Client_id + '/edit', function(data) {
         $('#modalHeading').html("Edit Client");
         $('#saveBtn').val("edit-user");
         $('#modals-slide-in').modal('show');
@@ -338,7 +331,7 @@
     });
 
     // save data
-    $('#saveBtn').click(function (e) {
+    $('#saveBtn').click(function(e) {
       e.preventDefault();
       $(this).html('Sending..');
 
@@ -347,7 +340,7 @@
         url: "",
         type: "POST",
         dataType: 'json',
-        success: function (data) {
+        success: function(data) {
 
           $('#ClientForm').trigger("reset");
           $('#saveBtn').html('Submit');
@@ -355,7 +348,7 @@
           table.draw();
 
         },
-        error: function (data) {
+        error: function(data) {
           console.log('Error:', data);
           $('#saveBtn').html('Submit');
         }
@@ -364,18 +357,18 @@
 
 
     // delete
-    $('body').on('click', '.deleteClient', function (e) {
+    $('body').on('click', '.deleteClient', function(e) {
 
       var Client_id = $(this).data("id");
-      if(confirm("Are You sure want to delete !")){
+      if (confirm("Are You sure want to delete !")) {
 
         $.ajax({
           type: "DELETE",
-          url: ""+'/clients/'+Client_id,
-          success: function (data) {
+          url: "" + '/clients/' + Client_id,
+          success: function(data) {
             table.draw();
           },
-          error: function (data) {
+          error: function(data) {
             console.log('Error:', data);
           }
         });
@@ -385,7 +378,7 @@
     });
 
     // popover
-    $(function () {
+    $(function() {
       $('[data-toggle="popover"]').popover()
     })
 
