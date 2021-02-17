@@ -20,7 +20,7 @@
           <!-- /Brand logo-->
           <!-- Left Text-->
           <div class="d-none d-lg-flex col-lg-7 align-items-center p-5">
-            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('assets/images/pages/register-v2.svg')}}" alt="Register V2"/></div>
+            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('assets/images/pages/register-v2.svg')}}" alt="Register V2" /></div>
           </div>
           <!-- /Left Text-->
           <!-- Register-->
@@ -40,9 +40,17 @@
                   @enderror
                 </div>
                 <div class="form-group">
+
                   <label class="form-label" for="register-phone">Phone</label>
-                  <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text" name="phone" placeholder="081xxxxx" aria-describedby="phone" value="{{ old('phone') }}" required autocomplete="phone" tabindex="2" />
+                  <div class="input-group input-group-merge mb-16">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon5">+62</span>
+                    </div>
+                    <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text" name="phone" placeholder="081xxxxx" aria-describedby="phone" value="{{ old('phone') }}" required autocomplete="phone" tabindex="2" />
+                  </div>
+
                   @error('phone')
+
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
@@ -78,14 +86,14 @@
                 </div>
                 <h5>Register as</h5>
                 <div class="form-group demo-inline-spacing">
-                        <div class="custom-control custom-radio">
-                            <input type="radio" id="role_coach" name="role" class="custom-control-input" value="coach" />
-                            <label class="custom-control-label" for="role_coach">Coach</label>
-                          </div>
-                          <div class="custom-control custom-radio">
-                            <input type="radio" id="role_coachee" name="role" class="custom-control-input" value="coachee" />
-                            <label class="custom-control-label" for="role_coachee">Coachee</label>
-                          </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="role_coach" name="role" class="custom-control-input" value="coach" />
+                    <label class="custom-control-label" for="role_coach">Coach</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="role_coachee" name="role" class="custom-control-input" value="coachee" />
+                    <label class="custom-control-label" for="role_coachee">Coachee</label>
+                  </div>
                 </div>
                 <div class="form-group">
                   <div class="custom-control custom-checkbox">

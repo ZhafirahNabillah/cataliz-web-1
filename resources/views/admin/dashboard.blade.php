@@ -42,7 +42,7 @@
                                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 172.png') }}" alt="Card image cap" />
                                 <small class="card text-center text-muted mb-1">Total Coach
                                 </small>
-                                <img class="rounded float-right width=" 20" height="20"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+                                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                                 <h2 class="font-weight-bolder text-center">... Coach</h2>
 
                             </div>
@@ -54,7 +54,7 @@
                                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 115.png') }}" alt="Card image cap" />
                                 <small class="card text-center text-muted mb-1">Total Coachee
                                 </small>
-                                <img class="rounded float-right width=" 20" height="20"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
+                                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
                                 <h2 class="font-weight-bolder text-center">... Coachee</h2>
                             </div>
                         </div>
@@ -66,7 +66,7 @@
                                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 191.png') }}" alt="Card image cap" />
                                 <small class="card text-center text-muted mb-1">Total Plan
                                 </small>
-                                <img class="rounded float-right width=" 20" height="20"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="" />
+                                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="" />
                                 <h2 class="font-weight-bolder text-center">... Plan</h2>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 90.png') }}" alt="Card image cap" />
                                 <small class="card text-center text-muted mb-1">Total Session
                                 </small>
-                                <img class="rounded float-right width=" 20" height="20"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
+                                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                                 <h2 class="font-weight-bolder text-center">... Sessions</h2>
                             </div>
                         </div>

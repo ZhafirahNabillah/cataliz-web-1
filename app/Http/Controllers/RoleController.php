@@ -13,6 +13,9 @@ class RoleController extends Controller
 
     public function index(Request $request)
     {
+      // $role = Role::find(1);
+      // $permissions = $role->permissions;
+
       if ($request->ajax()) {
         $data = Role::all();
 
@@ -35,17 +38,21 @@ class RoleController extends Controller
     public function edit($id)
     {
       //
-      $role = Role::find($id);
-      return response()->json($role);
+      $role_with_permissions = Role::with('permissions')->where('id',$id)->get();
+
+      return response()->json($role_with_permissions);
     }
 
     public function store(Request $request){
         $this->validate($request, [
-            'name' => 'required|unique:roles,name',
+            'name' => 'required',
             'permission' => 'required',
         ]);
 
-        $role = Role::create(['name' => $request->input('name')]);
+        $role = Role::updateOrCreate(
+          ['id' => $request->input('role_id')],
+          ['name' => $request->input('name')]
+        );
 
         $role->syncPermissions($request->input('permission'));
 
