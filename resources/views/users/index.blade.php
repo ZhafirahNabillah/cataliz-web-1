@@ -60,9 +60,9 @@
 					@endif
 					<div class="row">
 
-					<div class="col-12 mb-1">
+					<!-- <div class="col-12 mb-1">
 						<a href="javascript:;" class="create-new btn btn-primary createNewRole">Add New</a>
-					</div>
+					</div> -->
 
 			</div>
 			<!-- Basic table -->
@@ -90,18 +90,36 @@
 				<!-- Modal to add new record -->
 				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="RoleForm" name="RoleForm">
+						<form class="add-new-record modal-content pt-0" id="userForm" name="userForm">
 
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 							<div class="modal-header mb-1">
 								<h5 class="modal-title" id="modalHeading"></h5>
 							</div>
-							<input type="hidden" name="role_id" id="role_id">
+							<input type="hidden" name="user_id" id="user_id">
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
 									<input id="name" name="name" type="text" class="form-control dt-full-name"
 									id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-email">Email</label>
+									<input id="email" name="email" type="text" class="form-control dt-full-name"
+									id="basic-icon-default-email" placeholder="John Doe" aria-label="John Doe" />
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-phone">Phone</label>
+									<input id="phone" name="phone" type="text" class="form-control dt-full-name"
+									id="basic-icon-default-phone" placeholder="John Doe" aria-label="John Doe" />
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-fullname">Role</label>
+									<select class="form-control" id="role" name="role">
+										<option value="admin">Admin</option>
+										<option value="coach">Coach</option>
+										<option value="coachee">Coachee</option>
+									</select>
 								</div>
 
 								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
@@ -167,22 +185,25 @@
 		// create
 		$('body').on('click', '.createNewRole', function () {
 			$('#saveBtn').val("create-Client");
-			$('#Customer_id').val('');
-			$('#ClientForm').trigger("reset");
-			$('#modalHeading').html("Create New Client");
+			$('#user_id').val('');
+			$('#userForm').trigger("reset");
+			$('#modalHeading').html("Create New User");
 			$('#modals-slide-in').modal('show');
 		});
 
 		// edit
-		$('body').on('click', '#editRole', function () {
+		$('body').on('click', '#editUser', function () {
 			console.log('tes');
-			var role_id = $(this).data('id');
-			$.get("" +'/roles/' + role_id +'/edit', function (data) {
-				$('#modalHeading').html("Edit Role");
-				$('#saveBtn').val("edit-role");
+			var user_id = $(this).data('id');
+			$.get("" +'/users/' + user_id +'/edit', function (data) {
+				$('#modalHeading').html("Edit User");
+				$('#saveBtn').val("edit-user");
 				$('#modals-slide-in').modal('show');
-				$('#role_id').val(data.id);
+				$('#user_id').val(data.id);
 				$('#name').val(data.name);
+				$('#email').val(data.email);
+				$('#phone').val(data.phone);
+				$('#role option[value='+ data.roles[0].name +']').attr('selected','selected');
 			})
 		});
 
@@ -190,17 +211,17 @@
 		$('#saveBtn').click(function (e) {
 			e.preventDefault();
 			$(this).html('Sending..');
-			var data = $('#RoleForm').serialize();
+			var data = $('#userForm').serialize();
 			console.log(data);
 
 			$.ajax({
 				data: data,
-				url: "",
+				url: "{{ route('users.store') }}",
 				type: "POST",
 				dataType: 'json',
 				success: function (data) {
 
-					$('#RoleForm').trigger("reset");
+					$('#userForm').trigger("reset");
 					$('#saveBtn').html('Submit');
 					$('#modals-slide-in').modal('hide');
 					table.draw();
@@ -214,14 +235,14 @@
 		});
 
 		// delete
-		$('body').on('click', '#deleteRole', function (e) {
+		$('body').on('click', '#deleteUser', function (e) {
 
-			var role_id = $(this).data("id");
+			var user_id = $(this).data("id");
 			if(confirm("Are You sure want to delete !")){
 
 				$.ajax({
 					type: "DELETE",
-					url: ""+'/roles/'+role_id,
+					url: ""+'/users/'+user_id,
 					success: function (data) {
 						table.draw();
 					},
