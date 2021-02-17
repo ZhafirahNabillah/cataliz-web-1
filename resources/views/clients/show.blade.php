@@ -180,6 +180,7 @@
 										<!-- Number of Coaching -->
 										<div class="col-lg-4 col-sm-4 col-6">
 											<div class="card style="width: 18rem;" style="border-radius: 11px"">
+
 												<div class="card-header">
 													<div class="card-body flex-column align-items-start pb-0">
 														<img class="rounded float-right width="60" height="60"" src="
@@ -188,6 +189,8 @@
 
 												</div>
 													<div class="card-body">
+														<img class="rounded float-left width="120" height="180"" src="
+															{{asset('assets\images\icons\file-icons\Group 149.png') }}" alt="Card image cap" />
 														<h1 class="display-1 text-primary card text-center">22</h1>
 														<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
 													</div>

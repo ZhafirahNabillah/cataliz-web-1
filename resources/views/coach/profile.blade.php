@@ -106,14 +106,14 @@
 							                aria-haspopup="true"
 							                aria-expanded="false"
 							              >
-							                Edit Profile
+							                Edit
 							              </button>
 							              <div class="dropdown-menu " style="z-index:99">
 							                <a class="dropdown-item" style="z-index:99" data-toggle="modal"
-																data-target="#exampleModal">Edit Foto
+																data-target="#exampleModal">Profile Picture
 															</a>
 							                <a class="dropdown-item position-relative" style="z-index:99" data-toggle="modal"
-																data-target="#exampleModal2">Edit Background
+																data-target="#exampleModal2">Cover Picture
 															</a>
 							              </div>
 													</div>
