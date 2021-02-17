@@ -122,7 +122,12 @@ class ClientController extends Controller
     $coaching_note = Coaching_note::with('agenda_detail')->whereIn('agenda_detail_id', $agenda_detail_id)->get();
     $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->where('status', 'finished')->get();
 
-    $total_agenda = Agenda::selectRaw('sum(session) as sum')
+    $total_agenda = Agenda::selectRaw('count(id) as count')
+      ->where('owner_id', Auth::user()->id)
+      ->where('client_id', $client->id)
+      ->first();
+
+    $total_session = Agenda::selectRaw('sum(session) as sum')
       ->where('owner_id', Auth::user()->id)
       ->where('client_id', $client->id)
       ->first();
@@ -148,7 +153,7 @@ class ClientController extends Controller
         ->make(true);
     }
     // return $total_event;
-    return view('clients.show', compact('client', 'coaching_note', 'agenda_detail', 'total_event', 'total_agenda'));
+    return view('clients.show', compact('client', 'coaching_note', 'agenda_detail', 'total_event', 'total_agenda', 'total_session'));
   }
 
   public function show_agendas_data(Request $request, Client $client)
@@ -212,7 +217,7 @@ class ClientController extends Controller
   public function show_notes_data(Request $request, Client $client)
   {
     if ($request->ajax()) {
-      $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'coaching_notes.subject', 'agenda_details.created_at')
+      $data = Agenda_detail::select('coaching_notes.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'coaching_notes.subject', 'agenda_details.created_at')
         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
         ->join('users', 'agendas.owner_id', '=', 'users.id')
         ->join('clients', 'clients.id', '=', 'agendas.client_id')
@@ -258,6 +263,19 @@ class ClientController extends Controller
       ->join('users', 'agendas.owner_id', '=', 'users.id')
       ->join('clients', 'clients.id', '=', 'agendas.client_id')
       ->where('agenda_details.id', $id)
+      ->first();
+
+    return response()->json($data);
+  }
+
+  public function show_detail_notes($id)
+  {
+    $data = Agenda_detail::select('coaching_notes.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'coaching_notes.subject', 'coaching_notes.attachment', 'coaching_notes.summary', 'agenda_details.created_at')
+      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+      ->join('users', 'agendas.owner_id', '=', 'users.id')
+      ->join('clients', 'clients.id', '=', 'agendas.client_id')
+      ->join('coaching_notes', 'coaching_notes.agenda_detail_id', '=', 'agenda_details.id')
+      ->where('coaching_notes.id', $id)
       ->first();
 
     return response()->json($data);
