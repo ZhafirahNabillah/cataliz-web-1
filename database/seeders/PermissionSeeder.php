@@ -34,5 +34,17 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'update-agenda']);
         Permission::create(['name' => 'detail-agenda']);
         Permission::create(['name' => 'delete-agenda']);
+
+        //crud role
+        Permission::create(['name' => 'list-role']);
+        Permission::create(['name' => 'create-role']);
+        Permission::create(['name' => 'update-role']);
+        Permission::create(['name' => 'delete-role']);
+
+        //crud permission
+        Permission::create(['name' => 'list-permission']);
+        Permission::create(['name' => 'create-permission']);
+        Permission::create(['name' => 'update-permission']);
+        Permission::create(['name' => 'delete-permission']);
     }
 }
