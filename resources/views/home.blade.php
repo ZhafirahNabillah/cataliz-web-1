@@ -18,7 +18,7 @@
 
       <!--card -->
       @role('admin')
-        <h5>Dashboard admin</h5>
+      <h5>Dashboard admin</h5>
       @endrole
       @role('coach')
       <section id="card-demo-example">
@@ -34,7 +34,7 @@
                     </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{auth()->user()->name . ", You are logged in!"}}
                   </div>
                 </div>
               </div>
@@ -47,13 +47,14 @@
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coaching Hour
                 </small>
-                <img class="rounded float-right width="20" height="20"" src="
-                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Jumlah waktu mengajar yang telah dilaksanakan"/>
+                <img class="rounded float-right width=" 20" height="20"" src="
+                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                 @if ($hours == null)
                 <h2 class="font-weight-bolder text-center">0 Hours</h2>
                 @else
-                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}} Hours</h2>
+                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}
+                  Hours</h2>
                 @endif
               </div>
             </div>
@@ -65,9 +66,9 @@
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coachee
                 </small>
-                <img class="rounded float-right width="20" height="20"" src="
-                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Jumlah coachee"/>
+                <img class="rounded float-right width=" 20" height="20"" src="
+                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coachee" />
                 <h2 class="font-weight-bolder text-center">{{$client}} Clients</h2>
               </div>
             </div>
@@ -80,9 +81,9 @@
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
-                <img class="rounded float-right width="20" height="20"" src="
-                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content=""/>
+                <img class="rounded float-right width=" 20" height="20"" src="
+                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="" />
                 <h2 class="font-weight-bolder text-center">21 Rating</h2>
               </div>
             </div>
@@ -95,9 +96,9 @@
                   alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Session
                 </small>
-                <img class="rounded float-right width="20" height="20"" src="
-                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Total sesi yang telah dilaksanakan"/>
+                <img class="rounded float-right width=" 20" height="20"" src="
+                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                 <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
               </div>
             </div>
@@ -149,7 +150,7 @@
       <!-- /card -->
       @endrole
       @role('coachee')
-        <h5>Dashboard Coachee</h5>
+      <h5>Dashboard Coachee</h5>
       @endrole
     </div>
   </div>

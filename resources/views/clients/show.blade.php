@@ -121,7 +121,7 @@
 
 											<!-- edit button -->
 											<button type="button" href="javascript:;" class="btn btn-primary editClient"
-												data-id={{$client->id}}>
+												data-id="{{$client->id}}">
 												Edit
 											</button>
 										</div>
@@ -902,6 +902,24 @@
 									});
 
 								});
+							});
+
+							$(document).on("click", ".editClient", function () {
+								// console.log('masuk');
+								// let detail_agenda_id = $(this).data('id');
+
+								// $.get("" +'/clients/' + detail_agenda_id +'/show_detail_feedbacks', function (data) {
+								// 	$('#modalHeading').html("Detail Feedbacks");
+								// 	$('#name').text(data.name);
+								// 	$('.session_feedback').html(data.session_name);
+								// 	$('.coach_name_feedback').html(data.name);
+								// 	$('.topic_feedback').html(data.topic);
+								// 	$('.feedback').html(data.feedback);
+									$('#modals-slide-in').modal('show');
+
+							
+
+								// });
 							});
 						});
 </script>
