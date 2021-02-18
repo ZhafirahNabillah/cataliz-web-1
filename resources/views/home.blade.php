@@ -39,26 +39,20 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                </div>
+                <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coach yang terdaftar" />
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 172.png') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Coach
-                </small>
-                <h2 class="font-weight-bolder text-center">... Coach</h2>
-
+                <small class="card text-center text-muted my-1">Total Coach</small>
+                <h2 class="font-weight-bolder text-center">{{$total_coach}} Coach</h2>
               </div>
             </div>
           </div>
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah client coachee yang terdaftar" />
-
+                <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah client coachee yang terdaftar" />
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 115.png') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Coachee
-                </small>
-                <h2 class="font-weight-bolder text-center">... Coachee</h2>
+                <small class="card text-center text-muted my-1">Total Coachee</small>
+                <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
               </div>
             </div>
           </div>
@@ -66,11 +60,10 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah plan yang terdaftar" />
+                <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah plan yang terdaftar" />
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 191.png') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Plan
-                </small>
-                <h2 class="font-weight-bolder text-center">... Plan</h2>
+                <small class="card text-center text-muted my-1">Total Plan</small>
+                <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
               </div>
             </div>
           </div>
@@ -78,12 +71,10 @@
           <div class="col-md-4 col-lg-3">
             <div class="card">
               <div class="card-body">
-                <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang terdaftar" />
-
+                <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang terdaftar" />
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 90.png') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Session
-                </small>
-                <h2 class="font-weight-bolder text-center">... Sessions</h2>
+                <small class="card text-center text-muted my-1">Total Session</small>
+                <h2 class="font-weight-bolder text-center">{{$total_sessions}} Sessions</h2>
               </div>
             </div>
           </div>
@@ -92,7 +83,7 @@
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title mb-1">List Agenda</h5>
-                <table class="datatables-basic table yajra-datatable1">
+                <table class="datatables-basic table admin-datatable-sessions">
                   <thead>
                     <tr>
                       <th>No</th>
@@ -512,6 +503,51 @@
         {
           data: 'duration',
           name: 'duration',
+          defaultContent: '<i>-</i>'
+        },
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
+    });
+
+    //admin yajra datatable for list sessions
+    var table = $('.admin-datatable-sessions').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'name',
+          name: 'name'
+        },
+        {
+          data: 'session_name',
+          name: 'session_name'
+        },
+        {
+          data: 'date',
+          name: 'date',
+          defaultContent: '<i>-</i>'
+        },
+        {
+          data: 'duration',
+          name: 'duration',
+          defaultContent: '<i>-</i>'
+        },
+        {
+          data: 'status',
+          name: 'status',
           defaultContent: '<i>-</i>'
         },
       ],
