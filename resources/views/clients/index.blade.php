@@ -18,7 +18,8 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">User List
-              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -40,14 +41,13 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Coach List
-              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">dashboard</a>
-                </li>
-                <li class="breadcrumb-item active">Coach List
-                </li>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">dashboard</a></li>
+                <li class="breadcrumb-item active">Coach List</li>
               </ol>
             </div>
           </div>
@@ -62,7 +62,8 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Client List
-              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -219,7 +220,8 @@
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="basic-icon-default-email">Email</label>
-                    <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+                    <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe
+                    @example.com" />
                     <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                   </div>
                   <div class="form-group">
@@ -272,7 +274,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
-                      <table class="datatables-basic table yajra-datatable-coach">
+                      <table class="datatables-basic table admin-datatable-coach">
                         <thead>
                           <tr>
                             <th>NO</th>
@@ -307,7 +309,7 @@
                 <div class="col-12">
                   <div class="card">
                     <div class="card-body">
-                      <table class="datatables-basic table yajra-datatable-coach">
+                      <table class="datatables-basic table admin-datatable-coachee">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -325,7 +327,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
         <!-- /coachee list admin -->
@@ -436,9 +437,8 @@
               dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
               displayLength: 7,
               lengthMenu: [7, 10, 25, 50, 75, 100],
-              @can('create-client')
+              @can ('create-client')
               buttons: [
-
                 {
                   text: feather.icons['plus'].toSvg({
                     class: 'mr-50 font-small-4'
@@ -504,6 +504,88 @@
               processing: true,
               serverSide: true,
               ajax: "",
+              columns: [{
+                  data: 'DT_RowIndex',
+                  name: 'DT_RowIndex'
+                },
+                {
+                  data: 'name',
+                  name: 'name'
+                },
+                {
+                  data: 'email',
+                  name: 'email',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'phone',
+                  name: 'phone',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+                },
+              ],
+              dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+              language: {
+                paginate: {
+                  // remove previous & next text from pagination
+                  previous: '&nbsp;',
+                  next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+              }
+            });
+
+            var table = $('.admin-datatable-coach').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('show_coach_list') }}",
+              columns: [{
+                  data: 'DT_RowIndex',
+                  name: 'DT_RowIndex'
+                },
+                {
+                  data: 'name',
+                  name: 'name'
+                },
+                {
+                  data: 'email',
+                  name: 'email',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'phone',
+                  name: 'phone',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+                },
+              ],
+              dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+              language: {
+                paginate: {
+                  // remove previous & next text from pagination
+                  previous: '&nbsp;',
+                  next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+              }
+            });
+
+            var table = $('.admin-datatable-coachee').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('show_coachee_list') }}",
               columns: [{
                   data: 'DT_RowIndex',
                   name: 'DT_RowIndex'

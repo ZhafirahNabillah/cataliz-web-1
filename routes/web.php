@@ -45,6 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::resource('roles', RoleController::class);
 	Route::resource('permissions', PermissionController::class);
 	Route::resource('users', UserController::class);
+	Route::get('/show_coach_list', [ClientController::class, 'show_coach_list'])->name('show_coach_list');
+	Route::get('/show_coachee_list', [ClientController::class, 'show_coachee_list'])->name('show_coachee_list');
 });
 
 //Middleware group for coach page
