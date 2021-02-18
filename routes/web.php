@@ -51,6 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
+	Route::get('/home/show_upcoming_list', [HomeController::class, 'show_upcoming_data'])->name('home.show_upcoming_list');
+	Route::post('/home/{id}/store', [HomeController::class, 'store_data'])->name('home.store_data');
+
 	//Route::resource('roles', RoleController::class);
 	Route::resource('coachs', CoachController::class);
 	Route::get('/coachs/{id}/profil', [CoachController::class, 'profil'])->name('coachs.profil');
