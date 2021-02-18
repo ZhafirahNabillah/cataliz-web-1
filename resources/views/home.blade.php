@@ -322,11 +322,8 @@
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coaching Hour
                 </small>
-                @if ($hours == null)
                 <h2 class="font-weight-bolder text-center">0 Hours</h2>
-                @else
-                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}} Hours</h2>
-                @endif
+                <h2 class="font-weight-bolder text-center">Hours</h2>
               </div>
             </div>
           </div>
@@ -339,7 +336,7 @@
                 <img class="rounded mx-auto d-block center" style="height: 80px;" src="{{ url('assets\images\icons\Group 172.png') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coach
                 </small>
-                <h2 class="font-weight-bolder text-center">{{$client}} Clients</h2>
+                <h2 class="font-weight-bolder text-center">Clients</h2>
               </div>
             </div>
           </div>
@@ -367,7 +364,7 @@
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Session
                 </small>
-                <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
+                <h2 class="font-weight-bolder text-center">Sessions</h2>
               </div>
             </div>
           </div>

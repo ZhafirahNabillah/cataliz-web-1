@@ -79,6 +79,8 @@ class HomeController extends Controller
         }
 
         return view('home', compact('total_coach','total_coachee','total_plans','total_sessions'));
+      }elseif (auth()->user()->hasRole('coachee')) {
+        return view('home');
       }
 
 
