@@ -35,7 +35,7 @@ class ClientController extends Controller
 
     if ($request->ajax()) {
       //get data of table
-      if (auth()->user()->role('admin')) {
+      if (auth()->user()->hasRole('admin')) {
         $data = Client::get();
       } elseif (auth()->user()->role('coach')) {
         $data = Client::where('owner_id', Auth::user()->id)->latest()->get();
