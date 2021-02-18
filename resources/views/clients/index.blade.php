@@ -119,6 +119,57 @@
             </div>
           </div>
         </div>
+
+        <!-- Modal Detail Coach -->
+        <div class="modal modal-slide-in fade" id="modals-slide-in" role="dialog" aria-hidden="true">
+          <div class="modal-dialog sidebar-sm" role="document">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
+            </div>
+            <input type="hidden" name="Client_id" id="Client_id">
+            <div class="modal-body flex-grow-1">
+              <dl class="row">
+                <dt class="col-sm-3">Full Name</dt>
+              </dl>
+              <dl class="row">
+                <small class="col-sm-3">#</small>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">Phone</dt>
+              </dl>
+              <dl class="row">
+                <small class="col-sm-3">#</small>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">Email</dt>
+              </dl>
+              <dl class="row">
+                <small class="col-sm-3">#</small>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">Total Coaching</dt>
+              </dl>
+              <dl class="row">
+                <small class="col-sm-3">#</small>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">Total Client</dt>
+              </dl>
+              <dl class="row">
+                <small class="col-sm-3">#</small>
+              </dl>
+              <dl class="row">
+                <dt class="col-sm-3">Rating</dt>
+              </dl>
+              <dl class="row">
+                <small class="col-sm-3">#</small>
+              </dl>
+            </div>
+            <!-- </Card modal>-->
+          </div>
+        </div>
+        <!-- End Modal -->
         @endrole
 
         @role('coach')
