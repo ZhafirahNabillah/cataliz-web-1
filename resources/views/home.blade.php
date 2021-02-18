@@ -68,7 +68,6 @@
             <div class="card">
               <div class="card-body">
                 <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah plan yang terdaftar" />
-
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 191.png') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Plan
                 </small>
@@ -141,14 +140,11 @@
 
               <div class="card-body">
                 <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+                  <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                 </div>
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coaching Hour
                 </small>
-                <img class="rounded float-right width=" 20" height="20"" src="
-                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                  data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                 @if ($hours == null)
                 <h2 class="font-weight-bolder text-center">0 Hours</h2>
                 @else
@@ -162,14 +158,11 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
+                  <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
                 </div>
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 84.jpg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Coachee
                 </small>
-                <img class="rounded float-right width=" 20" height="20"" src="
-                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                  data-placement="top" data-content="Jumlah coachee" />
                 <h2 class="font-weight-bolder text-center">{{$client}} Clients</h2>
               </div>
             </div>
@@ -179,14 +172,11 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="" />
+                  <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="" />
                 </div>
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 82.jpg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
-                <img class="rounded float-right width=" 20" height="20"" src="
-                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                  data-placement="top" data-content="" />
                 <h2 class="font-weight-bolder text-center">21 Rating</h2>
               </div>
             </div>
@@ -196,14 +186,11 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
+                  <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                 </div>
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Session
                 </small>
-                <img class="rounded float-right width=" 20" height="20"" src="
-                  {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                  data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                 <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
               </div>
             </div>
