@@ -44,7 +44,7 @@
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Coach List
                 </li>
@@ -90,25 +90,17 @@
       @endif
 
       @role('coachee')
-      <div class="row">
-        <!--
-            <div class="col-12">
-            <a href={{ route('clients.create')}} class="create-new btn btn-primary">Add New</a>
-          </div>
-        -->
-      </div>
       <!-- Basic table -->
       <section id="basic-datatable">
         <div class="row">
           <div class="col-12">
             <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table yajra-datatable">
+              <table class="datatables-basic table coachee-datatable-coach">
                 <thead>
                   <tr>
                     <th>No</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Program</th>
                     <th>Phone</th>
                     <th>Action</th>
                   </tr>
@@ -121,65 +113,65 @@
         </div>
 
         <!-- Modal Detail Coach -->
-        <div class="modal modal-slide-in fade" id="modals-slide-in" role="dialog" aria-hidden="true">
+        <div class="modal modal-slide-in fade" id="modals-slide-in-coach" role="dialog" aria-hidden="true">
           <div class="modal-dialog sidebar-sm" role="document">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-            <div class="modal-header mb-1">
-              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
+            <div class="modal-content">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalHeading"></h5>
+
+              </div>
+
+              <div class="modal-body flex-grow-1">
+                <div class="card-body">
+                  <dl class="row">
+                    <dt class="col-sm-6">Full Name</dt>
+                  </dl>
+                  <dl class="row">
+                    <small class="col-sm-6 name"></small>
+                  </dl>
+                  <dl class="row">
+                    <dt class="col-sm-6">Phone</dt>
+                  </dl>
+                  <dl class="row">
+                    <small class="col-sm-6 phone"></small>
+                  </dl>
+                  <dl class="row">
+                    <dt class="col-sm-6">Email</dt>
+                  </dl>
+                  <dl class="row">
+                    <small class="col-sm-6 email"></small>
+                  </dl>
+                  <dl class="row">
+                    <dt class="col-sm-6">Total Coaching</dt>
+                  </dl>
+                  <dl class="row">
+                    <small class="col-sm-6 total_coaching"></small>
+                  </dl>
+                  <dl class="row">
+                    <dt class="col-sm-6">Total Client</dt>
+                  </dl>
+                  <dl class="row">
+                    <small class="col-sm-6 total_client"></small>
+                  </dl>
+                  <dl class="row">
+                    <dt class="col-sm-6">Rating</dt>
+                  </dl>
+                  <dl class="row">
+                    <small class="col-sm-6 rating"></small>
+                  </dl>
+                </div>
+                <!-- </Card modal>-->
+              </div>
             </div>
-            <input type="hidden" name="Client_id" id="Client_id">
-            <div class="modal-body flex-grow-1">
-              <dl class="row">
-                <dt class="col-sm-3">Full Name</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-3">#</small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-3">Phone</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-3">#</small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-3">Email</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-3">#</small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-3">Total Coaching</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-3">#</small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-3">Total Client</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-3">#</small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-3">Rating</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-3">#</small>
-              </dl>
-            </div>
-            <!-- </Card modal>-->
           </div>
         </div>
         <!-- End Modal -->
         @endrole
 
         @role('coach')
-        <div class="row">
-          <!--
-            <div class="col-12">
-            <a href={{ route('clients.create')}} class="create-new btn btn-primary">Add New</a>
-          </div>
-        -->
-        </div>
         <!-- Basic table -->
         <section id="basic-datatable">
           <div class="row">
@@ -266,9 +258,9 @@
             </li>
           </ul>
 
-          <!-- Panel Coach -->
-          <div class="tab-pane" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-            <div class="tab-content">
+          <div class="tab-content">
+            <!-- Panel Coach -->
+            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
               <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                   <div class="row breadcrumbs-top">
@@ -279,41 +271,11 @@
               <div class="row">
                 <div class="col-12">
                   <div class="card">
-                    <table class="datatables-basic table yajra-datatable-coach">
-                      <thead>
-                        <tr>
-                          <th>NO</th>
-                          <th>Coach Name</th>
-                          <th>Email</th>
-                          <th>Handphone</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <!-- /coach list admin -->
-              <!-- /panel coach -->
-
-              <!-- Panel Coachee -->
-              <div class="tab-pane" id="coachee" aria-labelledby="about-tab" role="tabpanel">
-                <div class="content-header row">
-                  <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                    </div>
-                  </div>
-                </div>
-                <!-- coacheelist card -->
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
+                    <div class="card-body">
                       <table class="datatables-basic table yajra-datatable-coach">
                         <thead>
                           <tr>
-                            <th>.</th>
+                            <th>NO</th>
                             <th>Coach Name</th>
                             <th>Email</th>
                             <th>Handphone</th>
@@ -326,260 +288,354 @@
                     </div>
                   </div>
                 </div>
-                <!-- /coachee list admin -->
-                <!-- /panel coachee -->
-
-                @endrole
-
               </div>
             </div>
+            <!-- /coach list admin -->
+            <!-- /panel coach -->
+
+            <!-- Panel Coachee -->
+            <div class="tab-pane" id="coachee" aria-labelledby="about-tab" role="tabpanel">
+              <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                  <div class="row breadcrumbs-top">
+                  </div>
+                </div>
+              </div>
+              <!-- coacheelist card -->
+              <div class="row">
+
+                <div class="col-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <table class="datatables-basic table yajra-datatable-coach">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Coachee Name</th>
+                            <th>Email</th>
+                            <th>Handphone</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
-          <!-- END: Content-->
-          @endsection
+        </div>
+        <!-- /coachee list admin -->
+        <!-- /panel coachee -->
+        @endrole
 
-          @push('scripts')
-          <script>
-            $(function() {
+        <!-- END: Content-->
+        @endsection
 
-              $.ajaxSetup({
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-              var table = $('.yajra-datatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "",
-                columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                  },
-                  {
-                    data: 'name',
-                    name: 'name'
-                  },
-                  {
-                    data: 'email',
-                    name: 'email'
-                  },
-                  {
-                    data: 'program',
-                    name: 'program'
-                  },
-                  {
-                    data: 'phone',
-                    name: 'phone'
-                  },
-                  {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                  },
-                ],
-                columnDefs: [{
-                    // Avatar image/badge, Name and post
-                    targets: 1,
-                    responsivePriority: 4,
-                    render: function(data, type, full, meta) {
-                      var $user_img = full['avatar'],
+        @push('scripts')
+        <script>
+          $(function() {
+
+            $.ajaxSetup({
+              headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+              }
+            });
+            var table = $('.yajra-datatable').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "",
+              columns: [{
+                  data: 'DT_RowIndex',
+                  name: 'DT_RowIndex'
+                },
+                {
+                  data: 'name',
+                  name: 'name'
+                },
+                {
+                  data: 'email',
+                  name: 'email'
+                },
+                {
+                  data: 'program',
+                  name: 'program'
+                },
+                {
+                  data: 'phone',
+                  name: 'phone'
+                },
+                {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+                },
+              ],
+              columnDefs: [{
+                  // Avatar image/badge, Name and post
+                  targets: 1,
+                  responsivePriority: 4,
+                  render: function(data, type, full, meta) {
+                    var $user_img = full['avatar'],
+                      $name = full['name'],
+                      $post = full['company'];
+                    $org = full['organization'];
+                    if ($user_img) {
+                      // For Avatar image
+                      var $output =
+                        '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
+                    } else {
+                      // For Avatar badge
+                      var stateNum = full['status'];
+                      var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+                      var $state = states[stateNum],
                         $name = full['name'],
-                        $post = full['company'];
-                      $org = full['organization'];
-                      if ($user_img) {
-                        // For Avatar image
-                        var $output =
-                          '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
-                      } else {
-                        // For Avatar badge
-                        var stateNum = full['status'];
-                        var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-                        var $state = states[stateNum],
-                          $name = full['name'],
-                          $initials = $name.match(/\b\w/g) || [];
-                        $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-                        $output = '<span class="avatar-content">' + $initials + '</span>';
-                      }
-
-                      var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
-                      // Creates full output for row
-                      var $row_output =
-                        '<div class="d-flex justify-content-left align-items-center">' +
-                        '<div class="avatar ' +
-                        colorClass +
-                        ' mr-1">' +
-                        $output +
-                        '</div>' +
-                        '<div class="d-flex flex-column">' +
-                        '<span class="emp_name text-truncate font-weight-bold">' +
-                        $name +
-                        '</span>' +
-                        '<small class="emp_post text-truncate text-muted">' +
-                        $post + ' - ' + $org +
-                        '</small>' +
-                        '</div>' +
-                        '</div>';
-                      return $row_output;
+                        $initials = $name.match(/\b\w/g) || [];
+                      $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+                      $output = '<span class="avatar-content">' + $initials + '</span>';
                     }
-                  },
-                  {
-                    targets: 4,
-                    render: function(data, type, full, meta) {
-                      var $phone = full['phone'],
-                        $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-                        '</div>';
-                      return $output;
-                    }
-                  }
-                ],
-                order: [
-                  [2, 'desc']
-                ],
-                dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-                displayLength: 7,
-                lengthMenu: [7, 10, 25, 50, 75, 100],
-                @can('create-client')
-                buttons: [
 
-                  {
-                    text: feather.icons['plus'].toSvg({
-                      class: 'mr-50 font-small-4'
-                    }) + 'Add Client',
-                    className: 'create-new btn btn-primary createNewClient ',
-                    attr: {
-                      'data-toggle': 'modal'
-
-                    },
-                    init: function(api, node, config) {
-                      $(node).removeClass('btn-secondary');
-                    }
-                  }
-                ],
-                @endcan
-                responsive: {
-                  details: {
-                    display: $.fn.dataTable.Responsive.display.modal({
-                      header: function(row) {
-                        var data = row.data();
-                        return 'Details of ' + data['name'];
-                      }
-                    }),
-                    type: 'column',
-                    renderer: function(api, rowIdx, columns) {
-                      var data = $.map(columns, function(col, i) {
-                        console.log(columns);
-                        return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                          ?
-                          '<tr data-dt-row="' +
-                          col.rowIndex +
-                          '" data-dt-column="' +
-                          col.columnIndex +
-                          '">' +
-                          '<td>' +
-                          col.title +
-                          ':' +
-                          '</td> ' +
-                          '<td>' +
-                          col.data +
-                          '</td>' +
-                          '</tr>' :
-                          '';
-                      }).join('');
-
-                      return data ? $('<table class="table"/>').append(data) : false;
-                    }
+                    var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
+                    // Creates full output for row
+                    var $row_output =
+                      '<div class="d-flex justify-content-left align-items-center">' +
+                      '<div class="avatar ' +
+                      colorClass +
+                      ' mr-1">' +
+                      $output +
+                      '</div>' +
+                      '<div class="d-flex flex-column">' +
+                      '<span class="emp_name text-truncate font-weight-bold">' +
+                      $name +
+                      '</span>' +
+                      '<small class="emp_post text-truncate text-muted">' +
+                      $post + ' - ' + $org +
+                      '</small>' +
+                      '</div>' +
+                      '</div>';
+                    return $row_output;
                   }
                 },
-                language: {
-                  paginate: {
-                    // remove previous & next text from pagination
-                    previous: '&nbsp;',
-                    next: '&nbsp;'
-                  },
-                  search: "<i data-feather='search'></i>",
-                  searchPlaceholder: "Search records"
+                {
+                  targets: 4,
+                  render: function(data, type, full, meta) {
+                    var $phone = full['phone'],
+                      $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
+                      '</div>';
+                    return $output;
+                  }
                 }
+              ],
+              order: [
+                [2, 'desc']
+              ],
+              dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+              displayLength: 7,
+              lengthMenu: [7, 10, 25, 50, 75, 100],
+              @can('create-client')
+              buttons: [
 
-              });
+                {
+                  text: feather.icons['plus'].toSvg({
+                    class: 'mr-50 font-small-4'
+                  }) + 'Add Client',
+                  className: 'create-new btn btn-primary createNewClient ',
+                  attr: {
+                    'data-toggle': 'modal'
 
-              // create
-              $('body').on('click', '.createNewClient', function() {
-                $('#saveBtn').val("create-Client");
-                $('#Customer_id').val('');
-                $('#ClientForm').trigger("reset");
-                $('#modalHeading').html("Create New Client");
+                  },
+                  init: function(api, node, config) {
+                    $(node).removeClass('btn-secondary');
+                  }
+                }
+              ],
+              @endcan
+              responsive: {
+                details: {
+                  display: $.fn.dataTable.Responsive.display.modal({
+                    header: function(row) {
+                      var data = row.data();
+                      return 'Details of ' + data['name'];
+                    }
+                  }),
+                  type: 'column',
+                  renderer: function(api, rowIdx, columns) {
+                    var data = $.map(columns, function(col, i) {
+                      console.log(columns);
+                      return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                        ?
+                        '<tr data-dt-row="' +
+                        col.rowIndex +
+                        '" data-dt-column="' +
+                        col.columnIndex +
+                        '">' +
+                        '<td>' +
+                        col.title +
+                        ':' +
+                        '</td> ' +
+                        '<td>' +
+                        col.data +
+                        '</td>' +
+                        '</tr>' :
+                        '';
+                    }).join('');
+
+                    return data ? $('<table class="table"/>').append(data) : false;
+                  }
+                }
+              },
+              language: {
+                paginate: {
+                  // remove previous & next text from pagination
+                  previous: '&nbsp;',
+                  next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+              }
+
+            });
+
+            var table = $('.coachee-datatable-coach').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "",
+              columns: [{
+                  data: 'DT_RowIndex',
+                  name: 'DT_RowIndex'
+                },
+                {
+                  data: 'name',
+                  name: 'name'
+                },
+                {
+                  data: 'email',
+                  name: 'email',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'phone',
+                  name: 'phone',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+                },
+              ],
+              dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+              language: {
+                paginate: {
+                  // remove previous & next text from pagination
+                  previous: '&nbsp;',
+                  next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+              }
+            });
+
+            // create
+            $('body').on('click', '.createNewClient', function() {
+              $('#saveBtn').val("create-Client");
+              $('#Customer_id').val('');
+              $('#ClientForm').trigger("reset");
+              $('#modalHeading').html("Create New Client");
+              $('#modals-slide-in').modal('show');
+            });
+
+            // edit client
+            $('body').on('click', '.editClient', function() {
+              var Client_id = $(this).data('id');
+              $.get("" + '/clients/' + Client_id + '/edit', function(data) {
+                $('#modalHeading').html("Edit Client");
+                $('#saveBtn').val("edit-user");
                 $('#modals-slide-in').modal('show');
-              });
+                $('#Client_id').val(data.id);
+                $('#name').val(data.name);
+                $('#phone').val(data.phone);
+                $('#email').val(data.email);
+                $('#company').val(data.company);
+                $('#organization').val(data.organization);
+                $('#occupation').val(data.occupation);
+              })
+            });
 
-              // edit
-              $('body').on('click', '.editClient', function() {
-                var Client_id = $(this).data('id');
-                $.get("" + '/clients/' + Client_id + '/edit', function(data) {
-                  $('#modalHeading').html("Edit Client");
-                  $('#saveBtn').val("edit-user");
-                  $('#modals-slide-in').modal('show');
-                  $('#Client_id').val(data.id);
-                  $('#name').val(data.name);
-                  $('#phone').val(data.phone);
-                  $('#email').val(data.email);
-                  $('#company').val(data.company);
-                  $('#organization').val(data.organization);
-                  $('#occupation').val(data.occupation);
-                })
-              });
+            // show detail coach on coachee page
+            $('body').on('click', '.detailCoach', function() {
+              var coach_id = $(this).data('id');
+              $.get("" + '/users/' + coach_id + '/edit', function(data) {
+                console.log(data);
+                $('#modalHeading').html("Detail Coach");
+                $('#saveBtn').val("edit-user");
+                $('#modals-slide-in-coach').modal('show');
+                $('#coach_id').val(data.id);
+                $('.name').html(data.user.name);
+                $('.phone').html(data.user.phone);
+                $('.email').html(data.user.email);
+                $('.total_coaching').html(data.total_coaching);
+                $('.total_client').html(data.total_client);
+              })
+            });
 
-              // save data
-              $('#saveBtn').click(function(e) {
-                e.preventDefault();
-                $(this).html('Sending..');
+            // save data
+            $('#saveBtn').click(function(e) {
+              e.preventDefault();
+              $(this).html('Sending..');
+
+              $.ajax({
+                data: $('#ClientForm').serialize(),
+                url: "",
+                type: "POST",
+                dataType: 'json',
+                success: function(data) {
+
+                  $('#ClientForm').trigger("reset");
+                  $('#saveBtn').html('Submit');
+                  $('#modals-slide-in').modal('hide');
+                  table.draw();
+
+                },
+                error: function(data) {
+                  console.log('Error:', data);
+                  $('#saveBtn').html('Submit');
+                }
+              });
+            });
+
+
+            // delete
+            $('body').on('click', '.deleteClient', function(e) {
+
+              var Client_id = $(this).data("id");
+              if (confirm("Are You sure want to delete !")) {
 
                 $.ajax({
-                  data: $('#ClientForm').serialize(),
-                  url: "",
-                  type: "POST",
-                  dataType: 'json',
+                  type: "DELETE",
+                  url: "" + '/clients/' + Client_id,
                   success: function(data) {
-
-                    $('#ClientForm').trigger("reset");
-                    $('#saveBtn').html('Submit');
-                    $('#modals-slide-in').modal('hide');
                     table.draw();
-
                   },
                   error: function(data) {
                     console.log('Error:', data);
-                    $('#saveBtn').html('Submit');
                   }
                 });
-              });
-
-
-              // delete
-              $('body').on('click', '.deleteClient', function(e) {
-
-                var Client_id = $(this).data("id");
-                if (confirm("Are You sure want to delete !")) {
-
-                  $.ajax({
-                    type: "DELETE",
-                    url: "" + '/clients/' + Client_id,
-                    success: function(data) {
-                      table.draw();
-                    },
-                    error: function(data) {
-                      console.log('Error:', data);
-                    }
-                  });
-                } else {
-                  e.preventDefault();
-                }
-              });
-
-              // popover
-              $(function() {
-                $('[data-toggle="popover"]').popover()
-              })
-
+              } else {
+                e.preventDefault();
+              }
             });
-          </script>
-          @endpush
+
+            // popover
+            $(function() {
+              $('[data-toggle="popover"]').popover()
+            })
+
+          });
+        </script>
+        @endpush
