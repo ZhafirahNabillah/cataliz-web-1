@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Agenda_detail;
+use App\Models\Client;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DataTables;
@@ -37,8 +39,16 @@ class UserController extends Controller
     public function edit($id)
     {
       //
-      $user = User::with('roles')->where('id',$id)->first();
-      return response()->json($user);
+
+      if (auth()->user()->hasRole('coachee')) {
+        $user = User::with('roles')->where('id',$id)->first();
+        $total_coaching = Agenda_detail::join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')->where('agendas.owner_id','=',$id)->count();
+        $total_client = Client::where('owner_id',$id)->count();
+
+        return response()->json(array('total_coaching' => $total_coaching, 'total_client' => $total_client, 'user' => $user));
+      }
+
+      // return response()->json($user);
     }
 
     public function store(Request $request){

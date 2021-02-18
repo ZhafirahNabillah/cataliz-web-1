@@ -44,7 +44,7 @@
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">dashboard</a>
                 </li>
                 <li class="breadcrumb-item active">Coach List
                 </li>
@@ -90,25 +90,17 @@
       @endif
 
       @role('coachee')
-      <div class="row">
-        <!--
-            <div class="col-12">
-            <a href={{ route('clients.create')}} class="create-new btn btn-primary">Add New</a>
-          </div>
-        -->
-      </div>
       <!-- Basic table -->
       <section id="basic-datatable">
         <div class="row">
           <div class="col-12">
             <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table yajra-datatable">
+              <table class="datatables-basic table coachee-datatable-coach">
                 <thead>
                   <tr>
                     <th>No</th>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Program</th>
                     <th>Phone</th>
                     <th>Action</th>
                   </tr>
@@ -121,49 +113,49 @@
         </div>
 
         <!-- Modal Detail Coach -->
-        <div class="modal modal-slide-in fade" id="modals-slide-in" role="dialog" aria-hidden="true">
+        <div class="modal modal-slide-in fade" id="modals-slide-in-coach" role="dialog" aria-hidden="true">
           <div class="modal-dialog sidebar-sm" role="document">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
             <div class="modal-header mb-1">
               <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
             </div>
-            <input type="hidden" name="Client_id" id="Client_id">
+            <input type="hidden" name="coach_id" id="coach_id">
             <div class="modal-body flex-grow-1">
               <dl class="row">
                 <dt class="col-sm-3">Full Name</dt>
               </dl>
               <dl class="row">
-                <small class="col-sm-3">#</small>
+                <small class="col-sm-3 name"></small>
               </dl>
               <dl class="row">
                 <dt class="col-sm-3">Phone</dt>
               </dl>
               <dl class="row">
-                <small class="col-sm-3">#</small>
+                <small class="col-sm-3 phone"></small>
               </dl>
               <dl class="row">
                 <dt class="col-sm-3">Email</dt>
               </dl>
               <dl class="row">
-                <small class="col-sm-3">#</small>
+                <small class="col-sm-3 email"></small>
               </dl>
               <dl class="row">
                 <dt class="col-sm-3">Total Coaching</dt>
               </dl>
               <dl class="row">
-                <small class="col-sm-3">#</small>
+                <small class="col-sm-3 total_coaching"></small>
               </dl>
               <dl class="row">
                 <dt class="col-sm-3">Total Client</dt>
               </dl>
               <dl class="row">
-                <small class="col-sm-3">#</small>
+                <small class="col-sm-3 total_client"></small>
               </dl>
               <dl class="row">
                 <dt class="col-sm-3">Rating</dt>
               </dl>
               <dl class="row">
-                <small class="col-sm-3">#</small>
+                <small class="col-sm-3 rating"></small>
               </dl>
             </div>
             <!-- </Card modal>-->
@@ -173,13 +165,6 @@
         @endrole
 
         @role('coach')
-        <div class="row">
-          <!--
-            <div class="col-12">
-            <a href={{ route('clients.create')}} class="create-new btn btn-primary">Add New</a>
-          </div>
-        -->
-        </div>
         <!-- Basic table -->
         <section id="basic-datatable">
           <div class="row">
@@ -502,6 +487,47 @@
 
               });
 
+              var table = $('.coachee-datatable-coach').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "",
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                  },
+                  {
+                    data: 'name',
+                    name: 'name'
+                  },
+                  {
+                    data: 'email',
+                    name: 'email',
+                    defaultContent: '<i>-</i>'
+                  },
+                  {
+                    data: 'phone',
+                    name: 'phone',
+                    defaultContent: '<i>-</i>'
+                  },
+                  {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                  },
+                ],
+                dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                language: {
+                  paginate: {
+                    // remove previous & next text from pagination
+                    previous: '&nbsp;',
+                    next: '&nbsp;'
+                  },
+                  search: "<i data-feather='search'></i>",
+                  searchPlaceholder: "Search records"
+                }
+              });
+
               // create
               $('body').on('click', '.createNewClient', function() {
                 $('#saveBtn').val("create-Client");
@@ -511,7 +537,7 @@
                 $('#modals-slide-in').modal('show');
               });
 
-              // edit
+              // edit client
               $('body').on('click', '.editClient', function() {
                 var Client_id = $(this).data('id');
                 $.get("" + '/clients/' + Client_id + '/edit', function(data) {
@@ -525,6 +551,23 @@
                   $('#company').val(data.company);
                   $('#organization').val(data.organization);
                   $('#occupation').val(data.occupation);
+                })
+              });
+
+              // show detail coach on coachee page
+              $('body').on('click', '.detailCoach', function() {
+                var coach_id = $(this).data('id');
+                $.get("" + '/users/' + coach_id + '/edit', function(data) {
+                  console.log(data);
+                  $('#modalHeading').html("Edit Client");
+                  $('#saveBtn').val("edit-user");
+                  $('#modals-slide-in-coach').modal('show');
+                  $('#coach_id').val(data.id);
+                  $('.name').html(data.user.name);
+                  $('.phone').html(data.user.phone);
+                  $('.email').html(data.user.email);
+                  $('.total_coaching').html(data.total_coaching);
+                  $('.total_client').html(data.total_client);
                 })
               });
 
