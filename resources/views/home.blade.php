@@ -17,10 +17,9 @@
     <div class="content-body">
 
       @role('admin')
-      <h5>Dashboard admin</h5>
       <section id="card-demo-example">
         <div class="row match-height">
-          <div class="container">
+          <div class="container-fluid">
             <div class="row justify-content-left">
               <div class="col-md-3">
                 <div class="card">
@@ -118,7 +117,7 @@
       @role('coach')
       <section id="card-demo-example">
         <div class="row match-height">
-          <div class="container">
+          <div class="container-fluid">
             <div class="row justify-content-left">
               <div class="col-md-3">
                 <div class="card">
@@ -132,6 +131,8 @@
                     {{auth()->user()->name . ", You are logged in!"}}
                   </div>
                 </div>
+              </div>
+              <div class="col-md-9 col-lg-9">
               </div>
             </div>
           </div>
@@ -242,10 +243,70 @@
       <!-- /card -->
       @endrole
       @role('coachee')
-      <h5>Dashboard Coachee</h5>
       <section id="card-demo-example">
         <div class="row match-height">
-          <div class="container ">
+          <div class="container-fluid">
+            <div class="row justify-content-left position-relative">
+              <div class="col-md-12 col-lg-12">
+                <div class="card text-white bg-warning mb-3">
+                  <div class="card-body">
+                    <a class="text-white" href="#modals-slide-in"> Welcome Your Name, Yuk Lengkapi Akunmu Untuk Lebih Menikmati Layanan Kami !</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal to Edit Profile -->
+          <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+            <div class="modal-dialog sidebar-sm">
+              <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+                <div class="modal-header mb-1">
+                  <h5 class="modal-title" id="modalHeading"></h5>
+                </div>
+                <input type="hidden" name="Client_id" id="Client_id">
+                <div class="modal-body flex-grow-1">
+                  <div class="form-group">
+                    <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                    <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+                  </div>
+                  <label class="form-label" for="basic-icon-default-post">Phone</label>
+                  <div class="input-group input-group-merge mb-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon5">+62</span>
+                    </div>
+                    <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="basic-icon-default-email">Email</label>
+                    <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" disabled />
+                    <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="basic-icon-default-fullname">Organization</label>
+                    <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="basic-icon-default-fullname">Company</label>
+                    <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+                    <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                </div>
+                <!-- </form>-->
+
+            </div>
+          </div>
+          <!-- End Modal -->
+
+          <div class="container-fluid">
             <div class="row justify-content-left position-relative">
               <div class="col-md-4 col-lg-3">
                 <div class="card  ">
