@@ -263,7 +263,8 @@
           <!-- Modal to Edit Profile -->
           <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
             <div class="modal-dialog sidebar-sm">
-              <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('home.store_data', Auth::user()->id)}}">
+              <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
+                action="{{route('home.store_data', $data->id)}}">
                 @csrf
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">

@@ -237,14 +237,6 @@ class AgendaController extends Controller
   {
     // dd($request);
 
-    $this->validate($request, [
-      'subject'       => 'required',
-      'summary'       => 'required',
-    ], [
-      'subject.required'       => "Silahkan isi subject note anda terlebih dahulu!",
-      'summary.required'       => "Silahkan isi summary note anda terlebih dahulu!",
-    ]);
-
     $agenda_detail = Agenda_detail::where('id', $id)->first();
 
     if ($request->has('feedback')) {
@@ -269,7 +261,20 @@ class AgendaController extends Controller
     }
     $agenda_detail->update();
 
-    $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id], ['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
+    if ($request->hasAny('subject','summary')) {
+
+      $this->validate($request, [
+        'subject'       => 'required',
+        'summary'       => 'required',
+      ], [
+        'subject.required'       => "Silahkan isi subject note anda terlebih dahulu!",
+        'summary.required'       => "Silahkan isi summary note anda terlebih dahulu!",
+      ]);
+
+
+      $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id], ['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
+    }
+
 
     if ($request->hasFile('note_attachment')) {
       $this->validate($request, [

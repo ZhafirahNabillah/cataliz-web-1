@@ -95,7 +95,7 @@ class HomeController extends Controller
                 ->where('clients.user_id', Auth::user()->id)->first();
 
             $data = Client::select('clients.id', 'clients.name', 'clients.phone', 'clients.email', 'clients.company', 'clients.occupation', 'clients.organization')
-                ->join('users', 'users.id', '=', 'clients.id')
+                ->join('users', 'users.id', '=', 'clients.user_id')
                 ->where('clients.user_id', Auth::user()->id)
                 ->first();
             return view('home', compact('hours', 'total_coach', 'session', 'data'));
@@ -160,7 +160,7 @@ class HomeController extends Controller
         $client->company = $request->company;
         $client->occupation = $request->occupation;
         $client->update();
-
+        // return $client;
         return redirect('/dashboard');
     }
 }
