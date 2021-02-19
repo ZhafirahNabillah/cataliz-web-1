@@ -163,6 +163,9 @@
 											<div class="card style=" width: 18rem;" style="border-radius: 11px"">
 
 												<div class=" card-header">
+												<div>
+													<img class=" rounded float-left" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi yang dimiliki oleh client yang dipilih." />
+												</div>
 												<div class="card-body flex-column align-items-start pb-0">
 													<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
 												</div>
@@ -179,7 +182,10 @@
 									<!-- Number of Agenda -->
 									<div class="col-lg-4 col-sm-4 col-6">
 										<div class="card style=" width: 18rem;" style="border-radius: 11px"">
-												<div class=" card-header mb-0">
+									<div class=" card-header mb-0">
+											<div>
+												<img class=" rounded float-left" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya agenda yang dimiliki oleh client yang dipilih." />
+											</div>
 											<div class="card-body flex-column align-items-start pb-0">
 												<img class="rounded float-right width=" 55" height="55"" src=" {{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
 											</div>
@@ -196,7 +202,10 @@
 								<!-- Number of Event -->
 								<div class="col-lg-4 col-sm-4 col-6">
 									<div class="card style=" width: 18rem;" style="border-radius: 11px"">
-												<div class=" card-header">
+										<div class=" card-header">
+										<div>
+											<img class=" rounded float-left" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi dengan status scheduled yang dimiliki oleh client yang dipilih." />
+										</div>
 										<div class="card-body flex-column align-items-start pb-0">
 											<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
 										</div>
@@ -217,7 +226,9 @@
 							<!-- Upcoming event -->
 							<div class="card" style="border-radius: 11px">
 								<div class="card-body">
-									<h5 class="card-title mb-1">Upcoming Event</h5>
+									<h5 class="card-title mb-1">Upcoming Event
+										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bgaian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat" />
+									</h5>
 									<table class="datatables-basic table yajra-datatable">
 										<thead>
 											<tr>
@@ -238,7 +249,9 @@
 							<!-- List Agenda-->
 							<div class="card" style="border-radius: 11px">
 								<div class="card-body">
-									<h5 class="card-title mb-1">List Agenda</h5>
+									<h5 class="card-title mb-1">List Agenda
+										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+									</h5>
 									<table class="datatables-basic table yajra-datatable1">
 										<thead>
 											<tr>
@@ -273,7 +286,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Sessions
-								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
 							</h4>
 						</div>
 					</div>
@@ -315,7 +328,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Coaching Plans
-								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -353,7 +366,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Coaching Notes
-								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>

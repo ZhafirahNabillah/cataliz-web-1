@@ -18,8 +18,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">User List
-              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -41,8 +40,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Coach List
-              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+
+              <img class="align-text  width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -62,8 +62,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Client List
-              <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -437,22 +436,20 @@
               dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
               displayLength: 7,
               lengthMenu: [7, 10, 25, 50, 75, 100],
-              @can ('create-client')
-              buttons: [
-                {
-                  text: feather.icons['plus'].toSvg({
-                    class: 'mr-50 font-small-4'
-                  }) + 'Add Client',
-                  className: 'create-new btn btn-primary createNewClient ',
-                  attr: {
-                    'data-toggle': 'modal'
+              @can('create-client')
+              buttons: [{
+                text: feather.icons['plus'].toSvg({
+                  class: 'mr-50 font-small-4'
+                }) + 'Add Client',
+                className: 'create-new btn btn-primary createNewClient ',
+                attr: {
+                  'data-toggle': 'modal'
 
-                  },
-                  init: function(api, node, config) {
-                    $(node).removeClass('btn-secondary');
-                  }
+                },
+                init: function(api, node, config) {
+                  $(node).removeClass('btn-secondary');
                 }
-              ],
+              }],
               @endcan
               responsive: {
                 details: {
