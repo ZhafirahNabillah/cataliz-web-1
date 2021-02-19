@@ -46,42 +46,119 @@
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			@endif
+			<section id="card-demo-example ">
+				<div class="row match-height align-middle">
+					<div class="col-auto">
 
-			<div class="row mb-1 no-gutters">
-				<div class="col-md-12">
-					@can('create-agenda')
-					<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
-					@endcan
-				</div>
-			</div>
-
-			<!-- Basic table -->
-			<section id="basic-datatable">
-				<div class="row">
-					<div class="col-12">
+					</div>
+					<div class="col-auto">
 						<div class="card">
-							<table class="datatables-basic table yajra-datatable">
-								<thead>
-									<tr>
-										<th>No</th>
-										<th>Name</th>
-										<th>Session</th>
-										<th>Date</th>
-										<th>Duration</th>
-										<th>Status</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tbody>
-								</tbody>
-							</table>
+							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+								<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+							</div>
+							<div class="card-body" style="padding-top: 1px;">
+								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
+								<small class="card text-center  mb-1">Unscheduled Sessions
+								</small>
+								<h2 class="font-weight-bolder text-center " style="font-size: 72px;margin-top: -24px;"> 0</h2>
+							</div>
 						</div>
 					</div>
+
+					<div class="col-auto">
+						<div class="card">
+							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+								<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+							</div>
+							<div class="card-body" style="padding-top: 1px;">
+								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
+								<small class="card text-center  mb-1">Scheduled Sessions
+								</small>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-auto">
+						<div class="card">
+							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+								<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+							</div>
+							<div class="card-body" style="padding-top: 1px;">
+								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
+								<small class="card text-center  mb-1">Reschedule Sessions
+								</small>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-auto">
+						<div class="card">
+							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+								<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+							</div>
+							<div class="card-body" style="padding-top: 1px;">
+								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
+								<small class="card text-center  mb-1">Canceled Sessions
+								</small>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-auto">
+						<div class="card">
+							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+								<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+							</div>
+							<div class="card-body" style="padding-top: 1px;">
+								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
+								<small class="card text-center  mb-1">Finished Sessions
+								</small>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+							</div>
+						</div>
+					</div>
+
 				</div>
-			</section>
-			<!--/ Basic table -->
 		</div>
+
+		<div class="row mb-1 no-gutters">
+			<div class="col-md-12">
+				@can('create-agenda')
+				<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
+				@endcan
+			</div>
+		</div>
+
+		<!-- Basic table -->
+		<section id="basic-datatable">
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<table class="datatables-basic table yajra-datatable">
+							<thead>
+								<tr>
+									<th>No</th>
+									<th>Name</th>
+									<th>Session</th>
+									<th>Date</th>
+									<th>Duration</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!--/ Basic table -->
 	</div>
+</div>
 </div>
 <!-- END: Content-->
 @endsection
