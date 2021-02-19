@@ -22,10 +22,7 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-							<img class="rounded float-right width=" 20" height="20"" src="
-								{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-								data-placement="top"
-								data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
+							<img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
@@ -58,16 +55,14 @@
 					<div class="col-sm-12 ">
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
@@ -79,11 +74,8 @@
 							<!-- tabs pill -->
 							<div class="profile-header-nav position-relative">
 								<!-- navbar -->
-								<nav
-									class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-										aria-label="Toggle navigation">
+								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -92,24 +84,20 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 											</ul>
 										</div>
 
 										<!-- edit button -->
 										<div class="btn-group dropleft " style="z-index:99">
-											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
-												aria-haspopup="true" aria-expanded="false">
+											<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												Edit
 											</button>
 											<div class="dropdown-menu " style="z-index:99">
-												<a class="dropdown-item" style="z-index:99" data-toggle="modal"
-													data-target="#exampleModal">Profile Picture
+												<a class="dropdown-item" style="z-index:99" data-toggle="modal" data-target="#exampleModal">Profile Picture
 												</a>
-												<a class="dropdown-item position-relative" style="z-index:99" data-toggle="modal"
-													data-target="#exampleModal2">Cover Picture
+												<a class="dropdown-item position-relative" style="z-index:99" data-toggle="modal" data-target="#exampleModal2">Cover Picture
 												</a>
 											</div>
 										</div>
@@ -117,8 +105,7 @@
 										<!-- /edit button -->
 
 										<!-- Modal Profil-->
-										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-											aria-hidden="true">
+										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -129,8 +116,7 @@
 													</div>
 
 													<div class="modal-body">
-														<form action="{{route('coachs.update_profil', Auth::user()->id)}}" method="POST"
-															enctype="multipart/form-data">
+														<form action="{{route('coachs.update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
 															<input type="file" name="profil_picture" id="profil_picture">
 													</div>
@@ -145,8 +131,7 @@
 										<!--/ Modal Profil -->
 
 										<!-- Modal Background-->
-										<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-											aria-hidden="true">
+										<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -156,8 +141,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														<form action="{{route('coachs.update_background', Auth::user()->id)}}" method="POST"
-															enctype="multipart/form-data">
+														<form action="{{route('coachs.update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
 															<input type="file" name="background_picture" id="background_picture">
 													</div>
@@ -219,10 +203,7 @@
 											<div class="card">
 												<div class="card-header">
 													<h4 class="card-title">Change Password
-														<img class="rounded float-right width=" 20" height="20"" src="
-															{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-															data-placement="top"
-															data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
+														<img class="text-align width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
 													</h4>
 												</div>
 												<div class="container">
@@ -239,8 +220,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">Old password</label>
-													<input class="form-control @error('old_password') is-invalid @enderror" type="password"
-														name="old_password" placeholder="Type old password here...">
+													<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
 													@error('old_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -250,8 +230,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">New Password</label>
-													<input class="form-control @error('new_password') is-invalid @enderror" type="password"
-														name="new_password" placeholder="Type new password here...">
+													<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
 													@error('new_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -261,8 +240,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">Confirm New Password</label>
-													<input class="form-control @error('new_confirm_password') is-invalid @enderror"
-														type="password" name="new_confirm_password" placeholder="New password confirmation">
+													<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
 													@error('new_confirm_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -271,8 +249,7 @@
 												</div>
 
 												<div class="col-md-12 form-group">
-													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-														value="create">Save
+													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save
 														Change</button>
 												</div>
 											</div>
@@ -298,16 +275,14 @@
 					<div class="col-12">
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
@@ -320,9 +295,7 @@
 							<div class="profile-header-nav">
 								<!-- navbar -->
 								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-										aria-label="Toggle navigation">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -331,38 +304,31 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile"
-														role="tab" aria-selected="false">Sessions</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile" role="tab" aria-selected="false">Sessions</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingPlan"
-														aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingPlan" aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingNotes"
-														aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingNotes" aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback"
-														aria-controls="profile" role="tab" aria-selected="false">Feedbacks</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedbacks</a>
 												</li>
 
 											</ul>
 
 											<!-- edit button -->
 
-											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil"
-												 aria-expanded="false" id="edit_profil">
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
 
 											<!-- modal edit-->
-											<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog"
-												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -373,20 +339,17 @@
 														<div class="modal-body">
 															<div class="container">
 																<div class="col-3">
-																	<button type="button" class="btn btn-primary" data-toggle="dropdown"
-																		aria-haspopup="true" aria-expanded="false">
+																	<button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																		Foto Profile
 																	</button>
 																</div>
 																<div class="col-3">
-																	<button type="button" class="btn btn-primary" data-toggle="dropdown"
-																		aria-haspopup="true" aria-expanded="false">
+																	<button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																		Cover Backgound
 																	</button>
 																</div>
 																<div class="col-3">
-																	<button type="button" class="btn btn-primary" data-toggle="dropdown"
-																		aria-haspopup="true" aria-expanded="false">
+																	<button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 																		Profile
 																	</button>
 																</div>
@@ -457,14 +420,10 @@
 
 											<div class=" card-title">
 												<div class="card-body flex-column align-items-start pb-0">
-													<img class="rounded float-left width=" 15px" height="15px"" src="
-														{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-														data-placement="top"
-														data-content="Bagian ini menampilkan banyaknya sesi yang dimiliki oleh client yang dipilih." />
+													<img class="rounded float-left width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi yang dimiliki oleh client yang dipilih." />
 												</div>
 												<div class="card-body flex-column align-items-start pb-0">
-													<img class="rounded float-right width=" 60" height="60"" src="
-														{{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
+													<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
 												</div>
 											</div>
 
@@ -482,14 +441,10 @@
 
 										<div class=" card-title">
 											<div class="card-body flex-column align-items-start pb-0">
-												<img class="rounded float-left width=" 15px" height="15px"" src="
-													{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-													data-placement="top"
-													data-content="Bagian ini menampilkan banyaknya agenda yang dimiliki oleh client yang dipilih." />
+												<img class="rounded float-left width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya agenda yang dimiliki oleh client yang dipilih." />
 											</div>
 											<div class="card-body flex-column align-items-start pb-0">
-												<img class="rounded float-right width=" 55" height="55"" src="
-													{{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
+												<img class="rounded float-right width=" 55" height="55"" src=" {{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
 											</div>
 										</div>
 
@@ -508,14 +463,10 @@
 
 									<div class=" card-title">
 										<div class="card-body flex-column align-items-start pb-0">
-											<img class="rounded float-left width=" 15px" height="15px"" src="
-												{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-												data-placement="top"
-												data-content="Bagian ini menampilkan banyaknya sesi dengan status scheduled yang dimiliki oleh client yang dipilih." />
+											<img class="rounded float-left width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi dengan status scheduled yang dimiliki oleh client yang dipilih." />
 										</div>
 										<div class="card-body flex-column align-items-start pb-0">
-											<img class="rounded float-right width=" 60" height="60"" src="
-												{{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
+											<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
 										</div>
 									</div>
 
@@ -536,10 +487,7 @@
 							<div class="card" style="border-radius: 11px">
 								<div class="card-body">
 									<h5 class="card-title mb-1">Upcoming Event
-										<img class="rounded width=" 15px" height="15px"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-											data-placement="top"
-											data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+										<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
 									</h5>
 
 									<table class="datatables-basic table yajra-datatable">
@@ -563,10 +511,7 @@
 							<div class="card" style="border-radius: 11px">
 								<div class="card-body">
 									<h5 class="card-title mb-1">List Agenda
-										<img class="rounded width=" 15px" height="15px"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-											data-placement="top"
-											data-content="Bagian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat." />
+										<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat." />
 									</h5>
 									<table class="datatables-basic table yajra-datatable1">
 										<thead>
@@ -601,9 +546,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Sessions
-								<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
-									alt="Card image cap" data-toggle="popover" data-placement="top"
-									data-content="BPada bagian ini ditampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+								<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="BPada bagian ini ditampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -645,10 +588,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Coaching Plans
-								<img class="rounded float-right width=" 15" height="15"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top"
-									data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -686,10 +626,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Coaching Notes
-								<img class="rounded float-right width=" 15" height="15"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top"
-									data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
+								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -718,8 +655,7 @@
 			</div>
 
 			<!-- coaching note detail modal -->
-			<div class="modal fade" id="show_note" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
+			<div class="modal fade" id="show_note" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -781,10 +717,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active tes">Feedback
-								<img class="rounded float-right width=" 15" height="15"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top"
-									data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
+								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -813,8 +746,7 @@
 			<!-- /Feedback note -->
 
 			<!-- Feedback detail modal -->
-			<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
+			<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -879,23 +811,22 @@
 @push('scripts')
 
 <script type="text/javascript">
-	$(function() {
-
-	// // modal edit
-	// $('body').on('click', '#edit_profil', function() {
-	// 	// $('#saveBtn').val("edit-profil");
-	// 	$('#modals_profil').modal('show');
-	// 	// save data
-	// 	// $('#saveBtn').click(function(e) {
-	// 	// 	// e.preventDefault();
-	// 	// 	$(this).html('Sending..');
-	// 	// 	$('#modals_profil').modal('hide');
-	// 	// })
-	// });
-
 	// popover
 	$(function() {
 		$('[data-toggle="popover"]').popover()
-	})
+	});
+	$(function() {
+
+				// // modal edit
+				// $('body').on('click', '#edit_profil', function() {
+				// 	// $('#saveBtn').val("edit-profil");
+				// 	$('#modals_profil').modal('show');
+				// 	// save data
+				// 	// $('#saveBtn').click(function(e) {
+				// 	// 	// e.preventDefault();
+				// 	// 	$(this).html('Sending..');
+				// 	// 	$('#modals_profil').modal('hide');
+				// 	// })
+				// });
 </script>
 @endpush
