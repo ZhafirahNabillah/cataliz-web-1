@@ -16,10 +16,10 @@ class CreateAgendasTable extends Migration
         Schema::create('agendas', function (Blueprint $table) {
             $table->id();
             $table->integer('client_id');
-			$table->integer('session');
-			$table->string('type_session');
-			$table->string('attachment')->nullable();
-			$table->integer('owner_id');
+            $table->integer('plan_id');
+      			$table->integer('session');
+      			$table->string('type_session');
+      			$table->integer('owner_id');
             $table->timestamps();
         });
     }

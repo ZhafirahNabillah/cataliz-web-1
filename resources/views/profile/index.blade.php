@@ -116,7 +116,7 @@
 													</div>
 
 													<div class="modal-body">
-														<form action="{{route('coachs.update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
+														<form action="{{route('update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
 															<input type="file" name="profil_picture" id="profil_picture">
 													</div>
@@ -141,7 +141,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														<form action="{{route('coachs.update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
+														<form action="{{route('update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
 															<input type="file" name="background_picture" id="background_picture">
 													</div>
@@ -196,7 +196,7 @@
 							<!-- center profile info section -->
 
 							<div class="col-lg-8 col-`4` order-1 order-lg-2">
-								<form action="{{route('coachs.simpan_password', Auth::user()->id)}}" method="post">
+								<form action="{{route('simpan_password', Auth::user()->id)}}" method="post">
 									@csrf
 									<div class="row match-height">
 										<div class="col-sm-12 col-md-12">

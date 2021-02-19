@@ -14,9 +14,4 @@ class Agenda_detail extends Model
     public function agenda() {
       return $this->belongsTo('App\Models\Agenda');
     }
-
-    public function coaching_note()
-      {
-          return $this->hasMany(Coaching_note::class);
-      }
 }

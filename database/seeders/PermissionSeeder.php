@@ -15,11 +15,11 @@ class PermissionSeeder extends Seeder
     public function run()
     {
         //crud clients
-        Permission::create(['name' => 'list-client']);
-        Permission::create(['name' => 'create-client']);
-        Permission::create(['name' => 'update-client']);
-        Permission::create(['name' => 'detail-client']);
-        Permission::create(['name' => 'delete-client']);
+        Permission::create(['name' => 'list-user']);
+        Permission::create(['name' => 'create-user']);
+        Permission::create(['name' => 'update-user']);
+        Permission::create(['name' => 'detail-user']);
+        Permission::create(['name' => 'delete-user']);
 
         //crud plans
         Permission::create(['name' => 'list-plan']);

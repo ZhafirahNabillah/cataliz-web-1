@@ -18,7 +18,7 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_coach = Role::where('name','coach')->first();
 
         //give permission to coach to create,update,delete clients
-        $role_coach->givePermissionTo(['list-client','create-client','update-client','delete-client','detail-client']);
+        $role_coach->givePermissionTo(['list-user','detail-user']);
         //give permission to coach to create,update,delete plans
         $role_coach->givePermissionTo(['list-plan','create-plan','update-plan','delete-plan','detail-plan']);
         //give permission to coach to create,update,delete agendas
@@ -27,7 +27,7 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_admin = Role::where('name','admin')->first();
 
         //give permission to admin to create,update,delete clients
-        $role_admin->givePermissionTo(['list-client','create-client','update-client','delete-client','detail-client']);
+        $role_admin->givePermissionTo(['list-user','create-user','update-user','delete-user','detail-user']);
         //give permission to admin to see plans
         $role_admin->givePermissionTo(['list-plan','detail-plan']);
         //give permission to admin to see agendas

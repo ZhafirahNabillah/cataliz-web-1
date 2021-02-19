@@ -60,7 +60,7 @@
 								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
 								<small class="card text-center  mb-1">Unscheduled Sessions
 								</small>
-								<h2 class="font-weight-bolder text-center " style="font-size: 72px;margin-top: -24px;"> 0</h2>
+								<h2 class="font-weight-bolder text-center " style="font-size: 72px;margin-top: -24px;">{{ $total_uscheduled_sessions }}</h2>
 							</div>
 						</div>
 					</div>
@@ -74,7 +74,7 @@
 								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
 								<small class="card text-center  mb-1">Scheduled Sessions
 								</small>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">{{ $total_scheduled_sessions }}</h2>
 							</div>
 						</div>
 					</div>
@@ -88,7 +88,7 @@
 								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
 								<small class="card text-center  mb-1">Reschedule Sessions
 								</small>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">{{ $total_rescheduled_sessions }}</h2>
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
 								<small class="card text-center  mb-1">Canceled Sessions
 								</small>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">{{ $total_canceled_sessions }}</h2>
 							</div>
 						</div>
 					</div>
@@ -116,7 +116,7 @@
 								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
 								<small class="card text-center  mb-1">Finished Sessions
 								</small>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;"> 0</h2>
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">{{ $total_finished_sessions }}</h2>
 							</div>
 						</div>
 					</div>

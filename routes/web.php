@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 //use App\Http\Controllers\RoleController;
-use App\Http\Controllers\CoachController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\PlanController;
@@ -57,11 +57,10 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/home/{id}/store', [HomeController::class, 'store_data'])->name('home.store_data');
 
 	//Route::resource('roles', RoleController::class);
-	Route::resource('coachs', CoachController::class);
-	Route::get('/coachs/{id}/profil', [CoachController::class, 'profil'])->name('coachs.profil');
-	Route::post('/coachs/{id}/change-password', [CoachController::class, 'simpan_password'])->name('coachs.simpan_password');
-	Route::post('/coachs/{id}/update_profil', [CoachController::class, 'update_profil'])->name('coachs.update_profil');
-	Route::post('/coachs/{id}/update_background', [CoachController::class, 'update_background'])->name('coachs.update_background');
+	Route::get('/{id}/profil', [ProfileController::class, 'profil'])->name('profil');
+	Route::post('/{id}/change-password', [ProfileController::class, 'simpan_password'])->name('simpan_password');
+	Route::post('/{id}/update_profil', [ProfileController::class, 'update_profil'])->name('update_profil');
+	Route::post('/{id}/update_background', [ProfileController::class, 'update_background'])->name('update_background');
 
 	Route::resource('clients', ClientController::class);
 	Route::resource('agendas', AgendaController::class);

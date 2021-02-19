@@ -36,24 +36,34 @@ class AgendaController extends Controller
   public function index(Request $request)
   {
 
+    if (auth()->user()->hasRole('admin')) {
+      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+      ->join('clients', 'clients.id', '=', 'agendas.client_id')
+      ->latest()
+      ->get();
+
+      $total_uscheduled_sessions = Agenda_detail::where('status','unschedule')->get()->count();
+      $total_scheduled_sessions = Agenda_detail::where('status','scheduled')->get()->count();
+      $total_rescheduled_sessions = Agenda_detail::where('status','rescheduled')->get()->count();
+      $total_finished_sessions = Agenda_detail::where('status','finished')->get()->count();
+      $total_canceled_sessions = Agenda_detail::where('status','canceled')->get()->count();
+
+    }elseif (auth()->user()->hasRole('coach')) {
+      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+      ->join('clients', 'clients.id', '=', 'agendas.client_id')
+      ->where('clients.owner_id', Auth::user()->id)->latest()
+      ->get();
+
+      $total_uscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','unschedule')->get()->count();
+      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','scheduled')->get()->count();
+      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','rescheduled')->get()->count();
+      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','finished')->get()->count();
+      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','canceled')->get()->count();
+    }
+
     if ($request->ajax()) {
-      //get data of table
-
-      if (auth()->user()->role('admin')) {
-        $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-          ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-          ->join('clients', 'clients.id', '=', 'agendas.client_id')
-          ->latest()
-          ->get();
-      }elseif (auth()->user()->role('coach')) {
-        $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-          ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-          ->join('clients', 'clients.id', '=', 'agendas.client_id')
-          ->where('clients.owner_id', Auth::user()->id)->latest()
-          ->get();
-      }
-
-      // dd($data);
 
       //return data as datatable json
       return DataTables::of($data)
@@ -92,7 +102,7 @@ class AgendaController extends Controller
         ->make(true);
     }
 
-    return view('agendas.index');
+    return view('agendas.index',compact('total_uscheduled_sessions','total_scheduled_sessions','total_rescheduled_sessions','total_canceled_sessions','total_finished_sessions'));
   }
 
   /**

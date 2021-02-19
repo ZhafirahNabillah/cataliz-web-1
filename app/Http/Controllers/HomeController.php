@@ -94,7 +94,7 @@ class HomeController extends Controller
                 ->join('clients', 'clients.id', '=', 'agendas.client_id')
                 ->where('clients.user_id', Auth::user()->id)->first();
 
-            $data = Client::select('clients.id', 'clients.name', 'clients.phone', 'clients.email', 'clients.company', 'clients.occupation', 'clients.organization')
+            $data = Client::select('clients.id', 'users.name', 'users.phone', 'users.email', 'clients.company', 'clients.occupation', 'clients.organization')
                 ->join('users', 'users.id', '=', 'clients.user_id')
                 ->where('clients.user_id', Auth::user()->id)
                 ->first();
@@ -154,13 +154,19 @@ class HomeController extends Controller
     public function store_data(Request $request, $id)
     {
         $client = Client::find($id);
-        $client->name = $request->name;
-        $client->phone = $request->phone;
+        $user = User::find($client->user_id);
+
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->update();
+
+        $client->name = $user->name;
+        $client->phone = $user->phone;
         $client->organization = $request->organization;
         $client->company = $request->company;
         $client->occupation = $request->occupation;
         $client->update();
-        // return $client;
+
         return redirect('/dashboard');
     }
 }

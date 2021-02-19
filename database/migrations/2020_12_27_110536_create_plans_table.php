@@ -15,13 +15,13 @@ class CreatePlansTable extends Migration
     {
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
-			$table->integer('client_id');
-			$table->date('date');
-			$table->string('objective');
-			$table->string('success_indicator');
-			$table->string('development_areas');
-			$table->string('support');
-			$table->integer('owner_id');
+      			$table->integer('client_id');
+      			$table->date('date');
+      			$table->string('objective');
+      			$table->string('success_indicator');
+      			$table->string('development_areas');
+      			$table->string('support');
+      			$table->integer('owner_id');
             $table->timestamps();
         });
     }

@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Main Menu</span><i data-feather="more-horizontal"></i></li>
-            @can('list-client')
+            @can('list-user')
             <li class="nav-item">
                 @role('admin')
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Users</span></a>

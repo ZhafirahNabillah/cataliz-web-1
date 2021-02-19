@@ -9,7 +9,7 @@ class Agenda extends Model
 {
 		use HasFactory;
 
-		protected $fillable = ['client_id','session','type_session','date','duration','status','owner_id'];
+		protected $fillable = ['client_id','plan_id','session','type_session','date','duration','status','owner_id'];
 
 		//protected $attributes = ['status' => 'unschedule'];
 
@@ -17,8 +17,7 @@ class Agenda extends Model
 		return $this->belongsTo('App\Models\Client');
 	}
 
-	public function agenda_detail()
-    {
-        return $this->hasMany(Agenda_detail::class);
-    }
+	public function plan() {
+		return $this->belongsTo('App\Models\Plan');
+	}
 }
