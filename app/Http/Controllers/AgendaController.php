@@ -24,10 +24,10 @@ class AgendaController extends Controller
 
   function __construct()
   {
-    $this->middleware('permission:list-agenda',['only' => 'index']);
-    $this->middleware('permission:create-agenda', ['only' => ['create','store']]);
-    $this->middleware('permission:update-agenda', ['only' => ['edit','update','ajaxPlans']]);
-    $this->middleware('permission:detail-agenda', ['only' => ['show','agenda_detail_update','feedback_download','note_download']]);
+    $this->middleware('permission:list-agenda', ['only' => 'index']);
+    $this->middleware('permission:create-agenda', ['only' => ['create', 'store']]);
+    $this->middleware('permission:update-agenda', ['only' => ['edit', 'update', 'ajaxPlans']]);
+    $this->middleware('permission:detail-agenda', ['only' => ['show', 'agenda_detail_update', 'feedback_download', 'note_download']]);
     $this->middleware('permission:delete-agenda', ['only' => ['destroy']]);
   }
 
@@ -38,29 +38,38 @@ class AgendaController extends Controller
 
     if (auth()->user()->hasRole('admin')) {
       $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->join('clients', 'clients.id', '=', 'agendas.client_id')
-      ->latest()
-      ->get();
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('clients', 'clients.id', '=', 'agendas.client_id')
+        ->latest()
+        ->get();
 
-      $total_uscheduled_sessions = Agenda_detail::where('status','unschedule')->get()->count();
-      $total_scheduled_sessions = Agenda_detail::where('status','scheduled')->get()->count();
-      $total_rescheduled_sessions = Agenda_detail::where('status','rescheduled')->get()->count();
-      $total_finished_sessions = Agenda_detail::where('status','finished')->get()->count();
-      $total_canceled_sessions = Agenda_detail::where('status','canceled')->get()->count();
-
-    }elseif (auth()->user()->hasRole('coach')) {
+      $total_unscheduled_sessions = Agenda_detail::where('status', 'unschedule')->get()->count();
+      $total_scheduled_sessions = Agenda_detail::where('status', 'scheduled')->get()->count();
+      $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
+      $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
+      $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
+    } elseif (auth()->user()->hasRole('coach')) {
       $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->join('clients', 'clients.id', '=', 'agendas.client_id')
-      ->where('clients.owner_id', Auth::user()->id)->latest()
-      ->get();
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('clients', 'clients.id', '=', 'agendas.client_id')
+        ->where('clients.owner_id', Auth::user()->id)->latest()
+        ->get();
 
-      $total_uscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','unschedule')->get()->count();
-      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','scheduled')->get()->count();
-      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','rescheduled')->get()->count();
-      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','finished')->get()->count();
-      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function($query) { $query->where('owner_id', auth()->user()->id); })->where('status','canceled')->get()->count();
+      $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
+        $query->where('owner_id', auth()->user()->id);
+      })->where('status', 'unschedule')->get()->count();
+      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
+        $query->where('owner_id', auth()->user()->id);
+      })->where('status', 'scheduled')->get()->count();
+      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
+        $query->where('owner_id', auth()->user()->id);
+      })->where('status', 'rescheduled')->get()->count();
+      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
+        $query->where('owner_id', auth()->user()->id);
+      })->where('status', 'finished')->get()->count();
+      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
+        $query->where('owner_id', auth()->user()->id);
+      })->where('status', 'canceled')->get()->count();
     }
 
     if ($request->ajax()) {
@@ -95,14 +104,14 @@ class AgendaController extends Controller
 
           //final dropdown button that shows on view
           $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
-          <div class="dropdown-menu dropdown-menu-right">'. $edit_btn . $detail_btn . $whatsapp_btn . $delete_btn .'</div>';
+          <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $whatsapp_btn . $delete_btn . '</div>';
           return $actionBtn;
         })
         ->rawColumns(['action'])
         ->make(true);
     }
 
-    return view('agendas.index',compact('total_uscheduled_sessions','total_scheduled_sessions','total_rescheduled_sessions','total_canceled_sessions','total_finished_sessions'));
+    return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
   }
 
   /**
@@ -271,7 +280,7 @@ class AgendaController extends Controller
     }
     $agenda_detail->update();
 
-    if ($request->hasAny('subject','summary')) {
+    if ($request->hasAny('subject', 'summary')) {
 
       $this->validate($request, [
         'subject'       => 'required',
