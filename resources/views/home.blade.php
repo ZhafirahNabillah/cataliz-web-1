@@ -263,8 +263,7 @@
           <!-- Modal to Edit Profile -->
           <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
             <div class="modal-dialog sidebar-sm">
-              <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
-                action="{{route('home.store_data', $data->id)}}">
+              <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('home.store_data', $data->id)}}">
                 @csrf
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
                 <div class="modal-header mb-1">
@@ -301,7 +300,12 @@
                     <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$data->occupation}}" />
                   </div>
 
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+                    icon: 'success',
+                    title: 'Saved Successfully!',
+                  })">
+                    Submit
+                  </button>
                   <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                 </div>
               </form>
@@ -450,6 +454,7 @@
 @endsection
 
 @push('scripts')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script type="text/javascript">
   $(function() {
 

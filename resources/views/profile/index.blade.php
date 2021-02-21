@@ -307,18 +307,8 @@
 													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile" role="tab" aria-selected="false">Sessions</a>
+													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
 												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingPlan" aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingNotes" aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
-												</li>
-												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedbacks</a>
-												</li>
-
 											</ul>
 
 											<!-- edit button -->
@@ -338,20 +328,29 @@
 														</div>
 														<div class="modal-body">
 															<div class="container">
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		Foto Profile
-																	</button>
+																<div class="col-auto ">
+																	<div class="card">
+																		<img class=" width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+																			Edit Profile
+																		</button>
+																	</div>
 																</div>
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		Cover Backgound
-																	</button>
+																<div class="col-auto">
+																	<div class="card">
+																		<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+																			Edit Picture
+																		</button>
+																	</div>
 																</div>
-																<div class="col-3">
-																	<button type="button" class="btn btn-primary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-																		Profile
-																	</button>
+																<div class="col-auto">
+																	<div class="card">
+																		<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">
+																			Edit Cover
+																		</button>
+																	</div>
 																</div>
 															</div>
 														</div>
@@ -371,6 +370,62 @@
 				</div>
 				<!--/ profile header -->
 
+				<!-- Modal to Edit Profile -->
+				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+					<div class="modal-dialog sidebar-sm">
+						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="">
+							@csrf
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+							<div class="modal-header mb-1">
+								<h5 class="modal-title" id="modalHeading"></h5>
+							</div>
+							<input type="hidden" name="Client_id" id="Client_id">
+							<div class="modal-body flex-grow-1">
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
+								</div>
+								<label class="form-label" for="basic-icon-default-post">Phone</label>
+								<div class="input-group input-group-merge mb-2">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon5">+62</span>
+									</div>
+									<input id="phone" name="phone" type="text" class="form-control" value="">
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-email">Email</label>
+									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="" disabled />
+									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-fullname">Organization</label>
+									<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-fullname">Company</label>
+									<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
+								</div>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+									<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
+								</div>
+
+								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+                    icon: 'success',
+                    title: 'Saved Successfully!',
+                  })">
+									Submit
+								</button>
+								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+							</div>
+						</form>
+						<!-- </form>-->
+
+					</div>
+				</div>
+				<!-- End Modal -->
+
+
 				<div class="tab-content">
 					<div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
 						<!-- profile info section -->
@@ -379,7 +434,7 @@
 								<!-- left profile info section -->
 								<div class="col-lg-4 col-12 order-2 order-lg-1">
 									<!-- about -->
-									<div class="card" style="border-radius: 11px">
+									<div class="card">
 										<div class="card-body">
 											<h5 class="mb-75">Joined:</h5>
 											<p class="card-text">{{\Carbon\Carbon::parse($user->created_at)->format('F d, Y')}}</p>
@@ -401,8 +456,8 @@
 												<p class="card-text">{{$user->company}}</p>
 											</div>
 											<div class="mt-2">
-												<h5 class="mb-50">Occupation:</h5>
-												<p class="card-text mb-0">{{$user->occupation}}</p>
+												<h5 class="mb-75">Occupation:</h5>
+												<p class="card-text">{{$user->occupation}}</p>
 											</div>
 										</div>
 									</div>
@@ -412,92 +467,98 @@
 
 								<!-- center profile info section -->
 
-								<div class="col-lg-8 col-12 order-1 order-lg-2">
-									<div class="row match-height">
-										<!-- Number of Coaching -->
-										<div class="col-lg-4 col-sm-4 col-6">
-											<div class="card style=" width: 18rem;" style="border-radius: 11px"">
+								<div class="col-lg-8 col-`4` order-1 order-lg-2">
+									<form action="{{route('simpan_password', Auth::user()->id)}}" method="post">
+										@csrf
+										<div class="row match-height">
+											<div class="col-sm-12 col-md-12">
+												<div class="card">
+													<div class="card-header">
+														<h4 class="card-title">Change Password
+															<img class="text-align width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
+														</h4>
+													</div>
+													<div class="container">
+														@if ($message = Session::get('success'))
+														<div class="alert alert-success alert-dissmisable">
+															<h4 class="alert-heading">Success</h4>
+															<div class="alert-body">{{ $message }}</div>
+															<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																<span aria-hidden="true">×</span>
+															</button>
+														</div>
+														@endif
+													</div>
 
-											<div class=" card-title">
-												<div class="card-body flex-column align-items-start pb-0">
-													<img class="rounded float-left width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi yang dimiliki oleh client yang dipilih." />
+													<div class="col-md-12 form-group">
+														<label for="fp-default">Old password</label>
+														<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
+														@error('old_password')
+														<span class="invalid-feedback" role="alert">
+															<strong>{{ $message }}</strong>
+														</span>
+														@enderror
+													</div>
+
+													<div class="col-md-12 form-group">
+														<label for="fp-default">New Password</label>
+														<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
+														@error('new_password')
+														<span class="invalid-feedback" role="alert">
+															<strong>{{ $message }}</strong>
+														</span>
+														@enderror
+													</div>
+
+													<div class="col-md-12 form-group">
+														<label for="fp-default">Confirm New Password</label>
+														<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
+														@error('new_confirm_password')
+														<span class="invalid-feedback" role="alert">
+															<strong>{{ $message }}</strong>
+														</span>
+														@enderror
+													</div>
+
+													<div class="col-md-12 form-group">
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save
+															Change</button>
+													</div>
 												</div>
-												<div class="card-body flex-column align-items-start pb-0">
-													<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
-												</div>
-											</div>
-
-											<div class="card-body">
-												<h1 class="display-1 text-primary card text-center">0</h1>
-												<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
 											</div>
 										</div>
-									</div>
-									<!-- Number of Coaching ends -->
-
-									<!-- Number of Agenda -->
-									<div class="col-lg-4 col-sm-4 col-6">
-										<div class="card style=" width: 18rem;" style="border-radius: 11px"">
-
-										<div class=" card-title">
-											<div class="card-body flex-column align-items-start pb-0">
-												<img class="rounded float-left width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya agenda yang dimiliki oleh client yang dipilih." />
-											</div>
-											<div class="card-body flex-column align-items-start pb-0">
-												<img class="rounded float-right width=" 55" height="55"" src=" {{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
-											</div>
-										</div>
-
-										<div class="card-body">
-											<h1 class="display-1 text-primary card text-center">0</h1>
-											<h3 class="font-weight-bolder text-center">Agenda</h3>
-										</div>
-									</div>
+									</form>
 								</div>
-								<!-- Number of Agenda End -->
+							</div>
+					</div>
+					<!--/ center profile info section -->
 
 
-								<!-- Number of Event -->
-								<div class="col-lg-4 col-sm-4 col-6">
-									<div class="card style=" width: 18rem;" style="border-radius: 11px"">
-
-									<div class=" card-title">
-										<div class="card-body flex-column align-items-start pb-0">
-											<img class="rounded float-left width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi dengan status scheduled yang dimiliki oleh client yang dipilih." />
-										</div>
-										<div class="card-body flex-column align-items-start pb-0">
-											<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
-										</div>
-									</div>
-
-									<div class="card-body">
-										<h1 class="display-1 text-primary card text-center">0</h1>
-										<h3 class="font-weight-bolder text-center">Event</h3>
+					<!-- Tab Feedback -->
+					<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
+						<div class="content-header row">
+							<div class="content-header-left col-md-9 col-12 mb-2">
+								<div class="row breadcrumbs-top">
+									<div class="col-12">
+										<h4 class="breadcrumb-item active tes">Feedback
+											<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
+										</h4>
 									</div>
 								</div>
 							</div>
-							<!-- Number of Event End -->
-
-
-					</div>
-
-					<div class="row">
-						<div class="col-lg-12 col-12 order-1 order-lg-2">
-							<!-- Upcoming event -->
-							<div class="card" style="border-radius: 11px">
-								<div class="card-body">
-									<h5 class="card-title mb-1">Upcoming Event
-										<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
-									</h5>
-
-									<table class="datatables-basic table yajra-datatable">
+						</div>
+						<!-- Feedback card -->
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<table class="datatables-basic table yajra-datatable-feedback">
 										<thead>
 											<tr>
-												<th>No</th>
-												<th>Name</th>
-												<th>Date</th>
-												<th>Time</th>
+												<th>NO</th>
+												<th>Coach Name</th>
 												<th>Session</th>
+												<th>Topic</th>
+												<th>Action</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -505,328 +566,88 @@
 									</table>
 								</div>
 							</div>
-							<!--/Upcoming Event -->
-
-							<!-- List Agenda-->
-							<div class="card" style="border-radius: 11px">
-								<div class="card-body">
-									<h5 class="card-title mb-1">List Agenda
-										<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat." />
-									</h5>
-									<table class="datatables-basic table yajra-datatable1">
-										<thead>
-											<tr>
-												<th>No</th>
-												<th>Name</th>
-												<th>Date</th>
-												<th>Time</th>
-												<th>Duration</th>
-											</tr>
-										</thead>
-										<tbody>
-										</tbody>
-									</table>
-								</div>
-							</div>
-							<!--/List Agenda-->
 						</div>
-					</div>
-				</div>
-				<!--/ center profile info section -->
-			</div>
+						<!-- /Feedback note -->
 
-			</section>
-			<!--/ profile info section -->
-		</div>
-		<!-- tab Session -->
+						<!-- Feedback detail modal -->
+						<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="modalHeading"></h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-body">
+										<div class="container">
+											<div class="row">
+												<div class="card-body">
+													<dl class="row">
+														<dt class="col-sm-3">Topic</dt>
+														<dd class="col-sm-9 topic_feedback"></dd>
+													</dl>
+													<dl class="row">
+														<dt class="col-sm-3">Coach Name</dt>
+														<dd class="col-sm-9 coach_name_feedback"></dd>
+													</dl>
+													<dl class="row">
+														<dt class="col-sm-3">Session</dt>
+														<dd class="col-sm-9 session_feedback"></dd>
+													</dl>
+													<dl class="row">
+														<dt class="col-sm-3">Feedback</dt>
+														<span class="d-block my-1"></span>
+														<dd class="col-sm-9 text-justify feedback"></dd>
+													</dl>
+													<dl class="row">
+														<dt class="col-md-12">
+															<small class="d-block text-muted">Feedback Attachment</small>
 
-		<div class="tab-pane" id="session" aria-labelledby="about-tab" role="tabpanel">
-			<div class="content-header row">
-				<div class="content-header-left col-md-9 col-12 mb-2">
-					<div class="row breadcrumbs-top">
-						<div class="col-12">
-							<h4 class="breadcrumb-item active">Sessions
-								<img class="rounded width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="BPada bagian ini ditampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
-							</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card" style="border-radius: 11px">
+															<span class="d-block my-1"></span>
+															<a class="btn btn-primary download_button_feedback">Download</a>
 
-				<section id="basic-datatable">
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<table class="datatables-basic table yajra-datatable-1">
-									<thead>
-										<tr>
-											<th>NO</th>
-											<th>TOPIC</th>
-											<th>SESSION</th>
-											<th>Date</th>
-											<th>TIME</th>
-											<th>DURATION</th>
-											<th>ACTION</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</div>
-		<!-- /tab Session -->
-		<!-- Tab coaching plans -->
+															<span class="d-block font-italic span_none_feedback">Tidak ada file</span>
 
-		<div class="tab-pane" id="coachingPlan" aria-labelledby="about-tab" role="tabpanel">
-			<div class="content-header row">
-				<div class="content-header-left col-md-9 col-12 mb-2">
-					<div class="row breadcrumbs-top">
-						<div class="col-12">
-							<h4 class="breadcrumb-item active">Coaching Plans
-								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
-							</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="card" style="border-radius: 11px">
-
-				<section id="basic-datatable">
-					<div class="row">
-						<div class="col-12">
-							<div class="card">
-								<table class="datatables-basic table yajra-datatable-2">
-									<thead>
-										<tr>
-											<th>NO</th>
-											<th>OBJEKTIF</th>
-											<th>Tanggal Pelaksanaan</th>
-											<th>ACTION</th>
-										</tr>
-									</thead>
-									<tbody>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-					<!-- /tab coaching plans -->
-			</div>
-		</div>
-
-		<!-- Tab coaching Notes -->
-		<div class="tab-pane" id="coachingNotes" aria-labelledby="about-tab" role="tabpanel">
-			<div class="content-header row">
-				<div class="content-header-left col-md-9 col-12 mb-2">
-					<div class="row breadcrumbs-top">
-						<div class="col-12">
-							<h4 class="breadcrumb-item active">Coaching Notes
-								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
-							</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- coaching note card -->
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<table class="datatables-basic table yajra-datatable-notes">
-							<thead>
-								<tr>
-									<th>NO</th>
-									<th>Coach Name</th>
-									<th>Session</th>
-									<th>Topic</th>
-									<th>Subject</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-
-			<!-- coaching note detail modal -->
-			<div class="modal fade" id="show_note" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Detail Note</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="container">
-								<div class="row">
-									<div class="card-body" style="border-radius: 11px">
-										<dl class="row">
-											<dt class="col-sm-3">Topic</dt>
-											<dd class="col-sm-9 topic_note"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Coach Name</dt>
-											<dd class="col-sm-9 coach_name_note"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Session</dt>
-											<dd class="col-sm-9 session_note"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Subject</dt>
-											<dd class="col-sm-9 subject_note"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Note</dt>
-											<span class="d-block my-1"></span>
-											<dd class="col-sm-9 text-justify note"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-md-12">
-												<small class="d-block text-muted">Note Attachment</small>
-												<span class="d-block my-1"></span>
-												<a href="#" class="btn btn-primary download_button_note">Download</a>
-
-												<span class="d-block font-italic span_none_note">Tidak ada file</span>
-
-											</dt>
-										</dl>
+														</dt>
+													</dl>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<!-- /modal Feedback-->
 				</div>
+				<!--End profile-->
+				@endrole
+
 			</div>
+			<!---End Content Body -->
 		</div>
-		<!-- /tab coaching Notes-->
-
-
-		<!-- Tab Feedback -->
-		<div class="tab-pane" id="feedback" aria-labelledby="about-tab" role="tabpanel">
-			<div class="content-header row">
-				<div class="content-header-left col-md-9 col-12 mb-2">
-					<div class="row breadcrumbs-top">
-						<div class="col-12">
-							<h4 class="breadcrumb-item active tes">Feedback
-								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
-							</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Feedback card -->
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<table class="datatables-basic table yajra-datatable-feedback">
-							<thead>
-								<tr>
-									<th>NO</th>
-									<th>Coach Name</th>
-									<th>Session</th>
-									<th>Topic</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-			<!-- /Feedback note -->
-
-			<!-- Feedback detail modal -->
-			<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="modalHeading"></h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<div class="container">
-								<div class="row">
-									<div class="card-body">
-										<dl class="row">
-											<dt class="col-sm-3">Topic</dt>
-											<dd class="col-sm-9 topic_feedback"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Coach Name</dt>
-											<dd class="col-sm-9 coach_name_feedback"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Session</dt>
-											<dd class="col-sm-9 session_feedback"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-sm-3">Feedback</dt>
-											<span class="d-block my-1"></span>
-											<dd class="col-sm-9 text-justify feedback"></dd>
-										</dl>
-										<dl class="row">
-											<dt class="col-md-12">
-												<small class="d-block text-muted">Feedback Attachment</small>
-
-												<span class="d-block my-1"></span>
-												<a class="btn btn-primary download_button_feedback">Download</a>
-
-												<span class="d-block font-italic span_none_feedback">Tidak ada file</span>
-
-											</dt>
-										</dl>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- /modal Feedback-->
-
-
-		<!--End profile-->
-		@endrole
-
 	</div>
-	<!---End Content Body -->
-</div>
-</div>
-<!-- END: Content-->
-@endsection
+	<!-- END: Content-->
+	@endsection
 
-@push('scripts')
+	@push('scripts')
 
-<script type="text/javascript">
-	// popover
-	$(function() {
-		$('[data-toggle="popover"]').popover()
-	});
-	$(function() {
-
-				// // modal edit
-				// $('body').on('click', '#edit_profil', function() {
-				// 	// $('#saveBtn').val("edit-profil");
-				// 	$('#modals_profil').modal('show');
-				// 	// save data
-				// 	// $('#saveBtn').click(function(e) {
-				// 	// 	// e.preventDefault();
-				// 	// 	$(this).html('Sending..');
-				// 	// 	$('#modals_profil').modal('hide');
-				// 	// })
-				// });
-</script>
-@endpush
+	<script type="text/javascript">
+		$(function() {
+			// popover
+			$('[data-toggle="popover"]').popover()
+		});
+		// // modal edit
+		// $('body').on('click', '#edit_profil', function() {
+		// 	// $('#saveBtn').val("edit-profil");
+		// 	$('#modals_profil').modal('show');
+		// 	// save data
+		// 	// $('#saveBtn').click(function(e) {
+		// 	// 	// e.preventDefault();
+		// 	// 	$(this).html('Sending..');
+		// 	// 	$('#modals_profil').modal('hide');
+		// 	// })
+		// });
+	</script>
+	@endpush
