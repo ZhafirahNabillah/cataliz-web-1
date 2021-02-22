@@ -13,15 +13,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
-    //
     public function profil($id)
     {
-        $user = User::select('*')
-            ->join('clients', 'user_id', '=', 'users.id')
-            ->where('users.id', Auth::user()->id)
-            ->first();
-        // return Auth::user()->password;
-        return view('profile.index', compact('user'));
+        if (auth()->user()->hasRole('admin')) {
+
+            $user = User::where('id', Auth::user()->id)->first();
+            return view('profile.index', compact('user'));
+        } elseif (auth()->user()->hasRole('coachee')) {
+            $user = User::select('*')
+                ->join('clients', 'user_id', '=', 'users.id')
+                ->where('users.id', Auth::user()->id)
+                ->first();
+            // return Auth::user()->password;
+            return view('profile.index', compact('user'));
+        }
     }
 
     public function simpan_password(Request $request, $id)
@@ -39,21 +44,29 @@ class ProfileController extends Controller
 
     public function store_data(Request $request, $id)
     {
-        $user = User::find($id);
-        // return $user;
-        $client = Client::where('user_id', $user->id)->first();
-        // return $client;
+        if (auth()->user()->hasRole('coachee')) {
+            $user = User::find($id);
+            // return $user;
+            $client = Client::where('user_id', $user->id)->first();
+            // return $client;
 
-        $user->name = $request->name;
-        $user->phone = $request->phone;
-        $user->update();
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->update();
 
-        $client->name = $user->name;
-        $client->phone = $user->phone;
-        $client->organization = $request->organization;
-        $client->company = $request->company;
-        $client->occupation = $request->occupation;
-        $client->update();
+            $client->name = $user->name;
+            $client->phone = $user->phone;
+            $client->organization = $request->organization;
+            $client->company = $request->company;
+            $client->occupation = $request->occupation;
+            $client->update();
+        } elseif (auth()->user()->hasRole('admin')) {
+            $user = User::find($id);
+
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->update();
+        }
 
         return redirect(route('profil', Auth::user()->id));
     }

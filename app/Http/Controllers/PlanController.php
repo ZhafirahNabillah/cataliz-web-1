@@ -156,9 +156,11 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Plan $plan)
   {
-    return view('plans.detail');
+    $client = Client::where('id', $plan->client_id)->first();
+    // return $client;
+    return view('plans.detail', compact('plan', 'client'));
   }
 
   /**

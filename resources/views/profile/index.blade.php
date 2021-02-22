@@ -761,7 +761,7 @@
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
-										<h2 class="text-white">{{$user->name}}</h2>
+										<h2 class="">{{$user->name}}</h2>
 									</div>
 								</div>
 							</div>
@@ -826,8 +826,8 @@
 											<!--/ Modal Profil -->
 
 											<!-- Modal Background-->
-											<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-												aria-hidden="true">
+											<div class="modal fade" id="modal_edit_background" tabindex="-1"
+												aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -869,7 +869,8 @@
 																		<img class=" width=" 120px" height="120px"" src="
 																			{{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
 																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			aria-expanded="false" data-toggle="modal" data-target="#modals-slide-in">
+																			id="btn_edit_profil" aria-expanded="false" data-toggle="modal"
+																			data-target="#modals-slide-in">
 																			Edit Profile
 																		</button>
 																	</div>
@@ -879,7 +880,8 @@
 																		<img class="width=" 120px" height="120px"" src="
 																			{{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
 																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			aria-expanded="false" data-toggle="modal" data-target="#modal_edit_profil">
+																			id="btn_edit_picture" aria-expanded="false" data-toggle="modal"
+																			data-target="#modal_edit_profil">
 																			Edit Picture
 																		</button>
 																	</div>
@@ -889,7 +891,8 @@
 																		<img class="width=" 120px" height="120px"" src="
 																			{{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
 																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			aria-expanded="false">
+																			id="btn_edit_background" aria-expanded="false" data-toggle="modal"
+																			data-target="#modal_edit_background">
 																			Edit Cover
 																		</button>
 																	</div>
@@ -915,7 +918,8 @@
 				<!-- Modal to Edit Profile -->
 				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="">
+						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
+							action="{{route('store_data', Auth::user()->id)}}">
 							@csrf
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 							<div class="modal-header mb-1">
@@ -926,19 +930,19 @@
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
 									<input id="name" name="name" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="" />
+										id="basic-icon-default-fullname" value="{{$user->name}}" />
 								</div>
 								<label class="form-label" for="basic-icon-default-post">Phone</label>
 								<div class="input-group input-group-merge mb-2">
 									<div class="input-group-prepend">
 										<span class="input-group-text" id="basic-addon5">+62</span>
 									</div>
-									<input id="phone" name="phone" type="text" class="form-control" value="">
+									<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-email">Email</label>
 									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-										value="" disabled />
+										value="{{$user->email}}" disabled />
 									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 								</div>
 
@@ -978,18 +982,6 @@
 											<div class="mt-2">
 												<h5 class="mb-75">Email:</h5>
 												<p class="card-text">{{$user->email}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-75">Organization:</h5>
-												<p class="card-text">{{$user->organization}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-75">Company:</h5>
-												<p class="card-text">{{$user->company}}</p>
-											</div>
-											<div class="mt-2">
-												<h5 class="mb-75">Occupation:</h5>
-												<p class="card-text">{{$user->occupation}}</p>
 											</div>
 										</div>
 									</div>

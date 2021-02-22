@@ -28,7 +28,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
                 </li>
-                <li class="breadcrumb-item active">Edit Coaching Plans
+                <li class="breadcrumb-item active">Detail Coaching Plans
                 </li>
               </ol>
             </div>
@@ -53,65 +53,72 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title">Detail Plan</h4>
+                <h4 class="card-title"><b>Detail Plan</b></h4>
               </div>
               <div class="card-body">
                 <div class="row">
-                  <dt class="col-sm-3">Full Name</dt>
+                  <dt class="col-sm-3"><b>Full Name</b></dt>
                 </div>
                 <dl class="row">
-                  <dt class="col-sm-3">#</dt>
+                  <dt class="col-sm-3">{{$client->name}}</dt>
                 </dl>
                 <div class="row">
-                  <dt class="col-sm-3">Organitation</dt>
-                  <dt class="col-sm-9"> Tanggal Kegiatan</dt>
+                  <dt class="col-sm-3"><b>Organization</b></dt>
+                  <dt class="col-sm-9"><b>Tanggal Kegiatan</b></dt>
 
                 </div>
                 <dl class="row">
-                  <dt class="col-sm-3">#</dt>
+                  <dt class="col-sm-3">{{$client->organization}}</dt>
                   <dd>
-                  <dt class="col-sm-3">#</dt>
+                  <dt class="col-sm-3">{{$plan->date}}</dt>
                   </dd>
                 </dl>
                 <div class="card collapse-icon">
                   <div class="collapse-default">
                     <div class="card">
-                      <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                        <span class="lead collapse-title">Objektif</span>
+                      <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
+                        data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                        <span class="lead collapse-title"><b>Objektif</b></span>
                       </div>
                       <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                         <div class="card-body">
-                          #
+                          {{$plan->objective}}
                         </div>
                       </div>
                     </div>
                     <div class="card">
-                      <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                        <span class="lead collapse-title">Sukses Indikator</span>
+                      <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse"
+                        role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        <span class="lead collapse-title"><b>Sukses Indikator</b></span>
                       </div>
-                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
+                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse"
+                        aria-expanded="false">
                         <div class="card-body">
-                          #
+                          {{$plan->success_indicator}}
                         </div>
                       </div>
                     </div>
                     <div class="card">
-                      <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                        <span class="lead collapse-title">Pengembangan Area</span>
+                      <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse"
+                        role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        <span class="lead collapse-title"><b>Pengembangan Area</b></span>
                       </div>
-                      <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
+                      <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse"
+                        aria-expanded="false">
                         <div class="card-body">
-                          #
+                          {{$plan->development_areas}}
                         </div>
                       </div>
                     </div>
                     <div class="card">
-                      <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                        <span class="lead collapse-title">Support</span>
+                      <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse"
+                        role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        <span class="lead collapse-title"><b>Support</b></span>
                       </div>
-                      <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">
+                      <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse"
+                        aria-expanded="false">
                         <div class="card-body">
-                          #
+                          {{$plan->support}}
                         </div>
                       </div>
                     </div>
@@ -136,31 +143,37 @@
           <div class="modal-body flex-grow-1">
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+              <input id="name" name="name" type="text" class="form-control dt-full-name"
+                id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
             </div>
             <label class="form-label" for="basic-icon-default-post">Phone</label>
             <div class="input-group input-group-merge mb-2">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon5">+62</span>
               </div>
-              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
+                aria-label="Phone">
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-email">Email</label>
-              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+                placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
               <small class="form-text text-muted"> You can use letters, numbers & periods </small>
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-              <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+              <input id="organization" name="organization" type="text" class="form-control dt-full-name"
+                id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Company</label>
-              <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+              <input id="company" name="company" type="text" class="form-control dt-full-name"
+                id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+                id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
             </div>
 
             <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
@@ -189,275 +202,281 @@
     placeholder: 'Select clients',
     ajax: {
       url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              pro: item.program
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
+                    dataType: 'json',
+                    delay: 250,
+                    processResults: function(data) {
+                    return {
+                    results: $.map(data, function(item) {
+                    console.log(item)
+                    return {
+                    text: item.name,
+                    id: item.id,
+                    org: item.organization,
+                    pro: item.program
+                    }
+                    })
+                    };
+                    },
+                    cache: true
+                    }
+                    });
 
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#program').val(dd.pro);
+                    $(".livesearch").on('change', function(e) {
+                    // Access to full data
+                    console.log($(this).select2('data'));
+                    console.log($(this).select2('data')[0].id);
+                    var dd = $(this).select2('data')[0];
+                    $('#organization').val(dd.org);
+                    $('#program').val(dd.pro);
 
-  });
+                    });
 
-  $(function() {
+                    $(function() {
 
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    var table = $('.yajra-datatable').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'email',
-          name: 'email'
-        },
-        {
-          data: 'program',
-          name: 'program'
-        },
-        {
-          data: 'phone',
-          name: 'phone'
-        },
-        {
-          data: 'action',
-          name: 'action',
-          orderable: true,
-          searchable: true
-        },
-      ],
-      columnDefs: [{
-          // Avatar image/badge, Name and post
-          targets: 1,
-          responsivePriority: 4,
-          render: function(data, type, full, meta) {
-            var $user_img = full['avatar'],
-              $name = full['name'],
-              $post = full['company'];
-            $org = full['organization'];
-            if ($user_img) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
-            } else {
-              // For Avatar badge
-              var stateNum = full['status'];
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['name'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-content">' + $initials + '</span>';
-            }
+                    $.ajaxSetup({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                    });
+                    var table = $('.yajra-datatable').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "",
+                    columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                    },
+                    {
+                    data: 'name',
+                    name: 'name'
+                    },
+                    {
+                    data: 'email',
+                    name: 'email'
+                    },
+                    {
+                    data: 'program',
+                    name: 'program'
+                    },
+                    {
+                    data: 'phone',
+                    name: 'phone'
+                    },
+                    {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                    },
+                    ],
+                    columnDefs: [{
+                    // Avatar image/badge, Name and post
+                    targets: 1,
+                    responsivePriority: 4,
+                    render: function(data, type, full, meta) {
+                    var $user_img = full['avatar'],
+                    $name = full['name'],
+                    $post = full['company'];
+                    $org = full['organization'];
+                    if ($user_img) {
+                    // For Avatar image
+                    var $output =
+                    '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
+                    } else {
+                    // For Avatar badge
+                    var stateNum = full['status'];
+                    var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+                    var $state = states[stateNum],
+                    $name = full['name'],
+                    $initials = $name.match(/\b\w/g) || [];
+                    $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
+                    $output = '<span class="avatar-content">' + $initials + '</span>';
+                    }
 
-            var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
-            // Creates full output for row
-            var $row_output =
-              '<div class="d-flex justify-content-left align-items-center">' +
-              '<div class="avatar ' +
+                    var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
+                    // Creates full output for row
+                    var $row_output =
+                    '<div class="d-flex justify-content-left align-items-center">' +
+                      '<div class="avatar ' +
               colorClass +
               ' mr-1">' +
-              $output +
-              '</div>' +
-              '<div class="d-flex flex-column">' +
-              '<span class="emp_name text-truncate font-weight-bold">' +
-              $name +
-              '</span>' +
-              '<small class="emp_post text-truncate text-muted">' +
-              $post + ' - ' + $org +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return $row_output;
-          }
-        },
-        {
-          targets: 4,
-          render: function(data, type, full, meta) {
-            var $phone = full['phone'],
-              $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-              '</div>';
-            return $output;
-          }
-        }
-      ],
-      order: [
-        [2, 'desc']
-      ],
-      dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
-      lengthMenu: [7, 10, 25, 50, 75, 100],
-      buttons: [
+                        $output +
+                        '</div>' +
+                      '<div class="d-flex flex-column">' +
+                        '<span class="emp_name text-truncate font-weight-bold">' +
+                          $name +
+                          '</span>' +
+                        '<small class="emp_post text-truncate text-muted">' +
+                          $post + ' - ' + $org +
+                          '</small>' +
+                        '</div>' +
+                      '</div>';
+                    return $row_output;
+                    }
+                    },
+                    {
+                    targets: 4,
+                    render: function(data, type, full, meta) {
+                    var $phone = full['phone'],
+                    $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
+                      '</div>';
+                    return $output;
+                    }
+                    }
+                    ],
+                    order: [
+                    [2, 'desc']
+                    ],
+                    dom: '<"card-header border-bottom p-1"<"head-label">
+                      <"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0
+                          row"<"col-sm-12 col-md-6"l>
+                          <"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i>
+                              <"col-sm-12 col-md-6"p>>',
+                                displayLength: 7,
+                                lengthMenu: [7, 10, 25, 50, 75, 100],
+                                buttons: [
 
-        {
-          text: feather.icons['plus'].toSvg({
-            class: 'mr-50 font-small-4'
-          }) + 'Add Client',
-          className: 'create-new btn btn-primary createNewClient',
-          attr: {
-            'data-toggle': 'modal'
+                                {
+                                text: feather.icons['plus'].toSvg({
+                                class: 'mr-50 font-small-4'
+                                }) + 'Add Client',
+                                className: 'create-new btn btn-primary createNewClient',
+                                attr: {
+                                'data-toggle': 'modal'
 
-          },
-          init: function(api, node, config) {
-            $(node).removeClass('btn-secondary');
-          }
-        }
-      ],
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function(row) {
-              var data = row.data();
-              return 'Details of ' + data['name'];
-            }
-          }),
-          type: 'column',
-          renderer: function(api, rowIdx, columns) {
-            var data = $.map(columns, function(col, i) {
-              console.log(columns);
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ?
-                '<tr data-dt-row="' +
+                                },
+                                init: function(api, node, config) {
+                                $(node).removeClass('btn-secondary');
+                                }
+                                }
+                                ],
+                                responsive: {
+                                details: {
+                                display: $.fn.dataTable.Responsive.display.modal({
+                                header: function(row) {
+                                var data = row.data();
+                                return 'Details of ' + data['name'];
+                                }
+                                }),
+                                type: 'column',
+                                renderer: function(api, rowIdx, columns) {
+                                var data = $.map(columns, function(col, i) {
+                                console.log(columns);
+                                return col.title !== '' // ? Do not show row in modal popup if title is blank (for check
+                                box)
+                                ?
+                                '<tr data-dt-row="' +
                 col.rowIndex +
                 '" data-dt-column="' +
                 col.columnIndex +
                 '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>' :
-                '';
-            }).join('');
+                                  '<td>' +
+                                    col.title +
+                                    ':' +
+                                    '</td> ' +
+                                  '<td>' +
+                                    col.data +
+                                    '</td>' +
+                                  '</tr>' :
+                                '';
+                                }).join('');
 
-            return data ? $('<table class="table"/>').append(data) : false;
-          }
-        }
-      },
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
+                                return data ? $('
+                                <table class="table" />').append(data) : false;
+                                }
+                                }
+                                },
+                                language: {
+                                paginate: {
+                                // remove previous & next text from pagination
+                                previous: '&nbsp;',
+                                next: '&nbsp;'
+                                },
+                                search: "<i data-feather='search'></i>",
+                                searchPlaceholder: "Search records"
+                                }
 
-    });
+                                });
 
-    // create
-    $('body').on('click', '.createNewClient', function() {
-      $('#saveBtn').val("create-Client");
-      $('#Customer_id').val('');
-      $('#ClientForm').trigger("reset");
-      $('#modalHeading').html("Create New Client");
-      $('#modals-slide-in').modal('show');
-    });
+                                // create
+                                $('body').on('click', '.createNewClient', function() {
+                                $('#saveBtn').val("create-Client");
+                                $('#Customer_id').val('');
+                                $('#ClientForm').trigger("reset");
+                                $('#modalHeading').html("Create New Client");
+                                $('#modals-slide-in').modal('show');
+                                });
 
-    // edit
-    $('body').on('click', '.editClient', function() {
-      var Client_id = $(this).data('id');
-      $.get("" + '/clients/' + Client_id + '/edit', function(data) {
-        $('#modalHeading').html("Edit Client");
-        $('#saveBtn').val("edit-user");
-        $('#modals-slide-in').modal('show');
-        $('#Client_id').val(data.id);
-        $('#name').val(data.name);
-        $('#phone').val(data.phone);
-        $('#email').val(data.email);
-        $('#company').val(data.company);
-        $('#organization').val(data.organization);
-        $('#occupation').val(data.occupation);
-      })
-    });
+                                // edit
+                                $('body').on('click', '.editClient', function() {
+                                var Client_id = $(this).data('id');
+                                $.get("" + '/clients/' + Client_id + '/edit', function(data) {
+                                $('#modalHeading').html("Edit Client");
+                                $('#saveBtn').val("edit-user");
+                                $('#modals-slide-in').modal('show');
+                                $('#Client_id').val(data.id);
+                                $('#name').val(data.name);
+                                $('#phone').val(data.phone);
+                                $('#email').val(data.email);
+                                $('#company').val(data.company);
+                                $('#organization').val(data.organization);
+                                $('#occupation').val(data.occupation);
+                                })
+                                });
 
-    // save data
-    $('#saveBtn').click(function(e) {
-      e.preventDefault();
-      $(this).html('Sending..');
+                                // save data
+                                $('#saveBtn').click(function(e) {
+                                e.preventDefault();
+                                $(this).html('Sending..');
 
-      $.ajax({
-        data: $('#ClientForm').serialize(),
-        url: "",
-        type: "POST",
-        dataType: 'json',
-        success: function(data) {
+                                $.ajax({
+                                data: $('#ClientForm').serialize(),
+                                url: "",
+                                type: "POST",
+                                dataType: 'json',
+                                success: function(data) {
 
-          $('#ClientForm').trigger("reset");
-          $('#saveBtn').html('Submit');
-          $('#modals-slide-in').modal('hide');
-          table.draw();
+                                $('#ClientForm').trigger("reset");
+                                $('#saveBtn').html('Submit');
+                                $('#modals-slide-in').modal('hide');
+                                table.draw();
 
-        },
-        error: function(data) {
-          console.log('Error:', data);
-          $('#saveBtn').html('Submit');
-        }
-      });
-    });
+                                },
+                                error: function(data) {
+                                console.log('Error:', data);
+                                $('#saveBtn').html('Submit');
+                                }
+                                });
+                                });
 
-    // delete
-    $('body').on('click', '.deleteClient', function(e) {
+                                // delete
+                                $('body').on('click', '.deleteClient', function(e) {
 
-      var Client_id = $(this).data("id");
-      if (confirm("Are You sure want to delete !")) {
+                                var Client_id = $(this).data("id");
+                                if (confirm("Are You sure want to delete !")) {
 
-        $.ajax({
-          type: "DELETE",
-          url: "" + '/clients/' + Client_id,
-          success: function(data) {
-            table.draw();
-          },
-          error: function(data) {
-            console.log('Error:', data);
-          }
-        });
-      } else {
-        e.preventDefault();
-      }
-    });
+                                $.ajax({
+                                type: "DELETE",
+                                url: "" + '/clients/' + Client_id,
+                                success: function(data) {
+                                table.draw();
+                                },
+                                error: function(data) {
+                                console.log('Error:', data);
+                                }
+                                });
+                                } else {
+                                e.preventDefault();
+                                }
+                                });
 
-  });
+                                });
 
 
-  $(function() {
-    $('#datetimepicker11').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
-  });
+                                $(function() {
+                                $('#datetimepicker11').datetimepicker({
+                                daysOfWeekDisabled: [0, 6]
+                                });
+                                });
 </script>
 @endpush
