@@ -17,9 +17,7 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Agendas
-							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
-								alt="Card image cap" data-toggle="popover" data-placement="top"
-								data-content="Pada bagian ini ditampilkan daftar seluruh agenda yang ada dalam sistem." />
+							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini ditampilkan daftar seluruh agenda yang ada dalam sistem." />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
@@ -45,105 +43,92 @@
 			<div class="alert alert-success alert-dissmisable">
 				<h4 class="alert-heading">Success</h4>
 				<div class="alert-body">{{ $message }}</div>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-						aria-hidden="true">×</span></button>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			@endif
 			<section id="card-demo-example ">
-				<div class="row match-height align-middle">
-					<div class="col-auto">
-
-					</div>
-					<div class="col-auto">
-						<div class="card">
-							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-								<img class=" rounded float-right width=" 15px" height="15px"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-							</div>
-							<div class="card-body" style="padding-top: 1px;">
-								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src="
-									{{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
-								<small class="card text-center  mb-1">Unscheduled Sessions
-								</small>
+				<div class="container">
+					<div class="row match-height align-item-start">
+						<div class="col">
+							<div class="card">
+								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+								</div>
+								<div class="card-body" style="padding-top: 1px;">
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
+									<small class="card text-center  mb-1">Unscheduled Sessions
+									</small>
+								</div>
 								<h2 class="font-weight-bolder text-center " style="font-size: 72px;margin-top: -24px;">
-									{{ $total_unscheduled_sessions }}</h2>
+									{{ $total_unscheduled_sessions }}
+								</h2>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-auto">
-						<div class="card">
-							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-								<img class=" rounded float-right width=" 15px" height="15px"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-							</div>
-							<div class="card-body" style="padding-top: 1px;">
-								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src="
-									{{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
-								<small class="card text-center  mb-1">Scheduled Sessions
-								</small>
+						<div class="col">
+							<div class="card">
+								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+								</div>
+								<div class="card-body" style="padding-top: 1px;">
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
+									<small class="card text-center  mb-1">Scheduled Sessions
+									</small>
+								</div>
 								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
-									{{ $total_scheduled_sessions }}</h2>
+									{{ $total_scheduled_sessions }}
+								</h2>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-auto">
-						<div class="card">
-							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-								<img class=" rounded float-right width=" 15px" height="15px"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-							</div>
-							<div class="card-body" style="padding-top: 1px;">
-								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src="
-									{{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
-								<small class="card text-center  mb-1">Reschedule Sessions
-								</small>
+						<div class="col">
+							<div class="card">
+								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+								</div>
+								<div class="card-body" style="padding-top: 1px;">
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
+									<small class="card text-center  mb-1">Reschedule Sessions
+									</small>
+								</div>
 								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
-									{{ $total_rescheduled_sessions }}</h2>
+									{{ $total_rescheduled_sessions }}
+								</h2>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-auto">
-						<div class="card">
-							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-								<img class=" rounded float-right width=" 15px" height="15px"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-							</div>
-							<div class="card-body" style="padding-top: 1px;">
-								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src="
-									{{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
-								<small class="card text-center  mb-1">Canceled Sessions
-								</small>
+						<div class="col">
+							<div class="card">
+								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+								</div>
+								<div class="card-body" style="padding-top: 1px;">
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
+									<small class="card text-center  mb-1">Canceled Sessions
+									</small>
+								</div>
 								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
-									{{ $total_canceled_sessions }}</h2>
+									{{ $total_canceled_sessions }}
+								</h2>
 							</div>
 						</div>
-					</div>
 
-					<div class="col-auto">
-						<div class="card">
-							<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-								<img class=" rounded float-right width=" 15px" height="15px"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-							</div>
-							<div class="card-body" style="padding-top: 1px;">
-								<img class="rounded float-left mx-auto d-block center width=" 120px" height="120px"" src="
-									{{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
-								<small class="card text-center  mb-1">Finished Sessions
-								</small>
+						<div class="col">
+							<div class="card">
+								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+								</div>
+								<div class="card-body" style="padding-top: 1px;">
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
+									<small class="card text-center  mb-1">Finished Sessions
+									</small>
+								</div>
 								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
-									{{ $total_finished_sessions }}</h2>
+									{{ $total_finished_sessions }}
+								</h2>
 							</div>
 						</div>
 					</div>
-
 				</div>
 		</div>
 

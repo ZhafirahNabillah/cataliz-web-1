@@ -249,87 +249,328 @@
         @endrole
 
         @role('admin')
-        <div class="card-body">
-          <ul class="nav nav-tabs justify-content-center" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Coach</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Coachee</a>
-            </li>
-          </ul>
+        <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
+        <div class="card">
+          <div class="card-body">
+            <ul class="nav nav-tabs justify-content-center" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#admin" aria-controls="profile" role="tab" aria-selected="false">Admin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Coach</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Coachee</a>
+              </li>
+            </ul>
 
-          <div class="tab-content">
-            <!-- Panel Coach -->
-            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-              <div class="content-header row">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                  <div class="row breadcrumbs-top">
-                  </div>
-                </div>
-              </div>
-              <!-- coachlist card -->
-              <div class="row">
-                <div class="col-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <table class="datatables-basic table admin-datatable-coach">
-                        <thead>
-                          <tr>
-                            <th>NO</th>
-                            <th>Coach Name</th>
-                            <th>Email</th>
-                            <th>Handphone</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
+            <div class="tab-content">
+              <!-- Panel Coach -->
+              <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+                <div class="content-header row">
+                  <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- /coach list admin -->
-            <!-- /panel coach -->
-
-            <!-- Panel Coachee -->
-            <div class="tab-pane" id="coachee" aria-labelledby="about-tab" role="tabpanel">
-              <div class="content-header row">
-                <div class="content-header-left col-md-9 col-12 mb-2">
-                  <div class="row breadcrumbs-top">
+                <!-- coachlist card -->
+                <div class="row">
+                  <div class="col-12">
+                    <table class="datatables-basic table admin-datatable-coach">
+                      <thead>
+                        <tr>
+                          <th>NO</th>
+                          <th>Coach Name</th>
+                          <th>Email</th>
+                          <th>Handphone</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
-              <!-- coacheelist card -->
-              <div class="row">
+              <!-- /coach list admin -->
+              <!-- /panel coach -->
 
-                <div class="col-12">
-                  <div class="card">
-                    <div class="card-body">
-                      <table class="datatables-basic table admin-datatable-coachee">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Coachee Name</th>
-                            <th>Email</th>
-                            <th>Handphone</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
+
+              <!-- Panel Admin -->
+              <div class="tab-pane" id="admin" aria-labelledby="about-tab" role="tabpanel">
+                <div class="content-header row">
+                  <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
                     </div>
                   </div>
                 </div>
+                <!-- adminlist card -->
+                <div class="row">
+                  <div class="col-12">
+                    <table class="datatables-basic table admin-datatable-admin">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Admin Name</th>
+                          <th>Email</th>
+                          <th>Handphone</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </div>
+              <!-- /admin list admin -->
+
+              <!-- Panel Coachee -->
+              <div class="tab-pane" id="coachee" aria-labelledby="about-tab" role="tabpanel">
+                <div class="content-header row">
+                  <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                    </div>
+                  </div>
+                </div>
+                <!-- coacheelist card -->
+                <div class="row">
+                  <div class="col-12">
+                    <table class="datatables-basic table admin-datatable-coachee">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Coachee Name</th>
+                          <th>Email</th>
+                          <th>Handphone</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- /coachee list admin -->
             </div>
           </div>
         </div>
-        <!-- /coachee list admin -->
         <!-- /panel coachee -->
+
+        <!-- Modal Detail Profile Admin -->
+        <div class="modal modal-slide-in fade" id="detailProfile" aria-hidden="true">
+          <div class="modal-dialog sidebar-sm">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
+            </div>
+            <div class="card" style="border-radius: 11px">
+              <div class="card-body">
+                <h5 class="mb-75">Full Name:</h5>
+                <p class="card-text"></p>
+
+                <div class="mt-2">
+                  <h5 class="mb-75">Phone:</h5>
+                  <p class="card-text">+62</p>
+                </div>
+                <div class="mt-2">
+                  <h5 class="mb-75">Email:</h5>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+              title: 'Are you sure, you want to make this user as a Coach?',
+              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
+              if (result.isConfirmed) {
+              Swal.fire(
+              'Update Successfully',
+              'success'
+              )
+              }
+              })">
+              Make a coach
+            </button>
+            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+              title: 'Are you sure, you want to cancel this user as a Coach?',
+              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
+              if (result.isConfirmed) {
+              Swal.fire(
+              'Update Successfully',
+              'success'
+              )
+              }
+              })">
+              Delete as a Coach
+            </button>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Modal Detail Profile Coach -->
+        <div class="modal modal-slide-in fade" id="detailProfile" aria-hidden="true">
+          <div class="modal-dialog sidebar-sm">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
+            </div>
+            <div class="card" style="border-radius: 11px">
+              <div class="card-body">
+                <h5 class="mb-75">Full Name:</h5>
+                <p class="card-text"></p>
+
+                <div class="mt-2">
+                  <h5 class="mb-75">Phone:</h5>
+                  <p class="card-text">+62</p>
+                </div>
+                <div class="mt-2">
+                  <h5 class="mb-75">Email:</h5>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+              title: 'Are you sure, you want to suspend this account?',
+              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
+              if (result.isConfirmed) {
+              Swal.fire(
+              'Update Successfully',
+              'success'
+              )
+              }
+              })">
+              Suspend
+            </button>
+            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+              title: 'Are you sure, you want to cancel suspend this account?',
+              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
+              if (result.isConfirmed) {
+              Swal.fire(
+              'Update Successfully',
+              'success'
+              )
+              }
+              })">
+              Cencel Suspend
+            </button>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+
+        <!-- Modal Detail Profile Coachee -->
+        <div class="modal modal-slide-in fade" id="detailProfile" aria-hidden="true">
+          <div class="modal-dialog sidebar-sm">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
+            </div>
+            <div class="card" style="border-radius: 11px">
+              <div class="card-body">
+                <h5 class="mb-75">Full Name:</h5>
+                <p class="card-text"></p>
+
+                <div class="mt-2">
+                  <h5 class="mb-75">Phone:</h5>
+                  <p class="card-text">+62</p>
+                </div>
+                <div class="mt-2">
+                  <h5 class="mb-75">Email:</h5>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+              title: 'Are you sure, you want to suspend this account?',
+              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
+              if (result.isConfirmed) {
+              Swal.fire(
+              'Update Successfully',
+              'success'
+              )
+              }
+              })">
+              Suspend
+            </button>
+            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+              title: 'Are you sure, you want to cancel suspend this account?',
+              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
+              if (result.isConfirmed) {
+              Swal.fire(
+              'Update Successfully',
+              'success'
+              )
+              }
+              })">
+              Cencel Suspend
+            </button>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+
+        <!-- Modal to Add User -->
+        <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+          <div class="modal-dialog sidebar-sm">
+            <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="">
+              @csrf
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+              <div class="modal-header mb-1">
+                <h5 class="modal-title" id="modalHeading">Add User</h5>
+              </div>
+              <input type="hidden" name="Client_id" id="Client_id">
+              <div class="modal-body flex-grow-1">
+                <div class="form-group">
+                  <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                  <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
+                </div>
+                <label class="form-label" for="basic-icon-default-post">Phone</label>
+                <div class="input-group input-group-merge mb-2">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon5">+62</span>
+                  </div>
+                  <input id="phone" name="phone" type="text" class="form-control" value="">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="basic-icon-default-email">Email</label>
+                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="" />
+                  <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="register-password">Password</label>
+                  <div class="input-group input-group-merge form-password-toggle">
+                    <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="password" type="password" name="password" required autocomplete="new-password" placeholder="············" aria-describedby="password" tabindex="3" />
+                    <div class="input-group-append"><span class="input-group-text cursor-pointer "><i data-feather="eye"></i></span></div>
+                    @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="basic-icon-default-fullname">Role</label>
+                  <select class="form-control" id="userRole">
+                    <option selected>Choose user role</option>
+                    <option value="1">Admin</option>
+                    <option value="2">Coach</option>
+                    <option value="3">Coachee</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+                    icon: 'success',
+                    title: 'Saved Successfully!',
+                  })">
+                  Submit
+                </button>
+                <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+              </div>
+            </form>
+            <!-- </form>-->
+          </div>
+        </div>
+        <!-- End Modal -->
         @endrole
 
         <!-- END: Content-->
