@@ -16,7 +16,6 @@ class ProfileController extends Controller
     public function profil($id)
     {
         if (auth()->user()->hasRole('admin')) {
-
             $user = User::where('id', Auth::user()->id)->first();
             return view('profile.index', compact('user'));
         } elseif (auth()->user()->hasRole('coachee')) {
@@ -25,6 +24,9 @@ class ProfileController extends Controller
                 ->where('users.id', Auth::user()->id)
                 ->first();
             // return Auth::user()->password;
+            return view('profile.index', compact('user'));
+        } else {
+            $user = User::where('id', Auth::user()->id)->first();
             return view('profile.index', compact('user'));
         }
     }
