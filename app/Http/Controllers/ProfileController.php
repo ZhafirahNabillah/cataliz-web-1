@@ -16,9 +16,12 @@ class ProfileController extends Controller
     //
     public function profil($id)
     {
-        $user = User::where('id', Auth::user()->id)->first();
-        $client = Client::find($id);
-        return view('profile.index', compact('user', 'client'));
+        $user = User::select('*')
+            ->join('clients', 'user_id', '=', 'users.id')
+            ->where('users.id', Auth::user()->id)
+            ->first();
+        // return Auth::user()->password;
+        return view('profile.index', compact('user'));
     }
 
     public function simpan_password(Request $request, $id)
@@ -32,6 +35,27 @@ class ProfileController extends Controller
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
         return redirect(route('profil', Auth::user()->id))->with('success', 'Password berhasil diubah!');
+    }
+
+    public function store_data(Request $request, $id)
+    {
+        $user = User::find($id);
+        // return $user;
+        $client = Client::where('user_id', $user->id)->first();
+        // return $client;
+
+        $user->name = $request->name;
+        $user->phone = $request->phone;
+        $user->update();
+
+        $client->name = $user->name;
+        $client->phone = $user->phone;
+        $client->organization = $request->organization;
+        $client->company = $request->company;
+        $client->occupation = $request->occupation;
+        $client->update();
+
+        return redirect(route('profil', Auth::user()->id));
     }
 
     public function update_profil(Request $request, $id)
