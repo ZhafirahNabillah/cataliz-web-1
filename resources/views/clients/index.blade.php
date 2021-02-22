@@ -944,6 +944,7 @@
                   $('#modal-user-slide-in').modal('hide');
                   table_coach.draw();
                   table_admin.draw();
+                  table_coachee.draw();
 
                 },
                 error: function(data) {
@@ -979,6 +980,7 @@
                         success: function(data) {
                           table_admin.draw();
                           table_coach.draw();
+                          table_coachee.draw();
                         },
                         error: function(data) {
                           console.log('Error:', data);
@@ -1014,6 +1016,7 @@
                         success: function(data) {
                           table_admin.draw();
                           table_coach.draw();
+                          table_coachee.draw();
                         },
                         error: function(data) {
                           console.log('Error:', data);
