@@ -57,78 +57,62 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                  <dl class="row">
-                    <dt class="col-sm-3">Full Name</dt>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-3">#</dt>
-                  </dl>
+                  <dt class="col-sm-3">Full Name</dt>
                 </div>
+                <dl class="row">
+                  <dt class="col-sm-3">#</dt>
+                </dl>
                 <div class="row">
-                  <dl class="row">
-                    <dt class="col-sm-3">Organitation</dt>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-3">#</dt>
-                  </dl>
-                  <dd class="col-sm-9"> Tanggal Kegiatan</dd>
+                  <dt class="col-sm-3">Organitation</dt>
+                  <dt class="col-sm-9"> Tanggal Kegiatan</dt>
+
                 </div>
-
-                <div id="accordion">
-                  <div class="card">
-                    <div class="card-header" id="headingOne">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                          Objektif
-                        </button>
-                      </h5>
-                    </div>
-
-                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                      <div class="card-body">
-                        #
+                <dl class="row">
+                  <dt class="col-sm-3">#</dt>
+                  <dd>
+                  <dt class="col-sm-3">#</dt>
+                  </dd>
+                </dl>
+                <div class="card collapse-icon">
+                  <div class="collapse-default">
+                    <div class="card">
+                      <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                        <span class="lead collapse-title">Objektif</span>
+                      </div>
+                      <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                        <div class="card-body">
+                          #
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-header" id="headingTwo">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                          Sukses Indikator
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                      <div class="card-body">
-                        #
+                    <div class="card">
+                      <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        <span class="lead collapse-title">Sukses Indikator</span>
+                      </div>
+                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
+                        <div class="card-body">
+                          #
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-header" id="headingThree">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                          Pengembangan Area
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                      <div class="card-body">
-                        #
+                    <div class="card">
+                      <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                        <span class="lead collapse-title">Pengembangan Area</span>
+                      </div>
+                      <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
+                        <div class="card-body">
+                          #
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="card">
-                    <div class="card-header" id="headingFour">
-                      <h5 class="mb-0">
-                        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                          Support
-                        </button>
-                      </h5>
-                    </div>
-                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
-                      <div class="card-body">
-                        #
+                    <div class="card">
+                      <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                        <span class="lead collapse-title">Support</span>
+                      </div>
+                      <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">
+                        <div class="card-body">
+                          #
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -138,62 +122,61 @@
           </div>
         </div>
     </div>
-  </div>
 
-  <!-- Modal to add new record -->
-  <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-    <div class="modal-dialog sidebar-sm">
-      <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
+    <!-- Modal to add new record -->
+    <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+      <div class="modal-dialog sidebar-sm">
+        <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
 
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-        <div class="modal-header mb-1">
-          <h5 class="modal-title" id="modalHeading"></h5>
-        </div>
-        <input type="hidden" name="Client_id" id="Client_id">
-        <div class="modal-body flex-grow-1">
-          <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-            <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+          <div class="modal-header mb-1">
+            <h5 class="modal-title" id="modalHeading"></h5>
           </div>
-          <label class="form-label" for="basic-icon-default-post">Phone</label>
-          <div class="input-group input-group-merge mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon5">+62</span>
+          <input type="hidden" name="Client_id" id="Client_id">
+          <div class="modal-body flex-grow-1">
+            <div class="form-group">
+              <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
             </div>
-            <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="basic-icon-default-email">Email</label>
-            <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-            <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-            <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Company</label>
-            <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-            <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-          </div>
+            <label class="form-label" for="basic-icon-default-post">Phone</label>
+            <div class="input-group input-group-merge mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon5">+62</span>
+              </div>
+              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="basic-icon-default-email">Email</label>
+              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+              <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="basic-icon-default-fullname">Organization</label>
+              <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="basic-icon-default-fullname">Company</label>
+              <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+            </div>
 
-          <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-          <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-        </div>
-        <!-- </form>-->
+            <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+          <!-- </form>-->
 
+      </div>
     </div>
+    <!-- End Modal -->
+    </section>
+    <!--/ Basic table -->
+
+
+
   </div>
-  <!-- End Modal -->
-  </section>
-  <!--/ Basic table -->
-
-
-
-</div>
 </div>
 </div>
 <!-- END: Content-->
