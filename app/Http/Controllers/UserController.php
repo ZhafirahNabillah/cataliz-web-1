@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Agenda_detail;
 use App\Models\Client;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DataTables;
@@ -39,7 +40,11 @@ class UserController extends Controller
     public function edit($id)
     {
       //
+      if (auth()->user()->hasRole('admin')) {
+        $user = User::with('roles')->where('id',$id)->first();
 
+        return response()->json($user);
+      }
       if (auth()->user()->hasRole('coachee')) {
         $user = User::with('roles')->where('id',$id)->first();
         $total_coaching = Agenda_detail::join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')->where('agendas.owner_id','=',$id)->count();
@@ -53,19 +58,31 @@ class UserController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'name'  => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'role'  => 'required',
+            'name'      => 'required',
+            'email'     => 'required|email',
+            'phone'     => 'required',
+            'roles'     => 'required',
         ]);
 
-        $user = User::where('id',$request->input('user_id'))->first();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->phone = $request->input('phone');
-        $user->syncRoles($request->input('role'));
-        $user->save();
+        $user = User::updateOrCreate(['id' => $request->user_id],['name' => $request->name, 'email'=> $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123')]);
+        $user->syncRoles($request->input('roles'));
 
         return response()->json(['success' => 'Customer saved successfully!']);
+    }
+
+    public function suspend_user(Request $request){
+      $user = User::find($request->id);
+      $user->status = 0;
+      $user->update();
+
+      return response()->json(['success' => 'User has been suspended!']);
+    }
+
+    public function unsuspend_user(Request $request){
+      $user = User::find($request->id);
+      $user->status = 1;
+      $user->update();
+
+      return response()->json(['success' => 'User has been activated!']);
     }
 }

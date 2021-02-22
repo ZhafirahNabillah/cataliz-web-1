@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::resource('users', UserController::class);
 	Route::get('/show_coach_list', [ClientController::class, 'show_coach_list'])->name('show_coach_list');
 	Route::get('/show_coachee_list', [ClientController::class, 'show_coachee_list'])->name('show_coachee_list');
+	Route::get('/show_admin_list', [ClientController::class, 'show_admin_list'])->name('show_admin_list');
+	Route::post('/suspend', [UserController::class, 'suspend_user'])->name('suspend_user');
+	Route::post('/unsuspend', [UserController::class, 'unsuspend_user'])->name('unsuspend_user');
 });
 
 //Middleware group for coach page
