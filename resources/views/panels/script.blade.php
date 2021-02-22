@@ -27,7 +27,8 @@
         })
 </script>
 
-@elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show', 'dashboard','roles.index','permissions.index','users.index']))
+@elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show',
+'plans.show', 'dashboard','roles.index','permissions.index','users.index']))
 
 
 <!-- BEGIN: Vendor JS-->
