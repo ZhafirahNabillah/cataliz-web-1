@@ -251,7 +251,7 @@
         @role('admin')
         <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
         <div class="">
-          <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1">Add User</button>
+          <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
         </div>
         <div class="card">
           <div class="card-body">
@@ -270,12 +270,6 @@
             <div class="tab-content">
               <!-- Panel Coach -->
               <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-                <div class="content-header row">
-                  <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                    </div>
-                  </div>
-                </div>
                 <!-- coachlist card -->
                 <div class="row">
                   <div class="col-12">
@@ -300,13 +294,7 @@
 
 
               <!-- Panel Admin -->
-              <div class="tab-pane" id="admin" aria-labelledby="about-tab" role="tabpanel">
-                <div class="content-header row">
-                  <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                    </div>
-                  </div>
-                </div>
+              <div class="tab-pane" id="admin" aria-labelledby="admin-tab" role="tabpanel">
                 <!-- adminlist card -->
                 <div class="row">
                   <div class="col-12">
@@ -329,13 +317,7 @@
               <!-- /admin list admin -->
 
               <!-- Panel Coachee -->
-              <div class="tab-pane" id="coachee" aria-labelledby="about-tab" role="tabpanel">
-                <div class="content-header row">
-                  <div class="content-header-left col-md-9 col-12 mb-2">
-                    <div class="row breadcrumbs-top">
-                    </div>
-                  </div>
-                </div>
+              <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
                 <!-- coacheelist card -->
                 <div class="row">
                   <div class="col-12">
@@ -383,7 +365,7 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn1" value="create" onclick="Swal.fire({
               title: 'Are you sure, you want to make this user as a Coach?',
               icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
               if (result.isConfirmed) {
@@ -395,7 +377,7 @@
               })">
               Make a coach
             </button>
-            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn2" value="create" onclick="Swal.fire({
               title: 'Are you sure, you want to cancel this user as a Coach?',
               icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
               if (result.isConfirmed) {
@@ -433,7 +415,7 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn3" value="create" onclick="Swal.fire({
               title: 'Are you sure, you want to suspend this account?',
               icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
               if (result.isConfirmed) {
@@ -445,7 +427,7 @@
               })">
               Suspend
             </button>
-            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn4" value="create" onclick="Swal.fire({
               title: 'Are you sure, you want to cancel suspend this account?',
               icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
               if (result.isConfirmed) {
@@ -484,7 +466,7 @@
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn5" value="create" onclick="Swal.fire({
               title: 'Are you sure, you want to suspend this account?',
               icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
               if (result.isConfirmed) {
@@ -496,7 +478,7 @@
               })">
               Suspend
             </button>
-            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
+            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn6" value="create" onclick="Swal.fire({
               title: 'Are you sure, you want to cancel suspend this account?',
               icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
               if (result.isConfirmed) {
@@ -514,15 +496,15 @@
 
 
         <!-- Modal to Add User -->
-        <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+        <div class="modal modal-slide-in fade" id="modal-user-slide-in" aria-hidden="true">
           <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="">
+            <form class="add-new-record modal-content pt-0" id="createUserForm" name="createUserForm">
               @csrf
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
               <div class="modal-header mb-1">
                 <h5 class="modal-title" id="modalHeading">Add User</h5>
               </div>
-              <input type="hidden" name="Client_id" id="Client_id">
+              <input type="hidden" name="user_id" id="user_id">
               <div class="modal-body flex-grow-1">
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
@@ -537,36 +519,25 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-email">Email</label>
-                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="" />
+                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"/>
                   <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="register-password">Password</label>
-                  <div class="input-group input-group-merge form-password-toggle">
-                    <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="password" type="password" name="password" required autocomplete="new-password" placeholder="············" aria-describedby="password" tabindex="3" />
-                    <div class="input-group-append"><span class="input-group-text cursor-pointer "><i data-feather="eye"></i></span></div>
-                    @error('password')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
+                  <label class="form-label" for="basic-icon-default-fullname">Roles</label>
+                  <div class="form-check">
+										<input class="form-check-input" type="checkbox" value="coach" name="roles[]" id="permission-check-coach">
+										<label class="form-check-label" for="permission-check-coach">
+											Coach
+										</label>
+									</div>
+                  <div class="form-check">
+										<input class="form-check-input" type="checkbox" value="admin" name="roles[]" id="permission-check-admin">
+										<label class="form-check-label" for="permission-check-admin">
+											Admin
+										</label>
+									</div>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-fullname">Role</label>
-                  <select class="form-control" id="userRole">
-                    <option selected>Choose user role</option>
-                    <option value="1">Admin</option>
-                    <option value="2">Coach</option>
-                    <option value="3">Coachee</option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
-                    icon: 'success',
-                    title: 'Saved Successfully!',
-                  })">
-                  Submit
-                </button>
+                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
                 <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
               </div>
             </form>
@@ -580,6 +551,9 @@
         @endsection
 
         @push('scripts')
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
         <script>
           $(function() {
 
@@ -782,7 +756,7 @@
               }
             });
 
-            var table = $('.admin-datatable-coach').DataTable({
+            var table_coach = $('.admin-datatable-coach').DataTable({
               processing: true,
               serverSide: true,
               ajax: "{{ route('show_coach_list') }}",
@@ -823,7 +797,7 @@
               }
             });
 
-            var table = $('.admin-datatable-coachee').DataTable({
+            var table_coachee = $('.admin-datatable-coachee').DataTable({
               processing: true,
               serverSide: true,
               ajax: "{{ route('show_coachee_list') }}",
@@ -864,29 +838,73 @@
               }
             });
 
-            // create
-            $('body').on('click', '.createNewClient', function() {
-              $('#saveBtn').val("create-Client");
-              $('#Customer_id').val('');
-              $('#ClientForm').trigger("reset");
-              $('#modalHeading').html("Create New Client");
-              $('#modals-slide-in').modal('show');
+            var table_admin = $('.admin-datatable-admin').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "{{ route('show_admin_list') }}",
+              columns: [{
+                  data: 'DT_RowIndex',
+                  name: 'DT_RowIndex'
+                },
+                {
+                  data: 'name',
+                  name: 'name'
+                },
+                {
+                  data: 'email',
+                  name: 'email',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'phone',
+                  name: 'phone',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+                },
+              ],
+              dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+              language: {
+                paginate: {
+                  // remove previous & next text from pagination
+                  previous: '&nbsp;',
+                  next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+              }
             });
 
-            // edit client
-            $('body').on('click', '.editClient', function() {
-              var Client_id = $(this).data('id');
-              $.get("" + '/clients/' + Client_id + '/edit', function(data) {
-                $('#modalHeading').html("Edit Client");
+            // create new user on admin page
+            $('body').on('click', '.createNewUser', function() {
+              console.log('tes');
+              $('#saveBtn').val("create-User");
+              $('#user_id').val('');
+              $('#createUserForm').trigger("reset");
+              $('#modalHeading').html("Create New User");
+              $('#modal-user-slide-in').modal('show');
+            });
+
+            // edit user in admin page
+            $('body').on('click', '.editUser', function() {
+              var user_id = $(this).data('id');
+              $.get("" + '/users/' + user_id + '/edit', function(data) {
+                $('#modalHeading').html("Edit User");
                 $('#saveBtn').val("edit-user");
-                $('#modals-slide-in').modal('show');
-                $('#Client_id').val(data.id);
+                $('#createUserForm').trigger("reset");
+                $('#modal-user-slide-in').modal('show');
+                $('#user_id').val(data.id);
                 $('#name').val(data.name);
                 $('#phone').val(data.phone);
                 $('#email').val(data.email);
-                $('#company').val(data.company);
-                $('#organization').val(data.organization);
-                $('#occupation').val(data.occupation);
+                $.each(data.roles, function(i, item) {
+        					var role_name = data.roles[i].name;
+        					$('#permission-check-'+role_name).prop('checked', true);
+        				});
               })
             });
 
@@ -907,22 +925,25 @@
               })
             });
 
-            // save data
+            // save user data on admin page
             $('#saveBtn').click(function(e) {
               e.preventDefault();
               $(this).html('Sending..');
+              var data = $('#createUserForm').serialize();
+              console.log(data);
 
               $.ajax({
-                data: $('#ClientForm').serialize(),
-                url: "",
+                data: data,
+                url: "{{ route('users.store') }}",
                 type: "POST",
                 dataType: 'json',
                 success: function(data) {
 
-                  $('#ClientForm').trigger("reset");
+                  $('#createUserForm').trigger("reset");
                   $('#saveBtn').html('Submit');
-                  $('#modals-slide-in').modal('hide');
-                  table.draw();
+                  $('#modal-user-slide-in').modal('hide');
+                  table_coach.draw();
+                  table_admin.draw();
 
                 },
                 error: function(data) {
@@ -932,6 +953,75 @@
               });
             });
 
+            // suspend user
+            $('body').on('click', '.suspendUser', function(e) {
+              console.log('tes');
+
+              let user_id = $(this).attr('data-id');
+
+              Swal.fire({
+                    title: "Are you sure?",
+                    text: "The user you choose will be suspended!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, Sure",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      var data = {id: user_id};
+                      console.log(data);
+
+                      $.ajax({
+                        data: data,
+                        type: "POST",
+                        url: "{{ route('suspend_user') }}",
+                        success: function(data) {
+                          table_admin.draw();
+                          table_coach.draw();
+                        },
+                        error: function(data) {
+                          console.log('Error:', data);
+                        }
+                      });
+                    }
+                })
+            });
+
+            // unsuspend user
+            $('body').on('click', '.unsuspendUser', function(e) {
+              console.log('tes');
+
+              let user_id = $(this).attr('data-id');
+
+              Swal.fire({
+                    title: "Are you sure?",
+                    text: "The user you choose will be activated",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, Sure",
+                    cancelButtonText: "Cancel"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                      var data = {id: user_id};
+                      console.log(data);
+
+                      $.ajax({
+                        data: data,
+                        type: "POST",
+                        url: "{{ route('unsuspend_user') }}",
+                        success: function(data) {
+                          table_admin.draw();
+                          table_coach.draw();
+                        },
+                        error: function(data) {
+                          console.log('Error:', data);
+                        }
+                      });
+                    }
+                })
+            });
 
             // delete
             $('body').on('click', '.deleteClient', function(e) {
