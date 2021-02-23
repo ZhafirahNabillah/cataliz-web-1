@@ -35,7 +35,7 @@ class ResetPasswordController extends Controller
       $reset_code = \Illuminate\Support\Facades\Request::get('code');
       $user = User::where('reset_code', $reset_code)->first();
       if ($user != null) {
-        return view('auth.passwords.reset',compact('user'));
+        return view('auth.passwords.reset_new',compact('user'));
       } else {
         return abort(404);
       }
