@@ -126,15 +126,14 @@ class ClientController extends Controller
       return DataTables::of($data)
       ->addIndexColumn()
       ->addColumn('action', function ($row) {
-        // $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "'. $row->id .'">Update</a>';
+        $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "'. $row->id .'">Update</a>';
         $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "'. $row->id .'">Suspend</a>';
         $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "'. $row->id .'">Unsuspend</a>';
 
         if ($row->status == 1) {
-          // code...
-          $actionBtn = $suspend_btn;
+          $actionBtn = $detail_btn.' '.$suspend_btn;
         } else {
-          $actionBtn = $unsuspend_btn;
+          $actionBtn = $detail_btn.' '.$unsuspend_btn;
         }
         return $actionBtn;
       })

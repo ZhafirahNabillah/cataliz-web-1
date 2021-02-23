@@ -523,19 +523,25 @@
                   <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-fullname">Roles</label>
+                  <label class="form-label" for="basic-icon-default-fullname">Role</label>
                   <div class="form-check">
-										<input class="form-check-input" type="checkbox" value="coach" name="roles[]" id="permission-check-coach">
-										<label class="form-check-label" for="permission-check-coach">
-											Coach
-										</label>
-									</div>
+                    <input class="form-check-input" type="radio" name="roles" id="permission-check-coach" value="coach">
+                    <label class="form-check-label" for="permission-check-coach">
+                      Coach
+                    </label>
+                  </div>
                   <div class="form-check">
-										<input class="form-check-input" type="checkbox" value="admin" name="roles[]" id="permission-check-admin">
-										<label class="form-check-label" for="permission-check-admin">
-											Admin
-										</label>
-									</div>
+                    <input class="form-check-input" type="radio" name="roles" id="permission-check-admin" value="admin">
+                    <label class="form-check-label" for="permission-check-admin">
+                      Admin
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
+                    <label class="form-check-label" for="permission-check-coachee">
+                      Coachee
+                    </label>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
                 <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
@@ -886,6 +892,9 @@
               $('#user_id').val('');
               $('#createUserForm').trigger("reset");
               $('#modalHeading').html("Create New User");
+              $('#name').prop('disabled', false);
+              $('#phone').prop('disabled', false);
+              $('#email').prop('disabled', false);
               $('#modal-user-slide-in').modal('show');
             });
 
@@ -898,9 +907,9 @@
                 $('#createUserForm').trigger("reset");
                 $('#modal-user-slide-in').modal('show');
                 $('#user_id').val(data.id);
-                $('#name').val(data.name);
-                $('#phone').val(data.phone);
-                $('#email').val(data.email);
+                $('#name').val(data.name).prop('disabled', true);
+                $('#phone').val(data.phone).prop('disabled', true);
+                $('#email').val(data.email).prop('disabled', true);
                 $.each(data.roles, function(i, item) {
         					var role_name = data.roles[i].name;
         					$('#permission-check-'+role_name).prop('checked', true);
