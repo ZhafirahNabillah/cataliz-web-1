@@ -80,19 +80,19 @@ class AgendaController extends Controller
         ->where('agendas.client_id', $client->id)->latest()
         ->get();
 
-      $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($client) {
+      $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
       })->where('status', 'unschedule')->get()->count();
-      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($client) {
+      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
       })->where('status', 'scheduled')->get()->count();
-      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($client) {
+      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
       })->where('status', 'rescheduled')->get()->count();
-      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($client) {
+      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
       })->where('status', 'finished')->get()->count();
-      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($client) {
+      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
       })->where('status', 'canceled')->get()->count();
     }
@@ -102,6 +102,24 @@ class AgendaController extends Controller
       //return data as datatable json
       return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('status_colored', function ($row) {
+          if ($row->status == 'unschedule') {
+            $unschedule_status = '<span class="badge badge-pill badge-secondary">unschedule</span>';
+            return $unschedule_status;
+          } elseif ($row->status == 'scheduled') {
+            $scheduled_status = '<span class="badge badge-pill badge-warning">scheduled</span>';
+            return $scheduled_status;
+          } elseif ($row->status == 'rescheduled') {
+            $rescheduled_status = '<span class="badge badge-pill badge-primary">finished</span>';
+            return $rescheduled_status;
+          } elseif ($row->status == 'finished') {
+            $finished_status = '<span class="badge badge-pill badge-success">finished</span>';
+            return $finished_status;
+          } elseif ($row->status == 'canceled') {
+            $canceled_status = '<span class="badge badge-pill badge-danger">canceled</span>';
+            return $canceled_status;
+          }
+        })
         ->addColumn('action', function ($row) {
 
           //add update button if user have permission
@@ -132,7 +150,7 @@ class AgendaController extends Controller
           <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $whatsapp_btn . $delete_btn . '</div>';
           return $actionBtn;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action', 'status_colored'])
         ->make(true);
     }
 

@@ -206,8 +206,8 @@
 					defaultContent: '<i>-</i>'
 				},
 				{
-					data: 'status',
-					name: 'status'
+					data: 'status_colored',
+					name: 'status_colored'
 				},
 				{
 					data: 'action',
