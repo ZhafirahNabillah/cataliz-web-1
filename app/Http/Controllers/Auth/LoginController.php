@@ -41,15 +41,14 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    protected function authenticated(Request $request, $user){
-      return redirect('dashboard');
-      // if ($user->hasRole('admin')) {
-      //   return redirect()->route('dashboard.admin');
-      // } elseif ($user->hasRole('coach')) {
-      //   return redirect()->route('dashboard.coach');
-      // } elseif ($user->hasRole('coachee')) {
-      //   return redirect()->route('dashboard.coachee');
-      // }
+    protected function authenticated(Request $request){
+
+      if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'status' => 1])) {
+          return redirect('dashboard');
+      } else {
+          Auth::logout();
+          return redirect('login')->with('error','Your account has been suspended!');
+      }
     }
 
     public function logout(Request $request) {

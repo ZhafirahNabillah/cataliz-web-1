@@ -30,7 +30,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-	return redirect('/');
+	return redirect('login');
 });
 
 //Authenticate route

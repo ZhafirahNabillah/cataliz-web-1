@@ -35,6 +35,13 @@
       				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><spanaria-hidden="true">×</span></button>
       			</div>
       			@endif
+            @if ($message = Session::get('error'))
+      			<div class="alert alert-danger alert-dissmisable">
+      				<h4 class="alert-heading">Sorry</h4>
+      				<div class="alert-body">{{ $message }}</div>
+      				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><spanaria-hidden="true">×</span></button>
+      			</div>
+      			@endif
             <h4 class="card-title mb-1">Welcome to Cataliz! 👋</h4>
             <p class="card-text mb-2">Please sign-in to your account and start the adventure</p>
             <form class="auth-login-form mt-2" method="POST" action="{{ route('login') }}">
