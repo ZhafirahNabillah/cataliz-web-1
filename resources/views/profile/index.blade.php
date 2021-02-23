@@ -808,9 +808,6 @@
 												<li class="nav-item">
 													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
-												<li class="nav-item">
-													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
-												</li>
 											</ul>
 
 											<!-- edit button -->
