@@ -13,6 +13,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +40,9 @@ Auth::routes();
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');
 Route::get('/logout', [LoginController::class, 'logout']);
+Route::get('/reset', [ResetPasswordController::class, 'show_reset_form'])->name('show_reset_form');
+Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name('reset_password');
+Route::get('/send_email', [MailController::class, 'SendResetPasswordMail'])->name('send_email');
 
 //Middleware group for admin page
 Route::group(['middleware' => ['auth']], function () {

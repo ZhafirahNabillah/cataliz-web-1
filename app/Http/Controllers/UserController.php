@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DataTables;
+use App\Http\Controllers\MailController;
 
 class UserController extends Controller
 {
@@ -64,8 +65,9 @@ class UserController extends Controller
             'roles'     => 'required',
         ]);
 
-        $user = User::updateOrCreate(['id' => $request->user_id],['name' => $request->name, 'email'=> $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123')]);
+        $user = User::updateOrCreate(['id' => $request->user_id],['name' => $request->name, 'email'=> $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
         $user->syncRoles($request->input('roles'));
+        MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);
 
         return response()->json(['success' => 'Customer saved successfully!']);
     }
