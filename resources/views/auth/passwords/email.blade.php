@@ -44,7 +44,7 @@
 
                                 <button class="btn btn-primary btn-block" tabindex="5">Send Password Reset Link</button>
                             </form>
-                            <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
+                            <p class="text-center mt-2"><span>New on our platform?</span><a href="{{route('show_register')}}" id="btn-register-choice"><span>&nbsp;Create an account</span></a></p>
 
                         </div>
                     </div>

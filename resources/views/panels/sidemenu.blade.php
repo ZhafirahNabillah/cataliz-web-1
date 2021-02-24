@@ -50,12 +50,12 @@
             @endcan
             @can('list-role')
             <li class=" nav-item {{ 'roles' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Role</span></a>
+                <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="inbox"></i><span class="menu-title text-truncate" data-i18n="Email">Role</span></a>
             </li>
             @endcan
             @can('list-permission')
             <li class=" nav-item {{ 'permissions' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Permission</span></a>
+                <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i data-feather="edit-3"></i><span class="menu-title text-truncate" data-i18n="Email">Permission</span></a>
             </li>
             @endcan
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>

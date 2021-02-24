@@ -104,10 +104,12 @@ class AgendaController extends Controller
         ->addIndexColumn()
         ->addColumn('status_colored', function ($row) {
           if ($row->status == 'unschedule') {
-            $unschedule_status = '<span class="badge badge-pill badge-secondary">unschedule</span>';
+            $unschedule_status = '<span class="badge badge-pill badge-secondary" style="
+            background-color: #F1AF33;">unschedule</span>';
             return $unschedule_status;
           } elseif ($row->status == 'scheduled') {
-            $scheduled_status = '<span class="badge badge-pill badge-warning">scheduled</span>';
+            $scheduled_status = '<span class="badge badge-pill badge-warning" style="
+            background-color: #CADB05;">scheduled</span>';
             return $scheduled_status;
           } elseif ($row->status == 'rescheduled') {
             $rescheduled_status = '<span class="badge badge-pill badge-primary">finished</span>';
