@@ -112,7 +112,7 @@ class AgendaController extends Controller
             background-color: #CADB05;">scheduled</span>';
             return $scheduled_status;
           } elseif ($row->status == 'rescheduled') {
-            $rescheduled_status = '<span class="badge badge-pill badge-primary">finished</span>';
+            $rescheduled_status = '<span class="badge badge-pill badge-primary">rescheduled</span>';
             return $rescheduled_status;
           } elseif ($row->status == 'finished') {
             $finished_status = '<span class="badge badge-pill badge-success">finished</span>';

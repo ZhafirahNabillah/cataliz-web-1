@@ -343,156 +343,6 @@
         </div>
         <!-- /panel coachee -->
 
-        <!-- Modal Detail Profile Admin -->
-        <div class="modal modal-slide-in fade" id="detailProfile" aria-hidden="true">
-          <div class="modal-dialog sidebar-sm">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-            <div class="modal-header mb-1">
-              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
-            </div>
-            <div class="card" style="border-radius: 11px">
-              <div class="card-body">
-                <h5 class="mb-75">Full Name:</h5>
-                <p class="card-text"></p>
-
-                <div class="mt-2">
-                  <h5 class="mb-75">Phone:</h5>
-                  <p class="card-text">+62</p>
-                </div>
-                <div class="mt-2">
-                  <h5 class="mb-75">Email:</h5>
-                  <p class="card-text"></p>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn1" value="create" onclick="Swal.fire({
-              title: 'Are you sure, you want to make this user as a Coach?',
-              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
-              if (result.isConfirmed) {
-              Swal.fire(
-              'Update Successfully',
-              'success'
-              )
-              }
-              })">
-              Make a coach
-            </button>
-            <button type="submit" class="btn btn-success data-submit mr-1" id="saveBtn2" value="create" onclick="Swal.fire({
-              title: 'Are you sure, you want to cancel this user as a Coach?',
-              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
-              if (result.isConfirmed) {
-              Swal.fire(
-              'Update Successfully',
-              'success'
-              )
-              }
-              })">
-              Delete as a Coach
-            </button>
-          </div>
-        </div>
-        <!-- End Modal -->
-
-        <!-- Modal Detail Profile Coach -->
-        <div class="modal modal-slide-in fade" id="detailProfile" aria-hidden="true">
-          <div class="modal-dialog sidebar-sm">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-            <div class="modal-header mb-1">
-              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
-            </div>
-            <div class="card" style="border-radius: 11px">
-              <div class="card-body">
-                <h5 class="mb-75">Full Name:</h5>
-                <p class="card-text"></p>
-
-                <div class="mt-2">
-                  <h5 class="mb-75">Phone:</h5>
-                  <p class="card-text">+62</p>
-                </div>
-                <div class="mt-2">
-                  <h5 class="mb-75">Email:</h5>
-                  <p class="card-text"></p>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn3" value="create" onclick="Swal.fire({
-              title: 'Are you sure, you want to suspend this account?',
-              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
-              if (result.isConfirmed) {
-              Swal.fire(
-              'Update Successfully',
-              'success'
-              )
-              }
-              })">
-              Suspend
-            </button>
-            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn4" value="create" onclick="Swal.fire({
-              title: 'Are you sure, you want to cancel suspend this account?',
-              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
-              if (result.isConfirmed) {
-              Swal.fire(
-              'Update Successfully',
-              'success'
-              )
-              }
-              })">
-              Cencel Suspend
-            </button>
-          </div>
-        </div>
-        <!-- End Modal -->
-
-
-        <!-- Modal Detail Profile Coachee -->
-        <div class="modal modal-slide-in fade" id="detailProfile" aria-hidden="true">
-          <div class="modal-dialog sidebar-sm">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-            <div class="modal-header mb-1">
-              <h5 class="modal-title" id="modalHeading">Detail Profile</h5>
-            </div>
-            <div class="card" style="border-radius: 11px">
-              <div class="card-body">
-                <h5 class="mb-75">Full Name:</h5>
-                <p class="card-text"></p>
-
-                <div class="mt-2">
-                  <h5 class="mb-75">Phone:</h5>
-                  <p class="card-text">+62</p>
-                </div>
-                <div class="mt-2">
-                  <h5 class="mb-75">Email:</h5>
-                  <p class="card-text"></p>
-                </div>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-danger data-submit mr-1" id="saveBtn5" value="create" onclick="Swal.fire({
-              title: 'Are you sure, you want to suspend this account?',
-              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
-              if (result.isConfirmed) {
-              Swal.fire(
-              'Update Successfully',
-              'success'
-              )
-              }
-              })">
-              Suspend
-            </button>
-            <button type="submit" class="btn btn-secondary data-submit mr-1" id="saveBtn6" value="create" onclick="Swal.fire({
-              title: 'Are you sure, you want to cancel suspend this account?',
-              icon: 'warning', showCancelButton: true, confirmButtonColor: '#3085d6' , cancelButtonColor: '#d33' , confirmButtonText: 'YES' }).then((result)=> {
-              if (result.isConfirmed) {
-              Swal.fire(
-              'Update Successfully',
-              'success'
-              )
-              }
-              })">
-              Cencel Suspend
-            </button>
-          </div>
-        </div>
-        <!-- End Modal -->
 
 
         <!-- Modal to Add User -->
@@ -519,7 +369,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-email">Email</label>
-                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"/>
+                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" />
                   <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                 </div>
                 <div class="form-group">
@@ -911,9 +761,9 @@
                 $('#phone').val(data.phone).prop('disabled', true);
                 $('#email').val(data.email).prop('disabled', true);
                 $.each(data.roles, function(i, item) {
-        					var role_name = data.roles[i].name;
-        					$('#permission-check-'+role_name).prop('checked', true);
-        				});
+                  var role_name = data.roles[i].name;
+                  $('#permission-check-' + role_name).prop('checked', true);
+                });
               })
             });
 
@@ -970,33 +820,35 @@
               let user_id = $(this).attr('data-id');
 
               Swal.fire({
-                    title: "Are you sure?",
-                    text: "The user you choose will be suspended!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, Sure",
-                    cancelButtonText: "Cancel"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                      var data = {id: user_id};
-                      console.log(data);
+                title: "Are you sure?",
+                text: "The user you choose will be suspended!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Sure",
+                cancelButtonText: "Cancel"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  var data = {
+                    id: user_id
+                  };
+                  console.log(data);
 
-                      $.ajax({
-                        data: data,
-                        type: "POST",
-                        url: "{{ route('suspend_user') }}",
-                        success: function(data) {
-                          table_admin.draw();
-                          table_coach.draw();
-                          table_coachee.draw();
-                        },
-                        error: function(data) {
-                          console.log('Error:', data);
-                        }
-                      });
+                  $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "{{ route('suspend_user') }}",
+                    success: function(data) {
+                      table_admin.draw();
+                      table_coach.draw();
+                      table_coachee.draw();
+                    },
+                    error: function(data) {
+                      console.log('Error:', data);
                     }
-                })
+                  });
+                }
+              })
             });
 
             // unsuspend user
@@ -1006,33 +858,35 @@
               let user_id = $(this).attr('data-id');
 
               Swal.fire({
-                    title: "Are you sure?",
-                    text: "The user you choose will be activated",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, Sure",
-                    cancelButtonText: "Cancel"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                      var data = {id: user_id};
-                      console.log(data);
+                title: "Are you sure?",
+                text: "The user you choose will be activated",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Sure",
+                cancelButtonText: "Cancel"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  var data = {
+                    id: user_id
+                  };
+                  console.log(data);
 
-                      $.ajax({
-                        data: data,
-                        type: "POST",
-                        url: "{{ route('unsuspend_user') }}",
-                        success: function(data) {
-                          table_admin.draw();
-                          table_coach.draw();
-                          table_coachee.draw();
-                        },
-                        error: function(data) {
-                          console.log('Error:', data);
-                        }
-                      });
+                  $.ajax({
+                    data: data,
+                    type: "POST",
+                    url: "{{ route('unsuspend_user') }}",
+                    success: function(data) {
+                      table_admin.draw();
+                      table_coach.draw();
+                      table_coachee.draw();
+                    },
+                    error: function(data) {
+                      console.log('Error:', data);
                     }
-                })
+                  });
+                }
+              })
             });
 
             // delete

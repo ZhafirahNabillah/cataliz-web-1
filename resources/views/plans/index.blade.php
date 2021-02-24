@@ -59,7 +59,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
-                          @hasanyrole('coach|admin')
+                            @hasanyrole('coach|admin')
                             <table class="datatables-basic table default-datatable-plans">
                                 <thead>
                                     <tr>
@@ -74,7 +74,7 @@
                                 <tbody>
                                 </tbody>
                             </table>
-                          @else
+                            @else
                             <table class="datatables-basic table coachee-datatable-plans">
                                 <thead>
                                     <tr>
@@ -88,7 +88,7 @@
                                 <tbody>
                                 </tbody>
                             </table>
-                          @endhasanyrole
+                            @endhasanyrole
                         </div>
                     </div>
                 </div>
@@ -254,49 +254,50 @@
         });
 
         var table = $('.coachee-datatable-plans').DataTable({
-    			processing: true,
-    			serverSide: true,
-    			ajax: "",
-    			columns: [{
-    					data: 'DT_RowIndex',
-    					name: 'DT_RowIndex'
-    				},
-    				{
-    					data: 'name',
-    					name: 'name'
-    				},
-    				{
-    					data: 'objective',
-    					name: 'objective'
-    				},
-    				{
-    					data: 'date',
-    					name: 'date',
-    					defaultContent: '<i>-</i>'
-    				},
-    				{
-    					data: 'action',
-    					name: 'action',
-    					orderable: true,
-    					searchable: true
-    				},
-    			],
-    			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-    			language: {
-    				paginate: {
-    					// remove previous & next text from pagination
-    					previous: '&nbsp;',
-    					next: '&nbsp;'
-    				},
-    				search: "<i data-feather='search'></i>",
-    				searchPlaceholder: "Search records"
-    			}
-    		});
+            processing: true,
+            serverSide: true,
+            ajax: "",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name',
+                    name: 'name'
+                },
+                {
+                    data: 'objective',
+                    name: 'objective'
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    defaultContent: '<i>-</i>'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+                paginate: {
+                    // remove previous & next text from pagination
+                    previous: '&nbsp;',
+                    next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+            }
+        });
 
         $('body').on('click', '.deletePlan', function(e) {
 
             var plan_id = $(this).data("id");
             console.log(plan_id);
+            // ganti sweetalert
             if (confirm("Are You sure want to delete !")) {
 
                 $.ajaxSetup({

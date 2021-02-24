@@ -232,6 +232,7 @@
 
 			var agenda_id = $(this).data("id");
 			console.log(agenda_id);
+			// ganti sweetalert
 			if (confirm("Are You sure want to delete !")) {
 
 				$.ajaxSetup({

@@ -229,9 +229,11 @@
 														</div>
 
 														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
-                    icon: 'success',
-                    title: 'Saved Successfully!',
-                  })">
+															icon: 'success',
+															title: 'Your work has been saved',
+															showConfirmButton: false,
+															timer: 1500
+														})">
 															Submit
 														</button>
 														<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
@@ -423,7 +425,11 @@
 																<input type="file" name="profil_picture" id="profil_picture">
 														</div>
 														<div class="modal-footer">
-															<button type="submit" class="btn btn-primary">Simpan</button>
+															<button type="submit" class="btn btn-primary" onclick="Swal.fire({
+																icon: 'success',
+																title: 'Your work has been saved',
+																showConfirmButton: false,
+															})">Simpan</button>
 															</form>
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 														</div>
@@ -448,7 +454,11 @@
 																<input type="file" name="background_picture" id="background_picture">
 														</div>
 														<div class="modal-footer">
-															<button type="submit" class="btn btn-primary">Simpan</button>
+															<button type="submit" class="btn btn-primary" onclick="Swal.fire({
+																icon: 'success',
+																title: 'Your work has been saved',
+																showConfirmButton: false,
+															})">Simpan</button>
 															</form>
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 														</div>
@@ -552,7 +562,8 @@
 
 								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
                     icon: 'success',
-                    title: 'Saved Successfully!',
+										title: 'Your work has been saved',
+										showConfirmButton: false,
                   })">
 									Submit
 								</button>
@@ -1071,7 +1082,7 @@
 	@endsection
 
 	@push('scripts')
-
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 	<script type="text/javascript">
 		$(function() {
 			// popover

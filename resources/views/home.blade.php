@@ -300,10 +300,7 @@
                     <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$data->occupation}}" />
                   </div>
 
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
-                    icon: 'success',
-                    title: 'Saved Successfully!',
-                  })">
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">
                     Submit
                   </button>
                   <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
@@ -685,6 +682,10 @@
         // e.preventDefault();
         $(this).html('Sending..');
         $('#modals-slide-in').modal('hide');
+        Swal.fire({
+          icon: 'success',
+          title: 'Saved Successfully!',
+        })
       })
     })
   });

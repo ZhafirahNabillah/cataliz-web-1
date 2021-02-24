@@ -32,44 +32,34 @@
 			<div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
 				<div class="form-group breadcrumb-right">
 					<div class="dropdown">
-						<button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-						data-feather="grid"></i></button>
-						<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i
-							class="mr-1" data-feather="check-square"></i><span
-							class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i
-								class="mr-1" data-feather="message-square"></i><span
-								class="align-middle">Chat</span></a><a class="dropdown-item"
-								href="app-email.html"><i class="mr-1" data-feather="mail"></i><span
-								class="align-middle">Email</span></a><a class="dropdown-item"
-								href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span
-								class="align-middle">Calendar</span></a></div>
-							</div>
-						</div>
+						<button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+						<div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="app-todo.html"><i class="mr-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="mr-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="mr-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="mr-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
 					</div>
 				</div>
-				<div class="content-body">
-					@if ($message = Session::get('success'))
-					<div class="alert alert-success alert-dissmisable">
-						<h4 class="alert-heading">Success</h4>
-						<div class="alert-body">{{ $message }}</div>
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">×</span>
-						</button>
-					</div>
-					@endif
-					<div class="row">
+			</div>
+		</div>
+		<div class="content-body">
+			@if ($message = Session::get('success'))
+			<div class="alert alert-success alert-dissmisable">
+				<h4 class="alert-heading">Success</h4>
+				<div class="alert-body">{{ $message }}</div>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+			</div>
+			@endif
+			<div class="row">
 
-					<div class="col-12 mb-1">
-						<a href="javascript:;" class="create-new btn btn-primary createNewRole">Add New</a>
-					</div>
+				<div class="col-12 mb-1">
+					<a href="javascript:;" class="create-new btn btn-primary createNewRole">Add New</a>
+				</div>
 
 			</div>
 			<!-- Basic table -->
 			<section id="basic-datatable">
 				<div class="row">
 					<div class="col-12">
-						<div class="card style="border-radius: 15px;>
+						<div class="card style=" border-radius: 15px;>
 							<table class="datatables-basic table yajra-datatable-role">
 								<thead>
 									<tr>
@@ -98,8 +88,7 @@
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name"
-									id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Permission</label>
@@ -113,66 +102,68 @@
 									@endforeach
 								</div>
 
-								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-								value="create">Submit</button>
-								<button type="reset" class="btn btn-outline-secondary"
-								data-dismiss="modal">Cancel</button>
+								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 							</div>
 							<!-- </form>-->
 
-						</div>
 					</div>
-					<!-- End Modal -->
-				</section>
-				<!--/ Basic table -->
+				</div>
+				<!-- End Modal -->
+			</section>
+			<!--/ Basic table -->
 
 
 
-			</div>
 		</div>
 	</div>
-	<!-- END: Content-->
-	@endsection
+</div>
+<!-- END: Content-->
+@endsection
 
-	@push('scripts')
-	<script type="text/javascript">
-	$(function () {
+@push('scripts')
+<script type="text/javascript">
+	$(function() {
 
-	$.ajaxSetup({
+		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
-	});
+		});
 
-	var table = $('.yajra-datatable-role').DataTable({
-		processing: true,
-		serverSide: true,
-		ajax: "",
-		columns: [
-			{data: 'DT_RowIndex', name: 'DT_RowIndex'},
-			{data: 'name', name: 'name'},
-			{
-				data: 'action',
-				name: 'action',
-				orderable: true,
-				searchable: true
-			},
-		],
-		dom:
-				'<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-		language: {
-			paginate: {
-				// remove previous & next text from pagination
-				previous: '&nbsp;',
-				next: '&nbsp;'
-			},
-			search: "<i data-feather='search'></i>",
-			searchPlaceholder: "Search records"
-		}
-	});
+		var table = $('.yajra-datatable-role').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: "",
+			columns: [{
+					data: 'DT_RowIndex',
+					name: 'DT_RowIndex'
+				},
+				{
+					data: 'name',
+					name: 'name'
+				},
+				{
+					data: 'action',
+					name: 'action',
+					orderable: true,
+					searchable: true
+				},
+			],
+			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+			language: {
+				paginate: {
+					// remove previous & next text from pagination
+					previous: '&nbsp;',
+					next: '&nbsp;'
+				},
+				search: "<i data-feather='search'></i>",
+				searchPlaceholder: "Search records"
+			}
+		});
 
 		// create
-		$('body').on('click', '.createNewRole', function () {
+		$('body').on('click', '.createNewRole', function() {
 			$('#saveBtn').val("create-role");
 			$('#role_id').val('');
 			$('#modalHeading').html("Create New Client");
@@ -181,10 +172,10 @@
 		});
 
 		// edit
-		$('body').on('click', '#editRole', function () {
+		$('body').on('click', '#editRole', function() {
 			console.log('tes');
 			var role_id = $(this).data('id');
-			$.get("" +'/roles/' + role_id +'/edit', function (data) {
+			$.get("" + '/roles/' + role_id + '/edit', function(data) {
 				$('#modalHeading').html("Edit Role");
 				$('#saveBtn').val("edit-role");
 				$('#RoleForm').trigger("reset");
@@ -193,13 +184,13 @@
 				$('#name').val(data[0].name);
 				$.each(data[0].permissions, function(i, item) {
 					var permission_id = data[0].permissions[i].id;
-					$('#permission-check-'+permission_id).prop('checked', true);
+					$('#permission-check-' + permission_id).prop('checked', true);
 				});
 			})
 		});
 
 		// save data
-		$('#saveBtn').click(function (e) {
+		$('#saveBtn').click(function(e) {
 			e.preventDefault();
 			$(this).html('Sending..');
 			var data = $('#RoleForm').serialize();
@@ -210,7 +201,7 @@
 				url: "",
 				type: "POST",
 				dataType: 'json',
-				success: function (data) {
+				success: function(data) {
 
 					$('#RoleForm').trigger("reset");
 					$('#saveBtn').html('Submit');
@@ -218,7 +209,7 @@
 					table.draw();
 
 				},
-				error: function (data) {
+				error: function(data) {
 					console.log('Error:', data);
 					$('#saveBtn').html('Submit');
 				}
@@ -226,18 +217,19 @@
 		});
 
 		// delete
-		$('body').on('click', '#deleteRole', function (e) {
+		$('body').on('click', '#deleteRole', function(e) {
 
 			var role_id = $(this).data("id");
-			if(confirm("Are You sure want to delete !")){
+			// ganti sweetalert
+			if (confirm("Are You sure want to delete !")) {
 
 				$.ajax({
 					type: "DELETE",
-					url: ""+'/roles/'+role_id,
-					success: function (data) {
+					url: "" + '/roles/' + role_id,
+					success: function(data) {
 						table.draw();
 					},
-					error: function (data) {
+					error: function(data) {
 						console.log('Error:', data);
 					}
 				});
