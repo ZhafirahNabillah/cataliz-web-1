@@ -101,6 +101,9 @@
 @endsection
 
 @push('scripts')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 <script type="text/javascript">
     // popover
     $(function() {
@@ -114,7 +117,7 @@
             }
         });
 
-        var table = $('.default-datatable-plans').DataTable({
+        var table_plans_default = $('.default-datatable-plans').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -253,7 +256,7 @@
             }
         });
 
-        var table = $('.coachee-datatable-plans').DataTable({
+        var table_plans_coachee = $('.coachee-datatable-plans').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -298,7 +301,17 @@
             var plan_id = $(this).data("id");
             console.log(plan_id);
             // ganti sweetalert
-            if (confirm("Are You sure want to delete !")) {
+
+            Swal.fire({
+              title: "Are you sure?",
+              text: "You'll delete your plan",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes, Sure",
+              cancelButtonText: "Cancel"
+            }).then((result) => {
+              if (result.isConfirmed) {
 
                 $.ajaxSetup({
                     headers: {
@@ -310,21 +323,18 @@
                     type: "DELETE",
                     url: "" + '/plans/' + plan_id,
                     success: function(data) {
-                        table.draw();
-                        $(".alert-danger").css("display", "block");
-                        $(".alert-danger").css("height", "50px");
-                        $(".alert-danger").css("padding-left", "12px");
-                        $(".alert-danger").css("padding-top", "12px");
-                        $(".alert-danger").css("padding-right", "12px");
-                        $(".alert-danger").append("<P>Data berhasil dihapus!");
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Saved Successfully!',
+                        });
+                        table_plans_default.draw();
                     },
                     error: function(data) {
                         console.log('Error:', data);
                     }
                 });
-            } else {
-                e.preventDefault();
-            }
+              }
+            })
         });
     });
 </script>

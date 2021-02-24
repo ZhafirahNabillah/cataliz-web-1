@@ -110,6 +110,9 @@
 @endsection
 
 @push('scripts')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 <script type="text/javascript">
 	$(function() {
 
@@ -202,25 +205,43 @@
 		// delete
 		$('body').on('click', '#deletePermission', function(e) {
 
-			var permission_id = $(this).data("id");
-			// ganti sweetalert
-			if (confirm("Are You sure want to delete !")) {
+				var permission_id = $(this).data("id");
+				console.log(permission_id);
 
-				$.ajax({
-					type: "DELETE",
-					url: "" + '/permissions/' + permission_id,
-					success: function(data) {
-						table.draw();
-					},
-					error: function(data) {
-						console.log('Error:', data);
+				Swal.fire({
+					title: "Are you sure?",
+					text: "You'll delete your agenda",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yes, Sure",
+					cancelButtonText: "Cancel"
+				}).then((result) => {
+					if (result.isConfirmed) {
+
+						$.ajaxSetup({
+								headers: {
+										'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+								}
+						});
+
+						$.ajax({
+								type: "DELETE",
+								url: "" + '/permissions/' + permission_id,
+								success: function(data) {
+										Swal.fire({
+											icon: 'success',
+											title: 'Saved Successfully!',
+										});
+										table.draw();
+								},
+								error: function(data) {
+										console.log('Error:', data);
+								}
+						});
 					}
-				});
-			} else {
-				e.preventDefault();
-			}
+				})
 		});
-
 	});
 </script>
 @endpush
