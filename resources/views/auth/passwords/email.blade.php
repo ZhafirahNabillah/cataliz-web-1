@@ -1,6 +1,6 @@
 @extends('layouts.layoutFull')
 
-@section('title','Signup')
+@section('title','Reset Password')
 
 @section('content')
 
@@ -27,7 +27,7 @@
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
                             <h4 class="card-title mb-1">Forgot Password</h4>
-                            <p class="card-text mb-2">Verify your email addres to reset your password!</p>
+                            <p class="card-text mb-2">Verify your email address to reset your password!</p>
                             <form class="auth-register-form mt-2" method="POST" action="{{ route('password.email') }}">
                                 @csrf
 

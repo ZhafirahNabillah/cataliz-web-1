@@ -1,8 +1,11 @@
+<img class="img-fluid" src=" {{asset('assets\images\icons\email\icon.png')}}" alt="Card image cap" />
 Hello {{$email_data['name']}}
 <br><br>
-Selamat datang di Cataliz.id!
+FORGOT
 <br>
-Akun anda telah sukses dibuat! Kami merekomendasikan anda untuk segera melakukan reset password pada link dibawah
+YOUR PASSWORD?
+<br>
+Not to worry, we got you! Let’s create a new password!
 <br><br>
 <a href="{{ url('/reset?code='.$email_data['reset_code']) }}">Reset Password</a>
 

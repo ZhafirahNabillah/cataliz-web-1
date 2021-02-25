@@ -1,6 +1,6 @@
 @extends('layouts.layoutFull')
 
-@section('title','Signup')
+@section('title','Confirm Password')
 
 @section('content')
 
@@ -26,8 +26,8 @@
                     <!-- Register-->
                     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
                         <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
-                            <h4 class="card-title mb-1">Forgot Password</h4>
-                            <p class="card-text mb-2">Verify your email addres to reset your password!</p>
+                            <h4 class="card-title mb-1">Reset Password</h4>
+                            <p class="card-text mb-2">Create your new password and make sure you are remember it!</p>
                             <div class="card-body">
                                 <form method="POST" action="{{ route('password.update') }}">
                                     @csrf
@@ -35,18 +35,7 @@
                                     <input type="hidden" name="token" value="{{ $token }}">
 
                                     <div class="form-group row">
-                                        <label class="form-label" for="register-email">Email</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <label class="form-label" for="register-password">Password</label>
+                                        <label class="form-label" for="register-password">New Password</label>
                                         <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -55,15 +44,13 @@
                                         @enderror
                                     </div>
                                     <div class="form-group row">
-                                        <label for="password-confirm" class="form-label">Confirm Password</label>
+                                        <label for="password-confirm" class="form-label">Confirm New Password</label>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                     <div class="form-group row mb-0">
-                                        <div class="col-md-6 offset-md-4">
-                                            <button type="submit" class="btn btn-primary">
-                                                Submit
-                                            </button>
-                                        </div>
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            Submit
+                                        </button>
                                     </div>
 
                             </div>
