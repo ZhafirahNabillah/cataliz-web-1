@@ -68,7 +68,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Coach Name</label>
-                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id"
+                        id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                       </select>
                       @error('livesearch')
                       <span class="invalid-feedback" role="alert">
@@ -83,7 +84,8 @@
                     <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
                     @foreach($client as $cl)
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="{{$cl->name}}" name="cl[]" id="permission-check-{{$cl->id}}">
+                      <input class="form-check-input" type="checkbox" value="{{$cl->name}}" name="cl[]"
+                        id="permission-check-{{$cl->id}}">
                       <label class="form-check-label" for="permission-check-{{$cl->id}}">
                         {{$cl->name}}
                       </label>
@@ -91,7 +93,8 @@
                     @endforeach
                   </div>
                   <!-- tambah sweet alert ('Added Successfully') -->
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
                   <button type="submit" class="btn btn-light  mr-1" id="cancel" value="">Cancel</button>
                 </div>
               </form>
@@ -114,27 +117,32 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
   $('.livesearch').select2({
-    placeholder: 'Select Coach',
+    placeholder: 'Select coachs',
     ajax: {
-      url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
+        url: "{{route('coachs.search')}}",
+        dataType: 'json',
+        delay: 250,
+        processResults: function (data) {
             return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              pro: item.program
-            }
-          })
-        };
-      },
+                results: $.map(data, function (item) {
+				          console.log(item)
+                  return {
+                    text: item.name,
+                    id: item.id,
+                  }
+                })
+            };
+        },
       cache: true
     }
   });
+
+	$(".livesearch").on('change', function(e) {
+    // Access to full data
+    console.log($(this).select2('data'));
+    console.log($(this).select2('data')[0].id);
+	  var dd = $(this).select2('data')[0];
+	});
 
   $(function() {
 

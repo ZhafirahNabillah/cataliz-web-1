@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/show_admin_list', [ClientController::class, 'show_admin_list'])->name('show_admin_list');
 	Route::post('/suspend', [UserController::class, 'suspend_user'])->name('suspend_user');
 	Route::post('/unsuspend', [UserController::class, 'unsuspend_user'])->name('unsuspend_user');
+	Route::get('/ajaxCoachs', [ClassController::class, 'ajaxClass'])->name('coachs.search');
 });
 
 //Middleware group for coach page
