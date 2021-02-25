@@ -56,10 +56,11 @@
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
-									<small class="card text-center  mb-1">Unscheduled Sessions
+									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
+										Unscheduled Sessions
 									</small>
 								</div>
-								<h2 class="font-weight-bolder text-center " style="font-size: 72px;margin-top: -24px;">
+								<h2 class="font-weight-bolder text-center " style="font-size: 72px;margin-top: -40px;">
 									{{ $total_unscheduled_sessions }}
 								</h2>
 							</div>
@@ -72,10 +73,11 @@
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
-									<small class="card text-center  mb-1">Scheduled Sessions
+									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
+										Scheduled Sessions
 									</small>
 								</div>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -40px;">
 									{{ $total_scheduled_sessions }}
 								</h2>
 							</div>
@@ -88,10 +90,11 @@
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
-									<small class="card text-center  mb-1">Reschedule Sessions
+									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
+										Reschedule Sessions
 									</small>
 								</div>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -40px;">
 									{{ $total_rescheduled_sessions }}
 								</h2>
 							</div>
@@ -104,10 +107,11 @@
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
-									<small class="card text-center  mb-1">Canceled Sessions
+									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
+										Canceled Sessions
 									</small>
 								</div>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -40px;">
 									{{ $total_canceled_sessions }}
 								</h2>
 							</div>
@@ -120,10 +124,11 @@
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
-									<small class="card text-center  mb-1">Finished Sessions
+									<small class="card text-center  mb-1" style="word-spacing: 11em; margin-top: 1em;">
+										Finished Sessions
 									</small>
 								</div>
-								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -24px;">
+								<h2 class="font-weight-bolder text-center" style="font-size: 72px;margin-top: -40px;">
 									{{ $total_finished_sessions }}
 								</h2>
 							</div>
@@ -233,42 +238,42 @@
 
 		$('body').on('click', '.deleteAgenda', function(e) {
 
-				var agenda_id = $(this).data("id");
-				console.log(agenda_id);
+			var agenda_id = $(this).data("id");
+			console.log(agenda_id);
 
-				Swal.fire({
-					title: "Are you sure?",
-					text: "You'll delete your agenda",
-					icon: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#DD6B55",
-					confirmButtonText: "Yes, Sure",
-					cancelButtonText: "Cancel"
-				}).then((result) => {
-					if (result.isConfirmed) {
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You'll delete your agenda",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, Sure",
+				cancelButtonText: "Cancel"
+			}).then((result) => {
+				if (result.isConfirmed) {
 
-						$.ajaxSetup({
-								headers: {
-										'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-								}
-						});
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
 
-						$.ajax({
-								type: "DELETE",
-								url: "" + '/agendas/' + agenda_id,
-								success: function(data) {
-										Swal.fire({
-											icon: 'success',
-											title: 'Saved Successfully!',
-										});
-										table.draw();
-								},
-								error: function(data) {
-										console.log('Error:', data);
-								}
-						});
-					}
-				})
+					$.ajax({
+						type: "DELETE",
+						url: "" + '/agendas/' + agenda_id,
+						success: function(data) {
+							Swal.fire({
+								icon: 'success',
+								title: 'Saved Successfully!',
+							});
+							table.draw();
+						},
+						error: function(data) {
+							console.log('Error:', data);
+						}
+					});
+				}
+			})
 		});
 	});
 </script>

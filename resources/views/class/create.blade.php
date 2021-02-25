@@ -21,14 +21,14 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
+            <h2 class="content-header-title float-left mb-0">Class List</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
+                <li class="breadcrumb-item"><a href="{{route('class.index')}}">Class List</a>
                 </li>
-                <li class="breadcrumb-item active">Detail Coaching Plans
+                <li class="breadcrumb-item active">Create New Class
                 </li>
               </ol>
             </div>
@@ -36,6 +36,7 @@
         </div>
       </div>
     </div>
+
     <div class="content-body">
       @if ($message = Session::get('success'))
       <div class="alert alert-success alert-dissmisable">
@@ -53,132 +54,59 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h4 class="card-title"><b>Detail Plan</b></h4>
+                <h4 class="card-title">Create a New Class</h4>
               </div>
-              <div class="card-body">
-                <div class="row">
-                  <dt class="col-sm-3"><b>Full Name</b></dt>
-                </div>
-                <dl class="row">
-                  <dt class="col-sm-3">{{$client->name}}</dt>
-                </dl>
-                <div class="row">
-                  <dt class="col-sm-3"><b>Organization</b></dt>
-                  <dt class="col-sm-9"><b>Tanggal Kegiatan</b></dt>
+              <form action="{{url('/plans')}}" method="post">
+                @csrf
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Class Name</label>
+                      <input class="form-control" name="organization" id="organization">
+                    </div>
 
-                </div>
-                <dl class="row">
-                  <dt class="col-sm-3">{{$client->organization}}</dt>
-                  <dd>
-                  <dt class="col-sm-3">{{$plan->date}}</dt>
-                  </dd>
-                </dl>
-                <div class="card collapse-icon">
-                  <div class="collapse-default">
-                    <div class="card">
-                      <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                        <span class="lead collapse-title"><b>Objektif</b></span>
-                      </div>
-                      <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                        <div class="card-body">
-                          {{$plan->objective}}
-                        </div>
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="fp-default">Coach Name</label>
+                        <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                        </select>
+                        @error('livesearch')
+                        <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                       </div>
                     </div>
-                    <div class="card">
-                      <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                        <span class="lead collapse-title"><b>Sukses Indikator</b></span>
+
+                    <div class="form-group">
+                      <label class="fp-default" for="basic-icon-default-fullname">Partisipant</label>
+                      <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
+                      <!-- @foreach($permissions as $permission)
+                      <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="{{$permission->name}}" name="permission[]" id="permission-check-{{$permission->id}}">
+                        <label class="form-check-label" for="permission-check-{{$permission->id}}">
+                          {{$permission->name}}
+                        </label>
                       </div>
-                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
-                        <div class="card-body">
-                          {{$plan->success_indicator}}
-                        </div>
-                      </div>
+                      @endforeach -->
                     </div>
-                    <div class="card">
-                      <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                        <span class="lead collapse-title"><b>Pengembangan Area</b></span>
-                      </div>
-                      <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
-                        <div class="card-body">
-                          {{$plan->development_areas}}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                        <span class="lead collapse-title"><b>Support</b></span>
-                      </div>
-                      <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">
-                        <div class="card-body">
-                          {{$plan->support}}
-                        </div>
-                      </div>
-                    </div>
+                    <!-- tambah sweet alert ('Added Successfully') -->
+                    <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                    <button type="submit" class="btn btn-light  mr-1" id="cancel" value="">Cancel</button>
                   </div>
-                </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
     </div>
-
-    <!-- Modal to add new record -->
-    <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-      <div class="modal-dialog sidebar-sm">
-        <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-          <div class="modal-header mb-1">
-            <h5 class="modal-title" id="modalHeading"></h5>
-          </div>
-          <input type="hidden" name="Client_id" id="Client_id">
-          <div class="modal-body flex-grow-1">
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-            </div>
-            <label class="form-label" for="basic-icon-default-post">Phone</label>
-            <div class="input-group input-group-merge mb-2">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon5">+62</span>
-              </div>
-              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-email">Email</label>
-              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-              <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-              <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Company</label>
-              <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-            </div>
-
-            <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-          </div>
-          <!-- </form>-->
-
-      </div>
-    </div>
-    <!-- End Modal -->
-    </section>
-    <!--/ Basic table -->
-
-
-
   </div>
+  </section>
+  <!--/ Basic table -->
+
+
+
 </div>
-</div>
+
 <!-- END: Content-->
 @endsection
 
@@ -206,16 +134,6 @@
       },
       cache: true
     }
-  });
-
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#program').val(dd.pro);
-
   });
 
   $(function() {
@@ -314,17 +232,7 @@
       order: [
         [2, 'desc']
       ],
-      dom: '<"card-header border-bottom p-1"<"head-label"> <
-        "dt-action-buttons text-right"
-      B >> < "d-flex justify-content-between align-items-center mx-0
-      row "<"
-      col - sm - 12 col - md - 6 "l> <
-      "col-sm-12 col-md-6"
-      f >> t < "d-flex justify-content-between mx-0 row" < "col-sm-12 col-md-6"
-      i >
-      <
-      "col-sm-12 col-md-6"
-      p >> ',
+      dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
@@ -354,27 +262,26 @@
           type: 'column',
           renderer: function(api, rowIdx, columns) {
             var data = $.map(columns, function(col, i) {
-                console.log(columns);
-                return col.title !== '' // ? Do not show row in modal popup if title is blank (for check
-                box) ?
-              '<tr data-dt-row="' +
-              col.rowIndex +
-              '" data-dt-column="' +
-              col.columnIndex +
-              '">' +
-              '<td>' +
-              col.title +
-              ':' +
-              '</td> ' +
-              '<td>' +
-              col.data +
-              '</td>' +
-              '</tr>' :
-              '';
+              console.log(columns);
+              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                ?
+                '<tr data-dt-row="' +
+                col.rowIndex +
+                '" data-dt-column="' +
+                col.columnIndex +
+                '">' +
+                '<td>' +
+                col.title +
+                ':' +
+                '</td> ' +
+                '<td>' +
+                col.data +
+                '</td>' +
+                '</tr>' :
+                '';
             }).join('');
 
-          return data ? $(' <
-            table class = "table" / > ').append(data) : false;
+            return data ? $('<table class="table"/>').append(data) : false;
           }
         }
       },

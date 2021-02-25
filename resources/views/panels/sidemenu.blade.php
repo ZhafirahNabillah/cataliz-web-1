@@ -45,6 +45,11 @@
             </li>
             @endcan
 
+            <li class=" nav-item {{ 'class' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href=""><i data-feather="clipboard"></i><span class="menu-title text-truncate" data-i18n="Todo">Class</span></a>
+            </li>
+
+
             @canany('list-role','list-permission')
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Role and Permission</span><i data-feather="more-horizontal"></i></li>
             @endcan
