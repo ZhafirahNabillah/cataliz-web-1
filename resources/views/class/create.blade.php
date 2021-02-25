@@ -60,43 +60,40 @@
                 @csrf
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-6 form-group">
+                    <div class=" col-md-12 form-group">
                       <label for="fp-default">Class Name</label>
                       <input class="form-control" name="class_name" id="class_name">
                     </div>
-
-                    <div class="row">
-                      <div class="col-md-12 form-group">
-                        <label for="fp-default">Coach Name</label>
-                        <select class="livesearch form-control @error('livesearch') is-invalid @enderror"
-                          name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
-                        </select>
-                        @error('livesearch')
-                        <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                      </div>
-                    </div>
-
-                    <div class="form-group">
-                      <label class="fp-default" for="basic-icon-default-fullname">Partisipant</label>
-                      <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
-                      @foreach($client as $cl)
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="{{$cl->name}}" name="cl[]"
-                          id="permission-check-{{$cl->id}}">
-                        <label class="form-check-label" for="permission-check-{{$cl->id}}">
-                          {{$cl->name}}
-                        </label>
-                      </div>
-                      @endforeach
-                    </div>
-                    <!-- tambah sweet alert ('Added Successfully') -->
-                    <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                      value="create">Submit</button>
-                    <button type="submit" class="btn btn-light  mr-1" id="cancel" value="">Cancel</button>
                   </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Coach Name</label>
+                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                      </select>
+                      @error('livesearch')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="fp-default" for="basic-icon-default-fullname">Partisipant</label>
+                    <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
+                    @foreach($client as $cl)
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="{{$cl->name}}" name="cl[]" id="permission-check-{{$cl->id}}">
+                      <label class="form-check-label" for="permission-check-{{$cl->id}}">
+                        {{$cl->name}}
+                      </label>
+                    </div>
+                    @endforeach
+                  </div>
+                  <!-- tambah sweet alert ('Added Successfully') -->
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-light  mr-1" id="cancel" value="">Cancel</button>
+                </div>
               </form>
             </div>
           </div>
@@ -117,7 +114,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
   $('.livesearch').select2({
-    placeholder: 'Select clients',
+    placeholder: 'Select Coach',
     ajax: {
       url: "{{route('clients.search')}}",
       dataType: 'json',
