@@ -7,6 +7,7 @@ use App\Models\Class_model;
 use App\Models\Client;
 use App\Models\Class_has_client;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 use DataTables;
 
 class ClassController extends Controller
@@ -55,7 +56,19 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'class_name'  => 'required',
+            'livesearch' => 'required'
+        ]);
+
+        Permission::updateOrCreate(
+            ['id' => $request->input('permission_id')],
+            ['class_name' => $request->input('class_name')],
+            ['coach_name' => $request->input('livesearch')],
+            ['status' => 'Pending']
+        );
+
+        return response()->json(['success' => 'Class saved successfully!']);
     }
 
     /**
@@ -114,5 +127,21 @@ class ClassController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ajaxClass(Request $request)
+    {
+        $coach = [];
+        if ($request->has('q')) {
+            $search = $request->q;
+            $coach = User::role('coach')->get()
+                ->where('name', 'LIKE', "%$search%")
+                ->get();
+        } else {
+            $coach = User::orderby('name', 'asc')
+                ->role('coach')
+                ->get();
+        }
+        return response()->json($coach);
     }
 }
