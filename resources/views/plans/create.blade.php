@@ -62,8 +62,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror"
-                        name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id"
+                        id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                       </select>
                       @error('livesearch')
                       <span class="invalid-feedback" role="alert">
@@ -227,9 +227,9 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
   $('.livesearch').select2({
-        placeholder: 'Select clients',
+        placeholder: 'Select coachs',
         ajax: {
-            url: "{{route('clients.search')}}",
+            url: "{{route('coachs.search')}}",
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -238,9 +238,6 @@
 						console.log(item)
                         return {
                             text: item.name,
-                            id: item.id,
-							org: item.organization,
-							pro: item.program
                         }
                     })
                 };
@@ -254,8 +251,6 @@
     console.log($(this).select2('data'));
     console.log($(this).select2('data')[0].id);
 	var dd = $(this).select2('data')[0];
-	$('#organization').val(dd.org);
-	$('#program').val(dd.pro);
 
 	});
 

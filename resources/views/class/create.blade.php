@@ -68,7 +68,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Coach Name</label>
-                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id"
+                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="coach_id"
                         id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                       </select>
                       @error('livesearch')
@@ -84,7 +84,7 @@
                     <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
                     @foreach($client as $cl)
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="{{$cl->name}}" name="cl[]"
+                      <input class="form-check-input" type="checkbox" value="{{$cl->id}}" name="cl[]"
                         id="permission-check-{{$cl->id}}">
                       <label class="form-check-label" for="permission-check-{{$cl->id}}">
                         {{$cl->name}}

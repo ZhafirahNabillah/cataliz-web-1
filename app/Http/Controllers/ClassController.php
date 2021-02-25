@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Class_model;
 use App\Models\Client;
 use App\Models\Class_has_client;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use DataTables;
@@ -56,19 +57,29 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->cl;
+
         $this->validate($request, [
             'class_name'  => 'required',
-            'livesearch' => 'required'
+            'coach_id' => 'required'
         ]);
 
-        Permission::updateOrCreate(
-            ['id' => $request->input('permission_id')],
-            ['class_name' => $request->input('class_name')],
-            ['coach_name' => $request->input('livesearch')],
-            ['status' => 'Pending']
-        );
+        $class = new Class_model;
+        $class->class_name = $request->class_name;
+        $class->coach_id = $request->coach_id;
+        $class->status = 'Pending';
+        $class->save();
 
-        return response()->json(['success' => 'Class saved successfully!']);
+        $count = $request->cl;
+
+        foreach ($count as $ct) {
+            $coachee = new Class_has_client;
+            $coachee->class_id = $class->id;
+            $coachee->client_id = $ct;
+            $coachee->save();
+        }
+
+        return redirect('/class');
     }
 
     /**
@@ -80,16 +91,16 @@ class ClassController extends Controller
     public function show($id, Request $request)
     {
         //
-        $class = Class_model::with('coach')->where('id',$id)->first();
-        $coachee_id = Class_has_client::where('class_id',$class->id)->pluck('client_id');
+        $class = Class_model::with('coach')->where('id', $id)->first();
+        $coachee_id = Class_has_client::where('class_id', $class->id)->pluck('client_id');
 
         if ($request->ajax()) {
 
-            $data = Client::whereIn('id',$coachee_id)->get();
+            $data = Client::whereIn('id', $coachee_id)->get();
 
             return DataTables::of($data)
-              ->addIndexColumn()
-              ->make(true);
+                ->addIndexColumn()
+                ->make(true);
         }
 
         return view('class.detail', compact('class'));
