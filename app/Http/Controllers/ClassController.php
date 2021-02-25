@@ -45,7 +45,10 @@ class ClassController extends Controller
      */
     public function create()
     {
-        $client = Client::all();
+        $client_final = Class_has_client::pluck('client_id');
+        // return $client_final;
+        $client = Client::whereNotIn('id', $client_final)->get();
+        // return $client;
         return view('class.create', compact('client'));
     }
 

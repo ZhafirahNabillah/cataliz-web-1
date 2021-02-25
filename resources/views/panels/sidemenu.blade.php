@@ -55,13 +55,13 @@
                         data-i18n="Todo">Agenda</span></a>
             </li>
             @endcan
-
+            @canany('list-class', 'create-class', 'detail-class')
             <li class=" nav-item {{ 'class' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('class.index')}}"><i
                         data-feather="clipboard"></i><span class="menu-title text-truncate"
                         data-i18n="Todo">Class</span></a>
             </li>
-
+            @endcan
 
             @canany('list-role','list-permission')
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Role and Permission</span><i
