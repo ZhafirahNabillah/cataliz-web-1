@@ -105,12 +105,12 @@
           name: 'DT_RowIndex'
         },
         {
-          data: 'ClassName',
-          name: 'ClassName'
+          data: 'class_name',
+          name: 'class_name'
         },
         {
-          data: 'CoachName',
-          name: 'CoachName'
+          data: 'coach.name',
+          name: 'coach.name'
         },
         {
           data: 'status',

@@ -58,11 +58,11 @@
               <div class="card-body">
                 <div class="row">
                   <dt class="col-sm-3"><b>Class Name</b></dt>
-                  <dt class="col-sm-9"><b>#</b></dt>
+                  <dt class="col-sm-9"><b>{{ $class->class_name }}</b></dt>
                 </div>
                 <div class="row">
                   <dt class="col-sm-3"><b>Coach Name</b></dt>
-                  <dt class="col-sm-9"><b>#</b></dt>
+                  <dt class="col-sm-9"><b>{{ $class->coach->name }}</b></dt>
                 </div>
 
                 <!-- Basic table -->
@@ -75,7 +75,7 @@
                             <tr>
                               <th>No</th>
                               <th>Coachee Name</th>
-                              <th>Session</th>
+                              {{-- <th>Session</th> --}}
                             </tr>
                           </thead>
                           <tbody>
@@ -152,48 +152,39 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
-  $('.livesearch').select2({
-    placeholder: 'Select clients',
-    ajax: {
-      url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              pro: item.program
-            }
-          })
-        };
-      },
-      cache: true
+$(function() {
+
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
   });
 
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#program').val(dd.pro);
-
+  var table = $('.yajra-datatable-class').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: "",
+    columns: [{
+        data: 'DT_RowIndex',
+        name: 'DT_RowIndex'
+      },
+      {
+        data: 'name',
+        name: 'name'
+      }
+    ],
+    dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+    language: {
+      paginate: {
+        // remove previous & next text from pagination
+        previous: '&nbsp;',
+        next: '&nbsp;'
+      },
+      search: "<i data-feather='search'></i>",
+      searchPlaceholder: "Search records"
+    }
   });
-
-
-
-
-  $(function() {
-    $('#datetimepicker11').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
-  });
+});
 </script>
 @endpush
