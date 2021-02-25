@@ -56,13 +56,13 @@
               <div class="card-header">
                 <h4 class="card-title">Create a New Class</h4>
               </div>
-              <form action="{{url('/plans')}}" method="post">
+              <form action="{{route('class.store')}}" method="post">
                 @csrf
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Class Name</label>
-                      <input class="form-control" name="organization" id="organization">
+                      <input class="form-control" name="class_name" id="class_name">
                     </div>
 
                     <div class="row">
