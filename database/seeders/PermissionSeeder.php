@@ -46,5 +46,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'create-permission']);
         Permission::create(['name' => 'update-permission']);
         Permission::create(['name' => 'delete-permission']);
+
+        // crud class
+        Permission::create(['name' => 'list-class']);
+        Permission::create(['name' => 'create-class']);
+        Permission::create(['name' => 'detail-class']);
     }
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClassController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
@@ -44,10 +45,10 @@ Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name(
 
 //Middleware group for admin page
 Route::group(['middleware' => ['auth']], function () {
-
 	Route::resource('roles', RoleController::class);
 	Route::resource('permissions', PermissionController::class);
 	Route::resource('users', UserController::class);
+	Route::resource('class', ClassController::class);
 	Route::get('/show_coach_list', [ClientController::class, 'show_coach_list'])->name('show_coach_list');
 	Route::get('/show_coachee_list', [ClientController::class, 'show_coachee_list'])->name('show_coachee_list');
 	Route::get('/show_admin_list', [ClientController::class, 'show_admin_list'])->name('show_admin_list');
@@ -69,24 +70,24 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/{id}/update_background', [ProfileController::class, 'update_background'])->name('update_background');
 	Route::post('/{id}/store', [ProfileController::class, 'store_data'])->name('store_data');
 
-	Route::resource('clients', ClientController::class);
-	Route::resource('agendas', AgendaController::class);
 	Route::resource('plans', PlanController::class);
 	Route::get('/ajaxClients', [PlanController::class, 'ajaxClients'])->name('clients.search');
+
+	Route::resource('agendas', AgendaController::class);
 	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
 	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
 	Route::get('/ajaxPlans', [AgendaController::class, 'ajaxPlans'])->name('plans.search');
-
 	Route::post('/agendas/{id}/agenda_detail_update', [AgendaController::class, 'agenda_detail_update'])->name('agendas.agenda_detail_update');
 	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
 	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
+
+	Route::resource('clients', ClientController::class);
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}/show_sessions', [ClientController::class, 'show_sessions_data'])->name('clients.show_sessions');
 	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
 	Route::get('/clients/{client}/show_feedbacks', [ClientController::class, 'show_feedbacks_data'])->name('clients.show_feedbacks');
 	Route::get('/clients/{client}/show_notes', [ClientController::class, 'show_notes_data'])->name('clients.show_notes');
 	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
-
 	Route::get('clients/{id}/show_detail_feedbacks', [ClientController::class, 'show_detail_feedbacks'])->name('clients.show_detail_feedbacks');
 	Route::get('clients/{id}/show_detail_notes', [ClientController::class, 'show_detail_notes'])->name('clients.show_detail_notes');
 });

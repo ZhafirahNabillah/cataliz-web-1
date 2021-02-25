@@ -15,12 +15,12 @@ class CreateCoachingNotesTable extends Migration
     {
         Schema::create('coaching_notes', function (Blueprint $table) {
             $table->id();
-      			$table->integer('agenda_detail_id');
-      			$table->string('subject');
-      			$table->string('summary',10000);
-      			$table->string('attachment')->nullable();
-      			$table->string('send_to_email')->nullable();
-      			$table->integer('owner_id');
+            $table->integer('agenda_detail_id');
+            $table->string('subject');
+            $table->string('summary', 10000);
+            $table->string('attachment')->nullable();
+            $table->string('send_to_email')->nullable();
+            $table->integer('owner_id');
             $table->timestamps();
         });
     }
