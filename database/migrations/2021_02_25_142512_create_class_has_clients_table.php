@@ -14,7 +14,7 @@ class CreateClassHasClientsTable extends Migration
     public function up()
     {
         //
-        Schema::create('Class_has_clients', function (Blueprint $table) {
+        Schema::create('class_has_clients', function (Blueprint $table) {
           $table->integer('class_id');
           $table->integer('client_id');
         });
