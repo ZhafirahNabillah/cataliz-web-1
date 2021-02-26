@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Coaching Plan')
+@section('title','Class')
 
 @push('styles')
 
