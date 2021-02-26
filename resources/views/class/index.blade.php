@@ -44,12 +44,13 @@
       </div>
       @endif
       <div class="row">
-
-        <div class="col-12 mb-1">
-          <a href="{{route('class.create')}}" class="create-new btn btn-primary createNewClass">Add Class</a>
-        </div>
-
+        @can ('create-class')
+          <div class="col-12 mb-1">
+            <a href="{{route('class.create')}}" class="create-new btn btn-primary createNewClass">Add Class</a>
+          </div>
+        @endcan
       </div>
+      
       <!-- Basic table -->
       <section id="basic-datatable">
         <div class="row">
@@ -62,7 +63,7 @@
                     <th>Class Name</th>
                     <th>Coach Name</th>
                     <th>Status</th>
-                    <th>Action</th>
+                    @can('detail-class')<th>Action</th>@endcan
                   </tr>
                 </thead>
                 <tbody>
@@ -116,12 +117,14 @@
           data: 'status',
           name: 'status'
         },
+        @can ('detail-class')
         {
           data: 'action',
           name: 'action',
           orderable: true,
           searchable: true
         },
+        @endcan
       ],
       dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       language: {

@@ -18,6 +18,15 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     function __construct()
+     {
+       $this->middleware('permission:list-class', ['only' => 'index']);
+       $this->middleware('permission:create-class', ['only' => ['create', 'store']]);
+       $this->middleware('permission:detail-class', ['only' => 'show']);
+     }
+
+
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
