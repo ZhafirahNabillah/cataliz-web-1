@@ -37,6 +37,6 @@ class RoleHasPermissionsSeeder extends Seeder
         //give permission to admin to create,update,delete permission
         $role_admin->givePermissionTo(['list-permission', 'create-permission', 'update-permission', 'delete-permission']);
         //give permission to admin to see,create,update class
-        $role_admin->givePermissionTo(['list-class', 'create-class', 'detail-permission']);
+        $role_admin->givePermissionTo(['list-class', 'create-class', 'detail-class']);
     }
 }
