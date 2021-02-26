@@ -1,5 +1,4 @@
 <img class="img-fluid" src=" {{asset('assets\images\icons\email\icon.png')}}" alt="Card image cap" />
-Hello {{$email_data['name']}}
 <br><br>
 FORGOT
 <br>

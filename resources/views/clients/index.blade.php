@@ -801,9 +801,14 @@
                   $('#createUserForm').trigger("reset");
                   $('#saveBtn').html('Submit');
                   $('#modal-user-slide-in').modal('hide');
+                  Swal.fire({
+    								icon: 'success',
+    								title: 'Account created successfully!',
+    							});
                   table_coach.draw();
                   table_admin.draw();
                   table_coachee.draw();
+
 
                 },
                 error: function(data) {

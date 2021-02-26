@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class SendResetPasswordMail extends Mailable
+class SendForgotPasswordMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -27,8 +27,8 @@ class SendResetPasswordMail extends Mailable
      *
      * @return $this
      */
-    public function build()
-    {
-        return $this->subject("Cataliz.id Account Created Succesfully!")->view('email_template.create_default_account_mail', ['email_data' => $this->email_data])->from('cataliz.mail@gmail.com');
-    }
+     public function build()
+     {
+         return $this->subject("Cataliz.id - Forgot Password Reset Link")->view('email_template.forgot_password_mail', ['email_data' => $this->email_data])->from('cataliz.mail@gmail.com');
+     }
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
+use App\Http\Controllers\MailController;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,4 +22,22 @@ class ForgotPasswordController extends Controller
     */
 
     use SendsPasswordResetEmails;
+
+
+    protected function sendResetLinkEmail(Request $request){
+
+      $this->validateEmail($request);
+
+      $user = User::where('email', $request->email)->first();
+
+      if ($user == null) {
+        return back()->with('error', 'Sorry, account with this email address not found!');
+      } else {
+        $user->reset_code = sha1(time());
+        $user->update();
+
+        MailController::SendForgotPasswordMail($user->email, $user->reset_code);
+        return back()->with('success', 'Forgot password reset link has been successfully sent to your email address!');
+      }
+    }
 }

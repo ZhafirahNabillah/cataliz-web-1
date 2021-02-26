@@ -37,7 +37,7 @@ class ResetPasswordController extends Controller
         $reset_code = \Illuminate\Support\Facades\Request::get('code');
         $user = User::where('reset_code', $reset_code)->first();
         if ($user != null) {
-            return view('auth.passwords.reset_new', compact('user'));
+            return view('auth.passwords.reset', compact('user'));
         } else {
             return abort(404);
         }
@@ -53,7 +53,7 @@ class ResetPasswordController extends Controller
             $user->reset_code = null;
             $user->update();
 
-            return redirect()->with('success', 'Password sukses dirubah! Silahkan login');
+            return redirect('login')->with('success', 'Password sukses dirubah! Silahkan login');
         } else {
             return back()->with('error', 'Password tidak sama!');
         }

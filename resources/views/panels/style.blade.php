@@ -1,4 +1,4 @@
-@if (in_array(Route::currentRouteName(), ['login', 'show_register.coach','show_register.coachee']))
+@if (in_array(Route::currentRouteName(), ['login', 'show_register', 'password.request', 'show_reset_form']))
 <!-- BEGIN: Vendor CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/vendors/css/vendors.min.css')}}">
 <!-- END: Vendor CSS-->
