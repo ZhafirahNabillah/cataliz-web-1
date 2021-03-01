@@ -49,7 +49,9 @@
             <div class="row">
                 <div class="col-12">
                     @can('create-plan')
+                    @role('coach')
                     <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
+                    @endrole
                     @endcan
                 </div>
             </div>
@@ -303,37 +305,37 @@
             // ganti sweetalert
 
             Swal.fire({
-              title: "Are you sure?",
-              text: "You'll delete your plan",
-              icon: "warning",
-              showCancelButton: true,
-              confirmButtonColor: "#DD6B55",
-              confirmButtonText: "Yes, Sure",
-              cancelButtonText: "Cancel"
+                title: "Are you sure?",
+                text: "You'll delete your plan",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, Sure",
+                cancelButtonText: "Cancel"
             }).then((result) => {
-              if (result.isConfirmed) {
+                if (result.isConfirmed) {
 
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
 
-                $.ajax({
-                    type: "DELETE",
-                    url: "" + '/plans/' + plan_id,
-                    success: function(data) {
-                        Swal.fire({
-                          icon: 'success',
-                          title: 'Saved Successfully!',
-                        });
-                        table_plans_default.draw();
-                    },
-                    error: function(data) {
-                        console.log('Error:', data);
-                    }
-                });
-              }
+                    $.ajax({
+                        type: "DELETE",
+                        url: "" + '/plans/' + plan_id,
+                        success: function(data) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Saved Successfully!',
+                            });
+                            table_plans_default.draw();
+                        },
+                        error: function(data) {
+                            console.log('Error:', data);
+                        }
+                    });
+                }
             })
         });
     });
