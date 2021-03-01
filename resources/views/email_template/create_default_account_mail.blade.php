@@ -361,7 +361,7 @@
                       <table cellspacing="0" cellpadding="30" width="100%">
                         <tr>
                           <td>
-                            <a href="#">
+                            <a href="https://www.instagram.com/cataliz.id/">
                               <img src="{{ $message->embed('assets\images\icons\email\instagram.png') }}">
                             </a>
                           </td>
@@ -382,7 +382,7 @@
                             </a>
                           </td>
                           <td>
-                            <a href="#">
+                            <a href="https://cataliz.id/">
                               <img src="{{ $message->embed('assets\images\icons\email\link.png') }}">
                             </a>
                           </td>
