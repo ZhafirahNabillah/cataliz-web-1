@@ -297,14 +297,52 @@ class AgendaController extends Controller
     return response()->json(['success' => 'Agenda deleted!']);
   }
 
+  public function add_feedback_from_coachee(Request $request, $id){
+    $agenda_detail = Agenda_detail::find($id);
+
+    //check if feedback input was filled
+    if ($request->filled('feedback')) {
+      //add feeback form coachee to database session
+      $agenda_detail->feedback_from_coachee = $request->feedback;
+    }
+
+    //check if feedback attachment was filled
+    if ($request->hasFile('feedback_attachment')) {
+      //add feedback attachment form coachee to database session
+      $this->validate($request, [
+        'feedback_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
+      ], [
+        'feedback_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
+        'feedback_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
+      ]);
+      $filenameWithExt = $request->file('feedback_attachment')->getClientOriginalName();
+      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+      $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
+      $filenameSave = $filename . '_' . time() . '.' . $extension;
+      $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
+      $agenda_detail->attachment_from_coachee = $filenameSave;
+    }
+
+    //check if rating from coachee was filled
+    if ($request->filled('coach_rating')) {
+      //add rating from coachee to database session
+      $agenda_detail->rating_from_coachee = $request->coach_rating;
+    }
+
+    $agenda_detail->status = 'finished';
+    $agenda_detail->update();
+
+    return redirect('/agendas')->with('success','Feedback behasil ditambahkan. Terimakasih atas kesediaan anda mengisi feedback!');
+  }
+
   public function agenda_detail_update(Request $request, $id)
   {
     // dd($request);
 
     $agenda_detail = Agenda_detail::where('id', $id)->first();
 
-    if ($request->has('feedback')) {
-      $agenda_detail->feedback = $request->feedback;
+    if ($request->filled('feedback')) {
+      $agenda_detail->feedback_from_coach = $request->feedback;
       $agenda_detail->status = 'finished';
     }
 
@@ -320,12 +358,12 @@ class AgendaController extends Controller
       $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
       $filenameSave = $filename . '_' . time() . '.' . $extension;
       $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
-      $agenda_detail->attachment = $filenameSave;
+      $agenda_detail->attachment_from_coach = $filenameSave;
       $agenda_detail->status = 'finished';
     }
     $agenda_detail->update();
 
-    if ($request->hasAny('subject', 'summary')) {
+    if ($request->filled('subject') || $request->filled('summary')) {
 
       $this->validate($request, [
         'subject'       => 'required',
@@ -334,7 +372,6 @@ class AgendaController extends Controller
         'subject.required'       => "Silahkan isi subject note anda terlebih dahulu!",
         'summary.required'       => "Silahkan isi summary note anda terlebih dahulu!",
       ]);
-
 
       $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id], ['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
     }
@@ -362,8 +399,12 @@ class AgendaController extends Controller
 
   public function feedback_download($id)
   {
-    $agenda_detail = Agenda_detail::where('id', $id)->first();
-    return response()->download(storage_path('app/public/attachment/' . $agenda_detail->attachment));
+    $agenda_detail = Agenda_detail::find($id);
+    if (auth()->user()->hasRole('coach')) {
+      return response()->download(storage_path('app/public/attachment/' . $agenda_detail->attachment_from_coach));
+    } elseif (auth()->user()->hasRole('coachee')) {
+      return response()->download(storage_path('app/public/attachment/' . $agenda_detail->attachment_from_coachee));
+    }
   }
 
   public function note_download($id)

@@ -79,6 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
 	Route::get('/ajaxPlans', [AgendaController::class, 'ajaxPlans'])->name('plans.search');
 	Route::post('/agendas/{id}/agenda_detail_update', [AgendaController::class, 'agenda_detail_update'])->name('agendas.agenda_detail_update');
+	Route::post('/agendas/{id}/add_feedback_from_coachee', [AgendaController::class, 'add_feedback_from_coachee'])->name('add_feedback_from_coachee');
 	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
 	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
 
