@@ -37,8 +37,8 @@ class PlanController extends Controller
         $data = Plan::with('client')->where('owner_id', Auth::user()->id)->latest()->get();
       } elseif (auth()->user()->hasRole('coachee')) {
         $login_user_id = auth()->user()->id;
-        $client_id = Client::where('user_id',$login_user_id)->pluck('id');
-        $data = Plan::select('plans.objective','plans.date','users.name')->join('users', 'plans.owner_id', '=', 'users.id')->join('clients', 'plans.client_id', '=', 'clients.id')->where('clients.id', $client_id)->get();
+        $client_id = Client::where('user_id', $login_user_id)->pluck('id');
+        $data = Plan::select('plans.objective', 'plans.date', 'users.name')->join('users', 'plans.owner_id', '=', 'users.id')->join('clients', 'plans.client_id', '=', 'clients.id')->where('clients.id', $client_id)->get();
       }
 
       return Datatables::of($data)
@@ -95,12 +95,18 @@ class PlanController extends Controller
     $clients = [];
     if ($request->has('q')) {
       $search = $request->q;
-      $clients = Client::where('owner_id', Auth::user()->id)
+      $clients = Client::select('clients.name', 'clients.id', 'clients.organization')
+        ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
+        ->join('class', 'class.id', '=', 'class_has_clients.class_id')
+        ->where('class.coach_id', Auth::user()->id)
         ->where('name', 'LIKE', "%$search%")
         ->get();
     } else {
-      $clients = Client::orderby('name', 'asc')
-        ->where('owner_id', Auth::user()->id)
+      $clients = Client::select('clients.name', 'clients.id', 'clients.organization')
+        ->orderby('clients.name', 'asc')
+        ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
+        ->join('class', 'class.id', '=', 'class_has_clients.class_id')
+        ->where('class.coach_id', Auth::user()->id)
         ->get();
     }
     /* $search = $request->search;

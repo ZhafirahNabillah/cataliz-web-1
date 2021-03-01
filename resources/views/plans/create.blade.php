@@ -76,7 +76,7 @@
                   <div class="row">
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Organization</label>
-                      <input class="form-control" name="organization" id="organization" disabled>
+                      <input class="form-control" name="organization" id="organization" value="" disabled>
                     </div>
 
                     <div class="col-md-6 form-group">
@@ -229,7 +229,7 @@
   $('.livesearch').select2({
         placeholder: 'Select coachs',
         ajax: {
-            url: "{{route('coachs.search')}}",
+            url: "{{route('clients.search')}}",
             dataType: 'json',
             delay: 250,
             processResults: function (data) {
@@ -238,6 +238,8 @@
 						console.log(item)
                         return {
                             text: item.name,
+                            id: item.id,
+                            org: item.organization,
                         }
                     })
                 };
@@ -251,6 +253,7 @@
     console.log($(this).select2('data'));
     console.log($(this).select2('data')[0].id);
 	var dd = $(this).select2('data')[0];
+  $('#organization').val(dd.org);
 
 	});
 
