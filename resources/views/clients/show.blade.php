@@ -955,10 +955,10 @@
 				$('.session_feedback').html(data.session_name);
 				$('.coach_name_feedback').html(data.name);
 				$('.topic_feedback').html(data.topic);
-				$('.feedback').html(data.feedback);
+				$('.feedback').html(data.feedback_from_coach);
 				$('#show_feedback').modal('show');
 
-				if (data.attachment == null) {
+				if (data.attachment_from_coach == null) {
 					$('.download_button_feedback').css("display", "none");
 					$('.span_none_feedback').html('Tidak ada file');
 				} else {

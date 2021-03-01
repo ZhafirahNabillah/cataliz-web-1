@@ -76,7 +76,6 @@ class ClientController extends Controller
           })
           ->rawColumns(['action'])
           ->make(true);
-
       } elseif (auth()->user()->hasRole('coachee')) {
 
         $data = User::role('coach')->get();
@@ -84,7 +83,7 @@ class ClientController extends Controller
         return DataTables::of($data)
           ->addIndexColumn()
           ->addColumn('action', function ($row) {
-            $actionBtn = '<a href="javascript:;" class="btn-sm btn-primary detailCoach" data-id = "'. $row->id .'">Detail</a>';
+            $actionBtn = '<a href="javascript:;" class="btn-sm btn-primary detailCoach" data-id = "' . $row->id . '">Detail</a>';
             return $actionBtn;
           })
           ->rawColumns(['action'])
@@ -95,75 +94,78 @@ class ClientController extends Controller
   }
 
   //method to show coach list
-  public function show_coach_list(Request $request){
+  public function show_coach_list(Request $request)
+  {
     if ($request->ajax()) {
       $data = User::role('coach')->get();
 
       return DataTables::of($data)
-      ->addIndexColumn()
-      ->addColumn('action', function ($row) {
-        $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "'. $row->id .'">Update</a>';
-        $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "'. $row->id .'">Suspend</a>';
-        $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "'. $row->id .'">Unsuspend</a>';
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
 
-        if ($row->status == 1) {
-          $actionBtn = $detail_btn.' '.$suspend_btn;
-        } else {
-          $actionBtn = $detail_btn.' '.$unsuspend_btn;
-        }
-        return $actionBtn;
-      })
-      ->rawColumns(['action'])
-      ->make(true);
+          if ($row->status == 1) {
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
     }
   }
 
   //method to show coachee list
-  public function show_coachee_list(Request $request){
+  public function show_coachee_list(Request $request)
+  {
     if ($request->ajax()) {
       $data = User::role('coachee')->get();
 
       return DataTables::of($data)
-      ->addIndexColumn()
-      ->addColumn('action', function ($row) {
-        $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "'. $row->id .'">Update</a>';
-        $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "'. $row->id .'">Suspend</a>';
-        $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "'. $row->id .'">Unsuspend</a>';
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
 
-        if ($row->status == 1) {
-          $actionBtn = $detail_btn.' '.$suspend_btn;
-        } else {
-          $actionBtn = $detail_btn.' '.$unsuspend_btn;
-        }
-        return $actionBtn;
-      })
-      ->rawColumns(['action'])
-      ->make(true);
+          if ($row->status == 1) {
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
     }
   }
 
   //method to show admin list
-  public function show_admin_list(Request $request){
+  public function show_admin_list(Request $request)
+  {
     if ($request->ajax()) {
       $data = User::role('admin')->get();
 
       return DataTables::of($data)
-      ->addIndexColumn()
-      ->addColumn('action', function ($row) {
-        $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "'. $row->id .'">Update</a>';
-        $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "'. $row->id .'">Suspend</a>';
-        $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "'. $row->id .'">Unsuspend</a>';
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
 
-        if ($row->status == 1) {
-          // code...
-          $actionBtn = $detail_btn.' '.$suspend_btn;
-        } else {
-          $actionBtn = $detail_btn.' '.$unsuspend_btn;
-        }
-        return $actionBtn;
-      })
-      ->rawColumns(['action'])
-      ->make(true);
+          if ($row->status == 1) {
+            // code...
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
     }
   }
 
@@ -344,7 +346,7 @@ class ClientController extends Controller
 
   public function show_detail_feedbacks($id)
   {
-    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.feedback', 'agenda_details.attachment', 'agenda_details.created_at')
+    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.feedback_from_coach', 'agenda_details.attachment_from_coach', 'agenda_details.created_at')
       ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
       ->join('users', 'agendas.owner_id', '=', 'users.id')
       ->join('clients', 'clients.id', '=', 'agendas.client_id')
