@@ -70,7 +70,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/core/menu/menu-types/vertical-menu.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/pages/dashboard-ecommerce.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins/charts/chart-apex.css')}}">
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins/extensions/ext-component-toastr.css')}}">
+{{-- <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins/extensions/ext-component-toastr.css')}}"> --}}
 <!-- END: Page CSS-->
 
 <!-- BEGIN: Custom CSS-->
