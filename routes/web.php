@@ -92,4 +92,6 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
 	Route::get('clients/{id}/show_detail_feedbacks', [ClientController::class, 'show_detail_feedbacks'])->name('clients.show_detail_feedbacks');
 	Route::get('clients/{id}/show_detail_notes', [ClientController::class, 'show_detail_notes'])->name('clients.show_detail_notes');
+
+	Route::post('/class/{class}/ubah_status', [ClassController::class, 'ubah_status'])->name('class.ubah_status');
 });
