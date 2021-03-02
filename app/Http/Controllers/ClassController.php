@@ -18,12 +18,12 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     function __construct()
-     {
-       $this->middleware('permission:list-class', ['only' => 'index']);
-       $this->middleware('permission:create-class', ['only' => ['create', 'store']]);
-       $this->middleware('permission:detail-class', ['only' => 'show']);
-     }
+    function __construct()
+    {
+        $this->middleware('permission:list-class', ['only' => 'index']);
+        $this->middleware('permission:create-class', ['only' => ['create', 'store']]);
+        $this->middleware('permission:detail-class', ['only' => 'show']);
+    }
 
 
 
@@ -166,5 +166,15 @@ class ClassController extends Controller
                 ->get();
         }
         return response()->json($coach);
+    }
+
+    public function ubah_status(Request $request, $id)
+    {
+        $class = Class_model::where('id', $id)->first();
+        $class->status = $request->status;
+        $class->notes = $request->notes;
+        $class->update();
+
+        return redirect('/class');
     }
 }
