@@ -176,8 +176,8 @@
                 <table cellspacing="0" cellpadding="0" width="500" class="w320">
                   <tr>
                     <td valign="top" style="padding:10px 0; text-align:center;" class="mobile-center">
-                      <img src="{{ $message->embed('assets\images\icons\email\catalizlogo.png') }}">
-                      <img src="{{ $message->embed('assets\images\icons\email\cataliz.png') }}">
+                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
+                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/cataliz.png') }}">
                     </td>
                   </tr>
                 </table>
@@ -250,7 +250,7 @@
                             <table class="force-full-width" cellspacing="0" cellpadding="0">
                               <tr>
                                 <td>
-                                  <img src="{{ $message->embed('assets\images\icons\email\icon.png') }}">
+                                  <img src="{{ $message->embed(public_path().'/assets/images/icons/email/icon.png') }}">
                                 </td>
 
                               </tr>
@@ -343,28 +343,28 @@
                         <tr>
                           <td>
                             <a href="https://www.instagram.com/cataliz.id/">
-                              <img src="{{ $message->embed('assets\images\icons\email\instagram.png') }}">
+                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/instagram.png') }}">
                             </a>
                           </td>
                           <td>
                             <a href="#">
-                              <img src="{{ $message->embed('assets\images\icons\email\facebook.png') }}">
+                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/facebook.png') }}">
                             </a>
                           </td>
                           <td>
                             <a href="#">
-                              <img src="{{ $message->embed('assets\images\icons\email\twitter.png') }}">
+                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/twitter.png') }}">
 
                             </a>
                           </td>
                           <td>
                             <a href="#">
-                              <img src="{{ $message->embed('assets\images\icons\email\youtube.png') }}">
+                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/youtube.png') }}">
                             </a>
                           </td>
                           <td>
                             <a href="https://cataliz.id/">
-                              <img src="{{ $message->embed('assets\images\icons\email\link.png') }}">
+                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/link.png') }}">
                             </a>
                           </td>
                         </tr>
