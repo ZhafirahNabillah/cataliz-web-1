@@ -187,7 +187,7 @@
 						</div>
 
 						@if(($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
-						$agenda_detail->status == 'finished') && (($agenda_detail->date.' '.$agenda_detail->time) <
+						$agenda_detail->status == 'finished') && ($agenda_detail->feedback_from_coachee == null || $agenda_detail->attachment_from_coachee == null || $agenda_detail->rating_from_coachee == null) && (($agenda_detail->date.' '.$agenda_detail->time) <
 							(\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
 							<div class="row">
 								<div class="col-md-12 text-left">
@@ -385,23 +385,35 @@
 
 	$(function() {
 
-		var rating = $('#rateYo').data("rating");
-		$('#rateYo').rateYo({
-			starWidth: "50px",
-			rating: rating,
-			fullStar: true,
-			spacing: "30px",
-			multiColor: {
+		@if($agenda_detail->rating_from_coachee != null)
+			var rating = $('#rateYo').data("rating");
+			$('#rateYo').rateYo({
+				starWidth: "50px",
+				rating: rating,
+				fullStar: true,
+				spacing: "30px",
+				readOnly: true,
+				multiColor: {
+					"startColor": "#7367F0", //RED
+					"endColor": "#7367F0" //GREEN
+				}
+			});
+		@else
+			$('#rateYo').rateYo({
+				starWidth: "50px",
+				fullStar: true,
+				spacing: "30px",
+				multiColor: {
+					"startColor": "#7367F0", //RED
+					"endColor": "#7367F0" //GREEN
+				}
+			});
+			$('#rateYo').click(function() {
+				var rating = $('#rateYo').rateYo("rating");
+				$('#coach_rating').val(rating);
+			});
+		@endif
 
-				"startColor": "#7367F0", //RED
-				"endColor": "#7367F0" //GREEN
-			}
-		});
-
-		$('#rateYo').click(function() {
-			var rating = $('#rateYo').rateYo("rating");
-			$('#coach_rating').val(rating);
-		});
 	});
 </script>
 @endpush
