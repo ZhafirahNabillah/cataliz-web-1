@@ -783,6 +783,10 @@
               $('#name').prop('readonly', false);
               $('#phone').prop('readonly', false);
               $('#email').prop('readonly', false);
+              $('#name-error').empty();
+              $('#phone-error').empty();
+              $('#email-error').empty();
+              $('#roles-error').empty();
               $('#modal-user-slide-in').modal('show');
             });
 
@@ -793,7 +797,10 @@
                 $('#modalHeading').html("Edit User");
                 $('#saveBtn').val("edit-user");
                 $('#createUserForm').trigger("reset");
-                $('#modal-user-slide-in').modal('show');
+                $('#name-error').empty();
+          			$('#phone-error').empty();
+                $('#email-error').empty();
+                $('#roles-error').empty();
                 $('#user_id').val(data.id);
                 $('#name').val(data.name).prop('readonly', true);
                 $('#phone').val(data.phone).prop('readonly', true);
@@ -802,6 +809,7 @@
                   var role_name = data.roles[i].name;
                   $('#permission-check-' + role_name).prop('checked', true);
                 });
+                $('#modal-user-slide-in').modal('show');
               })
             });
 
@@ -871,6 +879,7 @@
                     error.appendTo("#roles-error");
                   }
                 },
+
                 //submit Handler
                 submitHandler: function(form) {
                   $('#saveBtn').html('Sending..');

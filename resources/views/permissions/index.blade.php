@@ -84,8 +84,9 @@
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Permission Name</label>
 									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+									<div id="name-error"></div>
 								</div>
-								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="">Submit</button>
 								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 							</div>
 							<!-- </form>-->
@@ -108,6 +109,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<style>
+	label.error.fail-alert {
+		color: red;
+	}
+</style>
 <script type="text/javascript">
 	// popover
 	$(function() {
@@ -154,10 +161,11 @@
 
 		// create
 		$('body').on('click', '.createNewPermission', function() {
-			$('#saveBtn').val("create-Client");
+			$('#saveBtn').val("create-permission");
 			$('#permission_id').val('');
 			$('#PermissionForm').trigger("reset");
 			$('#modalHeading').html("Create New Permission");
+			$('#name-error').empty();
 			$('#modals-slide-in').modal('show');
 		});
 
@@ -168,35 +176,69 @@
 			$.get("" + '/permissions/' + permission_id + '/edit', function(data) {
 				$('#modalHeading').html("Edit Permission");
 				$('#saveBtn').val("edit-permission");
-				$('#modals-slide-in').modal('show');
 				$('#permission_id').val(data.id);
 				$('#name').val(data.name);
+				$('#name-error').empty();
+				$('#modals-slide-in').modal('show');
 			})
 		});
 
 		// save data
-		$('#saveBtn').click(function(e) {
-			e.preventDefault();
-			$(this).html('Sending..');
-			var data = $('#PermissionForm').serialize();
-			console.log(data);
-
-			$.ajax({
-				data: data,
-				url: "",
-				type: "POST",
-				dataType: 'json',
-				success: function(data) {
-
-					$('#PermissionForm').trigger("reset");
-					$('#saveBtn').html('Submit');
-					$('#modals-slide-in').modal('hide');
-					table.draw();
-
+		$('#saveBtn').click(function() {
+			$('#PermissionForm').validate({
+				debug: false,
+				errorClass: "error fail-alert",
+				validClass: "valid success-alert",
+				rules:{
+					name: {
+						required: true
+					}
 				},
-				error: function(data) {
-					console.log('Error:', data);
-					$('#saveBtn').html('Submit');
+				messages: {
+					name: {
+						required: "Name is required!"
+					}
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "name") {
+						error.appendTo($("#name-error"));
+					}
+				},
+				submitHandler: function(form) {
+					$(this).html('Sending..');
+					var data = $('#PermissionForm').serialize();
+					console.log(data);
+
+					$.ajax({
+						data: data,
+						url: "",
+						type: "POST",
+						dataType: 'json',
+						success: function(data) {
+
+							$('#PermissionForm').trigger("reset");
+							$('#saveBtn').html('Submit');
+							$('#modals-slide-in').modal('hide');
+							if ( $('#saveBtn').val() == 'create-permission') {
+								Swal.fire({
+									icon: 'success',
+									title: 'Permission created successfully!',
+								});
+							} else if ($('#saveBtn').val() == 'edit-permission') {
+								Swal.fire({
+									icon: 'success',
+									title: 'Permission updated successfully!',
+								});
+							}
+							table.draw();
+
+						},
+						error: function(data) {
+							console.log('Error:', data);
+							$('#saveBtn').html('Submit');
+						}
+					});
+					return false;
 				}
 			});
 		});
@@ -209,7 +251,7 @@
 
 			Swal.fire({
 				title: "Are you sure?",
-				text: "You'll delete your agenda",
+				text: "You'll delete this permission",
 				icon: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
@@ -230,7 +272,7 @@
 						success: function(data) {
 							Swal.fire({
 								icon: 'success',
-								title: 'Saved Successfully!',
+								title: 'Deleted Successfully!',
 							});
 							table.draw();
 						},

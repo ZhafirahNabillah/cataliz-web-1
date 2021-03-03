@@ -74,7 +74,6 @@
 				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 					<div class="modal-dialog sidebar-sm">
 						<form class="add-new-record modal-content pt-0" id="RoleForm" name="RoleForm">
-
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 							<div class="modal-header mb-1">
 								<h5 class="modal-title" id="modalHeading"></h5>
@@ -83,7 +82,8 @@
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe"/>
+									<div id="name-error"></div>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Permission</label>
@@ -95,13 +95,12 @@
 										</label>
 									</div>
 									@endforeach
+									<div id="permissions-error"></div>
 								</div>
-
 								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
 								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 							</div>
 							<!-- </form>-->
-
 					</div>
 				</div>
 				<!-- End Modal -->
@@ -120,6 +119,12 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<style>
+	label.error.fail-alert {
+		color: red;
+	}
+</style>
 <script type="text/javascript">
 	// popover
 	$(function() {
@@ -170,6 +175,8 @@
 			$('#role_id').val('');
 			$('#modalHeading').html("Create New Client");
 			$('#RoleForm').trigger("reset");
+			$('#name-error').empty();
+			$('#permissions-error').empty();
 			$('#modals-slide-in').modal('show');
 		});
 
@@ -181,6 +188,8 @@
 				$('#modalHeading').html("Edit Role");
 				$('#saveBtn').val("edit-role");
 				$('#RoleForm').trigger("reset");
+				$('#name-error').empty();
+				$('#permissions-error').empty();
 				$('#modals-slide-in').modal('show');
 				$('#role_id').val(data[0].id);
 				$('#name').val(data[0].name);
@@ -192,28 +201,68 @@
 		});
 
 		// save data
-		$('#saveBtn').click(function(e) {
-			e.preventDefault();
-			$(this).html('Sending..');
-			var data = $('#RoleForm').serialize();
-			console.log(data);
-
-			$.ajax({
-				data: data,
-				url: "",
-				type: "POST",
-				dataType: 'json',
-				success: function(data) {
-
-					$('#RoleForm').trigger("reset");
-					$('#saveBtn').html('Submit');
-					$('#modals-slide-in').modal('hide');
-					table.draw();
-
+		$('#saveBtn').click(function() {
+			$('#RoleForm').validate({
+				debug: false,
+				errorClass: "error fail-alert",
+				validClass: "valid success-alert",
+				rules:{
+					name: {
+						required: true
+					},
+					'permission[]': {
+						required: true,
+					}
 				},
-				error: function(data) {
-					console.log('Error:', data);
-					$('#saveBtn').html('Submit');
+				messages: {
+					name: {
+						required: "Name is required!"
+					},
+					'permission[]': {
+						required: "Role must have at least 1 permission!",
+					},
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "name") {
+						error.appendTo($("#name-error"));
+					} else if (element.attr("name") == "permission[]") {
+						error.appendTo("#permissions-error");
+					}
+				},
+				submitHandler: function(form){
+					$('#saveBtn').html('Sending..');
+					var data = $('#RoleForm').serialize();
+					console.log(data);
+
+					$.ajax({
+						data: data,
+						url: "",
+						type: "POST",
+						dataType: 'json',
+						success: function(data) {
+
+							$('#RoleForm').trigger("reset");
+							$('#saveBtn').html('Submit');
+							$('#modals-slide-in').modal('hide');
+							if ( $('#saveBtn').val() == 'create-role') {
+								Swal.fire({
+									icon: 'success',
+									title: 'Role created successfully!',
+								});
+							} else if ($('#saveBtn').val() == 'edit-role') {
+								Swal.fire({
+									icon: 'success',
+									title: 'Role updated successfully!',
+								});
+							}
+							table.draw();
+						},
+						error: function(data) {
+							console.log('Error:', data);
+							$('#saveBtn').html('Submit');
+						}
+					});
+					return false;
 				}
 			});
 		});
@@ -226,7 +275,7 @@
 
 			Swal.fire({
 				title: "Are you sure?",
-				text: "You'll delete your agenda",
+				text: "You'll delete this role",
 				icon: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
@@ -247,7 +296,7 @@
 						success: function(data) {
 							Swal.fire({
 								icon: 'success',
-								title: 'Saved Successfully!',
+								title: 'Deleted Successfully!',
 							});
 							table.draw();
 						},

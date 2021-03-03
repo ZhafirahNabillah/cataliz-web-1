@@ -38,10 +38,6 @@ class PermissionController extends Controller
 
   public function store(Request $request)
   {
-    $this->validate($request, [
-      'name'  => 'required',
-    ]);
-
     Permission::updateOrCreate(
       ['id' => $request->input('permission_id')],
       ['name' => $request->input('name')]
