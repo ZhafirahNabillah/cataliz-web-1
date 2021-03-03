@@ -150,7 +150,7 @@ class ClientController extends Controller
           $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
           $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
 
-          if ($row->status == 1) {
+          if ($row->suspend_status == 1) {
             $actionBtn = $detail_btn . ' ' . $suspend_btn;
           } else {
             $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
@@ -175,7 +175,7 @@ class ClientController extends Controller
           $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
           $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
 
-          if ($row->status == 1) {
+          if ($row->suspend_status == 1) {
             // code...
             $actionBtn = $detail_btn . ' ' . $suspend_btn;
           } else {

@@ -57,23 +57,23 @@ class UserController extends Controller
     // return response()->json($user);
   }
 
+
   public function store(Request $request)
   {
-    $this->validate($request, [
-      'name'      => 'required',
-      'email'     => 'required|email',
-      'phone'     => 'required',
-      'roles'     => 'required',
-    ]);
+    if ($request->action_type == 'edit-user') {
+      $user = User::find($request->user_id);
+      $user->syncRoles($request->input('roles'));
+      
+    } elseif ($request->action_type == 'create-user') {
+      $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
+      $user->syncRoles($request->input('roles'));
 
-    $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
-    $user->syncRoles($request->input('roles'));
+      if ($user->hasRole('coachee')) {
+        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->name, 'phone' => $user->phone, 'program' => 'Starco']);
+      }
 
-    if ($user->hasRole('coachee')) {
-      $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->name, 'phone' => $user->phone, 'program' => 'Starco']);
+      MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);
     }
-
-    MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);
 
     return response()->json(['success' => 'Customer saved successfully!']);
   }

@@ -175,7 +175,8 @@
           </div>
         </div>
         <!-- End Modal -->
-        @endrole
+      </section>
+      @endrole
 
         @role('coach')
         <!-- Basic table -->
@@ -376,21 +377,25 @@
               <div class="modal-body flex-grow-1">
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                  <input id="name" name="name" type="text" class="form-control dt-full-name"
-                    id="basic-icon-default-fullname" value="" />
+                  <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value=""/>
+                  <div id="name-error"></div>
                 </div>
-                <label class="form-label" for="basic-icon-default-post">Phone</label>
-                <div class="input-group input-group-merge mb-2">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon5">+62</span>
+                <div class="form-group">
+                  <label class="form-label" for="basic-icon-default-post">Phone</label>
+                  <div class="input-group input-group-merge">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon5">+62</span>
+                    </div>
+                    <input id="phone" name="phone" type="text" class="form-control" value="">
                   </div>
-                  <input id="phone" name="phone" type="text" class="form-control" value="">
+                  <div id="phone-error"></div>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-email">Email</label>
                   <input id="email" name="email" type="text" id="basic-icon-default-email"
                     class="form-control dt-email" />
-                  <small class="form-text text-muted"> You can use letters, numbers & periods </small>
+                  <small class="form-text text-muted"> You can use letters, numbers & periods</small>
+                  <div id="email-error"></div>
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Role</label>
@@ -413,8 +418,9 @@
                       Coachee
                     </label>
                   </div>
+                  <div id="roles-error"></div>
                 </div>
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
+                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" name="action_type">Create</button>
                 <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
               </div>
             </form>
@@ -428,10 +434,15 @@
         @endsection
 
         @push('scripts')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
-          id="theme-styles">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <style>
+          label.error.fail-alert {
+            color: red;
+          }
+        </style>
         <script>
           $(function() {
 
@@ -765,13 +776,13 @@
             // create new user on admin page
             $('body').on('click', '.createNewUser', function() {
               console.log('tes');
-              $('#saveBtn').val("create-User");
+              $('#saveBtn').val("create-user");
               $('#user_id').val('');
               $('#createUserForm').trigger("reset");
               $('#modalHeading').html("Create New User");
-              $('#name').prop('disabled', false);
-              $('#phone').prop('disabled', false);
-              $('#email').prop('disabled', false);
+              $('#name').prop('readonly', false);
+              $('#phone').prop('readonly', false);
+              $('#email').prop('readonly', false);
               $('#modal-user-slide-in').modal('show');
             });
 
@@ -784,9 +795,9 @@
                 $('#createUserForm').trigger("reset");
                 $('#modal-user-slide-in').modal('show');
                 $('#user_id').val(data.id);
-                $('#name').val(data.name).prop('disabled', true);
-                $('#phone').val(data.phone).prop('disabled', true);
-                $('#email').val(data.email).prop('disabled', true);
+                $('#name').val(data.name).prop('readonly', true);
+                $('#phone').val(data.phone).prop('readonly', true);
+                $('#email').val(data.email).prop('readonly', true);
                 $.each(data.roles, function(i, item) {
                   var role_name = data.roles[i].name;
                   $('#permission-check-' + role_name).prop('checked', true);
@@ -812,35 +823,91 @@
             });
 
             // save user data on admin page
-            $('#saveBtn').click(function(e) {
-              e.preventDefault();
-              $(this).html('Sending..');
-              var data = $('#createUserForm').serialize();
-              console.log(data);
-
-              $.ajax({
-                data: data,
-                url: "{{ route('users.store') }}",
-                type: "POST",
-                dataType: 'json',
-                success: function(data) {
-
-                  $('#createUserForm').trigger("reset");
-                  $('#saveBtn').html('Submit');
-                  $('#modal-user-slide-in').modal('hide');
-                  Swal.fire({
-    								icon: 'success',
-    								title: 'Account created successfully!',
-    							});
-                  table_coach.draw();
-                  table_admin.draw();
-                  table_coachee.draw();
-
-
+            $('#saveBtn').click(function() {
+              $('#createUserForm').validate({
+                debug: false,
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules:{
+                  name: {
+                    required: true
+                  },
+                  phone: {
+                    required: true,
+                    digits: true
+                  },
+                  email: {
+                    required:true,
+                    email: true
+                  },
+                  roles : {
+                    required: true
+                  }
                 },
-                error: function(data) {
-                  console.log('Error:', data);
-                  $('#saveBtn').html('Submit');
+                messages: {
+                  name: {
+                    required: "Name is required!"
+                  },
+                  phone: {
+                    required: "phone number is required!",
+                    digits: "phone number must be number!"
+                  },
+                  email: {
+                    required: "email is required!",
+                    email: "please provide valid email address!"
+                  },
+                  roles: {
+                    required: "role is required!"
+                  }
+                },
+                errorPlacement: function(error, element) {
+                  if (element.attr("name") == "name") {
+                    error.appendTo($("#name-error"));
+                  } else if (element.attr("name") == "phone") {
+                    error.appendTo("#phone-error");
+                  } else if (element.attr("name") == "email") {
+                    error.appendTo("#email-error");
+                  } else if (element.attr("name") == "roles") {
+                    error.appendTo("#roles-error");
+                  }
+                },
+                //submit Handler
+                submitHandler: function(form) {
+                  $('#saveBtn').html('Sending..');
+                  var data = $('#createUserForm').serialize();
+                  console.log(data);
+
+                  $.ajax({
+                    data: data,
+                    url: "{{ route('users.store') }}",
+                    type: "POST",
+                    dataType: 'json',
+                    success: function(data) {
+
+                      $('#createUserForm').trigger("reset");
+                      $('#saveBtn').html('Submit');
+                      $('#modal-user-slide-in').modal('hide');
+                      if ( $('#saveBtn').val() == 'create-user') {
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Account created successfully!',
+                        });
+                      } else if ($('#saveBtn').val() == 'edit-user') {
+                        Swal.fire({
+                          icon: 'success',
+                          title: 'Account updated successfully!',
+                        });
+                      }
+                      table_coach.draw();
+                      table_admin.draw();
+                      table_coachee.draw();
+                    },
+                    error: function(data) {
+                      console.log('Error:', data);
+                      $('#saveBtn').html('Submit');
+                    }
+                  });
+                  return false;
                 }
               });
             });

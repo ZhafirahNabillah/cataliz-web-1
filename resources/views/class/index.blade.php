@@ -50,7 +50,7 @@
           </div>
         @endcan
       </div>
-      
+
       <!-- Basic table -->
       <section id="basic-datatable">
         <div class="row">
@@ -113,6 +113,10 @@
         {
           data: 'coach.name',
           name: 'coach.name'
+        },
+        {
+          data: 'participant',
+          name: 'participant'
         },
         {
           data: 'status',
