@@ -280,6 +280,7 @@
                           <th>Coach Name</th>
                           <th>Email</th>
                           <th>Handphone</th>
+                          <th>Rate</th>
                           <th>Action</th>
                         </tr>
                       </thead>
