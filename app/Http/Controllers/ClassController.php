@@ -44,9 +44,9 @@ class ClassController extends Controller
                 ->addColumn('participant', function ($row) {
                     $participant = Class_has_client::where('class_id', $row->id)->count();
 
-                    return ($participant.'/10');
+                    return ($participant . '/10');
                 })
-                ->rawColumns(['action','participant'])
+                ->rawColumns(['action', 'participant'])
                 ->make(true);
         }
         return view('class.index');
@@ -78,7 +78,8 @@ class ClassController extends Controller
 
         $this->validate($request, [
             'class_name'  => 'required',
-            'coach_id' => 'required'
+            'coach_id' => 'required',
+            'cl' => 'required'
         ]);
 
         $class = new Class_model;
@@ -175,6 +176,10 @@ class ClassController extends Controller
 
     public function ubah_status(Request $request, $id)
     {
+        $this->validate($request, [
+            'notes'  => 'required',
+        ]);
+
         $class = Class_model::where('id', $id)->first();
         $class->status = $request->status;
         $class->notes = $request->notes;

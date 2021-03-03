@@ -90,6 +90,10 @@ class ProfileController extends Controller
     {
         $user = User::where('id', Auth::user()->id)->first();
 
+        $this->validate($request, [
+            'profil_picture' => 'required',
+        ]);
+
         if ($request->has('profil_picture')) {
             if ($request->hasFile('profil_picture')) {
                 $filenameWithExt = $request->file('profil_picture')->getClientOriginalName();
@@ -108,6 +112,10 @@ class ProfileController extends Controller
     public function update_background(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
+
+        $this->validate($request, [
+            'background_picture'  => 'required',
+        ]);
 
         if ($request->hasFile('background_picture')) {
             if ($request->hasFile('background_picture')) {
