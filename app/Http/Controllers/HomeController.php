@@ -156,6 +156,14 @@ class HomeController extends Controller
         $client = Client::find($id);
         $user = User::find($client->user_id);
 
+        $this->validate($request, [
+            'name'          => 'required',
+            'phone'         => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+            'organization'  => 'required',
+            'company'       => 'required',
+            'occupation'    => 'required'
+        ]);
+
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->update();

@@ -52,6 +52,14 @@ class ProfileController extends Controller
             $client = Client::where('user_id', $user->id)->first();
             // return $client;
 
+            $this->validate($request, [
+                'name'          => 'required',
+                'phone'         => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+                'organization'  => 'required',
+                'company'       => 'required',
+                'occupation'    => 'required'
+            ]);
+
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
@@ -64,6 +72,11 @@ class ProfileController extends Controller
             $client->update();
         } elseif (auth()->user()->hasRole('admin')) {
             $user = User::find($id);
+
+            $this->validate($request, [
+                'name'          => 'required',
+                'phone'         => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+            ]);
 
             $user->name = $request->name;
             $user->phone = $request->phone;
