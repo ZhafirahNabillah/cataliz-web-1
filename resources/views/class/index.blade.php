@@ -62,6 +62,7 @@
                     <th>No</th>
                     <th>Class Name</th>
                     <th>Coach Name</th>
+                    <th>Participant</th>
                     <th>Status</th>
                     @can('detail-class')<th>Action</th>@endcan
                   </tr>

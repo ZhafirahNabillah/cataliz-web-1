@@ -38,7 +38,7 @@
                 </div>
               @endif
               <h4 class="card-title mb-1">Adventure starts here 🚀</h4>
-              <p class="card-text mb-2">Make your app management easy and fun!</p>
+              <p class="card-text mb-2">Create your own account and join with us!</p>
               <form class="auth-register-form mt-2" method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">

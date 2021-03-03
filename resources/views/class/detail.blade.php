@@ -90,7 +90,7 @@
                   <div class="row align-items-center mb-2">
                     <dt class="col-sm-3"> </dt>
                     <dt class="col-sm-9">
-                      <button type="submit" class="btn btn-primary">Ubah Status</button>
+                      <button type="submit" class="btn btn-primary">Update</button>
                     </dt>
                   </div>
                   @else
@@ -109,7 +109,7 @@
                   <div class="row align-items-center media_url2">
                     <dt class="col-sm-3"><b>Notes</b></dt>
                     <dt class="col-sm-9 form-group">
-                      <input type="text" class="form-control" name="notes" placeholder="Masukkan notes..." disabled
+                      <input type="text" class="form-control" name="notes" placeholder="Write note here..." disabled
                         value="{{$class->notes}}">
                     </dt>
                   </div>
