@@ -79,7 +79,7 @@ class ClassController extends Controller
         $class = new Class_model;
         $class->class_name = $request->class_name;
         $class->coach_id = $request->coach_id;
-        $class->status = 'Pending';
+        $class->status = 'On-Going';
         $class->save();
 
         $count = $request->cl;

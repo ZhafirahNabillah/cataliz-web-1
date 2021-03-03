@@ -102,7 +102,7 @@ class PlanController extends Controller
       $clients = Client::select('clients.name', 'clients.id', 'clients.organization')
         ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
         ->join('class', 'class.id', '=', 'class_has_clients.class_id')
-        ->where('class.status', 'Sedang Berjalan')
+        ->where('class.status', 'On-Going')
         ->where('class.coach_id', Auth::user()->id)
         ->where('name', 'LIKE', "%$search%")
         ->get();
@@ -111,7 +111,7 @@ class PlanController extends Controller
         ->orderby('clients.name', 'asc')
         ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
         ->join('class', 'class.id', '=', 'class_has_clients.class_id')
-        ->where('class.status', 'Sedang Berjalan')
+        ->where('class.status', 'On-Going')
         ->where('class.coach_id', Auth::user()->id)
         ->get();
     }
