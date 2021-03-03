@@ -67,16 +67,15 @@
 
                 <form action="{{route('class.ubah_status',$class->id)}}" method="post">
                   @csrf
-                  @if ($class->status == 'Sedang Berjalan')
+                  @if ($class->status == 'On-Going')
                   <div class="row align-items-center mt-1">
                     <dt class="col-sm-3"><b>Status</b></dt>
                     <dt class="col-sm-9 form-group">
                       <select class="form-control" id="media1" aria-label=".form-select-lg example" name="status">
-                        <option selected value="Dibatalkan" id="Dibatalkan" @if($class->status == 'Dibatalkan')
-                          @endif>Dibatalkan</option>
-                        <option selected value="Sedang Berjalan" id="Sedang Berjalan" @if($class->status == 'Sedang
-                          Berjalan')
-                          @endif>Sedang Berjalan
+                        <option selected value="Cancelled" id="Cancelled" @if($class->status == 'Cancelled')
+                          @endif>Cancelled</option>
+                        <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')
+                          @endif>On-Going
                         </option>
                       </select>
                     </dt>
@@ -87,7 +86,7 @@
                       <input type="text" class="form-control" name="notes" placeholder="Masukkan notes...">
                     </dt>
                   </div>
-                  
+
                   <div class="row align-items-center mb-2">
                     <dt class="col-sm-3"> </dt>
                     <dt class="col-sm-9">
@@ -100,10 +99,10 @@
                     <dt class="col-sm-9 form-group">
                       <select class="form-control" id="media2" aria-label=".form-select-lg example" name="status"
                         disabled>
-                        <option selected value="Sedang Berjalan" id="Sedang Berjalan" @if($class->status == 'Sedang
-                          Berjalan')@endif>Sedang Berjalan</option>
-                        <option selected value="Dibatalkan" id="Dibatalkan" @if($class->status ==
-                          'Dibatalkan')@endif>Dibatalkan</option>
+                        <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')@endif>On-Going
+                        </option>
+                        <option selected value="Cancelled" id="Cancelled" @if($class->status ==
+                          'Cancelled')@endif>Cancelled</option>
                       </select>
                     </dt>
                   </div>
