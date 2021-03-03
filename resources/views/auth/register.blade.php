@@ -56,7 +56,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon5">+62</span>
                     </div>
-                    <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text" name="phone" placeholder="081xxxxx" aria-describedby="phone" value="{{ old('phone') }}" autocomplete="phone" tabindex="2" />
+                    <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text" onkeypress="return isNumberKey(event)" name="phone" placeholder="081xxxxx" aria-describedby="phone" value="{{ old('phone') }}" autocomplete="phone" tabindex="2" />
                   </div>
                   @error('phone')
                   <strong class="text-danger">{{ $message }}</strong>
@@ -122,5 +122,14 @@
   </div>
 </div>
 <!-- END: Content-->
+<script>
+  function isNumberKey(evt)
+      {
+         var charCode = (evt.which) ? evt.which : event.keyCode
+         if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
 
+         return true;
+      }
+</script>
 @endsection
