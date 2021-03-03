@@ -11,6 +11,8 @@ use App\Models\Coaching_note;
 use App\Models\Agenda;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Class_model;
+use App\Models\Class_has_client;
 use DataTables;
 
 class ClientController extends Controller
@@ -38,7 +40,10 @@ class ClientController extends Controller
       if (auth()->user()->hasRole('admin')) {
         $data = Client::with('user')->get();
       } elseif (auth()->user()->hasRole('coach')) {
-        $data = Client::with('user')->where('owner_id', Auth::user()->id)->latest()->get();
+        $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
+        $class_has_clients = Class_has_client::whereIn('class_id',$class_id)->pluck('client_id');
+
+        $data = Client::with('user')->whereIn('id', $class_has_clients)->latest()->get();
 
         //return data as datatable json
         return Datatables::of($data)
