@@ -278,7 +278,7 @@
                           </td>
                         </tr>
                         <tr>
-                          <td style="padding-bottom: 30px;" class="mobile-padding">
+                          <td style="padding-bottom: 30px;text-align:center" class="mobile-padding">
 
                             <table class="force-full-width" cellspacing="0" cellpadding="0">
                               <tr>
@@ -359,29 +359,11 @@
                   <tr>
                     <td>
                       <table cellspacing="0" cellpadding="30" width="100%">
-                        <tr>
-                          <td>
+                        <tr style="text-align: center;">
+                          <td style="">
                             <a href="https://www.instagram.com/cataliz.id/">
                               <img src="{{ $message->embed(public_path().'/assets/images/icons/email/instagram.png') }}">
                             </a>
-                          </td>
-                          <td>
-                            <a href="#">
-                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/facebook.png') }}">
-                            </a>
-                          </td>
-                          <td>
-                            <a href="#">
-                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/twitter.png') }}">
-
-                            </a>
-                          </td>
-                          <td>
-                            <a href="#">
-                              <img src="{{ $message->embed(public_path().'/assets/images/icons/email/youtube.png') }}">
-                            </a>
-                          </td>
-                          <td>
                             <a href="https://cataliz.id/">
                               <img src="{{ $message->embed(public_path().'/assets/images/icons/email/link.png') }}">
                             </a>

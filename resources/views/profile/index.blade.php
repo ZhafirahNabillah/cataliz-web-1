@@ -403,7 +403,6 @@
 											</ul>
 
 											<!-- edit button -->
-
 											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
@@ -571,7 +570,6 @@
 							</div>
 						</form>
 						<!-- </form>-->
-
 					</div>
 				</div>
 				<!-- End Modal -->
@@ -1099,7 +1097,83 @@
 			$(document).on('click', '#btn_edit_background', function() {
 				$('#modals_profil').modal('hide');
 			})
-		});
+
+			//script for coachee role
+			@role('coachee')
+			//datatable for feedbacks table
+			var table = $('.yajra-datatable-feedback').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{route('clients.show_feedbacks', $user->id)}}",
+				columns: [{
+						data: 'DT_RowIndex',
+						name: 'DT_RowIndex'
+					},
+					{
+						data: 'name',
+						name: 'name',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'session_name',
+						name: 'session_name',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'topic',
+						name: 'topic',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: true,
+						searchable: true
+					},
+				],
+				dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+				language: {
+					paginate: {
+						// remove previous & next text from pagination
+						previous: '&nbsp;',
+						next: '&nbsp;'
+					},
+					search: "<i data-feather='search'></i>",
+					searchPlaceholder: "Search records"
+				}
+			});
+			});
+
+			// show_feedback
+			$(document).on("click", "#detailFeedback", function() {
+				console.log('masuk');
+				let detail_agenda_id = $(this).data('id');
+
+				$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
+					$('#modalHeading').html("Detail Feedbacks");
+					$('#name').text(data.name);
+					$('.session_feedback').html(data.session_name);
+					$('.coach_name_feedback').html(data.name);
+					$('.topic_feedback').html(data.topic);
+					$('.feedback').html(data.feedback_from_coach);
+					$('#show_feedback').modal('show');
+
+					if (data.attachment_from_coach == null) {
+						$('.download_button_feedback').css("display", "none");
+						$('.span_none_feedback').html('Tidak ada file');
+					} else {
+						$('.span_none_feedback').html(data.attachment_from_coach);
+						$('.download_button_feedback').removeAttr('style');
+						$('.download_button_feedback').css("display", "relative");
+					}
+
+					$('.download_button_feedback').on('click', function() {
+						window.location.href = ("" + '/agendas/' + detail_agenda_id + '/feedback_download');
+					});
+
+				});
+			});
+			@endrole
 
 
 

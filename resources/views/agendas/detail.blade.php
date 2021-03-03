@@ -393,20 +393,12 @@
 				fullStar: true,
 				spacing: "30px",
 				readOnly: true,
-				multiColor: {
-					"startColor": "#7367F0", //RED
-					"endColor": "#7367F0" //GREEN
-				}
 			});
 		@else
 			$('#rateYo').rateYo({
 				starWidth: "50px",
 				fullStar: true,
 				spacing: "30px",
-				multiColor: {
-					"startColor": "#7367F0", //RED
-					"endColor": "#7367F0" //GREEN
-				}
 			});
 			$('#rateYo').click(function() {
 				var rating = $('#rateYo').rateYo("rating");
