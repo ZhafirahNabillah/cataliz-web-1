@@ -175,7 +175,8 @@
           </div>
         </div>
         <!-- End Modal -->
-        @endrole
+      </section>
+      @endrole
 
         @role('coach')
         <!-- Basic table -->

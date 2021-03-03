@@ -41,7 +41,12 @@ class ClassController extends Controller
 
                     return $detail_btn;
                 })
-                ->rawColumns(['action'])
+                ->addColumn('participant', function ($row) {
+                    $participant = Class_has_client::where('class_id', $row->id)->count();
+
+                    return ($participant.'/10');
+                })
+                ->rawColumns(['action','participant'])
                 ->make(true);
         }
         return view('class.index');
