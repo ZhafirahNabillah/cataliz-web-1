@@ -29,10 +29,17 @@ class ClassController extends Controller
 
     public function index(Request $request)
     {
+      if (auth()->user()->hasRole('coach')) {
+        $data = Class_model::with('coach')->where('coach_id',auth()->user()->id)->get();
+      } elseif (auth()->user()->hasRole('coachee')) {
+        $client = Client::where('user_id',auth()->user()->id)->first();
+        $class_id = Class_has_client::where('client_id',$client->id)->pluck('class_id');
+        $data = Class_model::with('coach')->whereIn('id',$class_id)->get();
+      } else {
+        $data = Class_model::with('coach')->get();
+      }
+
         if ($request->ajax()) {
-
-            $data = Class_model::with('coach')->get();
-
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

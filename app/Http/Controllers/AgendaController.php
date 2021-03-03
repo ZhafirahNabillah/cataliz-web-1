@@ -52,7 +52,7 @@ class AgendaController extends Controller
       $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
         ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('clients.owner_id', Auth::user()->id)->latest()
+        ->where('agendas.owner_id', Auth::user()->id)->latest()
         ->get();
 
       $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {

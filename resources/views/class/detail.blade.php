@@ -71,6 +71,7 @@
                   <div class="row align-items-center mt-1">
                     <dt class="col-sm-3"><b>Status</b></dt>
                     <dt class="col-sm-9 form-group">
+                      @role('admin')
                       <select class="form-control" id="media1" aria-label=".form-select-lg example" name="status">
                         <option selected value="Cancelled" id="Cancelled" @if($class->status == 'Cancelled')
                           @endif>Cancelled</option>
@@ -78,21 +79,25 @@
                           @endif>On-Going
                         </option>
                       </select>
+                    @else
+                      <b>{{ $class->status }}</b>
+                    @endrole
                     </dt>
                   </div>
+                  @role('admin')
                   <div class="row align-items-center media_url1" style="display: none">
                     <dt class="col-sm-3"><b>Notes</b></dt>
                     <dt class="col-sm-9 form-group">
                       <input type="text" class="form-control" name="notes" placeholder="Masukkan notes...">
                     </dt>
                   </div>
-
                   <div class="row align-items-center mb-2">
                     <dt class="col-sm-3"> </dt>
                     <dt class="col-sm-9">
                       <button type="submit" class="btn btn-primary">Update</button>
                     </dt>
                   </div>
+                  @endrole
                   @else
                   <div class="row align-items-center mt-1">
                     <dt class="col-sm-3"><b>Status</b></dt>
