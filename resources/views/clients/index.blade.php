@@ -18,7 +18,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">User List
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -41,7 +43,9 @@
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Coach List
 
-              <img class="align-text  width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="align-text  width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
 
             </h2>
             <div class="breadcrumb-wrapper">
@@ -62,7 +66,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Client List
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar client yang terdaftar dalam website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -208,35 +214,42 @@
                 <div class="modal-body flex-grow-1">
                   <div class="form-group">
                     <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                    <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+                    <input id="name" name="name" type="text" class="form-control dt-full-name"
+                      id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
                   </div>
                   <label class="form-label" for="basic-icon-default-post">Phone</label>
                   <div class="input-group input-group-merge mb-2">
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon5">+62</span>
                     </div>
-                    <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
+                    <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
+                      aria-label="Phone">
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="basic-icon-default-email">Email</label>
-                    <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe
+                    <input id="email" name="email" type="text" id="basic-icon-default-email"
+                      class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe
                     @example.com" />
                     <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                    <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+                    <input id="organization" name="organization" type="text" class="form-control dt-full-name"
+                      id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                    <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+                    <input id="company" name="company" type="text" class="form-control dt-full-name"
+                      id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                    <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+                    <input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+                      id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
                   </div>
 
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
                   <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
                 </div>
                 <!-- </form>-->
@@ -251,19 +264,23 @@
         @role('admin')
         <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
         <div class="">
-          <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
+          <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
+            class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
         </div>
         <div class="card">
           <div class="card-body">
             <ul class="nav nav-tabs justify-content-center" role="tablist">
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#admin" aria-controls="profile" role="tab" aria-selected="false">Admin</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#admin" aria-controls="profile" role="tab"
+                  aria-selected="false">Admin</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Coach</a>
+                <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach"
+                  role="tab" aria-selected="true">Coach</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Coachee</a>
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile"
+                  role="tab" aria-selected="false">Coachee</a>
               </li>
             </ul>
 
@@ -280,6 +297,7 @@
                           <th>Coach Name</th>
                           <th>Email</th>
                           <th>Handphone</th>
+                          <th>Rating</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -358,7 +376,8 @@
               <div class="modal-body flex-grow-1">
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                  <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
+                  <input id="name" name="name" type="text" class="form-control dt-full-name"
+                    id="basic-icon-default-fullname" value="" />
                 </div>
                 <label class="form-label" for="basic-icon-default-post">Phone</label>
                 <div class="input-group input-group-merge mb-2">
@@ -369,7 +388,8 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="basic-icon-default-email">Email</label>
-                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" />
+                  <input id="email" name="email" type="text" id="basic-icon-default-email"
+                    class="form-control dt-email" />
                   <small class="form-text text-muted"> You can use letters, numbers & periods </small>
                 </div>
                 <div class="form-group">
@@ -387,7 +407,8 @@
                     </label>
                   </div>
                   <div class="form-check">
-                    <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
+                    <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee"
+                      value="coachee">
                     <label class="form-check-label" for="permission-check-coachee">
                       Coachee
                     </label>
@@ -407,7 +428,8 @@
         @endsection
 
         @push('scripts')
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
+          id="theme-styles">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
         <script>
@@ -632,6 +654,11 @@
                 {
                   data: 'phone',
                   name: 'phone',
+                  defaultContent: '<i>-</i>'
+                },
+                {
+                  data: 'rating',
+                  name: 'rating',
                   defaultContent: '<i>-</i>'
                 },
                 {

@@ -11,8 +11,6 @@ use App\Models\Coaching_note;
 use App\Models\Agenda;
 use App\Models\Plan;
 use App\Models\User;
-use App\Models\Class_model;
-use App\Models\Class_has_client;
 use DataTables;
 
 class ClientController extends Controller
@@ -40,10 +38,7 @@ class ClientController extends Controller
       if (auth()->user()->hasRole('admin')) {
         $data = Client::with('user')->get();
       } elseif (auth()->user()->hasRole('coach')) {
-        $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
-        $class_has_clients = Class_has_client::whereIn('class_id',$class_id)->pluck('client_id');
-
-        $data = Client::with('user')->whereIn('id', $class_has_clients)->latest()->get();
+        $data = Client::with('user')->where('owner_id', Auth::user()->id)->latest()->get();
 
         //return data as datatable json
         return Datatables::of($data)
@@ -102,23 +97,42 @@ class ClientController extends Controller
   public function show_coach_list(Request $request)
   {
     if ($request->ajax()) {
-      $data = User::role('coach')->get();
+      $data = User::role('coach')->select('users.*')->selectRaw('avg(agenda_details.rating_from_coachee) as average')
+        ->leftJoin('agendas', function ($join) {
+          $join->on('agendas.owner_id', '=', 'users.id');
+        })
+        ->leftJoin('agenda_details', function ($join) {
+          $join->on('agenda_details.agenda_id', '=', 'agendas.id');
+        })
+        ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
+        // // ->whereNull('agenda_details.agenda_id')
+        ->get();
 
       return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('rating', function ($row) {
+
+          if ($row->average != null) {
+            $rating = $row->average . '/5';
+          } else {
+            $rating = $row->average;
+          }
+          return $rating;
+        })
         ->addColumn('action', function ($row) {
           $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
           $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
           $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
 
-          if ($row->status == 1) {
+          if ($row->suspend_status == 1) {
             $actionBtn = $detail_btn . ' ' . $suspend_btn;
           } else {
             $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
           }
           return $actionBtn;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action', 'rating'])
+        // ->rawColumns(['rating'])
         ->make(true);
     }
   }
