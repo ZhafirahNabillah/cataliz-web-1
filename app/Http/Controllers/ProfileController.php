@@ -52,14 +52,6 @@ class ProfileController extends Controller
             $client = Client::where('user_id', $user->id)->first();
             // return $client;
 
-            $this->validate($request, [
-                'name'          => 'required',
-                'phone'         => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
-                'organization'  => 'required',
-                'company'       => 'required',
-                'occupation'    => 'required'
-            ]);
-
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
@@ -73,11 +65,6 @@ class ProfileController extends Controller
         } elseif (auth()->user()->hasRole('admin')) {
             $user = User::find($id);
 
-            $this->validate($request, [
-                'name'          => 'required',
-                'phone'         => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
-            ]);
-
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
@@ -89,10 +76,6 @@ class ProfileController extends Controller
     public function update_profil(Request $request, $id)
     {
         $user = User::where('id', Auth::user()->id)->first();
-
-        $this->validate($request, [
-            'profil_picture' => 'required',
-        ]);
 
         if ($request->has('profil_picture')) {
             if ($request->hasFile('profil_picture')) {
@@ -112,10 +95,6 @@ class ProfileController extends Controller
     public function update_background(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
-
-        $this->validate($request, [
-            'background_picture'  => 'required',
-        ]);
 
         if ($request->hasFile('background_picture')) {
             if ($request->hasFile('background_picture')) {
