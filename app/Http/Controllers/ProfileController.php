@@ -71,16 +71,17 @@ class ProfileController extends Controller
             $client->occupation = $request->occupation;
             $client->update();
         } elseif (auth()->user()->hasRole('admin')) {
-            $user = User::find($id);
 
             $this->validate($request, [
                 'name'          => 'required',
                 'phone'         => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
             ]);
 
+            $user = User::find($id);
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
+            return $user;
         }
 
         return redirect(route('profil', Auth::user()->id));
