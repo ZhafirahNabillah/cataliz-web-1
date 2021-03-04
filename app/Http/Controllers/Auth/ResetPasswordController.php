@@ -53,7 +53,7 @@ class ResetPasswordController extends Controller
             $user->reset_code = null;
             $user->update();
 
-            return redirect('login')->with('success', 'Password sukses dirubah! Silahkan login');
+            return redirect('login')->with('success', 'Password changed successfully. Please login!');
         } else {
             return back()->with('error', 'Password tidak sama!');
         }

@@ -91,7 +91,7 @@
                   </div>
                 </div>
                 <h5>Register as</h5>
-                <div class="form-group demo-inline-spacing">
+                <div class="form-group demo-inline-spacing" style="margin-top: -18px;">
                   <div class="custom-control custom-radio">
                     <input type="radio" id="role_coach" name="role" class="custom-control-input @error('role') is-invalid @enderror" value="coach" />
                     <label class="custom-control-label" for="role_coach">Coach</label>

@@ -104,6 +104,6 @@ class RegisterController extends Controller
       $user->assignRole('coachee');
     }
 
-    return redirect('login')->with('success', 'Registrasi berhasil, silahkan login!');
+    return redirect('login')->with('success', 'Registration is successful, please login!');
   }
 }

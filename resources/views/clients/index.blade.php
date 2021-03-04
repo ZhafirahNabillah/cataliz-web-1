@@ -386,7 +386,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon5">+62</span>
                     </div>
-                    <input id="phone" name="phone" type="text" class="form-control" value="">
+                    <input id="phone" name="phone" type="text" onkeypress="return isNumberKey(event)" class="form-control" value="">
                   </div>
                   <div id="phone-error"></div>
                 </div>
@@ -444,6 +444,14 @@
           }
         </style>
         <script>
+        function isNumberKey(evt)
+          {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode > 31 && (charCode < 48 || charCode > 57))
+              return false;
+
+            return true;
+          }
           $(function() {
 
             $.ajaxSetup({
