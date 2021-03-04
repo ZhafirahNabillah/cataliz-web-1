@@ -55,14 +55,22 @@
 					<div class="col-sm-12 ">
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
-							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							@if ($user->background_picture == 'background_default.jpg')
+								<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
+							@else
+								<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							@endif
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@if ($user->profil_picture == 'cataliz.jpg')
+											<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@else
+											<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@endif
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
@@ -366,14 +374,22 @@
 					<div class="col-12">
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
-							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							@if ($user->background_picture == 'background_default.jpg')
+								<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
+							@else
+								<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							@endif
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@if ($user->profil_picture == 'cataliz.jpg')
+											<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@else
+											<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@endif
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
@@ -786,18 +802,26 @@
 					<div class="col-12">
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
-							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							@if ($user->background_picture == 'background_default.jpg')
+								<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
+							@else
+								<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							@endif
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@if ($user->profil_picture == 'cataliz.jpg')
+											<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@else
+											<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
+										@endif
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
-										<h2 class="">{{$user->name}}</h2>
+										<h2 class="text-white">{{$user->name}}</h2>
 									</div>
 								</div>
 							</div>
