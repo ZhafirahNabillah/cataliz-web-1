@@ -444,15 +444,20 @@
           }
         </style>
         <script>
-        function isNumberKey(evt)
-          {
-            var charCode = (evt.which) ? evt.which : event.keyCode
-            if (charCode > 31 && (charCode < 48 || charCode > 57))
-              return false;
+        // function isNumberKey(evt)
+        //   {
+        //     var charCode = (evt.which) ? evt.which : event.keyCode
+        //     if (charCode > 31 && (charCode < 48 || charCode > 57))
+        //       return false;
+        //
+        //     return true;
+        //   }
 
-            return true;
-          }
           $(function() {
+            //custom validation method for phone number
+            $.validator.addMethod("phoneNumber", function(value, element) {
+              return this.optional( element ) || /^[1-9][0-9]/.test( value );
+            }, 'Please enter a valid phone number.');
 
             $.ajaxSetup({
               headers: {
@@ -850,7 +855,8 @@
                   },
                   phone: {
                     required: true,
-                    digits: true
+                    digits: true,
+                    'phoneNumber': true
                   },
                   email: {
                     required:true,
