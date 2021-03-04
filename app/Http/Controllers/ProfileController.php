@@ -68,7 +68,14 @@ class ProfileController extends Controller
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
-            return $user;
+            // return $user;
+        } elseif (auth()->user()->hasRole('coach')) {
+
+            $user = User::find($id);
+            $user->name = $request->name;
+            $user->phone = $request->phone;
+            $user->update();
+            // return $user;
         }
         return redirect(route('profil', Auth::user()->id));
     }
