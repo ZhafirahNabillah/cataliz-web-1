@@ -63,13 +63,13 @@ class ProfileController extends Controller
             $client->occupation = $request->occupation;
             $client->update();
         } elseif (auth()->user()->hasRole('admin')) {
-            $user = User::find($id);
 
+            $user = User::find($id);
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
+            return $user;
         }
-
         return redirect(route('profil', Auth::user()->id));
     }
 
