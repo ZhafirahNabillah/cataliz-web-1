@@ -106,10 +106,108 @@
                 </div>
                 <div class="form-group">
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" id="register-privacy-policy" type="checkbox" tabindex="4" />
-                    <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:void(0);">&nbsp;privacy policy & terms</a></label>
+                    <input class="custom-control-input @error('privacy') is-invalid @enderror" id="register-privacy-policy" name="privacy" value="ok" type="checkbox" tabindex="4" />
+                    <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:;" id="showPrivacy">&nbsp;privacy policy & terms</a></label>
+                  </div>
+                  @error('privacy')
+                    <strong class="text-danger">{{ $message }}</strong>
+                  @enderror
+                </div>
+
+              <!-- Modal Privacy policy & terms -->
+              <div
+                class="modal fade"
+                id="privacy"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalScrollableTitle"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>
+                        Biscuit powder jelly beans. Lollipop candy canes croissant icing chocolate cake. Cake fruitcake
+                        powder pudding pastry.
+                      </p>
+                      <p>
+                        Tootsie roll oat cake I love bear claw I love caramels caramels halvah chocolate bar. Cotton
+                        candy gummi bears pudding pie apple pie cookie. Cheesecake jujubes lemon drops danish dessert I
+                        love caramels powder.
+                      </p>
+                      <p>
+                        Chocolate cake icing tiramisu liquorice toffee donut sweet roll cake. Cupcake dessert icing
+                        dragée dessert. Liquorice jujubes cake tart pie donut. Cotton candy candy canes lollipop
+                        liquorice chocolate marzipan muffin pie liquorice.
+                      </p>
+                      <p>
+                        Powder cookie jelly beans sugar plum ice cream. Candy canes I love powder sugar plum tiramisu.
+                        Liquorice pudding chocolate cake cupcake topping biscuit. Lemon drops apple pie sesame snaps
+                        tootsie roll carrot cake soufflé halvah. Biscuit powder jelly beans. Lollipop candy canes
+                        croissant icing chocolate cake. Cake fruitcake powder pudding pastry.
+                      </p>
+                      <p>
+                        Tootsie roll oat cake I love bear claw I love caramels caramels halvah chocolate bar. Cotton
+                        candy gummi bears pudding pie apple pie cookie. Cheesecake jujubes lemon drops danish dessert I
+                        love caramels powder.
+                      </p>
+                      <p>
+                        Chocolate cake icing tiramisu liquorice toffee donut sweet roll cake. Cupcake dessert icing
+                        dragée dessert. Liquorice jujubes cake tart pie donut. Cotton candy candy canes lollipop
+                        liquorice chocolate marzipan muffin pie liquorice.
+                      </p>
+                      <p>
+                        Powder cookie jelly beans sugar plum ice cream. Candy canes I love powder sugar plum tiramisu.
+                        Liquorice pudding chocolate cake cupcake topping biscuit. Lemon drops apple pie sesame snaps
+                        tootsie roll carrot cake soufflé halvah. Biscuit powder jelly beans. Lollipop candy canes
+                        croissant icing chocolate cake. Cake fruitcake powder pudding pastry.
+                      </p>
+                      <p>
+                        Tootsie roll oat cake I love bear claw I love caramels caramels halvah chocolate bar. Cotton
+                        candy gummi bears pudding pie apple pie cookie. Cheesecake jujubes lemon drops danish dessert I
+                        love caramels powder.
+                      </p>
+                      <p>
+                        Chocolate cake icing tiramisu liquorice toffee donut sweet roll cake. Cupcake dessert icing
+                        dragée dessert. Liquorice jujubes cake tart pie donut. Cotton candy candy canes lollipop
+                        liquorice chocolate marzipan muffin pie liquorice.
+                      </p>
+                      <p>
+                        Powder cookie jelly beans sugar plum ice cream. Candy canes I love powder sugar plum tiramisu.
+                        Liquorice pudding chocolate cake cupcake topping biscuit. Lemon drops apple pie sesame snaps
+                        tootsie roll carrot cake soufflé halvah. Biscuit powder jelly beans. Lollipop candy canes
+                        croissant icing chocolate cake. Cake fruitcake powder pudding pastry.
+                      </p>
+                      <p>
+                        Tootsie roll oat cake I love bear claw I love caramels caramels halvah chocolate bar. Cotton
+                        candy gummi bears pudding pie apple pie cookie. Cheesecake jujubes lemon drops danish dessert I
+                        love caramels powder.
+                      </p>
+                      <p>
+                        Chocolate cake icing tiramisu liquorice toffee donut sweet roll cake. Cupcake dessert icing
+                        dragée dessert. Liquorice jujubes cake tart pie donut. Cotton candy candy canes lollipop
+                        liquorice chocolate marzipan muffin pie liquorice.
+                      </p>
+                      <p>
+                        Powder cookie jelly beans sugar plum ice cream. Candy canes I love powder sugar plum tiramisu.
+                        Liquorice pudding chocolate cake cupcake topping biscuit. Lemon drops apple pie sesame snaps
+                        tootsie roll carrot cake soufflé halvah.
+                      </p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">Accept</button>
+                    </div>
                   </div>
                 </div>
+              </div>
+
+                
                 <button class="btn btn-primary btn-block" tabindex="5">Sign up</button>
               </form>
               <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
@@ -123,6 +221,10 @@
 </div>
 <!-- END: Content-->
 <script>
+  $('body').on('click', '#showPrivacy', function() {
+    
+    $('#privacy').modal('show');
+    }
   function isNumberKey(evt)
       {
          var charCode = (evt.which) ? evt.which : event.keyCode
