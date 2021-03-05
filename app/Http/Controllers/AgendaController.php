@@ -206,7 +206,7 @@ class AgendaController extends Controller
       $agenda_detail->save();
     }
 
-    return redirect('/agendas')->with('success', 'Data berhasil disimpan!');
+    return redirect('/agendas')->with('success', 'Agenda successfully created!');
   }
 
   /**
@@ -281,7 +281,7 @@ class AgendaController extends Controller
     $agenda_detail->duration = $request->duration;
     $agenda_detail->update();
 
-    return redirect('/agendas')->with('success', 'Data berhasil diupdate!');
+    return redirect('/agendas')->with('success', 'Sessions Successfully updated!');
   }
 
   /**
@@ -332,7 +332,7 @@ class AgendaController extends Controller
     $agenda_detail->status = 'finished';
     $agenda_detail->update();
 
-    return redirect('/agendas')->with('success','Feedback behasil ditambahkan. Terimakasih atas kesediaan anda mengisi feedback!');
+    return redirect('/agendas')->with('success','Feedback saved successfully!');
   }
 
   public function agenda_detail_update(Request $request, $id)
@@ -394,7 +394,7 @@ class AgendaController extends Controller
     }
 
 
-    return redirect('/agendas')->with('success', 'Feedback dan notes berhasil disimpan!');
+    return redirect('/agendas')->with('success', 'Feedback and notes saved successfully!');
   }
 
   public function feedback_download($id)

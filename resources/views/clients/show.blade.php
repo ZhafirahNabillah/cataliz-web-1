@@ -165,7 +165,7 @@
 
 											</div>
 											<div class="card-body">
-												<h1 class="display-1 text-primary card text-center">{{$total_agenda->count}}</h1>
+												<h1 class="display-1 text-primary card text-center">{{ $total_session }}</h1>
 												<h3 class="font-weight-bolder text-center">Number of Coaching</h3>
 											</div>
 										</div>
@@ -184,7 +184,7 @@
 											</div>
 										</div>
 										<div class="card-body">
-											<h1 class="display-1 text-primary card text-center">{{$total_session->sum}}</h1>
+											<h1 class="display-1 text-primary card text-center">{{ $total_agenda }}</h1>
 											<h3 class="font-weight-bolder text-center">Agenda</h3>
 										</div>
 									</div>

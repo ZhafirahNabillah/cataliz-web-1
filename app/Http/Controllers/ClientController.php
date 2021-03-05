@@ -233,15 +233,13 @@ class ClientController extends Controller
     $coaching_note = Coaching_note::with('agenda_detail')->whereIn('agenda_detail_id', $agenda_detail_id)->get();
     $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->where('status', 'finished')->get();
 
-    $total_agenda = Agenda::selectRaw('count(id) as count')
-      ->where('owner_id', Auth::user()->id)
-      ->where('client_id', $client->id)
-      ->first();
+    $total_agenda = Agenda::where('owner_id', Auth::user()->id)->where('client_id', $client->id)->count();
 
-    $total_session = Agenda::selectRaw('sum(session) as sum')
-      ->where('owner_id', Auth::user()->id)
-      ->where('client_id', $client->id)
-      ->first();
+    $total_session = Agenda_detail::select('agenda_details.id', 'agendas.client_id')
+      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+      ->where('agendas.owner_id', Auth::user()->id)
+      ->where('agendas.client_id', $client->id)
+      ->count();
 
     $total_event = Agenda_detail::select('agenda_details.id', 'agendas.client_id')
       ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
@@ -276,7 +274,8 @@ class ClientController extends Controller
         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
         ->join('clients', 'clients.id', '=', 'agendas.client_id')
         ->where('clients.id', $client->id)
-        ->where('clients.owner_id', Auth::user()->id)->orderBy('date', 'asc')->orderBy('time', 'asc')
+        ->where('agendas.owner_id',Auth::user()->id)
+        ->orderBy('date', 'asc')->orderBy('time', 'asc')
         ->get();
       return DataTables::of($data2)
         ->addIndexColumn()
@@ -354,12 +353,7 @@ class ClientController extends Controller
       return Datatables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
-                <div class="dropdown-menu dropdown-menu-right">
-                <a href="' . route('plans.edit', $row->id) . '" class="dropdown-item editClient"  data-id="' . $row->id . '" data-original-title="Edit"><i data-feather="edit"></i> Edit</a>
-                <a href="https://wa.me/62' . $row->client['phone'] . '" class="dropdown-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Kirim WA</a>
-                <a href="javascript:;" class="dropdown-item deletePlan" data-id="' . $row->id . '" data-original-title="Delete" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>Delete</a>
-                </div></div>';
+          $actionBtn = '<a href="' . route('plans.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
         })
         ->rawColumns(['action'])
