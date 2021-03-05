@@ -81,7 +81,7 @@
                       </div>
                       <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                         <div class="card-body">
-                          {{$plan->objective}}
+                          {!!$plan->objective!!}
                         </div>
                       </div>
                     </div>
@@ -91,7 +91,7 @@
                       </div>
                       <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
                         <div class="card-body">
-                          {{$plan->success_indicator}}
+                          {!!$plan->success_indicator!!}
                         </div>
                       </div>
                     </div>
@@ -101,7 +101,7 @@
                       </div>
                       <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
                         <div class="card-body">
-                          {{$plan->development_areas}}
+                          {!!$plan->development_areas!!}
                         </div>
                       </div>
                     </div>
@@ -111,7 +111,7 @@
                       </div>
                       <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">
                         <div class="card-body">
-                          {{$plan->support}}
+                          {!!$plan->support!!}
                         </div>
                       </div>
                     </div>

@@ -236,31 +236,26 @@
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
 															<input id="name" name="name" type="text" class="form-control dt-full-name"
-																id="basic-icon-default-fullname" value="{{$user->name}}" />
+																id="basic-icon-default-fullname" value="{{$user->name}}" readonly/>
 														</div>
-														<label class="form-label" for="basic-icon-default-post">Phone</label>
-														<div class="input-group input-group-merge mb-2">
-															<div class="input-group-prepend">
-																<span class="input-group-text" id="basic-addon5">+62</span>
+														<div class="form-group">
+															<label class="form-label" for="basic-icon-default-post">Phone</label>
+															<div class="input-group input-group-merge">
+																<div class="input-group-prepend">
+																	<span class="input-group-text" id="basic-addon5">+62</span>
+																</div>
+																<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
 															</div>
-															<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
+															<div id="phone-error"></div>
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-email">Email</label>
 															<input id="email" name="email" type="text" id="basic-icon-default-email"
-																class="form-control dt-email" value="{{$user->email}}" disabled />
+																class="form-control dt-email" value="{{$user->email}}" readonly />
 															<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 														</div>
 
-														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create"
-															onclick="Swal.fire({
-															icon: 'success',
-															title: 'Your work has been saved',
-															showConfirmButton: false,
-															timer: 1500
-														})">
-															Submit
-														</button>
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn1" value="create">Submit</button>
 														<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 													</div>
 												</form>
@@ -1054,28 +1049,26 @@
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
 									<input id="name" name="name" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="{{$user->name}}" />
+										id="basic-icon-default-fullname" value="{{$user->name}}" readonly/>
 								</div>
-								<label class="form-label" for="basic-icon-default-post">Phone</label>
-								<div class="input-group input-group-merge mb-2">
-									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon5">+62</span>
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-post">Phone</label>
+									<div class="input-group input-group-merge">
+										<div class="input-group-prepend">
+											<span class="input-group-text" id="basic-addon5">+62</span>
+										</div>
+										<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
 									</div>
-									<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
+									<div id="phone-error"></div>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-email">Email</label>
-									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-										value="{{$user->email}}" disabled />
+									<input id="email" name="email" type="text" id="basic-icon-default-email"
+										class="form-control dt-email" value="{{$user->email}}" readonly />
 									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 								</div>
 
-								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
-                    icon: 'success',
-                    title: 'Saved Successfully!',
-                  })">
-									Submit
-								</button>
+								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn1" value="create">Submit</button>
 								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 							</div>
 						</form>
@@ -1201,6 +1194,7 @@
 
 	@push('scripts')
 	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			// popover
@@ -1295,18 +1289,48 @@
 			});
 			@endrole
 
+		});
 
+		$.validator.addMethod("phoneNumber", function(value, element) {
+			return this.optional(element) || /^[1-9][0-9]/.test(value);
+		}, '<strong class="text-danger">Please enter a valid phone number!</strong>');
+
+		$('#saveBtn1').click(function(e) {
+				console.log('masuk');
+				$('#ClientForm').validate({
+					rules:{
+						'phone': {
+							required: true,
+							'phoneNumber': true
+						}
+					},
+					messages: {
+						'phone': {
+							required: '<strong class="text-danger">Phone is required!</strong>'
+						}
+					},
+					errorPlacement: function(error, element) {
+						if(element.attr("name") == "phone") {
+							error.appendTo("#phone-error");
+						}
+					},
+					//submit Handler
+					submitHandler: function(form) {
+						form.submit();
+						Swal.fire({
+						icon: 'success',
+						title: 'Updated succesfully!',
+						showConfirmButton: false,
+						timer: 1500
+					});
+					}
+				});
+				$('#modals_profil').modal('hide');
+		});
 
 		// modal edit
 		$('body').on('click', '#edit_profil', function() {
-			// $('#saveBtn').val("edit-profil");
-			// $('#modals_profil').modal('show');
-			// save data
-			$('#saveBtn').click(function(e) {
-				// e.preventDefault();
-				$(this).html('Sending..');
-				$('#modals_profil').modal('hide');
-			})
+			console.log('edit');
 		});
 	</script>
 	@endpush

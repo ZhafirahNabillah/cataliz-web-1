@@ -48,9 +48,7 @@
 <script src="{{ asset('assets/vendors/js/tables/datatable/buttons.html5.min.js')}}"></script>
 <script src="{{ asset('assets/vendors/js/tables/datatable/buttons.print.min.js')}}"></script>
 <script src="{{ asset('assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js')}}"></script>
-<!--
-    <script src="{{ asset('assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
-	-->
+<script src="{{ asset('assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->

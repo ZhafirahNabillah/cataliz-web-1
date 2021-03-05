@@ -74,7 +74,7 @@ class ClientController extends Controller
 
             //final dropdown button that shows on view
             $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
-            <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $whatsapp_btn . $delete_btn . '</div>';
+            <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $delete_btn . '</div>';
 
             return $actionBtn;
           })
