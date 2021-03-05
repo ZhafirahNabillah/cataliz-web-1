@@ -134,10 +134,10 @@ class AgendaController extends Controller
           //add detail and whatsapp button if user have permission
           if (auth()->user()->can('detail-agenda')) {
             $detail_btn = '<a href="' . route('agendas.show', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Details</a>';
-            // $whatsapp_btn = '<a href="https://wa.me/62' . $row->phone . '" class="dropdown-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Kirim WA</a>';
+            $whatsapp_btn = '<a href="https://wa.me/62' . $row->phone . '" class="dropdown-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Kirim WA</a>';
           } else {
             $detail_btn = null;
-            // $whatsapp_btn = null;
+            $whatsapp_btn = null;
           };
 
           //add delete button if user have permission
@@ -206,7 +206,7 @@ class AgendaController extends Controller
       $agenda_detail->save();
     }
 
-    return redirect('/agendas')->with('success', 'The agenda has been added successfully!!');
+    return redirect('/agendas')->with('success', 'Agenda successfully created!');
   }
 
   /**
@@ -256,8 +256,11 @@ class AgendaController extends Controller
       'date'          => 'required',
       'time'          => 'required',
       'duration'      => 'required',
-      'media'         => 'required',
-      'media_url'     => 'required'
+    ], [
+      'topic.required'            => "Silahkan isi topic sesi terlebih dahulu!",
+      'date.required'             => "Silahkan isi tanggal sesi terlebih dahulu!",
+      'time.required'             => "Silahkan isi waktu sesi terlebih dahulu!",
+      'duration.required'         => "Silahkan isi durasi sesi terlebih dahulu!",
     ]);
 
     $agenda_detail = Agenda_detail::where('id', $id)->first();
@@ -278,7 +281,7 @@ class AgendaController extends Controller
     $agenda_detail->duration = $request->duration;
     $agenda_detail->update();
 
-    return redirect('/agendas')->with('success', 'The agenda has been updated successfully!!');
+    return redirect('/agendas')->with('success', 'Sessions Successfully updated!');
   }
 
   /**
@@ -294,8 +297,7 @@ class AgendaController extends Controller
     return response()->json(['success' => 'Agenda deleted!']);
   }
 
-  public function add_feedback_from_coachee(Request $request, $id)
-  {
+  public function add_feedback_from_coachee(Request $request, $id){
     $agenda_detail = Agenda_detail::find($id);
 
     //check if feedback input was filled
@@ -330,7 +332,7 @@ class AgendaController extends Controller
     $agenda_detail->status = 'finished';
     $agenda_detail->update();
 
-    return redirect('/agendas')->with('success', 'Feedback behasil ditambahkan. Terimakasih atas kesediaan anda mengisi feedback!');
+    return redirect('/agendas')->with('success','Feedback saved successfully!');
   }
 
   public function agenda_detail_update(Request $request, $id)
@@ -392,7 +394,7 @@ class AgendaController extends Controller
     }
 
 
-    return redirect('/agendas')->with('success', 'Feedback dan notes berhasil disimpan!');
+    return redirect('/agendas')->with('success', 'Feedback and notes saved successfully!');
   }
 
   public function feedback_download($id)

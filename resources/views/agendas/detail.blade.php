@@ -387,7 +387,7 @@
 
 	$(function() {
 
-		@if($agenda_detail - > rating_from_coachee != null)
+		@if($agenda_detail->rating_from_coachee != null)
 		var rating = $('#rateYo').data("rating");
 		$('#rateYo').rateYo({
 			starWidth: "50px",
