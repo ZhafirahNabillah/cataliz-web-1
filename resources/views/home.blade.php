@@ -82,7 +82,9 @@
           <div class="col-md-12 col-lg-12">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title mb-1">List Agenda</h5>
+                <h5 class="card-title mb-1">List Agenda
+                  <img class="rounded float-center" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Daftar agenda yang ada dalam sistem" />
+                </h5>
                 <table class="datatables-basic table admin-datatable-sessions">
                   <thead>
                     <tr>
