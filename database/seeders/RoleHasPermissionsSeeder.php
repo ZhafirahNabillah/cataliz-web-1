@@ -38,5 +38,14 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_admin->givePermissionTo(['list-permission', 'create-permission', 'update-permission', 'delete-permission']);
         //give permission to admin to see,create,update class
         $role_admin->givePermissionTo(['list-class', 'create-class', 'detail-class']);
+        
+        $role_coachee = Role::where('name', 'coachee')->first();
+        
+        //give permission to coachee see coaches
+        $role_coachee->givePermissionTo(['list-user', 'detail-user']);
+        //give permission to coachee see plans
+        $role_coachee->givePermissionTo(['list-plan', 'detail-plan']);
+        //give permission to coachee see agendas
+        $role_coachee->givePermissionTo(['list-agenda', 'detail-agenda']);
     }
 }
