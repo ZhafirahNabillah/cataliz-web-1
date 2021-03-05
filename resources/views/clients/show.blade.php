@@ -22,13 +22,11 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-							<img class="rounded float-right width=" 15" height="15"" src="
-								{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-								data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
+							<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="/">Home</a>
+								<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
 								</li>
 								<li class="breadcrumb-item"><a href="{{route('clients.index')}}">Client</a>
 								</li>
@@ -47,17 +45,14 @@
 					<div class="col-12">
 						<div class="card profile-header mb-2">
 							<!-- profile cover photo -->
-							<img class="card-img-top"
-								src="https://image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg"
-								alt="User Profile Image" />
+							<img class="card-img-top" src="https://image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg" alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
 								<!-- profile picture -->
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
-										<img src="{{asset('assets/images/avatars/cataliz.jpg') }}" class="rounded img-fluid"
-											alt="Card image" />
+										<img src="{{asset('assets/images/avatars/cataliz.jpg') }}" class="rounded img-fluid" alt="Card image" />
 									</div>
 									<!-- profile title -->
 									<div class="profile-title ml-3">
@@ -71,9 +66,7 @@
 							<div class="profile-header-nav">
 								<!-- navbar -->
 								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-										aria-label="Toggle navigation">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -82,24 +75,19 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile"
-														role="tab" aria-selected="false">Sessions</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#session" aria-controls="profile" role="tab" aria-selected="false">Sessions</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingPlan"
-														aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingPlan" aria-controls="profile" role="tab" aria-selected="false">Coaching Plans</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingNotes"
-														aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachingNotes" aria-controls="profile" role="tab" aria-selected="false">Coaching Notes</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback"
-														aria-controls="profile" role="tab" aria-selected="false">Feedbacks</a>
+													<a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedbacks</a>
 												</li>
 
 											</ul>
@@ -169,14 +157,10 @@
 
 												<div class=" card-header">
 												<div>
-													<img class=" rounded float-left" width="15px" height="15px"
-														src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-														data-toggle="popover" data-placement="top"
-														data-content="Bagian ini menampilkan banyaknya sesi yang dimiliki oleh client yang dipilih." />
+													<img class=" rounded float-left" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi yang dimiliki oleh client yang dipilih." />
 												</div>
 												<div class="card-body flex-column align-items-start pb-0">
-													<img class="rounded float-right width=" 60" height="60"" src="
-														{{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
+													<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 149.png') }}" alt="Card image cap" />
 												</div>
 
 											</div>
@@ -193,14 +177,10 @@
 										<div class="card style=" width: 18rem;" style="border-radius: 11px"">
 									<div class=" card-header mb-0">
 											<div>
-												<img class=" rounded float-left" width="15px" height="15px"
-													src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-													data-toggle="popover" data-placement="top"
-													data-content="Bagian ini menampilkan banyaknya agenda yang dimiliki oleh client yang dipilih." />
+												<img class=" rounded float-left" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya agenda yang dimiliki oleh client yang dipilih." />
 											</div>
 											<div class="card-body flex-column align-items-start pb-0">
-												<img class="rounded float-right width=" 55" height="55"" src="
-													{{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
+												<img class="rounded float-right width=" 55" height="55"" src=" {{asset('assets\images\icons\Group 141.jpg') }}" alt="Card image cap" />
 											</div>
 										</div>
 										<div class="card-body">
@@ -217,14 +197,10 @@
 									<div class="card style=" width: 18rem;" style="border-radius: 11px"">
 										<div class=" card-header">
 										<div>
-											<img class=" rounded float-left" width="15px" height="15px"
-												src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-												data-placement="top"
-												data-content="Bagian ini menampilkan banyaknya sesi dengan status scheduled yang dimiliki oleh client yang dipilih." />
+											<img class=" rounded float-left" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan banyaknya sesi dengan status scheduled yang dimiliki oleh client yang dipilih." />
 										</div>
 										<div class="card-body flex-column align-items-start pb-0">
-											<img class="rounded float-right width=" 60" height="60"" src="
-												{{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
+											<img class="rounded float-right width=" 60" height="60"" src=" {{asset('assets\images\icons\Group 142.jpg') }}" alt="Card image cap" />
 										</div>
 									</div>
 									<div class="card-body">
@@ -244,10 +220,7 @@
 							<div class="card" style="border-radius: 11px">
 								<div class="card-body">
 									<h5 class="card-title mb-1">Upcoming Event
-										<img class="align-text width=" 15px" height="15px"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-											data-placement="top"
-											data-content="Bgaian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat" />
+										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bgaian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat" />
 									</h5>
 									<table class="datatables-basic table yajra-datatable">
 										<thead>
@@ -270,10 +243,7 @@
 							<div class="card" style="border-radius: 11px">
 								<div class="card-body">
 									<h5 class="card-title mb-1">List Agenda
-										<img class="align-text width=" 15px" height="15px"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-											data-placement="top"
-											data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
 									</h5>
 									<table class="datatables-basic table yajra-datatable1">
 										<thead>
@@ -309,9 +279,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Sessions
-								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}"
-									alt="Card image cap" data-toggle="popover" data-placement="top"
-									data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan detail profile dari client yang dipilih" />
 							</h4>
 						</div>
 					</div>
@@ -353,9 +321,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Coaching Plans
-								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}"
-									alt="Card image cap" data-toggle="popover" data-placement="top"
-									data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching plans yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -393,9 +359,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active">Coaching Notes
-								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}"
-									alt="Card image cap" data-toggle="popover" data-placement="top"
-									data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
+								<img class="align-text width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar coaching notes berdasarkan session  yang dimiliki oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -424,8 +388,7 @@
 			</div>
 
 			<!-- coaching note detail modal -->
-			<div class="modal fade" id="show_note" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
+			<div class="modal fade" id="show_note" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -487,10 +450,7 @@
 					<div class="row breadcrumbs-top">
 						<div class="col-12">
 							<h4 class="breadcrumb-item active tes">Feedback
-								<img class="rounded float-right width=" 15" height="15"" src="
-									{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-									data-placement="top"
-									data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
+								<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
 							</h4>
 						</div>
 					</div>
@@ -519,8 +479,7 @@
 			<!-- /Feedback note -->
 
 			<!-- Feedback detail modal -->
-			<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-				aria-hidden="true">
+			<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
@@ -589,8 +548,7 @@
 				<div class="modal-body flex-grow-1">
 					<div class="form-group">
 						<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-						<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname"
-							placeholder="John Doe" aria-label="John Doe" />
+						<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
 					</div>
 					<label class="form-label" for="basic-icon-default-post">Phone</label>
 					<div class="input-group input-group-merge mb-2">
@@ -601,24 +559,20 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="basic-icon-default-email">Email</label>
-						<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-							placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+						<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
 						<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-						<input id="organization" name="organization" type="text" class="form-control dt-full-name"
-							id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+						<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="basic-icon-default-fullname">Company</label>
-						<input id="company" name="company" type="text" class="form-control dt-full-name"
-							id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+						<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-						<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-							id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+						<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
 					</div>
 
 					<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>

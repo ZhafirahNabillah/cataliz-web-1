@@ -24,11 +24,11 @@
             <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
                 </li>
-                <li class="breadcrumb-item active">Create Coaching Plans
+                <li class="breadcrumb-item active">Create Coaching Plan
                 </li>
               </ol>
             </div>
@@ -62,8 +62,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id"
-                        id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                      <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                       </select>
                       @error('livesearch')
                       <span class="invalid-feedback" role="alert">
@@ -81,8 +80,7 @@
 
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
-                        value="{{ old('date') }}" autocomplete="date" autofocus>
+                      <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}" autocomplete="date" autofocus>
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -94,8 +92,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Objektif</label>
-                      <textarea class="form-control @error('objective') is-invalid @enderror" name="objective"
-                        id="objective" value="{{ old('objective') }}" autocomplete="objective"></textarea>
+                      <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" value="{{ old('objective') }}" autocomplete="objective"></textarea>
 
                       @error('objective')
                       <span class="invalid-feedback" role="alert">
@@ -108,9 +105,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Sukses Indikator</label>
-                      <textarea class="form-control @error('success_indicator') is-invalid @enderror"
-                        name="success_indicator" id="success_indicator" value="{{ old('success_indicator') }}"
-                        autocomplete="success_indicator"></textarea>
+                      <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" value="{{ old('success_indicator') }}" autocomplete="success_indicator"></textarea>
 
                       @error('success_indicator')
                       <span class="invalid-feedback" role="alert">
@@ -123,9 +118,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Pengembangan Area</label>
-                      <textarea class="form-control @error('development_areas') is-invalid @enderror"
-                        name="development_areas" id="development_areas" value="{{ old('development_areas') }}"
-                        autocomplete="development_areas"></textarea>
+                      <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" value="{{ old('development_areas') }}" autocomplete="development_areas"></textarea>
 
                       @error('development_areas')
                       <span class="invalid-feedback" role="alert">
@@ -138,8 +131,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Support</label>
-                      <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
-                        value="{{ old('support') }}" autocomplete="support"></textarea>
+                      <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support" value="{{ old('support') }}" autocomplete="support"></textarea>
 
                       @error('support')
                       <span class="invalid-feedback" role="alert">
@@ -149,8 +141,7 @@
                     </div>
                   </div>
 
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                    value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                 </div>
               </form>
             </div>
@@ -172,8 +163,7 @@
         <div class="modal-body flex-grow-1">
           <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-            <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname"
-              placeholder="John Doe" aria-label="John Doe" />
+            <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
           </div>
           <label class="form-label" for="basic-icon-default-post">Phone</label>
           <div class="input-group input-group-merge mb-2">
@@ -184,24 +174,20 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="basic-icon-default-email">Email</label>
-            <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-              placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+            <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
             <small class="form-text text-muted"> You can use letters, numbers & periods </small>
           </div>
           <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-            <input id="organization" name="organization" type="text" class="form-control dt-full-name"
-              id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+            <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
           </div>
           <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Company</label>
-            <input id="company" name="company" type="text" class="form-control dt-full-name"
-              id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+            <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
           </div>
           <div class="form-group">
             <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-            <input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-              id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+            <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
           </div>
 
           <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
@@ -227,70 +213,83 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
   $('.livesearch').select2({
-        placeholder: 'Select client',
-        ajax: {
-            url: "{{route('clients.search')}}",
-            dataType: 'json',
-            delay: 250,
-            processResults: function (data) {
-                return {
-                    results: $.map(data, function (item) {
-						console.log(item)
-                        return {
-                            text: item.name,
-                            id: item.id,
-                            org: item.organization,
-                        }
-                    })
-                };
-            },
-            cache: true
-        }
-    });
+    placeholder: 'Select client',
+    ajax: {
+      url: "{{route('clients.search')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            console.log(item)
+            return {
+              text: item.name,
+              id: item.id,
+              org: item.organization,
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
 
-	$(".livesearch").on('change', function(e) {
+  $(".livesearch").on('change', function(e) {
     // Access to full data
     console.log($(this).select2('data'));
     console.log($(this).select2('data')[0].id);
-	var dd = $(this).select2('data')[0];
-  $('#organization').val(dd.org);
+    var dd = $(this).select2('data')[0];
+    $('#organization').val(dd.org);
 
-	});
+  });
 
-  $(function () {
+  $(function() {
 
-      $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
     });
-	var table = $('.yajra-datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "",
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {data: 'name', name: 'name'},
-            {data: 'email', name: 'email'},
-            {data: 'program', name: 'program'},
-            {data: 'phone', name: 'phone'},
-			{
-                data: 'action',
-                name: 'action',
-                orderable: true,
-                searchable: true
-            },
-        ],
-		columnDefs: [
+    var table = $('.yajra-datatable').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
         {
+          data: 'name',
+          name: 'name'
+        },
+        {
+          data: 'email',
+          name: 'email'
+        },
+        {
+          data: 'program',
+          name: 'program'
+        },
+        {
+          data: 'phone',
+          name: 'phone'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: true,
+          searchable: true
+        },
+      ],
+      columnDefs: [{
           // Avatar image/badge, Name and post
           targets: 1,
           responsivePriority: 4,
-          render: function (data, type, full, meta) {
+          render: function(data, type, full, meta) {
             var $user_img = full['avatar'],
               $name = full['name'],
               $post = full['company'];
-			  $org = full['organization'];
+            $org = full['organization'];
             if ($user_img) {
               // For Avatar image
               var $output =
@@ -327,160 +326,163 @@
             return $row_output;
           }
         },
-		{
-			targets: 4,
-			render: function (data, type, full, meta) {
-				var $phone = full['phone'],
-					$output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-							  '</div>';
-				return $output;
-			}
-		}
-		],
-		order: [[2, 'desc']],
-		dom:
-        '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-		  displayLength: 7,
-		  lengthMenu: [7, 10, 25, 50, 75, 100],
-		  buttons: [
+        {
+          targets: 4,
+          render: function(data, type, full, meta) {
+            var $phone = full['phone'],
+              $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
+              '</div>';
+            return $output;
+          }
+        }
+      ],
+      order: [
+        [2, 'desc']
+      ],
+      dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      displayLength: 7,
+      lengthMenu: [7, 10, 25, 50, 75, 100],
+      buttons: [
 
-			{
-			  text: feather.icons['plus'].toSvg({ class: 'mr-50 font-small-4' }) + 'Add Client',
-			  className: 'create-new btn btn-primary createNewClient',
-			  attr: {
-				'data-toggle': 'modal'
+        {
+          text: feather.icons['plus'].toSvg({
+            class: 'mr-50 font-small-4'
+          }) + 'Add Client',
+          className: 'create-new btn btn-primary createNewClient',
+          attr: {
+            'data-toggle': 'modal'
 
-			  },
-			  init: function (api, node, config) {
-				$(node).removeClass('btn-secondary');
-			  }
-			}
-		  ],
-		  responsive: {
-			details: {
-			  display: $.fn.dataTable.Responsive.display.modal({
-				header: function (row) {
-				  var data = row.data();
-				  return 'Details of ' + data['name'];
-				}
-			  }),
-			  type: 'column',
-			  renderer: function (api, rowIdx, columns) {
-				var data = $.map(columns, function (col, i) {
-				  console.log(columns);
-				  return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-					? '<tr data-dt-row="' +
-						col.rowIndex +
-						'" data-dt-column="' +
-						col.columnIndex +
-						'">' +
-						'<td>' +
-						col.title +
-						':' +
-						'</td> ' +
-						'<td>' +
-						col.data +
-						'</td>' +
-						'</tr>'
-					: '';
-				}).join('');
+          },
+          init: function(api, node, config) {
+            $(node).removeClass('btn-secondary');
+          }
+        }
+      ],
+      responsive: {
+        details: {
+          display: $.fn.dataTable.Responsive.display.modal({
+            header: function(row) {
+              var data = row.data();
+              return 'Details of ' + data['name'];
+            }
+          }),
+          type: 'column',
+          renderer: function(api, rowIdx, columns) {
+            var data = $.map(columns, function(col, i) {
+              console.log(columns);
+              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                ?
+                '<tr data-dt-row="' +
+                col.rowIndex +
+                '" data-dt-column="' +
+                col.columnIndex +
+                '">' +
+                '<td>' +
+                col.title +
+                ':' +
+                '</td> ' +
+                '<td>' +
+                col.data +
+                '</td>' +
+                '</tr>' :
+                '';
+            }).join('');
 
-				return data ? $('<table class="table"/>').append(data) : false;
-			  }
-			}
-		  },
-		  language: {
-			paginate: {
-			  // remove previous & next text from pagination
-			  previous: '&nbsp;',
-			  next: '&nbsp;'
-			},
-			search: "<i data-feather='search'></i>",
-			searchPlaceholder: "Search records"
-		  }
+            return data ? $('<table class="table"/>').append(data) : false;
+          }
+        }
+      },
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
 
     });
 
-	// create
-	$('body').on('click', '.createNewClient', function () {
-		$('#saveBtn').val("create-Client");
-        $('#Customer_id').val('');
-        $('#ClientForm').trigger("reset");
-        $('#modalHeading').html("Create New Client");
-		$('#modals-slide-in').modal('show');
-	});
+    // create
+    $('body').on('click', '.createNewClient', function() {
+      $('#saveBtn').val("create-Client");
+      $('#Customer_id').val('');
+      $('#ClientForm').trigger("reset");
+      $('#modalHeading').html("Create New Client");
+      $('#modals-slide-in').modal('show');
+    });
 
-	// edit
-	$('body').on('click', '.editClient', function () {
+    // edit
+    $('body').on('click', '.editClient', function() {
       var Client_id = $(this).data('id');
-      $.get("" +'/clients/' + Client_id +'/edit', function (data) {
-          $('#modalHeading').html("Edit Client");
-          $('#saveBtn').val("edit-user");
-          $('#modals-slide-in').modal('show');
-          $('#Client_id').val(data.id);
-          $('#name').val(data.name);
-          $('#phone').val(data.phone);
-          $('#email').val(data.email);
-          $('#company').val(data.company);
-          $('#organization').val(data.organization);
-          $('#occupation').val(data.occupation);
+      $.get("" + '/clients/' + Client_id + '/edit', function(data) {
+        $('#modalHeading').html("Edit Client");
+        $('#saveBtn').val("edit-user");
+        $('#modals-slide-in').modal('show');
+        $('#Client_id').val(data.id);
+        $('#name').val(data.name);
+        $('#phone').val(data.phone);
+        $('#email').val(data.email);
+        $('#company').val(data.company);
+        $('#organization').val(data.organization);
+        $('#occupation').val(data.occupation);
       })
-	});
+    });
 
-	// save data
-	$('#saveBtn').click(function (e) {
-        e.preventDefault();
-        $(this).html('Sending..');
+    // save data
+    $('#saveBtn').click(function(e) {
+      e.preventDefault();
+      $(this).html('Sending..');
 
-        $.ajax({
-          data: $('#ClientForm').serialize(),
-          url: "",
-          type: "POST",
-          dataType: 'json',
-          success: function (data) {
+      $.ajax({
+        data: $('#ClientForm').serialize(),
+        url: "",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
 
-              $('#ClientForm').trigger("reset");
-			  $('#saveBtn').html('Submit');
-              $('#modals-slide-in').modal('hide');
-              table.draw();
+          $('#ClientForm').trigger("reset");
+          $('#saveBtn').html('Submit');
+          $('#modals-slide-in').modal('hide');
+          table.draw();
 
-          },
-          error: function (data) {
-              console.log('Error:', data);
-              $('#saveBtn').html('Submit');
-          }
+        },
+        error: function(data) {
+          console.log('Error:', data);
+          $('#saveBtn').html('Submit');
+        }
       });
     });
 
-	// delete
-	$('body').on('click', '.deleteClient', function (e) {
+    // delete
+    $('body').on('click', '.deleteClient', function(e) {
 
-        var Client_id = $(this).data("id");
-        if(confirm("Are You sure want to delete !")){
+      var Client_id = $(this).data("id");
+      if (confirm("Are You sure want to delete !")) {
 
         $.ajax({
-            type: "DELETE",
-            url: ""+'/clients/'+Client_id,
-            success: function (data) {
-                table.draw();
-            },
-            error: function (data) {
-                console.log('Error:', data);
-            }
+          type: "DELETE",
+          url: "" + '/clients/' + Client_id,
+          success: function(data) {
+            table.draw();
+          },
+          error: function(data) {
+            console.log('Error:', data);
+          }
         });
-		} else {
-			e.preventDefault();
-		}
+      } else {
+        e.preventDefault();
+      }
     });
 
   });
 
 
-  $(function () {
-        $('#datetimepicker11').datetimepicker({
-          daysOfWeekDisabled: [0, 6]
-        });
+  $(function() {
+    $('#datetimepicker11').datetimepicker({
+      daysOfWeekDisabled: [0, 6]
+    });
   });
-
 </script>
 @endpush

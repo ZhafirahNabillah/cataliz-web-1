@@ -24,7 +24,7 @@
             <h2 class="content-header-title float-left mb-0">Agenda</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">Agenda</a>
                 </li>
@@ -93,8 +93,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic"
-                        value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic...">
+                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic...">
                       @error('topic')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -118,8 +117,7 @@
                   <div class="row media_url1" style="display: none">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}"
-                        placeholder="Masukkan media url...">
+                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Masukkan media url...">
                     </div>
                   </div>
                   @else
@@ -139,8 +137,7 @@
                   <div class="row media_url2">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}"
-                        placeholder="Masukkan media url...">
+                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Masukkan media url...">
                     </div>
                   </div>
                   @endif
@@ -148,8 +145,7 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror"
-                        name="date" value="{{ $agenda_detail->date }}">
+                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $agenda_detail->date }}">
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -158,8 +154,7 @@
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="fp-default">Waktu Kegiatan</label>
-                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time"
-                        value="{{ $agenda_detail->time }}">
+                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}">
                       @error('time')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -170,8 +165,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
-                      <select class="form-control @error('duration') is-invalid @enderror"
-                        aria-label=".form-select-lg example" name="duration">
+                      <select class="form-control @error('duration') is-invalid @enderror" aria-label=".form-select-lg example" name="duration">
                         <option hidden selected value>Pilih Durasi</option>
                         <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Menit</option>
                         <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Menit</option>
@@ -186,8 +180,7 @@
                     </div>
                   </div>
                   <a href="{{route('agendas.index')}}" class="btn btn-secondary">Kembali</a>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                    value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                 </div>
               </div>
             </div>
@@ -205,86 +198,86 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
-  $(document).ready(function () {
-    $("#media1").on('change', function () {
-        $(".media_url1").toggle(500);
+  $(document).ready(function() {
+    $("#media1").on('change', function() {
+      $(".media_url1").toggle(500);
     });
   });
 
-  $(document).ready(function () {
-    $("#media2").on('change', function () {
-        $(".media_url2").toggle(500);
+  $(document).ready(function() {
+    $("#media2").on('change', function() {
+      $(".media_url2").toggle(500);
     });
   });
 </script>
 
 <script type="text/javascript">
   $('.livesearch').select2({
-  placeholder: 'Select clients',
-  ajax: {
-    url: "{{route('clients.search')}}",
-    dataType: 'json',
-    delay: 250,
-    processResults: function (data) {
-      return {
-        results: $.map(data, function (item) {
-          console.log(item)
-          return {
-            text: item.name,
-            id: item.id,
-            org: item.organization,
-            pro: item.program
-          }
-        })
-      };
-    },
-    cache: true
-  }
-});
-
-$(".livesearch").on('change', function(e) {
-  // Access to full data
-  console.log($(this).select2('data'));
-  console.log($(this).select2('data')[0].id);
-  var dd = $(this).select2('data')[0];
-  $('#organization').val(dd.org);
-  $('#program').val(dd.pro);
-});
-
-$('.livesearch-plans').select2({
-  placeholder: 'Select plans',
-  ajax: {
-    url: "{{route('plans.search')}}",
-    dataType: 'json',
-    delay: 250,
-    processResults: function (data) {
-      return {
-        results: $.map(data, function (item) {
-          console.log(item)
-          return {
-            text: item.objective,
-            id: item.id,
-          }
-        })
-      };
-    },
-    cache: true
-  }
-});
-
-$(".livesearch-plans").on('change', function(e) {
-  // Access to full data
-  console.log($(this).select2('data'));
-  console.log($(this).select2('data')[0].id);
-  var dd = $(this).select2('data')[0];
-});
-
-$(".")
-
-$(function () {
-  $('#datepicker').datetimepicker({
-    daysOfWeekDisabled: [0, 6]
+    placeholder: 'Select clients',
+    ajax: {
+      url: "{{route('clients.search')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            console.log(item)
+            return {
+              text: item.name,
+              id: item.id,
+              org: item.organization,
+              pro: item.program
+            }
+          })
+        };
+      },
+      cache: true
+    }
   });
-});
+
+  $(".livesearch").on('change', function(e) {
+    // Access to full data
+    console.log($(this).select2('data'));
+    console.log($(this).select2('data')[0].id);
+    var dd = $(this).select2('data')[0];
+    $('#organization').val(dd.org);
+    $('#program').val(dd.pro);
+  });
+
+  $('.livesearch-plans').select2({
+    placeholder: 'Select plans',
+    ajax: {
+      url: "{{route('plans.search')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            console.log(item)
+            return {
+              text: item.objective,
+              id: item.id,
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+  $(".livesearch-plans").on('change', function(e) {
+    // Access to full data
+    console.log($(this).select2('data'));
+    console.log($(this).select2('data')[0].id);
+    var dd = $(this).select2('data')[0];
+  });
+
+  $(".")
+
+  $(function() {
+    $('#datepicker').datetimepicker({
+      daysOfWeekDisabled: [0, 6]
+    });
+  });
 </script>
 @endpush

@@ -21,7 +21,7 @@
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="/">dashboard</a>
+								<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
 								</li>
 								<li class="breadcrumb-item active">Role
 								</li>
@@ -82,7 +82,7 @@
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe"/>
+									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
 									<div id="name-error"></div>
 								</div>
 								<div class="form-group">
@@ -206,7 +206,7 @@
 				debug: false,
 				errorClass: "error fail-alert",
 				validClass: "valid success-alert",
-				rules:{
+				rules: {
 					name: {
 						required: true
 					},
@@ -229,7 +229,7 @@
 						error.appendTo("#permissions-error");
 					}
 				},
-				submitHandler: function(form){
+				submitHandler: function(form) {
 					$('#saveBtn').html('Sending..');
 					var data = $('#RoleForm').serialize();
 					console.log(data);
@@ -244,7 +244,7 @@
 							$('#RoleForm').trigger("reset");
 							$('#saveBtn').html('Submit');
 							$('#modals-slide-in').modal('hide');
-							if ( $('#saveBtn').val() == 'create-role') {
+							if ($('#saveBtn').val() == 'create-role') {
 								Swal.fire({
 									icon: 'success',
 									title: 'Role created successfully!',

@@ -21,7 +21,7 @@
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="/">dashboard</a>
+								<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
 								</li>
 								<li class="breadcrumb-item active">Permission
 								</li>
@@ -189,7 +189,7 @@
 				debug: false,
 				errorClass: "error fail-alert",
 				validClass: "valid success-alert",
-				rules:{
+				rules: {
 					name: {
 						required: true
 					}
@@ -219,7 +219,7 @@
 							$('#PermissionForm').trigger("reset");
 							$('#saveBtn').html('Submit');
 							$('#modals-slide-in').modal('hide');
-							if ( $('#saveBtn').val() == 'create-permission') {
+							if ($('#saveBtn').val() == 'create-permission') {
 								Swal.fire({
 									icon: 'success',
 									title: 'Permission created successfully!',
