@@ -26,7 +26,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Agenda</a>
+                <li class="breadcrumb-item"><a href="{{route('agendas.index')}}">Agenda</a>
                 </li>
                 <li class="breadcrumb-item active">Edit Agenda
                 </li>
@@ -93,7 +93,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Masukkan topic...">
+                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic"
+                        value="{{ $agenda_detail->topic }}" placeholder="Insert a topic...">
                       @error('topic')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -106,25 +107,38 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control" id="media1" aria-label=".form-select-lg example" name="media">
+                      <select class="form-control @error('media') is-invalid @enderror" id="media1"
+                        aria-label=".form-select-lg example" name="media">
                         <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
                           Room')@endif>Meeting Room</option>
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
                           'Whatsapp')@endif>Whatsapp</option>
                       </select>
+                      @error('media')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
                   <div class="row media_url1" style="display: none">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Masukkan media url...">
+                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
+                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media...">
+                      @error('media_url')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
                   @else
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control" id="media2" aria-label=".form-select-lg example" name="media">
+                      <select class="form-control @error('media') is-invalid @enderror" id="media2"
+                        aria-label=".form-select-lg example" name="media">
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
                           @endif>Whatsapp
                         </option>
@@ -132,20 +146,32 @@
                           Room')
                           @endif>Meeting Room</option>
                       </select>
+                      @error('media')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
                   <div class="row media_url2">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Masukkan media url...">
+                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
+                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media...">
+                      @error('media_url')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
                     </div>
                   </div>
                   @endif
 
                   <div class="row">
                     <div class="col-md-8 form-group">
-                      <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $agenda_detail->date }}">
+                      <label for="fp-default">Activity Date</label>
+                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror"
+                        name="date" value="{{ $agenda_detail->date }}">
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -153,8 +179,9 @@
                       @enderror
                     </div>
                     <div class="col-md-4 form-group">
-                      <label for="fp-default">Waktu Kegiatan</label>
-                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}">
+                      <label for="fp-default">Activity Time</label>
+                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time"
+                        value="{{ $agenda_detail->time }}">
                       @error('time')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -164,13 +191,14 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label class="form-label" for="basic-icon-default-fullname">Durasi</label>
-                      <select class="form-control @error('duration') is-invalid @enderror" aria-label=".form-select-lg example" name="duration">
-                        <option hidden selected value>Pilih Durasi</option>
-                        <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Menit</option>
-                        <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Menit</option>
-                        <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Menit</option>
-                        <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Menit</option>
+                      <label class="form-label" for="basic-icon-default-fullname">Duration</label>
+                      <select class="form-control @error('duration') is-invalid @enderror"
+                        aria-label=".form-select-lg example" name="duration">
+                        <option hidden selected value>Choose a duration</option>
+                        <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Minutes</option>
+                        <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Minutes</option>
+                        <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Minutes</option>
+                        <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Minutes</option>
                       </select>
                       @error('duration')
                       <span class="invalid-feedback" role="alert">
@@ -179,8 +207,9 @@
                       @enderror
                     </div>
                   </div>
-                  <a href="{{route('agendas.index')}}" class="btn btn-secondary">Kembali</a>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
                 </div>
               </div>
             </div>

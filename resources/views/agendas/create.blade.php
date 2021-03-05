@@ -26,7 +26,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Agenda</a>
+                <li class="breadcrumb-item"><a href="{{route('agendas.index')}}">Agenda</a>
                 </li>
                 <li class="breadcrumb-item active">Create Agenda
                 </li>
@@ -60,13 +60,18 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title">Create Agenda</h4>
+                  <h4 class="card-title">Create Agenda
+                    <img class="align-text width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Pada bagian ini dibuat untuk membuuat agenda baru" />
+                  </h4>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Plans</label>
-                      <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror" name="plan_id"></select>
+                      <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror"
+                        name="plan_id"></select>
                       @error('plan_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -77,7 +82,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id"></select>
+                      <select class="livesearch form-control @error('client_id') is-invalid @enderror"
+                        name="client_id"></select>
                       @error('client_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -98,7 +104,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Pilih Sesi</label>
-                      <select class="form-control @error('session') is-invalid @enderror" aria-label=".form-select-lg example" name="session">
+                      <select class="form-control @error('session') is-invalid @enderror"
+                        aria-label=".form-select-lg example" name="session">
                         <option selected value hidden>Pilih Sesi</option>
                         <option value="1">Sesi 1</option>
                         <option value="2">Sesi 2</option>
@@ -117,7 +124,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Tipe Sesi</label>
-                      <select class="form-control @error('type_session') is-invalid @enderror" aria-label=".form-select-lg example" name="type_session">
+                      <select class="form-control @error('type_session') is-invalid @enderror"
+                        aria-label=".form-select-lg example" name="type_session">
                         <option selected value hidden>Pilih Tipe Sesi</option>
                         <option value="Free">Free</option>
                         <option value="Paid">Paid</option>
@@ -129,7 +137,8 @@
                       @enderror
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                    value="create">Submit</button>
                 </div>
               </div>
             </div>
@@ -146,6 +155,11 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
+  // popover
+	$(function() {
+		$('[data-toggle="popover"]').popover()
+	})
+
   $('.livesearch').select2({
     placeholder: 'Select clients',
     ajax: {
