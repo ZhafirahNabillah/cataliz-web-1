@@ -63,7 +63,8 @@
                   <h4 class="card-title">Create Agenda
                     <img class="align-text width=" 15px" height="15px"" src="
                       {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top" data-content="Isilah kolom di bawah ini untuk membuat agenda baru untuk client Anda!" />
+                      data-placement="top"
+                      data-content="Isilah kolom di bawah ini untuk membuat agenda baru untuk client Anda!" />
                   </h4>
                 </div>
                 <div class="card-body">
@@ -107,12 +108,12 @@
                       <select class="form-control @error('session') is-invalid @enderror"
                         aria-label=".form-select-lg example" name="session">
                         <option selected value hidden>Select number of session</option>
-                        <option value="1">Sesi 1</option>
-                        <option value="2">Sesi 2</option>
-                        <option value="3">Sesi 3</option>
-                        <option value="4">Sesi 4</option>
-                        <option value="5">Sesi 5</option>
-                        <option value="6">Sesi 6</option>
+                        <option value="1" @if (old('session')=='1' ) selected="selected" @endif>Sesi 1</option>
+                        <option value="2" @if (old('session')=='2' ) selected="selected" @endif>Sesi 2</option>
+                        <option value="3" @if (old('session')=='3' ) selected="selected" @endif>Sesi 3</option>
+                        <option value="4" @if (old('session')=='4' ) selected="selected" @endif>Sesi 4</option>
+                        <option value="5" @if (old('session')=='5' ) selected="selected" @endif>Sesi 5</option>
+                        <option value="6" @if (old('session')=='6' ) selected="selected" @endif>Sesi 6</option>
                       </select>
                       @error('session')
                       <span class="invalid-feedback" role="alert">
@@ -127,8 +128,8 @@
                       <select class="form-control @error('type_session') is-invalid @enderror"
                         aria-label=".form-select-lg example" name="type_session">
                         <option selected value hidden>Select session type</option>
-                        <option value="Free">Free</option>
-                        <option value="Paid">Paid</option>
+                        <option value="Free" @if (old('type_session')=='Free' ) selected="selected" @endif>Free</option>
+                        <option value="Paid" @if (old('type_session')=='Paid' ) selected="selected" @endif>Paid</option>
                       </select>
                       @error('type_session')
                       <span class="invalid-feedback" role="alert">
