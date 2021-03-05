@@ -24,7 +24,7 @@
             <h2 class="content-header-title float-left mb-0">Class List</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item"><a href="{{route('class.index')}}">Class List</a>
                 </li>
@@ -79,9 +79,9 @@
                           @endif>On-Going
                         </option>
                       </select>
-                    @else
+                      @else
                       <b>{{ $class->status }}</b>
-                    @endrole
+                      @endrole
                     </dt>
                   </div>
                   @role('admin')
@@ -102,8 +102,7 @@
                   <div class="row align-items-center mt-1">
                     <dt class="col-sm-3"><b>Status</b></dt>
                     <dt class="col-sm-9 form-group">
-                      <select class="form-control" id="media2" aria-label=".form-select-lg example" name="status"
-                        disabled>
+                      <select class="form-control" id="media2" aria-label=".form-select-lg example" name="status" disabled>
                         <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')@endif>On-Going
                         </option>
                         <option selected value="Cancelled" id="Cancelled" @if($class->status ==
@@ -114,8 +113,7 @@
                   <div class="row align-items-center media_url2">
                     <dt class="col-sm-3"><b>Notes</b></dt>
                     <dt class="col-sm-9 form-group">
-                      <input type="text" class="form-control" name="notes" placeholder="Write note here..." disabled
-                        value="{{$class->notes}}">
+                      <input type="text" class="form-control" name="notes" placeholder="Write note here..." disabled value="{{$class->notes}}">
                     </dt>
                   </div>
                   @endif
@@ -162,37 +160,31 @@
           <div class="modal-body flex-grow-1">
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-              <input id="name" name="name" type="text" class="form-control dt-full-name"
-                id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
             </div>
             <label class="form-label" for="basic-icon-default-post">Phone</label>
             <div class="input-group input-group-merge mb-2">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="basic-addon5">+62</span>
               </div>
-              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx"
-                aria-label="Phone">
+              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-email">Email</label>
-              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-                placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
               <small class="form-text text-muted"> You can use letters, numbers & periods </small>
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-              <input id="organization" name="organization" type="text" class="form-control dt-full-name"
-                id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
+              <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Company</label>
-              <input id="company" name="company" type="text" class="form-control dt-full-name"
-                id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
+              <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
             </div>
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-                id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
             </div>
 
             <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
@@ -218,48 +210,48 @@
 <script type="text/javascript">
   $(function() {
 
-  $(document).ready(function () {
-    $("#media1").on('change', function () {
+    $(document).ready(function() {
+      $("#media1").on('change', function() {
         $(".media_url1").toggle(500);
+      });
     });
-  });
 
-  $(document).ready(function () {
-    $("#media2").on('change', function () {
+    $(document).ready(function() {
+      $("#media2").on('change', function() {
         $(".media_url2").toggle(500);
+      });
+    });
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    var table = $('.yajra-datatable-class').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'name',
+          name: 'name'
+        }
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
     });
   });
-
-  $.ajaxSetup({
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-  var table = $('.yajra-datatable-class').DataTable({
-    processing: true,
-    serverSide: true,
-    ajax: "",
-    columns: [{
-        data: 'DT_RowIndex',
-        name: 'DT_RowIndex'
-      },
-      {
-        data: 'name',
-        name: 'name'
-      }
-    ],
-    dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-    language: {
-      paginate: {
-        // remove previous & next text from pagination
-        previous: '&nbsp;',
-        next: '&nbsp;'
-      },
-      search: "<i data-feather='search'></i>",
-      searchPlaceholder: "Search records"
-    }
-  });
-});
 </script>
 @endpush

@@ -21,7 +21,7 @@
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Class List
                 </li>
@@ -45,9 +45,9 @@
       @endif
       <div class="row">
         @can ('create-class')
-          <div class="col-12 mb-1">
-            <a href="{{route('class.create')}}" class="create-new btn btn-primary createNewClass">Add Class</a>
-          </div>
+        <div class="col-12 mb-1">
+          <a href="{{route('class.create')}}" class="create-new btn btn-primary createNewClass">Add Class</a>
+        </div>
         @endcan
       </div>
 
@@ -122,8 +122,7 @@
           data: 'status',
           name: 'status'
         },
-        @can ('detail-class')
-        {
+        @can('detail-class') {
           data: 'action',
           name: 'action',
           orderable: true,

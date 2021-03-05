@@ -24,11 +24,11 @@
             <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a>
+                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
                 </li>
-                <li class="breadcrumb-item active">Detail Coaching Plans
+                <li class="breadcrumb-item active">Detail Coaching Plan
                 </li>
               </ol>
             </div>
@@ -315,7 +315,7 @@
         [2, 'desc']
       ],
       dom: '<"card-header border-bottom p-1"<"head-label"> <
-        "dt-action-buttons text-right"
+      "dt-action-buttons text-right"
       B >> < "d-flex justify-content-between align-items-center mx-0
       row "<"
       col - sm - 12 col - md - 6 "l> <
