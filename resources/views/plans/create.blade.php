@@ -217,41 +217,22 @@
                   var original_element = $(tinyMCE.activeEditor.getElement());
                   var element_id = original_element.attr('id');
                   var count = CountCharacters();
-                  if (count > 1000) {
-                    document.getElementById("character_count_" + element_id).innerHTML = "<strong class = 'text-danger'>"+ count +"/1000</strong>";
+                  if (count > 255) {
+                    document.getElementById("character_count_" + element_id).innerHTML = "<strong class = 'text-danger'>"+ count +"/255</strong>";
                   } else {
-                    document.getElementById("character_count_" + element_id).innerHTML = "<strong>"+ count +"/1000</strong>";
+                    document.getElementById("character_count_" + element_id).innerHTML = "<strong>"+ count +"/255</strong>";
                   }
               });
           }
       });
 
       $('#saveBtn').click(function(e) {
-        for (i=0; i < tinymce.editors.length; i++){
-          var content = tinymce.editors[i].getContent(); // get the content
-          var text_area_id = tinymce.editors[i].id;
-          $('#'+text_area_id).val(content);
-          var x = document.getElementById(text_area_id).value;
-          console.log(x);
-        };
         $('#plan_form').validate({
           rules:{
             'client_id': {
               required: true
             },
             'date': {
-              required: true
-            },
-            'objective': {
-              required: true
-            },
-            'success_indicator': {
-              required: true
-            },
-            'development_areas': {
-              required: true
-            },
-            'support': {
               required: true
             }
           },
@@ -261,18 +242,6 @@
             },
             'date' :{
               required: '<strong class="text-danger">date is required!</strong>'
-            },
-            'objective' :{
-              required: '<strong class="text-danger">date is required!</strong>'
-            },
-            'success_indicator' :{
-              required: '<strong class="text-danger">date is required!</strong>'
-            },
-            'development_areas' :{
-              required: '<strong class="text-danger">date is required!</strong>'
-            },
-            'support' :{
-              required: '<strong class="text-danger">date is required!</strong>'
             }
           },
           errorPlacement: function(error, element) {
@@ -280,19 +249,10 @@
               error.appendTo("#date-error");
             } else if (element.attr("name") == "client_id") {
               error.appendTo("#client_id-error");
-            } else if (element.attr("name") == "objective") {
-              error.appendTo("#objective-error");
-            } else if (element.attr("name") == "success_indicator") {
-              error.appendTo("#success_indicator-error");
-            } else if (element.attr("name") == "development_areas") {
-              error.appendTo("#development_areas-error");
-            } else if (element.attr("name") == "support") {
-              error.appendTo("#support-error");
             }
           },
           //submit Handler
           submitHandler: function(form) {
-            console.log('here');
             form.submit();
           }
         });
