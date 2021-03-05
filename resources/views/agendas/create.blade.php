@@ -63,13 +63,13 @@
                   <h4 class="card-title">Create Agenda
                     <img class="align-text width=" 15px" height="15px"" src="
                       {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top" data-content="Pada bagian ini dibuat untuk membuuat agenda baru" />
+                      data-placement="top" data-content="Isilah kolom di bawah ini untuk membuat agenda baru untuk client Anda!" />
                   </h4>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Plans</label>
+                      <label for="fp-default">Plan</label>
                       <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror"
                         name="plan_id"></select>
                       @error('plan_id')
@@ -103,10 +103,10 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Pilih Sesi</label>
+                      <label for="fp-default">Number of Session</label>
                       <select class="form-control @error('session') is-invalid @enderror"
                         aria-label=".form-select-lg example" name="session">
-                        <option selected value hidden>Pilih Sesi</option>
+                        <option selected value hidden>Select number of session</option>
                         <option value="1">Sesi 1</option>
                         <option value="2">Sesi 2</option>
                         <option value="3">Sesi 3</option>
@@ -123,10 +123,10 @@
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Tipe Sesi</label>
+                      <label for="fp-default">Session Type</label>
                       <select class="form-control @error('type_session') is-invalid @enderror"
                         aria-label=".form-select-lg example" name="type_session">
-                        <option selected value hidden>Pilih Tipe Sesi</option>
+                        <option selected value hidden>Select session type</option>
                         <option value="Free">Free</option>
                         <option value="Paid">Paid</option>
                       </select>
@@ -161,7 +161,7 @@
 	})
 
   $('.livesearch').select2({
-    placeholder: 'Select clients',
+    placeholder: 'Select client',
     ajax: {
       url: "{{route('clients.search')}}",
       dataType: 'json',
