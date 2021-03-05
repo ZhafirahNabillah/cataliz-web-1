@@ -161,7 +161,7 @@ class PlanController extends Controller
       'support' => $support,
       'owner_id' => Auth::user()->id
     ]);
-    return redirect('/plans')->with('success', 'Data berhasil disimpan!');
+    return redirect('/plans')->with('success', 'The plan has been added successfully!!');
   }
 
   /**

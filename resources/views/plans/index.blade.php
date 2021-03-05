@@ -327,7 +327,7 @@
                         success: function(data) {
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Saved Successfully!',
+                                title: 'Deleted Successfully!',
                             });
                             table_plans_default.draw();
                         },
