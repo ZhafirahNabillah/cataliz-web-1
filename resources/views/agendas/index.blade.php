@@ -17,13 +17,13 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Agendas
-							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini ditampilkan daftar seluruh agenda yang ada dalam sistem." />
+							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+								alt="Card image cap" data-toggle="popover" data-placement="top"
+								data-content="Pada bagian ini ditampilkan daftar seluruh agenda yang ada dalam sistem." />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
-								</li>
-								<li class="breadcrumb-item"><a href="#">Agendas</a>
 								</li>
 								<li class="breadcrumb-item active">Agendas
 								</li>
@@ -43,7 +43,8 @@
 			<div class="alert alert-success alert-dissmisable">
 				<h4 class="alert-heading">Success</h4>
 				<div class="alert-body">{{ $message }}</div>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+						aria-hidden="true">×</span></button>
 			</div>
 			@endif
 			<section id="card-demo-example ">
@@ -52,10 +53,13 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src="
+										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+										data-placement="top" data-content="Jumlah sesi yang belum terjadwal" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
+										{{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Unscheduled Sessions
 									</small>
@@ -69,10 +73,13 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src="
+										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+										data-placement="top" data-content="Jumlah sesi yang sudah terjadwal" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
+										{{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Scheduled Sessions
 									</small>
@@ -86,10 +93,13 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src="
+										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+										data-placement="top" data-content="Jumlah sesi yang dijadwal ulang" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
+										{{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Reschedule Sessions
 									</small>
@@ -103,10 +113,13 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src="
+										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+										data-placement="top" data-content="Jumlah sesi yang dibatalkan" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
+										{{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Canceled Sessions
 									</small>
@@ -120,10 +133,13 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src="
+										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+										data-placement="top" data-content="Jumlah sesi yang sudah dilaksanakan" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
+										{{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em; margin-top: 1em;">
 										Finished Sessions
 									</small>
@@ -231,7 +247,8 @@
 					previous: '&nbsp;',
 					next: '&nbsp;'
 				},
-				search: "<i data-feather='search'></i>",
+				// render: '<i data-feather="search"></i>',
+				// search: '<i data-feather="search"/>',
 				searchPlaceholder: "Search records"
 			}
 		});
@@ -264,7 +281,7 @@
 						success: function(data) {
 							Swal.fire({
 								icon: 'success',
-								title: 'Saved Successfully!',
+								title: 'Delete Successfully!',
 							});
 							table.draw();
 						},

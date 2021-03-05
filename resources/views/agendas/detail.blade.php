@@ -22,7 +22,7 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
 								</li>
-								<li class="breadcrumb-item"><a href="#">Agenda</a>
+								<li class="breadcrumb-item"><a href="{{route('agendas.index')}}">Agenda</a>
 								</li>
 								<li class="breadcrumb-item active">Detail Agenda
 								</li>
@@ -42,7 +42,8 @@
 			<div class="alert alert-success alert-dissmisable">
 				<h4 class="alert-heading">Success</h4>
 				<div class="alert-body">{{ $message }}</div>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+						aria-hidden="true">×</span></button>
 			</div>
 			@endif
 
@@ -107,7 +108,8 @@
 			@role('coachee')
 			<div class="row match-height">
 				<div class="col-sm-12 col-md-12">
-					<form class="" action="{{ route('add_feedback_from_coachee', $agenda_detail->id) }}" method="post" enctype="multipart/form-data">
+					<form class="" action="{{ route('add_feedback_from_coachee', $agenda_detail->id) }}" method="post"
+						enctype="multipart/form-data">
 						@csrf
 						<div class="card">
 							<div class="card-header">
@@ -147,9 +149,11 @@
 										@if($agenda_detail->attachment_from_coachee != null)
 										<div class="row">
 											<div class="col-md-10">
-												<input type="text" class="form-control" value="{{ $agenda_detail->attachment_from_coachee }}" disabled>
+												<input type="text" class="form-control" value="{{ $agenda_detail->attachment_from_coachee }}"
+													disabled>
 											</div>
-											<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}" class="btn btn-primary col-auto">Download</a>
+											<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}"
+												class="btn btn-primary col-auto">Download</a>
 										</div>
 										@endif
 									</div>
@@ -183,7 +187,10 @@
 						</div>
 
 						@if(($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
-						$agenda_detail->status == 'finished') && ($agenda_detail->feedback_from_coachee == null || $agenda_detail->attachment_from_coachee == null || $agenda_detail->rating_from_coachee == null) && (($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
+						$agenda_detail->status == 'finished') && ($agenda_detail->feedback_from_coachee == null ||
+						$agenda_detail->attachment_from_coachee == null || $agenda_detail->rating_from_coachee == null) &&
+						(($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->
+							setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
 							<div class="row">
 								<div class="col-md-12 text-left">
 									<a href="{{route('agendas.index')}}" class="btn btn-secondary">Kembali</a>
@@ -199,7 +206,8 @@
 
 
 			@role('coach')
-			<form action="{{ route('agendas.agenda_detail_update',$agenda_detail->id) }}" method="post" enctype="multipart/form-data">
+			<form action="{{ route('agendas.agenda_detail_update',$agenda_detail->id) }}" method="post"
+				enctype="multipart/form-data">
 				<div class="card">
 					<div class="card-header">
 						<h6 class="card-title">Feedback</h6>
@@ -238,9 +246,11 @@
 								@if($agenda_detail->attachment_from_coach != null)
 								<div class="row">
 									<div class="col-md-10">
-										<input type="text" class="form-control" value="{{ $agenda_detail->attachment_from_coach }}" disabled>
+										<input type="text" class="form-control" value="{{ $agenda_detail->attachment_from_coach }}"
+											disabled>
 									</div>
-									<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}" class="btn btn-primary col-auto">Download</a>
+									<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}"
+										class="btn btn-primary col-auto">Download</a>
 								</div>
 								@endif
 							</div>
@@ -305,7 +315,8 @@
 							@csrf
 							<div class="col-md-12 form-group">
 								<label for="fp-default">Subject</label>
-								<input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{$coaching_note->subject}}">
+								<input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject"
+									value="{{$coaching_note->subject}}">
 								@error('subject')
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $message }}</strong>
@@ -314,7 +325,8 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<label for="fp-default">Summary</label>
-								<textarea class="form-control @error('summary') is-invalid @enderror" name="summary">{{$coaching_note->summary}}</textarea>
+								<textarea class="form-control @error('summary') is-invalid @enderror"
+									name="summary">{{$coaching_note->summary}}</textarea>
 								@error('summary')
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $message }}</strong>
@@ -337,7 +349,8 @@
 									<div class="col-md-10">
 										<input type="text" class="form-control" value="{{ $coaching_note->attachment }}" disabled>
 									</div>
-									<a href="{{ route('agendas.note_download',$coaching_note->id) }}" class="btn btn-primary col-auto">Download</a>
+									<a href="{{ route('agendas.note_download',$coaching_note->id) }}"
+										class="btn btn-primary col-auto">Download</a>
 								</div>
 								@endif
 							</div>
