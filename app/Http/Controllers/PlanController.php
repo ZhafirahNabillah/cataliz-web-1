@@ -142,10 +142,10 @@ class PlanController extends Controller
     $this->validate($request, [
       'client_id' => 'required',
       'date' => 'required',
-      'objective' => 'required',
-      'success_indicator' => 'required',
-      'development_areas' => 'required',
-      'support' => 'required',
+      'objective' => 'required|max:255',
+      'success_indicator' => 'required|max:255',
+      'development_areas' => 'required|max:255',
+      'support' => 'required|max:255',
     ]);
 
     $objective = strip_tags($request->objective);

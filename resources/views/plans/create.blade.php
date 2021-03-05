@@ -60,7 +60,7 @@
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Full Name</label>
                     <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="client_id"
-                    id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
+                      id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                     </select>
                     <div id="client_id-error"></div>
                     @error('livesearch')
@@ -80,7 +80,7 @@
                   <div class="col-md-6 form-group">
                     <label for="fp-default">Tanggal Kegiatan</label>
                     <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
-                    value="{{ old('date') }}" autocomplete="date" autofocus>
+                      value="{{ old('date') }}" autocomplete="date" autofocus>
                     <div id="date-error"></div>
                     @error('date')
                     <span class="invalid-feedback" role="alert">
@@ -94,7 +94,8 @@
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Objektif</label>
                     <textarea class="form-control @error('objective') is-invalid @enderror" name="objective"
-                    id="objective" value="{{ old('objective') }}" autocomplete="objective"></textarea>
+                      id="objective" value="{{ old('objective') }}" autocomplete="objective">{{ old('objective') }}
+                    </textarea>
                     <small id="character_count_objective" class="float-right"></small>
                     <div id="objective-error"></div>
                     @error('objective')
@@ -109,8 +110,8 @@
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Sukses Indikator</label>
                     <textarea class="form-control @error('success_indicator') is-invalid @enderror"
-                    name="success_indicator" id="success_indicator" value="{{ old('success_indicator') }}"
-                    autocomplete="success_indicator"></textarea>
+                      name="success_indicator" id="success_indicator"
+                      autocomplete="success_indicator">{{ old('success_indicator') }}</textarea>
                     <small id="character_count_success_indicator" class="float-right"></small>
                     <div id="success_indicator-error"></div>
                     @error('success_indicator')
@@ -125,8 +126,8 @@
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Pengembangan Area</label>
                     <textarea class="form-control @error('development_areas') is-invalid @enderror"
-                    name="development_areas" id="development_areas" value="{{ old('development_areas') }}"
-                    autocomplete="development_areas"></textarea>
+                      name="development_areas" id="development_areas"
+                      autocomplete="development_areas">{{ old('development_areas') }}</textarea>
                     <small id="character_count_development_areas" class="float-right"></small>
                     <div id="development_areas-error"></div>
                     @error('development_areas')
@@ -141,7 +142,7 @@
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Support</label>
                     <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
-                    value="{{ old('support') }}" autocomplete="support"></textarea>
+                      autocomplete="support">{{ old('support') }}</textarea>
                     <small id="character_count_support" class="float-right"></small>
                     <div id="support-error"></div>
                     @error('support')
@@ -152,7 +153,8 @@
                   </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                  value="create">Submit</button>
               </div>
             </form>
           </div>
@@ -160,20 +162,20 @@
       </div>
     </div>
   </div>
-<!-- END: Content-->
-@endsection
+  <!-- END: Content-->
+  @endsection
 
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<style>
-  label.error.fail-alert {
-    color: red;
-  }
-</style>
-<script type="text/javascript">
-  $('.livesearch').select2({
+  @push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <style>
+    label.error.fail-alert {
+      color: red;
+    }
+  </style>
+  <script type="text/javascript">
+    $('.livesearch').select2({
     placeholder: 'Select client',
     ajax: {
       url       : "{{route('clients.search')}}",
@@ -274,5 +276,5 @@
     });
   });
 
-</script>
-@endpush
+  </script>
+  @endpush
