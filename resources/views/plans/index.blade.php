@@ -67,7 +67,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Organization</th>
+                                        <th>Company</th>
                                         <th>Email</th>
                                         <th>Handphone</th>
                                         <th>Action</th>
@@ -132,8 +132,8 @@
                     name: 'client.name'
                 },
                 {
-                    data: 'client.organization',
-                    name: 'client.organization'
+                    data: 'client.company',
+                    name: 'client.company'
                 },
                 {
                     data: 'email',
@@ -186,13 +186,7 @@
                             '</div>' +
                             '<div class="d-flex flex-column">' +
                             '<span class="emp_name text-truncate font-weight-bold">' +
-                            $name +
-                            '</span>' +
-                            '<small class="emp_post text-truncate text-muted">' +
-                            $post + ' - ' + $org +
-                            '</small>' +
-                            '</div>' +
-                            '</div>';
+                            $name;
                         return $row_output;
                     }
                 },

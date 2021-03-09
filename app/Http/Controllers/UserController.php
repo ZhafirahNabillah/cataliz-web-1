@@ -51,6 +51,9 @@ class UserController extends Controller
       $total_coaching = Agenda_detail::join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')->where('agendas.owner_id', '=', $id)->count();
       $total_client = Client::where('owner_id', $id)->count();
 
+      $user->phone = '+62'.substr($user->phone, 0, -5) . 'xxxxx';
+      $user->email = str_pad(substr($user->email, -11), strlen($user->email), 'x', STR_PAD_LEFT);
+
       return response()->json(array('total_coaching' => $total_coaching, 'total_client' => $total_client, 'user' => $user));
     }
 

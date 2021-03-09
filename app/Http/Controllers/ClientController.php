@@ -97,8 +97,16 @@ class ClientController extends Controller
           ->addColumn('action', function ($row) {
             $actionBtn = '<a href="javascript:;" class="btn-sm btn-primary detailCoach" data-id = "' . $row->id . '">Detail</a>';
             return $actionBtn;
+          })->addColumn('phone', function($row) {
+            $phone = '+62'.substr($row->phone, 0, -5) . 'xxxxx';
+
+            return $phone;
+          })->addColumn('email', function($row) {
+            $email = str_pad(substr($row->email, -11), strlen($row->email), 'x', STR_PAD_LEFT);
+
+            return $email;
           })
-          ->rawColumns(['action'])
+          ->rawColumns(['action','phone','email'])
           ->make(true);
       }
     }
