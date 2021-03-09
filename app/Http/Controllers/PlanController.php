@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Plan;
+use App\Models\User;
 use DataTables;
+use PDF;
 
 class PlanController extends Controller
 {
@@ -113,21 +115,7 @@ class PlanController extends Controller
         ->where('class.coach_id', Auth::user()->id)
         ->get();
     }
-    /* $search = $request->search;
 
-      if($search == ''){
-         $clients = Client::orderby('name','asc')->select('id','name')->get();
-      }else{
-         $clients = Client::orderby('name','asc')->select('id','name')->where('name', 'like', '%' .$search . '%')->limit(5)->get();
-      }
-
-      $response = array();
-      foreach($clients as $client){
-         $response[] = array(
-              "id"=>$client->id,
-              "text"=>$client->name
-         );
-      } */
     return response()->json($clients);
   }
 
@@ -210,5 +198,14 @@ class PlanController extends Controller
   {
     Plan::find($id)->delete();
     return response()->json(['success' => 'Plan deleted!']);
+  }
+
+  public function plan_detail_to_pdf($id){
+    $plan = Plan::find($id);
+    $coach = User::find($plan->owner_id);
+    $coachee = Client::find($plan->client_id);
+
+    $pdf = PDF::loadview('pdf_template.plans_detail_pdf',compact('plan','coach','coachee'));
+    return $pdf->download('plan_detail_'.$plan->id.'.pdf');
   }
 }
