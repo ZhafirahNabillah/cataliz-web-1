@@ -266,9 +266,9 @@
 
                                 <td style="text-align: left; vertical-align:top;">
                                   <span class="">
-                                    Sorry, we heard that you lost you Cataliz.id password. <br>
+                                     <br>
                                   </span>
-                                  We recommend that you reset your password immediately on the button below!
+                                  Your Session Has been Rescheduled at {{ $email_data['date'] }}
                                 </td>
                               </tr>
                             </table>
@@ -280,9 +280,9 @@
 
                             <table class="force-full-width" cellspacing="0" cellpadding="0">
                               <tr>
-                                <a href="{{ url('/reset?code='.$email_data['reset_code']) }}">
+                                {{-- <a href="{{ url('/reset?code='.$email_data['reset_code']) }}">
                                   <button class="button button1"> reset password</button>
-                                </a>
+                                </a> --}}
 
                               </tr>
                             </table>

@@ -14,6 +14,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
 /*
@@ -56,6 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/unsuspend', [UserController::class, 'unsuspend_user'])->name('unsuspend_user');
 	Route::get('/ajaxCoachs', [ClassController::class, 'ajaxClass'])->name('coachs.search');
 });
+
+Route::get('/mail', [MailController::class, 'SendSessionScheduledMail']);
 
 //Middleware group for coach page
 Route::group(['middleware' => ['auth']], function () {

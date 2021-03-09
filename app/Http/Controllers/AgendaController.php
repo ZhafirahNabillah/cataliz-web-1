@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use DataTables;
+use Illuminate\Support\Facades\Storage;
+use Spatie\Permission\Models\Permission;
+use App\Http\Controllers\MailController;
 use App\Models\Agenda;
 use App\Models\Agenda_detail;
 use App\Models\Coaching_note;
 use App\Models\Client;
 use App\Models\Plan;
-use DataTables;
-use Illuminate\Support\Facades\Storage;
-use Spatie\Permission\Models\Permission;
+use App\Models\User;
 
 class AgendaController extends Controller
 {
@@ -263,23 +265,35 @@ class AgendaController extends Controller
       'duration.required'         => "Silahkan isi durasi sesi terlebih dahulu!",
     ]);
 
-    $agenda_detail = Agenda_detail::where('id', $id)->first();
+    $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
+    $client = Client::where('id', $agenda_detail->agenda->client_id)->first();
+    $coach = User::where('id', $agenda_detail->agenda->owner_id)->first();
+
     $agenda_detail->topic = $request->topic;
 
     if ($agenda_detail->status == 'unschedule' && $agenda_detail->date == null) {
       $agenda_detail->status = 'scheduled';
+      $agenda_detail->date = $request->date;
+      $agenda_detail->time = $request->time;
+      $agenda_detail->media = $request->media;
+      $agenda_detail->media_url = $request->media_url;
+      $agenda_detail->duration = $request->duration;
+      $agenda_detail->update();
+
+      MailController::SendSessionScheduledMail($agenda_detail, $client, $coach);
     };
 
     if ($agenda_detail->status == 'scheduled' && $agenda_detail->date != null && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
       $agenda_detail->status = 'rescheduled';
-    };
+      $agenda_detail->date = $request->date;
+      $agenda_detail->time = $request->time;
+      $agenda_detail->media = $request->media;
+      $agenda_detail->media_url = $request->media_url;
+      $agenda_detail->duration = $request->duration;
+      $agenda_detail->update();
 
-    $agenda_detail->date = $request->date;
-    $agenda_detail->time = $request->time;
-    $agenda_detail->media = $request->media;
-    $agenda_detail->media_url = $request->media_url;
-    $agenda_detail->duration = $request->duration;
-    $agenda_detail->update();
+      MailController::SendSessionRescheduledMail($agenda_detail, $client, $coach);
+    };
 
     return redirect('/agendas')->with('success', 'Sessions Successfully updated!');
   }
