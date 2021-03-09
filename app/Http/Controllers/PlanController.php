@@ -78,8 +78,16 @@ class PlanController extends Controller
                   <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $delete_btn . '</div>';
 
           return $actionBtn;
+        })->addColumn('phone', function($row) {
+          $phone = substr($row->client['phone'], 0, -5) . 'xxxxx';
+
+          return $phone;
+        })->addColumn('email', function($row) {
+          $email = str_pad(substr($row->client['email'], -11), strlen($row->client['email']), 'x', STR_PAD_LEFT);
+
+          return $email;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action','phone','email'])
         ->make(true);
     }
     return view('plans.index');

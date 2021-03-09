@@ -63,13 +63,13 @@ class UserController extends Controller
     if ($request->action_type == 'edit-user') {
       $user = User::find($request->user_id);
       $user->syncRoles($request->input('roles'));
-      
+
     } elseif ($request->action_type == 'create-user') {
       $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
       $user->syncRoles($request->input('roles'));
 
       if ($user->hasRole('coachee')) {
-        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->name, 'phone' => $user->phone, 'program' => 'Starco']);
+        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program' => 'Starco']);
       }
 
       MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);

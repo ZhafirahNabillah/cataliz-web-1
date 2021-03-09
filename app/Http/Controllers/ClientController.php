@@ -77,8 +77,16 @@ class ClientController extends Controller
             <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $delete_btn . '</div>';
 
             return $actionBtn;
+          })->addColumn('phone', function($row) {
+            $phone = substr($row->phone, 0, -5) . 'xxxxx';
+
+            return $phone;
+          })->addColumn('email', function($row) {
+            $email = str_pad(substr($row->email, -11), strlen($row->email), 'x', STR_PAD_LEFT);
+
+            return $email;
           })
-          ->rawColumns(['action'])
+          ->rawColumns(['action','phone','email'])
           ->make(true);
       } elseif (auth()->user()->hasRole('coachee')) {
 

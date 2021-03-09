@@ -136,12 +136,12 @@
                     name: 'client.organization'
                 },
                 {
-                    data: 'client.email',
-                    name: 'client.email'
+                    data: 'email',
+                    name: 'email'
                 },
                 {
-                    data: 'client.phone',
-                    name: 'client.phone'
+                    data: 'phone',
+                    name: 'phone'
                 },
                 {
                     data: 'action',
@@ -199,7 +199,7 @@
                 {
                     targets: 4,
                     render: function(data, type, full, meta) {
-                        var $phone = full['client']['phone'],
+                        var $phone = full['phone'],
                             $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
                             '</div>';
                         return $output;
