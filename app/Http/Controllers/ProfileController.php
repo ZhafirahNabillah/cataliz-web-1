@@ -42,7 +42,7 @@ class ProfileController extends Controller
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
-        return redirect(route('profil', Auth::user()->id))->with('success', 'Password berhasil diubah!');
+        return redirect(route('profil', Auth::user()->id))->with('success', 'Your Password has been updated!');
     }
 
     public function store_data(Request $request, $id)
