@@ -97,7 +97,7 @@ class ProfileController extends Controller
         }
         $user->update();
 
-        return redirect(route('profil', Auth::user()->id))->with('success2', 'Foto profil berhasil diubah!');
+        return redirect(route('profil', Auth::user()->id));
     }
 
     public function update_background(Request $request)
@@ -116,6 +116,6 @@ class ProfileController extends Controller
         }
         $user->update();
 
-        return redirect(route('profil', Auth::user()->id))->with('success2', 'Background berhasil diubah!');
+        return redirect(route('profil', Auth::user()->id));
     }
 }
