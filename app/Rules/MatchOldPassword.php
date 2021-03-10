@@ -36,6 +36,6 @@ class MatchOldPassword implements Rule
      */
     public function message()
     {
-        return 'Password is ivalid';
+        return 'Password is invalid';
     }
 }
