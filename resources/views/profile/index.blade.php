@@ -22,15 +22,11 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-							<img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}"
-								alt="Card image cap" data-toggle="popover" data-placement="top"
-								data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
+							<img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/">Home</a>
-								</li>
-								<li class="breadcrumb-item"><a href="">Profile</a>
 								</li>
 								<li class="breadcrumb-item active">{{$user->name}}
 								</li>
@@ -58,11 +54,9 @@
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
 							@if ($user->background_picture == 'background_default.jpg')
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
 							@else
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
 							@endif
 							<!--/ profile cover photo -->
 
@@ -71,11 +65,9 @@
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
 										@if ($user->profil_picture == 'cataliz.jpg')
-										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@else
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@endif
 									</div>
 									<!-- profile title -->
@@ -88,11 +80,8 @@
 							<!-- tabs pill -->
 							<div class="profile-header-nav position-relative">
 								<!-- navbar -->
-								<nav
-									class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-										aria-label="Toggle navigation">
+								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -101,22 +90,19 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 											</ul>
 										</div>
 
 										<!-- edit button -->
 										<div class="position-relative">
-											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil"
-												aria-expanded="false" id="edit_profil">
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
 										</div>
 										<!-- Modal Profil-->
-										<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel"
-											aria-hidden="true">
+										<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -127,8 +113,7 @@
 													</div>
 
 													<div class="modal-body">
-														<form action="{{route('update_profil', Auth::user()->id)}}" method="POST"
-															enctype="multipart/form-data">
+														<form action="{{route('update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
 															<input type="file" name="profil_picture" id="profil_picture">
 													</div>
@@ -143,8 +128,7 @@
 										<!--/ Modal Profil -->
 
 										<!-- Modal Background-->
-										<div class="modal fade" id="modal_edit_background" tabindex="-1" aria-labelledby="exampleModalLabel"
-											aria-hidden="true">
+										<div class="modal fade" id="modal_edit_background" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -154,8 +138,7 @@
 														</button>
 													</div>
 													<div class="modal-body">
-														<form action="{{route('update_background', Auth::user()->id)}}" method="POST"
-															enctype="multipart/form-data">
+														<form action="{{route('update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 															@csrf
 															<input type="file" name="background_picture" id="background_picture">
 													</div>
@@ -170,8 +153,7 @@
 										<!--/ Modal Background -->
 
 										<!-- modal edit-->
-										<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog"
-											aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 											<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
@@ -183,33 +165,24 @@
 														<div class="container">
 															<div class="col-auto ">
 																<div class="card">
-																	<img class=" width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
-																	<button type="button" class="btn btn-primary" aria-haspopup="true"
-																		id="btn_edit_profil" aria-expanded="false" data-toggle="modal"
-																		data-target="#modals-slide-in">
+																	<img class=" width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
+																	<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_profil" aria-expanded="false" data-toggle="modal" data-target="#modals-slide-in">
 																		Edit Profile
 																	</button>
 																</div>
 															</div>
 															<div class="col-auto">
 																<div class="card">
-																	<img class="width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
-																	<button type="button" class="btn btn-primary" aria-haspopup="true"
-																		id="btn_edit_picture" aria-expanded="false" data-toggle="modal"
-																		data-target="#modal_edit_profil">
+																	<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
+																	<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_picture" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_profil">
 																		Edit Picture
 																	</button>
 																</div>
 															</div>
 															<div class="col-auto">
 																<div class="card">
-																	<img class="width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
-																	<button type="button" class="btn btn-primary" aria-haspopup="true"
-																		id="btn_edit_background" aria-expanded="false" data-toggle="modal"
-																		data-target="#modal_edit_background">
+																	<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
+																	<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_background" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_background">
 																		Edit Cover
 																	</button>
 																</div>
@@ -224,8 +197,7 @@
 										<!-- Modal to Edit Profile -->
 										<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 											<div class="modal-dialog sidebar-sm">
-												<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
-													action="{{route('store_data', Auth::user()->id)}}">
+												<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('store_data', Auth::user()->id)}}">
 													@csrf
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 													<div class="modal-header mb-1">
@@ -235,8 +207,7 @@
 													<div class="modal-body flex-grow-1">
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-															<input id="name" name="name" type="text" class="form-control dt-full-name"
-																id="basic-icon-default-fullname" value="{{$user->name}}" readonly/>
+															<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->name}}" readonly />
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-post">Phone</label>
@@ -250,8 +221,7 @@
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-email">Email</label>
-															<input id="email" name="email" type="text" id="basic-icon-default-email"
-																class="form-control dt-email" value="{{$user->email}}" readonly />
+															<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$user->email}}" readonly />
 															<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 														</div>
 
@@ -314,10 +284,7 @@
 											<div class="card">
 												<div class="card-header">
 													<h4 class="card-title">Change Password
-														<img class="text-align width=" 15" height="15"" src="
-															{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-															data-placement="top"
-															data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
+														<img class="text-align width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
 													</h4>
 												</div>
 												<div class="container">
@@ -334,8 +301,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">Old password</label>
-													<input class="form-control @error('old_password') is-invalid @enderror" type="password"
-														name="old_password" placeholder="Type old password here...">
+													<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
 													@error('old_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -345,8 +311,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">New Password</label>
-													<input class="form-control @error('new_password') is-invalid @enderror" type="password"
-														name="new_password" placeholder="Type new password here...">
+													<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
 													@error('new_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -356,8 +321,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">Confirm New Password</label>
-													<input class="form-control @error('new_confirm_password') is-invalid @enderror"
-														type="password" name="new_confirm_password" placeholder="New password confirmation">
+													<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
 													@error('new_confirm_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -366,8 +330,7 @@
 												</div>
 
 												<div class="col-md-12 form-group">
-													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-														value="create">Save
+													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save
 														Change</button>
 												</div>
 											</div>
@@ -394,11 +357,9 @@
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
 							@if ($user->background_picture == 'background_default.jpg')
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
 							@else
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
 							@endif
 							<!--/ profile cover photo -->
 
@@ -407,11 +368,9 @@
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
 										@if ($user->profil_picture == 'cataliz.jpg')
-										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@else
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@endif
 									</div>
 									<!-- profile title -->
@@ -425,9 +384,7 @@
 							<div class="profile-header-nav">
 								<!-- navbar -->
 								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-										aria-label="Toggle navigation">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -436,24 +393,20 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 												<li class="nav-item">
-													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback"
-														aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
+													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
 												</li>
 											</ul>
 
 											<!-- edit button -->
-											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil"
-												aria-expanded="false" id="edit_profil">
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
 
 											<!-- Modal Profil-->
-											<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel"
-												aria-hidden="true">
+											<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -464,8 +417,7 @@
 														</div>
 
 														<div class="modal-body">
-															<form action="{{route('update_profil', Auth::user()->id)}}" method="POST"
-																enctype="multipart/form-data">
+															<form action="{{route('update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 																@csrf
 																<input type="file" name="profil_picture" id="profil_picture">
 														</div>
@@ -484,8 +436,7 @@
 											<!--/ Modal Profil -->
 
 											<!-- Modal Background-->
-											<div class="modal fade" id="modal_edit_background" tabindex="-1"
-												aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal fade" id="modal_edit_background" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -495,8 +446,7 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<form action="{{route('update_background', Auth::user()->id)}}" method="POST"
-																enctype="multipart/form-data">
+															<form action="{{route('update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 																@csrf
 																<input type="file" name="background_picture" id="background_picture">
 														</div>
@@ -515,8 +465,7 @@
 											<!--/ Modal Background -->
 
 											<!-- modal edit-->
-											<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog"
-												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -528,33 +477,24 @@
 															<div class="container">
 																<div class="col-auto ">
 																	<div class="card">
-																		<img class=" width=" 120px" height="120px"" src="
-																			{{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
-																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			id="btn_edit_profil" aria-expanded="false" data-toggle="modal"
-																			data-target="#modals-slide-in">
+																		<img class=" width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_profil" aria-expanded="false" data-toggle="modal" data-target="#modals-slide-in">
 																			Edit Profile
 																		</button>
 																	</div>
 																</div>
 																<div class="col-auto">
 																	<div class="card">
-																		<img class="width=" 120px" height="120px"" src="
-																			{{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
-																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			id="btn_edit_picture" aria-expanded="false" data-toggle="modal"
-																			data-target="#modal_edit_profil">
+																		<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_picture" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_profil">
 																			Edit Picture
 																		</button>
 																	</div>
 																</div>
 																<div class="col-auto">
 																	<div class="card">
-																		<img class="width=" 120px" height="120px"" src="
-																			{{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
-																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			id="btn_edit_background" aria-expanded="false" data-toggle="modal"
-																			data-target="#modal_edit_background">
+																		<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_background" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_background">
 																			Edit Cover
 																		</button>
 																	</div>
@@ -580,8 +520,7 @@
 				<!-- Modal to Edit Profile -->
 				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
-							action="{{route('store_data', Auth::user()->id)}}">
+						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('store_data', Auth::user()->id)}}">
 							@csrf
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 							<div class="modal-header mb-1">
@@ -591,8 +530,7 @@
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="{{$user->name}}" />
+									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->name}}" />
 								</div>
 								<label class="form-label" for="basic-icon-default-post">Phone</label>
 								<div class="input-group input-group-merge mb-2">
@@ -603,24 +541,20 @@
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-email">Email</label>
-									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-										value="{{$user->email}}" disabled />
+									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$user->email}}" disabled />
 									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-									<input id="organization" name="organization" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="{{$user->organization}}" />
+									<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->organization}}" />
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Company</label>
-									<input id="company" name="company" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="{{$user->company}}" />
+									<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->company}}" />
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-									<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="{{$user->occupation}}" />
+									<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->occupation}}" />
 								</div>
 
 								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create" onclick="Swal.fire({
@@ -688,10 +622,7 @@
 												<div class="card">
 													<div class="card-header">
 														<h4 class="card-title">Change Password
-															<img class="text-align width=" 15" height="15"" src="
-																{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-																data-toggle="popover" data-placement="top"
-																data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
+															<img class="text-align width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
 														</h4>
 													</div>
 													<div class="container">
@@ -708,8 +639,7 @@
 
 													<div class="col-md-12 form-group">
 														<label for="fp-default">Old password</label>
-														<input class="form-control @error('old_password') is-invalid @enderror" type="password"
-															name="old_password" placeholder="Type old password here...">
+														<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
 														@error('old_password')
 														<span class="invalid-feedback" role="alert">
 															<strong>{{ $message }}</strong>
@@ -719,8 +649,7 @@
 
 													<div class="col-md-12 form-group">
 														<label for="fp-default">New Password</label>
-														<input class="form-control @error('new_password') is-invalid @enderror" type="password"
-															name="new_password" placeholder="Type new password here...">
+														<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
 														@error('new_password')
 														<span class="invalid-feedback" role="alert">
 															<strong>{{ $message }}</strong>
@@ -730,8 +659,7 @@
 
 													<div class="col-md-12 form-group">
 														<label for="fp-default">Confirm New Password</label>
-														<input class="form-control @error('new_confirm_password') is-invalid @enderror"
-															type="password" name="new_confirm_password" placeholder="New password confirmation">
+														<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
 														@error('new_confirm_password')
 														<span class="invalid-feedback" role="alert">
 															<strong>{{ $message }}</strong>
@@ -740,8 +668,7 @@
 													</div>
 
 													<div class="col-md-12 form-group">
-														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-															value="create">Save
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save
 															Change</button>
 													</div>
 												</div>
@@ -761,10 +688,7 @@
 								<div class="row breadcrumbs-top">
 									<div class="col-12">
 										<h4 class="breadcrumb-item active tes">Feedback
-											<img class="rounded float-right width=" 15" height="15"" src="
-												{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-												data-placement="top"
-												data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
+											<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
 										</h4>
 									</div>
 								</div>
@@ -793,8 +717,7 @@
 						<!-- /Feedback note -->
 
 						<!-- Feedback detail modal -->
-						<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog"
-							aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -862,11 +785,9 @@
 						<div class="card profile-header mb-2 position-relative ">
 							<!-- profile cover photo -->
 							@if ($user->background_picture == 'background_default.jpg')
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
 							@else
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('storage/background/'.$user->background_picture) }}" alt="User Profile Image" />
 							@endif
 							<!--/ profile cover photo -->
 
@@ -875,11 +796,9 @@
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
 										@if ($user->profil_picture == 'cataliz.jpg')
-										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@else
-										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid"
-											alt="Card image" id="profil" />
+										<img src="{{ asset('storage/profil/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@endif
 									</div>
 									<!-- profile title -->
@@ -893,9 +812,7 @@
 							<div class="profile-header-nav">
 								<!-- navbar -->
 								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-										aria-label="Toggle navigation">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -904,21 +821,18 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 											</ul>
 
 											<!-- edit button -->
 
-											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil"
-												aria-expanded="false" id="edit_profil">
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
 
 											<!-- Modal Profil-->
-											<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel"
-												aria-hidden="true">
+											<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -929,8 +843,7 @@
 														</div>
 
 														<div class="modal-body">
-															<form action="{{route('update_profil', Auth::user()->id)}}" method="POST"
-																enctype="multipart/form-data">
+															<form action="{{route('update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 																@csrf
 																<input type="file" name="profil_picture" id="profil_picture">
 														</div>
@@ -945,8 +858,7 @@
 											<!--/ Modal Profil -->
 
 											<!-- Modal Background-->
-											<div class="modal fade" id="modal_edit_background" tabindex="-1"
-												aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal fade" id="modal_edit_background" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 												<div class="modal-dialog">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -956,8 +868,7 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<form action="{{route('update_background', Auth::user()->id)}}" method="POST"
-																enctype="multipart/form-data">
+															<form action="{{route('update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data">
 																@csrf
 																<input type="file" name="background_picture" id="background_picture">
 														</div>
@@ -972,8 +883,7 @@
 											<!--/ Modal Background -->
 
 											<!-- modal edit-->
-											<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog"
-												aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+											<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 													<div class="modal-content">
 														<div class="modal-header">
@@ -985,33 +895,24 @@
 															<div class="container">
 																<div class="col-auto ">
 																	<div class="card">
-																		<img class=" width=" 120px" height="120px"" src="
-																			{{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
-																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			id="btn_edit_profil" aria-expanded="false" data-toggle="modal"
-																			data-target="#modals-slide-in">
+																		<img class=" width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_profil" aria-expanded="false" data-toggle="modal" data-target="#modals-slide-in">
 																			Edit Profile
 																		</button>
 																	</div>
 																</div>
 																<div class="col-auto">
 																	<div class="card">
-																		<img class="width=" 120px" height="120px"" src="
-																			{{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
-																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			id="btn_edit_picture" aria-expanded="false" data-toggle="modal"
-																			data-target="#modal_edit_profil">
+																		<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_picture" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_profil">
 																			Edit Picture
 																		</button>
 																	</div>
 																</div>
 																<div class="col-auto">
 																	<div class="card">
-																		<img class="width=" 120px" height="120px"" src="
-																			{{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
-																		<button type="button" class="btn btn-primary" aria-haspopup="true"
-																			id="btn_edit_background" aria-expanded="false" data-toggle="modal"
-																			data-target="#modal_edit_background">
+																		<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
+																		<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_background" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_background">
 																			Edit Cover
 																		</button>
 																	</div>
@@ -1037,8 +938,7 @@
 				<!-- Modal to Edit Profile -->
 				<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 					<div class="modal-dialog sidebar-sm">
-						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
-							action="{{route('store_data', Auth::user()->id)}}">
+						<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('store_data', Auth::user()->id)}}">
 							@csrf
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 							<div class="modal-header mb-1">
@@ -1048,8 +948,7 @@
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control dt-full-name"
-										id="basic-icon-default-fullname" value="{{$user->name}}" readonly/>
+									<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->name}}" readonly />
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-post">Phone</label>
@@ -1063,8 +962,7 @@
 								</div>
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-email">Email</label>
-									<input id="email" name="email" type="text" id="basic-icon-default-email"
-										class="form-control dt-email" value="{{$user->email}}" readonly />
+									<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$user->email}}" readonly />
 									<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 								</div>
 
@@ -1116,10 +1014,7 @@
 												<div class="card">
 													<div class="card-header">
 														<h4 class="card-title">Change Password
-															<img class="text-align width=" 15" height="15"" src="
-																{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-																data-toggle="popover" data-placement="top"
-																data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
+															<img class="text-align width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
 														</h4>
 													</div>
 													<div class="container">
@@ -1136,8 +1031,7 @@
 
 													<div class="col-md-12 form-group">
 														<label for="fp-default">Old password</label>
-														<input class="form-control @error('old_password') is-invalid @enderror" type="password"
-															name="old_password" placeholder="Type old password here...">
+														<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
 														@error('old_password')
 														<span class="invalid-feedback" role="alert">
 															<strong>{{ $message }}</strong>
@@ -1147,8 +1041,7 @@
 
 													<div class="col-md-12 form-group">
 														<label for="fp-default">New Password</label>
-														<input class="form-control @error('new_password') is-invalid @enderror" type="password"
-															name="new_password" placeholder="Type new password here...">
+														<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
 														@error('new_password')
 														<span class="invalid-feedback" role="alert">
 															<strong>{{ $message }}</strong>
@@ -1158,8 +1051,7 @@
 
 													<div class="col-md-12 form-group">
 														<label for="fp-default">Confirm New Password</label>
-														<input class="form-control @error('new_confirm_password') is-invalid @enderror"
-															type="password" name="new_confirm_password" placeholder="New password confirmation">
+														<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
 														@error('new_confirm_password')
 														<span class="invalid-feedback" role="alert">
 															<strong>{{ $message }}</strong>
@@ -1168,8 +1060,7 @@
 													</div>
 
 													<div class="col-md-12 form-group">
-														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-															value="create">Save
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save
 															Change</button>
 													</div>
 												</div>
@@ -1256,38 +1147,38 @@
 					searchPlaceholder: "Search records"
 				}
 			});
+		});
+
+		// show_feedback
+		$(document).on("click", "#detailFeedback", function() {
+		console.log('masuk');
+		let detail_agenda_id = $(this).data('id');
+
+		$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
+			$('#modalHeading').html("Detail Feedbacks");
+			$('#name').text(data.name);
+			$('.session_feedback').html(data.session_name);
+			$('.coach_name_feedback').html(data.name);
+			$('.topic_feedback').html(data.topic);
+			$('.feedback').html(data.feedback_from_coach);
+			$('#show_feedback').modal('show');
+
+			if (data.attachment_from_coach == null) {
+				$('.download_button_feedback').css("display", "none");
+				$('.span_none_feedback').html('Tidak ada file');
+			} else {
+				$('.span_none_feedback').html(data.attachment_from_coach);
+				$('.download_button_feedback').removeAttr('style');
+				$('.download_button_feedback').css("display", "relative");
+			}
+
+			$('.download_button_feedback').on('click', function() {
+				window.location.href = ("" + '/agendas/' + detail_agenda_id + '/feedback_download');
 			});
 
-			// show_feedback
-			$(document).on("click", "#detailFeedback", function() {
-				console.log('masuk');
-				let detail_agenda_id = $(this).data('id');
-
-				$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
-					$('#modalHeading').html("Detail Feedbacks");
-					$('#name').text(data.name);
-					$('.session_feedback').html(data.session_name);
-					$('.coach_name_feedback').html(data.name);
-					$('.topic_feedback').html(data.topic);
-					$('.feedback').html(data.feedback_from_coach);
-					$('#show_feedback').modal('show');
-
-					if (data.attachment_from_coach == null) {
-						$('.download_button_feedback').css("display", "none");
-						$('.span_none_feedback').html('Tidak ada file');
-					} else {
-						$('.span_none_feedback').html(data.attachment_from_coach);
-						$('.download_button_feedback').removeAttr('style');
-						$('.download_button_feedback').css("display", "relative");
-					}
-
-					$('.download_button_feedback').on('click', function() {
-						window.location.href = ("" + '/agendas/' + detail_agenda_id + '/feedback_download');
-					});
-
-				});
-			});
-			@endrole
+		});
+		});
+		@endrole
 
 		});
 
@@ -1296,36 +1187,36 @@
 		}, '<strong class="text-danger">Please enter a valid phone number!</strong>');
 
 		$('#saveBtn1').click(function(e) {
-				console.log('masuk');
-				$('#ClientForm').validate({
-					rules:{
-						'phone': {
-							required: true,
-							'phoneNumber': true
-						}
-					},
-					messages: {
-						'phone': {
-							required: '<strong class="text-danger">Phone is required!</strong>'
-						}
-					},
-					errorPlacement: function(error, element) {
-						if(element.attr("name") == "phone") {
-							error.appendTo("#phone-error");
-						}
-					},
-					//submit Handler
-					submitHandler: function(form) {
-						form.submit();
-						Swal.fire({
+			console.log('masuk');
+			$('#ClientForm').validate({
+				rules: {
+					'phone': {
+						required: true,
+						'phoneNumber': true
+					}
+				},
+				messages: {
+					'phone': {
+						required: '<strong class="text-danger">Phone is required!</strong>'
+					}
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "phone") {
+						error.appendTo("#phone-error");
+					}
+				},
+				//submit Handler
+				submitHandler: function(form) {
+					form.submit();
+					Swal.fire({
 						icon: 'success',
 						title: 'Updated succesfully!',
 						showConfirmButton: false,
 						timer: 1500
 					});
-					}
-				});
-				$('#modals_profil').modal('hide');
+				}
+			});
+			$('#modals_profil').modal('hide');
 		});
 
 		// modal edit
