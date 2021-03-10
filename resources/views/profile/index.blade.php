@@ -14,16 +14,13 @@
 
 <!-- BEGIN: Content-->
 <div class="app-content content ">
-	<div class="content-overlay"></div>
-	<div class="header-navbar-shadow"></div>
 	<div class="content-wrapper">
 		<div class="content-header row">
 			<div class="content-header-left col-md-9 col-12 mb-2">
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-							<img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}"
-								alt="Card image cap" data-toggle="popover" data-placement="top"
+							<img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
 								data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
 						</h2>
 						<div class="breadcrumb-wrapper">
@@ -47,6 +44,7 @@
 				<div class="row">
 					<div class="col-sm-12 ">
 						<div class="card profile-header mb-2 position-relative ">
+
 							<!-- profile cover photo -->
 							@if ($user->background_picture == 'background_default.jpg')
 							<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
@@ -85,13 +83,11 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home"
-														role="tab" aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
 												@role('coachee')
 												<li class="nav-item">
-													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback"
-														aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
+													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
 												</li>
 												@endrole
 											</ul>
@@ -202,8 +198,7 @@
 										@role('coachee')
 										<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 											<div class="modal-dialog sidebar-sm">
-												<form class="add-new-record modal-content pt-0" id="formEditProfileCoachee" name="formEditProfileCoachee" method="POST"
-													action="{{route('store_data', Auth::user()->id)}}">
+												<form class="add-new-record modal-content pt-0" id="formEditProfileCoachee" name="formEditProfileCoachee" method="POST" action="{{route('store_data', Auth::user()->id)}}">
 													@csrf
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 													<div class="modal-header mb-1">
@@ -213,8 +208,7 @@
 													<div class="modal-body flex-grow-1">
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-															<input id="name" name="name" type="text" class="form-control dt-full-name"
-																id="basic-icon-default-fullname" value="{{$user->name}}" />
+															<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->name}}" />
 															<div id="name-error"></div>
 														</div>
 														<label class="form-label" for="basic-icon-default-post">Phone</label>
@@ -229,24 +223,20 @@
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-email">Email</label>
-															<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
-																value="{{$user->email}}" readonly />
+															<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$user->email}}" readonly />
 															<small class="form-text text-muted"> You can use letters, numbers & periods </small>
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-fullname">Organization</label>
-															<input id="organization" name="organization" type="text" class="form-control dt-full-name"
-																id="basic-icon-default-fullname" value="{{$user->organization}}" readonly/>
+															<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->organization}}" readonly />
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-fullname">Company</label>
-															<input id="company" name="company" type="text" class="form-control dt-full-name"
-																id="basic-icon-default-fullname" value="{{$user->company}}" readonly/>
+															<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->company}}" readonly />
 														</div>
 														<div class="form-group">
 															<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-															<input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
-																id="basic-icon-default-fullname" value="{{$user->occupation}}" readonly/>
+															<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->occupation}}" readonly />
 														</div>
 														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveProfileCoacheeBtn">Submit</button>
 														<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
@@ -332,6 +322,20 @@
 											<h5 class="mb-75">Email:</h5>
 											<p class="card-text">{{$user->email}}</p>
 										</div>
+										@role('coachee')
+										<div class="mt-2">
+											<h5 class="mb-75">Organization:</h5>
+											<p class="card-text">{{$user->organization}}</p>
+										</div>
+										<div class="mt-2">
+											<h5 class="mb-75">Company:</h5>
+											<p class="card-text">{{$user->company}}</p>
+										</div>
+										<div class="mt-2">
+											<h5 class="mb-75">Occupation:</h5>
+											<p class="card-text">{{$user->occupation}}</p>
+										</div>
+										@endrole
 									</div>
 								</div>
 							</div>
@@ -405,9 +409,7 @@
 							<div class="row breadcrumbs-top">
 								<div class="col-12">
 									<h4 class="breadcrumb-item active tes">Feedback
-										<img class="rounded float-right width=" 15" height="15"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-											data-placement="top"
+										<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
 											data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
 									</h4>
 								</div>
@@ -437,8 +439,7 @@
 					<!-- /Feedback note -->
 
 					<!-- Feedback detail modal -->
-					<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog"
-						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -490,8 +491,8 @@
 				@endrole
 			</div>
 		</div>
-		</div>
 	</div>
+</div>
 	<!-- END: Content-->
 	@endsection
 
