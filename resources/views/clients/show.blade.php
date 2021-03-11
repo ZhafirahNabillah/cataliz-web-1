@@ -123,11 +123,11 @@
 
 											<div class="mt-2">
 												<h5 class="mb-75">Phone:</h5>
-												<p class="card-text">+62{{$client->phone}}</p>
+												<p class="card-text">+62{{ str_pad(substr($client->phone, -7), strlen($client->phone), 'x', STR_PAD_RIGHT) }}</p>
 											</div>
 											<div class="mt-2">
 												<h5 class="mb-75">Email:</h5>
-												<p class="card-text">{{$client->email}}</p>
+												<p class="card-text">{{ str_pad(substr($client->email, -11), strlen($client->email), 'x', STR_PAD_LEFT) }}</p>
 											</div>
 											<div class="mt-2">
 												<h5 class="mb-75">Organization:</h5>

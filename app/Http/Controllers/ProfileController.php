@@ -10,6 +10,7 @@ use App\Models\Client;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -41,7 +42,7 @@ class ProfileController extends Controller
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
-        return redirect(route('profil', Auth::user()->id))->with('success', 'Password berhasil diubah!');
+        return redirect(route('profil', Auth::user()->id))->with('success', 'Your Password has been updated!');
     }
 
     public function store_data(Request $request, $id)
@@ -96,7 +97,7 @@ class ProfileController extends Controller
         }
         $user->update();
 
-        return redirect(route('profil', Auth::user()->id))->with('success2', 'Foto profil berhasil diubah!');
+        return redirect(route('profil', Auth::user()->id));
     }
 
     public function update_background(Request $request)
@@ -115,6 +116,6 @@ class ProfileController extends Controller
         }
         $user->update();
 
-        return redirect(route('profil', Auth::user()->id))->with('success2', 'Background berhasil diubah!');
+        return redirect(route('profil', Auth::user()->id));
     }
 }

@@ -67,7 +67,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Name</th>
-                                        <th>Organization</th>
+                                        <th>Company</th>
                                         <th>Email</th>
                                         <th>Handphone</th>
                                         <th>Action</th>
@@ -132,16 +132,16 @@
                     name: 'client.name'
                 },
                 {
-                    data: 'client.organization',
-                    name: 'client.organization'
+                    data: 'client.company',
+                    name: 'client.company'
                 },
                 {
-                    data: 'client.email',
-                    name: 'client.email'
+                    data: 'email',
+                    name: 'email'
                 },
                 {
-                    data: 'client.phone',
-                    name: 'client.phone'
+                    data: 'phone',
+                    name: 'phone'
                 },
                 {
                     data: 'action',
@@ -186,20 +186,14 @@
                             '</div>' +
                             '<div class="d-flex flex-column">' +
                             '<span class="emp_name text-truncate font-weight-bold">' +
-                            $name +
-                            '</span>' +
-                            '<small class="emp_post text-truncate text-muted">' +
-                            $post + ' - ' + $org +
-                            '</small>' +
-                            '</div>' +
-                            '</div>';
+                            $name;
                         return $row_output;
                     }
                 },
                 {
                     targets: 4,
                     render: function(data, type, full, meta) {
-                        var $phone = full['client']['phone'],
+                        var $phone = full['phone'],
                             $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
                             '</div>';
                         return $output;
