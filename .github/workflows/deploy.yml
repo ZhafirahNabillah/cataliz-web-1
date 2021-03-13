@@ -7,7 +7,7 @@ on:
 jobs:
   build-js:
     name: Build Js/Css
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v1
       - name: Yarn Build
@@ -29,7 +29,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
-          php-version: 7.3 # Use your PHP version
+          php-version: 7.4 # Use your PHP version
           extension-csv: mbstring, bcmath # Setup any required extensions for tests
       - name: Composer install
         run: composer install #perlu ditambahi
