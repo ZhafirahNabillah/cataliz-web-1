@@ -2,7 +2,7 @@ name: CI-CD
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
   build-js:
@@ -33,7 +33,6 @@ jobs:
           extension-csv: mbstring, bcmath # Setup any required extensions for tests
       - name: Composer install
         run: composer install #perlu ditambahi
-      
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
