@@ -9,12 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1 # Download the source code
         # Build JS
-  #test-php:
-      #name: Test/Lint PHP
-      #runs-on: ubuntu-latest
-      #steps:
-      - #uses: actions/checkout@v1
-        # Test and Lint PHP code
+
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-latest
