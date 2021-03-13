@@ -53,7 +53,7 @@ jobs:
       - name: Composer install
         run: composer install
       - name: Setup Deployer
-        uses: cataliz/deployer-php-action@main
+        uses: atymic/deployer-php-action@master
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
