@@ -30,7 +30,10 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4' # Use your PHP version
-          extension: mbstring, bcmath # Setup any required extensions for tests
+          extensions: mbstring, bcmath # Setup any required extensions for tests
+          #ini-values: post_max_size=256M, max_execution_time=180
+          #coverage: xdebug        
+          #tools: php-cs-fixer
       - name: Composer install
         run: composer install
   deploy:
@@ -49,7 +52,7 @@ jobs:
         uses: shivammathur/setup-php@2
         with:
           php-version: '7.4'
-          extension: mbstring, bcmath
+          extensions: mbstring, bcmath
       - name: Composer install
         run: composer install
       - name: Setup Deployer
