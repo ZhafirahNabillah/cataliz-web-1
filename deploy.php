@@ -35,7 +35,7 @@ task('deploy:secrets', function () {
 });
 
 // Hosts
-host('staging99') // Name of the server
+host('cataliz-staging') // Name of the server
     ->hostname('54.227.121.79') // Hostname or IP address
     ->stage('staging') // Deployment stage (production, staging, etc)
     ->user('ubuntu') // SSH user
