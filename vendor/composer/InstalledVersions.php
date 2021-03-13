@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'bf09c0de567c2b53b183530b6fb9c5fa7650efba',
+    'reference' => '057a3e66f06ee64a95341fba1028ca9f8e2343e9',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -74,6 +74,37 @@ private static $installed = array (
       'replaced' => 
       array (
         0 => '*',
+      ),
+    ),
+    'deployer/deployer' => 
+    array (
+      'pretty_version' => 'v6.8.0',
+      'version' => '6.8.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4e243a64ed61e779fbb31c5a74e258a8e52fdaff',
+    ),
+    'deployer/phar-update' => 
+    array (
+      'pretty_version' => 'v2.2.0',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9ad07422f2cd43a1382ee8e134bdcd3a374848e3',
+    ),
+    'deployer/recipes' => 
+    array (
+      'pretty_version' => '6.2.2',
+      'version' => '6.2.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '84b3229c518c094a950e1fe785b7b8f9598770fe',
+      'replaced' => 
+      array (
+        0 => '6.2.2',
       ),
     ),
     'dnoegel/php-xdg-base-dir' => 
@@ -487,7 +518,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'bf09c0de567c2b53b183530b6fb9c5fa7650efba',
+      'reference' => '057a3e66f06ee64a95341fba1028ca9f8e2343e9',
     ),
     'laravel/sail' => 
     array (
@@ -760,6 +791,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f661659747f2f87f9e72095bb207bceb0f151cb4',
+    ),
+    'pimple/pimple' => 
+    array (
+      'pretty_version' => 'v3.3.1',
+      'version' => '3.3.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '21e45061c3429b1e06233475cc0e1f6fc774d5b0',
     ),
     'psr/container' => 
     array (
@@ -1322,6 +1362,15 @@ private static $installed = array (
       ),
       'reference' => '72ca213014a92223a5d18651ce79ef441c12b694',
     ),
+    'symfony/yaml' => 
+    array (
+      'pretty_version' => 'v5.2.5',
+      'version' => '5.2.5.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '298a08ddda623485208506fcee08817807a251dd',
+    ),
     'theseer/tokenizer' => 
     array (
       'pretty_version' => '1.2.0',
@@ -1599,7 +1648,6 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
-
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];
