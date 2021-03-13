@@ -27,12 +27,12 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4 # Use your PHP version
-          extension-csv: mbstring, bcmath # Setup any required extensions for tests
+          php-version: '7.4' # Use your PHP version
+          extension: mbstring, bcmath # Setup any required extensions for tests
       - name: Composer install
-        run: composer install #perlu ditambahi
+        run: composer install
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-20.04
@@ -46,10 +46,10 @@ jobs:
           name: assets
           path: public
       - name: Setup PHP
-        uses: shivammathur/setup-php@master
+        uses: shivammathur/setup-php@2
         with:
-          php-version: 7.4
-          extension-csv: mbstring, bcmath
+          php-version: '7.4'
+          extension: mbstring, bcmath
       - name: Composer install
         run: composer install
       - name: Setup Deployer
