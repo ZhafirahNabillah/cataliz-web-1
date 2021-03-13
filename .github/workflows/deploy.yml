@@ -49,7 +49,7 @@ jobs:
           name: assets
           path: public
       - name: Setup PHP
-        uses: shivammathur/setup-php@2
+        uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
           extensions: mbstring, bcmath
