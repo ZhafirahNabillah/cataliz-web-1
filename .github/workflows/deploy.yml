@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@master
         with:
           php-version: '7.4' # Use your PHP version
           extensions: mbstring, bcmath # Setup any required extensions for tests
@@ -49,7 +49,7 @@ jobs:
           name: assets
           path: public
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@master
         with:
           php-version: '7.4'
           extensions: mbstring, bcmath
@@ -63,4 +63,4 @@ jobs:
       - name: Deploy to Prod
         env:
           DOT_ENV: ${{ secrets.DOT_ENV }}
-        run: dep deploy production --tag=${{ env.GITHUB_REF }} -vvv
+        run: dep deploy staging --tag=${{ env.GITHUB_REF }} -vvv
