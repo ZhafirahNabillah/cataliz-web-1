@@ -51,6 +51,9 @@ class UserController extends Controller
       $total_coaching = Agenda_detail::join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')->where('agendas.owner_id', '=', $id)->count();
       $total_client = Client::where('owner_id', $id)->count();
 
+      $user->phone = '+62'.substr($user->phone, 0, -5) . 'xxxxx';
+      $user->email = str_pad(substr($user->email, -11), strlen($user->email), 'x', STR_PAD_LEFT);
+
       return response()->json(array('total_coaching' => $total_coaching, 'total_client' => $total_client, 'user' => $user));
     }
 
@@ -63,13 +66,13 @@ class UserController extends Controller
     if ($request->action_type == 'edit-user') {
       $user = User::find($request->user_id);
       $user->syncRoles($request->input('roles'));
-      
+
     } elseif ($request->action_type == 'create-user') {
       $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
       $user->syncRoles($request->input('roles'));
 
       if ($user->hasRole('coachee')) {
-        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->name, 'phone' => $user->phone, 'program' => 'Starco']);
+        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program' => 'Starco']);
       }
 
       MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);

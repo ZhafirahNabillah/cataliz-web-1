@@ -275,7 +275,7 @@
 							@csrf
 							<div class="col-md-12 form-group">
 								<label for="fp-default">Subject</label>
-								<input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject">
+								<input type="text" class="form-control @error('subject') is-invalid @enderror" name="subject" value="{{old('subject')}}">
 								@error('subject')
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $message }}</strong>
@@ -284,7 +284,7 @@
 							</div>
 							<div class="col-md-12 form-group">
 								<label for="fp-default">Summary</label>
-								<textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
+								<textarea class="form-control @error('summary') is-invalid @enderror" name="summary">{{old('summary')}}</textarea>
 								@error('summary')
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $message }}</strong>
@@ -292,7 +292,7 @@
 								@enderror
 							</div>
 							<div class="col-md-12 form-group">
-								<label for="customFile1">Attachment file</label>
+								<label for="customFile1">Documentation</label>
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" name="note_attachment" />
 									<label class="custom-file-label" for="customFile1">Choose file</label>
@@ -334,7 +334,7 @@
 								@enderror
 							</div>
 							<div class="col-md-12 form-group">
-								<label for="customFile1">Attachment file</label>
+								<label for="customFile1">Documentation</label>
 								@if($coaching_note->attachment == null)
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" name="note_attachment" />

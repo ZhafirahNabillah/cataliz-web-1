@@ -78,6 +78,9 @@
                         <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')
                           @endif>On-Going
                         </option>
+                        <option selected value="Finished" id="Finished" @if($class->status == 'Finished')
+                          @endif>Finished
+                        </option>
                       </select>
                       @else
                       <b>{{ $class->status }}</b>
