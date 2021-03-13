@@ -18,15 +18,18 @@ jobs:
     steps:
     - uses: actions/checkout@v1
       # Deploy Code 
+      
     - name: Change owner
       run:
         sudo chown ubuntu:ubuntu /var/www/html/cataliz-web/
         sudo chmod 775 -R /var/www/html/cataliz-web/public/
+        
     - name: Symlink storage
       run:
         cd cataliz-web/
         sudo rm -rf public/storage
         sudo php artisan storage:link
+        
     - name: Directory Permissions
       run: 
         chmod -R 777 storage
