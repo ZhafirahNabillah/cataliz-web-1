@@ -401,7 +401,8 @@
                 </div>
                 <div id="roles-error"></div>
               </div>
-              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" name="action_type">Create</button>
+              <input type="hidden" name="action_type" id="action_type">
+              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
               <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
             </div>
           </form>
@@ -419,11 +420,6 @@
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
       <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
       <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-      <style>
-        label.error.fail-alert {
-          color: red;
-        }
-      </style>
       <script>
         // function isNumberKey(evt)
         //   {
@@ -770,7 +766,7 @@
           // create new user on admin page
           $('body').on('click', '.createNewUser', function() {
             console.log('tes');
-            $('#saveBtn').val("create-user");
+            $('#action_type').val("create-user");
             $('#user_id').val('');
             $('#createUserForm').trigger("reset");
             $('#modalHeading').html("Create New User");
@@ -789,7 +785,7 @@
             var user_id = $(this).data('id');
             $.get("" + '/users/' + user_id + '/edit', function(data) {
               $('#modalHeading').html("Edit User");
-              $('#saveBtn').val("edit-user");
+              $('#action_type').val("edit-user");
               $('#createUserForm').trigger("reset");
               $('#name-error').empty();
               $('#phone-error').empty();
@@ -824,97 +820,155 @@
             })
           });
 
-          // save user data on admin page
-          $('#saveBtn').click(function() {
-            $('#createUserForm').validate({
-              debug: false,
-              errorClass: "error fail-alert",
-              validClass: "valid success-alert",
-              rules: {
-                name: {
-                  required: true
-                },
-                phone: {
-                  required: true,
-                  digits: true,
-                  'phoneNumber': true
-                },
-                email: {
-                  required: true,
-                  email: true
-                },
-                roles: {
-                  required: true
-                }
-              },
-              messages: {
-                name: {
-                  required: "Name is required!"
-                },
-                phone: {
-                  required: "phone number is required!",
-                  digits: "phone number must be number!"
-                },
-                email: {
-                  required: "email is required!",
-                  email: "please provide valid email address!"
-                },
-                roles: {
-                  required: "role is required!"
-                }
-              },
-              errorPlacement: function(error, element) {
-                if (element.attr("name") == "name") {
-                  error.appendTo($("#name-error"));
-                } else if (element.attr("name") == "phone") {
-                  error.appendTo("#phone-error");
-                } else if (element.attr("name") == "email") {
-                  error.appendTo("#email-error");
-                } else if (element.attr("name") == "roles") {
-                  error.appendTo("#roles-error");
-                }
-              },
+          $("#saveBtn").click(function(e){
+            e.preventDefault();
+            $('#saveBtn').html('Sending..');
+            $('#name-error').empty();
+            $('#phone-error').empty();
+            $('#email-error').empty();
+            $('#roles-error').empty();
 
-              //submit Handler
-              submitHandler: function(form) {
-                $('#saveBtn').html('Sending..');
-                var data = $('#createUserForm').serialize();
-                console.log(data);
+            var data = $('#createUserForm').serialize();
+            console.log(data);
 
-                $.ajax({
-                  data: data,
-                  url: "{{ route('users.store') }}",
-                  type: "POST",
-                  dataType: 'json',
-                  success: function(data) {
+            $.ajax({
+              data: data,
+              url: "{{ route('users.store') }}",
+              type: "POST",
+              dataType: 'json',
+              success: function(data) {
 
-                    $('#createUserForm').trigger("reset");
-                    $('#saveBtn').html('Submit');
-                    $('#modal-user-slide-in').modal('hide');
-                    if ($('#saveBtn').val() == 'create-user') {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'Account created successfully!',
-                      });
-                    } else if ($('#saveBtn').val() == 'edit-user') {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'Account updated successfully!',
-                      });
-                    }
-                    table_coach.draw();
-                    table_admin.draw();
-                    table_coachee.draw();
-                  },
-                  error: function(data) {
-                    console.log('Error:', data);
-                    $('#saveBtn').html('Submit');
-                  }
-                });
-                return false;
+                $('#createUserForm').trigger("reset");
+                $('#saveBtn').html('Submit');
+                $('#modal-user-slide-in').modal('hide');
+                if ($('#action_type').val() == 'create-user') {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Account created successfully!',
+                  });
+                } else if ($('#action_type').val() == 'edit-user') {
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Account updated successfully!',
+                  });
+                }
+                table_coach.draw();
+                table_admin.draw();
+                table_coachee.draw();
+              },
+              error: function(reject) {
+                $('#saveBtn').html('Submit');
+                if (reject.status === 422) {
+                   var errors = JSON.parse(reject.responseText);
+                   if (errors.name) {
+                    $('#name-error').html('<strong class="text-danger">'+errors.name[0]+'</strong>'); // and so on
+                   }
+                   if (errors.phone) {
+                    $('#phone-error').html('<strong class="text-danger">'+errors.phone[0]+'</strong>');  // and so on
+                   }
+                   if (errors.email) {
+                    $('#email-error').html('<strong class="text-danger">'+errors.email[0]+'</strong>');  // and so on
+                   }
+                   if (errors.roles) {
+                    $('#roles-error').html('<strong class="text-danger">'+errors.roles[0]+'</strong>');  // and so on
+                   }
+               }
               }
             });
+              /**Ajax code ends**/
           });
+
+          // save user data on admin page
+          // $('#saveBtn').click(function() {
+          //   $('#createUserForm').validate({
+          //     debug: false,
+          //     errorClass: "error fail-alert",
+          //     validClass: "valid success-alert",
+          //     rules: {
+          //       name: {
+          //         required: true
+          //       },
+          //       phone: {
+          //         required: true,
+          //         digits: true,
+          //         'phoneNumber': true
+          //       },
+          //       email: {
+          //         required: true,
+          //         email: true
+          //       },
+          //       roles: {
+          //         required: true
+          //       }
+          //     },
+          //     messages: {
+          //       name: {
+          //         required: "Name is required!"
+          //       },
+          //       phone: {
+          //         required: "phone number is required!",
+          //         digits: "phone number must be number!"
+          //       },
+          //       email: {
+          //         required: "email is required!",
+          //         email: "please provide valid email address!"
+          //       },
+          //       roles: {
+          //         required: "role is required!"
+          //       }
+          //     },
+          //     errorPlacement: function(error, element) {
+          //       if (element.attr("name") == "name") {
+          //         error.appendTo($("#name-error"));
+          //       } else if (element.attr("name") == "phone") {
+          //         error.appendTo("#phone-error");
+          //       } else if (element.attr("name") == "email") {
+          //         error.appendTo("#email-error");
+          //       } else if (element.attr("name") == "roles") {
+          //         error.appendTo("#roles-error");
+          //       }
+          //     },
+          //
+          //     //submit Handler
+          //     submitHandler: function(form) {
+          //       $('#saveBtn').html('Sending..');
+          //       var data = $('#createUserForm').serialize();
+          //       console.log(data);
+          //
+          //       $.ajax({
+          //         data: data,
+          //         url: "{{ route('users.store') }}",
+          //         type: "POST",
+          //         dataType: 'json',
+          //         success: function(data) {
+          //
+          //           $('#createUserForm').trigger("reset");
+          //           $('#saveBtn').html('Submit');
+          //           $('#modal-user-slide-in').modal('hide');
+          //           if ($('#saveBtn').val() == 'create-user') {
+          //             Swal.fire({
+          //               icon: 'success',
+          //               title: 'Account created successfully!',
+          //             });
+          //           } else if ($('#saveBtn').val() == 'edit-user') {
+          //             Swal.fire({
+          //               icon: 'success',
+          //               title: 'Account updated successfully!',
+          //             });
+          //           }
+          //           table_coach.draw();
+          //           table_admin.draw();
+          //           table_coachee.draw();
+          //         },
+          //         error: function(data) {
+          //           console.log('Error:', data);
+          //           $('#saveBtn').html('Submit');
+          //         }
+          //       });
+          //       return false;
+          //     }
+          //   });
+          // });
 
           // suspend user
           $('body').on('click', '.suspendUser', function(e) {

@@ -56,13 +56,16 @@
               <div class="card-header">
                 <h4 class="card-title">Create a New Class</h4>
               </div>
-              <form action="{{route('class.store')}}" method="post">
-                @csrf
-                <div class="card-body">
+              <div class="card-body">
+                <form action="{{route('class.store')}}" method="post">
+                  @csrf
                   <div class="row">
                     <div class=" col-md-12 form-group">
                       <label for="fp-default">Class Name</label>
                       <input class="form-control" name="class_name" id="class_name">
+                      @error('class_name')
+                        <strong class="text-danger">{{ $message }}</strong>
+                      @enderror
                     </div>
                   </div>
                   <div class="row">
@@ -70,31 +73,32 @@
                       <label for="fp-default">Coach Name</label>
                       <select class="livesearch form-control @error('livesearch') is-invalid @enderror" name="coach_id" id="livesearch" value="{{ old('livesearch') }}" autocomplete="livesearch">
                       </select>
-                      @error('livesearch')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
+                      @error('coach_id')
+                        <strong class="text-danger">{{ $message }}</strong>
                       @enderror
                     </div>
                   </div>
 
                   <div class="form-group">
-                    <label class="fp-default" for="basic-icon-default-fullname">Partisipant</label>
+                    <label class="fp-default" for="basic-icon-default-fullname">Participant</label>
                     <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
-                    @foreach($client as $cl)
+                    @foreach($clients as $client)
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="{{$cl->id}}" name="cl[]" id="permission-check-{{$cl->id}}">
-                      <label class="form-check-label" for="permission-check-{{$cl->id}}">
-                        {{$cl->name}}
+                      <input class="form-check-input" type="checkbox" value="{{$client->id}}" name="clients[]" id="permission-check-{{$client->id}}">
+                      <label class="form-check-label" for="permission-check-{{$client->id}}">
+                        {{$client->name}}
                       </label>
                     </div>
                     @endforeach
+                    @error('clients')
+                      <strong class="text-danger">{{ $message }}</strong>
+                    @enderror
                   </div>
                   <!-- tambah sweet alert ('Added Successfully') -->
                   <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                  <button type="submit" class="btn btn-light  mr-1" id="cancel" value="">Cancel</button>
-                </div>
-              </form>
+                  <a class="btn btn-light" href="{{ route('class.index') }}">Cancel</a>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -139,248 +143,6 @@
     console.log($(this).select2('data'));
     console.log($(this).select2('data')[0].id);
     var dd = $(this).select2('data')[0];
-  });
-
-  $(function() {
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-    var table = $('.yajra-datatable').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'email',
-          name: 'email'
-        },
-        {
-          data: 'program',
-          name: 'program'
-        },
-        {
-          data: 'phone',
-          name: 'phone'
-        },
-        {
-          data: 'action',
-          name: 'action',
-          orderable: true,
-          searchable: true
-        },
-      ],
-      columnDefs: [{
-          // Avatar image/badge, Name and post
-          targets: 1,
-          responsivePriority: 4,
-          render: function(data, type, full, meta) {
-            var $user_img = full['avatar'],
-              $name = full['name'],
-              $post = full['company'];
-            $org = full['organization'];
-            if ($user_img) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
-            } else {
-              // For Avatar badge
-              var stateNum = full['status'];
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['name'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-content">' + $initials + '</span>';
-            }
-
-            var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
-            // Creates full output for row
-            var $row_output =
-              '<div class="d-flex justify-content-left align-items-center">' +
-              '<div class="avatar ' +
-              colorClass +
-              ' mr-1">' +
-              $output +
-              '</div>' +
-              '<div class="d-flex flex-column">' +
-              '<span class="emp_name text-truncate font-weight-bold">' +
-              $name +
-              '</span>' +
-              '<small class="emp_post text-truncate text-muted">' +
-              $post + ' - ' + $org +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return $row_output;
-          }
-        },
-        {
-          targets: 4,
-          render: function(data, type, full, meta) {
-            var $phone = full['phone'],
-              $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-              '</div>';
-            return $output;
-          }
-        }
-      ],
-      order: [
-        [2, 'desc']
-      ],
-      dom: '<"card-header border-bottom p-1"<"head-label"><"dt-action-buttons text-right"B>><"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
-      lengthMenu: [7, 10, 25, 50, 75, 100],
-      buttons: [
-
-        {
-          text: feather.icons['plus'].toSvg({
-            class: 'mr-50 font-small-4'
-          }) + 'Add Client',
-          className: 'create-new btn btn-primary createNewClient',
-          attr: {
-            'data-toggle': 'modal'
-
-          },
-          init: function(api, node, config) {
-            $(node).removeClass('btn-secondary');
-          }
-        }
-      ],
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function(row) {
-              var data = row.data();
-              return 'Details of ' + data['name'];
-            }
-          }),
-          type: 'column',
-          renderer: function(api, rowIdx, columns) {
-            var data = $.map(columns, function(col, i) {
-              console.log(columns);
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ?
-                '<tr data-dt-row="' +
-                col.rowIndex +
-                '" data-dt-column="' +
-                col.columnIndex +
-                '">' +
-                '<td>' +
-                col.title +
-                ':' +
-                '</td> ' +
-                '<td>' +
-                col.data +
-                '</td>' +
-                '</tr>' :
-                '';
-            }).join('');
-
-            return data ? $('<table class="table"/>').append(data) : false;
-          }
-        }
-      },
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-
-    });
-
-    // create
-    $('body').on('click', '.createNewClient', function() {
-      $('#saveBtn').val("create-Client");
-      $('#Customer_id').val('');
-      $('#ClientForm').trigger("reset");
-      $('#modalHeading').html("Create New Client");
-      $('#modals-slide-in').modal('show');
-    });
-
-    // edit
-    $('body').on('click', '.editClient', function() {
-      var Client_id = $(this).data('id');
-      $.get("" + '/clients/' + Client_id + '/edit', function(data) {
-        $('#modalHeading').html("Edit Client");
-        $('#saveBtn').val("edit-user");
-        $('#modals-slide-in').modal('show');
-        $('#Client_id').val(data.id);
-        $('#name').val(data.name);
-        $('#phone').val(data.phone);
-        $('#email').val(data.email);
-        $('#company').val(data.company);
-        $('#organization').val(data.organization);
-        $('#occupation').val(data.occupation);
-      })
-    });
-
-    // save data
-    $('#saveBtn').click(function(e) {
-      e.preventDefault();
-      $(this).html('Sending..');
-
-      $.ajax({
-        data: $('#ClientForm').serialize(),
-        url: "",
-        type: "POST",
-        dataType: 'json',
-        success: function(data) {
-
-          $('#ClientForm').trigger("reset");
-          $('#saveBtn').html('Submit');
-          $('#modals-slide-in').modal('hide');
-          table.draw();
-
-        },
-        error: function(data) {
-          console.log('Error:', data);
-          $('#saveBtn').html('Submit');
-        }
-      });
-    });
-
-    // delete
-    $('body').on('click', '.deleteClient', function(e) {
-
-      var Client_id = $(this).data("id");
-      if (confirm("Are You sure want to delete !")) {
-
-        $.ajax({
-          type: "DELETE",
-          url: "" + '/clients/' + Client_id,
-          success: function(data) {
-            table.draw();
-          },
-          error: function(data) {
-            console.log('Error:', data);
-          }
-        });
-      } else {
-        e.preventDefault();
-      }
-    });
-
-  });
-
-
-  $(function() {
-    $('#datetimepicker11').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
   });
 </script>
 @endpush

@@ -68,9 +68,9 @@ class ClassController extends Controller
     {
         $client_final = Class_has_client::pluck('client_id');
         // return $client_final;
-        $client = Client::whereNotIn('id', $client_final)->get();
+        $clients = Client::whereNotIn('id', $client_final)->get();
         // return $client;
-        return view('class.create', compact('client'));
+        return view('class.create', compact('clients'));
     }
 
     /**
@@ -86,7 +86,7 @@ class ClassController extends Controller
         $this->validate($request, [
             'class_name'  => 'required',
             'coach_id' => 'required',
-            'cl' => 'required'
+            'clients' => 'required'
         ]);
 
         $class = new Class_model;
@@ -95,16 +95,14 @@ class ClassController extends Controller
         $class->status = 'On-Going';
         $class->save();
 
-        $count = $request->cl;
-
-        foreach ($count as $ct) {
-            $coachee = new Class_has_client;
-            $coachee->class_id = $class->id;
-            $coachee->client_id = $ct;
-            $coachee->save();
+        foreach ($request->clients as $client) {
+            $class_has_client = new Class_has_client;
+            $class_has_client->class_id = $class->id;
+            $class_has_client->client_id = $client;
+            $class_has_client->save();
         }
 
-        return redirect('/class');
+        return redirect('/class')->with('success','Class succesfully created');
     }
 
     /**

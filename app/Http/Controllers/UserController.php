@@ -11,6 +11,7 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DataTables;
 use App\Http\Controllers\MailController;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -63,6 +64,18 @@ class UserController extends Controller
 
   public function store(Request $request)
   {
+
+    $validator = Validator::make($request->all(), [
+      'name'  => 'required',
+      'phone' => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+      'email' => 'required|email|unique:users',
+      'roles' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 422);
+    }
+
     if ($request->action_type == 'edit-user') {
       $user = User::find($request->user_id);
       $user->syncRoles($request->input('roles'));
