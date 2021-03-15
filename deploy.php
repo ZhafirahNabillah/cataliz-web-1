@@ -57,8 +57,7 @@ task('deploy', [
     'deploy:writable',
     'artisan:storage:link', // |
     'artisan:view:cache',   // |
-    'artisan:config:clear', // | Laravel specific steps 
-    'artisan:cache:clear',  // |
+    'artisan:cache:clear',  // | Laravel specific steps
     'artisan:config:cache', // | 
     #'artisan:optimize',     // |
     #'artisan:migrate',      // |
