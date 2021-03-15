@@ -27,17 +27,20 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+        uses: shivammathur/setup-php@master
         with:
           php-version: '7.4' # Use your PHP version
-          extension: mbstring, bcmath # Setup any required extensions for tests
+          extensions: mbstring, bcmath # Setup any required extensions for tests
+          #ini-values: post_max_size=256M, max_execution_time=180
+          #coverage: xdebug        
+          #tools: php-cs-fixer
       - name: Composer install
         run: composer install
   deploy:
     name: Deploy to Production
     runs-on: ubuntu-20.04
     needs: [build-js, test-php]
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v1
       - name: Download build assets
@@ -46,10 +49,10 @@ jobs:
           name: assets
           path: public
       - name: Setup PHP
-        uses: shivammathur/setup-php@2
+        uses: shivammathur/setup-php@master
         with:
           php-version: '7.4'
-          extension: mbstring, bcmath
+          extensions: mbstring, bcmath
       - name: Composer install
         run: composer install
       - name: Setup Deployer
@@ -57,7 +60,7 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           ssh-known-hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
-      - name: Deploy to Prod
+      - name: Deploy 
         env:
           DOT_ENV: ${{ secrets.DOT_ENV }}
-        run: dep deploy production --tag=${{ env.GITHUB_REF }} -vvv
+        run: dep deploy staging --tag=${{ env.GITHUB_REF }} -vvv
