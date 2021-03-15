@@ -6,7 +6,7 @@ namespace Deployer;
 require 'recipe/laravel.php';
 require 'recipe/rsync.php';
 
-set('application', 'dep-demo');
+set('application', 'cataliz-web');
 set('ssh_multiplexing', true); // Speed up deployment
 
 set('rsync_src', function () {
@@ -35,7 +35,7 @@ task('deploy:secrets', function () {
 });
 
 // Hosts
-host('cataliz-staging') // Name of the server
+host('app.cataliz.id') // Name of the server or domain
     ->hostname('54.227.121.79') // Hostname or IP address
     ->stage('staging') // Deployment stage (production, staging, etc)
     ->user('ubuntu') // SSH user
