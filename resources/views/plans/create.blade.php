@@ -79,8 +79,8 @@
 
                   <div class="col-md-6 form-group">
                     <label for="fp-default">Tanggal Kegiatan</label>
-                    <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
-                      value="{{ old('date') }}" autocomplete="date" autofocus>
+                    <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
+                      value="{{ old('date') }}">
                     <div id="date-error"></div>
                     @error('date')
                     <span class="invalid-feedback" role="alert">
@@ -169,6 +169,8 @@
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
   <style>
     label.error.fail-alert {
       color: red;
@@ -176,26 +178,26 @@
   </style>
   <script type="text/javascript">
     $('.livesearch').select2({
-    placeholder: 'Select client',
-    ajax: {
-      url       : "{{route('clients.search')}}",
-      dataType  : 'json',
-      delay     : 250,
-      processResults: function (data) {
-        return {
-          results: $.map(data, function (item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
+      placeholder: 'Select client',
+      ajax: {
+            url       : "{{route('clients.search')}}",
+            dataType  : 'json',
+            delay     : 250,
+            processResults: function (data) {
+              return {
+                results: $.map(data, function (item) {
+                  console.log(item)
+                  return {
+                    text: item.name,
+                    id: item.id,
+                    org: item.organization,
+                  }
+                })
+              };
+            },
+            cache: true
+          }
+      });
 
 	$(".livesearch").on('change', function(e) {
     // Access to full data
@@ -270,11 +272,11 @@
 
 
 
-  $(function () {
-    $('#datetimepicker11').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
-  });
+  $(function() {
+     $("#date").datepicker({
+       minDate: "today"
+     });
+   });
 
   </script>
   @endpush
