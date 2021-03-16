@@ -68,7 +68,7 @@ class UserController extends Controller
     $validator = Validator::make($request->all(), [
       'name'  => 'required',
       'phone' => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
-      'email' => 'required|email|unique:users',
+      'email' => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
       'roles' => 'required',
     ]);
 

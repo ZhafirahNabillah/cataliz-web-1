@@ -27,11 +27,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $time_now = Carbon::now()->setTimezone('Asia/Jakarta')->format('h:i:s');
             $date_now = Carbon::now()->toDateString();
 
-            Agenda_detail::where('date', $date_now)->where('time', '<', $time_now)->orWhere('status', 'scheduled')->update(['status' => 'canceled']);
-            Agenda_detail::where('date', $date_now)->where('time', '<', $time_now)->orWhere('status', 'rescheduled')->update(['status' => 'canceled']);
+            Agenda_detail::where('date', '<', $date_now)->orWhere('status', 'scheduled')->update(['status' => 'canceled']);
+            Agenda_detail::where('date', '<', $date_now)->orWhere('status', 'rescheduled')->update(['status' => 'canceled']);
         })->everyMinute();
     }
 
