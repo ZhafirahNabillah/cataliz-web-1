@@ -412,7 +412,7 @@
                                   <tr>
                                     <td>
                                       <!-- Link buat ke agendas -->
-                                      <a href="#">
+                                      <a href="{{ route('agendas.index') }}">
                                         <button class="button button1">Go To My Agendas</button>
                                       </a>
                                     </td>

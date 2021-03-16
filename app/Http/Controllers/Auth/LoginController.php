@@ -45,7 +45,7 @@ class LoginController extends Controller
   {
 
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1])) {
-      return redirect('dashboard');
+      return redirect()->intended('dashboard');
     } else {
       Auth::logout();
       return redirect('login')->with('error', 'Your account has been suspended!');
