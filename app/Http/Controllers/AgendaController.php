@@ -266,6 +266,7 @@ class AgendaController extends Controller
     ]);
 
     $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
+    $old_agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
     $client = Client::where('id', $agenda_detail->agenda->client_id)->first();
     $coach = User::where('id', $agenda_detail->agenda->owner_id)->first();
 
@@ -283,7 +284,7 @@ class AgendaController extends Controller
       MailController::SendSessionScheduledMail($agenda_detail, $client, $coach);
     };
 
-    if ($agenda_detail->status == 'scheduled' && $agenda_detail->date != null && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
+    if (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && $agenda_detail->date != null && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
       $agenda_detail->status = 'rescheduled';
       $agenda_detail->date = $request->date;
       $agenda_detail->time = $request->time;
@@ -292,7 +293,7 @@ class AgendaController extends Controller
       $agenda_detail->duration = $request->duration;
       $agenda_detail->update();
 
-      MailController::SendSessionRescheduledMail($agenda_detail, $client, $coach);
+      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $client, $coach);
     };
 
     return redirect('/agendas')->with('success', 'Sessions Successfully updated!');

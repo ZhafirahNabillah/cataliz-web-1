@@ -272,7 +272,7 @@
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
                   <tr>
                     <!-- Nama -->
-                    <h3 style="color: black;">Hai, Your Name!</h3>
+                    <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
                     <span style="color: black;">Your coach has scheduled a new session for you. We hope you can attend
                       the</span>
                     <span style="color: black;">scheduled session with the following details:</span>
@@ -305,7 +305,7 @@
                         <td style="width: 150px;"></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- sesi ke -.... -->
-                          <span>1</span>
+                          <span>{{ $email_data['session_name'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -315,7 +315,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- topic -->
-                          <span>Introduction of Laravel</span>
+                          <span>{{ $email_data['topic'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -325,7 +325,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- Coach Name -->
-                          <span>Coach Name</span>
+                          <span>{{ $email_data['coach_name'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -344,7 +344,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- waktu -->
-                          <span>xx.xx WIB</span>
+                          <span>{{ $email_data['time'] }} WIB</span>
                         </td>
                       </tr>
                       <tr>
@@ -354,7 +354,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- Media -->
-                          <span>Media</span>
+                          <span>{{ $email_data['media'] }}</span>
                         </td>
                       </tr>
                     </table>

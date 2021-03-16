@@ -272,7 +272,7 @@
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
                   <tr>
                     <!-- Nama user -->
-                    <h3 style="color: black;">Hai, Your Name!</h3>
+                    <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
                     <span style="color: black;">Your coach has rescheduled your previously scheduled sessions for
                     </span>
                   </tr>
@@ -281,8 +281,8 @@
                 <table cellspacing="0" cellpadding="15px" class="force-full-width">
                   <tr>
                     <!-- Waktu Awal -->
-                    <td style="background-color: #625F6E;color: white;">Wednesday, xx Sxxxxx 20xx</td>
-                    <td style="background-color: #8D8D8D;color: white;">xx.xx WIB</td>
+                    <td style="background-color: #625F6E;color: white;">{{ $email_data['old_date'] }}</td>
+                    <td style="background-color: #8D8D8D;color: white;">{{ $email_data['old_time'] }} WIB</td>
 
                   </tr>
                   <tr>
@@ -291,7 +291,7 @@
                   <tr>
                     <!-- Waktu reschedule -->
                     <td style="background-color: #ECC373;color: #656565;">{{ $email_data['date'] }}</td>
-                    <td style="background-color: #F1DDAC;color: #656565;">xx.xx WIB</td>
+                    <td style="background-color: #F1DDAC;color: #656565;">{{ $email_data['time'] }} WIB</td>
 
                   </tr>
                 </table>
@@ -328,7 +328,7 @@
                         <td style="width: 150px;"></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- sesi ke - .... -->
-                          <span>1</span>
+                          <span>{{ $email_data['session_name'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -338,7 +338,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- topic -->
-                          <span>Introduction of Laravel</span>
+                          <span>{{ $email_data['topic'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -348,7 +348,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- coach name -->
-                          <span>Coach Name</span>
+                          <span>{{ $email_data['coach_name'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -358,7 +358,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- waktu yang reschedule -->
-                          <span>Wednesday, xx Sxxx 20xx</span>
+                          <span>{{ $email_data['date'] }}</span>
                         </td>
                       </tr>
                       <tr>
@@ -368,7 +368,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- waktu yang reschedule -->
-                          <span>xx.xx WIB</span>
+                          <span>{{ $email_data['time'] }} WIB</span>
                         </td>
                       </tr>
                       <tr>
@@ -378,7 +378,7 @@
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- Media -->
-                          <span>Media</span>
+                          <span>{{ $email_data['media'] }}</span>
                         </td>
                       </tr>
                     </table>
