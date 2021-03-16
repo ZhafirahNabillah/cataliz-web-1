@@ -7,6 +7,8 @@ use App\Models\Agenda_detail;
 use App\Models\Plan;
 use App\Models\Client;
 use App\Models\User;
+use App\Models\Class_model;
+use App\Models\Class_has_client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use DataTables;
@@ -35,7 +37,10 @@ class HomeController extends Controller
 
             // return (auth()->user());
             // summary content
-            $client = Client::where('owner_id', Auth::user()->id)->count();
+            $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
+            $class_has_clients = Class_has_client::whereIn('class_id', $class_id)->pluck('client_id');
+            $client = Client::whereIn('id', $class_has_clients)->count();
+
             $hours = Agenda::selectRaw('sum(agenda_details.duration)/60 as sum')
                 ->join('agenda_details', 'agenda_id', '=', 'agendas.id')
                 ->where([

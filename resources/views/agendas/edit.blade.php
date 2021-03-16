@@ -66,7 +66,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Plan</label>
-                      <select class="livesearch form-control" name="plan_id" disabled>
+                      <select class="livesearch form-control" name="plan_id" id="plan_id" disabled>
                         <option selected hidden value="{{ $plan->id }}">{{ $plan->objective }}</option>
                       </select>
                     </div>
@@ -74,7 +74,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control" name="client_id" disabled>
+                      <select class="livesearch form-control" name="client_id" id="client_id" disabled>
                         <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
                       </select>
                       <input type="hidden" name="id" value="{{$agenda->id}}">
@@ -94,7 +94,7 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
                       <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic"
-                        value="{{ $agenda_detail->topic }}" placeholder="Insert a topic...">
+                        value="{{ $agenda_detail->topic }}" placeholder="Insert a topic..." id="topic" disabled>
                       @error('topic')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
                       <select class="form-control @error('media') is-invalid @enderror" id="media1"
-                        aria-label=".form-select-lg example" name="media">
+                        aria-label=".form-select-lg example" name="media" disabled>
                         <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
                           Room')@endif>Meeting Room</option>
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
@@ -121,24 +121,12 @@
                       @enderror
                     </div>
                   </div>
-                  <div class="row media_url1" style="display: none">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
-                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media...">
-                      @error('media_url')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
                   @else
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
                       <select class="form-control @error('media') is-invalid @enderror" id="media2"
-                        aria-label=".form-select-lg example" name="media">
+                        aria-label=".form-select-lg example" name="media" disabled>
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
                           @endif>Whatsapp
                         </option>
@@ -157,7 +145,7 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
                       <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
-                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media...">
+                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url" disabled>
                       @error('media_url')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -170,8 +158,8 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Activity Date</label>
-                      <input type="date" id="datepicker" class="form-control @error('date') is-invalid @enderror"
-                        name="date" value="{{ $agenda_detail->date }}">
+                      <input type="text" id="date" class="form-control @error('date') is-invalid @enderror"
+                        name="date" value="{{ $agenda_detail->date }}" disabled>
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -180,8 +168,8 @@
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="fp-default">Activity Time</label>
-                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time"
-                        value="{{ $agenda_detail->time }}">
+                      <input type="text" class="form-control @error('time') is-invalid @enderror" name="time"
+                        value="{{ $agenda_detail->time }}" id="time" disabled>
                       @error('time')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -193,7 +181,7 @@
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Duration</label>
                       <select class="form-control @error('duration') is-invalid @enderror"
-                        aria-label=".form-select-lg example" name="duration">
+                        aria-label=".form-select-lg example" id="duration" name="duration" disabled>
                         <option hidden selected value>Choose a duration</option>
                         <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Minutes</option>
                         <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Minutes</option>
@@ -208,8 +196,10 @@
                     </div>
                   </div>
                   <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
+                    <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
                     value="create">Submit</button>
+                  @endif
                 </div>
               </div>
             </div>
@@ -225,7 +215,10 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#media1").on('change', function() {
@@ -236,6 +229,13 @@
   $(document).ready(function() {
     $("#media2").on('change', function() {
       $(".media_url2").toggle(500);
+    });
+    $("#date").datepicker({minDate:'0'});
+    $("#time").flatpickr({
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true
     });
   });
 </script>
@@ -301,12 +301,18 @@
     var dd = $(this).select2('data')[0];
   });
 
-  $(".")
-
+  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
   $(function() {
-    $('#datepicker').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
+    $('#plan_id').prop('disabled', false);
+    $('#client_id').prop('disabled', false);
+    $('#topic').prop('disabled', false);
+    $('#media1').prop('disabled', false);
+    $('#media2').prop('disabled', false);
+    $('#media_url').prop('disabled', false);
+    $('#date').prop('disabled', false);
+    $('#time').prop('disabled', false);
+    $('#duration').prop('disabled', false);
   });
+  @endif
 </script>
 @endpush

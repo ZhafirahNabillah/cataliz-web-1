@@ -11,6 +11,8 @@ class Agenda_detail extends Model
 
     protected $fillable = ['agenda_id','session_name','topic','date','time','media','media_url','duration','status','feedback_from_coachee','attachment_from_coachee','rating_from_coachee'];
 
+    // protected $dates = ['date'];
+
     public function agenda() {
       return $this->belongsTo('App\Models\Agenda');
     }

@@ -73,13 +73,13 @@
                     <dt class="col-sm-9 form-group">
                       @role('admin')
                       <select class="form-control" id="media1" aria-label=".form-select-lg example" name="status">
-                        <option selected value="Cancelled" id="Cancelled" @if($class->status == 'Cancelled')
+                        <option value="Cancelled" id="Cancelled" @if($class->status == 'Cancelled')
                           @endif>Cancelled</option>
-                        <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')
+                          <option value="Finished" id="Finished" @if($class->status == 'Finished')
+                            @endif>Finished
+                          </option>
+                        <option selected disabled value="On-Going" id="On-Going" @if($class->status == 'On-Going')
                           @endif>On-Going
-                        </option>
-                        <option selected value="Finished" id="Finished" @if($class->status == 'Finished')
-                          @endif>Finished
                         </option>
                       </select>
                       @else
@@ -91,7 +91,16 @@
                   <div class="row align-items-center media_url1" style="display: none">
                     <dt class="col-sm-3"><b>Notes</b></dt>
                     <dt class="col-sm-9 form-group">
-                      <input type="text" class="form-control" name="notes" placeholder="Masukkan notes...">
+                      <input type="text" class="form-control @error('notes') is-invalid @enderror" name="notes" placeholder="Masukkan notes...">
+                      @error('notes')
+                        <strong class="text-danger">{{ $message }}</strong>
+                      @enderror
+                    </dt>
+                  </div>
+                  <div class="row align-items-center">
+                    <dt class="col-sm-3"></dt>
+                    <dt class="col-sm-9">
+                      <p>*<i>You cannot restore the status if you have changed it</i></p>
                     </dt>
                   </div>
                   <div class="row align-items-center mb-2">
@@ -101,11 +110,12 @@
                     </dt>
                   </div>
                   @endrole
-                  @else
+                  @elseif($class->status == 'Cancelled')
                   <div class="row align-items-center mt-1">
                     <dt class="col-sm-3"><b>Status</b></dt>
                     <dt class="col-sm-9 form-group">
                       <select class="form-control" id="media2" aria-label=".form-select-lg example" name="status" disabled>
+                        <option selected value="Finished" id="Finished" @if($class->status == 'Finished')@endif>Finished</option>
                         <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')@endif>On-Going
                         </option>
                         <option selected value="Cancelled" id="Cancelled" @if($class->status ==
@@ -114,6 +124,25 @@
                     </dt>
                   </div>
                   <div class="row align-items-center media_url2">
+                    <dt class="col-sm-3"><b>Notes</b></dt>
+                    <dt class="col-sm-9 form-group">
+                      <input type="text" class="form-control" name="notes" placeholder="Write note here..." disabled value="{{$class->notes}}">
+                    </dt>
+                  </div>
+                  @else
+                  <div class="row align-items-center mt-1">
+                    <dt class="col-sm-3"><b>Status</b></dt>
+                    <dt class="col-sm-9 form-group">
+                      <select class="form-control" id="media3" aria-label=".form-select-lg example" name="status" disabled>
+                        <option selected value="On-Going" id="On-Going" @if($class->status == 'On-Going')@endif>On-Going
+                        </option>
+                        <option selected value="Cancelled" id="Cancelled" @if($class->status ==
+                          'Cancelled')@endif>Cancelled</option>
+                        <option selected value="Finished" id="Finished" @if($class->status == 'Finished')@endif>Finished</option>
+                      </select>
+                    </dt>
+                  </div>
+                  <div class="row align-items-center media_url3">
                     <dt class="col-sm-3"><b>Notes</b></dt>
                     <dt class="col-sm-9 form-group">
                       <input type="text" class="form-control" name="notes" placeholder="Write note here..." disabled value="{{$class->notes}}">
@@ -215,13 +244,7 @@
 
     $(document).ready(function() {
       $("#media1").on('change', function() {
-        $(".media_url1").toggle(500);
-      });
-    });
-
-    $(document).ready(function() {
-      $("#media2").on('change', function() {
-        $(".media_url2").toggle(500);
+        $(".media_url1").show(500);
       });
     });
 
