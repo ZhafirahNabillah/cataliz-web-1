@@ -105,7 +105,6 @@
 									<select class="form-control" id="role" name="role">
 										<option value="admin">Admin</option>
 										<option value="coach">Coach</option>
-										<option value="coachee">Coachee</option>
 									</select>
 								</div>
 
