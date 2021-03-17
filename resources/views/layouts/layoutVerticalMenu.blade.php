@@ -24,7 +24,7 @@
 date_default_timezone_set("Asia/Jakarta");
 ?>
 
-@if (date("H:i") > '14:56')
+@if ((date("H:i") > '18.00') && (date("H:i") < '06.00'))
 
 <body class="vertical-layout vertical-menu-modern dark-layout navbar-floating footer-static  " data-open="click"
     data-menu="vertical-menu-modern" data-col="">
