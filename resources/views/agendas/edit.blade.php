@@ -158,7 +158,7 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Activity Date</label>
-                      <input type="date" id="date" class="form-control @error('date') is-invalid @enderror"
+                      <input type="text" id="date" class="form-control @error('date') is-invalid @enderror"
                         name="date" value="{{ $agenda_detail->date }}" disabled>
                       @error('date')
                       <span class="invalid-feedback" role="alert">
@@ -168,7 +168,7 @@
                     </div>
                     <div class="col-md-4 form-group">
                       <label for="fp-default">Activity Time</label>
-                      <input type="time" class="form-control @error('time') is-invalid @enderror" name="time"
+                      <input type="text" class="form-control @error('time') is-invalid @enderror" name="time"
                         value="{{ $agenda_detail->time }}" id="time" disabled>
                       @error('time')
                       <span class="invalid-feedback" role="alert">
@@ -215,7 +215,10 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#media1").on('change', function() {
@@ -226,6 +229,13 @@
   $(document).ready(function() {
     $("#media2").on('change', function() {
       $(".media_url2").toggle(500);
+    });
+    $("#date").datepicker({minDate:'0'});
+    $("#time").flatpickr({
+      enableTime: true,
+      noCalendar: true,
+      dateFormat: "H:i",
+      time_24hr: true
     });
   });
 </script>
@@ -292,6 +302,7 @@
   });
 
   @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
+  $(function() {
     $('#plan_id').prop('disabled', false);
     $('#client_id').prop('disabled', false);
     $('#topic').prop('disabled', false);
@@ -301,12 +312,7 @@
     $('#date').prop('disabled', false);
     $('#time').prop('disabled', false);
     $('#duration').prop('disabled', false);
-  @endif
-
-  $(function() {
-    $('#datepicker').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
   });
+  @endif
 </script>
 @endpush
