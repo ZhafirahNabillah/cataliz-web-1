@@ -85,7 +85,6 @@ return array(
     'Doctrine\\Instantiator\\' => array($vendorDir . '/doctrine/instantiator/src/Doctrine/Instantiator'),
     'Doctrine\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Inflector'),
     'Doctrine\\Common\\Lexer\\' => array($vendorDir . '/doctrine/lexer/lib/Doctrine/Common/Lexer'),
-    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Common/Inflector'),
     'Deployer\\Component\\Version\\' => array($vendorDir . '/deployer/phar-update/src/Version'),
     'Deployer\\Component\\PharUpdate\\' => array($vendorDir . '/deployer/phar-update/src'),
     'Deployer\\Component\\PHPUnit\\' => array($vendorDir . '/deployer/phar-update/src/PHPUnit'),
