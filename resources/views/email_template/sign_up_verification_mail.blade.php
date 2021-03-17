@@ -1,6 +1,6 @@
-Hello {{$email_data['name']}}
+Hello
 <br><br>
-Selamat datang di Sepangan.com!
+Selamat datang di Cataliz.id!
 <br>
 Untuk melakukan aktivasi pada akun anda silahkan klik link dibawah ini!
 <br><br>
@@ -9,4 +9,4 @@ Untuk melakukan aktivasi pada akun anda silahkan klik link dibawah ini!
 <br><br>
 Terimakasih!
 <br>
-Sepangan.com - 2020
+Cataliz.id

@@ -18,18 +18,20 @@ class UserSeeder extends Seeder
         //
         $coach = User::create([
           'name'        => 'User Coach',
-          'phone'       => '081234567890',
+          'phone'       => '81234567890',
           'email'       => 'coach@cataliz.id',
-          'password'    => bcrypt('coach123')
+          'password'    => bcrypt('coach123'),
+          'is_verified' => 1
         ]);
 
         $coach->assignRole('coach');
 
         $coachee = User::create([
           'name'        => 'User Coachee',
-          'phone'       => '081234567890',
+          'phone'       => '81234567890',
           'email'       => 'coachee@cataliz.id',
-          'password'    => bcrypt('coachee123')
+          'password'    => bcrypt('coachee123'),
+          'is_verified' => 1
         ]);
 
         $coachee->assignRole('coachee');
@@ -47,9 +49,10 @@ class UserSeeder extends Seeder
 
         $admin = User::create([
           'name'        => 'User Admin',
-          'phone'       => '081234567890',
+          'phone'       => '81234567890',
           'email'       => 'admin@cataliz.id',
-          'password'    => bcrypt('admin123')
+          'password'    => bcrypt('admin123'),
+          'is_verified' => 1
         ]);
 
         $admin->assignRole('admin');

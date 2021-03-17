@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Request;
+use App\Http\Controllers\MailController;
 
 class RegisterController extends Controller
 {
@@ -88,6 +88,7 @@ class RegisterController extends Controller
       'phone' => $request->phone,
       'email' => $request->email,
       'password' => Hash::make($request->password),
+      'verification_code' => sha1(time()),
     ]);
 
     if ($request->role == 'coach') {
@@ -106,18 +107,21 @@ class RegisterController extends Controller
       $user->assignRole('coachee');
     }
 
+    MailController::SendSignUpMail($user->email, $user->verification_code);
+
     return redirect('login')->with('success', 'Registration is successful, please check your email to verify your account!');
   }
 
   public function verifyUser(){
-    $verification_code = Request::get('code');
+    $verification_code = \Illuminate\Support\Facades\Request::get('code');
     $user = User::where('verification_code', $verification_code)->first();
     if($user!=null){
       $user->is_verified = 1;
+      $user->verification_code = null;
       $user->save();
       return redirect('/login')->with('success','Akun anda berhasil terverifikasi. Silahkan login!');
     } else{
-      return redirect('/login')->with('fail','Kode Verifikasi tidak ditemukan. Silahkan mendaftar kembali!');
+      return abort(404);
     }
   }
 }

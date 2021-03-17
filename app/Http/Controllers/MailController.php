@@ -33,7 +33,7 @@ class MailController extends Controller
 
     public static function SendSignUpMail($email, $verification_code){
       $data = [
-        'verfication_code' => $verification_code
+        'verification_code' => $verification_code
       ];
 
       Mail::to($email)->send(new SendSignUpMail($data));
