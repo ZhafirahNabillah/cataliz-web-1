@@ -20,6 +20,7 @@ jobs:
         with:
           name: assets
           path: public
+          retention-days: 1
   test-php:
     name: Test/Lint PHP
     runs-on: ubuntu-20.04
