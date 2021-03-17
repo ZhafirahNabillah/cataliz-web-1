@@ -29,7 +29,6 @@
                       {{ session('status') }}
                     </div>
                     @endif
-
                     Welcome, {{auth()->user()->name . ", You are logged in!"}}
                   </div>
                 </div>
@@ -128,14 +127,16 @@
             <div class="row justify-content-left">
               <div class="col-md-3">
                 <div class="card">
-                  <div class="card-body">
+                  <div class="card-body text-center">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                       {{ session('status') }}
                     </div>
                     @endif
 
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}}
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}"
+                      target="_blank"><u>See
+                        Documentations</u></a>
                   </div>
                 </div>
               </div>
@@ -356,14 +357,16 @@
             <div class="row justify-content-left position-relative">
               <div class="col-md-4 col-lg-3">
                 <div class="card  ">
-                  <div class="card-body">
+                  <div class="card-body text-center">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                       {{ session('status') }}
                     </div>
                     @endif
 
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}}
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}"
+                      target="_blank"><u>See
+                        Documentations</u></a>
                   </div>
                 </div>
               </div>
