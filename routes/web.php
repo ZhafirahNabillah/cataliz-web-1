@@ -88,6 +88,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
 	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
 
+	Route::get('/coachee_pdf', [ClientController::class, 'coachee_pdf_download'])->name('coachee_pdf');
+	Route::get('/coach_pdf', [ClientController::class, 'coach_pdf_download'])->name('coach_pdf');
+
 	Route::resource('clients', ClientController::class);
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}/show_sessions', [ClientController::class, 'show_sessions_data'])->name('clients.show_sessions');

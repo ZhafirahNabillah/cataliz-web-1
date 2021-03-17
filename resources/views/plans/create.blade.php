@@ -166,18 +166,18 @@
   @endsection
 
   @push('scripts')
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
   <style>
     label.error.fail-alert {
       color: red;
     }
   </style>
   <script type="text/javascript">
-    $('.livesearch').select2({
+  $('.livesearch').select2({
       placeholder: 'Select client',
       ajax: {
             url       : "{{route('clients.search')}}",
@@ -262,6 +262,13 @@
         });
         console.log('loaded');
       });
+
+      today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+      $('#date').datepicker({
+        format: 'yyyy-mm-dd',
+        minDate: today,
+        uiLibrary: 'bootstrap4'
+      });
   });
 
   function CountCharacters() {
@@ -269,14 +276,6 @@
     var content = tinymce.trim(body.innerText || body.textContent);
     return content.length;
   };
-
-
-
-  $(function() {
-     $("#date").datepicker({
-       minDate: "today"
-     });
-   });
 
   </script>
   @endpush

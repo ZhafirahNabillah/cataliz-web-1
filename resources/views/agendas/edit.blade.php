@@ -215,10 +215,10 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#media1").on('change', function() {
@@ -230,12 +230,67 @@
     $("#media2").on('change', function() {
       $(".media_url2").toggle(500);
     });
-    $("#date").datepicker({minDate:'0'});
-    $("#time").flatpickr({
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: "H:i",
-      time_24hr: true
+
+    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    console.log(time);
+    $('#date').datepicker({
+      format: 'yyyy-mm-dd',
+      minDate: today,
+      uiLibrary: 'bootstrap4'
+    });
+
+    var dateToday = new Date();
+
+    var nowDay = dateToday.getDate();
+    var nowMonth = dateToday.getMonth()+1;
+    var nowYear = dateToday.getFullYear();
+
+    if(nowMonth < 10){
+      nowMonth = '0' + nowMonth.toString();
+    }
+
+    if(nowDay < 10){
+      nowDay = '0' + nowDay.toString();
+    }
+
+    var nowDateNew = nowYear + '-' + nowMonth + '-' + nowDay;
+
+    var selectedDate;
+
+    $('#date').change( function(){
+      selectedDate = new Date($('#date').val());
+
+      var SelectedDay = selectedDate.getDate();
+      var SelectedMonth = selectedDate.getMonth()+1;
+      var SelectedYear = selectedDate.getFullYear();
+
+      if(SelectedMonth < 10){
+        SelectedMonth = '0' + SelectedMonth.toString();
+      }
+
+      if(SelectedDay < 10){
+        SelectedDay = '0' + SelectedDay.toString();
+      }
+
+      var SelectedDateNew = SelectedYear + '-' + SelectedMonth + '-' + SelectedDay;
+
+      // console.log(SelectedDateNew);
+      // console.log(nowDateNew);
+
+      if (SelectedDateNew === nowDateNew) {
+        var time = new Date().getHours().toString()+':'+new Date().getMinutes().toString();
+        console.log(true);
+      }
+    });
+
+    $('#time').timepicker({
+      timeFormat: 'HH:mm',
+      interval: 15,
+      minTime: '8',
+      maxTime: '22',
+      dynamic: false,
+      dropdown: true,
+      scrollbar: true
     });
   });
 </script>

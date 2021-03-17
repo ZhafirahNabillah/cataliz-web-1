@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Class_model;
 use App\Models\Class_has_client;
 use DataTables;
+use PDF;
 
 class ClientController extends Controller
 {
@@ -438,5 +439,23 @@ class ClientController extends Controller
     //
     Client::find($id)->delete();
     return response()->json(['success' => 'Client deleted!']);
+  }
+
+  public function coach_pdf_download(){
+    $coachs = User::role('coach')->get();
+
+    $pdf = PDF::loadview('pdf_template.coach_list_pdf',compact('coachs'));
+    return $pdf->download('coach_list.pdf');
+  }
+
+  // public function print(){
+  //   return "test";
+  // }
+
+  public function coachee_pdf_download(){
+    $coachee = User::role('coachee')->get();
+
+    $pdf = PDF::loadview('pdf_template.coachee_list_pdf',compact('coachee'));
+    return $pdf->download('coachee_list.pdf');
   }
 }
