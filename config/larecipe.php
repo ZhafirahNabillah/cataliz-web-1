@@ -17,7 +17,7 @@ return [
         'route'   => '/docs',
         'path'    => '/resources/docs',
         'landing' => 'overview',
-        'middleware' => ['api'],
+        'middleware' => ['web'],
     ],
 
     /*
