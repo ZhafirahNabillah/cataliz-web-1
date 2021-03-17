@@ -56,16 +56,17 @@
                 <h4 class="card-title"><b>Detail Class</b></h4>
               </div>
               <div class="card-body">
-                <div class="row">
+                {{-- <div class="row">
                   <dt class="col-sm-3"><b>Class Name</b></dt>
                   <dt class="col-sm-9"><b>{{ $class->class_name }}</b></dt>
-                </div>
+                </div> --}}
                 <div class="row mt-1">
                   <dt class="col-sm-3"><b>Coach Name</b></dt>
-                  <dt class="col-sm-9"><b>{{ $class->coach->name }}</b></dt>
+                  {{-- <dt class="col-sm-9"><b>{{ $class->coach->name }}</b></dt> --}}
+                  <dt class="col-sm-9"><b>{{ $coach->name }}</b></dt>
                 </div>
 
-                <form action="{{route('class.ubah_status',$class->id)}}" method="post">
+                {{-- <form action="{{route('class.ubah_status',$class->id)}}" method="post">
                   @csrf
                   @if ($class->status == 'On-Going')
                   <div class="row align-items-center mt-1">
@@ -149,7 +150,7 @@
                     </dt>
                   </div>
                   @endif
-                </form>
+                </form> --}}
                 <hr>
 
                 <!-- Basic table -->
@@ -178,55 +179,6 @@
           </div>
         </div>
     </div>
-
-    <!-- Modal to add new record -->
-    <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-      <div class="modal-dialog sidebar-sm">
-        <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-          <div class="modal-header mb-1">
-            <h5 class="modal-title" id="modalHeading"></h5>
-          </div>
-          <input type="hidden" name="Client_id" id="Client_id">
-          <div class="modal-body flex-grow-1">
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-            </div>
-            <label class="form-label" for="basic-icon-default-post">Phone</label>
-            <div class="input-group input-group-merge mb-2">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="basic-addon5">+62</span>
-              </div>
-              <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-email">Email</label>
-              <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
-              <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-              <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Company</label>
-              <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-              <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-            </div>
-
-            <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-          </div>
-          <!-- </form>-->
-
-      </div>
-    </div>
-    <!-- End Modal -->
     </section>
     <!--/ Basic table -->
 
@@ -241,13 +193,6 @@
 @push('scripts')
 <script type="text/javascript">
   $(function() {
-
-    $(document).ready(function() {
-      $("#media1").on('change', function() {
-        $(".media_url1").show(500);
-      });
-    });
-
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

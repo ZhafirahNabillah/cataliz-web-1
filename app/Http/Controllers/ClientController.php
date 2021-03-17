@@ -124,7 +124,7 @@ class ClientController extends Controller
         ->leftJoin('agenda_details', function ($join) {
           $join->on('agenda_details.agenda_id', '=', 'agendas.id');
         })
-        ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
+        ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code','users.verification_code','users.is_verified', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
         // // ->whereNull('agenda_details.agenda_id')
         ->get();
 
