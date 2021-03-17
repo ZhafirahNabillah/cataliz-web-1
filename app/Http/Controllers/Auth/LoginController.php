@@ -44,11 +44,17 @@ class LoginController extends Controller
   protected function authenticated(Request $request)
   {
 
-    if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1])) {
+    if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1, 'is_verified' => 1])) {
       return redirect()->intended('dashboard');
-    } else {
+    } else if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 0, 'is_verified' => 1])){
       Auth::logout();
       return redirect('login')->with('error', 'Your account has been suspended!');
+    } else if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1, 'is_verified' => 0])){
+      Auth::logout();
+      return redirect('login')->with('error', 'Please verify your account before proceed!');
+    } else if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 0, 'is_verified' => 0])){
+      Auth::logout();
+      return redirect('login')->with('error', 'Your account has been suspended and not verified!');
     }
   }
 

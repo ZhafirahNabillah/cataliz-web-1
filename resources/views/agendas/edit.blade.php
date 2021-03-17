@@ -145,7 +145,8 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
                       <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
-                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url" disabled>
+                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url"
+                        disabled>
                       @error('media_url')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -158,8 +159,8 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Activity Date</label>
-                      <input type="text" id="date" class="form-control @error('date') is-invalid @enderror"
-                        name="date" value="{{ $agenda_detail->date }}" disabled>
+                      <input type="text" id="date" class="form-control @error('date') is-invalid @enderror" name="date"
+                        value="{{ $agenda_detail->date }}" disabled>
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -196,8 +197,9 @@
                     </div>
                   </div>
                   <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
-                  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
-                    <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
+                  $agenda_detail->status == 'unschedule')
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
                     value="create">Submit</button>
                   @endif
                 </div>
@@ -215,10 +217,10 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel = "stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
   $(document).ready(function() {
     $("#media1").on('change', function() {
@@ -230,12 +232,55 @@
     $("#media2").on('change', function() {
       $(".media_url2").toggle(500);
     });
-    $("#date").datepicker({minDate:'0'});
-    $("#time").flatpickr({
-      enableTime: true,
-      noCalendar: true,
-      dateFormat: "H:i",
-      time_24hr: true
+
+    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+    $('#date').datepicker({
+      format: 'yyyy-mm-dd',
+      minDate: today,
+      uiLibrary: 'bootstrap4'
+    });
+
+    $('#date').on('change', function(){
+      var a = new Date($('#date').val()).getFullYear();
+      var b = new Date($('#date').val()).getMonth();
+      var c = new Date($('#date').val()).getDate();
+      // var selectedDate = new Date(a,b,c);
+
+      console.log(a,b,c);
+
+      var time = new Date();
+      console.log(time.getFullYear(), time.getMonth(), time.getDate());
+      
+      function addZero(i) {
+        if ((a && b && c) != (time.getFullYear() && time.getMonth() && time.getDate())) {
+          i = 0;
+          if (i < 10) {
+            i = "0" + i;
+          }
+        }
+        else {
+          if (i < 10) {
+            i = "0" + i;
+          }
+        }
+        return i;
+      }
+
+      var h = String(addZero(time.getHours()));
+      var m = String(addZero(time.getMinutes()));
+      var min = h + ':' + m;
+      console.log(min);
+      
+      $('#time').timepicker({
+        pickDate: false,
+        timeFormat: 'HH:mm',
+        interval: 1,
+        minTime: min,
+        maxTime: '23:59',
+        dynamic: true,
+        dropdown: true,
+        scrollbar: true
+      });
     });
   });
 </script>

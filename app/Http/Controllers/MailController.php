@@ -8,6 +8,7 @@ use App\Mail\SendResetPasswordMail;
 use App\Mail\SendForgotPasswordMail;
 use App\Mail\SendSessionScheduledMail;
 use App\Mail\SendSessionRescheduledMail;
+use App\Mail\SendSignUpMail;
 use Carbon\Carbon;
 
 class MailController extends Controller
@@ -28,6 +29,14 @@ class MailController extends Controller
       ];
 
       Mail::to($email)->send(new SendForgotPasswordMail($data));
+    }
+
+    public static function SendSignUpMail($email, $verification_code){
+      $data = [
+        'verification_code' => $verification_code
+      ];
+
+      Mail::to($email)->send(new SendSignUpMail($data));
     }
 
     public static function SendSessionScheduledMail($agenda_detail, $client, $coach){

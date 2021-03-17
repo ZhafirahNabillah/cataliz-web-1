@@ -21,15 +21,14 @@
         <div class="row match-height">
           <div class="container-fluid">
             <div class="row justify-content-left">
-              <div class="col-md-3">
-                <div class="card">
+              <div class="col-md-12">
+                <div class="card bg-success text-white">
                   <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                       {{ session('status') }}
                     </div>
                     @endif
-
                     Welcome, {{auth()->user()->name . ", You are logged in!"}}
                   </div>
                 </div>
@@ -37,58 +36,66 @@
             </div>
           </div>
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <img class="rounded float-right" width="15px" height="15px"
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 172.png') }}"
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 172.png') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Coach</small>
-                <h2 class="font-weight-bolder text-center">{{$total_coach}} Coach</h2>
+                  <small class="card text-center text-muted my-1">Total Coach</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_coach}} Coach</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <img class="rounded float-right" width="15px" height="15px"
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah client coachee yang terdaftar" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 115.png') }}"
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 115.png') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Coachee</small>
-                <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
+                  <small class="card text-center text-muted my-1">Total Coachee</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <img class="rounded float-right" width="15px" height="15px"
+            <a href="{{ route('plans.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah plan yang terdaftar" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 191.png') }}"
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 191.png') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Plan</small>
-                <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
+                  <small class="card text-center text-muted my-1">Total Plan</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <img class="rounded float-right" width="15px" height="15px"
+            <a href="{{ route('agendas.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah sesi yang terdaftar" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 90.png') }}"
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\Group 90.png') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Session</small>
-                <h2 class="font-weight-bolder text-center">{{$total_sessions}} Sessions</h2>
+                  <small class="card text-center text-muted my-1">Total Session</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_sessions}} Sessions</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-12 col-lg-12">
@@ -126,8 +133,8 @@
         <div class="row match-height">
           <div class="container-fluid">
             <div class="row justify-content-left">
-              <div class="col-md-3">
-                <div class="card">
+              <div class="col-md-12">
+                <div class="card bg-success text-white">
                   <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -135,7 +142,9 @@
                     </div>
                     @endif
 
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}}
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}"
+                      target="_blank"><u>See
+                        Documentations</u></a>
                   </div>
                 </div>
               </div>
@@ -144,43 +153,46 @@
             </div>
           </div>
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src="
+            <a href="{{ route('agendas.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-                </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}"
+                  </div>
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Coaching Hour
-                </small>
-                @if ($hours == null)
-                <h2 class="font-weight-bolder text-center">0 Hours</h2>
-                @else
-                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}
-                  Hours</h2>
-                @endif
-              </div>
-            </div>
+                  <small class="card text-center text-muted mb-1">Total Coaching Hour
+                  </small>
+                  @if ($hours == null)
+                    <h2 class="font-weight-bolder text-center">0 Hours</h2>
+                  @else
+                    <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}
+                      Hours</h2>
+                    @endif
+                  </div>
+                </div>
+            </a>
           </div>
 
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src="
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Jumlah coachee" />
-                </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 84.jpg') }}"
+                  </div>
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 84.jpg') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Coachee
-                </small>
-                <h2 class="font-weight-bolder text-center">{{$client}} Clients</h2>
+                  <small class="card text-center text-muted mb-1">Total Coachee
+                  </small>
+                  <h2 class="font-weight-bolder text-center">{{$client}} Clients</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-4 col-lg-3">
@@ -201,20 +213,22 @@
           </div>
 
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src="
+            <a href="{{ route('agendas.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
-                </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}"
+                  </div>
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Session
-                </small>
-                <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
+                  <small class="card text-center text-muted mb-1">Total Session
+                  </small>
+                  <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-6">
@@ -354,8 +368,8 @@
 
           <div class="container-fluid">
             <div class="row justify-content-left position-relative">
-              <div class="col-md-4 col-lg-3">
-                <div class="card  ">
+              <div class="col-12">
+                <div class="card bg-success text-white">
                   <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -363,49 +377,54 @@
                     </div>
                     @endif
 
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}}
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}"
+                      target="_blank"><u>See
+                        Documentations</u></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src="
+            <a href="{{ route('agendas.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <img class="rounded float-right width=" 18px" height="18px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-                </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}"
+                  </div>
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.jpg') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Coaching Hour
-                </small>
-                @if ($hours == null)
-                <h2 class="font-weight-bolder text-center">0 Hours</h2>
-                @else
-                <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}
-                  Hours</h2>
-                @endif
-              </div>
-            </div>
+                  <small class="card text-center text-muted mb-1">Total Coaching Hour
+                  </small>
+                  @if ($hours == null)
+                    <h2 class="font-weight-bolder text-center">0 Hours</h2>
+                  @else
+                    <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($hours->sum, 1))}}
+                      Hours</h2>
+                    @endif
+                  </div>
+                </div>
+            </a>
           </div>
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src="
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Jumlah coachee" />
-                </div>
-                <img class="rounded mx-auto d-block center" style="height: 80px;"
+                  </div>
+                  <img class="rounded mx-auto d-block center" style="height: 80px;"
                   src="{{ url('assets\images\icons\Group 172.png') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Coach
-                </small>
-                <h2 class="font-weight-bolder text-center">{{$total_coach}} Coachs</h2>
+                  <small class="card text-center text-muted mb-1">Total Coach
+                  </small>
+                  <h2 class="font-weight-bolder text-center">{{$total_coach}} Coachs</h2>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-4 col-lg-3">
@@ -426,24 +445,26 @@
           </div>
 
           <div class="col-md-4 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src="
+            <a href="{{ route('agendas.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <div class="card-title">
+                    <img class="rounded float-right width=" 18px" height="18px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
-                </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}"
+                  </div>
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 90.jpg') }}"
                   alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Session
-                </small>
-                @if ($session->sum == null)
-                <h2 class="font-weight-bolder text-center">0 Sessions</h2>
-                @else
-                <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
-                @endif
+                  <small class="card text-center text-muted mb-1">Total Session
+                  </small>
+                  @if ($session->sum == null)
+                    <h2 class="font-weight-bolder text-center">0 Sessions</h2>
+                  @else
+                    <h2 class="font-weight-bolder text-center">{{$session->sum}} Sessions</h2>
+                  @endif
+                </div>
               </div>
-            </div>
+            </a>
           </div>
 
           <div class="col-md-6 col-lg-6">

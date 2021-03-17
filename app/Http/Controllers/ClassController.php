@@ -27,36 +27,60 @@ class ClassController extends Controller
 
 
 
-    public function index(Request $request)
-    {
-      if (auth()->user()->hasRole('coach')) {
-        $data = Class_model::with('coach')->where('coach_id',auth()->user()->id)->get();
-      } elseif (auth()->user()->hasRole('coachee')) {
-        $client = Client::where('user_id',auth()->user()->id)->first();
-        $class_id = Class_has_client::where('client_id',$client->id)->pluck('class_id');
-        $data = Class_model::with('coach')->whereIn('id',$class_id)->get();
-      } else {
-        $data = Class_model::with('coach')->get();
+    // public function index(Request $request)
+    // {
+    //   if (auth()->user()->hasRole('coach')) {
+    //     $data = Class_model::with('coach')->where('coach_id',auth()->user()->id)->get();
+    //   } elseif (auth()->user()->hasRole('coachee')) {
+    //     $client = Client::where('user_id',auth()->user()->id)->first();
+    //     $class_id = Class_has_client::where('client_id',$client->id)->pluck('class_id');
+    //     $data = Class_model::with('coach')->whereIn('id',$class_id)->get();
+    //   } else {
+    //     $data = Class_model::with('coach')->get();
+    //   }
+    //
+    //     if ($request->ajax()) {
+    //         return Datatables::of($data)
+    //             ->addIndexColumn()
+    //             ->addColumn('action', function ($row) {
+    //
+    //                 $detail_btn = '<a href="' . route('class.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
+    //
+    //                 return $detail_btn;
+    //             })
+    //             ->addColumn('participant', function ($row) {
+    //                 $participant = Class_has_client::where('class_id', $row->id)->count();
+    //
+    //                 return ($participant . '/10');
+    //             })
+    //             ->rawColumns(['action', 'participant'])
+    //             ->make(true);
+    //     }
+    //     return view('class.index');
+    // }
+
+    public function index(Request $request){
+      $data = User::role('coach')->get();
+
+      if ($request->ajax()) {
+        return Datatables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+
+          $detail_btn = '<a href="' . route('class.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
+
+          return $detail_btn;
+        })
+        ->addColumn('Total Client', function ($row) {
+          $participant = Client::where('owner_id', $row->id)->count();
+
+          return $participant;
+        })
+        ->rawColumns(['action', 'Total Client'])
+        ->make(true);
       }
 
-        if ($request->ajax()) {
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-
-                    $detail_btn = '<a href="' . route('class.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
-
-                    return $detail_btn;
-                })
-                ->addColumn('participant', function ($row) {
-                    $participant = Class_has_client::where('class_id', $row->id)->count();
-
-                    return ($participant . '/10');
-                })
-                ->rawColumns(['action', 'participant'])
-                ->make(true);
-        }
-        return view('class.index');
+      return view('class.index');
     }
 
     /**
@@ -114,19 +138,28 @@ class ClassController extends Controller
     public function show($id, Request $request)
     {
         //
-        $class = Class_model::with('coach')->where('id', $id)->first();
-        $coachee_id = Class_has_client::where('class_id', $class->id)->pluck('client_id');
+        // $class = Class_model::with('coach')->where('id', $id)->first();
+        // $coachee_id = Class_has_client::where('class_id', $class->id)->pluck('client_id');
 
+        $coach = User::find($id);
+        $data = Client::where('owner_id',$coach->id)->get();
+
+        // if ($request->ajax()) {
+        //
+        //     $data = Client::whereIn('id', $coachee_id)->get();
+        //
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()
+        //         ->make(true);
+        // }
         if ($request->ajax()) {
-
-            $data = Client::whereIn('id', $coachee_id)->get();
 
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->make(true);
         }
 
-        return view('class.detail', compact('class'));
+        return view('class.detail', compact('coach'));
     }
 
     /**

@@ -275,6 +275,7 @@
               <div class="row">
                 <div class="col-12">
                   <table class="datatables-basic table admin-datatable-coach">
+                    <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
                     <thead>
                       <tr>
                         <th>NO</th>
@@ -321,9 +322,11 @@
             <!-- Panel Coachee -->
             <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
               <!-- coacheelist card -->
+
               <div class="row">
                 <div class="col-12">
                   <table class="datatables-basic table admin-datatable-coachee">
+                    <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a>
                     <thead>
                       <tr>
                         <th>No</th>
@@ -760,7 +763,7 @@
               },
               search: "<i data-feather='search'></i>",
               searchPlaceholder: "Search records"
-            }
+            },
           });
 
           // create new user on admin page

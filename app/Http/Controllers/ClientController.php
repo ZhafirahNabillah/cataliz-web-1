@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Class_model;
 use App\Models\Class_has_client;
 use DataTables;
+use PDF;
 
 class ClientController extends Controller
 {
@@ -124,7 +125,7 @@ class ClientController extends Controller
         ->leftJoin('agenda_details', function ($join) {
           $join->on('agenda_details.agenda_id', '=', 'agendas.id');
         })
-        ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
+        ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code','users.verification_code','users.is_verified', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
         // // ->whereNull('agenda_details.agenda_id')
         ->get();
 
@@ -438,5 +439,23 @@ class ClientController extends Controller
     //
     Client::find($id)->delete();
     return response()->json(['success' => 'Client deleted!']);
+  }
+
+  public function coach_pdf_download(){
+    $coachs = User::role('coach')->get();
+
+    $pdf = PDF::loadview('pdf_template.coach_list_pdf',compact('coachs'));
+    return $pdf->download('coach_list.pdf');
+  }
+
+  // public function print(){
+  //   return "test";
+  // }
+
+  public function coachee_pdf_download(){
+    $coachee = User::role('coachee')->get();
+
+    $pdf = PDF::loadview('pdf_template.coachee_list_pdf',compact('coachee'));
+    return $pdf->download('coachee_list.pdf');
   }
 }

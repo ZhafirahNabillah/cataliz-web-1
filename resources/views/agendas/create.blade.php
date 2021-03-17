@@ -220,13 +220,5 @@
     console.log($(this).select2('data')[0].id);
     var dd = $(this).select2('data')[0];
   });
-
-  $(".")
-
-  $(function() {
-    $('#datepicker').datetimepicker({
-      daysOfWeekDisabled: [0, 6]
-    });
-  });
 </script>
 @endpush

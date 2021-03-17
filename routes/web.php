@@ -43,6 +43,7 @@ Route::post('/register', [RegisterController::class, 'create'])->name('register'
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/reset', [ResetPasswordController::class, 'show_reset_form'])->name('show_reset_form');
 Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name('reset_password');
+Route::get('/verify', [RegisterController::class, 'verifyUser'])->name('verify_user');
 
 //Middleware group for admin page
 Route::group(['middleware' => ['auth']], function () {
@@ -86,6 +87,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/agendas/{id}/add_feedback_from_coachee', [AgendaController::class, 'add_feedback_from_coachee'])->name('add_feedback_from_coachee');
 	Route::get('/agendas/{id}/feedback_download', [AgendaController::class, 'feedback_download'])->name('agendas.feedback_download');
 	Route::get('/agendas/{id}/note_download', [AgendaController::class, 'note_download'])->name('agendas.note_download');
+
+	Route::get('/coachee_pdf', [ClientController::class, 'coachee_pdf_download'])->name('coachee_pdf');
+	Route::get('/coach_pdf', [ClientController::class, 'coach_pdf_download'])->name('coach_pdf');
 
 	Route::resource('clients', ClientController::class);
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
