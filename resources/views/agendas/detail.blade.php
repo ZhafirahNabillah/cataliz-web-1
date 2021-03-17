@@ -203,6 +203,66 @@
 			</div>
 			@endrole
 
+			@role('admin')
+			<div class="row match-height">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<h4> <strong>Feedback from coach</strong> </h4>
+							<div class="mb-2">{!! $agenda_detail->feedback_from_coach ?? "Feedback not available" !!}</div>
+							<h5> <strong>Documentation</strong> </h5>
+							@if ($agenda_detail->attachment_from_coach)
+								<button type="button" name="button" class="btn btn-primary">Download</button>
+							@else
+								<div>Documentation not available</div>
+							@endif
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h4> <strong>Feedback from coachee</strong> </h4>
+							<div class="mb-2">{!! $agenda_detail->feedback_from_coachee ?? "Feedback not available" !!}</div>
+							<h5> <strong>Documentation</strong> </h5>
+							@if ($agenda_detail->attachment_from_coachee)
+								<button type="button" name="button" class="btn btn-primary">Download</button>
+							@else
+								<div>Documentation not available</div>
+							@endif
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h4> <strong>Coaching Note</strong> </h4>
+							@if ($coaching_note !== null)
+								<h5> <strong>Subject</strong> </h5>
+								<div class="mb-2">{!! $coaching_note->subject ?? "Subject not available" !!}</div>
+								<h5> <strong>Summary</strong> </h5>
+								<div class="mb-2">{!! $coaching_note->summary ?? "Summary not available" !!}</div>
+								<h5> <strong>Documentation</strong> </h5>
+								@if ($coaching_note->attachment)
+									<button type="button" name="button" class="btn btn-primary">Download</button>
+								@else
+									<div>Documentation not available</div>
+								@endif
+							@else
+								<div>Coaching note not available</div>
+							@endif
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<h4> <strong>Rating</strong> </h4>
+							@if ($agenda_detail->rating_from_coachee == null)
+							<div>Coach rating not available</div>
+							@else
+							<div id="rateYo" data-rating="{{ $agenda_detail->rating_from_coachee }}"></div>
+							@endif
+						</div>
+					</div>
+				</div>
+			</div>
+			@endrole
+
 
 
 			@role('coach')
