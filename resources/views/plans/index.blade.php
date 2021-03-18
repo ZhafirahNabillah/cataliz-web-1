@@ -31,72 +31,166 @@
                 </div>
             </div>
         </div>
-        <div class="content-body">
-            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-dissmisable">
-                <h4 class="alert-heading">Success</h4>
-                <div class="alert-body">{{ $message }}</div>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            @endif
-            <div class="row">
-                <div class="col-12">
-                    @can('create-plan')
-                    @role('coach')
-                    <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
-                    @endrole
-                    @endcan
-                </div>
-            </div>
-            <br>
-            <!-- Basic table -->
-            <section id="basic-datatable">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            @hasanyrole('coach|admin')
-                            <table class="datatables-basic table default-datatable-plans">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Company</th>
-                                        <th>Email</th>
-                                        <th>Handphone</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            @else
-                            <table class="datatables-basic table coachee-datatable-plans">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Coach Name</th>
-                                        <th>Objective</th>
-                                        <th>Schedule</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            @endhasanyrole
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Grup</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Panel Individu -->
+                    <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+                        <div class="content-body">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dissmisable">
+                                <h4 class="alert-heading">Success</h4>
+                                <div class="alert-body">{{ $message }}</div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @endif
+                            <div class="row">
+                                <div class="col-12">
+                                    @can('create-plan')
+                                    @role('coach')
+                                    <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
+                                    @endrole
+                                    @endcan
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Basic table -->
+                            <section id="basic-datatable">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            @hasanyrole('coach|admin')
+                                            <table class="datatables-basic table default-datatable-plans">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Name</th>
+                                                        <th>Company</th>
+                                                        <th>Email</th>
+                                                        <th>Handphone</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @else
+                                            <table class="datatables-basic table coachee-datatable-plans">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Coach Name</th>
+                                                        <th>Objective</th>
+                                                        <th>Handphone</th>
+                                                        <th>Schedule</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @endhasanyrole
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--/ Basic table -->
                         </div>
                     </div>
+                    <!-- /panel individu -->
+
+
+                    <!-- Panel Grup -->
+                    <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+                        <div class="content-body">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dissmisable">
+                                <h4 class="alert-heading">Success</h4>
+                                <div class="alert-body">{{ $message }}</div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @endif
+                            <div class="row">
+                                <div class="col-12">
+                                    @can('create-plan')
+                                    @role('coach')
+                                    <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
+                                    @endrole
+                                    @endcan
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Basic table -->
+                            <section id="basic-datatable">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            @hasanyrole('coach|admin')
+                                            <table class="datatables-basic table default-datatable-plans">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Kode Grup</th>
+                                                        <th>Company</th>
+                                                        <th>Schedule</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @else
+                                            <table class="datatables-basic table coachee-datatable-plans">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Kode Grup</th>
+                                                        <th>Objective</th>
+                                                        <th>Schedule</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @endhasanyrole
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--/ Basic table -->
+                        </div>
+                    </div>
+                    <!-- /coachee list admin -->
                 </div>
-            </section>
-            <!--/ Basic table -->
+            </div>
         </div>
+        <!-- /panel coachee -->
+
+
     </div>
 </div>
 <!-- END: Content-->

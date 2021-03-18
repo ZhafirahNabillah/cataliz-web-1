@@ -58,6 +58,7 @@
               <form action="{{url('/plans')}}" method="post">
                 @csrf
                 <div class="card-body">
+                  <!-- individu -->
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
@@ -67,14 +68,41 @@
                       <input type="hidden" name="client_id" value="{{ $client->id }}">
                     </div>
                   </div>
+                  <!-- grup -->
+                  <div class="form-group">
+                    <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
+                    <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
+
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="" name="" id="">
+                      <label class="form-check-label" for="">
+
+                      </label>
+                    </div>
+
+                    @error('')
+                    <strong class="text-danger">{{ $message }}</strong>
+                    @enderror
+                  </div>
 
                   <div class="row">
+                    <!-- kalo grup gausa organitation -->
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Organization</label>
                       <input class="form-control" name="organization" id="organization" disabled value="{{ $client->organization }}">
                     </div>
 
                     <div class="col-md-6 form-group">
+                      <label for="fp-default">Tanggal Kegiatan</label>
+                      <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
+                      @error('date')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                    <!-- Tanggal kalo grup -->
+                    <div class="col-md-12 form-group">
                       <label for="fp-default">Tanggal Kegiatan</label>
                       <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
                       @error('date')
@@ -161,7 +189,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
   $('.livesearch').select2({
     placeholder: 'Select clients',
