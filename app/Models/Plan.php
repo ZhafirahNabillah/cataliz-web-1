@@ -17,7 +17,8 @@ class Plan extends Model
 		'support',
 		'owner_id',
 		'type',
-		'client_id'
+		'client_id',
+		'group_id'
 	];
 
 	public function clients()

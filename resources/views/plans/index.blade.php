@@ -87,9 +87,8 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Name</th>
-                                                        <th>Company</th>
-                                                        <th>Email</th>
-                                                        <th>Handphone</th>
+                                                        <th>Objective</th>
+                                                        <th>Date</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -101,10 +100,9 @@
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Coach Name</th>
+                                                        <th>Name</th>
                                                         <th>Objective</th>
-                                                        <th>Handphone</th>
-                                                        <th>Schedule</th>
+                                                        <th>Date</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -161,8 +159,8 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Kode Grup</th>
-                                                        <th>Company</th>
-                                                        <th>Schedule</th>
+                                                        <th>Objective</th>
+                                                        <th>Date</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -176,7 +174,7 @@
                                                         <th>No</th>
                                                         <th>Kode Grup</th>
                                                         <th>Objective</th>
-                                                        <th>Schedule</th>
+                                                        <th>Date</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -233,16 +231,12 @@
                     name: 'client.name'
                 },
                 {
-                    data: 'client.company',
-                    name: 'client.company'
+                    data: 'objective',
+                    name: 'objective'
                 },
                 {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
+                    data: 'date',
+                    name: 'date'
                 },
                 {
                     data: 'action',
@@ -291,15 +285,15 @@
                         return $row_output;
                     }
                 },
-                {
-                    targets: 4,
-                    render: function(data, type, full, meta) {
-                        var $phone = full['phone'],
-                            $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-                            '</div>';
-                        return $output;
-                    }
-                }
+                // {
+                //     targets: 4,
+                //     render: function(data, type, full, meta) {
+                //         var $phone = full['phone'],
+                //             $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
+                //             '</div>';
+                //         return $output;
+                //     }
+                // }
             ],
 
             order: [
@@ -366,12 +360,12 @@
                     name: 'group_id'
                 },
                 {
-                    data: 'company',
-                    name: 'company'
+                    data: 'objective',
+                    name: 'objective'
                 },
                 {
-                    data: 'schedule',
-                    name: 'schedule',
+                    data: 'date',
+                    name: 'date',
                     defaultContent: '<i>-</i>'
                 },
                 {

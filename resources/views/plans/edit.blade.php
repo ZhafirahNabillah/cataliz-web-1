@@ -59,124 +59,137 @@
                 @csrf
                 <div class="card-body">
                   <!-- individu -->
-                  <div class="row">
+                  {{-- <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
                       <select class="livesearch form-control" name="client_id" id="client_id" disabled>
                         <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
-                      </select>
-                      <input type="hidden" name="client_id" value="{{ $client->id }}">
-                    </div>
+                  </select>
+                  <input type="hidden" name="client_id" value="{{ $client->id }}">
+                </div>
+            </div> --}}
+            <!-- grup -->
+            <div class="form-group">
+              <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
+              <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
+
+              <div class="row">
+                @foreach ($all_clients as $client)
+                <div class="col-3">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="{{ $client->id }}" name="client[]"
+                      id="client-{{ $client->id }}" @if($clients->contains($client->id)) checked @endif>
+                    <label class="form-check-label" for="client-{{ $client->id }}">
+                      {{ $client->name }}
+                    </label>
                   </div>
-                  <!-- grup -->
-                  <div class="form-group">
-                    <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
-                    <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
+                </div>
+                @endforeach
+              </div>
 
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" value="" name="" id="">
-                      <label class="form-check-label" for="">
+              @error('')
+              <strong class="text-danger">{{ $message }}</strong>
+              @enderror
+            </div>
 
-                      </label>
-                    </div>
-
-                    @error('')
-                    <strong class="text-danger">{{ $message }}</strong>
-                    @enderror
-                  </div>
-
-                  <div class="row">
-                    <!-- kalo grup gausa organitation -->
-                    <div class="col-md-6 form-group">
+            <div class="row">
+              <!-- kalo grup gausa organitation -->
+              {{-- <div class="col-md-6 form-group">
                       <label for="fp-default">Organization</label>
                       <input class="form-control" name="organization" id="organization" disabled value="{{ $client->organization }}">
-                    </div>
+            </div> --}}
 
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Date</label>
-                      <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
-                      @error('date')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                    <!-- Tanggal kalo grup -->
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Date</label>
-                      <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
-                      @error('date')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Objective</label>
-                      <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" autocomplete="objective">{{ $plan->objective }}</textarea>
-
-                      @error('objective')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Success Indicator</label>
-                      <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
-
-                      @error('success_indicator')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Development Areas</label>
-                      <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
-
-                      @error('development_areas')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Support</label>
-                      <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support" autocomplete="support">{{ $plan->support }}</textarea>
-
-                      @error('support')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <input type="hidden" name="id" value="{{$plan->id}}">
-
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                </div>
-              </form>
+            <div class="col-md-12 form-group">
+              <label for="fp-default">Date</label>
+              <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
+                value="{{ $plan->date }}">
+              @error('date')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+            <!-- Tanggal kalo grup -->
+            <div class="col-md-12 form-group">
+              <label for="fp-default">Date</label>
+              <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
+                value="{{ $plan->date }}">
+              @error('date')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label for="fp-default">Objective</label>
+              <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective"
+                autocomplete="objective">{{ $plan->objective }}</textarea>
+
+              @error('objective')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label for="fp-default">Success Indicator</label>
+              <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator"
+                id="success_indicator" autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
+
+              @error('success_indicator')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label for="fp-default">Development Areas</label>
+              <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas"
+                id="development_areas" autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
+
+              @error('development_areas')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label for="fp-default">Support</label>
+              <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
+                autocomplete="support">{{ $plan->support }}</textarea>
+
+              @error('support')
+              <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+              @enderror
+            </div>
+          </div>
+
+          <input type="hidden" name="id" value="{{$plan->id}}">
+
+          <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
         </div>
+        </form>
     </div>
   </div>
-  </section>
-  <!--/ Basic table -->
+</div>
+</div>
+</div>
+</section>
+<!--/ Basic table -->
 
 
 
@@ -238,6 +251,17 @@
       minDate: today,
       uiLibrary: 'bootstrap4'
     });
+
+    var clients = {{$plan}};
+		console.log(clients);
+		var role_id = $(this).data('id');
+		$.get("" + '/roles/' + role_id + '/edit', function(data) {
+			$('#role_id').val(data[0].id);
+			$.each(data[0].permissions, function(i, item) {
+				var permission_id = data[0].permissions[i].id;
+				$('#permission-check-' + permission_id).prop('checked', true);
+			});
+		});
 
   });
 </script>
