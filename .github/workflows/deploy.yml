@@ -16,10 +16,11 @@ jobs:
           yarn prod
           cat public/mix-manifest.json # See asset versions in log
       - name: Upload build files
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: assets
           path: public
+          retention-days: 1
   test-php:
     name: Test/Lint PHP
     runs-on: ubuntu-20.04
@@ -43,11 +44,11 @@ jobs:
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v1
-     # - name: Download build assets
-     #   uses: actions/download-artifact@v1
-     #   with:
-     #     name: assets
-     #     path: public
+      - name: Download build assets
+        uses: actions/download-artifact@v2
+        with:
+          name: assets
+          path: public
       - name: Setup PHP
         uses: shivammathur/setup-php@master
         with:
