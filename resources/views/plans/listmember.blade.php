@@ -45,6 +45,14 @@
             <div class="card-body">
               <div class="row mb-2">
                 <div class="col-sm-3">
+                  <b>Coach Name</b>
+                </div>
+                <div class="col-sm-9">
+                  #
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-3">
                   <b>Group ID</b>
                 </div>
                 <div class="col-sm-9">
