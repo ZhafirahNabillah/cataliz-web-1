@@ -24,7 +24,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active">User List
+                <li class="breadcrumb-item active">Detail Group
                 </li>
               </ol>
             </div>
@@ -47,7 +47,7 @@
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">dashboard</a></li>
-                <li class="breadcrumb-item active">Coach List</li>
+                <li class="breadcrumb-item active">Detail Group</li>
               </ol>
             </div>
           </div>
@@ -68,7 +68,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item active">Client List
+                <li class="breadcrumb-item active">Detail Group
                 </li>
               </ol>
             </div>
@@ -89,308 +89,39 @@
       </div>
       @endif
 
-      @role('coachee')
-      <!-- Basic table -->
-      <section id="basic-datatable">
-        <div class="row">
-          <div class="col-12">
-            <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table coachee-datatable-coach">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal Detail Coach -->
-        <div class="modal modal-slide-in fade" id="modals-slide-in-coach" role="dialog" aria-hidden="true">
-          <div class="modal-dialog sidebar-sm" role="document">
-            <div class="modal-content">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <div class="modal-header">
-                <h5 class="modal-title" id="modalHeading"></h5>
-
-              </div>
-
-              <div class="modal-body flex-grow-1">
-                <div class="card-body">
-                  <dl class="row">
-                    <dt class="col-sm-6">Full Name</dt>
-                  </dl>
-                  <dl class="row">
-                    <small class="col-sm-6 name"></small>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-6">Phone</dt>
-                  </dl>
-                  <dl class="row">
-                    <small class="col-sm-6 phone"></small>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-6">Email</dt>
-                  </dl>
-                  <dl class="row">
-                    <small class="col-sm-6 email"></small>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-6">Total Coaching</dt>
-                  </dl>
-                  <dl class="row">
-                    <small class="col-sm-6 total_coaching"></small>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-6">Total Client</dt>
-                  </dl>
-                  <dl class="row">
-                    <small class="col-sm-6 total_client"></small>
-                  </dl>
-                  <dl class="row">
-                    <dt class="col-sm-6">Rating</dt>
-                  </dl>
-                  <dl class="row">
-                    <small class="col-sm-6 rating"></small>
-                  </dl>
-                </div>
-                <!-- </Card modal>-->
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Modal -->
-      </section>
-      @endrole
-
-      @role('coach')
       <div class="card">
         <div class="card-body">
-          <ul class="nav nav-tabs justify-content-center" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
-            </li>
-          </ul>
-
-          <div class="tab-content">
-            <!-- Panel Individu -->
-            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-              <!-- Basic table -->
-              <section id="basic-datatable">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table yajra-datatable">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Program</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Modal to add new record -->
-                <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-                  <div class="modal-dialog sidebar-sm">
-                    <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                      <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="modalHeading"></h5>
-                      </div>
-                      <input type="hidden" name="Client_id" id="Client_id">
-                      <div class="modal-body flex-grow-1">
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                          <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-                        </div>
-                        <label class="form-label" for="basic-icon-default-post">Phone</label>
-                        <div class="input-group input-group-merge mb-2">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon5">+62</span>
-                          </div>
-                          <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-email">Email</label>
-                          <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe
-                    @example.com" />
-                          <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                          <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                          <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                          <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                      </div>
-                      <!-- </form>-->
-
-                  </div>
-                </div>
-                <!-- End Modal -->
-              </section>
-              <!--/ Basic table -->
-            </div>
-            <!-- /panel individu -->
-
-
-            <!-- Panel Grup -->
-            <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
-              <!-- Basic table -->
-              <section id="basic-datatable">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table yajra-datatable">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Group ID</th>
-                            <th>Partisipant</th>
-                            <th>Member</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-
-              </section>
-              <!--/ Basic table -->
-            </div>
-            <!-- /coachee list admin -->
+          <div class="card-header">
+            <h4 class="card-title"><b>Detail Plan</b></h4>
           </div>
-        </div>
-      </div>
-      <!-- /panel coachee -->
-
-      @endrole
-
-      @role('admin')
-      <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
-      <div class="">
-        <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
-      </div>
-      <div class="card">
-        <div class="card-body">
-          <ul class="nav nav-tabs justify-content-center" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#admin" aria-controls="profile" role="tab" aria-selected="false">Admin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Coach</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Coachee</a>
-            </li>
-          </ul>
-
-          <div class="tab-content">
-            <!-- Panel Coach -->
-            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-              <!-- coachlist card -->
-              <div class="row">
-                <div class="col-12">
-                  <div class="d-block text-right">
-                    <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
-                  </div>
-                  <hr class="mb-0">
-                  <table class="datatables-basic table admin-datatable-coach">
-                    <thead>
-                      <tr>
-                        <th>NO</th>
-                        <th>Coach Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Rating</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+          <div class="row mb-2">
+            <div class="col-sm-3">
+              <b>Group ID</b>
             </div>
-            <!-- /coach list admin -->
-            <!-- /panel coach -->
-
-
-            <!-- Panel Admin -->
-            <div class="tab-pane" id="admin" aria-labelledby="admin-tab" role="tabpanel">
-              <!-- adminlist card -->
-              <div class="row">
-                <div class="col-12">
-                  <table class="datatables-basic table admin-datatable-admin">
-                    <thead>
-                      <tr>
-                        <th>No</th>
-                        <th>Admin Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+            <div class="col-sm-9">
+              #
             </div>
-            <!-- /admin list admin -->
+          </div>
+          <div class="row mb-2">
+            <div class="col-sm-3">
+              <b>Number of Member</b>
+            </div>
+            <div class="col-sm-9">
+              #
+            </div>
+          </div>
+          <!-- Basic table -->
+          <section id="basic-datatable">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
 
-            <!-- Panel Coachee -->
-            <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
-              <!-- coacheelist card -->
-
-              <div class="row">
-                <div class="col-12">
-                  <div class="d-block text-right">
-                    <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a>
-                  </div>
-                  <hr class="mb-0">
-                  <table class="datatables-basic table admin-datatable-coachee">
+                  <table class="datatables-basic table default-datatable-plans">
                     <thead>
                       <tr>
                         <th>No</th>
                         <th>Coachee Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Action</th>
+                        <th>Company</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -399,78 +130,11 @@
                 </div>
               </div>
             </div>
-            <!-- /coachee list admin -->
-          </div>
+          </section>
+          <!--/ Basic table -->
         </div>
+
       </div>
-      <!-- /panel coachee -->
-
-
-
-      <!-- Modal to Add User -->
-      <div class="modal modal-slide-in fade" id="modal-user-slide-in" aria-hidden="true">
-        <div class="modal-dialog sidebar-sm">
-          <form class="add-new-record modal-content pt-0" id="createUserForm" name="createUserForm">
-            @csrf
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-            <div class="modal-header mb-1">
-              <h5 class="modal-title" id="modalHeading">Add User</h5>
-            </div>
-            <input type="hidden" name="user_id" id="user_id">
-            <div class="modal-body flex-grow-1">
-              <div class="form-group">
-                <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="" />
-                <div id="name-error"></div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="basic-icon-default-post">Phone</label>
-                <div class="input-group input-group-merge">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon5">+62</span>
-                  </div>
-                  <input id="phone" name="phone" type="text" onkeypress="return isNumberKey(event)" class="form-control" value="">
-                </div>
-                <div id="phone-error"></div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="basic-icon-default-email">Email</label>
-                <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" />
-                <small class="form-text text-muted"> You can use letters, numbers & periods</small>
-                <div id="email-error"></div>
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="basic-icon-default-fullname">Role</label>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coach" value="coach">
-                  <label class="form-check-label" for="permission-check-coach">
-                    Coach
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="roles" id="permission-check-admin" value="admin">
-                  <label class="form-check-label" for="permission-check-admin">
-                    Admin
-                  </label>
-                </div>
-                {{-- <div class="form-check">
-                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
-                  <label class="form-check-label" for="permission-check-coachee">
-                    Coachee
-                  </label>
-                </div> --}}
-                <div id="roles-error"></div>
-              </div>
-              <input type="hidden" name="action_type" id="action_type">
-              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
-              <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-            </div>
-          </form>
-          <!-- </form>-->
-        </div>
-      </div>
-      <!-- End Modal -->
-      @endrole
 
       <!-- END: Content-->
       @endsection

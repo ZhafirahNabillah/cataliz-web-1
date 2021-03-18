@@ -139,7 +139,7 @@
 			<div class="card-body">
 				<ul class="nav nav-tabs justify-content-center" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individu</a>
+						<a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
