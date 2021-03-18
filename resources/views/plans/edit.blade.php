@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="col-md-6 form-group">
-                      <label for="fp-default">Tanggal Kegiatan</label>
+                      <label for="fp-default">Date</label>
                       <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
                       @error('date')
                       <span class="invalid-feedback" role="alert">
@@ -103,7 +103,7 @@
                     </div>
                     <!-- Tanggal kalo grup -->
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Tanggal Kegiatan</label>
+                      <label for="fp-default">Date</label>
                       <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
                       @error('date')
                       <span class="invalid-feedback" role="alert">
@@ -115,7 +115,7 @@
 
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Objektif</label>
+                      <label for="fp-default">Objective</label>
                       <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" autocomplete="objective">{{ $plan->objective }}</textarea>
 
                       @error('objective')
@@ -128,7 +128,7 @@
 
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Sukses Indikator</label>
+                      <label for="fp-default">Success Indicator</label>
                       <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
 
                       @error('success_indicator')
@@ -141,7 +141,7 @@
 
                   <div class="row">
                     <div class="col-md-12 form-group">
-                      <label for="fp-default">Pengembangan Area</label>
+                      <label for="fp-default">Development Areas</label>
                       <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
 
                       @error('development_areas')

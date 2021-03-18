@@ -75,7 +75,7 @@
                 <div class="row">
 
                   <div class="col-md-12 form-group">
-                    <label for="fp-default">Tanggal Kegiatan</label>
+                    <label for="fp-default">Date</label>
                     <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
                     <div id="date-error"></div>
                     @error('date')
@@ -88,7 +88,7 @@
 
                 <div class="row">
                   <div class="col-md-12 form-group">
-                    <label for="fp-default">Objektif</label>
+                    <label for="fp-default">objective</label>
                     <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" value="{{ old('objective') }}" autocomplete="objective">{{ old('objective') }}
                     </textarea>
                     <small id="character_count_objective" class="float-right"></small>
@@ -103,7 +103,7 @@
 
                 <div class="row">
                   <div class="col-md-12 form-group">
-                    <label for="fp-default">Sukses Indikator</label>
+                    <label for="fp-default">Success Indicator</label>
                     <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" autocomplete="success_indicator">{{ old('success_indicator') }}</textarea>
                     <small id="character_count_success_indicator" class="float-right"></small>
                     <div id="success_indicator-error"></div>
@@ -117,7 +117,7 @@
 
                 <div class="row">
                   <div class="col-md-12 form-group">
-                    <label for="fp-default">Pengembangan Area</label>
+                    <label for="fp-default">Development Areas</label>
                     <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" autocomplete="development_areas">{{ old('development_areas') }}</textarea>
                     <small id="character_count_development_areas" class="float-right"></small>
                     <div id="development_areas-error"></div>

@@ -73,7 +73,7 @@
                 <div class="collapse-default">
                   <div class="card">
                     <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>Objektif</b></span>
+                      <span class="lead collapse-title"><b>Objective</b></span>
                     </div>
                     <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                       <div class="card-body">
@@ -83,7 +83,7 @@
                   </div>
                   <div class="card">
                     <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                      <span class="lead collapse-title"><b>Sukses Indikator</b></span>
+                      <span class="lead collapse-title"><b>Success Indicator</b></span>
                     </div>
                     <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
                       <div class="card-body">
@@ -93,7 +93,7 @@
                   </div>
                   <div class="card">
                     <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                      <span class="lead collapse-title"><b>Pengembangan Area</b></span>
+                      <span class="lead collapse-title"><b>Development Areas</b></span>
                     </div>
                     <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
                       <div class="card-body">
@@ -155,7 +155,7 @@
                   <!-- individu -->
                   {{$plan->date}}
                   <!-- grup -->
-                  <b>Tanggal Kegiatan</b>
+                  <b>Date</b>
                 </div>
               </div>
               <div class="row mb-2">
@@ -172,7 +172,7 @@
                 <div class="collapse-default">
                   <div class="card">
                     <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>Objektif</b></span>
+                      <span class="lead collapse-title"><b>Objective</b></span>
                     </div>
                     <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                       <div class="card-body">
@@ -182,7 +182,7 @@
                   </div>
                   <div class="card">
                     <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                      <span class="lead collapse-title"><b>Sukses Indikator</b></span>
+                      <span class="lead collapse-title"><b>Success Indicator</b></span>
                     </div>
                     <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
                       <div class="card-body">
@@ -192,7 +192,7 @@
                   </div>
                   <div class="card">
                     <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                      <span class="lead collapse-title"><b>Pengembangan Area</b></span>
+                      <span class="lead collapse-title"><b>Development Areas</b></span>
                     </div>
                     <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
                       <div class="card-body">
