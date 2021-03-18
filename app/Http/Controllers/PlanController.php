@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Coach;
 use DataTables;
 use PDF;
 
@@ -83,7 +84,7 @@ class PlanController extends Controller
         })
         ->rawColumns(['action'])
         ->make(true);
-        
+
       } else {
         // code...
         return Datatables::of($data)
@@ -145,31 +146,34 @@ class PlanController extends Controller
   public function create()
   {
     //
-    return view('plans.create');
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $clients = $coach->clients;
+
+    return view('plans.create', compact('clients'));
   }
 
-  public function ajaxClients(Request $request)
-  {
-    $clients = [];
-    if ($request->has('q')) {
-      $search = $request->q;
-      $clients = Client::select('clients.name', 'clients.id', 'clients.organization', 'clients.company')
-        ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
-        ->join('class', 'class.id', '=', 'class_has_clients.class_id')
-        ->where('class.coach_id', Auth::user()->id)
-        ->where('name', 'LIKE', "%$search%")
-        ->get();
-    } else {
-      $clients = Client::select('clients.name', 'clients.id', 'clients.organization', 'clients.company')
-        ->orderby('clients.name', 'asc')
-        ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
-        ->join('class', 'class.id', '=', 'class_has_clients.class_id')
-        ->where('class.coach_id', Auth::user()->id)
-        ->get();
-    }
-
-    return response()->json($clients);
-  }
+  // public function ajaxClients(Request $request)
+  // {
+  //   $clients = [];
+  //   if ($request->has('q')) {
+  //     $search = $request->q;
+  //     $clients = Client::select('clients.name', 'clients.id', 'clients.organization', 'clients.company')
+  //       ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
+  //       ->join('class', 'class.id', '=', 'class_has_clients.class_id')
+  //       ->where('class.coach_id', Auth::user()->id)
+  //       ->where('name', 'LIKE', "%$search%")
+  //       ->get();
+  //   } else {
+  //     $clients = Client::select('clients.name', 'clients.id', 'clients.organization', 'clients.company')
+  //       ->orderby('clients.name', 'asc')
+  //       ->join('class_has_clients', 'class_has_clients.client_id', '=', 'clients.id')
+  //       ->join('class', 'class.id', '=', 'class_has_clients.class_id')
+  //       ->where('class.coach_id', Auth::user()->id)
+  //       ->get();
+  //   }
+  //
+  //   return response()->json($clients);
+  // }
 
   /**
    * Store a newly created resource in storage.
@@ -180,7 +184,7 @@ class PlanController extends Controller
   public function store(Request $request)
   {
     $this->validate($request, [
-      'client_id' => 'required',
+      'client'  => 'required',
       'date' => 'required',
       'objective' => 'required|max:255',
       'success_indicator' => 'required|max:255',
@@ -193,14 +197,31 @@ class PlanController extends Controller
     $development_areas = strip_tags($request->development_areas);
     $support = strip_tags($request->support);
 
-    Plan::updateOrCreate(['id' => $request->id], [
-      'client_id' => $request->client_id,
+    $count = 0;
+
+    foreach ($request->input('client') as $client) {
+      $count = $count + 1 ;
+    }
+
+    if ($count == 1) {
+      $plan_type = 'individual';
+    } else {
+      $plan_type = 'group';
+    }
+
+    // return $count;
+
+    $plan = Plan::updateOrCreate(['id' => $request->id], [
       'date' => $request->date,
       'objective' => $objective,
       'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
       'support' => $support,
-      'owner_id' => Auth::user()->id
+      'owner_id' => Auth::user()->id,
+      'type' => $plan_type
     ]);
+
+    $plan->clients()->sync($request->input('client'));
+
     return redirect('/plans')->with('success', 'The plan has been added successfully!!');
   }
 

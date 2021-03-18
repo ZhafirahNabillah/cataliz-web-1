@@ -63,7 +63,7 @@
                 <div class="row mt-1">
                   <dt class="col-sm-3"><b>Coach Name</b></dt>
                   {{-- <dt class="col-sm-9"><b>{{ $class->coach->name }}</b></dt> --}}
-                  <dt class="col-sm-9"><b>{{ $coach->name }}</b></dt>
+                  <dt class="col-sm-9"><b>{{ $coach->user->name }}</b></dt>
                 </div>
 
                 {{-- <form action="{{route('class.ubah_status',$class->id)}}" method="post">
@@ -157,6 +157,10 @@
                 <section id="basic-datatable">
                   <div class="row">
                     <div class="col-12">
+                      <div class="d-block text-right">
+                        <button type="button" name="button" class="btn btn-primary" id="addClient" data-id="{{ $coach->id }}">+ Add Client</button>
+                      </div>
+                      <hr>
                       <div class="card style=" border-radius: 15px;>
                         <table class="datatables-basic table yajra-datatable-class">
                           <thead>
@@ -182,6 +186,38 @@
     </section>
     <!--/ Basic table -->
 
+    <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
+      <div class="modal-dialog sidebar-sm">
+        <form class="add-new-record modal-content pt-0" id="addClientForm" name="addClientForm">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+          <div class="modal-header mb-1">
+            <h5 class="modal-title" id="modalHeading"></h5>
+          </div>
+          <input type="hidden" name="coach_id" id="coach_id">
+          <div class="modal-body flex-grow-1">
+            {{-- <div class="form-group">
+              <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+              <div id="name-error"></div>
+            </div> --}}
+            <div class="form-group">
+              <label class="form-label" for="basic-icon-default-fullname">Client list</label>
+              @foreach($clients as $client)
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="{{$client->id}}" name="client[]" id="client-check-{{$client->id}}">
+                <label class="form-check-label" for="permission-check-{{$client->id}}">
+                  {{$client->name}}
+                </label>
+              </div>
+              @endforeach
+              <div id="permissions-error"></div>
+            </div>
+            <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+            <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+          </div>
+          <!-- </form>-->
+      </div>
+    </div>
 
 
   </div>
@@ -191,6 +227,8 @@
 @endsection
 
 @push('scripts')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
 <script type="text/javascript">
   $(function() {
     $.ajaxSetup({
@@ -222,6 +260,53 @@
         search: "<i data-feather='search'></i>",
         searchPlaceholder: "Search records"
       }
+    });
+
+    $('body').on('click', '#addClient', function() {
+			console.log('tes');
+			var coach_id = $(this).data('id');
+			$.get("" + '/class/' + coach_id + '/edit', function(data) {
+        // console.log(data[0].name);
+				$('#modalHeading').html("Edit Class Client");
+				$('#saveBtn').val("edit-class");
+				$('#addClientForm').trigger("reset");
+				$('#modals-slide-in').modal('show');
+        $('#coach_id').val(coach_id);
+				$.each(data, function(i, item) {
+					var client_id = data[i].id;
+					$('#client-check-' + client_id).prop('checked', true);
+				});
+			})
+		});
+
+    $('#saveBtn').click(function(e) {
+      e.preventDefault();
+      $('#saveBtn').html('Sending..');
+      var data = $('#addClientForm').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('class.store') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+
+          $('#addClientForm').trigger("reset");
+          $('#saveBtn').html('Submit');
+          $('#modals-slide-in').modal('hide');
+          Swal.fire({
+              icon: 'success',
+              title: 'Client added!',
+          });
+          table.draw();
+        },
+        error: function(data) {
+          console.log('Error:', data);
+          $('#saveBtn').html('Submit');
+        }
+      });
+      return false;
     });
   });
 </script>

@@ -60,12 +60,14 @@
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
 
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" name="" id="">
-                    <label class="form-check-label" for="">
-
-                    </label>
-                  </div>
+                  @foreach ($clients as $client)
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" value="{{ $client->id }}" name="client[]" id="client-{{ $client->id }}">
+                      <label class="form-check-label" for="client-{{ $client->id }}">
+                        {{ $client->name }}
+                      </label>
+                    </div>
+                  @endforeach
 
                   @error('')
                   <strong class="text-danger">{{ $message }}</strong>

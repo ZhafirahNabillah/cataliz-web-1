@@ -24,4 +24,12 @@ class Client extends Model
     public function user() {
   		return $this->belongsTo('App\Models\User');
   	}
+
+    public function coaches(){
+        return $this->belongsToMany('App\Models\Coach');
+    }
+
+    public function plans(){
+        return $this->belongsToMany('App\Models\Plan');
+    }
 }

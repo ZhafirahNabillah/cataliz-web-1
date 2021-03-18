@@ -7,6 +7,7 @@ use App\Models\Class_model;
 use App\Models\Client;
 use App\Models\Class_has_client;
 use App\Models\User;
+use App\Models\Coach;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use DataTables;
@@ -60,7 +61,11 @@ class ClassController extends Controller
     // }
 
     public function index(Request $request){
-      $data = User::role('coach')->get();
+      // $coach = Coach::where('user_id', 1)->first();
+      //
+      // return $coach->clients->count();
+
+      $data = Coach::with('user')->get();
 
       if ($request->ajax()) {
         return Datatables::of($data)
@@ -72,9 +77,9 @@ class ClassController extends Controller
           return $detail_btn;
         })
         ->addColumn('Total Client', function ($row) {
-          $participant = Client::where('owner_id', $row->id)->count();
+          $coach = Coach::where('id', $row->id)->first();
 
-          return $participant;
+          return $coach->clients->count();
         })
         ->rawColumns(['action', 'Total Client'])
         ->make(true);
@@ -107,26 +112,31 @@ class ClassController extends Controller
     {
         // return $request->cl;
 
-        $this->validate($request, [
-            'class_name'  => 'required',
-            'coach_id' => 'required',
-            'clients' => 'required'
-        ]);
+        // $this->validate($request, [
+        //     'class_name'  => 'required',
+        //     'coach_id' => 'required',
+        //     'clients' => 'required'
+        // ]);
+        //
+        // $class = new Class_model;
+        // $class->class_name = $request->class_name;
+        // $class->coach_id = $request->coach_id;
+        // $class->status = 'On-Going';
+        // $class->save();
+        //
+        // foreach ($request->clients as $client) {
+        //     $class_has_client = new Class_has_client;
+        //     $class_has_client->class_id = $class->id;
+        //     $class_has_client->client_id = $client;
+        //     $class_has_client->save();
+        // }
+        //
+        // return redirect('/class')->with('success','Class succesfully created');
 
-        $class = new Class_model;
-        $class->class_name = $request->class_name;
-        $class->coach_id = $request->coach_id;
-        $class->status = 'On-Going';
-        $class->save();
+        $coach = Coach::find($request->coach_id);
+        $coach->clients()->sync($request->input('client'));
 
-        foreach ($request->clients as $client) {
-            $class_has_client = new Class_has_client;
-            $class_has_client->class_id = $class->id;
-            $class_has_client->client_id = $client;
-            $class_has_client->save();
-        }
-
-        return redirect('/class')->with('success','Class succesfully created');
+        return response()->json(['success' => 'Customer saved successfully!']);
     }
 
     /**
@@ -141,8 +151,9 @@ class ClassController extends Controller
         // $class = Class_model::with('coach')->where('id', $id)->first();
         // $coachee_id = Class_has_client::where('class_id', $class->id)->pluck('client_id');
 
-        $coach = User::find($id);
-        $data = Client::where('owner_id',$coach->id)->get();
+        $coach = Coach::find($id);
+
+        $data = $coach->clients;
 
         // if ($request->ajax()) {
         //
@@ -159,7 +170,9 @@ class ClassController extends Controller
                 ->make(true);
         }
 
-        return view('class.detail', compact('coach'));
+        $clients = Client::all();
+
+        return view('class.detail', compact('coach','clients'));
     }
 
     /**
@@ -170,7 +183,9 @@ class ClassController extends Controller
      */
     public function edit($id)
     {
-        //
+      $coach = Coach::find($id);
+
+      return response()->json($coach->clients);
     }
 
     /**

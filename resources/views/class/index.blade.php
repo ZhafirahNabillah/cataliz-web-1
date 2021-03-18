@@ -151,8 +151,8 @@
           name: 'DT_RowIndex'
         },
         {
-          data: 'name',
-          name: 'name'
+          data: 'user.name',
+          name: 'user.name'
         },
         {
           data: 'Total Client',

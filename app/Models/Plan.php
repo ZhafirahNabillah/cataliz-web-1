@@ -10,17 +10,17 @@ class Plan extends Model
 	use HasFactory;
 
 	protected $fillable = [
-		'client_id',
 		'date',
 		'objective',
 		'success_indicator',
 		'development_areas',
 		'support',
-		'owner_id'
+		'owner_id',
+		'type'
 	];
 
-	public function client()
+	public function clients()
 	{
-		return $this->belongsTo('App\Models\Client');
+		return $this->belongsToMany('App\Models\Client');
 	}
 }
