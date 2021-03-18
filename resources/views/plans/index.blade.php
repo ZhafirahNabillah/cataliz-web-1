@@ -17,7 +17,10 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Coaching Plans
-                            <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
+                            <img class="align-text width=" 15px" height="15px"" src="
+                                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
+                                data-toggle="popover" data-placement="top"
+                                data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
@@ -35,10 +38,12 @@
             <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach"
+                            role="tab" aria-selected="true">Individual</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile"
+                            role="tab" aria-selected="false">Group</a>
                     </li>
                 </ul>
 
@@ -46,7 +51,8 @@
                     <!-- Panel Individu -->
                     <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
                         <div class="content-body">
-                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none"
+                                role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -119,7 +125,8 @@
                     <!-- Panel Grup -->
                     <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
                         <div class="content-body">
-                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none"
+                                role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -222,12 +229,12 @@
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'client.name',
-                    name: 'client.name'
+                    data: 'name',
+                    name: 'name'
                 },
                 {
-                    data: 'client.company',
-                    name: 'client.company'
+                    data: 'company',
+                    name: 'company'
                 },
                 {
                     data: 'email',
@@ -251,9 +258,9 @@
                     responsivePriority: 4,
                     render: function(data, type, full, meta) {
                         var $user_img = full['avatar'],
-                            $name = full['client']['name'],
-                            $post = full['client']['company'];
-                        $org = full['client']['organization'];
+                            $name = full['name'],
+                            $post = full['company'];
+                        $org = full['organization'];
                         if ($user_img) {
                             // For Avatar image
                             var $output =
@@ -263,7 +270,7 @@
                             var stateNum = full['status'];
                             var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
                             var $state = states[stateNum],
-                                $name = full['client']['name'],
+                                $name = full['name'],
                                 $initials = $name.match(/\b\w/g) || [];
                             $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
                             $output = '<span class="avatar-content">' + $initials + '</span>';
@@ -305,7 +312,7 @@
                     display: $.fn.dataTable.Responsive.display.modal({
                         header: function(row) {
                             var data = row.data();
-                            return 'Details of ' + data['client']['name'];
+                            return 'Details of ' + data['name'];
                         }
                     }),
                     type: 'column',
