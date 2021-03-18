@@ -31,14 +31,13 @@ class PlanController extends Controller
 
   public function index(Request $request)
   {
-    // $plan = Plan::find(5);
-    // return $plan->clients;
     if ($request->ajax()) {
+
 
       if (auth()->user()->hasRole('admin')) {
         $data = Plan::with('client')->get();
       } elseif (auth()->user()->hasRole('coach')) {
-        $data = Plan::where('owner_id', Auth::user()->id)->where('type', 'individual')->latest()->get();
+        $data = Plan::with('client')->where('owner_id', Auth::user()->id)->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coachee')) {
         $login_user_id = auth()->user()->id;
         $client_id = Client::where('user_id', $login_user_id)->pluck('id');
@@ -89,12 +88,6 @@ class PlanController extends Controller
         // code...
         return Datatables::of($data)
           ->addIndexColumn()
-          ->addColumn('name', function ($row) {
-            return $row->clients[0]->name;
-          })
-          ->addColumn('company', function ($row) {
-            return $row->clients[0]->company;
-          })
           ->addColumn('action', function ($row) {
 
             //add update button if user have permission
@@ -129,15 +122,15 @@ class PlanController extends Controller
 
             return $actionBtn;
           })->addColumn('phone', function ($row) {
-            $phone = substr($row->clients[0]->phone, 0, -5) . 'xxxxx';
+            $phone = substr($row->client['phone'], 0, -5) . 'xxxxx';
 
             return $phone;
           })->addColumn('email', function ($row) {
-            $email = str_pad(substr($row->clients[0]->email, -11), strlen($row->clients[0]->email), 'x', STR_PAD_LEFT);
+            $email = str_pad(substr($row->client['email'], -11), strlen($row->client['email']), 'x', STR_PAD_LEFT);
 
             return $email;
           })
-          ->rawColumns(['name', 'action', 'phone', 'email', 'company'])
+          ->rawColumns(['action', 'phone', 'email'])
           ->make(true);
       }
     }
@@ -287,5 +280,25 @@ class PlanController extends Controller
 
     $pdf = PDF::loadview('pdf_template.plans_detail_pdf', compact('plan', 'coach', 'coachee'));
     return $pdf->download('plan_detail_' . $plan->id . '.pdf');
+  }
+
+  public function show_group_list(Request $request)
+  {
+    if ($request->ajax()) {
+
+      $data = Plan::with('client')->where('owner_id', Auth::user()->id)->where('client_id', null)->latest()->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        // ->addColumn('action', function ($row) {
+        //   $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+        //   $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+        //   $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+
+        //   return $actionBtn;
+        // })
+        // ->rawColumns(['action', 'rating'])
+        ->make(true);
+    }
   }
 }

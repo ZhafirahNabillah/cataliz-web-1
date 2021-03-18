@@ -156,7 +156,7 @@
                                     <div class="col-12">
                                         <div class="card">
                                             @hasanyrole('coach|admin')
-                                            <table class="datatables-basic table default-datatable-plans">
+                                            <table class="datatables-basic table default-group-datatable-plans">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -170,7 +170,7 @@
                                                 </tbody>
                                             </table>
                                             @else
-                                            <table class="datatables-basic table coachee-datatable-plans">
+                                            <table class="datatables-basic table coachee-group-datatable-plans">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -229,12 +229,12 @@
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'client.name',
+                    name: 'client.name'
                 },
                 {
-                    data: 'company',
-                    name: 'company'
+                    data: 'client.company',
+                    name: 'client.company'
                 },
                 {
                     data: 'email',
@@ -258,9 +258,9 @@
                     responsivePriority: 4,
                     render: function(data, type, full, meta) {
                         var $user_img = full['avatar'],
-                            $name = full['name'],
-                            $post = full['company'];
-                        $org = full['organization'];
+                            $name = full['client']['name'],
+                            $post = full['client']['company'];
+                        $org = full['client']['organization'];
                         if ($user_img) {
                             // For Avatar image
                             var $output =
@@ -270,7 +270,7 @@
                             var stateNum = full['status'];
                             var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
                             var $state = states[stateNum],
-                                $name = full['name'],
+                                $name = full['client']['name'],
                                 $initials = $name.match(/\b\w/g) || [];
                             $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
                             $output = '<span class="avatar-content">' + $initials + '</span>';
@@ -312,7 +312,7 @@
                     display: $.fn.dataTable.Responsive.display.modal({
                         header: function(row) {
                             var data = row.data();
-                            return 'Details of ' + data['name'];
+                            return 'Details of ' + data['client']['name'];
                         }
                     }),
                     type: 'column',
@@ -342,6 +342,46 @@
                 }
             },
 
+            language: {
+                paginate: {
+                    // remove previous & next text from pagination
+                    previous: '&nbsp;',
+                    next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+            }
+        });
+
+        var table_plans_group = $('.default-group-datatable-plans').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{route('plans.show_group')}}",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'group_id',
+                    name: 'group_id'
+                },
+                {
+                    data: 'company',
+                    name: 'company'
+                },
+                {
+                    data: 'schedule',
+                    name: 'schedule',
+                    defaultContent: '<i>-</i>'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
             language: {
                 paginate: {
                     // remove previous & next text from pagination

@@ -76,7 +76,8 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/{id}/store', [ProfileController::class, 'store_data'])->name('store_data');
 
 	Route::resource('plans', PlanController::class);
-	Route::get('/plans/{id}/pdf',[PlanController::class, 'plan_detail_to_pdf'])->name('plans.detail_to_pdf');
+	Route::get('/plans/{id}/pdf', [PlanController::class, 'plan_detail_to_pdf'])->name('plans.detail_to_pdf');
+	Route::get('/plans/show_group_list', [PlanController::class, 'show_group_list'])->name('plans.show_group');
 	Route::get('/ajaxClients', [PlanController::class, 'ajaxClients'])->name('clients.search');
 
 	Route::resource('agendas', AgendaController::class);

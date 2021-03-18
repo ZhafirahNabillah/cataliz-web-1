@@ -16,11 +16,17 @@ class Plan extends Model
 		'development_areas',
 		'support',
 		'owner_id',
-		'type'
+		'type',
+		'client_id'
 	];
 
 	public function clients()
 	{
 		return $this->belongsToMany('App\Models\Client');
+	}
+
+	public function client()
+	{
+		return $this->belongsTo('App\Models\Client');
 	}
 }
