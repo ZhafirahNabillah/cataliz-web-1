@@ -17,9 +17,7 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Agendas
-							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
-								alt="Card image cap" data-toggle="popover" data-placement="top"
-								data-content="Pada bagian ini ditampilkan daftar seluruh agenda yang ada dalam sistem." />
+							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini ditampilkan daftar seluruh agenda yang ada dalam sistem." />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
@@ -43,8 +41,7 @@
 			<div class="alert alert-success alert-dissmisable">
 				<h4 class="alert-heading">Success</h4>
 				<div class="alert-body">{{ $message }}</div>
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-						aria-hidden="true">×</span></button>
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
 			</div>
 			@endif
 			<section id="card-demo-example ">
@@ -53,13 +50,10 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src="
-										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-										data-placement="top" data-content="Jumlah sesi yang belum terjadwal" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang belum terjadwal" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
-										{{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\US.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Unscheduled Sessions
 									</small>
@@ -73,13 +67,10 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src="
-										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-										data-placement="top" data-content="Jumlah sesi yang sudah terjadwal" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang sudah terjadwal" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
-										{{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\SS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Scheduled Sessions
 									</small>
@@ -93,13 +84,10 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src="
-										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-										data-placement="top" data-content="Jumlah sesi yang dijadwal ulang" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang dijadwal ulang" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
-										{{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\RS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Reschedule Sessions
 									</small>
@@ -113,13 +101,10 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src="
-										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-										data-placement="top" data-content="Jumlah sesi yang dibatalkan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang dibatalkan" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
-										{{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\CS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
 										Canceled Sessions
 									</small>
@@ -133,13 +118,10 @@
 						<div class="col">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
-									<img class=" rounded float-right width=" 15px" height="15px"" src="
-										{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-										data-placement="top" data-content="Jumlah sesi yang sudah dilaksanakan" />
+									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang sudah dilaksanakan" />
 								</div>
 								<div class="card-body" style="padding-top: 1px;">
-									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src="
-										{{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
+									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\FS.png') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em; margin-top: 1em;">
 										Finished Sessions
 									</small>
@@ -153,39 +135,95 @@
 				</div>
 		</div>
 
-		<div class="row mb-1 no-gutters">
-			<div class="col-md-12">
-				@can('create-agenda')
-				<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
-				@endcan
-			</div>
-		</div>
+		<div class="card">
+			<div class="card-body">
+				<ul class="nav nav-tabs justify-content-center" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individu</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+					</li>
+				</ul>
 
-		<!-- Basic table -->
-		<section id="basic-datatable">
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<table class="datatables-basic table yajra-datatable">
-							<thead>
-								<tr>
-									<th>No</th>
-									<th>Name</th>
-									<th>Session</th>
-									<th>Date</th>
-									<th>Duration</th>
-									<th>Status</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody>
-							</tbody>
-						</table>
+				<div class="tab-content">
+					<!-- Panel Individu -->
+					<div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+						<div class="row mb-1 no-gutters">
+							<div class="col-md-12">
+								@can('create-agenda')
+								<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
+								@endcan
+							</div>
+						</div>
+						<!-- Basic table -->
+						<section id="basic-datatable">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<table class="datatables-basic table yajra-datatable">
+											<thead>
+												<tr>
+													<th>No</th>
+													<th>Name</th>
+													<th>Session</th>
+													<th>Date</th>
+													<th>Duration</th>
+													<th>Status</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!--/ Basic table -->
 					</div>
+					<!-- /panel individu -->
+
+
+					<!-- Panel Grup -->
+					<div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+						<div class="row mb-1 no-gutters">
+							<div class="col-md-12">
+								@can('create-agenda')
+								<a href="{{ url('/agendas/create') }}" class="create-new btn btn-primary">Add New</a>
+								@endcan
+							</div>
+						</div>
+						<!-- Basic table -->
+						<section id="basic-datatable">
+							<div class="row">
+								<div class="col-12">
+									<div class="card">
+										<table class="datatables-basic table yajra-datatable">
+											<thead>
+												<tr>
+													<th>No</th>
+													<th>Group ID</th>
+													<th>Session</th>
+													<th>Date</th>
+													<th>Duration</th>
+													<th>Status</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</section>
+						<!--/ Basic table -->
+					</div>
+					<!-- /coachee list admin -->
 				</div>
 			</div>
-		</section>
-		<!--/ Basic table -->
+		</div>
 	</div>
 </div>
 </div>

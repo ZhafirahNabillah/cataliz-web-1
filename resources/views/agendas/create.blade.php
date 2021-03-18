@@ -61,18 +61,14 @@
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">Create Agenda
-                    <img class="align-text width=" 15px" height="15px"" src="
-                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top"
-                      data-content="Isilah kolom di bawah ini untuk membuat agenda baru untuk client Anda!" />
+                    <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Isilah kolom di bawah ini untuk membuat agenda baru untuk client Anda!" />
                   </h4>
                 </div>
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Plan</label>
-                      <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror"
-                        name="plan_id"></select>
+                      <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror" name="plan_id"></select>
                       @error('plan_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -83,8 +79,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control @error('client_id') is-invalid @enderror"
-                        name="client_id"></select>
+                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id"></select>
                       @error('client_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -92,6 +87,20 @@
                       @enderror
                     </div>
                   </div>
+
+                  <!-- Kalo grup -->
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Group ID</label>
+                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id" disabled></select>
+                      @error('client_id')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                      @enderror
+                    </div>
+                  </div>
+                  <!-- Kalo grup gausa Organitation sama Company -->
                   <div class="row">
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Organization</label>
@@ -105,8 +114,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Number of Session</label>
-                      <select class="form-control @error('session') is-invalid @enderror"
-                        aria-label=".form-select-lg example" name="session">
+                      <select class="form-control @error('session') is-invalid @enderror" aria-label=".form-select-lg example" name="session">
                         <option selected value hidden>Select number of session</option>
                         <option value="1" @if (old('session')=='1' ) selected="selected" @endif>Sesi 1</option>
                         <option value="2" @if (old('session')=='2' ) selected="selected" @endif>Sesi 2</option>
@@ -125,8 +133,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Session Type</label>
-                      <select class="form-control @error('type_session') is-invalid @enderror"
-                        aria-label=".form-select-lg example" name="type_session">
+                      <select class="form-control @error('type_session') is-invalid @enderror" aria-label=".form-select-lg example" name="type_session">
                         <option selected value hidden>Select session type</option>
                         <option value="Free" @if (old('type_session')=='Free' ) selected="selected" @endif>Free</option>
                         <option value="Paid" @if (old('type_session')=='Paid' ) selected="selected" @endif>Paid</option>
@@ -138,8 +145,7 @@
                       @enderror
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                    value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                 </div>
               </div>
             </div>
@@ -157,9 +163,9 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
   // popover
-	$(function() {
-		$('[data-toggle="popover"]').popover()
-	})
+  $(function() {
+    $('[data-toggle="popover"]').popover()
+  })
 
   $('.livesearch').select2({
     placeholder: 'Select client',
