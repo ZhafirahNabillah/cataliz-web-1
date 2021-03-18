@@ -43,6 +43,7 @@
               <h4 class="card-title"><b>Detail Plan</b></h4>
               <a href="{{ route('plans.detail_to_pdf', $plan->id) }}" class="btn btn-primary">Download PDF</a>
             </div>
+            @role('coachee')
             <div class="card-body">
               <div class="row mb-2">
                 <div class="col-sm-3">
@@ -72,7 +73,7 @@
                 <div class="collapse-default">
                   <div class="card">
                     <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>Objektif</b></span>
+                      <span class="lead collapse-title"><b>Objective</b></span>
                     </div>
                     <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                       <div class="card-body">
@@ -82,7 +83,7 @@
                   </div>
                   <div class="card">
                     <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                      <span class="lead collapse-title"><b>Sukses Indikator</b></span>
+                      <span class="lead collapse-title"><b>Success Indicator</b></span>
                     </div>
                     <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
                       <div class="card-body">
@@ -92,7 +93,7 @@
                   </div>
                   <div class="card">
                     <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                      <span class="lead collapse-title"><b>Pengembangan Area</b></span>
+                      <span class="lead collapse-title"><b>Development Areas</b></span>
                     </div>
                     <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
                       <div class="card-body">
@@ -113,6 +114,108 @@
                 </div>
               </div>
             </div>
+            @endrole
+
+            @role('coach|admin')
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="col-sm-3">
+                  <!-- individu name -->
+                  <b>Full Name</b>
+                  <!-- group name-->
+                  <b>Client List</b>
+                </div>
+                <div class="col-sm-9">
+                  <!-- individu Client Name-->
+                  {{$client->name}}
+                  <!-- grup Organitation -->
+                  <b>Organization</b>
+                </div>
+              </div>
+
+              <div class="row mb-2">
+                <div class="col-sm-3">
+                  <!--Organitation individu   -->
+                  <b>Organization</b>
+                  <!-- grup Client Name  kebawah-->
+                  {{$client->name}}
+                </div>
+                <div class="col-sm-9">
+                  <!-- individu Organitation -->
+                  {{$client->organization}}
+
+
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-3">
+                  <b>Date</b>
+                </div>
+                <div class="col-sm-9">
+                  <!-- individu -->
+                  {{$plan->date}}
+                  <!-- grup -->
+                  <b>Date</b>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-3">
+                  <b></b>
+                </div>
+                <div class="col-sm-9">
+                  <!-- grup -->
+                  {{$plan->date}}
+
+                </div>
+              </div>
+              <div class="collapse-icon">
+                <div class="collapse-default">
+                  <div class="card">
+                    <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                      <span class="lead collapse-title"><b>Objective</b></span>
+                    </div>
+                    <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                      <div class="card-body">
+                        {!!$plan->objective!!}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                      <span class="lead collapse-title"><b>Success Indicator</b></span>
+                    </div>
+                    <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
+                      <div class="card-body">
+                        {!!$plan->success_indicator!!}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                      <span class="lead collapse-title"><b>Development Areas</b></span>
+                    </div>
+                    <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
+                      <div class="card-body">
+                        {!!$plan->development_areas!!}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card">
+                    <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                      <span class="lead collapse-title"><b>Support</b></span>
+                    </div>
+                    <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">
+                      <div class="card-body">
+                        {!!$plan->support!!}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            @endrole
+
           </div>
         </div>
       </div>

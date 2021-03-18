@@ -274,8 +274,11 @@
               <!-- coachlist card -->
               <div class="row">
                 <div class="col-12">
-                  <table class="datatables-basic table admin-datatable-coach">
+                  <div class="d-block text-right">
                     <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table admin-datatable-coach">
                     <thead>
                       <tr>
                         <th>NO</th>
@@ -325,8 +328,11 @@
 
               <div class="row">
                 <div class="col-12">
-                  <table class="datatables-basic table admin-datatable-coachee">
+                  <div class="d-block text-right">
                     <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a>
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table admin-datatable-coachee">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -396,12 +402,12 @@
                     Admin
                   </label>
                 </div>
-                <div class="form-check">
+                {{-- <div class="form-check">
                   <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
                   <label class="form-check-label" for="permission-check-coachee">
                     Coachee
                   </label>
-                </div>
+                </div> --}}
                 <div id="roles-error"></div>
               </div>
               <input type="hidden" name="action_type" id="action_type">
