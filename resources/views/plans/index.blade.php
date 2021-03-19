@@ -218,7 +218,7 @@
             }
         });
 
-        var table_plans_default = $('.default-datatable-plans').DataTable({
+        var table_plans_individual = $('.default-datatable-plans').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -458,7 +458,8 @@
                                 icon: 'success',
                                 title: 'Deleted Successfully!',
                             });
-                            table_plans_default.draw();
+                            table_plans_individual.draw();
+                            table_plans.group.draw();
                         },
                         error: function(data) {
                             console.log('Error:', data);

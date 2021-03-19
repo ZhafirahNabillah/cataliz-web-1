@@ -46,21 +46,23 @@
             @role('coachee')
             <div class="card-body">
               <div class="row mb-2">
-                <div class="col-sm-3">
+                <div class="col-sm-12">
                   <b>Full Name</b>
                 </div>
-                <div class="col-sm-9">
-                  {{$client->name}}
-                </div>
+                @foreach ($plan->clients as $client)
+                  <div class="col-sm-12">
+                    1
+                  </div>
+                @endforeach
               </div>
-              <div class="row mb-2">
+              {{-- <div class="row mb-2">
                 <div class="col-sm-3">
                   <b>Organization</b>
                 </div>
                 <div class="col-sm-9">
                   {{$client->organization}}
                 </div>
-              </div>
+              </div> --}}
               <div class="row mb-2">
                 <div class="col-sm-3">
                   <b>Date</b>
@@ -118,54 +120,30 @@
 
             @role('coach|admin')
             <div class="card-body">
-              <div class="row mb-2">
-                <div class="col-sm-3">
-                  <!-- individu name -->
-                  <b>Full Name</b>
-                  <!-- group name-->
-                  <b>Client List</b>
+              <div class="row">
+                <div class="col-6">
+                  <strong>Client Name</strong>
                 </div>
-                <div class="col-sm-9">
-                  <!-- individu Client Name-->
-                  {{$client->name}}
-                  <!-- grup Organitation -->
-                  <b>Organization</b>
-                </div>
-              </div>
-
-              <div class="row mb-2">
-                <div class="col-sm-3">
-                  <!--Organitation individu   -->
-                  <b>Organization</b>
-                  <!-- grup Client Name  kebawah-->
-                  {{$client->name}}
-                </div>
-                <div class="col-sm-9">
-                  <!-- individu Organitation -->
-                  {{$client->organization}}
-
-
+                <div class="col-6">
+                  <strong>Organization</strong>
                 </div>
               </div>
               <div class="row mb-2">
-                <div class="col-sm-3">
+                @foreach ($plan->clients as $client)
+                  <div class="col-6">
+                    {{ $client->name }}
+                  </div>
+                  <div class="col-6">
+                    {{ $client->organization ?? '-' }}
+                  </div>
+                @endforeach
+              </div>
+              <div class="row mb-2">
+                <div class="col-sm-6">
                   <b>Date</b>
                 </div>
-                <div class="col-sm-9">
-                  <!-- individu -->
+                <div class="col-sm-6">
                   {{$plan->date}}
-                  <!-- grup -->
-                  <b>Date</b>
-                </div>
-              </div>
-              <div class="row mb-2">
-                <div class="col-sm-3">
-                  <b></b>
-                </div>
-                <div class="col-sm-9">
-                  <!-- grup -->
-                  {{$plan->date}}
-
                 </div>
               </div>
               <div class="collapse-icon">

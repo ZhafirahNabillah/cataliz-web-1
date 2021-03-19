@@ -247,9 +247,10 @@ class PlanController extends Controller
    */
   public function show(Plan $plan)
   {
-    $client = Client::where('id', $plan->client_id)->first();
+    $clients = $plan->clients;
+    // return $clients;
     // return $client;
-    return view('plans.detail', compact('plan', 'client'));
+    return view('plans.detail', compact('plan', 'clients'));
   }
 
   /**
@@ -267,30 +268,22 @@ class PlanController extends Controller
   }
 
   /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-  }
-
-  /**
    * Remove the specified resource from storage.
    *
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
-  {
-    Plan::find($id)->delete();
+  public function destroy($id){
+    $plan = Plan::find($id);
+    $plan->clients()->detach();
+    $plan->delete();
+
+    // Plan::find($id)->clients()->detach();
+
     return response()->json(['success' => 'Plan deleted!']);
   }
 
-  public function plan_detail_to_pdf($id)
-  {
+  public function plan_detail_to_pdf($id){
     $plan = Plan::find($id);
     $coach = User::find($plan->owner_id);
     $coachee = Client::find($plan->client_id);
@@ -299,8 +292,7 @@ class PlanController extends Controller
     return $pdf->download('plan_detail_' . $plan->id . '.pdf');
   }
 
-  public function show_group_list(Request $request)
-  {
+  public function show_group_list(Request $request){
     if ($request->ajax()) {
 
       $data = Plan::where('owner_id', Auth::user()->id)->where('client_id', null)->latest()->get();
@@ -336,7 +328,6 @@ class PlanController extends Controller
           return $actionBtn;
         })
         ->rawColumns(['action'])
-
         ->make(true);
     }
   }
