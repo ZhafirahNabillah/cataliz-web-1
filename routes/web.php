@@ -74,11 +74,14 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/{id}/update_profil', [ProfileController::class, 'update_profil'])->name('update_profil');
 	Route::post('/{id}/update_background', [ProfileController::class, 'update_background'])->name('update_background');
 	Route::post('/{id}/store', [ProfileController::class, 'store_data'])->name('store_data');
-	
+
 	Route::resource('plans', PlanController::class);
 	Route::get('/plans/{id}/pdf', [PlanController::class, 'plan_detail_to_pdf'])->name('plans.detail_to_pdf');
 	Route::get('/ajaxClients', [PlanController::class, 'ajaxClients'])->name('clients.search');
 	Route::get('/show_group_list', [PlanController::class, 'show_group_list'])->name('plans.show_group');
+
+	Route::get('/agendas/sessions_individual', [AgendaController::class, 'show_individual_sessions'])->name('agendas.sessions_individual');
+	Route::get('/agendas/sessions_group', [AgendaController::class, 'show_group_sessions'])->name('agendas.sessions_group');
 
 	Route::resource('agendas', AgendaController::class);
 	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
@@ -101,6 +104,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
 	Route::get('clients/{id}/show_detail_feedbacks', [ClientController::class, 'show_detail_feedbacks'])->name('clients.show_detail_feedbacks');
 	Route::get('clients/{id}/show_detail_notes', [ClientController::class, 'show_detail_notes'])->name('clients.show_detail_notes');
+	Route::get('/get_client_data/{id}', [ClientController::class, 'get_client_data'])->name('get_client_data');
 
 	Route::post('/class/{class}/ubah_status', [ClassController::class, 'ubah_status'])->name('class.ubah_status');
 });

@@ -59,4 +59,12 @@ class User extends Authenticatable
             return strtoupper(substr($words[0], 0, 1));
         }
     }
+
+    public function client(){
+  		return $this->hasOne('App\Models\Client');
+  	}
+
+    public function coach(){
+  		return $this->hasOne('App\Models\Coach');
+  	}
 }

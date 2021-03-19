@@ -20,4 +20,8 @@ class Agenda extends Model
 	public function plan() {
 		return $this->belongsTo('App\Models\Plan');
 	}
+
+	public function agenda_detail() {
+		return $this->hasMany('App\Models\Agenda_detail');
+	}
 }

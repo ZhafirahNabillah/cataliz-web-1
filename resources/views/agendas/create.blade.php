@@ -76,39 +76,31 @@
                       @enderror
                     </div>
                   </div>
-                  <div class="row">
+
+                  <!-- Kalo grup -->
+                  <div class="row group_id_wrapper" style="display: none">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Group ID</label>
+                      <input type="text" id="group_id" name="group_id" class="form-control" disabled>
+                      </div>
+                    </div>
+
+                  <div class="row client_data_wrapper" style="display: none">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id"></select>
-                      @error('client_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
+                      <input type="text" id="client_name" name="group_id" class="form-control" disabled>
                     </div>
                   </div>
 
-                  <!-- Kalo grup -->
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Group ID</label>
-                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id" disabled></select>
-                      @error('client_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
                   <!-- Kalo grup gausa Organitation sama Company -->
-                  <div class="row">
+                  <div class="row client_data_wrapper" style="display: none">
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Organization</label>
-                      <input class="form-control" type="text" value="" id="organization" disabled>
+                      <input class="form-control" type="text" value="" id="client_organization" disabled>
                     </div>
                     <div class="col-md-6 form-group">
                       <label for="fp-default">Company</label>
-                      <input class="form-control" type="text" value="" id="company" disabled>
+                      <input class="form-control" type="text" value="" id="client_company" disabled>
                     </div>
                   </div>
                   <div class="row">
@@ -167,37 +159,37 @@
     $('[data-toggle="popover"]').popover()
   })
 
-  $('.livesearch').select2({
-    placeholder: 'Select client',
-    ajax: {
-      url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              co: item.company
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
-
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#company').val(dd.co);
-  });
+  // $('.livesearch').select2({
+  //   placeholder: 'Select client',
+  //   ajax: {
+  //     url: "{{route('clients.search')}}",
+  //     dataType: 'json',
+  //     delay: 250,
+  //     processResults: function(data) {
+  //       return {
+  //         results: $.map(data, function(item) {
+  //           console.log(item)
+  //           return {
+  //             text: item.name,
+  //             id: item.id,
+  //             org: item.organization,
+  //             co: item.company
+  //           }
+  //         })
+  //       };
+  //     },
+  //     cache: true
+  //   }
+  // });
+  //
+  // $(".livesearch").on('change', function(e) {
+  //   // Access to full data
+  //   console.log($(this).select2('data'));
+  //   console.log($(this).select2('data')[0].id);
+  //   var dd = $(this).select2('data')[0];
+  //   $('#organization').val(dd.org);
+  //   $('#company').val(dd.co);
+  // });
 
   $('.livesearch-plans').select2({
     placeholder: 'Select plans',
@@ -212,6 +204,8 @@
             return {
               text: item.objective,
               id: item.id,
+              client_id : item.client_id,
+              group_id : item.group_id
             }
           })
         };
@@ -223,8 +217,21 @@
   $(".livesearch-plans").on('change', function(e) {
     // Access to full data
     console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
+    console.log($(this).select2('data')[0].text);
     var dd = $(this).select2('data')[0];
+    if (dd.client_id != null) {
+      $(".group_id_wrapper").hide();
+      $.get("" + '/get_client_data/' + dd.client_id, function(data) {
+				$("#client_name").val(data.name);
+        $("#client_organization").val(data.organization);
+        $("#client_company").val(data.company);
+			});
+      $(".client_data_wrapper").show();
+    } else if (dd.group_id != null) {
+      $(".client_data_wrapper").hide();
+      $(".group_id_wrapper").show();
+      $("#group_id").val(dd.group_id);
+    }
   });
 </script>
 @endpush

@@ -15,6 +15,7 @@ use App\Models\Coaching_note;
 use App\Models\Client;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Coach;
 
 class AgendaController extends Controller
 {
@@ -37,13 +38,15 @@ class AgendaController extends Controller
 
   public function index(Request $request)
   {
+    // $coach = Coach::where('user_id', auth()->user()->id)->first();
+    // $plans = $coach->plan->pluck('id');
+    // // $agenda = $plans->agenda->get();
+    // $agenda = Agenda::whereIn('plan_id', $plans)->pluck('id');
+    // $agenda_detail = Agenda_detail::with('client')->whereIn('agenda_id', $agenda)->get();
+    // return $agenda_detail;
+
 
     if (auth()->user()->hasRole('admin')) {
-      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->latest()
-        ->get();
 
       $total_unscheduled_sessions = Agenda_detail::where('status', 'unschedule')->get()->count();
       $total_scheduled_sessions = Agenda_detail::where('status', 'scheduled')->get()->count();
@@ -51,36 +54,27 @@ class AgendaController extends Controller
       $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
       $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
     } elseif (auth()->user()->hasRole('coach')) {
-      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('agendas.owner_id', Auth::user()->id)->latest()
-        ->get();
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+      $plan_id = $coach->plan->pluck('id');
 
-      $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
-        $query->where('owner_id', auth()->user()->id);
+      $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query)use($plan_id) {
+        $query->whereIn('plan_id', $plan_id);
       })->where('status', 'unschedule')->get()->count();
-      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
-        $query->where('owner_id', auth()->user()->id);
+      $total_scheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($plan_id){
+        $query->whereIn('plan_id', $plan_id);
       })->where('status', 'scheduled')->get()->count();
-      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
-        $query->where('owner_id', auth()->user()->id);
+      $total_rescheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($plan_id){
+        $query->whereIn('plan_id', $plan_id);
       })->where('status', 'rescheduled')->get()->count();
-      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
-        $query->where('owner_id', auth()->user()->id);
+      $total_finished_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($plan_id){
+        $query->whereIn('plan_id', $plan_id);
       })->where('status', 'finished')->get()->count();
-      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) {
-        $query->where('owner_id', auth()->user()->id);
+      $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use($plan_id){
+        $query->whereIn('plan_id', $plan_id);
       })->where('status', 'canceled')->get()->count();
+
+
     } elseif (auth()->user()->hasRole('coachee')) {
-
-      $client = Client::where('user_id', auth()->user()->id)->first();
-
-      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('agendas.client_id', $client->id)->latest()
-        ->get();
 
       $total_unscheduled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
@@ -97,6 +91,100 @@ class AgendaController extends Controller
       $total_canceled_sessions = Agenda_detail::with('agenda')->whereHas('agenda', function ($query) use ($client) {
         $query->where('client_id', $client->id);
       })->where('status', 'canceled')->get()->count();
+    }
+
+    // if ($request->ajax()) {
+    //
+    //   //return data as datatable json
+    //   return DataTables::of($data)
+    //     ->addIndexColumn()
+    //     ->addColumn('status_colored', function ($row) {
+    //       if ($row->status == 'unschedule') {
+    //         $unschedule_status = '<span class="badge badge-pill badge-secondary" style="
+    //         background-color: #F1AF33;">unschedule</span>';
+    //         return $unschedule_status;
+    //       } elseif ($row->status == 'scheduled') {
+    //         $scheduled_status = '<span class="badge badge-pill badge-warning" style="
+    //         background-color: #CADB05;">scheduled</span>';
+    //         return $scheduled_status;
+    //       } elseif ($row->status == 'rescheduled') {
+    //         $rescheduled_status = '<span class="badge badge-pill badge-primary">rescheduled</span>';
+    //         return $rescheduled_status;
+    //       } elseif ($row->status == 'finished') {
+    //         $finished_status = '<span class="badge badge-pill badge-success">finished</span>';
+    //         return $finished_status;
+    //       } elseif ($row->status == 'canceled') {
+    //         $canceled_status = '<span class="badge badge-pill badge-danger">canceled</span>';
+    //         return $canceled_status;
+    //       }
+    //     })
+    //     ->addColumn('action', function ($row) {
+    //
+    //       //add update button if user have permission
+    //       if (auth()->user()->can('update-agenda')) {
+    //         $edit_btn = '<a href="' . route('agendas.edit', $row->id) . '" class="dropdown-item"  data-id="' . $row->id . '" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4 mr-50"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>Edit</a>';
+    //       } else {
+    //         $edit_btn = null;
+    //       };
+    //
+    //       //add detail and whatsapp button if user have permission
+    //       if (auth()->user()->can('detail-agenda')) {
+    //         $detail_btn = '<a href="' . route('agendas.show', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Details</a>';
+    //         $whatsapp_btn = '<a href="https://wa.me/62' . $row->phone . '" class="dropdown-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Kirim WA</a>';
+    //       } else {
+    //         $detail_btn = null;
+    //         $whatsapp_btn = null;
+    //       };
+    //
+    //       //add delete button if user have permission
+    //       if (auth()->user()->can('delete-agenda')) {
+    //         $delete_btn = '<a href="javascript:;" class="dropdown-item deleteAgenda" data-id="' . $row->id . '" data-original-title="Delete" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>Delete</a></div>';
+    //       } else {
+    //         $delete_btn = null;
+    //       };
+    //
+    //       //final dropdown button that shows on view
+    //       $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
+    //       <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $delete_btn . '</div>';
+    //       return $actionBtn;
+    //     })
+    //     ->rawColumns(['action', 'status_colored'])
+    //     ->make(true);
+    // }
+
+    return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
+  }
+
+  public function show_individual_sessions(Request $request){
+    if (auth()->user()->hasRole('admin')) {
+      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->join('clients', 'plans.client_id', '=', 'clients.id')
+        ->where('plans.group_id', null)
+        ->latest()
+        ->get();
+    } elseif (auth()->user()->hasRole('coach')) {
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+
+      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->join('clients', 'plans.client_id', '=', 'clients.id')
+        ->where('plans.group_id', null)
+        ->where('plans.owner_id', $coach->id)->latest()
+        ->get();
+
+    } elseif (auth()->user()->hasRole('coachee')) {
+      $client = Client::where('user_id', auth()->user()->id)->first();
+
+      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->join('clients', 'plans.client_id', '=', 'clients.id')
+        ->where('plans.group_id', null)
+        ->where('plans.client_id', $client->id)->latest()
+        ->get();
     }
 
     if ($request->ajax()) {
@@ -158,7 +246,98 @@ class AgendaController extends Controller
         ->make(true);
     }
 
-    return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
+
+  }
+
+  public function show_group_sessions(Request $request){
+    if (auth()->user()->hasRole('admin')) {
+      $data = Agenda_detail::select('agenda_details.id', 'plans.group_id as group', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->where('plans.client_id', null)
+        ->get();
+
+    } elseif (auth()->user()->hasRole('coach')) {
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+
+      $data = Agenda_detail::select('agenda_details.id', 'plans.group_id as group', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->where('plans.client_id', null)
+        ->where('plans.owner_id', $coach->id)->latest()
+        ->get();
+
+    } elseif (auth()->user()->hasRole('coachee')) {
+      $client = Client::where('user_id', auth()->user()->id)->first();
+
+      $data = Agenda_detail::select('agenda_details.id', 'plans.group.id as group', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->where('plans.client_id', null)
+        ->where('plans.owner_id', $client->id)->latest()
+        ->get();
+    }
+
+    if ($request->ajax()) {
+
+      //return data as datatable json
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('status_colored', function ($row) {
+          if ($row->status == 'unschedule') {
+            $unschedule_status = '<span class="badge badge-pill badge-secondary" style="
+            background-color: #F1AF33;">unschedule</span>';
+            return $unschedule_status;
+          } elseif ($row->status == 'scheduled') {
+            $scheduled_status = '<span class="badge badge-pill badge-warning" style="
+            background-color: #CADB05;">scheduled</span>';
+            return $scheduled_status;
+          } elseif ($row->status == 'rescheduled') {
+            $rescheduled_status = '<span class="badge badge-pill badge-primary">rescheduled</span>';
+            return $rescheduled_status;
+          } elseif ($row->status == 'finished') {
+            $finished_status = '<span class="badge badge-pill badge-success">finished</span>';
+            return $finished_status;
+          } elseif ($row->status == 'canceled') {
+            $canceled_status = '<span class="badge badge-pill badge-danger">canceled</span>';
+            return $canceled_status;
+          }
+        })
+        ->addColumn('action', function ($row) {
+
+          //add update button if user have permission
+          if (auth()->user()->can('update-agenda')) {
+            $edit_btn = '<a href="' . route('agendas.edit', $row->id) . '" class="dropdown-item"  data-id="' . $row->id . '" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4 mr-50"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>Edit</a>';
+          } else {
+            $edit_btn = null;
+          };
+
+          //add detail and whatsapp button if user have permission
+          if (auth()->user()->can('detail-agenda')) {
+            $detail_btn = '<a href="' . route('agendas.show', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Details</a>';
+            $whatsapp_btn = '<a href="https://wa.me/62' . $row->phone . '" class="dropdown-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-archive font-small-4 mr-50"><polyline points="21 8 21 21 3 21 3 8"></polyline><rect x="1" y="3" width="22" height="5"></rect><line x1="10" y1="12" x2="14" y2="12"></line></svg>Kirim WA</a>';
+          } else {
+            $detail_btn = null;
+            $whatsapp_btn = null;
+          };
+
+          //add delete button if user have permission
+          if (auth()->user()->can('delete-agenda')) {
+            $delete_btn = '<a href="javascript:;" class="dropdown-item deleteAgenda" data-id="' . $row->id . '" data-original-title="Delete" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>Delete</a></div>';
+          } else {
+            $delete_btn = null;
+          };
+
+          //final dropdown button that shows on view
+          $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
+          <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $delete_btn . '</div>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action', 'status_colored'])
+        ->make(true);
+    }
+
+
   }
 
   /**
@@ -181,22 +360,18 @@ class AgendaController extends Controller
   {
     //
     $this->validate($request, [
-      'client_id'     => 'required',
       'session'       => 'required',
       'type_session'  => 'required',
       'plan_id'       => 'required',
     ], [
-      'client_id.required'            => "Silahkan pilih client anda terlebih dahulu!",
       'session.required'              => "Silahkan pilih banyaknya sesi terlebih dahulu!",
       'type_session.required'         => "Silahkan pilih tipe sesi terlebih dahulu!",
       'plan_id.required'              => "Silahkan pilih plan anda terlebih dahulu!",
     ]);
 
     $agenda = new Agenda;
-    $agenda->client_id = $request->client_id;
     $agenda->session = $request->session;
     $agenda->type_session = $request->session;
-    $agenda->owner_id = Auth::user()->id;
     $agenda->plan_id = $request->plan_id;
     $agenda->save();
 
@@ -237,10 +412,13 @@ class AgendaController extends Controller
     //
     $agenda_detail = Agenda_detail::where('id', $id)->first();
     $agenda = Agenda::where('id', $agenda_detail->agenda_id)->first();
-    $client = Client::where('id', $agenda->client_id)->first();
-    $plan = Plan::where('id', $agenda->plan_id)->first();
+    // $client = Client::where('id', $agenda->client_id)->first();
+    // $plan = Plan::where('id', $agenda->plan_id)->first();
+    $plan = $agenda->plan;
+    $clients = $plan->clients;
 
-    return view('agendas.edit', compact('agenda', 'client', 'agenda_detail', 'plan'));
+
+    return view('agendas.edit', compact('agenda', 'clients', 'agenda_detail', 'plan'));
   }
 
   /**
@@ -267,8 +445,11 @@ class AgendaController extends Controller
 
     $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
     $old_agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
-    $client = Client::where('id', $agenda_detail->agenda->client_id)->first();
-    $coach = User::where('id', $agenda_detail->agenda->owner_id)->first();
+
+    $agenda = $agenda_detail->agenda;
+    $plan = $agenda->plan;
+    $clients = $plan->clients;
+    $coach = Coach::find($plan->owner_id)->user;
 
     $agenda_detail->topic = $request->topic;
 
@@ -281,7 +462,7 @@ class AgendaController extends Controller
       $agenda_detail->duration = $request->duration;
       $agenda_detail->update();
 
-      MailController::SendSessionScheduledMail($agenda_detail, $client, $coach);
+      MailController::SendSessionScheduledMail($agenda_detail, $clients, $coach);
     };
 
     if (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && $agenda_detail->date != null && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
@@ -293,7 +474,7 @@ class AgendaController extends Controller
       $agenda_detail->duration = $request->duration;
       $agenda_detail->update();
 
-      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $client, $coach);
+      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach);
     };
 
     return redirect('/agendas')->with('success', 'Sessions Successfully updated!');
