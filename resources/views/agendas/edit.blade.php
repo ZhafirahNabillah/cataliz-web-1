@@ -351,7 +351,7 @@
     var dd = $(this).select2('data')[0];
   });
 
-  @if($agenda_detail - > status == 'scheduled' || $agenda_detail - > status == 'rescheduled' || $agenda_detail - > status == 'unschedule')
+  @if($agenda_detail->status == 'scheduled' || $agenda_detail-> status == 'rescheduled' || $agenda_detail-> status == 'unschedule')
   $(function() {
     $('#plan_id').prop('disabled', false);
     $('#client_id').prop('disabled', false);

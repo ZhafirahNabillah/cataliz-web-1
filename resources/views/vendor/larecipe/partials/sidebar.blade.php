@@ -1,3 +1,3 @@
 <div class="sidebar" :class="[{'is-hidden': ! sidebar}]">
-    {!! $index !!}
+    z{!! $index !!}
 </div>

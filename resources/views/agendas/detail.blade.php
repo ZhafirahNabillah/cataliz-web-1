@@ -55,7 +55,7 @@
 
 						<!-- Kalo grup -->
 						<h5 class="mb-75">Group ID:</h5>
-						<p class="card-text">{{ $agenda->client->name }}</p>
+						<p class="card-text">{{ $agenda->client->id}}</p>
 						<div class="mt-2">
 							<h5 class="mb-75">Session:</h5>
 							<p class="card-text">{{ $agenda->client->organization }}</p>
@@ -481,7 +481,7 @@
 
 	$(function() {
 
-		@if($agenda_detail - > rating_from_coachee != null)
+		@if($agenda_detail->rating_from_coachee != null)
 		var rating = $('#rateYo').data("rating");
 		$('#rateYo').rateYo({
 			starWidth: "50px",
