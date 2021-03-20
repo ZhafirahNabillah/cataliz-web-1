@@ -66,45 +66,42 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Plan</label>
-                      <select class="livesearch form-control" name="plan_id" id="plan_id" disabled>
+                      <select class="livesearch-plans form-control" name="plan_id" id="plan_id" disabled>
                         <option selected hidden value="{{ $plan->id }}">{{ $plan->objective }}</option>
                       </select>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control" name="client_id" id="client_id" disabled>
-                        <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
-                      </select>
-                      <input type="hidden" name="id" value="{{$agenda->id}}">
-                    </div>
-                  </div>
 
                   <!-- Kalo group -->
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Group ID</label>
-                      <select class="livesearch form-control @error('client_id') is-invalid @enderror" name="client_id" disabled></select>
-                      @error('client_id')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
+                  @if ($plan->group_id)
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="fp-default">Group ID</label>
+                        <input class="form-control" value="{{$plan->group_id}}" disabled>
+                      </div>
                     </div>
-                  </div>
+                  @endif
 
+                  @if ($plan->client_id)
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="fp-default">Full Name</label>
+                        <input class="form-control" value="{{$clients->first()->name}}" disabled>
+                        <input type="hidden" name="id" value="{{$agenda->id}}">
+                      </div>
+                    </div>
 
-                  <div class="row">
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Organization</label>
-                      <input class="form-control" value="{{$client->organization}}" disabled>
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label for="fp-default">Organization</label>
+                        <input class="form-control" value="{{$clients->first()->organization}}" disabled>
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <label for="fp-default">Company</label>
+                        <input class="form-control" value="{{$clients->first()->company}}" disabled>
+                      </div>
                     </div>
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Company</label>
-                      <input class="form-control" value="{{$client->company}}" disabled>
-                    </div>
-                  </div>
+                  @endif
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
@@ -291,37 +288,37 @@
 </script>
 
 <script type="text/javascript">
-  $('.livesearch').select2({
-    placeholder: 'Select clients',
-    ajax: {
-      url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              pro: item.program
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
-
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#program').val(dd.pro);
-  });
+  // $('.livesearch').select2({
+  //   placeholder: 'Select clients',
+  //   ajax: {
+  //     url: "{{route('clients.search')}}",
+  //     dataType: 'json',
+  //     delay: 250,
+  //     processResults: function(data) {
+  //       return {
+  //         results: $.map(data, function(item) {
+  //           console.log(item)
+  //           return {
+  //             text: item.name,
+  //             id: item.id,
+  //             org: item.organization,
+  //             pro: item.program
+  //           }
+  //         })
+  //       };
+  //     },
+  //     cache: true
+  //   }
+  // });
+  //
+  // $(".livesearch").on('change', function(e) {
+  //   // Access to full data
+  //   console.log($(this).select2('data'));
+  //   console.log($(this).select2('data')[0].id);
+  //   var dd = $(this).select2('data')[0];
+  //   $('#organization').val(dd.org);
+  //   $('#program').val(dd.pro);
+  // });
 
   $('.livesearch-plans').select2({
     placeholder: 'Select plans',
@@ -353,8 +350,8 @@
 
   @if($agenda_detail->status == 'scheduled' || $agenda_detail-> status == 'rescheduled' || $agenda_detail-> status == 'unschedule')
   $(function() {
-    $('#plan_id').prop('disabled', false);
-    $('#client_id').prop('disabled', false);
+    // $('#plan_id').prop('disabled', false);
+    // $('#client_id').prop('disabled', false);
     $('#topic').prop('disabled', false);
     $('#media1').prop('disabled', false);
     $('#media2').prop('disabled', false);

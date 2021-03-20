@@ -471,4 +471,9 @@ class ClientController extends Controller
     $pdf = PDF::loadview('pdf_template.coachee_list_pdf',compact('coachee'));
     return $pdf->download('coachee_list.pdf');
   }
+
+  public function get_client_data($id){
+    $client = Client::find($id);
+    return response()->json($client);
+  }
 }

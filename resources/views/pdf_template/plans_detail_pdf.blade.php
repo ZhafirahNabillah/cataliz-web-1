@@ -98,10 +98,10 @@
         <tr style="text-align: center;height: 100px;">
           <td style="">
             <a href="https://www.instagram.com/cataliz.id/">
-              <img style="padding-right: 10px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
+              <img style="padding-right: 10px;" src="{{ public_path().'/assets/images/icons/email/blackinstagram.png' }}">
             </a>
             <a href="https://cataliz.id/">
-              <img style="padding-left: 10px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
+              <img style="padding-left: 10px;" src="{{ public_path().'/assets/images/icons/email/blacklink.png' }}">
             </a>
           </td>
         </tr>

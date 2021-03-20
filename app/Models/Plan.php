@@ -30,4 +30,12 @@ class Plan extends Model
 	{
 		return $this->belongsTo('App\Models\Client');
 	}
+
+	public function agenda(){
+		return $this->hasOne('App\Models\Agenda');
+	}
+
+	public function owner(){
+		return $this->belongsTo('App\Models\Coach');
+	}
 }

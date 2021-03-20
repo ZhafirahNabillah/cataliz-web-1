@@ -21,4 +21,8 @@ class Coach extends Model
     public function user() {
   		return $this->belongsTo('App\Models\User');
   	}
+
+    public function plan(){
+  		return $this->hasMany('App\Models\Plan','owner_id');
+  	}
 }

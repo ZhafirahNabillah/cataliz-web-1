@@ -161,7 +161,7 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<table class="datatables-basic table yajra-datatable">
+										<table class="datatables-basic table sessions-datatable-individual">
 											<thead>
 												<tr>
 													<th>No</th>
@@ -199,7 +199,7 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<table class="datatables-basic table yajra-datatable">
+										<table class="datatables-basic table sessions-datatable-group">
 											<thead>
 												<tr>
 													<th>No</th>
@@ -241,10 +241,10 @@
 	})
 
 	$(function() {
-		var table = $('.yajra-datatable').DataTable({
+		var table_sessions_individual = $('.sessions-datatable-individual').DataTable({
 			processing: true,
 			serverSide: true,
-			ajax: "",
+			ajax: "{{ route('agendas.sessions_individual') }}",
 			columns: [{
 					data: 'DT_RowIndex',
 					name: 'DT_RowIndex'
@@ -252,6 +252,56 @@
 				{
 					data: 'name',
 					name: 'name'
+				},
+				{
+					data: 'session_name',
+					name: 'session_name'
+				},
+				{
+					data: 'date',
+					name: 'date',
+					defaultContent: '<i>-</i>'
+				},
+				{
+					data: 'duration',
+					name: 'duration',
+					defaultContent: '<i>-</i>'
+				},
+				{
+					data: 'status_colored',
+					name: 'status_colored'
+				},
+				{
+					data: 'action',
+					name: 'action',
+					orderable: true,
+					searchable: true
+				},
+			],
+			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+			language: {
+				paginate: {
+					// remove previous & next text from pagination
+					previous: '&nbsp;',
+					next: '&nbsp;'
+				},
+				// render: '<i data-feather="search"></i>',
+				// search: '<i data-feather="search"/>',
+				searchPlaceholder: "Search records"
+			}
+		});
+
+		var table_sessions_group = $('.sessions-datatable-group').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: "{{ route('agendas.sessions_group') }}",
+			columns: [{
+					data: 'DT_RowIndex',
+					name: 'DT_RowIndex'
+				},
+				{
+					data: 'group',
+					name: 'group'
 				},
 				{
 					data: 'session_name',
@@ -321,7 +371,8 @@
 								icon: 'success',
 								title: 'Delete Successfully!',
 							});
-							table.draw();
+							table_sessions_group.draw();
+							table_sessions_individual.draw();
 						},
 						error: function(data) {
 							console.log('Error:', data);
