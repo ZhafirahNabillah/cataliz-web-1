@@ -35,19 +35,26 @@ class PlanController extends Controller
 
 
       if (auth()->user()->hasRole('admin')) {
-        $data = Plan::with('client')->get();
+        $data = Plan::with('client')->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coach')) {
         $data = Plan::with('client')->where('owner_id', Auth::user()->id)->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coachee')) {
-        $login_user_id = auth()->user()->id;
-        $client_id = Client::where('user_id', $login_user_id)->pluck('id');
-        $data = Plan::select('plans.id', 'plans.objective', 'plans.date', 'users.name', 'clients.phone')->join('users', 'plans.owner_id', '=', 'users.id')->join('clients', 'plans.client_id', '=', 'clients.id')->where('clients.id', $client_id)->get();
+        // $login_user_id = auth()->user()->id;
+        // $client_id = Client::where('user_id', $login_user_id)->pluck('id');
+        // $data = Plan::select('plans.id', 'plans.objective', 'plans.date', 'users.name', 'clients.phone')->join('users', 'plans.owner_id', '=', 'users.id')->join('clients', 'plans.client_id', '=', 'clients.id')->where('clients.id', $client_id)->get();
+
+        $client = Client::where('user_id', auth()->user()->id)->first();
+        $data = Plan::with('owner')->where('client_id', $client->id)->where('group_id', null)->latest()->get();
       }
 
       if (auth()->user()->hasRole('coachee')) {
         // code...
         return Datatables::of($data)
           ->addIndexColumn()
+          ->addColumn('coach_name', function ($row) {
+            $user = User::where('id', $row->owner->id)->first();
+            return $user->name;
+          })
           ->addColumn('action', function ($row) {
 
             //add update button if user have permission
@@ -82,7 +89,7 @@ class PlanController extends Controller
 
             return $actionBtn;
           })
-          ->rawColumns(['action'])
+          ->rawColumns(['action','coach_name'])
           ->make(true);
       } else {
         // code...
@@ -247,10 +254,13 @@ class PlanController extends Controller
    */
   public function show(Plan $plan)
   {
-    $clients = $plan->clients;
-    // return $clients;
-    // return $client;
-    return view('plans.detail', compact('plan', 'clients'));
+    if (auth()->user()->hasRole('coachee')) {
+      $coach = $plan->owner;
+      $coach_detail = $coach->user;
+      return view('plans.detail', compact('plan','coach_detail'));
+    } else {
+      return view('plans.detail', compact('plan'));
+    }
   }
 
   /**
@@ -293,9 +303,17 @@ class PlanController extends Controller
   }
 
   public function show_group_list(Request $request){
-    if ($request->ajax()) {
+    if (auth()->user()->hasRole('admin')) {
+      $data = Plan::where('client_id', null)->latest()->get();
+    } elseif (auth()->user()->hasRole('coach')) {
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+      $data = Plan::where('owner_id', $coach->id)->where('client_id', null)->latest()->get();
+    } elseif (auth()->user()->hasRole('coachee')) {
+      $client = Client::where('user_id', auth()->user()->id)->first();
+      $data = $client->plans->where('client_id', null);
+    }
 
-      $data = Plan::where('owner_id', Auth::user()->id)->where('client_id', null)->latest()->get();
+    if ($request->ajax()) {
 
       return DataTables::of($data)
         ->addIndexColumn()

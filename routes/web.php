@@ -65,7 +65,10 @@ Route::get('/mail', [MailController::class, 'SendSessionScheduledMail']);
 Route::group(['middleware' => ['auth']], function () {
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
-	Route::get('/home/show_upcoming_list', [HomeController::class, 'show_upcoming_data'])->name('home.show_upcoming_list');
+	Route::get('/home/show_upcoming_individual_events', [HomeController::class, 'show_upcoming_individual_events'])->name('home.show_upcoming_individual_events');
+	Route::get('/home/show_upcoming_group_events', [HomeController::class, 'show_upcoming_group_events'])->name('home.show_upcoming_group_events');
+	Route::get('/home/show_agenda_individual_events', [HomeController::class, 'show_agenda_individual_events'])->name('home.show_agenda_individual_events');
+	Route::get('/home/show_agenda_group_events', [HomeController::class, 'show_agenda_group_events'])->name('home.show_agenda_group_events');
 	Route::post('/home/{id}/store', [HomeController::class, 'store_data'])->name('home.store_data');
 
 	//Route::resource('roles', RoleController::class);

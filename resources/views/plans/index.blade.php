@@ -82,7 +82,7 @@
                                     <div class="col-12">
                                         <div class="card">
                                             @hasanyrole('coach|admin')
-                                            <table class="datatables-basic table default-datatable-plans">
+                                            <table class="datatables-basic table plan-datatable-individual">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -96,7 +96,7 @@
                                                 </tbody>
                                             </table>
                                             @else
-                                            <table class="datatables-basic table coachee-datatable-plans">
+                                            <table class="datatables-basic table plan-datatable-individual">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -154,7 +154,7 @@
                                     <div class="col-12">
                                         <div class="card">
                                             @hasanyrole('coach|admin')
-                                            <table class="datatables-basic table default-group-datatable-plans">
+                                            <table class="datatables-basic table plan-datatable-group">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -168,7 +168,7 @@
                                                 </tbody>
                                             </table>
                                             @else
-                                            <table class="datatables-basic table coachee-group-datatable-plans">
+                                            <table class="datatables-basic table plan-datatable-group">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -218,7 +218,8 @@
             }
         });
 
-        var table_plans_individual = $('.default-datatable-plans').DataTable({
+        @role('coach|admin')
+        var table_plans_individual = $('.plan-datatable-individual').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -346,8 +347,51 @@
                 searchPlaceholder: "Search records"
             }
         });
+        @endrole
 
-        var table_plans_group = $('.default-group-datatable-plans').DataTable({
+        @role('coachee')
+        var table_plans_individual = $('.plan-datatable-individual').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "",
+          columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'coach_name',
+            name: 'coach_name'
+          },
+          {
+            data: 'objective',
+            name: 'objective'
+          },
+          {
+            data: 'date',
+            name: 'date',
+            defaultContent: '<i>-</i>'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
+        @endrole
+
+        var table_plans_group = $('.plan-datatable-group').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{route('plans.show_group')}}",
@@ -387,45 +431,6 @@
             }
         });
 
-        var table_plans_coachee = $('.coachee-datatable-plans').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: "",
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'objective',
-                    name: 'objective'
-                },
-                {
-                    data: 'date',
-                    name: 'date',
-                    defaultContent: '<i>-</i>'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                },
-            ],
-            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-            language: {
-                paginate: {
-                    // remove previous & next text from pagination
-                    previous: '&nbsp;',
-                    next: '&nbsp;'
-                },
-                search: "<i data-feather='search'></i>",
-                searchPlaceholder: "Search records"
-            }
-        });
 
         $('body').on('click', '.deletePlan', function(e) {
 

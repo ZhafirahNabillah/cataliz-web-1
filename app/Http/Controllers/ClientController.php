@@ -144,8 +144,11 @@ class ClientController extends Controller
           // } else {
           //   $rating = $row->average;
           // }
-          $agenda_id = Agenda::where('owner_id', $row->id)->pluck('id');
-          $rating = Agenda_detail::whereIn('agenda_id', $agenda_id)->pluck('rating_from_coachee')->avg();
+          $coach = Coach::where('user_id', $row->id)->first();
+          $plans = $coach->plan->pluck('id');
+          $agenda = Agenda::whereIn('plan_id', $plans)->pluck('id');
+          // $agenda_id = Agenda::where('owner_id', $row->id)->pluck('id');
+          $rating = Agenda_detail::whereIn('agenda_id', $agenda)->pluck('rating_from_coachee')->avg();
 
           if ($rating) {
             $rating = $rating.'/5';

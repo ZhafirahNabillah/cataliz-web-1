@@ -46,12 +46,28 @@
             @role('coachee')
             <div class="card-body">
               <div class="row mb-2">
-                <div class="col-sm-12">
-                  <b>Full Name</b>
+                <div class="col-sm-6">
+                  <b>Coach</b>
                 </div>
+                <div class="col-sm-6">
+                  {{$coach_detail->name}}
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <strong>Client Name</strong>
+                </div>
+                <div class="col-6">
+                  <strong>Organization</strong>
+                </div>
+              </div>
+              <div class="row mb-2">
                 @foreach ($plan->clients as $client)
-                  <div class="col-sm-12">
-                    1
+                  <div class="col-6">
+                    {{ $client->name }}
+                  </div>
+                  <div class="col-6">
+                    {{ $client->organization ?? '-' }}
                   </div>
                 @endforeach
               </div>
@@ -64,10 +80,10 @@
                 </div>
               </div> --}}
               <div class="row mb-2">
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                   <b>Date</b>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-6">
                   {{$plan->date}}
                 </div>
               </div>
