@@ -66,9 +66,9 @@ class AgendaController extends Controller
 
       $plans = $client->plans->pluck('id');
       $agendas = Agenda::whereIn('plan_id', $plans)->pluck('id');
-      $sessions = Agenda_detail::whereIn('agenda_id', $agenda)->get();
+      $sessions = Agenda_detail::whereIn('agenda_id', $agendas)->get();
 
-      $total_unscheduled_sessions = $sessiosn->where('status','unschedule')->count();
+      $total_unscheduled_sessions = $sessions->where('status','unschedule')->count();
       $total_scheduled_sessions = $sessions->where('status','scheduled')->count();
       $total_rescheduled_sessions = $sessions->where('status','rescheduled')->count();
       $total_finished_sessions = $sessions->where('status','finished')->count();
