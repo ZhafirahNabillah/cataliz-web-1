@@ -212,11 +212,15 @@ class PlanController extends Controller
         'group_id' => null
       ]);
     } else {
-
-      $rid = rand(00000, 99999);
-      while (Plan::where('group_id', $rid)->exists()) {
+      if ($request->group_id == null) {
         $rid = rand(00000, 99999);
+        while (Plan::where('group_id', $rid)->exists()) {
+          $rid = rand(00000, 99999);
+        }
+      } else {
+        $rid = $request->group_id;
       }
+
       // return $rid;
 
       $plan = Plan::updateOrCreate(['id' => $request->id], [
@@ -271,7 +275,8 @@ class PlanController extends Controller
    */
   public function edit(Plan $plan)
   {
-    $all_clients = Client::get();
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $all_clients = $coach->clients;
     $clients = $plan->clients->pluck('id');
 
     return view('plans.edit', compact('plan', 'all_clients', 'clients'));
