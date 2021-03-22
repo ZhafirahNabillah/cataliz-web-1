@@ -222,14 +222,14 @@
 									<h5 class="card-title mb-1">Upcoming Event
 										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bgaian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat" />
 									</h5>
-									<table class="datatables-basic table yajra-datatable">
+									<table class="datatables-basic table upcoming-datatable">
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>Name</th>
 												<th>Date</th>
 												<th>Time</th>
 												<th>Session</th>
+												<th>Type</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -245,14 +245,14 @@
 									<h5 class="card-title mb-1">List Agenda
 										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
 									</h5>
-									<table class="datatables-basic table yajra-datatable1">
+									<table class="datatables-basic table agenda-datatable">
 										<thead>
 											<tr>
 												<th>No</th>
-												<th>Name</th>
+												<th>Topic</th>
 												<th>Date</th>
 												<th>Time</th>
-												<th>Duration</th>
+												<th>Type</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -291,7 +291,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-								<table class="datatables-basic table yajra-datatable-1">
+								<table class="datatables-basic table sessions-datatable">
 									<thead>
 										<tr>
 											<th>NO</th>
@@ -333,7 +333,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-								<table class="datatables-basic table yajra-datatable-2">
+								<table class="datatables-basic table plans-datatable">
 									<thead>
 										<tr>
 											<th>NO</th>
@@ -369,11 +369,10 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<table class="datatables-basic table yajra-datatable-notes">
+						<table class="datatables-basic table notes-datatable">
 							<thead>
 								<tr>
 									<th>NO</th>
-									<th>Coach Name</th>
 									<th>Session</th>
 									<th>Topic</th>
 									<th>Subject</th>
@@ -460,7 +459,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<table class="datatables-basic table yajra-datatable-feedback">
+						<table class="datatables-basic table feedbacks-datatable">
 							<thead>
 								<tr>
 									<th>NO</th>
@@ -603,17 +602,13 @@
 		});
 
 		// datatable for upcoming table
-		var table = $('.yajra-datatable').DataTable({
+		var table = $('.upcoming-datatable').DataTable({
 			processing: true,
 			serverSide: true,
-			ajax: "",
+			ajax: "{{ route('clients.show_upcoming', $client->id) }}",
 			columns: [{
 					data: 'DT_RowIndex',
 					name: 'DT_RowIndex'
-				},
-				{
-					data: 'name',
-					name: 'name'
 				},
 				{
 					data: 'date',
@@ -630,6 +625,10 @@
 					name: 'session_name',
 					defaultContent: '<i>-</i>'
 				},
+				{
+					data: 'type',
+					name: 'type'
+				}
 			],
 			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
 			language: {
@@ -644,17 +643,18 @@
 		});
 
 		// datatable for event table
-		var table = $('.yajra-datatable1').DataTable({
+		var table = $('.agenda-datatable').DataTable({
 			processing: true,
 			serverSide: true,
-			ajax: "{{route('clients.show_agendas_list', $client->id)}}",
+			ajax: "{{route('clients.show_agendas', $client->id)}}",
 			columns: [{
 					data: 'DT_RowIndex',
 					name: 'DT_RowIndex'
 				},
 				{
-					data: 'name',
-					name: 'name'
+					data: 'topic',
+					name: 'topic',
+					defaultContent: '<i>-</i>'
 				},
 				{
 					data: 'date',
@@ -667,8 +667,8 @@
 					defaultContent: '<i>-</i>'
 				},
 				{
-					data: 'duration',
-					name: 'duration',
+					data: 'type',
+					name: 'type',
 					defaultContent: '<i>-</i>'
 				},
 			],
@@ -685,7 +685,7 @@
 		});
 
 		//datatable for sessions table
-		var table = $('.yajra-datatable-1').DataTable({
+		var table = $('.sessions-datatable').DataTable({
 			processing: true,
 			serverSide: true,
 			ajax: "{{route('clients.show_sessions', $client->id)}}",
@@ -736,7 +736,7 @@
 		});
 
 		//datatable for plans table
-		var table = $('.yajra-datatable-2').DataTable({
+		var table = $('.plans-datatable').DataTable({
 			processing: true,
 			serverSide: true,
 			ajax: "{{route('clients.show_plans', $client->id)}}",
@@ -816,7 +816,7 @@
 		});
 
 		//datatable for notes table
-		var table = $('.yajra-datatable-notes').DataTable({
+		var table = $('.notes-datatable').DataTable({
 			processing: true,
 			serverSide: true,
 			ajax: "{{route('clients.show_notes', $client->id)}}",
@@ -824,19 +824,19 @@
 					data: 'DT_RowIndex',
 					name: 'DT_RowIndex'
 				},
+				// {
+				// 	data: 'name',
+				// 	name: 'name',
+				// 	defaultContent: '<i>-</i>'
+				// },
 				{
-					data: 'name',
-					name: 'name',
+					data: 'agenda_detail.session_name',
+					name: 'agenda_detail.session_name',
 					defaultContent: '<i>-</i>'
 				},
 				{
-					data: 'session_name',
-					name: 'session_name',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'topic',
-					name: 'topic',
+					data: 'agenda_detail.topic',
+					name: 'agenda_detail.topic',
 					defaultContent: '<i>-</i>'
 				},
 				{

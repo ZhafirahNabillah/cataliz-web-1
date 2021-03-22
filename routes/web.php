@@ -100,11 +100,12 @@ Route::group(['middleware' => ['auth']], function () {
 
 	Route::resource('clients', ClientController::class);
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
-	Route::get('/clients/{client}/show_sessions', [ClientController::class, 'show_sessions_data'])->name('clients.show_sessions');
-	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_data'])->name('clients.show_plans');
+	Route::get('/clients/{client}/show_upcoming', [ClientController::class, 'show_upcoming_list'])->name('clients.show_upcoming');
+	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_agendas_list'])->name('clients.show_agendas');
+	Route::get('/clients/{client}/show_sessions', [ClientController::class, 'show_sessions_list'])->name('clients.show_sessions');
+	Route::get('/clients/{client}/show_plans', [ClientController::class, 'show_plans_list'])->name('clients.show_plans');
+	Route::get('/clients/{client}/show_notes', [ClientController::class, 'show_notes_list'])->name('clients.show_notes');
 	Route::get('/clients/{client}/show_feedbacks', [ClientController::class, 'show_feedbacks_data'])->name('clients.show_feedbacks');
-	Route::get('/clients/{client}/show_notes', [ClientController::class, 'show_notes_data'])->name('clients.show_notes');
-	Route::get('/clients/{client}/show_agendas_list', [ClientController::class, 'show_agendas_data'])->name('clients.show_agendas_list');
 	Route::get('clients/{id}/show_detail_feedbacks', [ClientController::class, 'show_detail_feedbacks'])->name('clients.show_detail_feedbacks');
 	Route::get('clients/{id}/show_detail_notes', [ClientController::class, 'show_detail_notes'])->name('clients.show_detail_notes');
 	Route::get('/get_client_data/{id}', [ClientController::class, 'get_client_data'])->name('get_client_data');
