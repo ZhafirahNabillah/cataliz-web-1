@@ -46,6 +46,7 @@ return array(
     'App\\Models\\Client' => $baseDir . '/app/Models/Client.php',
     'App\\Models\\Coach' => $baseDir . '/app/Models/Coach.php',
     'App\\Models\\Coaching_note' => $baseDir . '/app/Models/Coaching_note.php',
+    'App\\Models\\Feedback' => $baseDir . '/app/Models/Feedback.php',
     'App\\Models\\Plan' => $baseDir . '/app/Models/Plan.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

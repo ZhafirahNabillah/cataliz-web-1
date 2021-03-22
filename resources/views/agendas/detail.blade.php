@@ -53,7 +53,7 @@
 							<h6 class="card-title">Detail Agenda</h6>
 						</div>
 
-						<!-- Kalo grup -->
+						{{-- <!-- Kalo grup -->
 						<h5 class="mb-75">Group ID:</h5>
 						<p class="card-text">{{ $agenda->client->id}}</p>
 						<div class="mt-2">
@@ -68,19 +68,19 @@
 							<h5 class="mb-75">Duration:</h5>
 							<p class="card-text">{{ $agenda_detail->session_name }}</p>
 						</div>
-						<!-- /kalogrup -->
+						<!-- /kalogrup --> --}}
 
 
 						<div class="card-body">
 							<h5 class="mb-75">Name:</h5>
-							<p class="card-text">{{ $agenda->client->name }}</p>
+							<p class="card-text">{{ $agenda->plan->client->name }}</p>
 							<div class="mt-2">
 								<h5 class="mb-75">Organization:</h5>
-								<p class="card-text">{{ $agenda->client->organization }}</p>
+								<p class="card-text">{{ $agenda->plan->client->organization }}</p>
 							</div>
 							<div class="mt-2">
 								<h5 class="mb-75">Company:</h5>
-								<p class="card-text">{{ $agenda->client->company }}</p>
+								<p class="card-text">{{ $agenda->plan->client->company }}</p>
 							</div>
 							<div class="mt-2">
 								<h5 class="mb-75">Session:</h5>
@@ -96,7 +96,7 @@
 				<div class="col-sm-12 col-md-6">
 					<div class="card">
 
-						<!-- Kalo grup -->
+						{{-- <!-- Kalo grup -->
 						<div class="card-header">
 							<h7 class="card-title"> </h7>
 						</div>
@@ -115,7 +115,7 @@
 								<h5 class="mb-75">Media Url:</h5>
 								<p class="card-text">{{$agenda_detail->media_url}} @if($agenda_detail->media_url == null) - @endif</p>
 							</div>
-							<!-- /kalogrup -->
+							<!-- /kalogrup --> --}}
 
 
 

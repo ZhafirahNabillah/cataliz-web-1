@@ -2,9 +2,8 @@
     - [Overview](/{{route}}/{{version}}/overview)
     - [Membuat Akun](/{{route}}/{{version}}/membuat_akun)
     - [Data Diri](/{{route}}/{{version}}/melengkapi_data_diri)
+    - [Kustomisasi Tampilan](/{{route}}/{{version}}/kustomisasi_tampilan)
 
 - ## Role Introduction
-    - [Admin](/{{route}}/{{version}}/admin)
-    - [Coach](/{{route}}/{{version}}/coach)
-    - [Coachee](/{{route}}/{{version}}/coachee)
+    - [Coach](/{{route}}/{{version}}/coach/coach)
 

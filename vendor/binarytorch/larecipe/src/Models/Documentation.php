@@ -48,11 +48,11 @@ class Documentation
     {
         return $this->cache->remember(function () use ($version) {
             if (auth()->user()->hasRole('admin')) {
-                $path = base_path(config('larecipe.docs.path') . '/' . $version . '/index.md');
+                $path = base_path(config('larecipe.docs.path') . '/' . $version . '/index_admin.md');
             } elseif (auth()->user()->hasRole('coach')) {
-                $path = base_path(config('larecipe.docs.path') . '/' . $version . '/index.md');
+                $path = base_path(config('larecipe.docs.path') . '/' . $version . '/index_coach.md');
             } else {
-                $path = base_path(config('larecipe.docs.path') . '/' . $version . '/index2.md');
+                $path = base_path(config('larecipe.docs.path') . '/' . $version . '/index_coachee.md');
             }
 
             if ($this->files->exists($path)) {
