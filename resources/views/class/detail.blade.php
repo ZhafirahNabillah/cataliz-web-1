@@ -202,12 +202,11 @@
             </div> --}}
             <div class="form-group">
               <label class="form-label" for="basic-icon-default-fullname">Client list</label>
+              <input id="search" type="text" class="form-control" placeholder="Search client name..."/>
               @foreach($clients as $client)
-              <div class="form-check">
+              <div class="form-check client-list">
                 <input class="form-check-input" type="checkbox" value="{{$client->id}}" name="client[]" id="client-check-{{$client->id}}">
-                <label class="form-check-label" for="permission-check-{{$client->id}}">
-                  {{$client->name}}
-                </label>
+                <label class="form-check-label" for="client-check-{{$client->id}}">{{$client->name}}</label>
               </div>
               @endforeach
               <div id="permissions-error"></div>
@@ -276,7 +275,7 @@
 					var client_id = data[i].id;
 					$('#client-check-' + client_id).prop('checked', true);
 				});
-			})
+			});
 		});
 
     $('#saveBtn').click(function(e) {
@@ -308,6 +307,17 @@
       });
       return false;
     });
+
+    $('#search').keyup(function(){
+      var search_value = new RegExp($(this).val(), 'i');
+      $(".client-list label").each(function() {
+        if(!search_value.test($(this).text())) {
+          $(this).parent().hide();
+        } else {
+          $(this).parent().show();
+        }
+      });
+	  });
   });
 </script>
 @endpush
