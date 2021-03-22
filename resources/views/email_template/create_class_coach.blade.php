@@ -6,7 +6,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Session Scheduled</title>
+  <title>Class Created!</title>
   <!-- Designed by https://github.com/kaytcat -->
   <!-- Header image designed by Freepik.com -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">
@@ -250,10 +250,10 @@
                     </div>
                   <tr>
                     <td style="text-align: left;">
-                      <h1 style="color: black;margin-top: 50px;margin-left: 15px;">Session Scheduled</h1>
-                      <span style="margin-left: 15px;color: #656565;">There’s a new session scheduled for you </span>
+                      <h1 style="color: black;margin-top: 50px;margin-left: 15px;">Joined Class</h1>
+                      <span style="margin-left: 15px;color: #656565;">The admin has added you to join </span>
                       <br>
-                      <span style="margin-left: 15px;color: #656565;">by your coach.</span>
+                      <span style="margin-left: 15px;color: #656565;">the class</span>
                     </td>
                   </tr>
                   <tr style="height: 80px;">
@@ -271,10 +271,10 @@
 
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
                   <tr>
-                    <!-- Nama -->
+                    <!-- Nama user coach -->
                     <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
-                    <span style="color: black;">CONGRATULATION!! Your session has been successfully scheduled.</span>
-                    <span style="color: black;">We hope that you will be able to attend the scheduled sessions with the following details:</span>
+                    <span style="color: black;">You have been added to a class as a coach with the details class :
+                    </span>
                   </tr>
                 </table>
 
@@ -299,61 +299,22 @@
                     <table style="margin:1em auto;" cellspacing="0" cellpadding="10px" class="force-width-76" width="%">
                       <tr>
                         <td style="text-align:left;">
-                          <span>Session</span>
+                          <span>Class Name</span>
                         </td>
                         <td style="width: 150px;"></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- sesi ke -.... -->
-                          <span>{{ $email_data['session_name'] }}</span>
+                          <span>#Nama Kelas</span>
                         </td>
                       </tr>
                       <tr>
                         <td style="text-align:left;">
-                          <span>Topic</span>
+                          <span>Number of Participants</span>
                         </td>
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- topic -->
-                          <span>{{ $email_data['topic'] }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align:left;">
-                          <span>Coach Name</span>
-                        </td>
-                        <td style=""></td>
-                        <td style="text-align:left; vertical-align:top;">
-                          <!-- Coach Name -->
-                          <span>{{ $email_data['coach_name'] }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align:left;">
-                          <span>Date</span>
-                        </td>
-                        <td style=""></td>
-                        <td style="text-align:left; vertical-align:top;">
-                          <span>{{ $email_data['date'] }}</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align:left;">
-                          <span>Time</span>
-                        </td>
-                        <td style=""></td>
-                        <td style="text-align:left; vertical-align:top;">
-                          <!-- waktu -->
-                          <span>{{ $email_data['time'] }} WIB</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align:left;">
-                          <span>Media</span>
-                        </td>
-                        <td style=""></td>
-                        <td style="text-align:left; vertical-align:top;">
-                          <!-- Media -->
-                          <span>{{ $email_data['media'] }}</span>
+                          <span>#jumlah Partisipan</span>
                         </td>
                       </tr>
                     </table>
@@ -370,118 +331,81 @@
                     <tr>
                       <td style="text-align: justify;">
                         <br>
-                        <p>You can see a list of all your sessions on the "Agenda" menu in your Cataliz account or click
-                          on
-                          the button below.</p>
+                        <p>You can start planning for your clients and schedule sessions for them
+                          You can contact your clients for more intensive communication via the chat
+                          feature in the system.
+                          <br>
+                          The client can no longer be contacted when class has
+                          ended.
+                        </p>
 
-
-                        <table cellspacing="0" cellpadding="0" class="force-full-width" width="100%">
-                          <tr style="height: 10px;">
-                            <td></td>
-                          </tr>
+                        <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #8D8D8D;background-color:#E9E7FF">
                           <tr>
-                            <td class="mobile-block" style="text-align: center;">
-                              <table cellspacing="0" cellpadding="0" class="force-full-width" width="100%">
-                                <tbody>
-                                  <tr>
-                                    <td>
-                                      <!-- link ke agendas -->
-                                      <a href="{{ route('agendas.index') }}">
-                                        <button class="button button1">Go To My Agendas</button>
-                                      </a>
-                                    </td>
-                                  </tr>
-
-                                </tbody>
-                              </table>
+                            <td style="text-align: center;">
 
                             </td>
                           </tr>
-                          <tr style="height: 10px;">
-                            <td class="mobile-block" style="text-align: center;">
-                              <table cellspacing="0" cellpadding="0" class="force-full-width" width="100%">
-                                <tbody>
-                                  <tr>
-                                    <td style="    font-size: 14px;padding-bottom: 10px;font-weight: bold;">
+                        </table>
 
+                        <p style="text-align: justify;color: black;">If you have any questions, please email
+                          halo@cataliz.id or
+                          contact +62 822-3585-0005
+                          on Monday - Friday 09:00 - 18:00 WIB.
+                        </p>
+                        <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #8D8D8D;background-color:#E9E7FF">
+                          <tr>
+                            <td style="text-align: center;">
+
+                            </td>
+                          </tr>
+                        </table>
+
+
+                        <center>
+                          <table cellspacing="0" cellpadding="0" width="500" class="w320">
+                            <tr>
+                              <td>
+                                <table cellspacing="0" cellpadding="30" width="100%">
+                                  <tr style="text-align: center;">
+                                    <td style="">
+                                      <a href="https://www.instagram.com/cataliz.id/">
+                                        <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
+                                      </a>
+                                      <a href="https://cataliz.id/">
+                                        <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
+                                      </a>
                                     </td>
                                   </tr>
+                                </table>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <center>
+                                  <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
+                                    <tr>
+                                      <td style="text-align:center; margin:0 auto;" width="100%">
+                                        <p style="color: black;">
+                                          Cataliz.id. All Right Reserved
+                                        </p>
 
-                                </tbody>
-                              </table>
-                          <tr style="height: 15px;">
-                            <td></td>
-                          </tr>
-                      </td>
-                    </tr>
-                  </table>
-                  <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #8D8D8D;background-color:#E9E7FF">
-                    <tr>
-                      <td style="text-align: center;">
-
-                      </td>
-                    </tr>
-                  </table>
-
-                  <p style="text-align: justify;color: black;">If you have any questions, please email
-                    halo@cataliz.id or
-                    contact +62 822-3585-0005
-                    on Monday - Friday 09:00 - 18:00 WIB.
-                  </p>
-                  <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #8D8D8D;background-color:#E9E7FF">
-                    <tr>
-                      <td style="text-align: center;">
-
-                      </td>
-                    </tr>
-                  </table>
-
-
-                  <center>
-                    <table cellspacing="0" cellpadding="0" width="500" class="w320">
-                      <tr>
-                        <td>
-                          <table cellspacing="0" cellpadding="30" width="100%">
-                            <tr style="text-align: center;">
-                              <td style="">
-                                <a href="https://www.instagram.com/cataliz.id/">
-                                  <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
-                                </a>
-                                <a href="https://cataliz.id/">
-                                  <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
-                                </a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </center>
                               </td>
                             </tr>
                           </table>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <center>
-                            <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
-                              <tr>
-                                <td style="text-align:center; margin:0 auto;" width="100%">
-                                  <p style="color: black;">
-                                    Cataliz.id. All Right Reserved
-                                  </p>
-
-                                </td>
-                              </tr>
-                            </table>
-                          </center>
-                        </td>
-                      </tr>
-                    </table>
-                  </center>
+                        </center>
+                      </td>
+                    </tr>
+                  </table>
+                </center>
               </td>
             </tr>
           </table>
-        </center>
       </td>
     </tr>
-  </table>
-  </td>
-  </tr>
   </table>
   </center>
 
