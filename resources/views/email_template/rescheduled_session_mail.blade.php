@@ -273,7 +273,7 @@
                   <tr>
                     <!-- Nama user -->
                     <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
-                    <span style="color: black;">Your coach has rescheduled your previously scheduled sessions for
+                    <span style="color: black;">DON’T MISS IT!! Your session has been successfully scheduled. Your previously scheduled sessions for
                     </span>
                   </tr>
                 </table>

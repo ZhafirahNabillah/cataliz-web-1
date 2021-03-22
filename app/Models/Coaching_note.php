@@ -14,4 +14,8 @@ class Coaching_note extends Model
     public function agenda_detail() {
   		return $this->belongsTo('App\Models\Agenda_detail');
   	}
+
+    public function owner() {
+      return $this->belongsTo('App\Models\Coach');
+    }
 }

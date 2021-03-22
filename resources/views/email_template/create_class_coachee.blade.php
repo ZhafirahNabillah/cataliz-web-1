@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Create Class</title>
+  <title>Class Created!</title>
   <!-- Designed by https://github.com/kaytcat -->
   <!-- Header image designed by Freepik.com -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css">
@@ -271,7 +271,7 @@
 
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
                   <tr>
-                    <!-- Nama user -->
+                    <!-- Nama user coachee -->
                     <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
                     <span style="color: black;">You have been added to a class.
                     </span>
