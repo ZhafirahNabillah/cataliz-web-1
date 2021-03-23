@@ -99,6 +99,7 @@ class ClassController extends Controller
         // return $client_final;
         $clients = Client::whereNotIn('id', $client_final)->get();
         // return $client;
+
         return view('class.create', compact('clients'));
     }
 
@@ -135,6 +136,8 @@ class ClassController extends Controller
 
         $coach = Coach::find($request->coach_id);
         $coach->clients()->sync($request->input('client'));
+
+        // MailController::SendSignUpMail($user->email, $user->verification_code);
 
         return response()->json(['success' => 'Customer saved successfully!']);
     }

@@ -336,7 +336,7 @@
                         <th>Coach Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
-                        <th>Rating</th>
+                        {{-- <th>Rating</th> --}}
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -717,11 +717,11 @@
                 name: 'phone',
                 defaultContent: '<i>-</i>'
               },
-              {
-                data: 'rating',
-                name: 'rating',
-                defaultContent: '<i>-</i>'
-              },
+              // {
+              //   data: 'rating',
+              //   name: 'rating',
+              //   defaultContent: '<i>-</i>'
+              // },
               {
                 data: 'action',
                 name: 'action',

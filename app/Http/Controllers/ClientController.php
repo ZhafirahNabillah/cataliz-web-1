@@ -137,25 +137,25 @@ class ClientController extends Controller
 
       return DataTables::of($data)
         ->addIndexColumn()
-        ->addColumn('rating', function ($row) {
+        // ->addColumn('rating', function ($row) {
 
-          // if ($row->average != null) {
-          //   $rating = $row->average . '/5';
-          // } else {
-          //   $rating = $row->average;
-          // }
-          $coach = Coach::where('user_id', $row->id)->first();
-          $plans = $coach->plan->pluck('id');
-          $agenda = Agenda::whereIn('plan_id', $plans)->pluck('id');
-          // $agenda_id = Agenda::where('owner_id', $row->id)->pluck('id');
-          $rating = Agenda_detail::whereIn('agenda_id', $agenda)->pluck('rating_from_coachee')->avg();
+        //   // if ($row->average != null) {
+        //   //   $rating = $row->average . '/5';
+        //   // } else {
+        //   //   $rating = $row->average;
+        //   // }
+        //   $coach = Coach::where('user_id', $row->id)->first();
+        //   $plans = $coach->plan->pluck('id');
+        //   $agenda = Agenda::whereIn('plan_id', $plans)->pluck('id');
+        //   // $agenda_id = Agenda::where('owner_id', $row->id)->pluck('id');
+        //   // $rating = Agenda_detail::whereIn('agenda_id', $agenda)->pluck('rating_from_coachee')->avg();
 
-          if ($rating) {
-            $rating = $rating.'/5';
-          }
+        //   // if ($rating) {
+        //   //   $rating = $rating.'/5';
+        //   // }
 
-          return $rating;
-        })
+        //   // return $rating;
+        // })
         ->addColumn('action', function ($row) {
           $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
           $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
@@ -168,7 +168,7 @@ class ClientController extends Controller
           }
           return $actionBtn;
         })
-        ->rawColumns(['action', 'rating'])
+        ->rawColumns(['action'])
         // ->rawColumns(['rating'])
         ->make(true);
     }
