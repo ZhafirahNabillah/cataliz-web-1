@@ -322,11 +322,14 @@ class AgendaController extends Controller
   public function show($id)
   {
     $agenda_detail = Agenda_detail::where('id', $id)->first();
-    $agenda = Agenda::where('id', $agenda_detail->agenda_id)->first();
-    // return $agenda;
+    $agenda = $agenda_detail->agenda;
+    $plan = $agenda->plan;
+
     $coaching_note = Coaching_note::where('agenda_detail_id', $id)->first();
 
-    return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note'));
+    // return $coaching_note;
+
+    return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan'));
   }
 
   /**
