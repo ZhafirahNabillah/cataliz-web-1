@@ -31,12 +31,13 @@ class MailController extends Controller
       Mail::to($email)->send(new SendForgotPasswordMail($data));
     }
 
-    public static function SendSignUpMail($email, $verification_code){
+    public static function SendSignUpMail($user){
       $data = [
-        'verification_code' => $verification_code
+        'verification_code' => $user->verification_code,
+        'receiver_name' => $user->name
       ];
 
-      Mail::to($email)->send(new SendSignUpMail($data));
+      Mail::to($user->email)->send(new SendSignUpMail($data));
     }
 
     public static function SendSessionScheduledMail($agenda_detail, $clients, $coach){

@@ -112,7 +112,7 @@ class RegisterController extends Controller
       $user->assignRole('coachee');
     }
 
-    MailController::SendSignUpMail($user->email, $user->verification_code);
+    MailController::SendSignUpMail($user);
 
     return redirect('login')->with('success', 'Registration is successful, please check your email to verify your account!');
   }
@@ -125,7 +125,7 @@ class RegisterController extends Controller
       $user->is_verified = 1;
       $user->verification_code = null;
       $user->save();
-      return redirect('/login')->with('success', 'Akun anda berhasil terverifikasi. Silahkan login!');
+      return redirect('login')->with('success', 'Your account has been verified. Please login to continue the journey!');
     } else {
       return abort(404);
     }

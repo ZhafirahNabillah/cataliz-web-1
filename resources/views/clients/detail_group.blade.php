@@ -53,7 +53,7 @@
               </div>
               <div class="row mb-2">
                 <div class="col-sm-3">
-                  <b>Group ID</b>
+                  <b>Group Code</b>
                 </div>
                 <div class="col-sm-9">
                   {{ $plan->group_id }}
@@ -83,7 +83,6 @@
               </section>
               <!--/ Basic table -->
             </div>
-            <a href="" class="create-new btn btn-primary">Add New</a>
           </div>
         </div>
       </div>

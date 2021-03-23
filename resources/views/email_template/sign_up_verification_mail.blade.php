@@ -250,7 +250,7 @@
                       <table cellspacing="0" cellpadding="0" class="force-full-width">
                         <tr>
                           <td>
-                            <img src="{{ $message->embed(public_path().'/assets/images/icons/email/verification.png') }}">
+                            <img src="register.png">
                           </td>
                         </tr>
                         <tr>
@@ -308,8 +308,6 @@
                                   </td>
                                 </tr>
                               </table>
-
-
                               <center>
                                 <table cellspacing="0" cellpadding="0" width="500" class="w320">
                                   <tr>
@@ -346,37 +344,17 @@
                                   </tr>
                                 </table>
                               </center>
-
-
                             </td>
                           </tr>
                         </table>
                       </center>
-
-
-
-
-
-
                     </td>
                   </tr>
                 </table>
-
-
-
-
-
-
-
               </td>
             </tr>
           </table>
-
         </center>
-
-
-
-
       </td>
     </tr>
   </table>
