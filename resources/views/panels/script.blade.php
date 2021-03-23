@@ -29,7 +29,7 @@
 
 @elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show',
 'plans.show', 'dashboard','roles.index','agendas.show_group','permissions.index','users.index', 'class.index', 'class.show',
-'profil','auth.register']))
+'profil','auth.register', 'group.show']))
 
 
 <!-- BEGIN: Vendor JS-->
@@ -83,7 +83,7 @@
               $('body').addClass("dark-layout");
               $('nav').removeClass('navbar-light').addClass('navbar-dark');
               $('.main-menu').removeClass('menu-light').addClass('menu-dark');
-              $('#ic.ficon').replaceWith(feather.icons['sun'].toSvg({ class: 'ficon' }));            
+              $('#ic.ficon').replaceWith(feather.icons['sun'].toSvg({ class: 'ficon' }));
             }
         }
 
@@ -91,7 +91,7 @@
             var v = $(".dark-layout").is(":visible")
             window.localStorage.setItem("theme", v)
         });
-       
+
     });
 </script>
 

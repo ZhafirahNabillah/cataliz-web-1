@@ -42,9 +42,6 @@ class ClientController extends Controller
       if (auth()->user()->hasRole('admin')) {
         $data = Client::with('user')->get();
       } elseif (auth()->user()->hasRole('coach')) {
-        // $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
-        // $class_has_clients = Class_has_client::whereIn('class_id', $class_id)->pluck('client_id');
-        // $data = Client::with('user')->whereIn('id', $class_has_clients)->latest()->get();
 
         $coach = Coach::where('user_id', auth()->user()->id)->first();
         $data = $coach->clients;
@@ -116,6 +113,51 @@ class ClientController extends Controller
       }
     }
     return view('clients.index');
+  }
+
+  public function show_group_list(Request $request){
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $data = $coach->plan->where('client_id', null);
+
+    if ($request->ajax()) {
+      // code...
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('participant', function($row) {
+          return $row->clients->count();
+        })
+        ->addColumn('action', function($row) {
+          $actionBtn = '<a href="'. route('group.show', $row->group_id) .'" class="btn-sm btn-primary">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action','pacticipant'])
+        ->make(true);
+    }
+  }
+
+  public function show_group_detail(Request $request, $id){
+    // $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plan = Plan::where('group_id', $id)->first();
+    $user = User::where('id', $plan->owner->user_id)->first();
+
+    $data = $plan->clients;
+
+    if ($request->ajax()) {
+      // code...
+      return DataTables::of($data)
+        ->addIndexColumn()
+        // ->addColumn('participant', function($row) {
+        //   return $row->clients->count();
+        // })
+        ->addColumn('action', function($row) {
+          $actionBtn = '<a href="'. route('group.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+
+    return view('clients.detail_group', compact('plan','user'));
   }
 
   //method to show coach list
@@ -269,39 +311,10 @@ class ClientController extends Controller
 
     $coaching_note = Coaching_note::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->get();
 
-    // return $coaching_note;
-
     $total_event = $agenda_detail->where('status','scheduled')->count();
     $total_agenda = $agendas->count();
     $total_session = $agenda_detail->count();
 
-    // $total_session = Agenda_detail::select('agenda_details.id', 'agendas.client_id')
-    //   ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-    //   ->where('agendas.owner_id', Auth::user()->id)
-    //   ->where('agendas.client_id', $client->id)
-    //   ->count();
-    //
-    // $total_event = Agenda_detail::select('agenda_details.id', 'agendas.client_id')
-    //   ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-    //   ->where('agendas.owner_id', Auth::user()->id)
-    //   ->where('agendas.client_id', $client->id)
-    //   ->where('agenda_details.status', 'scheduled')
-    //   ->count();
-
-    // if ($request->ajax()) {
-    //   // upcoming event
-    //   $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.session_name')
-    //     ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-    //     ->join('clients', 'clients.id', '=', 'agendas.client_id')
-    //     ->where('clients.id', $client->id)
-    //     ->where('status', 'scheduled')
-    //     ->orderBy('date', 'asc')->orderBy('time', 'asc')
-    //     ->get();
-    //   return DataTables::of($data)
-    //     ->addIndexColumn()
-    //     ->make(true);
-    // }
-    // return $total_event;
     return view('clients.show', compact('client', 'coaching_note', 'agenda_detail', 'total_event', 'total_agenda', 'total_session'));
   }
 

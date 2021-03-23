@@ -209,56 +209,6 @@
                     </div>
                   </div>
                 </div>
-
-                <!-- Modal to add new record -->
-                <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-                  <div class="modal-dialog sidebar-sm">
-                    <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-                      <div class="modal-header mb-1">
-                        <h5 class="modal-title" id="modalHeading"></h5>
-                      </div>
-                      <input type="hidden" name="Client_id" id="Client_id">
-                      <div class="modal-body flex-grow-1">
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                          <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-                        </div>
-                        <label class="form-label" for="basic-icon-default-post">Phone</label>
-                        <div class="input-group input-group-merge mb-2">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon5">+62</span>
-                          </div>
-                          <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-email">Email</label>
-                          <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe
-                    @example.com" />
-                          <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                          <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                          <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-                        </div>
-                        <div class="form-group">
-                          <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                          <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
-                        </div>
-
-                        <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-                      </div>
-                      <!-- </form>-->
-
-                  </div>
-                </div>
-                <!-- End Modal -->
               </section>
               <!--/ Basic table -->
             </div>
@@ -272,13 +222,12 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table yajra-datatable">
+                      <table class="datatables-basic table client-datatable-group">
                         <thead>
                           <tr>
                             <th>No</th>
-                            <th>Group ID</th>
-                            <th>Partisipant</th>
-                            <th>Member</th>
+                            <th>Group Code</th>
+                            <th>Participant</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -501,7 +450,7 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
-          var table = $('.yajra-datatable').DataTable({
+          var table_client_individual = $('.yajra-datatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -652,6 +601,42 @@
               searchPlaceholder: "Search records"
             }
 
+          });
+
+          var table_client_group = $('.client-datatable-group').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('group.index') }}",
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+              },
+              {
+                data: 'group_id',
+                name: 'group_id'
+              },
+              {
+                data: 'participant',
+                name: 'participant',
+                defaultContent: '<i>-</i>'
+              },
+              {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+              },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+              paginate: {
+                // remove previous & next text from pagination
+                previous: '&nbsp;',
+                next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+            }
           });
 
           var table = $('.coachee-datatable-coach').DataTable({
@@ -937,98 +922,6 @@
             });
             /**Ajax code ends**/
           });
-
-          // save user data on admin page
-          // $('#saveBtn').click(function() {
-          //   $('#createUserForm').validate({
-          //     debug: false,
-          //     errorClass: "error fail-alert",
-          //     validClass: "valid success-alert",
-          //     rules: {
-          //       name: {
-          //         required: true
-          //       },
-          //       phone: {
-          //         required: true,
-          //         digits: true,
-          //         'phoneNumber': true
-          //       },
-          //       email: {
-          //         required: true,
-          //         email: true
-          //       },
-          //       roles: {
-          //         required: true
-          //       }
-          //     },
-          //     messages: {
-          //       name: {
-          //         required: "Name is required!"
-          //       },
-          //       phone: {
-          //         required: "phone number is required!",
-          //         digits: "phone number must be number!"
-          //       },
-          //       email: {
-          //         required: "email is required!",
-          //         email: "please provide valid email address!"
-          //       },
-          //       roles: {
-          //         required: "role is required!"
-          //       }
-          //     },
-          //     errorPlacement: function(error, element) {
-          //       if (element.attr("name") == "name") {
-          //         error.appendTo($("#name-error"));
-          //       } else if (element.attr("name") == "phone") {
-          //         error.appendTo("#phone-error");
-          //       } else if (element.attr("name") == "email") {
-          //         error.appendTo("#email-error");
-          //       } else if (element.attr("name") == "roles") {
-          //         error.appendTo("#roles-error");
-          //       }
-          //     },
-          //
-          //     //submit Handler
-          //     submitHandler: function(form) {
-          //       $('#saveBtn').html('Sending..');
-          //       var data = $('#createUserForm').serialize();
-          //       console.log(data);
-          //
-          //       $.ajax({
-          //         data: data,
-          //         url: "{{ route('users.store') }}",
-          //         type: "POST",
-          //         dataType: 'json',
-          //         success: function(data) {
-          //
-          //           $('#createUserForm').trigger("reset");
-          //           $('#saveBtn').html('Submit');
-          //           $('#modal-user-slide-in').modal('hide');
-          //           if ($('#saveBtn').val() == 'create-user') {
-          //             Swal.fire({
-          //               icon: 'success',
-          //               title: 'Account created successfully!',
-          //             });
-          //           } else if ($('#saveBtn').val() == 'edit-user') {
-          //             Swal.fire({
-          //               icon: 'success',
-          //               title: 'Account updated successfully!',
-          //             });
-          //           }
-          //           table_coach.draw();
-          //           table_admin.draw();
-          //           table_coachee.draw();
-          //         },
-          //         error: function(data) {
-          //           console.log('Error:', data);
-          //           $('#saveBtn').html('Submit');
-          //         }
-          //       });
-          //       return false;
-          //     }
-          //   });
-          // });
 
           // suspend user
           $('body').on('click', '.suspendUser', function(e) {

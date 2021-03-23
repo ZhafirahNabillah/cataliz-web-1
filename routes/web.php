@@ -109,6 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('clients/{id}/show_detail_feedbacks', [ClientController::class, 'show_detail_feedbacks'])->name('clients.show_detail_feedbacks');
 	Route::get('clients/{id}/show_detail_notes', [ClientController::class, 'show_detail_notes'])->name('clients.show_detail_notes');
 	Route::get('/get_client_data/{id}', [ClientController::class, 'get_client_data'])->name('get_client_data');
-
 	Route::post('/class/{class}/ubah_status', [ClassController::class, 'ubah_status'])->name('class.ubah_status');
+	Route::get('/groups', [ClientController::class, 'show_group_list'])->name('group.index');
+	Route::get('/groups/{id}', [ClientController::class, 'show_group_detail'])->name('group.show');
 });
