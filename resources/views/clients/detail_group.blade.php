@@ -19,14 +19,14 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
+            <h2 class="content-header-title float-left mb-0">Group Detail</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
+                <li class="breadcrumb-item"><a href="{{route('clients.index')}}">Client</a>
                 </li>
-                <li class="breadcrumb-item active">Detail Coaching Plan
+                <li class="breadcrumb-item active">Group Detail
                 </li>
               </ol>
             </div>
@@ -48,15 +48,15 @@
                   <b>Coach Name</b>
                 </div>
                 <div class="col-sm-9">
-                  #
+                  {{ $user->name }}
                 </div>
               </div>
               <div class="row mb-2">
                 <div class="col-sm-3">
-                  <b>Group ID</b>
+                  <b>Group Code</b>
                 </div>
                 <div class="col-sm-9">
-                  #
+                  {{ $plan->group_id }}
                 </div>
               </div>
               <!-- Basic table -->
@@ -64,7 +64,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
-                      <table class="datatables-basic table default-datatable-plans">
+                      <table class="datatables-basic table client-datatable">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -83,9 +83,6 @@
               </section>
               <!--/ Basic table -->
             </div>
-            <a href="" class="create-new btn btn-primary">Add New</a>
-
-
           </div>
         </div>
       </div>
@@ -96,7 +93,49 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
+$(function() {
+  var table_client_group = $('.client-datatable').DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: "",
+    columns: [{
+        data: 'DT_RowIndex',
+        name: 'DT_RowIndex'
+      },
+      {
+        data: 'name',
+        name: 'name'
+      },
+      {
+        data: 'email',
+        name: 'email',
+        defaultContent: '<i>-</i>'
+      },
+      {
+        data: 'program',
+        name: 'program',
+        orderable: true,
+        searchable: true
+      },
+      {
+        data: 'phone',
+        name: 'phone',
+        orderable: true,
+        searchable: true
+      }
+    ],
+    dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+    language: {
+      paginate: {
+        // remove previous & next text from pagination
+        previous: '&nbsp;',
+        next: '&nbsp;'
+      },
+      search: "<i data-feather='search'></i>",
+      searchPlaceholder: "Search records"
+    }
+  });
+})
 </script>
 @endpush
