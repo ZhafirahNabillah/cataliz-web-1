@@ -250,7 +250,7 @@
                       <table cellspacing="0" cellpadding="0" class="force-full-width">
                         <tr>
                           <td>
-                            <img src="register.png">
+                            <img src="{{ $message->embed(public_path().'/assets/images/icons/email/verification.png') }}">
                           </td>
                         </tr>
                         <tr>
