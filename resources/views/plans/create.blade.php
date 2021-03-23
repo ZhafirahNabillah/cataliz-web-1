@@ -59,9 +59,9 @@
                 <div class="form-group">
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
-
+                  <input id="search" type="text" class="form-control" placeholder="Search client name..."/>
                   @foreach ($clients as $client)
-                    <div class="form-check">
+                    <div class="form-check client-list">
                       <input class="form-check-input" type="checkbox" value="{{ $client->id }}" name="client[]" id="client-{{ $client->id }}">
                       <label class="form-check-label" for="client-{{ $client->id }}">
                         {{ $client->name }}
@@ -78,7 +78,7 @@
 
                   <div class="col-md-12 form-group">
                     <label for="fp-default">Date</label>
-                    <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}">
+                    <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}" placeholder="Select your date...">
                     <div id="date-error"></div>
                     @error('date')
                     <span class="invalid-feedback" role="alert">
@@ -168,35 +168,16 @@
     }
   </style>
   <script type="text/javascript">
-    $('.livesearch').select2({
-      placeholder: 'Select client',
-      ajax: {
-        url: "{{route('clients.search')}}",
-        dataType: 'json',
-        delay: 250,
-        processResults: function(data) {
-          return {
-            results: $.map(data, function(item) {
-              console.log(item)
-              return {
-                text: item.name,
-                id: item.id,
-                org: item.organization,
-              }
-            })
-          };
-        },
-        cache: true
-      }
-    });
-
-    $(".livesearch").on('change', function(e) {
-      // Access to full data
-      console.log($(this).select2('data'));
-      console.log($(this).select2('data')[0].id);
-      var dd = $(this).select2('data')[0];
-      $('#organization').val(dd.org);
-    });
+    $('#search').keyup(function(){
+      var search_value = new RegExp($(this).val(), 'i');
+      $(".client-list label").each(function() {
+        if(!search_value.test($(this).text())) {
+          $(this).parent().hide();
+        } else {
+          $(this).parent().show();
+        }
+      });
+	  });
 
     $(function() {
       $.ajaxSetup({

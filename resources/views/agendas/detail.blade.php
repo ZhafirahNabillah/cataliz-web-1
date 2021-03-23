@@ -52,36 +52,29 @@
 						<div class="card-header">
 							<h6 class="card-title">Detail Agenda</h6>
 						</div>
-
-						{{-- <!-- Kalo grup -->
-						<h5 class="mb-75">Group ID:</h5>
-						<p class="card-text">{{ $agenda->client->id}}</p>
-						<div class="mt-2">
-							<h5 class="mb-75">Session:</h5>
-							<p class="card-text">{{ $agenda->client->organization }}</p>
-						</div>
-						<div class="mt-2">
-							<h5 class="mb-75">Topic:</h5>
-							<p class="card-text">{{ $agenda->client->company }}</p>
-						</div>
-						<div class="mt-2">
-							<h5 class="mb-75">Duration:</h5>
-							<p class="card-text">{{ $agenda_detail->session_name }}</p>
-						</div>
-						<!-- /kalogrup --> --}}
-
-
 						<div class="card-body">
-							<h5 class="mb-75">Name:</h5>
-							<p class="card-text">{{ $agenda->plan->client->name }}</p>
+							@if ($plan->group_id)
+								<div class="mt-2">
+									<h5 class="mb-75">Group Code</h5>
+									<p class="card-text">{{ $plan->group_id }}</p>
+								</div>
+							@endif
 							<div class="mt-2">
-								<h5 class="mb-75">Organization:</h5>
-								<p class="card-text">{{ $agenda->plan->client->organization }}</p>
+								<h5 class="mb-75">Client</h5>
+								@foreach ($plan->clients as $client)
+									<p class="card-text mb-0">{{ $client->name }}</p>
+								@endforeach
 							</div>
-							<div class="mt-2">
-								<h5 class="mb-75">Company:</h5>
-								<p class="card-text">{{ $agenda->plan->client->company }}</p>
-							</div>
+							@if ($plan->client_id)
+								<div class="mt-2">
+									<h5 class="mb-75">Organization:</h5>
+									<p class="card-text">{{ $plan->clients->first()->organization ?? '-' }}</p>
+								</div>
+								<div class="mt-2">
+									<h5 class="mb-75">Company:</h5>
+									<p class="card-text">{{ $plan->clients->first()->company ?? '-' }}</p>
+								</div>
+							@endif
 							<div class="mt-2">
 								<h5 class="mb-75">Session:</h5>
 								<p class="card-text">{{ $agenda_detail->session_name }}</p>
@@ -95,52 +88,27 @@
 				</div>
 				<div class="col-sm-12 col-md-6">
 					<div class="card">
-
-						{{-- <!-- Kalo grup -->
-						<div class="card-header">
-							<h7 class="card-title"> </h7>
-						</div>
-						<div class="card-body">
-							<h5 class="mb-75">Date:</h5>
-							<p class="card-text">{{$agenda_detail->date}} @if($agenda_detail->date == null) - @endif</p>
-							<div class="mt-2">
-								<h5 class="mb-75">Time:</h5>
-								<p class="card-text">{{$agenda_detail->time}} @if($agenda_detail->time == null) - @endif</p>
-							</div>
-							<div class="mt-2">
-								<h5 class="mb-75">Media:</h5>
-								<p class="card-text">{{$agenda_detail->media}} @if($agenda_detail->media == null) - @endif</p>
-							</div>
-							<div class="mt-2">
-								<h5 class="mb-75">Media Url:</h5>
-								<p class="card-text">{{$agenda_detail->media_url}} @if($agenda_detail->media_url == null) - @endif</p>
-							</div>
-							<!-- /kalogrup --> --}}
-
-
-
-
 							<div class="card-header">
 								<h7 class="card-title"> </h7>
 							</div>
 							<div class="card-body">
 								<h5 class="mb-75">Date:</h5>
-								<p class="card-text">{{$agenda_detail->date}} @if($agenda_detail->date == null) - @endif</p>
+								<p class="card-text">{{$agenda_detail->date ?? '-'}}</p>
 								<div class="mt-2">
 									<h5 class="mb-75">Time:</h5>
-									<p class="card-text">{{$agenda_detail->time}} @if($agenda_detail->time == null) - @endif</p>
+									<p class="card-text">{{$agenda_detail->time ?? '-'}}</p>
 								</div>
 								<div class="mt-2">
 									<h5 class="mb-75">Media:</h5>
-									<p class="card-text">{{$agenda_detail->media}} @if($agenda_detail->media == null) - @endif</p>
+									<p class="card-text">{{$agenda_detail->media ?? '-'}}</p>
 								</div>
 								<div class="mt-2">
 									<h5 class="mb-75">Media Url:</h5>
-									<p class="card-text">{{$agenda_detail->media_url}} @if($agenda_detail->media_url == null) - @endif</p>
+									<p class="card-text">{{$agenda_detail->media_url ?? '-'}}</p>
 								</div>
 								<div class="mt-2">
 									<h5 class="mb-75">Duration:</h5>
-									<p class="card-text">{{$agenda_detail->duration}} @if($agenda_detail->duration == null) - @endif Menit
+									<p class="card-text">{{$agenda_detail->duration ?? '-'}} Menit
 									</p>
 								</div>
 							</div>
@@ -302,8 +270,6 @@
 					</div>
 				</div>
 				@endrole
-
-
 
 				@role('coach')
 				<form action="{{ route('agendas.agenda_detail_update',$agenda_detail->id) }}" method="post" enctype="multipart/form-data">

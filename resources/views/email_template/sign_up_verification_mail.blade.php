@@ -133,14 +133,14 @@
       text-align: center;
       text-decoration: none;
       display: inline-block;
-      font-size: 25px;
+      font-size: 20px;
       margin: 4px 2px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 5px;
       outline: none;
-      box-shadow: 0 3px #5a5686;
+
       width: 250px;
-      height: 50px;
+      height: 60px;
     }
   </style>
 
@@ -235,8 +235,8 @@
                   <tr style="border: 1px solid #9B93EF;">
                     <td style="text-align: center;">
                       <div class="iconatas">
-                        <img src="{{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
-                        <img src="{{ $message->embed(public_path().'/assets/images/icons/email/cataliz.png') }}">
+                        <img style="width: 56px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
+                        <img style="width: 100px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/cataliz.png') }}">
                       </div>
                     </td>
                   </tr>
@@ -250,24 +250,31 @@
                       <table cellspacing="0" cellpadding="0" class="force-full-width">
                         <tr>
                           <td>
-                            <img src="{{ $message->embed(public_path().'/assets/images/icons/email/register.png') }}">
+                            <img src="register.png">
                           </td>
                         </tr>
                         <tr>
                           <td>
                             <!-- Nama user -->
-                            <h3 style="color: black;">Hai, Nama</h3>
-                            <p style="color: black;">Your account registration has been successful. You can enjoy the
-                              features on the website after logging in.
+                            <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
+                            <p style="color: black;">Welcome to <a style="color: #1919DF;" href="app.cataliz.id">Cataliz.id!</a>
                             </p>
-                            <p>If you have forgotten your password, please change your password by clicking on the
-                              following link:</p>
-                            <p><a style="color: #1919DF;" href="{{ url('/verify?code='.$email_data['verification_code']) }}">http://app.cataliz.id/password/reset</a>
-                            </p>
+                            <p>Your account registration has been successful. Please click the button below to confirm
+                              your email addres and activate your account.</p>
                           </td>
+                          <tbody>
+                            <tr style="text-align: center;">
+                              <td>
+                                <!-- Link buat ke agendas -->
+                                <a href="{{ url('/verify?code='.$email_data['verification_code']) }}">
+                                  <button class="button button1">Verify Account</button>
+                                </a>
+                              </td>
+                            </tr>
+
+                          </tbody>
                         </tr>
                       </table>
-                      <br>
                     </td>
                   </tr>
                 </table>
@@ -339,17 +346,37 @@
                                   </tr>
                                 </table>
                               </center>
+
+
                             </td>
                           </tr>
                         </table>
                       </center>
+
+
+
+
+
+
                     </td>
                   </tr>
                 </table>
+
+
+
+
+
+
+
               </td>
             </tr>
           </table>
+
         </center>
+
+
+
+
       </td>
     </tr>
   </table>
