@@ -9,5 +9,5 @@ class Feedback extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['agenda_details_id', 'attachment_from_coach', 'feedback_from_coach', 'attachment_from_coachee', 'feedback_from_coach', 'rating_from_coachee'];
+    protected $fillable = ['agenda_details_id', 'attachment_from_coach', 'feedback_from_coach', 'attachment_from_coachee', 'feedback_from_coach', 'rating_from_coachee', 'owner_id'];
 }

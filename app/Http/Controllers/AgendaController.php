@@ -54,13 +54,11 @@ class AgendaController extends Controller
       $agendas = Agenda::whereIn('plan_id', $plans)->pluck('id');
       $sessions = Agenda_detail::whereIn('agenda_id', $agendas)->get();
 
-      $total_unscheduled_sessions = $sessions->where('status','unschedule')->count();
-      $total_scheduled_sessions = $sessions->where('status','scheduled')->count();
-      $total_rescheduled_sessions = $sessions->where('status','rescheduled')->count();
-      $total_finished_sessions = $sessions->where('status','finished')->count();
-      $total_canceled_sessions = $sessions->where('status','canceled')->count();
-
-
+      $total_unscheduled_sessions = $sessions->where('status', 'unschedule')->count();
+      $total_scheduled_sessions = $sessions->where('status', 'scheduled')->count();
+      $total_rescheduled_sessions = $sessions->where('status', 'rescheduled')->count();
+      $total_finished_sessions = $sessions->where('status', 'finished')->count();
+      $total_canceled_sessions = $sessions->where('status', 'canceled')->count();
     } elseif (auth()->user()->hasRole('coachee')) {
       $client = Client::where('user_id', auth()->user()->id)->first();
 
@@ -68,12 +66,11 @@ class AgendaController extends Controller
       $agendas = Agenda::whereIn('plan_id', $plans)->pluck('id');
       $sessions = Agenda_detail::whereIn('agenda_id', $agendas)->get();
 
-      $total_unscheduled_sessions = $sessions->where('status','unschedule')->count();
-      $total_scheduled_sessions = $sessions->where('status','scheduled')->count();
-      $total_rescheduled_sessions = $sessions->where('status','rescheduled')->count();
-      $total_finished_sessions = $sessions->where('status','finished')->count();
-      $total_canceled_sessions = $sessions->where('status','canceled')->count();
-
+      $total_unscheduled_sessions = $sessions->where('status', 'unschedule')->count();
+      $total_scheduled_sessions = $sessions->where('status', 'scheduled')->count();
+      $total_rescheduled_sessions = $sessions->where('status', 'rescheduled')->count();
+      $total_finished_sessions = $sessions->where('status', 'finished')->count();
+      $total_canceled_sessions = $sessions->where('status', 'canceled')->count();
     }
 
     return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
@@ -194,8 +191,10 @@ class AgendaController extends Controller
       $data = Agenda_detail::select('agenda_details.id', 'plans.group_id as group', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->join('client_plan', 'client_plan.plan_id', '=', 'plans.id')
         ->where('plans.client_id', null)
-        ->where('plans.owner_id', $client->id)->latest()
+        ->where('client_plan.client_id', $client->id)->latest()
+        // ->where('plans.owner_id', $client->id)->latest()
         ->get();
     }
 
@@ -277,7 +276,11 @@ class AgendaController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $user_id = Plan::select('client_plan.client_id')
+      ->rightJoin('client_plan', 'plan_id', '=', 'plans.id')
+      ->where('plans.id', $request->plan_id)
+      ->get();
+
     $this->validate($request, [
       'session'       => 'required',
       'type_session'  => 'required',
@@ -294,20 +297,25 @@ class AgendaController extends Controller
     $agenda->plan_id = $request->plan_id;
     $agenda->save();
 
-    $feedback = new Feedback;
-    $feedback->agenda_details_id = $agenda->id;
-    $feedback->feedback_from_coach = null;
-    $feedback->attachment_from_coach = null;
-    $feedback->feedback_from_coach = null;
-    $feedback->attachment_from_coachee = null;
-    $feedback->feedback_from_coachee = null;
-
     for ($i = 1; $i <= $agenda->session; $i++) {
       $agenda_detail = new Agenda_detail;
       $agenda_detail->agenda_id = $agenda->id;
       $agenda_detail->status = 'unschedule';
       $agenda_detail->session_name = 'Sesi ' . $i;
       $agenda_detail->save();
+
+      foreach ($user_id as $usr_id) {
+        $feedback = new Feedback;
+        $feedback->client_id = $usr_id->client_id;
+        $feedback->agenda_details_id = $agenda_detail->id;
+        $feedback->feedback_from_coach = null;
+        $feedback->attachment_from_coach = null;
+        $feedback->feedback_from_coach = null;
+        $feedback->attachment_from_coachee = null;
+        $feedback->feedback_from_coachee = null;
+        $feedback->owner_id = Auth::user()->id;
+        $feedback->save();
+      }
     }
 
     return redirect('/agendas')->with('success', 'Agenda successfully created!');
@@ -325,11 +333,14 @@ class AgendaController extends Controller
     $agenda = $agenda_detail->agenda;
     $plan = $agenda->plan;
 
+    $feedback = Feedback::where('agenda_details_id', $id)->first();
+    // return $feedback;
+
     $coaching_note = Coaching_note::where('agenda_detail_id', $id)->first();
 
     // return $coaching_note;
 
-    return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan'));
+    return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback'));
   }
 
   /**
@@ -426,8 +437,13 @@ class AgendaController extends Controller
 
   public function add_feedback_from_coachee(Request $request, $id)
   {
+
+    // return $request;
+    $client = Client::where('email', Auth::user()->email)->first();
+    // return $client;
     $agenda_detail = Agenda_detail::find($id);
-    $feedback = Feedback::where('id', $agenda_detail->id);
+    $feedback = Feedback::where('agenda_details_id', $agenda_detail->id)->where('client_id', $client->id)->first();
+    // return $feedback;
 
     //check if feedback input was filled
     if ($request->filled('feedback')) {
@@ -458,7 +474,8 @@ class AgendaController extends Controller
       $feedback->rating_from_coachee = $request->coach_rating;
     }
 
-    $feedback->status = 'finished';
+    $agenda_detail->status = 'finished';
+    $agenda_detail->update();
     $feedback->update();
 
     return redirect('/agendas')->with('success', 'Feedback saved successfully!');
@@ -466,32 +483,37 @@ class AgendaController extends Controller
 
   public function agenda_detail_update(Request $request, $id)
   {
-    // dd($request);
+    // return $request;
 
     $agenda_detail = Agenda_detail::where('id', $id)->first();
-    $feedback = Feedback::where('agenda_details_id', $agenda_detail->id)->where('owner_id', Auth::user()->id);
+    $feedback = Feedback::where('agenda_details_id', $agenda_detail->id)->where('owner_id', Auth::user()->id)->get();
+    // return $feedback;
 
-    if ($request->filled('feedback')) {
-      $feedback->feedback_from_coach = $request->feedback;
-      $agenda_detail->status = 'finished';
-    }
+    foreach ($feedback as $fb) {
+      if ($request->filled('feedback')) {
+        $fb->feedback_from_coach = $request->feedback;
+        $agenda_detail->status = 'finished';
+      }
 
-    if ($request->hasFile('feedback_attachment')) {
-      $this->validate($request, [
-        'feedback_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
-      ], [
-        'feedback_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
-        'feedback_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
-      ]);
-      $filenameWithExt = $request->file('feedback_attachment')->getClientOriginalName();
-      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-      $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
-      $filenameSave = $filename . '_' . time() . '.' . $extension;
-      $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
-      $agenda_detail->attachment_from_coach = $filenameSave;
-      $agenda_detail->status = 'finished';
+      if ($request->hasFile('feedback_attachment')) {
+        $this->validate($request, [
+          'feedback_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
+        ], [
+          'feedback_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
+          'feedback_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
+        ]);
+        $filenameWithExt = $request->file('feedback_attachment')->getClientOriginalName();
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
+        $filenameSave = $filename . '_' . time() . '.' . $extension;
+        $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
+        $agenda_detail->attachment_from_coach = $filenameSave;
+        $agenda_detail->status = 'finished';
+      }
+
+      $fb->update();
+      $agenda_detail->update();
     }
-    $agenda_detail->update();
 
     if ($request->filled('subject') || $request->filled('summary')) {
 
@@ -503,25 +525,25 @@ class AgendaController extends Controller
         'summary.required'       => "Silahkan isi summary note anda terlebih dahulu!",
       ]);
 
-      // $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id], ['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
+      $coaching_note = Coaching_note::updateOrCreate(['agenda_detail_id' => $request->id], ['subject' => $request->subject, 'summary' => $request->summary, 'owner_id' => Auth::user()->id]);
     }
 
 
-    // if ($request->hasFile('note_attachment')) {
-    //   $this->validate($request, [
-    //     'note_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
-    //   ], [
-    //     'note_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
-    //     'note_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
-    //   ]);
-    //   $filenameWithExt = $request->file('note_attachment')->getClientOriginalName();
-    //   $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-    //   $extension = $request->file('note_attachment')->getClientOriginalExtension();
-    //   $filenameSave = $filename . '_' . time() . '.' . $extension;
-    //   $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
-    //   $coaching_note->attachment = $filenameSave;
-    //   $coaching_note->update();
-    // }
+    if ($request->hasFile('note_attachment')) {
+      $this->validate($request, [
+        'note_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
+      ], [
+        'note_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
+        'note_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
+      ]);
+      $filenameWithExt = $request->file('note_attachment')->getClientOriginalName();
+      $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+      $extension = $request->file('note_attachment')->getClientOriginalExtension();
+      $filenameSave = $filename . '_' . time() . '.' . $extension;
+      $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
+      $coaching_note->attachment = $filenameSave;
+      $coaching_note->update();
+    }
 
 
     return redirect('/agendas')->with('success', 'Feedback and notes saved successfully!');
@@ -529,11 +551,12 @@ class AgendaController extends Controller
 
   public function feedback_download($id)
   {
-    $agenda_detail = Agenda_detail::find($id);
+    // $agenda_detail = Agenda_detail::find($id);
+    $feedback = Feedback::where('agenda_details_id', $id)->first();
     if (auth()->user()->hasRole('coach')) {
-      return response()->download(storage_path('app/public/attachment/' . $agenda_detail->attachment_from_coach));
+      return response()->download(storage_path('app/public/attachment/' . $feedback->attachment_from_coach));
     } elseif (auth()->user()->hasRole('coachee')) {
-      return response()->download(storage_path('app/public/attachment/' . $agenda_detail->attachment_from_coachee));
+      return response()->download(storage_path('app/public/attachment/' . $feedback->attachment_from_coachee));
     }
   }
 
