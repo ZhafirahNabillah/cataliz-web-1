@@ -135,11 +135,31 @@ class ClassController extends Controller
         // return redirect('/class')->with('success','Class succesfully created');
 
         $coach = Coach::find($request->coach_id);
+        $old_clients = $coach->clients->pluck('id')->toArray();
         $coach->clients()->sync($request->input('client'));
 
-        // MailController::SendSignUpMail($user->email, $user->verification_code);
+        $request_client = $request->input('client');
 
-        return response()->json(['success' => 'Customer saved successfully!']);
+        if ($request->filled('client')) {
+          $new_clients_id = array_diff($request_client, $old_clients);
+        } else {
+          $new_clients_id = [];
+        }
+
+        $coach_detail = User::where('id', $coach->user_id)->first();
+        if ($new_clients_id) {
+          $new_clients = Client::whereIn('id', $new_clients_id)->get();
+          MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
+          MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
+        }
+
+
+        return response()->json([
+          'success' => 'Customer saved successfully!'
+          // 'old_clients' => $old_clients,
+          // 'request_client' => $request_client,
+          // 'new_clients' => $new_clients
+        ]);
     }
 
     /**
