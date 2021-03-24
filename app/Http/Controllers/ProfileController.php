@@ -123,6 +123,9 @@ class ProfileController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('background_picture')->getClientOriginalExtension();
                 $filenameSave = $filename . '_' . time() . '.' . $extension;
+                if (Storage::disk('s3')->exists('images/background_picture/' . $user->background_picture)) {
+                    Storage::disk('s3')->delete('images/background_picture/' . $user->background_picture);
+                }
                 Storage::disk('s3')->put('images/background_picture/' . $filenameSave, file_get_contents($request->file('background_picture')));
                 // $path = $request->file('background_picture')->storeAs('public/background', $filenameSave);
                 $user->background_picture = $filenameSave;
