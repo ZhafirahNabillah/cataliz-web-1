@@ -341,10 +341,10 @@ class AgendaController extends Controller
     $feedbacks = $agenda_detail->feedbacks;
 
     if (auth()->user()->hasRole('coachee')) {
-      $feedback = $feedbacks->where('from','coachee')->where('user_id', auth()->user()->id)->first();
+      $feedback = $feedbacks->where('from', 'coachee')->where('user_id', auth()->user()->id)->first();
       // return $feedback;
     } elseif (auth()->user()->hasRole('coach')) {
-      $feedback = $feedbacks->where('from','coach')->where('user_id', auth()->user()->id)->first();
+      $feedback = $feedbacks->where('from', 'coach')->where('user_id', auth()->user()->id)->first();
       // return $feedback;
     } else {
       $feedbacks = Feedback::where('agenda_detail_id', $id)->get();
@@ -511,28 +511,10 @@ class AgendaController extends Controller
     }
     // return $feedback;
 
-    foreach ($feedback as $fb) {
-      if ($request->filled('feedback')) {
-        $fb->feedback_from_coach = $request->feedback;
-        $agenda_detail->status = 'finished';
-      }
-
-      if ($request->hasFile('feedback_attachment')) {
-        $this->validate($request, [
-          'feedback_attachment'       => 'max:2048|mimes:pdf,doc,docx,txt',
-        ], [
-          'feedback_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
-          'feedback_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
-        ]);
-        $filenameWithExt = $request->file('feedback_attachment')->getClientOriginalName();
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
-        $filenameSave = $filename . '_' . time() . '.' . $extension;
-        Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('feedback_attachment')));
-        // $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
-        $agenda_detail->attachment_from_coach = $filenameSave;
-        $agenda_detail->status = 'finished';
-      }
+    if ($request->filled('feedback')) {
+      $feedback->feedback = $request->feedback;
+      $agenda_detail->status = 'finished';
+    }
 
     if ($request->hasFile('feedback_attachment')) {
       $this->validate($request, [
@@ -545,7 +527,7 @@ class AgendaController extends Controller
       $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
       $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
       $filenameSave = $filename . '_' . time() . '.' . $extension;
-      $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
+      Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('feedback_attachment')));
       $feedback->attachment = $filenameSave;
       $agenda_detail->status = 'finished';
     }
@@ -581,7 +563,6 @@ class AgendaController extends Controller
       $extension = $request->file('note_attachment')->getClientOriginalExtension();
       $filenameSave = $filename . '_' . time() . '.' . $extension;
       Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('note_attachment')));
-      // $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
       $coaching_note->attachment = $filenameSave;
       $coaching_note->update();
     }
@@ -591,19 +572,14 @@ class AgendaController extends Controller
 
   public function feedback_download($id)
   {
-    // $agenda_detail = Agenda_detail::find($id);
-    $feedback = Feedback::where('agenda_details_id', $id)->first();
-    if (auth()->user()->hasRole('coach')) {
-      return Storage::disk('s3')->download($feedback->attachment_from_coach);
-    } elseif (auth()->user()->hasRole('coachee')) {
-      return Storage::disk('s3')->download('attachment/' . $feedback->attachment_from_coachee);
-    }
+    $feedback = Feedback::where('id', $id)->first();
+    return Storage::disk('s3')->download('attachment/' . $feedback->attachment);
   }
 
   public function note_download($id)
   {
     $coaching_note = Coaching_note::where('id', $id)->first();
-    return response()->download('attachment/' . $coaching_note->attachment);
+    return Storage::disk('s3')->download('attachment/' . $coaching_note->attachment);
   }
 
   public function ajaxPlans(Request $request)
