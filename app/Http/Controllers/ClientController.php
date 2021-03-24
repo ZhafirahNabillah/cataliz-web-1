@@ -12,6 +12,7 @@ use App\Models\Agenda;
 use App\Models\Plan;
 use App\Models\User;
 use App\Models\Coach;
+use App\Models\Feedback;
 use App\Models\Class_model;
 use App\Models\Class_has_client;
 use DataTables;
@@ -407,7 +408,7 @@ class ClientController extends Controller
           return $type;
         })
         ->addColumn('action', function ($row) {
-          $actionBtn = '<a href="javascript:;" id="detailSessions" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail session">Detail</a>';
+          $actionBtn = '<a href="'. route('agendas.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
         })
         ->rawColumns(['type','action'])
@@ -435,23 +436,40 @@ class ClientController extends Controller
   }
 
   // role: coach, list feedbacks on client detail
-  public function show_feedbacks_data(Request $request, Client $client)
+  public function show_feedbacks_list(Request $request, Client $client)
   {
     if ($request->ajax()) {
-      $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('users', 'agendas.owner_id', '=', 'users.id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('clients.id', $client->id)->latest()
-        ->get();
+      $plan = $client->plans;
+      $agenda = Agenda::whereIn('plan_id', $plan->pluck('id'))->get();
+      $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->get();
+
+      $feedbacks = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->Where(function($query) {
+                    $query->where('feedback', '!=', null)
+                          ->orWhere('attachment', '!=', null);
+                    })->get();
+      $feedbacks = $feedbacks->where('from', 'coach');
+
+      $data = $feedbacks;
 
       return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('coach', function ($row) {
+          $agenda_detail = $row->agenda_detail;
+          $agenda = $agenda_detail->agenda;
+          $plan = $agenda->plan;
+          $coach = $plan->owner;
+          $coach_detail = $coach->user->toArray();
+          return $coach_detail;
+        })
+        ->addColumn('agenda_detail', function ($row) {
+          $agenda_detail = $row->agenda_detail->toArray();
+          return $agenda_detail;
+        })
         ->addColumn('action', function ($row) {
           $actionBtn = '<a href="javascript:;" id="detailFeedback" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Detail</a>';
           return $actionBtn;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action','coach_detail','agenda_detail'])
         ->make(true);
     }
   }
@@ -482,12 +500,18 @@ class ClientController extends Controller
   // role: coach, detail feedback on client detail
   public function show_detail_feedbacks($id)
   {
-    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.feedback_from_coach', 'agenda_details.attachment_from_coach', 'agenda_details.created_at')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->join('users', 'agendas.owner_id', '=', 'users.id')
-      ->join('clients', 'clients.id', '=', 'agendas.client_id')
-      ->where('agenda_details.id', $id)
-      ->first();
+    $feedback = Feedback::find($id);
+    $agenda_detail = $feedback->agenda_detail;
+    $agenda = $agenda_detail->agenda;
+    $plan = $agenda->plan;
+    $coach = $plan->owner;
+    $coach_detail = $coach->user;
+
+    $data = [
+      'session' => $agenda_detail,
+      'coach' => $coach_detail,
+      'feedback' => $feedback
+    ];
 
     return response()->json($data);
   }
@@ -495,13 +519,18 @@ class ClientController extends Controller
   // role: coach, detail notes on client detail
   public function show_detail_notes($id)
   {
-    $data = Agenda_detail::select('coaching_notes.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'coaching_notes.subject', 'coaching_notes.attachment', 'coaching_notes.summary', 'agenda_details.created_at')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->join('users', 'agendas.owner_id', '=', 'users.id')
-      ->join('clients', 'clients.id', '=', 'agendas.client_id')
-      ->join('coaching_notes', 'coaching_notes.agenda_detail_id', '=', 'agenda_details.id')
-      ->where('coaching_notes.id', $id)
-      ->first();
+    $coaching_note = Coaching_note::find($id);
+    $agenda_detail = $coaching_note->agenda_detail;
+    $agenda = $agenda_detail->agenda;
+    $plan = $agenda->plan;
+    $coach = $plan->owner;
+    $coach_detail = $coach->user;
+
+    $data = [
+      'session' => $agenda_detail,
+      'coach' => $coach_detail,
+      'coaching_note' => $coaching_note
+    ];
 
     return response()->json($data);
   }

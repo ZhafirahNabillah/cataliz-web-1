@@ -9,5 +9,21 @@ class Feedback extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['agenda_details_id', 'attachment_from_coach', 'feedback_from_coach', 'attachment_from_coachee', 'feedback_from_coach', 'rating_from_coachee', 'owner_id'];
+    protected $fillable = [
+      'agenda_detail_id',
+      'feedback',
+      'attachment',
+      'rating',
+      'user_id',
+      'from',
+    ];
+
+    public function agenda_detail() {
+  		return $this->belongsTo('App\Models\Agenda_detail');
+  	}
+
+    public function user() {
+      return $this->belongsTo('App\Models\User');
+    }
+
 }

@@ -82,8 +82,7 @@
 							</div>
 							<div class="mt-2">
 								<h5 class="mb-75">Topic:</h5>
-								<p class="card-text">{{ $agenda_detail->topic }} @if($agenda_detail->topic == null) -
-									@endif</p>
+								<p class="card-text">{{ $agenda_detail->topic ?? '-' }}</p>
 							</div>
 						</div>
 					</div>
@@ -140,18 +139,18 @@
 								<div class="row">
 									<div class="col-md-12 form-group">
 										<label for="fp-default">Feedback</label>
-										@if($feedback->feedback_from_coachee == null)
+										@if($feedback->feedback == null)
 										<textarea class="form-control" name="feedback"></textarea>
 										@endif
-										@if($feedback->feedback_from_coachee != null)
+										@if($feedback->feedback != null)
 										<div class="overflow-auto p-2" style="max-height: 300px;">
-											{!! $feedback->feedback_from_coachee !!}
+											{!! $feedback->feedback !!}
 										</div>
 										@endif
 									</div>
 									<div class="col-md-12 form-group">
 										<label for="customFile1">Attachment file</label>
-										@if($feedback->attachment_from_coachee == null)
+										@if($feedback->attachment == null)
 										<div class="custom-file">
 											<input type="file" class="custom-file-input" name="feedback_attachment" />
 											<label class="custom-file-label" for="customFile1">Choose file</label>
@@ -160,14 +159,13 @@
 										<strong class="text-danger">{{ $message }}</strong>
 										@enderror
 										@endif
-										@if($feedback->attachment_from_coachee != null)
+										@if($feedback->attachment != null)
 										<div class="row">
 											<div class="col-md-10">
 												<input type="text" class="form-control"
-													value="{{ $feedback->attachment_from_coachee }}" disabled>
+													value="{{ $feedback->attachment }}" disabled>
 											</div>
-											<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}"
-												class="btn btn-primary col-auto">Download</a>
+											<a href="{{ route('agendas.feedback_download', $feedback->id) }}" class="btn btn-primary col-auto">Download</a>
 										</div>
 										@endif
 									</div>
@@ -190,10 +188,10 @@
 								<span>Rating tidak tersedia</span>
 								@else
 								<div class="row justify-content-md-center">
-									@if ($feedback->rating_from_coachee == null)
+									@if ($feedback->rating == null)
 									<div id="rateYo"></div>
 									@else
-									<div id="rateYo" data-rating="{{ $feedback->rating_from_coachee }}"></div>
+									<div id="rateYo" data-rating="{{ $feedback->rating }}"></div>
 									@endif
 									<input name="coach_rating" id="coach_rating" type="hidden" value="">
 								</div>
@@ -202,8 +200,8 @@
 						</div>
 
 						@if(($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
-						$agenda_detail->status == 'finished') && ($feedback->feedback_from_coachee == null ||
-						$feedback->attachment_from_coachee == null || $feedback->rating_from_coachee == null)
+						$agenda_detail->status == 'finished') && ($feedback->feedback == null ||
+						$feedback->attachment == null || $feedback->rating == null)
 						&&
 						(($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->
 							setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
@@ -226,11 +224,11 @@
 					<div class="card">
 						<div class="card-body">
 							<h4> <strong>Feedback from coach</strong> </h4>
-							<div class="mb-2">{!! $feedback->feedback_from_coach ?? "Feedback not available" !!}
+							<div class="mb-2">{!! $feedback_from_coach->feedback ?? "Feedback not available" !!}
 							</div>
 							<h5> <strong>Documentation</strong> </h5>
-							@if ($feedback->attachment_from_coach)
-							<button type="button" name="button" class="btn btn-primary">Download</button>
+							@if ($feedback_from_coach->attachment)
+							<a href="{{ route('agendas.feedback_download', $feedback_from_coach->id) }}" class="btn btn-primary">Download</a>
 							@else
 							<div>Documentation not available</div>
 							@endif
@@ -238,15 +236,17 @@
 					</div>
 					<div class="card">
 						<div class="card-body">
-							<h4> <strong>Feedback from coachee</strong> </h4>
-							<div class="mb-2">{!! $feedback->feedback_from_coachee ?? "Feedback not available" !!}
-							</div>
-							<h5> <strong>Documentation</strong> </h5>
-							@if ($feedback->attachment_from_coachee)
-							<button type="button" name="button" class="btn btn-primary">Download</button>
-							@else
-							<div>Documentation not available</div>
-							@endif
+							@foreach ($feedback_from_coachee as $feedback)
+								<h4> <strong>{{ $feedback->user->name }}</strong> (Coachee) </h4>
+								<div class="mb-2">{!! $feedback->feedback ?? "Feedback not available" !!}</div>
+								<h5> <strong>Documentation</strong> </h5>
+								@if ($feedback->attachment)
+								<a href="{{ route('agendas.feedback_download', $feedback->id) }}" class="btn btn-primary">Download</a>
+								@else
+								<div>Documentation not available</div>
+								@endif
+								<hr>
+							@endforeach
 						</div>
 					</div>
 					<div class="card">
@@ -259,7 +259,7 @@
 							<div class="mb-2">{!! $coaching_note->summary ?? "Summary not available" !!}</div>
 							<h5> <strong>Documentation</strong> </h5>
 							@if ($coaching_note->attachment)
-							<button type="button" name="button" class="btn btn-primary">Download</button>
+							<a href="{{ route('agendas.note_download', $coaching_note->id) }}" class="btn btn-primary col-auto">Download</a>
 							@else
 							<div>Documentation not available</div>
 							@endif
@@ -271,11 +271,15 @@
 					<div class="card">
 						<div class="card-body">
 							<h4> <strong>Rating</strong> </h4>
-							@if ($feedback->rating_from_coachee == null)
-							<div>Coach rating not available</div>
-							@else
-							<div id="rateYo" data-rating="{{ $feedback->rating_from_coachee }}"></div>
-							@endif
+							@foreach ($feedback_from_coachee as $feedback)
+								<h5>{{ $feedback->user->name }}</h5>
+								@if ($feedback->rating == null)
+									<div>Coach rating not available</div>
+								@else
+									<div id="rateYo-{{ $feedback->id }}" data-rating="{{ $feedback->rating }}"></div>
+								@endif
+								<hr>
+							@endforeach
 						</div>
 					</div>
 				</div>
@@ -300,18 +304,18 @@
 						<div class="row">
 							<div class="col-md-12 form-group">
 								<label for="fp-default">Feedback</label>
-								@if($feedback->feedback_from_coach == null)
+								@if($feedback->feedback == null)
 								<textarea class="form-control" name="feedback"></textarea>
 								@endif
-								@if($feedback->feedback_from_coach != null)
+								@if($feedback->feedback != null)
 								<div class="overflow-auto p-2" style="max-height: 300px;">
-									{!! $feedback->feedback_from_coach !!}
+									{!! $feedback->feedback !!}
 								</div>
 								@endif
 							</div>
 							<div class="col-md-12 form-group">
 								<label for="customFile1">Attachment file</label>
-								@if($feedback->attachment_from_coach == null)
+								@if($feedback->attachment == null)
 								<div class="custom-file">
 									<input type="file" class="custom-file-input" name="feedback_attachment" />
 									<label class="custom-file-label" for="customFile1">Choose file</label>
@@ -320,13 +324,13 @@
 								<strong class="text-danger">{{ $message }}</strong>
 								@enderror
 								@endif
-								@if($feedback->attachment_from_coach != null)
+								@if($feedback->attachment != null)
 								<div class="row">
 									<div class="col-md-10">
 										<input type="text" class="form-control"
-											value="{{ $feedback->attachment_from_coach }}" disabled>
+											value="{{ $feedback->attachment }}" disabled>
 									</div>
-									<a href="{{ route('agendas.feedback_download',$agenda_detail->id) }}"
+									<a href="{{ route('agendas.feedback_download', $feedback->id) }}"
 										class="btn btn-primary col-auto">Download</a>
 								</div>
 								@endif
@@ -452,7 +456,6 @@
 			</form>
 			@endrole
 		</div>
-
 	</div>
 </div>
 </div>
@@ -468,26 +471,41 @@
 
 	$(function() {
 
-		@if($feedback->rating_from_coachee != null)
-		var rating = $('#rateYo').data("rating");
-		$('#rateYo').rateYo({
-			starWidth: "50px",
-			rating: rating,
-			fullStar: true,
-			spacing: "30px",
-			readOnly: true,
-		});
-		@else
-		$('#rateYo').rateYo({
-			starWidth: "50px",
-			fullStar: true,
-			spacing: "30px",
-		});
-		$('#rateYo').click(function() {
-			var rating = $('#rateYo').rateYo("rating");
-			$('#coach_rating').val(rating);
-		});
-		@endif
+		@role('coach|coachee')
+			@if($feedback->rating != null)
+			var rating = $('#rateYo').data("rating");
+			$('#rateYo').rateYo({
+				starWidth: "50px",
+				rating: rating,
+				fullStar: true,
+				spacing: "30px",
+				readOnly: true,
+			});
+			@else
+			$('#rateYo').rateYo({
+				starWidth: "50px",
+				fullStar: true,
+				spacing: "30px",
+			});
+			$('#rateYo').click(function() {
+				var rating = $('#rateYo').rateYo("rating");
+				$('#coach_rating').val(rating);
+			});
+			@endif
+		@endrole
+
+		@role('admin')
+			@foreach ($feedback_from_coachee as $feedback)
+				var rating = $('#rateYo-'+{{ $feedback->id }}).data("rating");
+				$('#rateYo-'+{{ $feedback->id }}).rateYo({
+					starWidth: "30px",
+					rating: rating,
+					fullStar: true,
+					spacing: "10px",
+					readOnly: true,
+				});
+			@endforeach
+		@endrole
 
 	});
 </script>
