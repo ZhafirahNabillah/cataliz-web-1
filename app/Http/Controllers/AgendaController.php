@@ -483,7 +483,7 @@ class AgendaController extends Controller
       $filenameSave = $filename . '_' . time() . '.' . $extension;
       Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('feedback_attachment')));
       // $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
-      $feedback->attachment_from_coachee = $filenameSave;
+      $feedback->attachment = $filenameSave;
     }
 
     //check if rating from coachee was filled
