@@ -272,7 +272,7 @@
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
                   <tr>
                     <!-- Nama user coach -->
-                    <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
+                    <h3 style="color: black;">Hai, {{ $email_data['coach_name'] }}</h3>
                     <span style="color: black;">You have been added to a class as a coach with the details class :
                     </span>
                   </tr>
@@ -309,12 +309,12 @@
                       </tr>
                       <tr>
                         <td style="text-align:left;">
-                          <span>Number of Participants</span>
+                          <span>Client Name</span>
                         </td>
                         <td style=""></td>
                         <td style="text-align:left; vertical-align:top;">
                           <!-- topic -->
-                          <span>#jumlah Partisipan</span>
+                          <span>{{ $email_data['client_name'] }}</span>
                         </td>
                       </tr>
                     </table>

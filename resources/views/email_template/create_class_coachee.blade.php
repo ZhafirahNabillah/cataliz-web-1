@@ -272,7 +272,7 @@
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
                   <tr>
                     <!-- Nama user coachee -->
-                    <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
+                    <h3 style="color: black;">Hai, {{ $email_data['client_name'] }}</h3>
                     <span style="color: black;">You have been added to a class.
                     </span>
                   </tr>
@@ -281,8 +281,8 @@
                 <table cellspacing="0" cellpadding="15px" class="force-full-width">
                   <tr>
                     <!-- Kelas -->
-                    <td style="background-color: #ECC373;color: #656565;">#Nama kelas</td>
-                    <td style="background-color: #F1DDAC;color: #656565;">with #Nama coach</td>
+                    {{-- <td style="background-color: #ECC373;color: #656565;">#Nama kelas</td> --}}
+                    <td style="background-color: #F1DDAC;color: #656565;">{{ $email_data['coach_name'] }}</td>
 
                   </tr>
                 </table>

@@ -9,6 +9,8 @@ use App\Mail\SendForgotPasswordMail;
 use App\Mail\SendSessionScheduledMail;
 use App\Mail\SendSessionRescheduledMail;
 use App\Mail\SendSignUpMail;
+use App\Mail\SendAddClassMailToCoach;
+use App\Mail\SendAddClassMailToCoachee;
 use Carbon\Carbon;
 
 class MailController extends Controller
@@ -106,6 +108,29 @@ class MailController extends Controller
         ];
 
         Mail::to($client->email)->send(new SendSessionRescheduledMail($data_for_coachee));
+      }
+
+    }
+
+    public static function SendAddClassMailToCoach($clients, $coach_detail){
+      foreach ($clients as $client) {
+        $data = [
+          'client_name' => $client->name,
+          'coach_name' => $coach_detail->name
+        ];
+
+        Mail::to($coach_detail->email)->send(new SendAddClassMailToCoach($data));
+      }
+    }
+
+    public static function SendAddClassMailToCoachee($clients, $coach_detail){
+      foreach ($clients as $client) {
+        $data = [
+          'client_name' => $client->name,
+          'coach_name' => $coach_detail->name
+        ];
+
+        Mail::to($client->email)->send(new SendAddClassMailToCoachee($data));
       }
 
     }

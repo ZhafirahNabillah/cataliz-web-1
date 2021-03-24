@@ -290,7 +290,7 @@
         type: "POST",
         dataType: 'json',
         success: function(data) {
-
+          console.log(data);
           $('#addClientForm').trigger("reset");
           $('#saveBtn').html('Submit');
           $('#modals-slide-in').modal('hide');
