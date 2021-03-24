@@ -19,6 +19,7 @@ class ProfileController extends Controller
         if (auth()->user()->hasRole('admin')) {
             $user = User::where('id', Auth::user()->id)->first();
             $contents = Storage::disk('s3')->get('images/profil_picture/' . $user->profil_picture);
+            $contents_bg = Storage::disk('s3')->get('images/background_picture/' . $user->background_picture);
 
             return view('profile.index', compact('user', 'contents'));
         } elseif (auth()->user()->hasRole('coachee')) {
@@ -28,12 +29,15 @@ class ProfileController extends Controller
                 ->first();
 
             $contents = Storage::disk('s3')->get('images/profil_picture/' . $user->profil_picture);
+            $contents_bg = Storage::disk('s3')->get('images/background_picture/' . $user->background_picture);
+
             return view('profile.index', compact('user', 'contents'));
         } else {
             $user = User::where('id', Auth::user()->id)->first();
             $contents = Storage::disk('s3')->get('images/profil_picture/' . $user->profil_picture);
+            $contents_bg = Storage::disk('s3')->get('images/background_picture/' . $user->background_picture);
 
-            return view('profile.index', compact('user', 'contents'));
+            return view('profile.index', compact('user', 'contents', 'contents_bg'));
         }
     }
 

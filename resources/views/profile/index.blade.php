@@ -53,7 +53,7 @@
 								src="{{ asset('assets/images/avatars/'.$user->background_picture) }}"
 								alt="User Profile Image" />
 							@else
-							<img class="card-img-top" style="height: 569px;" src="{{ $contents }}"
+							<img class="card-img-top" style="height: 569px;" src="{{ $contents_bg }}"
 								alt="User Profile Image" />
 							@endif
 							<!--/ profile cover photo -->
@@ -66,8 +66,8 @@
 										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}"
 											class="rounded img-fluid" alt="Card image" id="profil" />
 										@else
-										<img src="{{'https://' . env('AWS_BUCKET') . '.s3-' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/images/profil_picture/' . $user->profil_picture }}"
-											class="rounded img-fluid" alt="Card image" id="profil" />
+										<img src="{{ $contents }}" class="rounded img-fluid" alt="Card image"
+											id="profil" />
 										@endif
 									</div>
 									<!-- profile title -->
