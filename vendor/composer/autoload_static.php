@@ -648,6 +648,8 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mail\\SendAddClassMailToCoach' => __DIR__ . '/../..' . '/app/Mail/SendAddClassMailToCoach.php',
+        'App\\Mail\\SendAddClassMailToCoachee' => __DIR__ . '/../..' . '/app/Mail/SendAddClassMailToCoachee.php',
         'App\\Mail\\SendForgotPasswordMail' => __DIR__ . '/../..' . '/app/Mail/SendForgotPasswordMail.php',
         'App\\Mail\\SendResetPasswordMail' => __DIR__ . '/../..' . '/app/Mail/SendResetPasswordMail.php',
         'App\\Mail\\SendSessionRescheduledMail' => __DIR__ . '/../..' . '/app/Mail/SendSessionRescheduledMail.php',

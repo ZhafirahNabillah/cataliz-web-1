@@ -773,7 +773,7 @@
 		});
 
 		//datatable for feedbacks table
-		var table = $('.yajra-datatable-feedback').DataTable({
+		var table = $('.feedbacks-datatable').DataTable({
 			processing: true,
 			serverSide: true,
 			ajax: "{{route('clients.show_feedbacks', $client->id)}}",
@@ -782,18 +782,18 @@
 					name: 'DT_RowIndex'
 				},
 				{
-					data: 'name',
-					name: 'name',
+					data: 'coach.name',
+					name: 'coach.name',
 					defaultContent: '<i>-</i>'
 				},
 				{
-					data: 'session_name',
-					name: 'session_name',
+					data: 'agenda_detail.session_name',
+					name: 'agenda_detail.session_name',
 					defaultContent: '<i>-</i>'
 				},
 				{
-					data: 'topic',
-					name: 'topic',
+					data: 'agenda_detail.topic',
+					name: 'agenda_detail.topic',
 					defaultContent: '<i>-</i>'
 				},
 				{
@@ -870,30 +870,30 @@
 		// show coaching notes
 		$(document).on("click", "#detailNote", function() {
 			console.log('masuk');
-			let detail_agenda_id_note = $(this).data('id');
-			console.log(detail_agenda_id_note);
+			let note_id = $(this).data('id');
+			console.log(note_id);
 
-			$.get("" + '/clients/' + detail_agenda_id_note + '/show_detail_notes', function(data) {
+			$.get("" + '/clients/' + note_id + '/show_detail_notes', function(data) {
 				$('#modalHeading').html("Detail Notes");
-				$('#name').text(data.name);
-				$('.session_note').html(data.session_name);
-				$('.coach_name_note').html(data.name);
-				$('.topic_note').html(data.topic);
-				$('.subject_note').html(data.subject);
-				$('.note').html(data.summary);
+				// $('#name').text(data.name);
+				$('.session_note').html(data.session.session_name);
+				$('.coach_name_note').html(data.coach.name);
+				$('.topic_note').html(data.session.topic);
+				$('.subject_note').html(data.coaching_note.subject);
+				$('.note').html(data.coaching_note.summary);
 				$('#show_note').modal('show');
 
-				if (data.attachment == null) {
+				if (data.coaching_note.attachment == null) {
 					$('.download_button_note').css("display", "none");
 					$('.span_none_note').html('Tidak ada file');
 				} else {
-					$('.span_none_note').html('Unduh file di atas');
+					$('.span_none_note').html('');
 					$('.download_button_note').removeAttr('style');
 					$('.download_button_note').css("display", "relative");
 				}
 
 				$('.download_button_note').on('click', function() {
-					window.location.href = ("" + '/agendas/' + detail_agenda_id_note + '/note_download');
+					window.location.href = ("" + '/agendas/' + note_id + '/note_download');
 				});
 			});
 		})
@@ -901,28 +901,28 @@
 		// show_feedback
 		$(document).on("click", "#detailFeedback", function() {
 			console.log('masuk');
-			let detail_agenda_id = $(this).data('id');
+			let feedback_id = $(this).data('id');
 
-			$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
+			$.get("" + '/clients/' + feedback_id + '/show_detail_feedbacks', function(data) {
 				$('#modalHeading').html("Detail Feedbacks");
-				$('#name').text(data.name);
-				$('.session_feedback').html(data.session_name);
-				$('.coach_name_feedback').html(data.name);
-				$('.topic_feedback').html(data.topic);
-				$('.feedback').html(data.feedback_from_coach);
+				// $('#name').text(data.name);
+				$('.session_feedback').html(data.session.session_name);
+				$('.coach_name_feedback').html(data.coach.name);
+				$('.topic_feedback').html(data.session.topic);
+				$('.feedback').html(data.feedback.feedback);
 				$('#show_feedback').modal('show');
 
-				if (data.attachment_from_coach == null) {
+				if (data.feedback.attachment == null) {
 					$('.download_button_feedback').css("display", "none");
 					$('.span_none_feedback').html('Tidak ada file');
 				} else {
-					$('.span_none_feedback').html('Unduh file di atas');
+					$('.span_none_feedback').html('');
 					$('.download_button_feedback').removeAttr('style');
 					$('.download_button_feedback').css("display", "relative");
 				}
 
 				$('.download_button_feedback').on('click', function() {
-					window.location.href = ("" + '/agendas/' + detail_agenda_id + '/feedback_download');
+					window.location.href = ("" + '/agendas/' + feedback_id + '/feedback_download');
 				});
 
 			});

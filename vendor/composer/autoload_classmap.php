@@ -34,6 +34,8 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Mail\\SendAddClassMailToCoach' => $baseDir . '/app/Mail/SendAddClassMailToCoach.php',
+    'App\\Mail\\SendAddClassMailToCoachee' => $baseDir . '/app/Mail/SendAddClassMailToCoachee.php',
     'App\\Mail\\SendForgotPasswordMail' => $baseDir . '/app/Mail/SendForgotPasswordMail.php',
     'App\\Mail\\SendResetPasswordMail' => $baseDir . '/app/Mail/SendResetPasswordMail.php',
     'App\\Mail\\SendSessionRescheduledMail' => $baseDir . '/app/Mail/SendSessionRescheduledMail.php',
