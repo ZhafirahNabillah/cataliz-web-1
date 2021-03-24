@@ -21,6 +21,7 @@ class ResctructuredFeedbacksTable extends Migration
             //dropping column
             // $table->dropColumn('attachment_from_coach');
             $table->dropColumn('agenda_details_id');
+            $table->dropColumn('attachment_from_coach');
             $table->dropColumn('feedback_from_coach');
             $table->dropColumn('attachment_from_coachee');
             $table->dropColumn('feedback_from_coachee');
