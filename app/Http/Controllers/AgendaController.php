@@ -464,7 +464,8 @@ class AgendaController extends Controller
       $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
       $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
       $filenameSave = $filename . '_' . time() . '.' . $extension;
-      $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
+      Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('feedback_attachment')));
+      // $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
       $feedback->attachment_from_coachee = $filenameSave;
     }
 
@@ -506,7 +507,8 @@ class AgendaController extends Controller
         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
         $extension = $request->file('feedback_attachment')->getClientOriginalExtension();
         $filenameSave = $filename . '_' . time() . '.' . $extension;
-        $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
+        Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('feedback_attachment')));
+        // $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
         $agenda_detail->attachment_from_coach = $filenameSave;
         $agenda_detail->status = 'finished';
       }
@@ -540,7 +542,8 @@ class AgendaController extends Controller
       $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
       $extension = $request->file('note_attachment')->getClientOriginalExtension();
       $filenameSave = $filename . '_' . time() . '.' . $extension;
-      $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
+      Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('note_attachment')));
+      // $path = $request->file('note_attachment')->storeAs('public/attachment', $filenameSave);
       $coaching_note->attachment = $filenameSave;
       $coaching_note->update();
     }
@@ -554,16 +557,16 @@ class AgendaController extends Controller
     // $agenda_detail = Agenda_detail::find($id);
     $feedback = Feedback::where('agenda_details_id', $id)->first();
     if (auth()->user()->hasRole('coach')) {
-      return response()->download(storage_path('app/public/attachment/' . $feedback->attachment_from_coach));
+      return Storage::disk('s3')->download($feedback->attachment_from_coach);
     } elseif (auth()->user()->hasRole('coachee')) {
-      return response()->download(storage_path('app/public/attachment/' . $feedback->attachment_from_coachee));
+      return Storage::disk('s3')->download('attachment/' . $feedback->attachment_from_coachee);
     }
   }
 
   public function note_download($id)
   {
     $coaching_note = Coaching_note::where('id', $id)->first();
-    return response()->download(storage_path('app/public/attachment/' . $coaching_note->attachment));
+    return response()->download('attachment/' . $coaching_note->attachment);
   }
 
   public function ajaxPlans(Request $request)

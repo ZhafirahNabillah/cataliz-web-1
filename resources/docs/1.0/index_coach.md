@@ -5,5 +5,5 @@
     - [Kustomisasi Tampilan](/{{route}}/{{version}}/kustomisasi_tampilan)
 
 - ## Role Introduction
-    - [Coach](/{{route}}/{{version}}/coach/coach)
-
+    - [Menu Clients](/{{route}}/{{version}}/coach/menu_clients)
+    - [Menu Plans](/{{route}}/{{version}}/coach/menu_plans)
