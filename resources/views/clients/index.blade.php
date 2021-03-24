@@ -700,7 +700,9 @@
               {
                 data: 'phone',
                 name: 'phone',
-                defaultContent: '<i>-</i>'
+                render: function (data, type, row) {
+                  return '+62'+data;
+                }
               },
               // {
               //   data: 'rating',
@@ -746,7 +748,9 @@
               {
                 data: 'phone',
                 name: 'phone',
-                defaultContent: '<i>-</i>'
+                render: function (data, type, row) {
+                  return '+62'+data;
+                }
               },
               {
                 data: 'action',
@@ -787,7 +791,9 @@
               {
                 data: 'phone',
                 name: 'phone',
-                defaultContent: '<i>-</i>'
+                render: function (data, type, row) {
+                  return '+62'+data;
+                }
               },
               {
                 data: 'action',
