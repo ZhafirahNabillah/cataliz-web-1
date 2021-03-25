@@ -11,6 +11,7 @@ use App\Mail\SendSessionRescheduledMail;
 use App\Mail\SendSignUpMail;
 use App\Mail\SendAddClassMailToCoach;
 use App\Mail\SendAddClassMailToCoachee;
+use App\Mail\SendAddClassMailToAdmin;
 use Carbon\Carbon;
 
 class MailController extends Controller
@@ -132,6 +133,17 @@ class MailController extends Controller
 
         Mail::to($client->email)->send(new SendAddClassMailToCoachee($data));
       }
+    }
 
+    public static function SendAddClassMailToAdmin($clients, $coach_detail){
+      foreach ($clients as $client) {
+        $data = [
+          'client_name' => $client->name,
+          'coach_name' => $coach_detail->name,
+          'admin_name' => auth()->user()->name
+        ];
+
+        Mail::to(auth()->user()->email)->send(new SendAddClassMailToAdmin($data));
+      }
     }
 }

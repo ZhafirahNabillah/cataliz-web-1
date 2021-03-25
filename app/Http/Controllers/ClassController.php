@@ -151,6 +151,7 @@ class ClassController extends Controller
           $new_clients = Client::whereIn('id', $new_clients_id)->get();
           MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
           MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
+          MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
         }
 
 
