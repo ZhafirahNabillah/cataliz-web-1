@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::resource('plans', PlanController::class);
 	Route::get('/plans/{id}/pdf', [PlanController::class, 'plan_detail_to_pdf'])->name('plans.detail_to_pdf');
 	Route::get('/ajaxClients', [PlanController::class, 'ajaxClients'])->name('clients.search');
+	Route::get('/ajaxInsertUsers', [PlanController::class, 'ajaxInsertUsers'])->name('users.search');
 	Route::get('/show_group_list', [PlanController::class, 'show_group_list'])->name('plans.show_group');
 
 	Route::get('/agendas/sessions_individual', [AgendaController::class, 'show_individual_sessions'])->name('agendas.sessions_individual');

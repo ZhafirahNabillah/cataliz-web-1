@@ -236,18 +236,18 @@ class ClassController extends Controller
 
     public function ajaxClass(Request $request)
     {
-        $coach = [];
+        $coachee = [];
         if ($request->has('q')) {
             $search = $request->q;
-            $coach = User::role('coach')->get()
+            $coachee = User::role('coachee')->get()
                 ->where('name', 'LIKE', "%$search%")
                 ->get();
         } else {
-            $coach = User::orderby('name', 'asc')
-                ->role('coach')
+            $coachee = User::orderby('name', 'asc')
+                ->role('coachee')
                 ->get();
         }
-        return response()->json($coach);
+        return response()->json($coachee);
     }
 
     public function ubah_status(Request $request, $id)

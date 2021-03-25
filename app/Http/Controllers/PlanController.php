@@ -89,7 +89,7 @@ class PlanController extends Controller
 
             return $actionBtn;
           })
-          ->rawColumns(['action','coach_name'])
+          ->rawColumns(['action', 'coach_name'])
           ->make(true);
       } else {
         // code...
@@ -143,7 +143,6 @@ class PlanController extends Controller
    */
   public function create()
   {
-    //
     $coach = Coach::where('user_id', auth()->user()->id)->first();
     $clients = $coach->clients;
 
@@ -181,6 +180,7 @@ class PlanController extends Controller
    */
   public function store(Request $request)
   {
+    // return $request;
     $this->validate($request, [
       'client'  => 'required',
       'date' => 'required',
@@ -261,7 +261,7 @@ class PlanController extends Controller
     if (auth()->user()->hasRole('coachee')) {
       $coach = $plan->owner;
       $coach_detail = $coach->user;
-      return view('plans.detail', compact('plan','coach_detail'));
+      return view('plans.detail', compact('plan', 'coach_detail'));
     } else {
       return view('plans.detail', compact('plan'));
     }
@@ -279,6 +279,8 @@ class PlanController extends Controller
     $all_clients = $coach->clients;
     $clients = $plan->clients->pluck('id');
 
+    // return $clients;
+
     return view('plans.edit', compact('plan', 'all_clients', 'clients'));
   }
 
@@ -288,7 +290,8 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id){
+  public function destroy($id)
+  {
     $plan = Plan::find($id);
     $plan->clients()->detach();
     $plan->delete();
@@ -298,7 +301,8 @@ class PlanController extends Controller
     return response()->json(['success' => 'Plan deleted!']);
   }
 
-  public function plan_detail_to_pdf($id){
+  public function plan_detail_to_pdf($id)
+  {
     $plan = Plan::find($id);
     $coach = User::find($plan->owner_id);
     $coachee = Client::find($plan->client_id);
@@ -307,7 +311,8 @@ class PlanController extends Controller
     return $pdf->download('plan_detail_' . $plan->id . '.pdf');
   }
 
-  public function show_group_list(Request $request){
+  public function show_group_list(Request $request)
+  {
     if (auth()->user()->hasRole('admin')) {
       $data = Plan::where('client_id', null)->latest()->get();
     } elseif (auth()->user()->hasRole('coach')) {
@@ -353,5 +358,19 @@ class PlanController extends Controller
         ->rawColumns(['action'])
         ->make(true);
     }
+  }
+
+  public function ajaxInsertUsers(Request $request)
+  {
+    $clients = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $clients = Client::where('owner_id', auth()->user()->id)->first()
+      ->where('name', 'LIKE', "%$search%");
+    } else {
+      $clients = Client::orderby('id', 'asc')->get()
+        ->where('owner_id', Auth::user()->id);
+    }
+    return response()->json($clients);
   }
 }

@@ -59,125 +59,181 @@
                 <div class="form-group">
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
-                  <input id="search" type="text" class="form-control" placeholder="Search client name..."/>
-                  @foreach ($clients as $client)
-                    <div class="form-check client-list">
-                      <input class="form-check-input" type="checkbox" value="{{ $client->id }}" name="client[]" id="client-{{ $client->id }}">
-                      <label class="form-check-label" for="client-{{ $client->id }}">
-                        {{ $client->name }}
-                      </label>
-                    </div>
-                  @endforeach
 
-                  @error('')
-                  <strong class="text-danger">{{ $message }}</strong>
+                  <select id="state" class="livesearch-plans form-control" @error('plan_id') is-invalid @enderror
+                    name="client[]" multiple="multiple"></select>
+                  {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..." /> --}}
+                  {{-- @foreach ($clients as $client)
+                  <div class="form-check client-list">
+                    <input class="form-check-input" type="checkbox" value="{{ $client->id }}" name="client[]"
+                  id="client-{{ $client->id }}">
+                  <label class="form-check-label" for="client-{{ $client->id }}">
+                    {{ $client->name }}
+                  </label>
+                </div>
+                @endforeach --}}
+
+                @error('')
+                <strong class="text-danger">{{ $message }}</strong>
+                @enderror
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Date</label>
+                  <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
+                    value="{{ old('date') }}" placeholder="Select your date...">
+                  <div id="date-error"></div>
+                  @error('date')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
                   @enderror
                 </div>
-
-                <div class="row">
-
-                  <div class="col-md-12 form-group">
-                    <label for="fp-default">Date</label>
-                    <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ old('date') }}" placeholder="Select your date...">
-                    <div id="date-error"></div>
-                    @error('date')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12 form-group">
-                    <label for="fp-default">objective</label>
-                    <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" value="{{ old('objective') }}" autocomplete="objective">{{ old('objective') }}
-                    </textarea>
-                    <small id="character_count_objective" class="float-right"></small>
-                    <div id="objective-error"></div>
-                    @error('objective')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12 form-group">
-                    <label for="fp-default">Success Indicator</label>
-                    <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" autocomplete="success_indicator">{{ old('success_indicator') }}</textarea>
-                    <small id="character_count_success_indicator" class="float-right"></small>
-                    <div id="success_indicator-error"></div>
-                    @error('success_indicator')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12 form-group">
-                    <label for="fp-default">Development Areas</label>
-                    <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" autocomplete="development_areas">{{ old('development_areas') }}</textarea>
-                    <small id="character_count_development_areas" class="float-right"></small>
-                    <div id="development_areas-error"></div>
-                    @error('development_areas')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-md-12 form-group">
-                    <label for="fp-default">Support</label>
-                    <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support" autocomplete="support">{{ old('support') }}</textarea>
-                    <small id="character_count_support" class="float-right"></small>
-                    <div id="support-error"></div>
-                    @error('support')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-                  </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
               </div>
-            </form>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">objective</label>
+                  <textarea class="form-control @error('objective') is-invalid @enderror" name="objective"
+                    id="objective" value="{{ old('objective') }}" autocomplete="objective">{{ old('objective') }}
+                    </textarea>
+                  <small id="character_count_objective" class="float-right"></small>
+                  <div id="objective-error"></div>
+                  @error('objective')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Success Indicator</label>
+                  <textarea class="form-control @error('success_indicator') is-invalid @enderror"
+                    name="success_indicator" id="success_indicator"
+                    autocomplete="success_indicator">{{ old('success_indicator') }}</textarea>
+                  <small id="character_count_success_indicator" class="float-right"></small>
+                  <div id="success_indicator-error"></div>
+                  @error('success_indicator')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Development Areas</label>
+                  <textarea class="form-control @error('development_areas') is-invalid @enderror"
+                    name="development_areas" id="development_areas"
+                    autocomplete="development_areas">{{ old('development_areas') }}</textarea>
+                  <small id="character_count_development_areas" class="float-right"></small>
+                  <div id="development_areas-error"></div>
+                  @error('development_areas')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Support</label>
+                  <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
+                    autocomplete="support">{{ old('support') }}</textarea>
+                  <small id="character_count_support" class="float-right"></small>
+                  <div id="support-error"></div>
+                  @error('support')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
           </div>
+          </form>
         </div>
       </div>
     </div>
   </div>
-  <!-- END: Content-->
-  @endsection
+</div>
+<!-- END: Content-->
+@endsection
 
-  @push('scripts')
-  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-  <style>
-    label.error.fail-alert {
-      color: red;
-    }
-  </style>
-  <script type="text/javascript">
-    $('#search').keyup(function(){
-      var search_value = new RegExp($(this).val(), 'i');
-      $(".client-list label").each(function() {
-        if(!search_value.test($(this).text())) {
-          $(this).parent().hide();
-        } else {
-          $(this).parent().show();
-        }
-      });
-	  });
+@push('scripts')
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<style>
+  label.error.fail-alert {
+    color: red;
+  }
+</style>
+<script type="text/javascript">
+  $("#state").select2({
+      tags: true,
+      placeholder: 'Select users',
+      ajax: {
+        url: "{{route('users.search')}}",
+        dataType: 'json',
+        delay: 250,
+        processResults: function(data) {
+          return {
+            results: $.map(data, function(item) {
+              console.log(item)
+              return {
+                text: item.name,
+                id: item.id,
+                client_id : item.client_id,
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+
+  // $(".livesearch").on('change', function(e) {
+  //   // Access to full data
+  //   console.log($(this).select2('data'));
+  //   console.log($(this).select2('data')[0].id);
+  //   var dd = $(this).select2('data')[0];
+  //   $('#organization').val(dd.org);
+  //   $('#company').val(dd.co);
+  // });
+      
+    // $("#btn-add-state").on("click", function(){
+    //   var newStateVal = $("#new-state").val();
+    //   // Set the value, creating a new option if necessary
+    //   if ($("#state").find("option[value=" + newStateVal + "]").length) {
+    //     $("#state").val(newStateVal).trigger("change");
+    //   } else { 
+    //     // Create the DOM option that is pre-selected by default
+    //     var newState = new Option(newStateVal, newStateVal, true, true);
+    //     // Append it to the select
+    //     $("#state").append(newState).trigger('change');
+    //   } 
+    // });  
+
+    // $('#search').keyup(function(){
+    //   var search_value = new RegExp($(this).val(), 'i');
+    //   $(".client-list label").each(function() {
+    //     if(!search_value.test($(this).text())) {
+    //       $(this).parent().hide();
+    //     } else {
+    //       $(this).parent().show();
+    //     }
+    //   });
+	  // });
 
     $(function() {
       $.ajaxSetup({
@@ -248,5 +304,5 @@
       var content = tinymce.trim(body.innerText || body.textContent);
       return content.length;
     };
-  </script>
-  @endpush
+</script>
+@endpush
