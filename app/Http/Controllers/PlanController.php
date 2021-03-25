@@ -300,7 +300,7 @@ class PlanController extends Controller
    * @return \Illuminate\Http\Response
    */
 
-  //method to delet plan
+  //method to delete plan
   public function destroy($id){
     $plan = Plan::find($id);
     $plan->clients()->detach();
@@ -370,6 +370,7 @@ class PlanController extends Controller
     }
   }
 
+  // method ajax for livesearch client on plan create
   public function ajaxInsertUsers(Request $request)
   {
     $clients = [];
