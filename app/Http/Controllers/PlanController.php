@@ -29,6 +29,7 @@ class PlanController extends Controller
     $this->middleware('permission:delete-plan', ['only' => ['destroy']]);
   }
 
+  // method to show plan index page and return datatable of individual plan
   public function index(Request $request)
   {
     if ($request->ajax()) {
@@ -141,6 +142,8 @@ class PlanController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  //method to show create plan page
   public function create()
   {
     //
@@ -179,6 +182,8 @@ class PlanController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
+
+  //method to store plan on database from create plan page and edit plan page
   public function store(Request $request)
   {
     $this->validate($request, [
@@ -256,6 +261,8 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to show detail plan page
   public function show(Plan $plan)
   {
     if (auth()->user()->hasRole('coachee')) {
@@ -273,6 +280,8 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to show edit plan page
   public function edit(Plan $plan)
   {
     $coach = Coach::where('user_id', auth()->user()->id)->first();
@@ -288,6 +297,8 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to delet plan
   public function destroy($id){
     $plan = Plan::find($id);
     $plan->clients()->detach();
@@ -298,6 +309,7 @@ class PlanController extends Controller
     return response()->json(['success' => 'Plan deleted!']);
   }
 
+  //method to export plan on detail plan page
   public function plan_detail_to_pdf($id){
     $plan = Plan::find($id);
     $coach = User::find($plan->owner_id);
@@ -307,6 +319,7 @@ class PlanController extends Controller
     return $pdf->download('plan_detail_' . $plan->id . '.pdf');
   }
 
+  //method to show plan group list on plan index page (plan tab)
   public function show_group_list(Request $request){
     if (auth()->user()->hasRole('admin')) {
       $data = Plan::where('client_id', null)->latest()->get();
