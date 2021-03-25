@@ -1,3 +1,5 @@
+<!-- Scheduled Session -->
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
@@ -74,7 +76,6 @@
 
     h1 {
       margin: 10px 0;
-      font-family: 'Roboto', sans-serif;
     }
 
     h2 {
@@ -136,9 +137,8 @@
       font-size: 25px;
       margin: 4px 2px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 8px;
       outline: none;
-      box-shadow: 0 3px #5a5686;
       width: 250px;
       height: 50px;
     }
@@ -240,7 +240,6 @@
                         <img src="{{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
                         <img src="{{ $message->embed(public_path().'/assets/images/icons/email/cataliz.png') }}">
                       </div>
-
                     </td>
                     <div>
                       <td rowspan="3" style="text-align:center; vertical-align:middle;width: 200px;background-color:#685FCD ;">
@@ -270,32 +269,31 @@
               <td style="background-color:white;">
 
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
-                  <tr>
-                    <!-- Nama user coachee -->
-                    <h3 style="color: black;">Hai, {{ $email_data['client_name'] }}</h3>
-                    <span style="color: black;">You have been added to a class.
-                    </span>
+                  <tr style="text-align: justify;">
+                    <!-- Nama user coach -->
+                    <h3 style="color: black;">Hai, {{ $email_data['coach_name'] }}</h3>
+                    <p style="color: black;">Admin has been assigned you to a new Coach! See the detail of your coach by
+                      click on the button bellow.
+                    </p>
                   </tr>
                 </table>
                 <br>
-                <table cellspacing="0" cellpadding="15px" class="force-full-width">
-                  <tr>
-                    <!-- Kelas -->
-                    {{-- <td style="background-color: #ECC373;color: #656565;">#Nama kelas</td> --}}
-                    <td style="background-color: #F1DDAC;color: #656565;">{{ $email_data['coach_name'] }}</td>
 
-                  </tr>
+                <table cellspacing="0" cellpadding="0px" class="force-full-width" width="100%">
+                  <tbody>
+                    <tr style="text-align: center;">
+                      <td>
+                        <!-- link ke agendas -->
+                        <a href="">
+                          <button class="button button1">Go To My Coaches</button>
+                        </a>
+                      </td>
+                    </tr>
+
+                  </tbody>
                 </table>
 
-                <br>
-                <table cellspacing="0" cellpadding="0" class="force-full-width">
-                  <tr>
-                    <span style="text-align: justify;color: black;"> You can contact the coach in charge using the chat
-                      feature on the
-                      website. The coach can no longer be contacted when class has ended.
-                    </span>
-                  </tr>
-                </table>
+
               </td>
             </tr>
           </table>
@@ -305,7 +303,6 @@
               <td style="background-color:#ffffff; padding-top: 15px;">
 
                 <center>
-
                   <table style="margin: 0 auto;" cellspacing="0" cellpadding="0" class="force-width-80" width="80%">
                     <tr>
                       <td style="text-align: justify;">
@@ -317,6 +314,7 @@
                             </td>
                           </tr>
                         </table>
+
                         <p style="text-align: justify;color: black;">If you have any questions, please email
                           halo@cataliz.id or
                           contact +62 822-3585-0005
@@ -339,10 +337,10 @@
                                   <tr style="text-align: center;">
                                     <td style="">
                                       <a href="https://www.instagram.com/cataliz.id/">
-                                        <img style="padding-right: 10px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
+                                        <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
                                       </a>
                                       <a href="https://cataliz.id/">
-                                        <img style="padding-left: 10px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
+                                        <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
                                       </a>
                                     </td>
                                   </tr>
@@ -367,8 +365,6 @@
                             </tr>
                           </table>
                         </center>
-
-
                       </td>
                     </tr>
                   </table>
@@ -380,6 +376,7 @@
     </tr>
   </table>
   </center>
+
   </td>
   </tr>
   </table>
