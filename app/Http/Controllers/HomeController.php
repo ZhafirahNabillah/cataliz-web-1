@@ -41,19 +41,12 @@ class HomeController extends Controller
             // $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
             // $class_has_clients = Class_has_client::whereIn('class_id', $class_id)->pluck('client_id');
             // $client = Client::whereIn('id', $class_has_clients)->count();
-            // $date_now = Carbon::now();
-            // $agenda_detail = Agenda_detail::find(25);
+
             // $agenda_detail = Agenda_detail::where(DB::raw("CONCAT(date,' ',time) + 1"), '<', $date_now)->pluck('id');
-            // return $agenda_detail;
+            // return $date_now;
             // $created_at_date = $agenda_detail->created_at->format('Y-m-d');
             // $created_at_time = $agenda_detail->created_at->format('H:i:s');
 
-            // $session_date_expired = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addDays(1)->addMinutes(1);
-            // if ($session_date_expired < $date_now) {
-            //   return 'expired';
-            // } else {
-            //   return 'still active';
-            // }
 
             $coach = Coach::where('user_id', auth()->user()->id)->first();
             $total_clients = $coach->clients->count();
