@@ -5,89 +5,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Laravel 7 PDF Example</title>
+  <title>Detail Plans</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  {{--
-  <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" /> --}}
+  <style type="text/css" media="all">
+    body {
+      height: 842px;
+      width: 595px;
+      /* to centre page on screen*/
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 </head>
 
 <body>
   <main role="main" class="container tex">
     <!-- head -->
-    <div class="row">
-      <table align="center" style="width: 80%;border: 1px solid white;">
-        <tr>
-          <td>
-            <div class="container" style="margin-top: 20px;margin-left: 10px;">
-              <div style="margin-bottom: 15px;" class="float-right text-right">
-                <h2 class="name">PT WAHANA INTEGRA <br> NUSANTARA</h2>
-                <span> +62 822-3585-0005</span> <img src="icon/telpon.png" alt=""><br>
-                <span> halo@cataliz.id</span> <img src="icon/mail.png" alt="">
-              </div>
+    <div class="container">
+      <tr>
+        <td>
+          <div class="container" style="margin-top: 20px;margin-left: 10px;">
+            <div style="margin-bottom: 15px;" class="float-right text-right">
+              <h2 class="name">PT WAHANA INTEGRA <br> NUSANTARA</h2>
+              <span> +62 822-3585-0005
+                <img src="{{ public_path().'/assets/images/icons/pdf/telpon.png' }}" alt="">
+              </span>
+              <br>
+              <span> halo@cataliz.id
+                <img src="{{ public_path().'/assets/images/icons/pdf/mail.png' }}" alt="">
+              </span>
+            </div>
 
-              <h1 class="text-left"><img style="width:170px;margin-top: 10px;margin-left: 15px; " src="icon/logofull.png">
-              </h1>
-          </td>
-        </tr>
-      </table>
+            <h1 class="text-left"><img style="width:170px;margin-top: 10px;margin-left: 15px; " src="">
+            </h1>
+        </td>
+      </tr>
     </div>
     <hr color="#C58407" />
 
-    <div class="col-12">
-      <h5 style="padding-top:50px;text-align: center;font-size:40px;color: #C58407;padding-bottom: 50px;">Title</h5>
-    </div>
-
-    <!-- objective -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card bg-faded">
-          <div class="card-header">
-            <b>Objective</b>
-          </div>
-          <div class="card-body">
-            <p>{!!$plan->objective!!}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <br>
-    <!-- success indicator -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card bg-faded">
-          <div class="card-header">
-            <b>Success Indicator</b>
-          </div>
-          <div class="card-body">
-            <p>{!!$plan->success_indicator!!}</p>
+    <div class="container">
+      <!-- objective -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Objective</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->objective!!}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <br>
-    <!-- Development areas -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card bg-faded">
-          <div class="card-header">
-            <b>Development Areas</b>
-          </div>
-          <div class="card-body">
-            <p>{!!$plan->development_areas!!}</p>
+      <br>
+      <!-- success indicator -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Success Indicator</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->success_indicator!!}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <br>
-    <!-- Support -->
-    <div class="row">
-      <div class="col-12">
-        <div class="card bg-faded">
-          <div class="card-header">
-            <b>Support</b>
+      <br>
+      <!-- Development areas -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Development Areas</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->development_areas!!}</p>
+            </div>
           </div>
-          <div class="card-body">
-            <p>{!!$plan->support!!}</p>
+        </div>
+      </div>
+      <br>
+      <!-- Support -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Support</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->support!!}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -108,11 +120,10 @@
       </table>
     </footer>
   </main>
-  {{--
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-  <script src="{{ asset('js/app.js') }}" type="text/js"></script> --}}
+  <script src="{{ asset('js/app.js') }}" type="text/js"></script>
 </body>
 
 </html>

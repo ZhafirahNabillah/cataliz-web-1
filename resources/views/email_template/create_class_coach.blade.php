@@ -137,9 +137,8 @@
       font-size: 25px;
       margin: 4px 2px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 8px;
       outline: none;
-      box-shadow: 0 3px #5a5686;
       width: 250px;
       height: 50px;
     }
@@ -265,79 +264,51 @@
           </table>
 
 
-          <table cellspacing="0" cellpadding="15px" class="force-full-width" style="background-color:#3bcdb0;border: 1px solid #9B93EF;border-top:white;">
+          <table cellspacing="0" cellpadding="15px" class="force-full-width" style="background-color:#3bcdb0;border: 1px solid #9B93EF;border-top:white;border-bottom: white;">
             <tr>
               <td style="background-color:white;">
 
                 <table cellspacing="0" cellpadding="0" class="force-full-width">
-                  <tr>
+                  <tr style="text-align: justify;">
                     <!-- Nama user coach -->
                     <h3 style="color: black;">Hai, {{ $email_data['coach_name'] }}</h3>
-                    <span style="color: black;">You have been added to a class as a coach with the details class :
+                    <p style="color: black;">Admin has been assigned you to a new Coachee! You can start Planning for
+                      your clients and schedule sessions for them.
+                    </p>
+                    <span>
+                      See your Coachee list bye click on the button bellow
                     </span>
                   </tr>
                 </table>
+                <br>
 
+                <table cellspacing="0" cellpadding="0px" class="force-full-width" width="100%">
+                  <tbody>
+                    <tr style="text-align: center;">
+                      <td>
+                        <!-- link ke agendas -->
+                        <a href="">
+                          <button class="button button1">Go To My Clients</button>
+                        </a>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                </table>
 
 
               </td>
             </tr>
           </table>
-          <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #9B93EF;background-color:#E9E7FF">
-            <tr>
-              <td style="text-align: center;">
-                <h2>Details</h2>
-              </td>
-            </tr>
-          </table>
+
           <table cellspacing="0" cellpadding="0" class="force-full-width" bgcolor="#ffffff" width="100%" style="border: 1px solid #9B93EF;border-top:white;">
             <tr>
               <td style="background-color:#ffffff; padding-top: 15px;">
 
                 <center>
-                  <div>
-                    <table style="margin:1em auto;" cellspacing="0" cellpadding="10px" class="force-width-76" width="%">
-                      <tr>
-                        <td style="text-align:left;">
-                          <span>Class Name</span>
-                        </td>
-                        <td style="width: 150px;"></td>
-                        <td style="text-align:left; vertical-align:top;">
-                          <!-- sesi ke -.... -->
-                          <span>#Nama Kelas</span>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td style="text-align:left;">
-                          <span>Client Name</span>
-                        </td>
-                        <td style=""></td>
-                        <td style="text-align:left; vertical-align:top;">
-                          <!-- topic -->
-                          <span>{{ $email_data['client_name'] }}</span>
-                        </td>
-                      </tr>
-                    </table>
-                  </div>
-                  <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #9B93EF;background-color:#E9E7FF">
-                    <tr>
-                      <td style="text-align: center;">
-
-                      </td>
-                    </tr>
-                  </table>
-
                   <table style="margin: 0 auto;" cellspacing="0" cellpadding="0" class="force-width-80" width="80%">
                     <tr>
                       <td style="text-align: justify;">
-                        <br>
-                        <p>You can start planning for your clients and schedule sessions for them
-                          You can contact your clients for more intensive communication via the chat
-                          feature in the system.
-                          <br>
-                          The client can no longer be contacted when class has
-                          ended.
-                        </p>
 
                         <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #8D8D8D;background-color:#E9E7FF">
                           <tr>
