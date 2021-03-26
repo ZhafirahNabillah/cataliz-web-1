@@ -29,6 +29,7 @@ class PlanController extends Controller
     $this->middleware('permission:delete-plan', ['only' => ['destroy']]);
   }
 
+  // method to show plan index page and return datatable of individual plan
   public function index(Request $request)
   {
     if ($request->ajax()) {
@@ -89,7 +90,7 @@ class PlanController extends Controller
 
             return $actionBtn;
           })
-          ->rawColumns(['action','coach_name'])
+          ->rawColumns(['action', 'coach_name'])
           ->make(true);
       } else {
         // code...
@@ -141,9 +142,10 @@ class PlanController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  //method to show create plan page
   public function create()
   {
-    //
     $coach = Coach::where('user_id', auth()->user()->id)->first();
     $clients = $coach->clients;
 
@@ -179,8 +181,11 @@ class PlanController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
+
+  //method to store plan on database from create plan page and edit plan page
   public function store(Request $request)
   {
+    // return $request;
     $this->validate($request, [
       'client'  => 'required',
       'date' => 'required',
@@ -256,12 +261,14 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to show detail plan page
   public function show(Plan $plan)
   {
     if (auth()->user()->hasRole('coachee')) {
       $coach = $plan->owner;
       $coach_detail = $coach->user;
-      return view('plans.detail', compact('plan','coach_detail'));
+      return view('plans.detail', compact('plan', 'coach_detail'));
     } else {
       return view('plans.detail', compact('plan'));
     }
@@ -273,11 +280,15 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to show edit plan page
   public function edit(Plan $plan)
   {
     $coach = Coach::where('user_id', auth()->user()->id)->first();
     $all_clients = $coach->clients;
     $clients = $plan->clients->pluck('id');
+
+    // return $clients;
 
     return view('plans.edit', compact('plan', 'all_clients', 'clients'));
   }
@@ -288,6 +299,8 @@ class PlanController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to delete plan
   public function destroy($id){
     $plan = Plan::find($id);
     $plan->clients()->detach();
@@ -298,6 +311,7 @@ class PlanController extends Controller
     return response()->json(['success' => 'Plan deleted!']);
   }
 
+  //method to export plan on detail plan page
   public function plan_detail_to_pdf($id){
     $plan = Plan::find($id);
     $coach = User::find($plan->owner_id);
@@ -307,6 +321,7 @@ class PlanController extends Controller
     return $pdf->download('plan_detail_' . $plan->id . '.pdf');
   }
 
+  //method to show plan group list on plan index page (plan tab)
   public function show_group_list(Request $request){
     if (auth()->user()->hasRole('admin')) {
       $data = Plan::where('client_id', null)->latest()->get();
@@ -353,5 +368,20 @@ class PlanController extends Controller
         ->rawColumns(['action'])
         ->make(true);
     }
+  }
+
+  // method ajax for livesearch client on plan create
+  public function ajaxInsertUsers(Request $request)
+  {
+    $clients = [];
+    if ($request->has('q')) {
+      $search = $request->q;
+      $clients = Client::where('owner_id', auth()->user()->id)->first()
+      ->where('name', 'LIKE', "%$search%");
+    } else {
+      $clients = Client::orderby('id', 'asc')->get()
+        ->where('owner_id', Auth::user()->id);
+    }
+    return response()->json($clients);
   }
 }

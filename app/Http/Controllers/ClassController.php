@@ -60,6 +60,7 @@ class ClassController extends Controller
     //     return view('class.index');
     // }
 
+    // method to show class index page
     public function index(Request $request){
       // $coach = Coach::where('user_id', 1)->first();
       //
@@ -93,14 +94,11 @@ class ClassController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+
     public function create()
     {
-        $client_final = Class_has_client::pluck('client_id');
-        // return $client_final;
-        $clients = Client::whereNotIn('id', $client_final)->get();
-        // return $client;
 
-        return view('class.create', compact('clients'));
     }
 
     /**
@@ -109,6 +107,8 @@ class ClassController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //method to assign coachee to a coach and send email to admin, coach, and coachee
     public function store(Request $request)
     {
         // return $request->cl;
@@ -151,6 +151,7 @@ class ClassController extends Controller
           $new_clients = Client::whereIn('id', $new_clients_id)->get();
           MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
           MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
+          MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
         }
 
 
@@ -168,6 +169,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // method to show class detail page
     public function show($id, Request $request)
     {
         //
@@ -204,6 +206,7 @@ class ClassController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //method to show client list for modal add coachee to coach on detail class page
     public function edit($id)
     {
       $coach = Coach::find($id);
@@ -234,33 +237,34 @@ class ClassController extends Controller
         //
     }
 
+    //method ajax for livesearch on detail class when adding coachee to a coach
     public function ajaxClass(Request $request)
     {
-        $coach = [];
+        $coachee = [];
         if ($request->has('q')) {
             $search = $request->q;
-            $coach = User::role('coach')->get()
+            $coachee = User::role('coachee')->get()
                 ->where('name', 'LIKE', "%$search%")
                 ->get();
         } else {
-            $coach = User::orderby('name', 'asc')
-                ->role('coach')
+            $coachee = User::orderby('name', 'asc')
+                ->role('coachee')
                 ->get();
         }
-        return response()->json($coach);
+        return response()->json($coachee);
     }
 
-    public function ubah_status(Request $request, $id)
-    {
-        $this->validate($request, [
-            'notes'  => 'required',
-        ]);
-
-        $class = Class_model::where('id', $id)->first();
-        $class->status = $request->status;
-        $class->notes = $request->notes;
-        $class->update();
-
-        return redirect('/class');
-    }
+    // public function ubah_status(Request $request, $id)
+    // {
+    //     $this->validate($request, [
+    //         'notes'  => 'required',
+    //     ]);
+    //
+    //     $class = Class_model::where('id', $id)->first();
+    //     $class->status = $request->status;
+    //     $class->notes = $request->notes;
+    //     $class->update();
+    //
+    //     return redirect('/class');
+    // }
 }

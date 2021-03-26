@@ -8,10 +8,10 @@ use App\Models\Plan;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\Coach;
-use App\Models\Class_model;
-use App\Models\Class_has_client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use \Carbon\Carbon;
 use DataTables;
 
 class HomeController extends Controller
@@ -41,6 +41,12 @@ class HomeController extends Controller
             // $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
             // $class_has_clients = Class_has_client::whereIn('class_id', $class_id)->pluck('client_id');
             // $client = Client::whereIn('id', $class_has_clients)->count();
+
+            // $agenda_detail = Agenda_detail::where(DB::raw("CONCAT(date,' ',time) + 1"), '<', $date_now)->pluck('id');
+            // return $date_now;
+            // $created_at_date = $agenda_detail->created_at->format('Y-m-d');
+            // $created_at_time = $agenda_detail->created_at->format('H:i:s');
+
 
             $coach = Coach::where('user_id', auth()->user()->id)->first();
             $total_clients = $coach->clients->count();

@@ -36,7 +36,7 @@ class AgendaController extends Controller
   }
 
 
-
+  //method to show agenda index page and get summary data of agenda (top of the page)
   public function index(Request $request)
   {
 
@@ -76,6 +76,7 @@ class AgendaController extends Controller
     return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
   }
 
+  //method to show list individuals session on agenda index page
   public function show_individual_sessions(Request $request)
   {
     if (auth()->user()->hasRole('admin')) {
@@ -168,6 +169,7 @@ class AgendaController extends Controller
     }
   }
 
+  //method to show list group sessions on agenda index page
   public function show_group_sessions(Request $request)
   {
     if (auth()->user()->hasRole('admin')) {
@@ -263,6 +265,8 @@ class AgendaController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  // method to show create agenda page
   public function create()
   {
     return view('agendas.create');
@@ -274,6 +278,8 @@ class AgendaController extends Controller
    * @param  \Illuminate\Http\Request  $request
    * @return \Illuminate\Http\Response
    */
+
+  //method to store new agenda also create initials agenda detail and feedback
   public function store(Request $request)
   {
     // $user_id = Plan::select('client_plan.client_id')
@@ -332,6 +338,8 @@ class AgendaController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to show detail agenda also feedback and coaching note if already filled
   public function show($id)
   {
     $agenda_detail = Agenda_detail::find($id);
@@ -367,6 +375,8 @@ class AgendaController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to show edit agenda page
   public function edit($id)
   {
     //
@@ -388,6 +398,8 @@ class AgendaController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  //method to update agenda detail/session on agenda edit page and send the email for scheduled and rescheduled session
   public function update(Request $request, $id)
   {
     //
@@ -446,6 +458,8 @@ class AgendaController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+  // method to delete agenda on agenda index page
   public function destroy($id)
   {
     //
@@ -453,6 +467,7 @@ class AgendaController extends Controller
     return response()->json(['success' => 'Agenda deleted!']);
   }
 
+  // method to add feedback from coachee on detail agenda page
   public function add_feedback_from_coachee(Request $request, $id)
   {
 
@@ -499,6 +514,7 @@ class AgendaController extends Controller
     return redirect('/agendas')->with('success', 'Feedback saved successfully!');
   }
 
+  //method to update feedback and coaching note on agenda detail page
   public function agenda_detail_update(Request $request, $id)
   {
     // return $request;
@@ -570,18 +586,21 @@ class AgendaController extends Controller
     return redirect('/agendas')->with('success', 'Feedback and notes saved successfully!');
   }
 
+  //method to download feedback
   public function feedback_download($id)
   {
     $feedback = Feedback::where('id', $id)->first();
     return Storage::disk('s3')->download('attachment/' . $feedback->attachment);
   }
 
+  //method to download agenda
   public function note_download($id)
   {
     $coaching_note = Coaching_note::where('id', $id)->first();
     return Storage::disk('s3')->download('attachment/' . $coaching_note->attachment);
   }
 
+  //method ajax to seach the plan on agenda create page
   public function ajaxPlans(Request $request)
   {
     $plans = [];
