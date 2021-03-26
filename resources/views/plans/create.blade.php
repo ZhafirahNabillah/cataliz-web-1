@@ -215,6 +215,16 @@
       }
     });
 
+    $(document).ready(function() {
+        var count = $('#state :selected').length;
+        // console.log(count);
+        if (count > 1) {
+          $('.group_wrapper').show(500);
+        } else {
+          $('.group_wrapper').hide(500);
+        }
+    });
+
     $('#state').on('select2:close', function (evt) {
       var count = $(this).select2('data').length;
       if (count > 1) {
