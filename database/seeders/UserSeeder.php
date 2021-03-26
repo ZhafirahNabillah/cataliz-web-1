@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //create coach seeder
         $coach = User::create([
           'name'        => 'User Coach',
           'phone'       => '81234567890',
@@ -26,6 +26,12 @@ class UserSeeder extends Seeder
 
         $coach->assignRole('coach');
 
+        $coach_coach = Coach::create([
+          'user_id'   => $coach->id,
+          'skill'     => 'Bussiness'
+        ]);
+
+        //create coachee seeder
         $coachee = User::create([
           'name'        => 'User Coachee',
           'phone'       => '81234567890',
@@ -47,6 +53,7 @@ class UserSeeder extends Seeder
           'organization'  => 'Universitas Jember'
         ]);
 
+        //create admin seeder
         $admin = User::create([
           'name'        => 'User Admin',
           'phone'       => '81234567890',

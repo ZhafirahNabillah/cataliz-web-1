@@ -60,7 +60,7 @@
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
 
-                  <select id="state" class="livesearch-plans form-control" @error('client') is-invalid @enderror
+                  <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" 
                     name="client[]" multiple="multiple"></select>
                   {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..." /> --}}
                   {{-- @foreach ($clients as $client)
