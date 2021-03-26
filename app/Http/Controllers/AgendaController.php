@@ -416,38 +416,46 @@ class AgendaController extends Controller
     ]);
 
     $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
-    $old_agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
+    $old_agenda_detail = $agenda_detail;
 
     $agenda = $agenda_detail->agenda;
     $plan = $agenda->plan;
     $clients = $plan->clients;
-    $coach = Coach::find($plan->owner_id)->user;
+    $coach_detail = Coach::find($plan->owner_id)->user;
+    $was_scheduled = false;
+    $was_rescheduled = false;
 
-    $agenda_detail->topic = $request->topic;
-
+    //check if status unschedule and the date is filled
     if ($agenda_detail->status == 'unschedule' && $agenda_detail->date == null) {
       $agenda_detail->status = 'scheduled';
-      $agenda_detail->date = $request->date;
-      $agenda_detail->time = $request->time;
-      $agenda_detail->media = $request->media;
-      $agenda_detail->media_url = $request->media_url;
-      $agenda_detail->duration = $request->duration;
-      $agenda_detail->update();
-
-      MailController::SendSessionScheduledMail($agenda_detail, $clients, $coach);
-    };
-
-    if (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && $agenda_detail->date != null && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
+      $was_scheduled = true;
+    //check if status schedule or rescheduled and the date and time was changed
+    } elseif (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
       $agenda_detail->status = 'rescheduled';
-      $agenda_detail->date = $request->date;
-      $agenda_detail->time = $request->time;
-      $agenda_detail->media = $request->media;
-      $agenda_detail->media_url = $request->media_url;
-      $agenda_detail->duration = $request->duration;
-      $agenda_detail->update();
+      $was_rescheduled = true;
+    }
 
-      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach);
-    };
+    $agenda_detail->topic = $request->topic;
+    $agenda_detail->date = $request->date;
+    $agenda_detail->time = $request->time;
+    $agenda_detail->media = $request->media;
+
+    //checking the media
+    if ($agenda_detail->media == 'Whatsapp') {
+      $agenda_detail->media_url = null;
+    } else {
+      $agenda_detail->media_url = $request->media_url;
+    }
+
+    $agenda_detail->duration = $request->duration;
+    $agenda_detail->update();
+
+    //checking if status was changed to send the email
+    if ($was_scheduled) {
+      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach_detail);
+    } elseif ($was_rescheduled) {
+      MailController::SendSessionScheduledMail($agenda_detail, $clients, $coach_detail);
+    }
 
     return redirect('/agendas')->with('success', 'Sessions Successfully updated!');
   }
@@ -604,15 +612,12 @@ class AgendaController extends Controller
   public function ajaxPlans(Request $request)
   {
     $plans = [];
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
     if ($request->has('q')) {
       $search = $request->q;
-      $plans = Plan::where('owner_id', Auth::user()->id)
-        ->where('objective', 'LIKE', "%$search%")
-        ->get();
+      $plans = $coach->plan->where('objective', 'LIKE', "%$search%");
     } else {
-      $plans = Plan::orderby('objective', 'asc')
-        ->where('owner_id', Auth::user()->id)
-        ->get();
+      $plans = $coach->plan;
     }
     return response()->json($plans);
   }

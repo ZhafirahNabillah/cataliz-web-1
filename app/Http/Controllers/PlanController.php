@@ -39,7 +39,8 @@ class PlanController extends Controller
       if (auth()->user()->hasRole('admin')) {
         $data = Plan::with('client')->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coach')) {
-        $data = Plan::with('client')->where('owner_id', Auth::user()->id)->where('group_id', null)->latest()->get();
+        $coach = Coach::where('user_id', auth()->user()->id)->first();
+        $data = Plan::with('client')->where('owner_id', $coach->id)->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coachee')) {
         // $login_user_id = auth()->user()->id;
         // $client_id = Client::where('user_id', $login_user_id)->pluck('id');
@@ -208,13 +209,15 @@ class PlanController extends Controller
     $development_areas = strip_tags($request->development_areas);
     $support = strip_tags($request->support);
 
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+
     if ($count == 1) {
       $plan = Plan::updateOrCreate(['id' => $request->id], [
         'date' => $request->date,
         'objective' => $objective,
         'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
         'support' => $support,
-        'owner_id' => Auth::user()->id,
+        'owner_id' => $coach->id,
         'client_id' => $request->client[0],
         'group_id' => null
       ]);
@@ -235,7 +238,7 @@ class PlanController extends Controller
         'objective' => $objective,
         'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
         'support' => $support,
-        'owner_id' => Auth::user()->id,
+        'owner_id' => $coach->id,
         'group_id' => $request->group_code,
         'client_id' => null
       ]);
@@ -376,16 +379,25 @@ class PlanController extends Controller
   public function ajaxInsertUsers(Request $request)
   {
     $clients = [];
-    $user = User::where('id', auth()->user()->id)->first();
-    $coach = $user->coach;
-    if ($request->has('q')) {
-      $search = $request->q;
-      $clients = $coach->clients->where('name', 'LIKE', "%$search%");
-    } else {
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+
+    $search = trim($request->q);
+
+    if (empty($search)){
       $clients = $coach->clients;
-      // $clients = Client::orderby('id', 'asc')->get()
-      //   ->where('owner_id', Auth::user()->id);
+    } else {
+      $client_id = $coach->clients->pluck('id');
+      $clients = Client::whereIn('id', $client_id)->where('name', 'LIKE', "%$search%")->get();
     }
+    // if ($request->has('term')) {
+    //   $search = $request->term;
+    //   $clients_id = $coach->clients->pluck('id');
+    //   $clients_detail = Client::whereIn('id', $clients_id)->get();
+    // } else {
+    //   // $clients = Client::orderby('id', 'asc')->get()
+    //   //   ->where('owner_id', Auth::user()->id);
+    // }
+
     return response()->json($clients);
   }
 }

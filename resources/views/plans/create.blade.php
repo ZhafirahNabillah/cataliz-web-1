@@ -60,8 +60,7 @@
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
 
-                  <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" 
-                    name="client[]" multiple="multiple"></select>
+                  <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" name="client[]" multiple></select>
                   {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..." /> --}}
                   {{-- @foreach ($clients as $client)
                   <div class="form-check client-list">
@@ -193,12 +192,17 @@
 </style>
 <script type="text/javascript">
   $("#state").select2({
-      tags: true,
+      // tags: true,
       placeholder: 'Select users',
       ajax: {
         url: "{{route('users.search')}}",
         dataType: 'json',
         delay: 250,
+        data: function (params) {
+            return {
+                q: $.trim(params.term)
+            };
+        },
         processResults: function(data) {
           return {
             results: $.map(data, function(item) {

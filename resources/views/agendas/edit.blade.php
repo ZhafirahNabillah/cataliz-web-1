@@ -114,15 +114,14 @@
                     </div>
                   </div>
 
-                  @if ($agenda_detail->media == 'Whatsapp')
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control @error('media') is-invalid @enderror" id="media1" aria-label=".form-select-lg example" name="media" disabled>
-                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
-                          Room')@endif>Meeting Room</option>
-                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
-                          'Whatsapp')@endif>Whatsapp</option>
+                      <select class="form-control @error('media') is-invalid @enderror" id="media" aria-label=".form-select-lg example" name="media" disabled>
+                        <option value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
+                          Room') selected @endif>Meeting Room</option>
+                        <option value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
+                          'Whatsapp') selected @endif>Whatsapp</option>
                       </select>
                       @error('media')
                       <span class="invalid-feedback" role="alert">
@@ -131,26 +130,7 @@
                       @enderror
                     </div>
                   </div>
-                  @else
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control @error('media') is-invalid @enderror" id="media2" aria-label=".form-select-lg example" name="media" disabled>
-                        <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
-                          @endif>Whatsapp
-                        </option>
-                        <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
-                          Room')
-                          @endif>Meeting Room</option>
-                      </select>
-                      @error('media')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-                  <div class="row media_url2">
+                  <div class="row media_url" @if ($agenda_detail->media == 'Whatsapp') style="display: none" @endif>
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
                       <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url" disabled>
@@ -161,7 +141,6 @@
                       @enderror
                     </div>
                   </div>
-                  @endif
 
                   <div class="row">
                     <div class="col-md-8 form-group">
@@ -331,12 +310,8 @@
       }
     }
 
-    $("#media2").on('change', function() {
-      $(".media_url2").toggle(500);
-    });
-
-    $("#media1").on('change', function() {
-      $(".media_url1").toggle(500);
+    $("#media").on('change', function() {
+      $(".media_url").toggle(500);
     });
 
     $('#date').attr('min', maxDate);
@@ -424,14 +399,13 @@
       }
     });
   });
-  
+
   @if($agenda_detail->status == 'scheduled' || $agenda_detail-> status == 'rescheduled' || $agenda_detail-> status == 'unschedule')
   $(function() {
     // $('#plan_id').prop('disabled', false);
     // $('#client_id').prop('disabled', false);
     $('#topic').prop('disabled', false);
-    $('#media1').prop('disabled', false);
-    $('#media2').prop('disabled', false);
+    $('#media').prop('disabled', false);
     $('#media_url').prop('disabled', false);
     $('#date').prop('disabled', false);
     $('#time').prop('disabled', false);
