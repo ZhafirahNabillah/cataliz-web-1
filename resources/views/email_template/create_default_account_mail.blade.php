@@ -314,10 +314,10 @@
                             <table cellspacing="0" cellpadding="0" width="100%">
                               <tr>
                                 <td style="text-align: left;">
-                                  If you are having trouble resetting your password, please contact us via
+                                  For further information, please contact email <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZdjtXMLCzXZJhvLlxSMhgZZgkCdPTltDMhFmjLSmzsjxLwncvlSPTzgnCJlmhpvrtCcvq">halo@cataliz.id</a>
                                   <br>
-                                  email <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZdjtXMLCzXZJhvLlxSMhgZZgkCdPTltDMhFmjLSmzsjxLwncvlSPTzgnCJlmhpvrtCcvq">halo@cataliz.id</a>
-                                  or No. Phone +62 822-3585-0005
+                                  or +62 822-3585-0005
+                                  on Monday - Friday 09:00 - 18:00 WIB.
                                   <br>
                                   <br>
                                 </td>
@@ -335,11 +335,11 @@
                     <td>
                       <table cellspacing="0" cellpadding="0" width="100%">
                         <tr>
-                          <td class="mobile-padding" style="text-align:right;">
+                          <td class="mobile-padding" style="text-align:center;">
                             <br>
                             Thank you
                             <br>
-                            Cataliz.id - 2021
+                            Cataliz.id - {{ Carbon\Carbon::now()->year }}
                             <br>
                             <br>
                             <br>
@@ -376,9 +376,9 @@
                     <td>
                       <center>
                         <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
-                          <tr>
+                          <tr style="font-size: 10px;">
                             <td style="text-align:center; margin:0 auto;" width="100%">
-                              <p style="color: #ffffff;">
+                              <p style="color: #ffffff;">COPYRIGHT &copy; {{ Carbon\Carbon::now()->year }}
                                 Cataliz.id. All Right Reserved
                               </p>
 
