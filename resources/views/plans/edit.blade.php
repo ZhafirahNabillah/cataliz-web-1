@@ -57,7 +57,7 @@
               @csrf
               <div class="card-body">
                 <input type="hidden" name="id" value="{{ $plan->id }}">
-                <input type="hidden" name="group_id" value="{{ $plan->group_id }}">
+                {{-- <input type="hidden" name="group_id" value="{{ $plan->group_id }}"> --}}
                 <div class="form-group">
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
@@ -87,8 +87,21 @@
                 @enderror
               </div>
 
-              <div class="row">
+              <div class="row group_wrapper" style="display: none;">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Group Code</label>
+                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" value="{{ $plan->group_id }}" placeholder="Fill group code here..">
+                  <small><strong>group code can consist of number and character</strong></small>
+                  <div id="group-code-error"></div>
+                  @error('group_code')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
 
+              <div class="row">
                 <div class="col-md-12 form-group">
                   <label for="fp-default">Date</label>
                   <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
@@ -210,16 +223,25 @@
         cache: true
       }
     });
-    // $('#search').keyup(function(){
-    //   var search_value = new RegExp($(this).val(), 'i');
-    //   $(".client-list label").each(function() {
-    //     if(!search_value.test($(this).text())) {
-    //       $(this).parent().hide();
-    //     } else {
-    //       $(this).parent().show();
-    //     }
-    //   });
-	  // });
+
+    $(document).ready(function() {
+        var count = $('#state :selected').length;
+        // console.log(count);
+        if (count > 1) {
+          $('.group_wrapper').show(500);
+        } else {
+          $('.group_wrapper').hide(500);
+        }
+    });
+
+    $('#state').on('select2:close', function (evt) {
+      var count = $(this).select2('data').length;
+      if (count > 1) {
+        $('.group_wrapper').show(500);
+      } else {
+        $('.group_wrapper').hide(500);
+      }
+    });
 
     $(function() {
       $.ajaxSetup({

@@ -60,7 +60,7 @@
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
 
-                  <select id="state" class="livesearch-plans form-control" @error('plan_id') is-invalid @enderror
+                  <select id="state" class="livesearch-plans form-control" @error('client') is-invalid @enderror
                     name="client[]" multiple="multiple"></select>
                   {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..." /> --}}
                   {{-- @foreach ($clients as $client)
@@ -78,8 +78,21 @@
                 @enderror
               </div>
 
-              <div class="row">
+              <div class="row group_wrapper" style="display: none;">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Group Code</label>
+                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" placeholder="Fill group code here..">
+                  <small><strong>group code can consist of number and character</strong></small>
+                  <div id="group-code-error"></div>
+                  @error('group_code')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
 
+              <div class="row">
                 <div class="col-md-12 form-group">
                   <label for="fp-default">Date</label>
                   <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
@@ -189,7 +202,7 @@
         processResults: function(data) {
           return {
             results: $.map(data, function(item) {
-              console.log(item)
+              // console.log(item)
               return {
                 text: item.name,
                 id: item.id,
@@ -202,6 +215,15 @@
       }
     });
 
+    $('#state').on('select2:close', function (evt) {
+      var count = $(this).select2('data').length;
+      if (count > 1) {
+        $('.group_wrapper').show(500);
+      } else {
+        $('.group_wrapper').hide(500);
+      }
+    });
+
   // $(".livesearch").on('change', function(e) {
   //   // Access to full data
   //   console.log($(this).select2('data'));
@@ -210,19 +232,19 @@
   //   $('#organization').val(dd.org);
   //   $('#company').val(dd.co);
   // });
-      
+
     // $("#btn-add-state").on("click", function(){
     //   var newStateVal = $("#new-state").val();
     //   // Set the value, creating a new option if necessary
     //   if ($("#state").find("option[value=" + newStateVal + "]").length) {
     //     $("#state").val(newStateVal).trigger("change");
-    //   } else { 
+    //   } else {
     //     // Create the DOM option that is pre-selected by default
     //     var newState = new Option(newStateVal, newStateVal, true, true);
     //     // Append it to the select
     //     $("#state").append(newState).trigger('change');
-    //   } 
-    // });  
+    //   }
+    // });
 
     // $('#search').keyup(function(){
     //   var search_value = new RegExp($(this).val(), 'i');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Plan;
@@ -186,6 +187,12 @@ class PlanController extends Controller
   public function store(Request $request)
   {
     // return $request;
+    $count = 0;
+
+    foreach ($request->input('client') as $client) {
+      $count = $count + 1;
+    }
+
     $this->validate($request, [
       'client'  => 'required',
       'date' => 'required',
@@ -193,18 +200,13 @@ class PlanController extends Controller
       'success_indicator' => 'required|max:255',
       'development_areas' => 'required|max:255',
       'support' => 'required|max:255',
+      'group_code' => Rule::requiredIf($count > 1)
     ]);
 
     $objective = strip_tags($request->objective);
     $success_indicator = strip_tags($request->success_indicator);
     $development_areas = strip_tags($request->development_areas);
     $support = strip_tags($request->support);
-
-    $count = 0;
-
-    foreach ($request->input('client') as $client) {
-      $count = $count + 1;
-    }
 
     if ($count == 1) {
       $plan = Plan::updateOrCreate(['id' => $request->id], [
@@ -217,14 +219,14 @@ class PlanController extends Controller
         'group_id' => null
       ]);
     } else {
-      if ($request->group_id == null) {
-        $rid = rand(00000, 99999);
-        while (Plan::where('group_id', $rid)->exists()) {
-          $rid = rand(00000, 99999);
-        }
-      } else {
-        $rid = $request->group_id;
-      }
+      // if ($request->group_id == null) {
+      //   $rid = rand(00000, 99999);
+      //   while (Plan::where('group_id', $rid)->exists()) {
+      //     $rid = rand(00000, 99999);
+      //   }
+      // } else {
+      //   $rid = $request->group_id;
+      // }
 
       // return $rid;
 
@@ -234,7 +236,7 @@ class PlanController extends Controller
         'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
         'support' => $support,
         'owner_id' => Auth::user()->id,
-        'group_id' => $rid,
+        'group_id' => $request->group_code,
         'client_id' => null
       ]);
     }
