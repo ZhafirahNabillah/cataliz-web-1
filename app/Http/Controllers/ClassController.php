@@ -135,24 +135,29 @@ class ClassController extends Controller
         // return redirect('/class')->with('success','Class succesfully created');
 
         $coach = Coach::find($request->coach_id);
-        $old_clients = $coach->clients->pluck('id')->toArray();
-        $coach->clients()->sync($request->input('client'));
-
-        $request_client = $request->input('client');
-
-        if ($request->filled('client')) {
-          $new_clients_id = array_diff($request_client, $old_clients);
-        } else {
-          $new_clients_id = [];
-        }
+        // $old_clients = $coach->clients->pluck('id')->toArray();
+        // $coach->clients()->sync($request->input('client'));
+        //
+        // $request_client = $request->input('client');
+        //
+        // if ($request->filled('client')) {
+        //   $new_clients_id = array_diff($request_client, $old_clients);
+        // } else {
+        //   $new_clients_id = [];
+        // }
+        $coach->clients()->attach($request->input('client'));
 
         $coach_detail = User::where('id', $coach->user_id)->first();
-        if ($new_clients_id) {
-          $new_clients = Client::whereIn('id', $new_clients_id)->get();
-          MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
-          MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
-          MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
-        }
+        $new_clients = Client::whereIn('id', $request->input('client'))->get();
+
+        MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
+        MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
+        MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
+
+        // if ($new_clients_id) {
+        //
+        //
+        // }
 
 
         return response()->json([
@@ -192,6 +197,11 @@ class ClassController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('action', function($row) {
+                  $remove_btn = '<button id="removeBtn" type="button" data-id="' . $row->id . '" name="button" class="btn-sm btn-danger">Remove</button>';
+                  return $remove_btn;
+                })
+                ->rawColumns(['action'])
                 ->make(true);
         }
 
@@ -237,19 +247,27 @@ class ClassController extends Controller
         //
     }
 
+    public function remove_client(Request $request){
+      $coach = Coach::where('id', $request->coach_id)->first();
+      $coach->clients()->detach($request->client_id);
+
+      return response()->json([
+        'success' => 'Client removed succesfully!'
+      ]);
+    }
+
     //method ajax for livesearch on detail class when adding coachee to a coach
     public function ajaxClass(Request $request)
     {
         $coachee = [];
+        $coach = Coach::where('id', $request->coach_id)->first();
+        $existing_coachee = $coach->clients->pluck('id');
+
         if ($request->has('q')) {
             $search = $request->q;
-            $coachee = User::role('coachee')->get()
-                ->where('name', 'LIKE', "%$search%")
-                ->get();
+            $coachee = Client::whereNotIn('id', $existing_coachee)->where('name', 'LIKE', "%$search%")->get();
         } else {
-            $coachee = User::orderby('name', 'asc')
-                ->role('coachee')
-                ->get();
+            $coachee = Client::whereNotIn('id', $existing_coachee)->get();
         }
         return response()->json($coachee);
     }

@@ -173,6 +173,7 @@
                           <tr>
                             <th>No</th>
                             <th>Coachee Name</th>
+                            <th>Action</th>
                             {{-- <th>Session</th> --}}
                           </tr>
                         </thead>
@@ -192,45 +193,37 @@
   </section>
   <!--/ Basic table -->
 
-  <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-    <div class="modal-dialog sidebar-sm">
-      <form class="add-new-record modal-content pt-0" id="addClientForm" name="addClientForm">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-        <div class="modal-header mb-1">
-          <h5 class="modal-title" id="modalHeading"></h5>
+  <div class="modal fade" id="add-clients-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalHeading">Add Clients</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <input type="hidden" name="coach_id" id="coach_id">
-        <div class="modal-body flex-grow-1">
-          {{-- <div class="form-group">
-              <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-              <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-              <div id="name-error"></div>
-            </div> --}}
-          <div class="form-group">
-            <label class="form-label" for="basic-icon-default-fullname">Client list</label>
-            <select id="state" class="livesearch-plans form-control" @error('plan_id') is-invalid @enderror
-              name="client[]" multiple="multiple">
-              {{-- @foreach ($clients as $client)
-              <option hidden id="client-{{ $client->id }}" value="{{ $client->id }}" @if($clients->
-              contains($client->id)) selected @endif>{{ $client->name }}</option>
-              @endforeach --}}
-            </select>
-            {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..."/> --}}
-            {{-- @foreach($clients as $client)
-              <div class="form-check client-list">
-                <input class="form-check-input" type="checkbox" value="{{$client->id}}" name="client[]"
-            id="client-check-{{$client->id}}">
-            <label class="form-check-label" for="client-check-{{$client->id}}">{{$client->name}}</label>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="card-body" style="border-radius: 11px">
+                <form id="addClientForm">
+                  <input type="hidden" name="coach_id" value="{{ $coach->id }}">
+                  <div class="form-group">
+                    <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
+                    <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" name="client[]" multiple></select>
+                    @error('')
+                    <strong class="text-danger">{{ $message }}</strong>
+                    @enderror
+                  </div>
+                  <button id="saveBtn" type="button" name="button" class="btn btn-primary">Submit</button>
+                </form>
+              </div>
+            </div>
           </div>
-          @endforeach --}}
-          <div id="permissions-error"></div>
         </div>
-        <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-        <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+      </div>
     </div>
-    <!-- </form>-->
   </div>
-</div>
 
 
 </div>
@@ -262,6 +255,10 @@
         {
           data: 'name',
           name: 'name'
+        },
+        {
+          data: 'action',
+          name: 'action'
         }
       ],
       dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
@@ -279,42 +276,46 @@
     $('body').on('click', '#addClient', function() {
 			console.log('tes');
 			var coach_id = $(this).data('id');
-			$.get("" + '/class/' + coach_id + '/edit', function(data) {
-        // console.log(data[0].name);
-				$('#modalHeading').html("Edit Class Client");
-				$('#saveBtn').val("edit-class");
-				$('#addClientForm').trigger("reset");
-				$('#modals-slide-in').modal('show');
-        $('#coach_id').val(coach_id);
-				$.each(data, function(i, item) {
-					var client_id = data[i].id;
-					$('#client-' + client_id).prop('selected', true);
-				});
-			});
+      $('#saveBtn').val("add-client");
+      $("#state").val(null).trigger('change') ;
+      $('#add-clients-modal').modal('show');
+			// $.get("" + '/class/' + coach_id + '/edit', function(data) {
+      //   // console.log(data[0].name);
+      //   $('#coach_id').val(coach_id);
+			// 	$.each(data, function(i, item) {
+			// 		var client_id = data[i].id;
+			// 		$('#client-' + client_id).prop('selected', true);
+			// 	});
+			// });
 		});
 
     $("#state").select2({
-      tags: true,
-      placeholder: 'Select users',
-      ajax: {
-        url: "{{route('coachs.search')}}",
-        dataType: 'json',
-        delay: 250,
-        processResults: function(data) {
-          return {
-            results: $.map(data, function(item) {
-              console.log(item)
+        // tags: true,
+        placeholder: 'Select users',
+        ajax: {
+          url: "{{route('coachee.search')}}",
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
               return {
-                text: item.name,
-                id: item.id,
-                // client_id : item.client_id,
-              }
-            })
-          };
-        },
-        cache: true
-      }
-    });
+                  q: $.trim(params.term),
+                  coach_id : $('#addClient').data('id')
+              };
+          },
+          processResults: function(data) {
+            return {
+              results: $.map(data, function(item) {
+                console.log(item)
+                return {
+                  id: item.id,
+                  text: item.name,
+                }
+              })
+            };
+          },
+          cache: true
+        }
+      });
 
     $('#saveBtn').click(function(e) {
       e.preventDefault();
@@ -331,7 +332,7 @@
           console.log(data);
           $('#addClientForm').trigger("reset");
           $('#saveBtn').html('Submit');
-          $('#modals-slide-in').modal('hide');
+          $('#add-clients-modal').modal('hide');
           Swal.fire({
               icon: 'success',
               title: 'Client added!',
@@ -345,6 +346,53 @@
       });
       return false;
     });
+
+    // $('#removeBtn').click(function(e) {
+    //   var client_id = $(this).data("id");
+		// 	console.log(client_id);
+    // });
+
+    $('body').on('click', '#removeBtn', function(e) {
+
+			var client_id = $(this).data("id");
+      var coach_id = $('#addClient').data('id');
+			console.log(client_id);
+
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You'll remove this client from this coach",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, Sure",
+				cancelButtonText: "Cancel"
+			}).then((result) => {
+				if (result.isConfirmed) {
+
+					$.ajaxSetup({
+						headers: {
+							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+						}
+					});
+
+					$.ajax({
+            data: {client_id: client_id, coach_id: coach_id},
+						type: "POST",
+						url: "{{route('class.remove_client')}}",
+						success: function(data) {
+							Swal.fire({
+								icon: 'success',
+								title: 'Removed Successfully!',
+							});
+							table.draw();
+						},
+						error: function(data) {
+							console.log('Error:', data);
+						}
+					});
+				}
+			})
+		});
 
     // $('#search').keyup(function(){
     //   var search_value = new RegExp($(this).val(), 'i');
