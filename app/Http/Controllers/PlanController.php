@@ -376,13 +376,15 @@ class PlanController extends Controller
   public function ajaxInsertUsers(Request $request)
   {
     $clients = [];
+    $user = User::where('id', auth()->user()->id)->first();
+    $coach = $user->coach;
     if ($request->has('q')) {
       $search = $request->q;
-      $clients = Client::where('owner_id', auth()->user()->id)->first()
-      ->where('name', 'LIKE', "%$search%");
+      $clients = $coach->clients->where('name', 'LIKE', "%$search%");
     } else {
-      $clients = Client::orderby('id', 'asc')->get()
-        ->where('owner_id', Auth::user()->id);
+      $clients = $coach->clients;
+      // $clients = Client::orderby('id', 'asc')->get()
+      //   ->where('owner_id', Auth::user()->id);
     }
     return response()->json($clients);
   }
