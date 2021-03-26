@@ -173,80 +173,80 @@
       @endrole
 
       @role('coach')
-      <!-- Basic table -->
-      <section id="basic-datatable">
-        <div class="row">
-          <div class="col-12">
-            <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table yajra-datatable">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Program</th>
-                    <th>Phone</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div class="card">
+        <div class="card-body">
+          <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+            </li>
+          </ul>
 
-        <!-- Modal to add new record -->
-        <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-          <div class="modal-dialog sidebar-sm">
-            <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm">
-
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-              <div class="modal-header mb-1">
-                <h5 class="modal-title" id="modalHeading"></h5>
-              </div>
-              <input type="hidden" name="Client_id" id="Client_id">
-              <div class="modal-body flex-grow-1">
-                <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                  <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
-                </div>
-                <label class="form-label" for="basic-icon-default-post">Phone</label>
-                <div class="input-group input-group-merge mb-2">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon5">+62</span>
+          <div class="tab-content">
+            <!-- Panel Individu -->
+            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+              <!-- Basic table -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card style=" border-radius: 15px;>
+                      <table class="datatables-basic table yajra-datatable">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Program</th>
+                            <th>Phone</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
-                  <input id="phone" name="phone" type="text" class="form-control" placeholder="81xxxxxxx" aria-label="Phone">
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-email">Email</label>
-                  <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe
-                    @example.com" />
-                  <small class="form-text text-muted"> You can use letters, numbers & periods </small>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                  <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Inbis Sample" aria-label="John Doe" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                  <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Startup Name" aria-label="John Doe" />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                  <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="CEO" aria-label="John Doe" />
+              </section>
+              <!--/ Basic table -->
+            </div>
+            <!-- /panel individu -->
+
+
+            <!-- Panel Grup -->
+            <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+              <!-- Basic table -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card style=" border-radius: 15px;>
+                      <table class="datatables-basic table client-datatable-group">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Group Code</th>
+                            <th>Participant</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-              </div>
-              <!-- </form>-->
-
+              </section>
+              <!--/ Basic table -->
+            </div>
+            <!-- /coachee list admin -->
           </div>
         </div>
-        <!-- End Modal -->
-      </section>
-      <!--/ Basic table -->
+      </div>
+      <!-- /panel coachee -->
+
       @endrole
 
       @role('admin')
@@ -274,15 +274,18 @@
               <!-- coachlist card -->
               <div class="row">
                 <div class="col-12">
-                  <table class="datatables-basic table admin-datatable-coach">
+                  <div class="d-block text-right">
                     <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table admin-datatable-coach">
                     <thead>
                       <tr>
                         <th>NO</th>
                         <th>Coach Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
-                        <th>Rating</th>
+                        {{-- <th>Rating</th> --}}
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -325,8 +328,11 @@
 
               <div class="row">
                 <div class="col-12">
-                  <table class="datatables-basic table admin-datatable-coachee">
+                  <div class="d-block text-right">
                     <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a>
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table admin-datatable-coachee">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -396,12 +402,12 @@
                     Admin
                   </label>
                 </div>
-                <div class="form-check">
+                {{-- <div class="form-check">
                   <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
                   <label class="form-check-label" for="permission-check-coachee">
                     Coachee
                   </label>
-                </div>
+                </div> --}}
                 <div id="roles-error"></div>
               </div>
               <input type="hidden" name="action_type" id="action_type">
@@ -444,7 +450,7 @@
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
           });
-          var table = $('.yajra-datatable').DataTable({
+          var table_client_individual = $('.yajra-datatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -597,6 +603,42 @@
 
           });
 
+          var table_client_group = $('.client-datatable-group').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('group.index') }}",
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+              },
+              {
+                data: 'group_id',
+                name: 'group_id'
+              },
+              {
+                data: 'participant',
+                name: 'participant',
+                defaultContent: '<i>-</i>'
+              },
+              {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+              },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+              paginate: {
+                // remove previous & next text from pagination
+                previous: '&nbsp;',
+                next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+            }
+          });
+
           var table = $('.coachee-datatable-coach').DataTable({
             processing: true,
             serverSide: true,
@@ -658,13 +700,15 @@
               {
                 data: 'phone',
                 name: 'phone',
-                defaultContent: '<i>-</i>'
+                render: function (data, type, row) {
+                  return '+62'+data;
+                }
               },
-              {
-                data: 'rating',
-                name: 'rating',
-                defaultContent: '<i>-</i>'
-              },
+              // {
+              //   data: 'rating',
+              //   name: 'rating',
+              //   defaultContent: '<i>-</i>'
+              // },
               {
                 data: 'action',
                 name: 'action',
@@ -704,7 +748,9 @@
               {
                 data: 'phone',
                 name: 'phone',
-                defaultContent: '<i>-</i>'
+                render: function (data, type, row) {
+                  return '+62'+data;
+                }
               },
               {
                 data: 'action',
@@ -745,7 +791,9 @@
               {
                 data: 'phone',
                 name: 'phone',
-                defaultContent: '<i>-</i>'
+                render: function (data, type, row) {
+                  return '+62'+data;
+                }
               },
               {
                 data: 'action',
@@ -823,7 +871,7 @@
             })
           });
 
-          $("#saveBtn").click(function(e){
+          $("#saveBtn").click(function(e) {
             e.preventDefault();
             $('#saveBtn').html('Sending..');
             $('#name-error').empty();
@@ -862,116 +910,24 @@
               error: function(reject) {
                 $('#saveBtn').html('Submit');
                 if (reject.status === 422) {
-                   var errors = JSON.parse(reject.responseText);
-                   if (errors.name) {
-                    $('#name-error').html('<strong class="text-danger">'+errors.name[0]+'</strong>'); // and so on
-                   }
-                   if (errors.phone) {
-                    $('#phone-error').html('<strong class="text-danger">'+errors.phone[0]+'</strong>');  // and so on
-                   }
-                   if (errors.email) {
-                    $('#email-error').html('<strong class="text-danger">'+errors.email[0]+'</strong>');  // and so on
-                   }
-                   if (errors.roles) {
-                    $('#roles-error').html('<strong class="text-danger">'+errors.roles[0]+'</strong>');  // and so on
-                   }
-               }
+                  var errors = JSON.parse(reject.responseText);
+                  if (errors.name) {
+                    $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+                  }
+                  if (errors.phone) {
+                    $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+                  }
+                  if (errors.email) {
+                    $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+                  }
+                  if (errors.roles) {
+                    $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+                  }
+                }
               }
             });
-              /**Ajax code ends**/
+            /**Ajax code ends**/
           });
-
-          // save user data on admin page
-          // $('#saveBtn').click(function() {
-          //   $('#createUserForm').validate({
-          //     debug: false,
-          //     errorClass: "error fail-alert",
-          //     validClass: "valid success-alert",
-          //     rules: {
-          //       name: {
-          //         required: true
-          //       },
-          //       phone: {
-          //         required: true,
-          //         digits: true,
-          //         'phoneNumber': true
-          //       },
-          //       email: {
-          //         required: true,
-          //         email: true
-          //       },
-          //       roles: {
-          //         required: true
-          //       }
-          //     },
-          //     messages: {
-          //       name: {
-          //         required: "Name is required!"
-          //       },
-          //       phone: {
-          //         required: "phone number is required!",
-          //         digits: "phone number must be number!"
-          //       },
-          //       email: {
-          //         required: "email is required!",
-          //         email: "please provide valid email address!"
-          //       },
-          //       roles: {
-          //         required: "role is required!"
-          //       }
-          //     },
-          //     errorPlacement: function(error, element) {
-          //       if (element.attr("name") == "name") {
-          //         error.appendTo($("#name-error"));
-          //       } else if (element.attr("name") == "phone") {
-          //         error.appendTo("#phone-error");
-          //       } else if (element.attr("name") == "email") {
-          //         error.appendTo("#email-error");
-          //       } else if (element.attr("name") == "roles") {
-          //         error.appendTo("#roles-error");
-          //       }
-          //     },
-          //
-          //     //submit Handler
-          //     submitHandler: function(form) {
-          //       $('#saveBtn').html('Sending..');
-          //       var data = $('#createUserForm').serialize();
-          //       console.log(data);
-          //
-          //       $.ajax({
-          //         data: data,
-          //         url: "{{ route('users.store') }}",
-          //         type: "POST",
-          //         dataType: 'json',
-          //         success: function(data) {
-          //
-          //           $('#createUserForm').trigger("reset");
-          //           $('#saveBtn').html('Submit');
-          //           $('#modal-user-slide-in').modal('hide');
-          //           if ($('#saveBtn').val() == 'create-user') {
-          //             Swal.fire({
-          //               icon: 'success',
-          //               title: 'Account created successfully!',
-          //             });
-          //           } else if ($('#saveBtn').val() == 'edit-user') {
-          //             Swal.fire({
-          //               icon: 'success',
-          //               title: 'Account updated successfully!',
-          //             });
-          //           }
-          //           table_coach.draw();
-          //           table_admin.draw();
-          //           table_coachee.draw();
-          //         },
-          //         error: function(data) {
-          //           console.log('Error:', data);
-          //           $('#saveBtn').html('Submit');
-          //         }
-          //       });
-          //       return false;
-          //     }
-          //   });
-          // });
 
           // suspend user
           $('body').on('click', '.suspendUser', function(e) {

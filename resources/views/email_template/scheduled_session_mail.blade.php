@@ -273,9 +273,8 @@
                   <tr>
                     <!-- Nama -->
                     <h3 style="color: black;">Hai, {{ $email_data['receiver_name'] }}</h3>
-                    <span style="color: black;">Your coach has scheduled a new session for you. We hope you can attend
-                      the</span>
-                    <span style="color: black;">scheduled session with the following details:</span>
+                    <span style="color: black;">CONGRATULATION!! Your session has been successfully scheduled.</span>
+                    <span style="color: black;">We hope that you will be able to attend the scheduled sessions with the following details:</span>
                   </tr>
                 </table>
 
@@ -424,9 +423,8 @@
                     </tr>
                   </table>
 
-                  <p style="text-align: justify;color: black;">If you have any questions, please email
-                    halo@cataliz.id or
-                    contact +62 822-3585-0005
+                  <p style="text-align: justify;color: black;">For further information, please contact email <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZdjtXMLCzXZJhvLlxSMhgZZgkCdPTltDMhFmjLSmzsjxLwncvlSPTzgnCJlmhpvrtCcvq">halo@cataliz.id</a>
+                    or +62 822-3585-0005
                     on Monday - Friday 09:00 - 18:00 WIB.
                   </p>
                   <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #8D8D8D;background-color:#E9E7FF">
@@ -462,7 +460,7 @@
                             <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
                               <tr>
                                 <td style="text-align:center; margin:0 auto;" width="100%">
-                                  <p style="color: black;">
+                                  <p style="color: black;">COPYRIGHT &copy; {{ Carbon\Carbon::now()->year }}
                                     Cataliz.id. All Right Reserved
                                   </p>
 

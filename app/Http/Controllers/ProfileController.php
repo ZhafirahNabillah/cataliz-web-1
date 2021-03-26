@@ -18,17 +18,26 @@ class ProfileController extends Controller
     {
         if (auth()->user()->hasRole('admin')) {
             $user = User::where('id', Auth::user()->id)->first();
-            return view('profile.index', compact('user'));
+            $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
+            $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
+
+            return view('profile.index', compact('user', 'contents'));
         } elseif (auth()->user()->hasRole('coachee')) {
             $user = User::select('*')
                 ->join('clients', 'user_id', '=', 'users.id')
                 ->where('users.id', Auth::user()->id)
                 ->first();
-            // return Auth::user()->password;
-            return view('profile.index', compact('user'));
+
+            $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
+            $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
+
+            return view('profile.index', compact('user', 'contents'));
         } else {
             $user = User::where('id', Auth::user()->id)->first();
-            return view('profile.index', compact('user'));
+            $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
+            $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
+
+            return view('profile.index', compact('user', 'contents', 'contents_bg'));
         }
     }
 
@@ -91,7 +100,11 @@ class ProfileController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('profil_picture')->getClientOriginalExtension();
                 $filenameSave = $filename . '_' . time() . '.' . $extension;
-                $path = $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
+                if (Storage::disk('s3')->exists('images/profil_picture/' . $user->profil_picture)) {
+                    Storage::disk('s3')->delete('images/profil_picture/' . $user->profil_picture);
+                }
+                Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents($request->file('profil_picture')));
+                // $path = $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
                 $user->profil_picture = $filenameSave;
             }
         }
@@ -110,7 +123,11 @@ class ProfileController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('background_picture')->getClientOriginalExtension();
                 $filenameSave = $filename . '_' . time() . '.' . $extension;
-                $path = $request->file('background_picture')->storeAs('public/background', $filenameSave);
+                if (Storage::disk('s3')->exists('images/background_picture/' . $user->background_picture)) {
+                    Storage::disk('s3')->delete('images/background_picture/' . $user->background_picture);
+                }
+                Storage::disk('s3')->put('images/background_picture/' . $filenameSave, file_get_contents($request->file('background_picture')));
+                // $path = $request->file('background_picture')->storeAs('public/background', $filenameSave);
                 $user->background_picture = $filenameSave;
             }
         }

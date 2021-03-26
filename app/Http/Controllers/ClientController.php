@@ -11,6 +11,8 @@ use App\Models\Coaching_note;
 use App\Models\Agenda;
 use App\Models\Plan;
 use App\Models\User;
+use App\Models\Coach;
+use App\Models\Feedback;
 use App\Models\Class_model;
 use App\Models\Class_has_client;
 use DataTables;
@@ -41,9 +43,9 @@ class ClientController extends Controller
       if (auth()->user()->hasRole('admin')) {
         $data = Client::with('user')->get();
       } elseif (auth()->user()->hasRole('coach')) {
-        $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
-        $class_has_clients = Class_has_client::whereIn('class_id', $class_id)->pluck('client_id');
-        $data = Client::with('user')->whereIn('id', $class_has_clients)->latest()->get();
+
+        $coach = Coach::where('user_id', auth()->user()->id)->first();
+        $data = $coach->clients;
 
         //return data as datatable json
         return Datatables::of($data)
@@ -114,32 +116,89 @@ class ClientController extends Controller
     return view('clients.index');
   }
 
+  public function show_group_list(Request $request){
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $data = $coach->plan->where('client_id', null);
+
+    if ($request->ajax()) {
+      // code...
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('participant', function($row) {
+          return $row->clients->count();
+        })
+        ->addColumn('action', function($row) {
+          $actionBtn = '<a href="'. route('group.show', $row->group_id) .'" class="btn-sm btn-primary">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action','pacticipant'])
+        ->make(true);
+    }
+  }
+
+  public function show_group_detail(Request $request, $id){
+    // $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plan = Plan::where('group_id', $id)->first();
+    $user = User::where('id', $plan->owner->user_id)->first();
+
+    $data = $plan->clients;
+
+    if ($request->ajax()) {
+      // code...
+      return DataTables::of($data)
+        ->addIndexColumn()
+        // ->addColumn('participant', function($row) {
+        //   return $row->clients->count();
+        // })
+        ->addColumn('action', function($row) {
+          $actionBtn = '<a href="'. route('group.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+
+    return view('clients.detail_group', compact('plan','user'));
+  }
+
   //method to show coach list
   public function show_coach_list(Request $request)
   {
     if ($request->ajax()) {
-      $data = User::role('coach')->select('users.*')->selectRaw('avg(agenda_details.rating_from_coachee) as average')
-        ->leftJoin('agendas', function ($join) {
-          $join->on('agendas.owner_id', '=', 'users.id');
-        })
-        ->leftJoin('agenda_details', function ($join) {
-          $join->on('agenda_details.agenda_id', '=', 'agendas.id');
-        })
-        ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code','users.verification_code','users.is_verified', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
-        // // ->whereNull('agenda_details.agenda_id')
-        ->get();
+      // $data = User::role('coach')->select('users.*')->selectRaw('avg(agenda_details.rating_from_coachee) as average')
+      //   ->leftJoin('agendas', function ($join) {
+      //     $join->on('agendas.owner_id', '=', 'users.id');
+      //   })
+      //   ->leftJoin('agenda_details', function ($join) {
+      //     $join->on('agenda_details.agenda_id', '=', 'agendas.id');
+      //   })
+      //   ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code','users.verification_code','users.is_verified', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
+      //   // // ->whereNull('agenda_details.agenda_id')
+      //   ->get();
+
+      $data = User::role('coach')->get();
 
       return DataTables::of($data)
         ->addIndexColumn()
-        ->addColumn('rating', function ($row) {
+        // ->addColumn('rating', function ($row) {
 
-          if ($row->average != null) {
-            $rating = $row->average . '/5';
-          } else {
-            $rating = $row->average;
-          }
-          return $rating;
-        })
+        //   // if ($row->average != null) {
+        //   //   $rating = $row->average . '/5';
+        //   // } else {
+        //   //   $rating = $row->average;
+        //   // }
+        //   $coach = Coach::where('user_id', $row->id)->first();
+        //   $plans = $coach->plan->pluck('id');
+        //   $agenda = Agenda::whereIn('plan_id', $plans)->pluck('id');
+        //   // $agenda_id = Agenda::where('owner_id', $row->id)->pluck('id');
+        //   // $rating = Agenda_detail::whereIn('agenda_id', $agenda)->pluck('rating_from_coachee')->avg();
+
+        //   // if ($rating) {
+        //   //   $rating = $rating.'/5';
+        //   // }
+
+        //   // return $rating;
+        // })
         ->addColumn('action', function ($row) {
           $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
           $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
@@ -152,7 +211,7 @@ class ClientController extends Controller
           }
           return $actionBtn;
         })
-        ->rawColumns(['action', 'rating'])
+        ->rawColumns(['action'])
         // ->rawColumns(['rating'])
         ->make(true);
     }
@@ -245,74 +304,130 @@ class ClientController extends Controller
    */
   public function show(Request $request, Client $client)
   {
-    $agenda_id = Agenda::where('client_id', $client->id)->pluck('id');
-    $agenda_detail_id = Agenda_detail::whereIn('agenda_id', $agenda_id)->pluck('id');
-    $coaching_note = Coaching_note::with('agenda_detail')->whereIn('agenda_detail_id', $agenda_detail_id)->get();
-    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->where('status', 'finished')->get();
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $client->plans->where('owner_id', $coach->id);
 
-    $total_agenda = Agenda::where('owner_id', Auth::user()->id)->where('client_id', $client->id)->count();
+    $agendas = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agendas->pluck('id'))->get();
 
-    $total_session = Agenda_detail::select('agenda_details.id', 'agendas.client_id')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->where('agendas.owner_id', Auth::user()->id)
-      ->where('agendas.client_id', $client->id)
-      ->count();
+    $coaching_note = Coaching_note::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->get();
 
-    $total_event = Agenda_detail::select('agenda_details.id', 'agendas.client_id')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->where('agendas.owner_id', Auth::user()->id)
-      ->where('agendas.client_id', $client->id)
-      ->where('agenda_details.status', 'scheduled')
-      ->count();
+    $total_event = $agenda_detail->where('status','scheduled')->count();
+    $total_agenda = $agendas->count();
+    $total_session = $agenda_detail->count();
 
-    if ($request->ajax()) {
-      // upcoming event
-      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.session_name')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('clients.id', $client->id)
-        ->where('status', 'scheduled')
-        ->orderBy('date', 'asc')->orderBy('time', 'asc')
-        ->get();
-      return DataTables::of($data)
-        ->addIndexColumn()
-        ->make(true);
-    }
-    // return $total_event;
     return view('clients.show', compact('client', 'coaching_note', 'agenda_detail', 'total_event', 'total_agenda', 'total_session'));
   }
 
-  public function show_agendas_data(Request $request, Client $client)
-  {
-    // agenda
-    if ($request->ajax()) {
+  public function show_upcoming_list(Request $request, Client $client){
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $client->plans->where('owner_id', $coach->id);
 
-      $data2 = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.duration')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('clients.id', $client->id)
-        ->where('agendas.owner_id',Auth::user()->id)
-        ->orderBy('date', 'asc')->orderBy('time', 'asc')
-        ->get();
-      return DataTables::of($data2)
+    $agendas = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agendas->pluck('id'))->orderByRaw('-date DESC')->get();
+
+    $data = $agenda_detail->where('status', 'scheduled');
+
+    if ($request->ajax()) {
+      return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('type', function ($row) {
+          $agenda = $row->agenda;
+          $plan = $agenda->plan;
+
+          if ($plan->client_id) {
+            $type = 'indiviual';
+          } elseif ($plan->group_id) {
+            $type = 'group';
+          }
+
+          return $type;
+        })
+        ->rawColumns(['type'])
+        ->make(true);
+    }
+
+  }
+
+
+  // role: coach, list agendas on client detail
+  public function show_agendas_list(Request $request, Client $client)
+  {
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $client->plans->where('owner_id', $coach->id);
+
+    $agendas = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agendas->pluck('id'))->orderByRaw('-date DESC')->get();
+
+    $data = $agenda_detail;
+
+    if ($request->ajax()) {
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('type', function ($row) {
+          $agenda = $row->agenda;
+          $plan = $agenda->plan;
+
+          if ($plan->client_id) {
+            $type = 'indiviual';
+          } elseif ($plan->group_id) {
+            $type = 'group';
+          }
+
+          return $type;
+        })
+        ->rawColumns(['type'])
         ->make(true);
     }
   }
 
-  public function show_sessions_data(Request $request, Client $client)
+  // role: coach, list sessions on client detail
+  public function show_sessions_list(Request $request, Client $client)
   {
-    if ($request->ajax()) {
-      $data = Agenda_detail::select('agenda_details.id', 'agenda_details.time', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('clients.id', $client->id)->latest()
-        ->get();
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $client->plans->where('owner_id', $coach->id);
 
+    $agendas = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agendas->pluck('id'))->orderByRaw('-date DESC')->get();
+
+    $data = $agenda_detail;
+
+    if ($request->ajax()) {
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('type', function ($row) {
+          $agenda = $row->agenda;
+          $plan = $agenda->plan;
+
+          if ($plan->client_id) {
+            $type = 'indiviual';
+          } elseif ($plan->group_id) {
+            $type = 'group';
+          }
+
+          return $type;
+        })
+        ->addColumn('action', function ($row) {
+          $actionBtn = '<a href="'. route('agendas.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
+          return $actionBtn;
+        })
+        ->rawColumns(['type','action'])
+        ->make(true);
+    }
+  }
+
+  public function show_plans_list(Request $request, Client $client)
+  {
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $client->plans->where('owner_id', $coach->id);
+
+    $data = $plans;
+
+    if ($request->ajax()) {
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $actionBtn = '<a href="' . route('agendas.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
+          $actionBtn = '<a href="'. route('plans.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
         })
         ->rawColumns(['action'])
@@ -320,42 +435,61 @@ class ClientController extends Controller
     }
   }
 
-  public function show_feedbacks_data(Request $request, Client $client)
+  // role: coach, list feedbacks on client detail
+  public function show_feedbacks_list(Request $request, Client $client)
   {
     if ($request->ajax()) {
-      $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('users', 'agendas.owner_id', '=', 'users.id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->where('clients.id', $client->id)->latest()
-        ->get();
+      $plan = $client->plans;
+      $agenda = Agenda::whereIn('plan_id', $plan->pluck('id'))->get();
+      $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->get();
+
+      $feedbacks = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->Where(function($query) {
+                    $query->where('feedback', '!=', null)
+                          ->orWhere('attachment', '!=', null);
+                    })->get();
+      $feedbacks = $feedbacks->where('from', 'coach');
+
+      $data = $feedbacks;
 
       return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('coach', function ($row) {
+          $agenda_detail = $row->agenda_detail;
+          $agenda = $agenda_detail->agenda;
+          $plan = $agenda->plan;
+          $coach = $plan->owner;
+          $coach_detail = $coach->user->toArray();
+          return $coach_detail;
+        })
+        ->addColumn('agenda_detail', function ($row) {
+          $agenda_detail = $row->agenda_detail->toArray();
+          return $agenda_detail;
+        })
         ->addColumn('action', function ($row) {
           $actionBtn = '<a href="javascript:;" id="detailFeedback" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Detail</a>';
           return $actionBtn;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action','coach_detail','agenda_detail'])
         ->make(true);
     }
   }
 
-  public function show_notes_data(Request $request, Client $client)
+  // role: coach, list notes on client detail
+  public function show_notes_list(Request $request, Client $client)
   {
-    if ($request->ajax()) {
-      $data = Agenda_detail::select('coaching_notes.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'coaching_notes.subject', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('users', 'agendas.owner_id', '=', 'users.id')
-        ->join('clients', 'clients.id', '=', 'agendas.client_id')
-        ->join('coaching_notes', 'coaching_notes.agenda_detail_id', '=', 'agenda_details.id')
-        ->where('clients.id', $client->id)->latest()
-        ->get();
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $client->plans->where('owner_id', $coach->id);
 
+    $agendas = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agendas->pluck('id'))->orderByRaw('-date DESC')->get();
+
+    $data = Coaching_note::with('agenda_detail')->whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->get();
+
+    if ($request->ajax()) {
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $actionBtn = '<a href="javascript:;" id="detailNote" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail note">Detail</a>';
+          $actionBtn = '<a href="javascript:;" id="detailNote" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail session">Detail</a>';
           return $actionBtn;
         })
         ->rawColumns(['action'])
@@ -363,42 +497,40 @@ class ClientController extends Controller
     }
   }
 
-  public function show_plans_data(Request $request, Client $client)
-  {
-    if ($request->ajax()) {
-      $data = Plan::with('client')->where('owner_id', Auth::user()->id)->latest()->get();
-      return Datatables::of($data)
-        ->addIndexColumn()
-        ->addColumn('action', function ($row) {
-          $actionBtn = '<a href="' . route('plans.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
-          return $actionBtn;
-        })
-        ->rawColumns(['action'])
-        ->make(true);
-    }
-  }
-
+  // role: coach, detail feedback on client detail
   public function show_detail_feedbacks($id)
   {
-    $data = Agenda_detail::select('agenda_details.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'agenda_details.feedback_from_coach', 'agenda_details.attachment_from_coach', 'agenda_details.created_at')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->join('users', 'agendas.owner_id', '=', 'users.id')
-      ->join('clients', 'clients.id', '=', 'agendas.client_id')
-      ->where('agenda_details.id', $id)
-      ->first();
+    $feedback = Feedback::find($id);
+    $agenda_detail = $feedback->agenda_detail;
+    $agenda = $agenda_detail->agenda;
+    $plan = $agenda->plan;
+    $coach = $plan->owner;
+    $coach_detail = $coach->user;
+
+    $data = [
+      'session' => $agenda_detail,
+      'coach' => $coach_detail,
+      'feedback' => $feedback
+    ];
 
     return response()->json($data);
   }
 
+  // role: coach, detail notes on client detail
   public function show_detail_notes($id)
   {
-    $data = Agenda_detail::select('coaching_notes.id', 'users.name', 'agenda_details.session_name', 'agenda_details.topic', 'coaching_notes.subject', 'coaching_notes.attachment', 'coaching_notes.summary', 'agenda_details.created_at')
-      ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-      ->join('users', 'agendas.owner_id', '=', 'users.id')
-      ->join('clients', 'clients.id', '=', 'agendas.client_id')
-      ->join('coaching_notes', 'coaching_notes.agenda_detail_id', '=', 'agenda_details.id')
-      ->where('coaching_notes.id', $id)
-      ->first();
+    $coaching_note = Coaching_note::find($id);
+    $agenda_detail = $coaching_note->agenda_detail;
+    $agenda = $agenda_detail->agenda;
+    $plan = $agenda->plan;
+    $coach = $plan->owner;
+    $coach_detail = $coach->user;
+
+    $data = [
+      'session' => $agenda_detail,
+      'coach' => $coach_detail,
+      'coaching_note' => $coaching_note
+    ];
 
     return response()->json($data);
   }
@@ -417,23 +549,13 @@ class ClientController extends Controller
   }
 
   /**
-   * Update the specified resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @param  int  $id
-   * @return \Illuminate\Http\Response
-   */
-  public function update(Request $request, $id)
-  {
-    //
-  }
-
-  /**
    * Remove the specified resource from storage.
    *
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
+
+
   public function destroy($id)
   {
     //
@@ -441,6 +563,7 @@ class ClientController extends Controller
     return response()->json(['success' => 'Client deleted!']);
   }
 
+  // download pdf list coach
   public function coach_pdf_download(){
     $coachs = User::role('coach')->get();
 
@@ -448,14 +571,16 @@ class ClientController extends Controller
     return $pdf->download('coach_list.pdf');
   }
 
-  // public function print(){
-  //   return "test";
-  // }
-
+  // download pdf list coachee
   public function coachee_pdf_download(){
     $coachee = User::role('coachee')->get();
 
     $pdf = PDF::loadview('pdf_template.coachee_list_pdf',compact('coachee'));
     return $pdf->download('coachee_list.pdf');
+  }
+
+  public function get_client_data($id){
+    $client = Client::find($id);
+    return response()->json($client);
   }
 }

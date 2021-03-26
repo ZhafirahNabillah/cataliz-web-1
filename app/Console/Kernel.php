@@ -27,10 +27,17 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function () {
-            $date_now = Carbon::now()->toDateString();
+          $date_now = Carbon::now();
+          $status = ['scheduled', 'rescheduled'];
+          $agenda_details = Agenda_detail::whereIn('status', $status)->get();
 
-            Agenda_detail::where('date', '<', $date_now)->orWhere('status', 'scheduled')->update(['status' => 'canceled']);
-            Agenda_detail::where('date', '<', $date_now)->orWhere('status', 'rescheduled')->update(['status' => 'canceled']);
+          foreach ($agenda_details as $agenda_detail) {
+            $session_date_expired = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addDays(1)->addMinutes(1);
+            if ($session_date_expired < $date_now) {
+              $agenda_detail->status = 'canceled';
+              $agenda_detail->update();
+            }
+          }
         })->everyMinute();
     }
 

@@ -9,11 +9,19 @@ class Agenda_detail extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['agenda_id','session_name','topic','date','time','media','media_url','duration','status','feedback_from_coachee','attachment_from_coachee','rating_from_coachee'];
+    protected $fillable = ['agenda_id','session_name','topic','date','time','media','media_url','duration','status'];
 
     // protected $dates = ['date'];
 
     public function agenda() {
       return $this->belongsTo('App\Models\Agenda');
     }
+
+    public function note(){
+  		return $this->hasOne('App\Models\Coaching_note');
+  	}
+
+    public function feedbacks(){
+  		return $this->hasMany('App\Models\Feedback');
+  	}
 }

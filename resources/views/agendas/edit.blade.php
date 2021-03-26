@@ -66,35 +66,46 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Plan</label>
-                      <select class="livesearch form-control" name="plan_id" id="plan_id" disabled>
+                      <select class="livesearch-plans form-control" name="plan_id" id="plan_id" disabled>
                         <option selected hidden value="{{ $plan->id }}">{{ $plan->objective }}</option>
                       </select>
                     </div>
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control" name="client_id" id="client_id" disabled>
-                        <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
-                      </select>
-                      <input type="hidden" name="id" value="{{$agenda->id}}">
+
+                  <!-- Kalo group -->
+                  @if ($plan->group_id)
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="fp-default">Group ID</label>
+                        <input class="form-control" value="{{$plan->group_id}}" disabled>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Organization</label>
-                      <input class="form-control" value="{{$client->organization}}" disabled>
+                  @endif
+
+                  @if ($plan->client_id)
+                    <div class="row">
+                      <div class="col-md-12 form-group">
+                        <label for="fp-default">Full Name</label>
+                        <input class="form-control" value="{{$clients->first()->name}}" disabled>
+                        <input type="hidden" name="id" value="{{$agenda->id}}">
+                      </div>
                     </div>
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Company</label>
-                      <input class="form-control" value="{{$client->company}}" disabled>
+
+                    <div class="row">
+                      <div class="col-md-6 form-group">
+                        <label for="fp-default">Organization</label>
+                        <input class="form-control" value="{{$clients->first()->organization}}" disabled>
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <label for="fp-default">Company</label>
+                        <input class="form-control" value="{{$clients->first()->company}}" disabled>
+                      </div>
                     </div>
-                  </div>
+                  @endif
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic"
-                        value="{{ $agenda_detail->topic }}" placeholder="Insert a topic..." id="topic" disabled>
+                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Insert a topic..." id="topic" disabled>
                       @error('topic')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -107,8 +118,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control @error('media') is-invalid @enderror" id="media1"
-                        aria-label=".form-select-lg example" name="media" disabled>
+                      <select class="form-control @error('media') is-invalid @enderror" id="media1" aria-label=".form-select-lg example" name="media" disabled>
                         <option selected value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
                           Room')@endif>Meeting Room</option>
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
@@ -125,8 +135,7 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control @error('media') is-invalid @enderror" id="media2"
-                        aria-label=".form-select-lg example" name="media" disabled>
+                      <select class="form-control @error('media') is-invalid @enderror" id="media2" aria-label=".form-select-lg example" name="media" disabled>
                         <option selected value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp')
                           @endif>Whatsapp
                         </option>
@@ -144,9 +153,7 @@
                   <div class="row media_url2">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
-                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url"
-                        disabled>
+                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url" disabled>
                       @error('media_url')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -159,30 +166,37 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Activity Date</label>
-                      <input type="text" id="date" class="form-control @error('date') is-invalid @enderror" name="date"
-                        value="{{ $agenda_detail->date }}" disabled>
+                      <input type="date" id="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $agenda_detail->date }}" disabled>
+                      <input type="hidden" id="time_hidden" value="{{ $agenda_detail->time }}">
                       @error('date')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
                       @enderror
                     </div>
-                    <div class="col-md-4 form-group">
+                    {{-- <div class="col-md-4 form-group">
                       <label for="fp-default">Activity Time</label>
-                      <input type="text" class="form-control @error('time') is-invalid @enderror" name="time"
-                        value="{{ $agenda_detail->time }}" id="time" disabled>
+                      <input type="text" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}" id="time" disabled>
                       @error('time')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                       </span>
+                      @enderror
+                    </div> --}}
+                    <div class="form-group col-md-4">
+                      <label for="time">Activity Time</label>
+                      <select name="time" class="form-control @error('start') is-invalid @enderror" id="time" disabled>
+                        <option hidden selected value>Pilih Jam Mulai</option>
+                      </select>
+                      @error('time')
+                        <div class="invalid-feedback">{{ $message }}</div>
                       @enderror
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Duration</label>
-                      <select class="form-control @error('duration') is-invalid @enderror"
-                        aria-label=".form-select-lg example" id="duration" name="duration" disabled>
+                      <select class="form-control @error('duration') is-invalid @enderror" aria-label=".form-select-lg example" id="duration" name="duration" disabled>
                         <option hidden selected value>Choose a duration</option>
                         <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Minutes</option>
                         <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Minutes</option>
@@ -199,8 +213,7 @@
                   <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
                   @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
                   $agenda_detail->status == 'unschedule')
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                    value="create">Submit</button>
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
                   @endif
                 </div>
               </div>
@@ -217,139 +230,205 @@
 
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
-  $(document).ready(function() {
-    $("#media1").on('change', function() {
-      $(".media_url1").toggle(500);
-    });
-  });
 
   $(document).ready(function() {
+
+    var SelectedTime = $('#time_hidden').val();
+    $('#time').append('<option value="'+ SelectedTime +'" selected>'+ SelectedTime +'</option>');
+    // console.log(SelectedTime);
+
+    var SelectedDate = new Date($('#date').val());
+    var SelectedDay = SelectedDate.getDate();
+    var SelectedMonth = SelectedDate.getMonth()+1;
+    var SelectedYear = SelectedDate.getFullYear();
+
+    if(SelectedMonth < 10){
+      SelectedMonth = '0' + SelectedMonth.toString();
+    }
+
+    if(SelectedDay < 10){
+      SelectedDay = '0' + SelectedDay.toString();
+    }
+
+    var SelectedDateOld = SelectedYear + '-' + SelectedMonth + '-' + SelectedDay;
+
+    if (SelectedDateOld !== null) {
+
+      var dateToday = new Date();
+
+      var month = dateToday.getMonth() + 1;
+      var day = dateToday.getDate();
+      var year = dateToday.getFullYear();
+
+      if(month < 10)
+        month = '0' + month.toString();
+
+      if(day < 10)
+        day = '0' + day.toString();
+
+      var maxDate = year + '-' + month + '-' + day;
+
+      if(SelectedDateOld == maxDate){
+        var formatted = dateToday.getHours();
+        var minutes = dateToday.getMinutes();
+
+        if (formatted < 9) {
+          formatted = 8;
+        }
+
+        for (i = formatted; i <= 22; i++) {
+          // console.log(i);
+          for (var y = 0; y < 60; y+=15) {
+            if (i < 10 || y < 10) {
+              if (i < 10) {
+                var xi = '0' + i;
+              } else {
+                var xi = i;
+              }
+              if (y < 10) {
+                var xy = '0' + y;
+              } else {
+                var xy = y;
+              }
+              var time = xi+':'+xy;
+            } else {
+              var time = i+':'+y;
+            }
+            if (i == formatted && y < minutes ) {
+              console.log('masuk');
+            } else {
+              $('#time').append('<option value="'+ time +':00">'+ time +'</option>');
+            }
+          }
+        }
+      }
+
+      if(SelectedDateOld !== maxDate){
+        var formatted = 8;
+
+        for (i = formatted; i <= 22; i++) {
+          // console.log(i);
+          for (var y = 0; y < 60; y+=15) {
+            if (i < 10 || y < 10) {
+              if (i < 10) {
+                var xi = '0' + i;
+              } else {
+                var xi = i;
+              }
+              if (y < 10) {
+                var xy = '0' + y;
+              } else {
+                var xy = y;
+              }
+              var time = xi+':'+xy;
+            } else {
+              var time = i+':'+y;
+            }
+            $('#time').append('<option value="'+ time +':00">'+ time +'</option>');
+          }
+        }
+      }
+    }
+
     $("#media2").on('change', function() {
       $(".media_url2").toggle(500);
     });
 
-    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    $('#date').datepicker({
-      format: 'yyyy-mm-dd',
-      minDate: today,
-      uiLibrary: 'bootstrap4'
+    $("#media1").on('change', function() {
+      $(".media_url1").toggle(500);
     });
 
-    $('#date').on('change', function(){
-      var a = new Date($('#date').val()).getFullYear();
-      var b = new Date($('#date').val()).getMonth();
-      var c = new Date($('#date').val()).getDate();
-      // var selectedDate = new Date(a,b,c);
+    $('#date').attr('min', maxDate);
 
-      console.log(a,b,c);
+    $('#date').on('change',function() {
+      SelectedDate = new Date($('#date').val());
 
-      var time = new Date();
-      console.log(time.getFullYear(), time.getMonth(), time.getDate());
-      
-      function addZero(i) {
-        if ((a && b && c) != (time.getFullYear() && time.getMonth() && time.getDate())) {
-          i = 0;
-          if (i < 10) {
-            i = "0" + i;
-          }
-        }
-        else {
-          if (i < 10) {
-            i = "0" + i;
-          }
-        }
-        return i;
+      var SelectedDay = SelectedDate.getDate();
+      var SelectedMonth = SelectedDate.getMonth()+1;
+      var SelectedYear = SelectedDate.getFullYear();
+
+      if(SelectedMonth < 10){
+        SelectedMonth = '0' + SelectedMonth.toString();
       }
 
-      var h = String(addZero(time.getHours()));
-      var m = String(addZero(time.getMinutes()));
-      var min = h + ':' + m;
-      console.log(min);
-      
-      $('#time').timepicker({
-        pickDate: false,
-        timeFormat: 'HH:mm',
-        interval: 1,
-        minTime: min,
-        maxTime: '23:59',
-        dynamic: true,
-        dropdown: true,
-        scrollbar: true
-      });
+      if(SelectedDay < 10){
+        SelectedDay = '0' + SelectedDay.toString();
+      }
+
+      var SelectedDateNew = SelectedYear + '-' + SelectedMonth + '-' + SelectedDay;
+      console.log(SelectedDateNew);
+
+      $('#time').find('option').remove();
+      $('#time').append('<option hidden selected value>Pilih Jam Mulai</option>');
+
+      if(SelectedDateNew == maxDate){
+        var formatted = dateToday.getHours();
+        var minutes = dateToday.getMinutes();
+
+        if (formatted < 9) {
+          formatted = 8;
+        }
+
+        for (i = formatted; i <= 22; i++) {
+          // console.log(i);
+          for (var y = 0; y < 60; y+=15) {
+            if (i < 10 || y < 10) {
+              if (i < 10) {
+                var xi = '0' + i;
+              } else {
+                var xi = i;
+              }
+              if (y < 10) {
+                var xy = '0' + y;
+              } else {
+                var xy = y;
+              }
+              var time = xi+':'+xy;
+            } else {
+              var time = i+':'+y;
+            }
+            if (i == formatted && y < minutes ) {
+              console.log('masuk');
+            } else {
+              $('#time').append('<option value="'+ time +':00">'+ time +'</option>');
+            }
+          }
+        }
+      }
+
+      if(SelectedDateNew !== maxDate){
+        var formatted = 8;
+
+        for (i = formatted; i <= 22; i++) {
+          // console.log(i);
+          for (var y = 0; y < 60; y+=15) {
+            if (i < 10 || y < 10) {
+              if (i < 10) {
+                var xi = '0' + i;
+              } else {
+                var xi = i;
+              }
+              if (y < 10) {
+                var xy = '0' + y;
+              } else {
+                var xy = y;
+              }
+              var time = xi+':'+xy;
+            } else {
+              var time = i+':'+y;
+            }
+            $('#time').append('<option value="'+ time +':00">'+ time +'</option>');
+          }
+        }
+      }
     });
   });
-</script>
-
-<script type="text/javascript">
-  $('.livesearch').select2({
-    placeholder: 'Select clients',
-    ajax: {
-      url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              pro: item.program
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
-
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#program').val(dd.pro);
-  });
-
-  $('.livesearch-plans').select2({
-    placeholder: 'Select plans',
-    ajax: {
-      url: "{{route('plans.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.objective,
-              id: item.id,
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
-
-  $(".livesearch-plans").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-  });
-
-  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
+  
+  @if($agenda_detail->status == 'scheduled' || $agenda_detail-> status == 'rescheduled' || $agenda_detail-> status == 'unschedule')
   $(function() {
-    $('#plan_id').prop('disabled', false);
-    $('#client_id').prop('disabled', false);
+    // $('#plan_id').prop('disabled', false);
+    // $('#client_id').prop('disabled', false);
     $('#topic').prop('disabled', false);
     $('#media1').prop('disabled', false);
     $('#media2').prop('disabled', false);
@@ -359,5 +438,37 @@
     $('#duration').prop('disabled', false);
   });
   @endif
+</script>
+
+<script type="text/javascript">
+
+  // $('.livesearch-plans').select2({
+  //   placeholder: 'Select plans',
+  //   ajax: {
+  //     url: "{{route('plans.search')}}",
+  //     dataType: 'json',
+  //     delay: 250,
+  //     processResults: function(data) {
+  //       return {
+  //         results: $.map(data, function(item) {
+  //           console.log(item)
+  //           return {
+  //             text: item.objective,
+  //             id: item.id,
+  //           }
+  //         })
+  //       };
+  //     },
+  //     cache: true
+  //   }
+  // });
+  //
+  // $(".livesearch-plans").on('change', function(e) {
+  //   // Access to full data
+  //   console.log($(this).select2('data'));
+  //   console.log($(this).select2('data')[0].id);
+  //   var dd = $(this).select2('data')[0];
+  // });
+
 </script>
 @endpush

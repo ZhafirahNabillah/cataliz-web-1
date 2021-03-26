@@ -14,8 +14,6 @@
 @include('panels.sidemenu')
 <!-- BEGIN: Content-->
 <div class="app-content content ">
-  <div class="content-overlay"></div>
-  <div class="header-navbar-shadow"></div>
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-9 col-12 mb-2">
@@ -24,11 +22,11 @@
             <h2 class="content-header-title float-left mb-0">Coaching Plans</h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
+                <li class="breadcrumb-item"><a href="/">Home</a>
                 </li>
                 <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
                 </li>
-                <li class="breadcrumb-item active">Edit Coaching Plan
+                <li class="breadcrumb-item active">Create Coaching Plans
                 </li>
               </ol>
             </div>
@@ -36,6 +34,7 @@
         </div>
       </div>
     </div>
+
     <div class="content-body">
       @if ($message = Session::get('success'))
       <div class="alert alert-success alert-dissmisable">
@@ -48,169 +47,248 @@
       @endif
 
       <!-- Basic table -->
-      <section id="basic-datatable">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Edit Plan</h4>
-              </div>
-              <form action="{{url('/plans')}}" method="post">
-                @csrf
-                <div class="card-body">
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Full Name</label>
-                      <select class="livesearch form-control" name="client_id" id="client_id" disabled>
-                        <option selected hidden value="{{ $client->id }}">{{ $client->name }}</option>
-                      </select>
-                      <input type="hidden" name="client_id" value="{{ $client->id }}">
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Organization</label>
-                      <input class="form-control" name="organization" id="organization" disabled value="{{ $client->organization }}">
-                    </div>
-
-                    <div class="col-md-6 form-group">
-                      <label for="fp-default">Tanggal Kegiatan</label>
-                      <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date" value="{{ $plan->date }}">
-                      @error('date')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Objektif</label>
-                      <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" autocomplete="objective">{{ $plan->objective }}</textarea>
-
-                      @error('objective')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Sukses Indikator</label>
-                      <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
-
-                      @error('success_indicator')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Pengembangan Area</label>
-                      <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
-
-                      @error('development_areas')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="fp-default">Support</label>
-                      <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support" autocomplete="support">{{ $plan->support }}</textarea>
-
-                      @error('support')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-
-                  <input type="hidden" name="id" value="{{$plan->id}}">
-
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                </div>
-              </form>
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title">Create Plan</h4>
             </div>
+            <form action="{{url('/plans')}}" id="plan_form" method="post">
+              @csrf
+              <div class="card-body">
+                <input type="hidden" name="id" value="{{ $plan->id }}">
+                <input type="hidden" name="group_id" value="{{ $plan->group_id }}">
+                <div class="form-group">
+                  <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
+                  <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
+                  {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..." /> --}}
+
+
+                  {{-- @foreach ($all_clients as $client)
+                    <div class="form-check client-list">
+                      <input class="form-check-input" type="checkbox" value="{{ $client->id }}" name="client[]"
+                  id="client-{{ $client->id }}" @if($clients->contains($client->id)) checked @endif>
+                  <label class="form-check-label" for="client-{{ $client->id }}">
+                    {{ $client->name }}
+                  </label>
+                </div>
+                @endforeach --}}
+
+                <select id="state" class="livesearch-plans form-control" @error('plan_id') is-invalid @enderror
+                  name="client[]" multiple="multiple">
+                  @foreach ($all_clients as $client)
+                  <option hidden id="client-{{ $client->id }}" value="{{ $client->id }}" @if($clients->
+                    contains($client->id)) selected @endif>{{ $client->name }}</option>
+                  @endforeach
+                </select>
+
+                @error('')
+                <strong class="text-danger">{{ $message }}</strong>
+                @enderror
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Date</label>
+                  <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
+                    value="{{ $plan->date }}" placeholder="Select your date...">
+                  <div id="date-error"></div>
+                  @error('date')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">objective</label>
+                  <textarea class="form-control @error('objective') is-invalid @enderror" name="objective"
+                    id="objective" autocomplete="objective">{{ $plan->objective }}
+                    </textarea>
+                  <small id="character_count_objective" class="float-right"></small>
+                  <div id="objective-error"></div>
+                  @error('objective')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Success Indicator</label>
+                  <textarea class="form-control @error('success_indicator') is-invalid @enderror"
+                    name="success_indicator" id="success_indicator"
+                    autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
+                  <small id="character_count_success_indicator" class="float-right"></small>
+                  <div id="success_indicator-error"></div>
+                  @error('success_indicator')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Development Areas</label>
+                  <textarea class="form-control @error('development_areas') is-invalid @enderror"
+                    name="development_areas" id="development_areas"
+                    autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
+                  <small id="character_count_development_areas" class="float-right"></small>
+                  <div id="development_areas-error"></div>
+                  @error('development_areas')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 form-group">
+                  <label for="fp-default">Support</label>
+                  <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
+                    autocomplete="support">{{ $plan->support }}</textarea>
+                  <small id="character_count_support" class="float-right"></small>
+                  <div id="support-error"></div>
+                  @error('support')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
           </div>
+          </form>
         </div>
+      </div>
     </div>
   </div>
-  </section>
-  <!--/ Basic table -->
-
-
-
-</div>
-</div>
 </div>
 <!-- END: Content-->
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
-<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<style>
+  label.error.fail-alert {
+    color: red;
+  }
+</style>
 <script type="text/javascript">
-  $('.livesearch').select2({
-    placeholder: 'Select clients',
-    ajax: {
-      url: "{{route('clients.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.name,
-              id: item.id,
-              org: item.organization,
-              pro: item.program
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
-
-  $(".livesearch").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].id);
-    var dd = $(this).select2('data')[0];
-    $('#organization').val(dd.org);
-    $('#program').val(dd.pro);
-
-  });
-
-  $(function() {
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  $("#state").select2({
+      tags: true,
+      placeholder: 'Select users',
+      ajax: {
+        url: "{{route('users.search')}}",
+        dataType: 'json',
+        delay: 250,
+        processResults: function(data) {
+          return {
+            results: $.map(data, function(item) {
+              console.log(item)
+              return {
+                text: item.name,
+                id: item.id,
+                client_id : item.client_id,
+              }
+            })
+          };
+        },
+        cache: true
       }
     });
+    // $('#search').keyup(function(){
+    //   var search_value = new RegExp($(this).val(), 'i');
+    //   $(".client-list label").each(function() {
+    //     if(!search_value.test($(this).text())) {
+    //       $(this).parent().hide();
+    //     } else {
+    //       $(this).parent().show();
+    //     }
+    //   });
+	  // });
 
-    today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    $('#date').datepicker({
-      format: 'yyyy-mm-dd',
-      minDate: today,
-      uiLibrary: 'bootstrap4'
+    $(function() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      tinymce.init({
+        selector: 'textarea',
+        setup: function(editor) {
+          editor.on('keyup', function(e) {
+            var original_element = $(tinyMCE.activeEditor.getElement());
+            var element_id = original_element.attr('id');
+            var count = CountCharacters();
+            if (count > 255) {
+              document.getElementById("character_count_" + element_id).innerHTML = "<strong class = 'text-danger'>" + count + "/255</strong>";
+            } else {
+              document.getElementById("character_count_" + element_id).innerHTML = "<strong>" + count + "/255</strong>";
+            }
+          });
+        }
+      });
+
+      $('#saveBtn').click(function(e) {
+        $('#plan_form').validate({
+          rules: {
+            'client_id': {
+              required: true
+            },
+            'date': {
+              required: true
+            }
+          },
+          messages: {
+            'client_id': {
+              required: '<strong class="text-danger">Name is required!</strong>'
+            },
+            'date': {
+              required: '<strong class="text-danger">date is required!</strong>'
+            }
+          },
+          errorPlacement: function(error, element) {
+            if (element.attr("name") == "date") {
+              error.appendTo("#date-error");
+            } else if (element.attr("name") == "client_id") {
+              error.appendTo("#client_id-error");
+            }
+          },
+          //submit Handler
+          submitHandler: function(form) {
+            form.submit();
+          }
+        });
+        console.log('loaded');
+      });
+
+      today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+      $('#date').datepicker({
+        format: 'yyyy-mm-dd',
+        minDate: today,
+        uiLibrary: 'bootstrap4'
+      });
     });
 
-  });
+    function CountCharacters() {
+      var body = tinymce.activeEditor.getBody();
+      var content = tinymce.trim(body.innerText || body.textContent);
+      return content.length;
+    };
 </script>
 @endpush

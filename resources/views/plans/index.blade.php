@@ -17,7 +17,10 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Coaching Plans
-                            <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
+                            <img class="align-text width=" 15px" height="15px"" src="
+                                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
+                                data-toggle="popover" data-placement="top"
+                                data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
@@ -31,72 +34,168 @@
                 </div>
             </div>
         </div>
-        <div class="content-body">
-            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            @if ($message = Session::get('success'))
-            <div class="alert alert-success alert-dissmisable">
-                <h4 class="alert-heading">Success</h4>
-                <div class="alert-body">{{ $message }}</div>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            @endif
-            <div class="row">
-                <div class="col-12">
-                    @can('create-plan')
-                    @role('coach')
-                    <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
-                    @endrole
-                    @endcan
-                </div>
-            </div>
-            <br>
-            <!-- Basic table -->
-            <section id="basic-datatable">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            @hasanyrole('coach|admin')
-                            <table class="datatables-basic table default-datatable-plans">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Name</th>
-                                        <th>Company</th>
-                                        <th>Email</th>
-                                        <th>Handphone</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            @else
-                            <table class="datatables-basic table coachee-datatable-plans">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Coach Name</th>
-                                        <th>Objective</th>
-                                        <th>Schedule</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                            @endhasanyrole
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs justify-content-center" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach"
+                            role="tab" aria-selected="true">Individual</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile"
+                            role="tab" aria-selected="false">Group</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Panel Individu -->
+                    <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+                        <div class="content-body">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none"
+                                role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dissmisable">
+                                <h4 class="alert-heading">Success</h4>
+                                <div class="alert-body">{{ $message }}</div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @endif
+                            <div class="row">
+                                <div class="col-12">
+                                    @can('create-plan')
+                                    @role('coach')
+                                    <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
+                                    @endrole
+                                    @endcan
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Basic table -->
+                            <section id="basic-datatable">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            @hasanyrole('coach|admin')
+                                            <table class="datatables-basic table plan-datatable-individual">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Name</th>
+                                                        <th>Objective</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @else
+                                            <table class="datatables-basic table plan-datatable-individual">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Name</th>
+                                                        <th>Objective</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @endhasanyrole
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--/ Basic table -->
                         </div>
                     </div>
+                    <!-- /panel individu -->
+
+
+                    <!-- Panel Grup -->
+                    <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+                        <div class="content-body">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none"
+                                role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @if ($message = Session::get('success'))
+                            <div class="alert alert-success alert-dissmisable">
+                                <h4 class="alert-heading">Success</h4>
+                                <div class="alert-body">{{ $message }}</div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            @endif
+                            <div class="row">
+                                <div class="col-12">
+                                    @can('create-plan')
+                                    @role('coach')
+                                    <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
+                                    @endrole
+                                    @endcan
+                                </div>
+                            </div>
+                            <br>
+                            <!-- Basic table -->
+                            <section id="basic-datatable">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            @hasanyrole('coach|admin')
+                                            <table class="datatables-basic table plan-datatable-group">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Kode Grup</th>
+                                                        <th>Objective</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @else
+                                            <table class="datatables-basic table plan-datatable-group">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Kode Grup</th>
+                                                        <th>Objective</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                            @endhasanyrole
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!--/ Basic table -->
+                        </div>
+                    </div>
+                    <!-- /coachee list admin -->
                 </div>
-            </section>
-            <!--/ Basic table -->
+            </div>
         </div>
+        <!-- /panel coachee -->
+
+
     </div>
 </div>
 <!-- END: Content-->
@@ -119,7 +218,8 @@
             }
         });
 
-        var table_plans_default = $('.default-datatable-plans').DataTable({
+        @role('coach|admin')
+        var table_plans_individual = $('.plan-datatable-individual').DataTable({
             processing: true,
             serverSide: true,
             ajax: "",
@@ -132,16 +232,12 @@
                     name: 'client.name'
                 },
                 {
-                    data: 'client.company',
-                    name: 'client.company'
+                    data: 'objective',
+                    name: 'objective'
                 },
                 {
-                    data: 'email',
-                    name: 'email'
-                },
-                {
-                    data: 'phone',
-                    name: 'phone'
+                    data: 'date',
+                    name: 'date'
                 },
                 {
                     data: 'action',
@@ -190,15 +286,15 @@
                         return $row_output;
                     }
                 },
-                {
-                    targets: 4,
-                    render: function(data, type, full, meta) {
-                        var $phone = full['phone'],
-                            $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-                            '</div>';
-                        return $output;
-                    }
-                }
+                // {
+                //     targets: 4,
+                //     render: function(data, type, full, meta) {
+                //         var $phone = full['phone'],
+                //             $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
+                //             '</div>';
+                //         return $output;
+                //     }
+                // }
             ],
 
             order: [
@@ -251,18 +347,61 @@
                 searchPlaceholder: "Search records"
             }
         });
+        @endrole
 
-        var table_plans_coachee = $('.coachee-datatable-plans').DataTable({
+        @role('coachee')
+        var table_plans_individual = $('.plan-datatable-individual').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "",
+          columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'coach_name',
+            name: 'coach_name'
+          },
+          {
+            data: 'objective',
+            name: 'objective'
+          },
+          {
+            data: 'date',
+            name: 'date',
+            defaultContent: '<i>-</i>'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
+        @endrole
+
+        var table_plans_group = $('.plan-datatable-group').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "",
+            ajax: "{{route('plans.show_group')}}",
             columns: [{
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                 },
                 {
-                    data: 'name',
-                    name: 'name'
+                    data: 'group_id',
+                    name: 'group_id'
                 },
                 {
                     data: 'objective',
@@ -291,6 +430,7 @@
                 searchPlaceholder: "Search records"
             }
         });
+
 
         $('body').on('click', '.deletePlan', function(e) {
 
@@ -323,7 +463,8 @@
                                 icon: 'success',
                                 title: 'Deleted Successfully!',
                             });
-                            table_plans_default.draw();
+                            table_plans_individual.draw();
+                            table_plans.group.draw();
                         },
                         error: function(data) {
                             console.log('Error:', data);

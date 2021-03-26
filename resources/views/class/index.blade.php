@@ -17,7 +17,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Class
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar kelas yang tersedia di dalam sistem." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar kelas yang tersedia di dalam sistem." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -44,39 +46,39 @@
       </div>
       @endif
       <div class="row">
-        @can ('create-class')
+        {{-- @can ('create-class')
         <div class="col-12 mb-1">
           <a href="{{route('class.create')}}" class="create-new btn btn-primary createNewClass">Add Class</a>
-        </div>
-        @endcan
       </div>
+      @endcan --}}
+    </div>
 
-      <!-- Basic table -->
-      <section id="basic-datatable">
-        <div class="row">
-          <div class="col-12">
-            <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table yajra-datatable-class">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    {{-- <th>Class Name</th> --}}
-                    <th>Coach Name</th>
-                    <th>Total Client</th>
-                    {{-- <th>Status</th> --}}
-                    @can('detail-class')<th>Action</th>@endcan
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
+    <!-- Basic table -->
+    <section id="basic-datatable">
+      <div class="row">
+        <div class="col-12">
+          <div class="card style=" border-radius: 15px;>
+            <table class="datatables-basic table yajra-datatable-class">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  {{-- <th>Class Name</th> --}}
+                  <th>Coach Name</th>
+                  <th>Total Client</th>
+                  {{-- <th>Status</th> --}}
+                  @can('detail-class')<th>Action</th>@endcan
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
           </div>
         </div>
-      </section>
-      <!--/ Basic table -->
-    </div>
+      </div>
+    </section>
+    <!--/ Basic table -->
   </div>
+</div>
 </div>
 <!-- END: Content-->
 @endsection
@@ -151,8 +153,8 @@
           name: 'DT_RowIndex'
         },
         {
-          data: 'name',
-          name: 'name'
+          data: 'user.name',
+          name: 'user.name'
         },
         {
           data: 'Total Client',

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\Client;
+use App\Models\Coach;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -92,6 +93,10 @@ class RegisterController extends Controller
     ]);
 
     if ($request->role == 'coach') {
+      Coach::create([
+        'user_id' => $user->id,
+        'skill' => null
+      ]);
       $user->assignRole('coach');
     } elseif ($request->role == 'coachee') {
       Client::create([
@@ -107,20 +112,21 @@ class RegisterController extends Controller
       $user->assignRole('coachee');
     }
 
-    MailController::SendSignUpMail($user->email, $user->verification_code);
+    MailController::SendSignUpMail($user);
 
     return redirect('login')->with('success', 'Registration is successful, please check your email to verify your account!');
   }
 
-  public function verifyUser(){
+  public function verifyUser()
+  {
     $verification_code = \Illuminate\Support\Facades\Request::get('code');
     $user = User::where('verification_code', $verification_code)->first();
-    if($user!=null){
+    if ($user != null) {
       $user->is_verified = 1;
       $user->verification_code = null;
       $user->save();
-      return redirect('/login')->with('success','Akun anda berhasil terverifikasi. Silahkan login!');
-    } else{
+      return redirect('login')->with('success', 'Your account has been verified. Please login to continue the journey!');
+    } else {
       return abort(404);
     }
   }

@@ -1,96 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-
-  <title>Hello, world!</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Detail Plans</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <style>
+    body {
+      height: 842px;
+      width: 595px;
+      /* to centre page on screen*/
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="card">
-    <h4>Plan Detail</h4>
-    <div class="row mb-2">
-      <div class="col-sm-3">
-        <b>Client Name</b>
-      </div>
-      <div class="col-sm-9">
-        {{$coachee->name}}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-3">
-        <b>Coach Name</b>
-      </div>
-      <div class="col-sm-9">
-        {{$coach->name}}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-3">
-        <b>Organization</b>
-      </div>
-      <div class="col-sm-9">
-        {{$coachee->organization}}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-3">
-        <b>Date</b>
-      </div>
-      <div class="col-sm-9">
-        {{$plan->date}}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-12">
-        <b>Objective</b>
-      </div>
-      <div class="col-sm-12">
-        {!!$plan->objective!!}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-12">
-        <b>Succes Indicator</b>
-      </div>
-      <div class="col-sm-12">
-        {!!$plan->success_indicator!!}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-12">
-        <b>Development Areas</b>
-      </div>
-      <div class="col-sm-12">
-        {!!$plan->development_areas!!}
-      </div>
-    </div>
-    <div class="row mb-2">
-      <div class="col-sm-12">
-        <b>Support</b>
-      </div>
-      <div class="col-sm-12">
-        {!!$plan->support!!}
-      </div>
-    </div>
-  </div>
+  <main role="main" class="container tex">
+    <!-- head -->
+    <div class="container">
+      <tr>
+        <td>
+          <div class="container" style="margin-top: 20px;margin-left: 10px;">
+            <div style="margin-bottom: 15px;" class="float-right text-right">
+              <h2 class="name">PT WAHANA INTEGRA <br> NUSANTARA</h2>
+              <span> +62 822-3585-0005
+                <img src="{{ public_path().'/assets/images/icons/pdf/telpon.png' }}" alt="">
+              </span>
+              <br>
+              <span> halo@cataliz.id
+                <img src="{{ public_path().'/assets/images/icons/pdf/mail.png' }}" alt="">
+              </span>
+            </div>
 
-  <!-- Optional JavaScript; choose one of the two! -->
+            <h1 class="text-left"><img style="width:170px;margin-top: 10px;margin-left: 15px; " src="">
+            </h1>
+        </td>
+      </tr>
+    </div>
+    <hr color="#C58407" />
 
-  <!-- Option 1: Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <div class="container">
+      <!-- objective -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Objective</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->objective!!}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- success indicator -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Success Indicator</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->success_indicator!!}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- Development areas -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Development Areas</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->development_areas!!}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <!-- Support -->
+      <div class="row">
+        <div class="col-12">
+          <div class="card bg-faded">
+            <div class="card-header">
+              <b>Support</b>
+            </div>
+            <br>
+            <div class="card-body">
+              <p>{!!$plan->support!!}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <footer>
+      <table align="center" style="width: 100%;background-color: #656565;">
+        <tr style="text-align: center;height: 100px;">
+          <td style="">
+            <a href="https://www.instagram.com/cataliz.id/">
+              <img style="padding-right: 10px;" src="{{ public_path().'/assets/images/icons/email/blackinstagram.png' }}">
+            </a>
+            <a href="https://cataliz.id/">
+              <img style="padding-left: 10px;" src="{{ public_path().'/assets/images/icons/email/blacklink.png' }}">
+            </a>
+          </td>
+        </tr>
+      </table>
+    </footer>
+  </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 
-  <!-- Option 2: Separate Popper and Bootstrap JS -->
-  <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
-    -->
+  <script src="{{ asset('js/app.js') }}" type="text/js"></script>
 </body>
 
 </html>

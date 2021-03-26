@@ -27,6 +27,8 @@ class User extends Authenticatable
         'is_verified'
     ];
 
+    // protected $guarded = [];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -59,4 +61,28 @@ class User extends Authenticatable
             return strtoupper(substr($words[0], 0, 1));
         }
     }
+
+    public function client()
+    {
+        return $this->hasOne('App\Models\Client');
+    }
+
+    public function coach()
+    {
+        return $this->hasOne('App\Models\Coach');
+    }
+
+    // protected $appends = ['profil_picture_url', 'background_picture_url'];
+
+    // public function getAvatarUrlAttribute($value)
+    // {
+    //     $url = 'https://' . env('AWS_BUCKET') . '.s3-' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/images/profil_picture/';
+    //     return $url . $this->profil_picture;
+    // }
+
+    // public function getBackgroundUrlAttribute($value)
+    // {
+    //     $url = 'https://' . env('AWS_BUCKET') . '.s3-' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/images/background_picture/';
+    //     return $url . $this->background_picture;
+    // }
 }

@@ -21,7 +21,23 @@ class Client extends Model
         'user_id',
     ];
 
-    public function user() {
-  		return $this->belongsTo('App\Models\User');
-  	}
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+    public function coaches()
+    {
+        return $this->belongsToMany('App\Models\Coach');
+    }
+
+    public function plans()
+    {
+        return $this->belongsToMany('App\Models\Plan');
+    }
+
+    public function plan()
+    {
+        return $this->hasMany('App\Models\Plan');
+    }
 }
