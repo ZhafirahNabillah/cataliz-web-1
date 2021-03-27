@@ -64,14 +64,14 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
+    'php-symlink',
     'restart-nginx',
 ]);
 
+task ('php-symlink', function(){
+    run('sudo ln -s /usr/share/phpmyadmin /var/www/html/current/public');
+});
 
 task ('restart-nginx',function(){
     run('sudo /usr/sbin/nginx nginx reload');
-});
-
-task ('php-symlink', function(){
-    run('sudo ln -s /usr/share/phpmyadmin /var/www/html/current/public');
 });
