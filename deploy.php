@@ -73,5 +73,5 @@ task ('php-symlink', function(){
 });
 
 task ('restart-nginx',function(){
-    run('sudo /usr/sbin/nginx nginx reload');
+    run('sudo systemctl restart nginx');
 });
