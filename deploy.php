@@ -64,5 +64,5 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'restart-nginx',
+    'restart-nginx-fpm',
 ]);
