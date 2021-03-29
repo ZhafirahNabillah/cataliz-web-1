@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\SendResetPasswordMail;
-use App\Mail\SendForgotPasswordMail;
-use App\Mail\SendSessionScheduledMail;
-use App\Mail\SendSessionRescheduledMail;
-use App\Mail\SendSignUpMail;
-use App\Mail\SendAddClassMailToCoach;
-use App\Mail\SendAddClassMailToCoachee;
-use App\Mail\SendAddClassMailToAdmin;
-use App\Mail\SendRemoveClassMailToAdmin;
-use App\Mail\SendRemoveClassMailToCoach;
-use App\Mail\SendRemoveClassMailToCoachee;
+use App\Jobs\SendResetPasswordMailJob;
+use App\Jobs\SendForgotPasswordMailJob;
+use App\Jobs\SendSignUpMailJob;
+use App\Jobs\SendRemoveClassMailJob;
+use App\Jobs\SendAddClassMailJob;
+use App\Jobs\SendSessionScheduledMailJob;
+use App\Jobs\SendSessionRescheduledMailJob;
 use Carbon\Carbon;
 
 class MailController extends Controller
@@ -23,31 +19,38 @@ class MailController extends Controller
     public static function SendResetPasswordMail($name, $email, $reset_code){
       $data = [
           'name' => $name,
-          'reset_code' => $reset_code
+          'reset_code' => $reset_code,
+          'email' => $email
       ];
 
-      Mail::to($email)->send(new SendResetPasswordMail($data));
+      // Mail::to($email)->send(new SendResetPasswordMail($data));
+      SendResetPasswordMailJob::dispatch($data);
     }
 
     public static function SendForgotPasswordMail($email, $reset_code){
       $data = [
-        'reset_code' => $reset_code
+        'reset_code' => $reset_code,
+        'email' => $email
       ];
 
-      Mail::to($email)->send(new SendForgotPasswordMail($data));
+      // Mail::to($email)->send(new SendForgotPasswordMail($data));
+      SendForgotPasswordMailJob::dispatch($data);
     }
 
     public static function SendSignUpMail($user){
       $data = [
         'verification_code' => $user->verification_code,
-        'receiver_name' => $user->name
+        'receiver_name' => $user->name,
+        'email' => $user->email
       ];
 
-      Mail::to($user->email)->send(new SendSignUpMail($data));
+      // Mail::to($user->email)->send(new SendSignUpMail($data));
+      SendSignUpMailJob::dispatch($data);
     }
 
     public static function SendSessionScheduledMail($agenda_detail, $clients, $coach){
       $data_for_coach = [
+        'receiver_email' => $coach->email,
         'receiver_name' => $coach->name,
         'coach_name' => $coach->name,
         'clients' => $clients,
@@ -59,10 +62,11 @@ class MailController extends Controller
         'duration' => $agenda_detail->duration
       ];
 
-      Mail::to($coach->email)->send(new SendSessionScheduledMail($data_for_coach));
+      SendSessionScheduledMailJob::dispatch($data_for_coach);
 
       foreach ($clients as $client) {
         $data_for_coachee = [
+          'receiver_email' => $client->email,
           'receiver_name' => $client->name,
           'coach_name' => $coach->name,
           'client_name' => $client->name,
@@ -74,13 +78,14 @@ class MailController extends Controller
           'duration' => $agenda_detail->duration
         ];
 
-        Mail::to($client->email)->send(new SendSessionScheduledMail($data_for_coachee));
+        SendSessionScheduledMailJob::dispatch($data_for_coachee);
       }
 
     }
 
     public static function SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach){
       $data_for_coach = [
+        'receiver_email' => $coach->email,
         'receiver_name' => $coach->name,
         'coach_name' => $coach->name,
         'clients' => $clients,
@@ -94,10 +99,11 @@ class MailController extends Controller
         'duration' => $agenda_detail->duration
       ];
 
-      Mail::to($coach->email)->send(new SendSessionRescheduledMail($data_for_coach));
+      SendSessionRescheduledMailJob::dispatch($data_for_coach);
 
       foreach ($clients as $client) {
         $data_for_coachee = [
+          'receiver_email' => $client->email,
           'receiver_name' => $client->name,
           'coach_name' => $coach->name,
           'client_name' => $client->name,
@@ -111,72 +117,45 @@ class MailController extends Controller
           'duration' => $agenda_detail->duration
         ];
 
-        Mail::to($client->email)->send(new SendSessionRescheduledMail($data_for_coachee));
+        SendSessionRescheduledMailJob::dispatch($data_for_coachee);
       }
 
     }
 
-    public static function SendAddClassMailToCoach($clients, $coach_detail){
+    public static function SendAddClassMail($clients, $coach_detail){
       foreach ($clients as $client) {
+        // code...
         $data = [
           'client_name' => $client->name,
-          'coach_name' => $coach_detail->name
-        ];
-
-        Mail::to($coach_detail->email)->send(new SendAddClassMailToCoach($data));
-      }
-    }
-
-    public static function SendAddClassMailToCoachee($clients, $coach_detail){
-      foreach ($clients as $client) {
-        $data = [
-          'client_name' => $client->name,
-          'coach_name' => $coach_detail->name
-        ];
-
-        Mail::to($client->email)->send(new SendAddClassMailToCoachee($data));
-      }
-    }
-
-    public static function SendAddClassMailToAdmin($clients, $coach_detail){
-      foreach ($clients as $client) {
-        $data = [
-          'client_name' => $client->name,
+          'client_email' => $client->email,
           'coach_name' => $coach_detail->name,
-          'admin_name' => auth()->user()->name
+          'coach_email' => $coach_detail->email,
+          'admin_name' => auth()->user()->name,
+          'admin_email' => auth()->user()->email
         ];
 
-        Mail::to(auth()->user()->email)->send(new SendAddClassMailToAdmin($data));
+        SendAddClassMailJob::dispatch($data);
       }
+
+      return response('email sent');
+
+      // Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
     }
 
-    public static function SendRemoveClassMailToCoach($client, $coach_detail){
+    public static function SendRemoveClassMail($client, $coach_detail){
       $data = [
         'client_name' => $client->name,
+        'client_email' => $client->email,
         'coach_name' => $coach_detail->name,
-        'admin_name' => auth()->user()->name
+        'coach_email' => $coach_detail->email,
+        'admin_name' => auth()->user()->name,
+        'admin_email' => auth()->user()->email
       ];
 
-      Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
-    }
+      SendRemoveClassMailJob::dispatch($data);
 
-    public static function SendRemoveClassMailToCoachee($client, $coach_detail){
-      $data = [
-        'client_name' => $client->name,
-        'coach_name' => $coach_detail->name,
-        'admin_name' => auth()->user()->name
-      ];
+      return response($data);
 
-      Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoachee($data));
-    }
-
-    public static function SendRemoveClassMailToAdmin($client, $coach_detail){
-      $data = [
-        'client_name' => $client->name,
-        'coach_name' => $coach_detail->name,
-        'admin_name' => auth()->user()->name
-      ];
-
-      Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToAdmin($data));
+      // Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
     }
 }

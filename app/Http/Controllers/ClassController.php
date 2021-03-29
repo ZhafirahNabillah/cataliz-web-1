@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Class_model;
 use App\Models\Client;
-use App\Models\Class_has_client;
 use App\Models\User;
 use App\Models\Coach;
 use Illuminate\Http\Request;
@@ -150,9 +148,12 @@ class ClassController extends Controller
         $coach_detail = User::where('id', $coach->user_id)->first();
         $new_clients = Client::whereIn('id', $request->input('client'))->get();
 
-        MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
-        MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
-        MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
+        // MailController::SendAddClassMailToCoachee($new_clients, $coach_detail);
+        // MailController::SendAddClassMailToCoach($new_clients, $coach_detail);
+        // MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
+
+        //sending email
+        MailController::SendAddClassMail($new_clients, $coach_detail);
 
         // if ($new_clients_id) {
         //
@@ -257,9 +258,7 @@ class ClassController extends Controller
       $client = Client::find($request->client_id);
 
       //sending email
-      MailController::SendRemoveClassMailToCoach($client, $coach_detail);
-      MailController::SendRemoveClassMailToCoachee($client, $coach_detail);
-      MailController::SendRemoveClassMailToAdmin($client, $coach_detail);
+      MailController::SendRemoveClassMail($client, $coach_detail);
 
       return response()->json([
         'success' => 'Client removed succesfully!'

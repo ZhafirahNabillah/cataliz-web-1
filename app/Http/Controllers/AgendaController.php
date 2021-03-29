@@ -416,7 +416,7 @@ class AgendaController extends Controller
     ]);
 
     $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
-    $old_agenda_detail = $agenda_detail;
+    $old_agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
 
     $agenda = $agenda_detail->agenda;
     $plan = $agenda->plan;
@@ -452,9 +452,9 @@ class AgendaController extends Controller
 
     //checking if status was changed to send the email
     if ($was_scheduled) {
-      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach_detail);
-    } elseif ($was_rescheduled) {
       MailController::SendSessionScheduledMail($agenda_detail, $clients, $coach_detail);
+    } elseif ($was_rescheduled) {
+      MailController::SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach_detail);
     }
 
     return redirect('/agendas')->with('success', 'Sessions Successfully updated!');
