@@ -17,10 +17,7 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Coaching Plans
-                            <img class="align-text width=" 15px" height="15px"" src="
-                                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-                                data-toggle="popover" data-placement="top"
-                                data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
+                            <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
@@ -38,12 +35,10 @@
             <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach"
-                            role="tab" aria-selected="true">Individual</a>
+                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile"
-                            role="tab" aria-selected="false">Group</a>
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
                     </li>
                 </ul>
 
@@ -51,8 +46,7 @@
                     <!-- Panel Individu -->
                     <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
                         <div class="content-body">
-                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none"
-                                role="alert">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -123,8 +117,7 @@
                     <!-- Panel Grup -->
                     <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
                         <div class="content-body">
-                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none"
-                                role="alert">
+                            <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -208,7 +201,14 @@
 <script type="text/javascript">
     // popover
     $(function() {
-        $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover({
+            html: true,
+            trigger: 'hover',
+            placement: 'top',
+            content: function() {
+                return '<img src="' + $(this).data('img') + '" />';
+            }
+        })
     })
 
     $(function() {
@@ -351,44 +351,44 @@
 
         @role('coachee')
         var table_plans_individual = $('.plan-datatable-individual').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "",
-          columns: [{
-            data: 'DT_RowIndex',
-            name: 'DT_RowIndex'
-          },
-          {
-            data: 'coach_name',
-            name: 'coach_name'
-          },
-          {
-            data: 'objective',
-            name: 'objective'
-          },
-          {
-            data: 'date',
-            name: 'date',
-            defaultContent: '<i>-</i>'
-          },
-          {
-            data: 'action',
-            name: 'action',
-            orderable: true,
-            searchable: true
-          },
-        ],
-        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-        language: {
-          paginate: {
-            // remove previous & next text from pagination
-            previous: '&nbsp;',
-            next: '&nbsp;'
-          },
-          search: "<i data-feather='search'></i>",
-          searchPlaceholder: "Search records"
-        }
-      });
+            processing: true,
+            serverSide: true,
+            ajax: "",
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'coach_name',
+                    name: 'coach_name'
+                },
+                {
+                    data: 'objective',
+                    name: 'objective'
+                },
+                {
+                    data: 'date',
+                    name: 'date',
+                    defaultContent: '<i>-</i>'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+                paginate: {
+                    // remove previous & next text from pagination
+                    previous: '&nbsp;',
+                    next: '&nbsp;'
+                },
+                search: "<i data-feather='search'></i>",
+                searchPlaceholder: "Search records"
+            }
+        });
         @endrole
 
         var table_plans_group = $('.plan-datatable-group').DataTable({

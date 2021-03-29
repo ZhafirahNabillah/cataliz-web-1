@@ -700,8 +700,8 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function (data, type, row) {
-                  return '+62'+data;
+                render: function(data, type, row) {
+                  return '+62' + data;
                 }
               },
               // {
@@ -748,8 +748,8 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function (data, type, row) {
-                  return '+62'+data;
+                render: function(data, type, row) {
+                  return '+62' + data;
                 }
               },
               {
@@ -791,8 +791,8 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function (data, type, row) {
-                  return '+62'+data;
+                render: function(data, type, row) {
+                  return '+62' + data;
                 }
               },
               {
@@ -1028,7 +1028,14 @@
 
           // popover
           $(function() {
-            $('[data-toggle="popover"]').popover()
+            $('[data-toggle="popover"]').popover({
+              html: true,
+              trigger: 'hover',
+              placement: 'top',
+              content: function() {
+                return '<img src="' + $(this).data('img') + '" />';
+              }
+            })
           })
 
         });
