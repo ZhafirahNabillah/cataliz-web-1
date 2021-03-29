@@ -323,7 +323,10 @@ class PlanController extends Controller
     $coachee = Client::find($plan->client_id);
 
     $pdf = PDF::loadview('pdf_template.plans_detail_pdf', compact('plan', 'coach', 'coachee'));
-    return $pdf->download('plan_detail_' . $plan->id . '.pdf');
+    $pdf->setPaper('A4','portrait');
+    $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+    return $pdf->stream();
+    // return $pdf->download('plan_detail_' . $plan->id . '.pdf');
   }
 
   //method to show plan group list on plan index page (plan tab)

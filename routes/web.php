@@ -36,6 +36,9 @@ Route::get('/home', function () {
 	return redirect('login');
 });
 
+Route::get('/pdf_show', function () {
+	return view('pdf_template.plans_detail_pdf');
+});
 //Authenticate route
 Auth::routes();
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');

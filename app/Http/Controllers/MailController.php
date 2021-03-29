@@ -12,6 +12,9 @@ use App\Mail\SendSignUpMail;
 use App\Mail\SendAddClassMailToCoach;
 use App\Mail\SendAddClassMailToCoachee;
 use App\Mail\SendAddClassMailToAdmin;
+use App\Mail\SendRemoveClassMailToAdmin;
+use App\Mail\SendRemoveClassMailToCoach;
+use App\Mail\SendRemoveClassMailToCoachee;
 use Carbon\Carbon;
 
 class MailController extends Controller
@@ -145,5 +148,35 @@ class MailController extends Controller
 
         Mail::to(auth()->user()->email)->send(new SendAddClassMailToAdmin($data));
       }
+    }
+
+    public static function SendRemoveClassMailToCoach($client, $coach_detail){
+      $data = [
+        'client_name' => $client->name,
+        'coach_name' => $coach_detail->name,
+        'admin_name' => auth()->user()->name
+      ];
+
+      Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
+    }
+
+    public static function SendRemoveClassMailToCoachee($client, $coach_detail){
+      $data = [
+        'client_name' => $client->name,
+        'coach_name' => $coach_detail->name,
+        'admin_name' => auth()->user()->name
+      ];
+
+      Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoachee($data));
+    }
+
+    public static function SendRemoveClassMailToAdmin($client, $coach_detail){
+      $data = [
+        'client_name' => $client->name,
+        'coach_name' => $coach_detail->name,
+        'admin_name' => auth()->user()->name
+      ];
+
+      Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToAdmin($data));
     }
 }

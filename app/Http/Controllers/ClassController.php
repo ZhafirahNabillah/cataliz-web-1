@@ -248,8 +248,18 @@ class ClassController extends Controller
     }
 
     public function remove_client(Request $request){
-      $coach = Coach::where('id', $request->coach_id)->first();
+      //removing client from coach
+      $coach = Coach::find($request->coach_id);
       $coach->clients()->detach($request->client_id);
+
+      //get data for email
+      $coach_detail = $coach->user;
+      $client = Client::find($request->client_id);
+
+      //sending email
+      MailController::SendRemoveClassMailToCoach($client, $coach_detail);
+      MailController::SendRemoveClassMailToCoachee($client, $coach_detail);
+      MailController::SendRemoveClassMailToAdmin($client, $coach_detail);
 
       return response()->json([
         'success' => 'Client removed succesfully!'
