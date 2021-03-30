@@ -64,7 +64,7 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'php-symlink',
+    #'php-symlink',
     'update',
     'restart-nginx',
 ]);
