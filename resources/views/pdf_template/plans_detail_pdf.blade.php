@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Laravel 7 PDF Example</title>
+  <title>Plan Detail</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
   {{-- <style>
       @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;1,100;1,300;1,400&display=swap');
@@ -108,7 +108,7 @@
   <!-- Define header and footer blocks before your content -->
   <header>
     <div class="header-content" style="padding: 0.5cm">
-      <h1>PT WAHANA INTEGRA NUSANTARA</h1>
+      <h2>PT WAHANA INTEGRA NUSANTARA</h2>
       <span>Phone: +62 822-3585-0005 | Email: halo@cataliz.id</span>
     </div>
   </header>
