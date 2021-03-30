@@ -29,6 +29,6 @@ class SendSessionRescheduledMail extends Mailable
      */
     public function build()
     {
-        return $this->subject("Cataliz.id - Rescheduled Session")->view('email_template.rescheduled_session_mail', ['email_data' => $this->email_data])->from('cataliz.mail@gmail.com');
+        return $this->subject("Cataliz.id - Rescheduled Session")->view('email_template.rescheduled_session_mail', ['email_data' => $this->email_data])->from('no-reply@cataliz.id');
     }
 }

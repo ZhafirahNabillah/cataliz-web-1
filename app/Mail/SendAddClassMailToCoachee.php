@@ -29,6 +29,6 @@ class SendAddClassMailToCoachee extends Mailable
      */
     public function build()
     {
-        return $this->subject("Cataliz.id - New Coach")->view('email_template.create_class_coachee', ['email_data' => $this->email_data])->from('cataliz.mail@gmail.com');
+        return $this->subject("Cataliz.id - New Coach")->view('email_template.create_class_coachee', ['email_data' => $this->email_data])->from('no-reply@cataliz.id');
     }
 }

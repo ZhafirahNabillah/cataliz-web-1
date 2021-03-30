@@ -29,6 +29,6 @@ class SendForgotPasswordMail extends Mailable
      */
      public function build()
      {
-         return $this->subject("Cataliz.id - Forgot Password Reset Link")->view('email_template.forgot_password_mail', ['email_data' => $this->email_data])->from('cataliz.mail@gmail.com');
+         return $this->subject("Cataliz.id - Forgot Password Reset Link")->view('email_template.forgot_password_mail', ['email_data' => $this->email_data])->from('no-reply@cataliz.id');
      }
 }
