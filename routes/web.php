@@ -91,7 +91,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/agendas/sessions_individual', [AgendaController::class, 'show_individual_sessions'])->name('agendas.sessions_individual');
 	Route::get('/agendas/sessions_group', [AgendaController::class, 'show_group_sessions'])->name('agendas.sessions_group');
 
-	Route::resource('agendas', AgendaController::class);
+	Route::resource('agendas', AgendaController::class)->except([
+    'update', 'edit'
+	]);
 	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
 	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
 	Route::get('/ajaxPlans', [AgendaController::class, 'ajaxPlans'])->name('plans.search');
@@ -103,7 +105,9 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/coachee_pdf', [ClientController::class, 'coachee_pdf_download'])->name('coachee_pdf');
 	Route::get('/coach_pdf', [ClientController::class, 'coach_pdf_download'])->name('coach_pdf');
 
-	Route::resource('clients', ClientController::class);
+	Route::resource('clients', ClientController::class)->except([
+    'store'
+	]);;
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}/show_upcoming', [ClientController::class, 'show_upcoming_list'])->name('clients.show_upcoming');
 	Route::get('/clients/{client}/show_agendas', [ClientController::class, 'show_agendas_list'])->name('clients.show_agendas');

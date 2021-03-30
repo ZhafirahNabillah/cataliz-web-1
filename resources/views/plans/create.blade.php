@@ -71,7 +71,7 @@
                   </label>
                 </div>
                 @endforeach --}}
-
+                <div id="client-error"></div>
                 @error('client')
                 <small class="text-danger">
                   <strong>{{ $message }}</strong>
@@ -82,9 +82,9 @@
               <div class="row group_wrapper" style="display: none;">
                 <div class="col-md-12 form-group">
                   <label for="fp-default">Group Code</label>
-                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" placeholder="Fill group code here..">
+                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" placeholder="Fill group code here.." disabled>
                   <small><strong>group code can consist of number and character</strong></small>
-                  <div id="group-code-error"></div>
+                  <div id="group_code-error"></div>
                   @error('group_code')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -98,6 +98,7 @@
                   <label for="fp-default">Date</label>
                   <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
                     value="{{ old('date') }}" placeholder="Select your date...">
+                  <div id="date-error"></div>
                   @error('date')
                   <small class="text-danger">
                     <strong>{{ $message }}</strong>
@@ -168,6 +169,7 @@
                   @enderror
                 </div>
               </div>
+              <input type="hidden" name="client_length" id="client_length">
 
               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
           </div>
@@ -225,8 +227,11 @@
         // console.log(count);
         if (count > 1) {
           $('.group_wrapper').show(500);
+          $("#group_code").prop('disabled', false);
         } else {
           $('.group_wrapper').hide(500);
+          $("#group_code").prop('disabled', true);
+          $('#group_code-error').empty();
         }
     });
 
@@ -234,8 +239,11 @@
       var count = $(this).select2('data').length;
       if (count > 1) {
         $('.group_wrapper').show(500);
+        $("#group_code").prop('disabled', false);
       } else {
         $('.group_wrapper').hide(500);
+        $("#group_code").prop('disabled', true);
+        $('#group_code-error').empty();
       }
     });
 
@@ -291,6 +299,7 @@
             } else {
               document.getElementById("character_count_" + element_id).innerHTML = "<strong>" + count + "/255</strong>";
             }
+            tinymce.triggerSave();
           });
         }
       });
@@ -327,6 +336,78 @@
       //   });
       //   console.log('loaded');
       // });
+
+      $("#saveBtn").click(function(e) {
+        e.preventDefault();
+        var client_length = parseInt($("#state").val().length);
+        // console.log(client_length);
+        $('#client_length').val(client_length);
+        $('#saveBtn').html('Sending..');
+        $('#client-error').empty();
+        $('#group_code-error').empty();
+        $('#date-error').empty();
+        $('#objective-error').empty();
+        $('#success_indicator-error').empty();
+        $('#development_areas-error').empty();
+        $('#support-error').empty();
+
+        var data = $('#plan_form').serialize();
+        console.log(data);
+
+        $.ajax({
+          data: data,
+          url: "{{ route('plans.store') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function(data) {
+
+            $('#saveBtn').html('Submit');
+            window.location = "{{ route('plans.index') }}"
+            // if ($('#action_type').val() == 'create-user') {
+            //   Swal.fire({
+            //     icon: 'success',
+            //     title: 'Account created successfully!',
+            //   });
+            // } else if ($('#action_type').val() == 'edit-user') {
+            //   Swal.fire({
+            //     icon: 'success',
+            //     title: 'Account updated successfully!',
+            //   });
+            // }
+            // table_coach.draw();
+            // table_admin.draw();
+            // table_coachee.draw();
+          },
+          error: function(reject) {
+            $('#saveBtn').html('Submit');
+            if (reject.status === 422) {
+              var errors = JSON.parse(reject.responseText);
+              if (errors.client) {
+                $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+              }
+              if (errors.group_code) {
+                $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+              }
+              if (errors.date) {
+                $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+              }
+              if (errors.objective) {
+                $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+              }
+              if (errors.success_indicator) {
+                $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+              }
+              if (errors.development_areas) {
+                $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+              }
+              if (errors.support) {
+                $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+              }
+            }
+          }
+        });
+        /**Ajax code ends**/
+      });
 
       today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
       $('#date').datepicker({

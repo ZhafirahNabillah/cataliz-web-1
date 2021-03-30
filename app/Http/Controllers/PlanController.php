@@ -6,6 +6,7 @@ use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Client;
 use App\Models\Plan;
 use App\Models\User;
@@ -188,14 +189,32 @@ class PlanController extends Controller
   public function store(Request $request)
   {
     // return $request;
-    $this->validate($request, [
+    // return response()->json($request);
+
+    // if ($request->filled('client')) {
+    //   $count = count(collect($request)->get('client'));
+    //   // return response()->json($count);
+    // } else {
+    //   $count = 0;
+    //   // return response()->json($count);
+    // }
+    //
+    // return response()->json($request);
+
+    $validator = Validator::make($request->all(), [
       'client'  => 'required',
       'date' => 'required',
       'objective' => 'required|max:255',
       'success_indicator' => 'required|max:255',
       'development_areas' => 'required|max:255',
       'support' => 'required|max:255',
+      'group_code' => 'sometimes|required|min:5|max:10',
     ]);
+
+
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 422);
+    }
 
     $count = 0;
 
@@ -211,6 +230,7 @@ class PlanController extends Controller
     $coach = Coach::where('user_id', auth()->user()->id)->first();
 
     if ($count == 1) {
+
       $plan = Plan::updateOrCreate(['id' => $request->id], [
         'date' => $request->date,
         'objective' => $objective,
@@ -221,10 +241,6 @@ class PlanController extends Controller
         'group_id' => null
       ]);
     } else {
-      $this->validate($request, [
-        'group_code' => Rule::requiredIf($count > 1),
-        'group_code'  => 'min:5|max:10'
-      ]);
       // if ($request->group_id == null) {
       //   $rid = rand(00000, 99999);
       //   while (Plan::where('group_id', $rid)->exists()) {
@@ -259,8 +275,9 @@ class PlanController extends Controller
     //   'client_id' => $plan_type
     // ]);
 
-
-    return redirect('/plans')->with('success', 'The plan has been added successfully!!');
+    $request->session()->flash('success','The plan has been added successfully!');
+    return response()->json(['success' => true]);
+    // return redirect('/plans')->with('success', 'The plan has been added successfully!!');
   }
 
   /**
