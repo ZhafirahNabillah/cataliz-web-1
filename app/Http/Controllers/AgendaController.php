@@ -407,12 +407,8 @@ class AgendaController extends Controller
       'topic'         => 'required',
       'date'          => 'required',
       'time'          => 'required',
+      'media'         => 'required',
       'duration'      => 'required',
-    ], [
-      'topic.required'            => "Silahkan isi topic sesi terlebih dahulu!",
-      'date.required'             => "Silahkan isi tanggal sesi terlebih dahulu!",
-      'time.required'             => "Silahkan isi waktu sesi terlebih dahulu!",
-      'duration.required'         => "Silahkan isi durasi sesi terlebih dahulu!",
     ]);
 
     $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();

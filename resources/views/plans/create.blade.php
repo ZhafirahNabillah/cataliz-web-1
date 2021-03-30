@@ -72,8 +72,10 @@
                 </div>
                 @endforeach --}}
 
-                @error('')
-                <strong class="text-danger">{{ $message }}</strong>
+                @error('client')
+                <small class="text-danger">
+                  <strong>{{ $message }}</strong>
+                </small>
                 @enderror
               </div>
 
@@ -96,11 +98,10 @@
                   <label for="fp-default">Date</label>
                   <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
                     value="{{ old('date') }}" placeholder="Select your date...">
-                  <div id="date-error"></div>
                   @error('date')
-                  <span class="invalid-feedback" role="alert">
+                  <small class="text-danger">
                     <strong>{{ $message }}</strong>
-                  </span>
+                  </small>
                   @enderror
                 </div>
               </div>
@@ -294,38 +295,38 @@
         }
       });
 
-      $('#saveBtn').click(function(e) {
-        $('#plan_form').validate({
-          rules: {
-            'client_id': {
-              required: true
-            },
-            'date': {
-              required: true
-            }
-          },
-          messages: {
-            'client_id': {
-              required: '<strong class="text-danger">Name is required!</strong>'
-            },
-            'date': {
-              required: '<strong class="text-danger">date is required!</strong>'
-            }
-          },
-          errorPlacement: function(error, element) {
-            if (element.attr("name") == "date") {
-              error.appendTo("#date-error");
-            } else if (element.attr("name") == "client_id") {
-              error.appendTo("#client_id-error");
-            }
-          },
-          //submit Handler
-          submitHandler: function(form) {
-            form.submit();
-          }
-        });
-        console.log('loaded');
-      });
+      // $('#saveBtn').click(function(e) {
+      //   $('#plan_form').validate({
+      //     rules: {
+      //       'client_id': {
+      //         required: true
+      //       },
+      //       'date': {
+      //         required: true
+      //       }
+      //     },
+      //     messages: {
+      //       'client_id': {
+      //         required: '<strong class="text-danger">Name is required!</strong>'
+      //       },
+      //       'date': {
+      //         required: '<strong class="text-danger">date is required!</strong>'
+      //       }
+      //     },
+      //     errorPlacement: function(error, element) {
+      //       if (element.attr("name") == "date") {
+      //         error.appendTo("#date-error");
+      //       } else if (element.attr("name") == "client_id") {
+      //         error.appendTo("#client_id-error");
+      //       }
+      //     },
+      //     //submit Handler
+      //     submitHandler: function(form) {
+      //       form.submit();
+      //     }
+      //   });
+      //   console.log('loaded');
+      // });
 
       today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
       $('#date').datepicker({

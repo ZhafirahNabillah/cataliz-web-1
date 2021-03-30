@@ -188,12 +188,6 @@ class PlanController extends Controller
   public function store(Request $request)
   {
     // return $request;
-    $count = 0;
-
-    foreach ($request->input('client') as $client) {
-      $count = $count + 1;
-    }
-
     $this->validate($request, [
       'client'  => 'required',
       'date' => 'required',
@@ -201,8 +195,13 @@ class PlanController extends Controller
       'success_indicator' => 'required|max:255',
       'development_areas' => 'required|max:255',
       'support' => 'required|max:255',
-      'group_code' => Rule::requiredIf($count > 1)
     ]);
+
+    $count = 0;
+
+    foreach ($request->input('client') as $client) {
+      $count = $count + 1;
+    }
 
     $objective = strip_tags($request->objective);
     $success_indicator = strip_tags($request->success_indicator);
@@ -222,6 +221,10 @@ class PlanController extends Controller
         'group_id' => null
       ]);
     } else {
+      $this->validate($request, [
+        'group_code' => Rule::requiredIf($count > 1),
+        'group_code'  => 'min:5|max:10'
+      ]);
       // if ($request->group_id == null) {
       //   $rid = rand(00000, 99999);
       //   while (Plan::where('group_id', $rid)->exists()) {

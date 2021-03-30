@@ -124,9 +124,9 @@
                           'Whatsapp') selected @endif>Whatsapp</option>
                       </select>
                       @error('media')
-                      <span class="invalid-feedback" role="alert">
+                      <small class="text-danger">
                         <strong>{{ $message }}</strong>
-                      </span>
+                      </small>
                       @enderror
                     </div>
                   </div>
@@ -164,11 +164,13 @@
                     </div> --}}
                     <div class="form-group col-md-4">
                       <label for="time">Activity Time</label>
-                      <select name="time" class="form-control @error('start') is-invalid @enderror" id="time" disabled>
+                      <select name="time" class="form-control @error('time') is-invalid @enderror" id="time" disabled>
                         <option hidden selected value>Pilih Jam Mulai</option>
                       </select>
                       @error('time')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
                       @enderror
                     </div>
                   </div>
