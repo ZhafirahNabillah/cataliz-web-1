@@ -190,18 +190,13 @@
 
 
                     <tr>
-                      <td style="text-align: center;">
-                        <h1 style="color: black;margin-top: 20px;margin-left: 15px;font-weight: bold;">Pairing
+                      <td style="text-align: center;background-color: #FCB0B0;">
+                        <h1 style="color: black;margin-top: 20px;margin-left: 15px;font-weight: bold;">Removed
                           Successfully</h1>
-                        <span style="margin-left: 15px;color: #656565;">You has been successfully pairing a coach to a
-                          new coachee.</span>
+                        <span style="margin-left: 15px;color: #656565;">You have been successfully removed a client from
+                          a coach!</span>
                         <br>
-                        <!-- link ke agendas -->
-                        <div style="padding-top: 10px;">
-                          <a href="">
-                            <button class="button button1">Go To My Coaches</button>
-                          </a>
-                        </div>
+                        <span>&nbsp;</span>
                       </td>
                     </tr>
                     <tr style="height: 80px;">
@@ -222,7 +217,7 @@
                       <td colspan="3">
                         <!-- Nama user coach -->
                         <h3 style="color: black;">Hai, Admin Name</h3>
-                        <p style="color: black;">You has been successfully pairing :
+                        <p style="color: black;">You have been successfully removed :
                         </p>
                       </td>
                     </tr>
@@ -232,7 +227,7 @@
                         <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
                       </td>
                       <td>
-                        <p>with</p>
+                        <p>and</p>
                       </td>
                       <td>
 
@@ -252,6 +247,11 @@
                       <td colspan="3">
                         <p>Email notification will be sent to the party concerned. If you don't think you've paired it,
                           please cancel it by accessing the Class menu or clicking on the button below.</p>
+                        <div style="padding-top: 10px;">
+                          <a href="">
+                            <button class="button button1">Go To My Class</button>
+                          </a>
+                        </div>
                       </td>
                     </tr>
               </tr>
@@ -272,7 +272,7 @@
     </tbody>
   </table>
 
-  <tr>
+  <tr style="background-color: #726F6F;">
     <td valign="top">
 
       <center>
@@ -284,13 +284,13 @@
               <table cellspacing="0" cellpadding="0" width="100%">
 
                 <tr>
-                  <td style="padding: 30px 0;" class="mobile-padding">
+                  <td style="padding: 30px;" class="mobile-padding">
 
                     <table class="force-full-width" cellspacing="0" cellpadding="0">
                       <tr>
 
                         <td style="text-align: center; vertical-align:top;">
-                          <span style="color: #656565;">
+                          <span style="color: white;">
                             For further information, please contact email <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZdjtXMLCzXZJhvLlxSMhgZZgkCdPTltDMhFmjLSmzsjxLwncvlSPTzgnCJlmhpvrtCcvq">halo@cataliz.id</a>
                             or +62 822-3585-0005
                             on Monday - Friday 09:00 - 18:00 WIB.
@@ -310,7 +310,7 @@
     </td>
   </tr>
   <tr>
-    <td style="background-color:white;">
+    <td style="background-color:#726F6F;">
       <center>
         <table cellspacing="0" cellpadding="0" width="500" class="w320">
           <tr>
@@ -319,10 +319,10 @@
                 <tr style="text-align: center;">
                   <td style="">
                     <a href="https://www.instagram.com/cataliz.id/">
-                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
+                      <img src="{{{{ $message->embed(public_path().'/assets/images/icons/email/white_instagram.png') }}">
                     </a>
                     <a href="https://cataliz.id/">
-                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
+                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_link.png') }}">
                     </a>
                   </td>
                 </tr>
@@ -334,7 +334,7 @@
               <center>
                 <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
                   <tr style="font-size: 10px;">
-                    <td style="text-align:center; margin:0 auto;color: #656565;" width="100%">
+                    <td style="text-align:center; margin:0 auto;color: white;" width="100%">
                       <p>COPYRIGHT &copy; {{ Carbon\Carbon::now()->year }}
                         Cataliz.id. All Right Reserved
                       </p>

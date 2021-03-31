@@ -182,7 +182,9 @@
                     <tr style="padding-left: 20px;">
                       <td style="text-align: center;">
                         <div class="iconatas">
-                          <img style="width: 30px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
+
+                          <img style="width: 30px;" src=" {{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
+
                           <img style="width: 70px;padding-bottom: 4px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/cataliz.png') }}">
                         </div>
                       </td>
@@ -190,19 +192,17 @@
 
 
                     <tr>
-                      <td style="text-align: center;">
-                        <h1 style="color: black;margin-top: 20px;margin-left: 15px;font-weight: bold;">Pairing
-                          Successfully</h1>
-                        <span style="margin-left: 15px;color: #656565;">You has been successfully pairing a coach to a
-                          new coachee.</span>
+                      <td style="text-align: center;background-color: #FCB0B0;">
+                        <h1 style="color: black;margin-top: 20px;margin-left: 15px;font-weight: bold;">Removed Coach
+                        </h1>
+                        <span style="margin-left: 15px;color: #656565;">Admin has been removed you from your
+                          coach!</span>
                         <br>
-                        <!-- link ke agendas -->
-                        <div style="padding-top: 10px;">
-                          <a href="">
-                            <button class="button button1">Go To My Coaches</button>
-                          </a>
-                        </div>
+                        <span>&nbsp;</span>
                       </td>
+
+
+
                     </tr>
                     <tr style="height: 80px;">
                       <td style="text-align: left;">
@@ -218,140 +218,124 @@
 
                   <table cellspacing="0" cellpadding="0" class="force-full-width">
                     <tr>
-                    <tr>
-                      <td colspan="3">
-                        <!-- Nama user coach -->
-                        <h3 style="color: black;">Hai, Admin Name</h3>
-                        <p style="color: black;">You has been successfully pairing :
-                        </p>
-                      </td>
+                      <!-- Nama user coach -->
+                      <h3 style="color: black;">Hai, {{ $email_data['coach_name'] }}</h3>
+                      <p style="color: black;">Admin has been removed you from your coach. This is your coach’s
+                        introduction.
+                      </p>
+                      <!-- foto profile -->
+                      <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
+                      <!-- /foto profile -->
+                      <br>
+                      <b style="padding-top: 10px;">Coach Name</b>
+                      <br>
+                      <p>
+                        Thank you for studying with this coach. You are not a client of this coach again. Sorry and see
+                        you for your next business
+                      </p>
+                      <div style="padding-top: 10px;">
+                        <a href="">
+                          <button class="button button1">Go To My Coaches</button>
+                        </a>
+                      </div>
                     </tr>
-                    <tr>
-                      <td>
+                  </table>
+                  <br>
 
-                        <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
-                      </td>
-                      <td>
-                        <p>with</p>
-                      </td>
-                      <td>
 
-                        <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/4.png') }}" alt="">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><b style="padding-top: 10px;">Coach Name</b></td>
-                      <td><br></td>
-                      <td>
-                        <b style="padding-top: 10px;">Coachee Name</b>
-                        <br>
-                        <span style="font-size: 12px;">Company Name</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="3">
-                        <p>Email notification will be sent to the party concerned. If you don't think you've paired it,
-                          please cancel it by accessing the Class menu or clicking on the button below.</p>
-                      </td>
-                    </tr>
+                </td>
               </tr>
             </table>
-            <br>
+
+            <table cellspacing="0" cellpadding="0px" class="force-full-width" width="100%">
+              <tbody>
+                <tr style="text-align: center;">
+                  <br>
+                </tr>
+
+              </tbody>
+            </table>
+
+            <tr style="background-color: #726F6F;">
+              <td valign="top">
+
+                <center>
+                  <table cellspacing="0" cellpadding="0" width="500" class="w320">
+                    <tr>
+                      <td valign="top" style="border-bottom:1px solid #E3B338;">
 
 
+                        <table cellspacing="0" cellpadding="0" width="100%">
+
+                          <tr>
+                            <td style="padding: 30px 0;" class="mobile-padding">
+
+                              <table class="force-full-width" cellspacing="0" cellpadding="0">
+                                <tr>
+
+                                  <td style="text-align: center; vertical-align:top;">
+                                    <span style="color: white;">
+                                      For further information, please contact email <a style="color: white;" href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZdjtXMLCzXZJhvLlxSMhgZZgkCdPTltDMhFmjLSmzsjxLwncvlSPTzgnCJlmhpvrtCcvq">halo@cataliz.id</a>
+                                      or +62 822-3585-0005
+                                      on Monday - Friday 09:00 - 18:00 WIB.
+                                    </span>
+                                  </td>
+                                </tr>
+                              </table>
+
+                            </td>
+                          </tr>
+
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </center>
+              </td>
+            </tr>
+            <tr style="background-color: #726F6F;">
+              <td>
+                <center>
+                  <table cellspacing="0" cellpadding="0" width="500" class="w320">
+                    <tr>
+                      <td>
+                        <table cellspacing="0" cellpadding="30" width="100%">
+                          <tr style="text-align: center;">
+                            <td style="">
+                              <a href="https://www.instagram.com/cataliz.id/">
+                                <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_instagram.png') }}">
+                              </a>
+                              <a href="https://cataliz.id/">
+                                <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_link.png') }}">
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <center>
+                          <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
+                            <tr style="font-size: 10px; color: white;">
+                              <td style="text-align:center; margin:0 auto;" width="100%">
+                                <p>COPYRIGHT &copy; {{ Carbon\Carbon::now()->year }}
+                                  Cataliz.id. All Right Reserved
+                                </p>
+
+                              </td>
+                            </tr>
+                          </table>
+                        </center>
+                      </td>
+                    </tr>
+                  </table>
+                </center>
+              </td>
+            </tr>
+        </table>
       </td>
     </tr>
-  </table>
-
-  <table cellspacing="0" cellpadding="0px" class="force-full-width" width="100%">
-    <tbody>
-      <tr style="text-align: center;">
-        <br>
-      </tr>
-
-    </tbody>
-  </table>
-
-  <tr>
-    <td valign="top">
-
-      <center>
-        <table cellspacing="0" cellpadding="0" width="500" class="w320">
-          <tr>
-            <td valign="top" style="border-bottom:1px solid #a1a1a1;border-top:1px solid #a1a1a1">
-
-
-              <table cellspacing="0" cellpadding="0" width="100%">
-
-                <tr>
-                  <td style="padding: 30px 0;" class="mobile-padding">
-
-                    <table class="force-full-width" cellspacing="0" cellpadding="0">
-                      <tr>
-
-                        <td style="text-align: center; vertical-align:top;">
-                          <span style="color: #656565;">
-                            For further information, please contact email <a href="https://mail.google.com/mail/u/0/#inbox?compose=CllgCJZdjtXMLCzXZJhvLlxSMhgZZgkCdPTltDMhFmjLSmzsjxLwncvlSPTzgnCJlmhpvrtCcvq">halo@cataliz.id</a>
-                            or +62 822-3585-0005
-                            on Monday - Friday 09:00 - 18:00 WIB.
-                          </span>
-                        </td>
-                      </tr>
-                    </table>
-
-                  </td>
-                </tr>
-
-              </table>
-            </td>
-          </tr>
-        </table>
-      </center>
-    </td>
-  </tr>
-  <tr>
-    <td style="background-color:white;">
-      <center>
-        <table cellspacing="0" cellpadding="0" width="500" class="w320">
-          <tr>
-            <td>
-              <table cellspacing="0" cellpadding="30" width="100%">
-                <tr style="text-align: center;">
-                  <td style="">
-                    <a href="https://www.instagram.com/cataliz.id/">
-                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blackinstagram.png') }}">
-                    </a>
-                    <a href="https://cataliz.id/">
-                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/blacklink.png') }}">
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <center>
-                <table style="margin:0 auto;" cellspacing="0" cellpadding="5" width="100%">
-                  <tr style="font-size: 10px;">
-                    <td style="text-align:center; margin:0 auto;color: #656565;" width="100%">
-                      <p>COPYRIGHT &copy; {{ Carbon\Carbon::now()->year }}
-                        Cataliz.id. All Right Reserved
-                      </p>
-
-                    </td>
-                  </tr>
-                </table>
-              </center>
-            </td>
-          </tr>
-        </table>
-      </center>
-    </td>
-  </tr>
-  </table>
-  </td>
-  </tr>
   </table>
 </body>
 
