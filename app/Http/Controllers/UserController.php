@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Agenda_detail;
 use App\Models\Client;
+use App\Models\Coach;
+use App\Models\Agenda;
+use App\Models\Agenda_detail;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -49,8 +51,11 @@ class UserController extends Controller
     }
     if (auth()->user()->hasRole('coachee')) {
       $user = User::with('roles')->where('id', $id)->first();
-      $total_coaching = Agenda_detail::join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')->where('agendas.owner_id', '=', $id)->count();
-      $total_client = Client::where('owner_id', $id)->count();
+      $coach = $user->coach;
+      $plans_id = $coach->plan->pluck('id');
+      $agendas_id = Agenda::whereIn('plan_id', $plans_id)->pluck('id');
+      $total_coaching = Agenda_detail::whereIn('agenda_id', $agendas_id)->count();
+      $total_client = $coach->clients->count();
 
       $user->phone = '+62' . substr($user->phone, 0, -5) . 'xxxxx';
       $user->email = str_pad(substr($user->email, -11), strlen($user->email), 'x', STR_PAD_LEFT);

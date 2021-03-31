@@ -81,10 +81,7 @@
                     contains($client->id)) selected @endif>{{ $client->name }}</option>
                   @endforeach
                 </select>
-
-                @error('')
-                <strong class="text-danger">{{ $message }}</strong>
-                @enderror
+                <div id="client-error"></div>
               </div>
 
               <div class="row group_wrapper" style="display: none;">
@@ -92,7 +89,7 @@
                   <label for="fp-default">Group Code</label>
                   <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" value="{{ $plan->group_id }}" placeholder="Fill group code here..">
                   <small><strong>group code can consist of number and character</strong></small>
-                  <div id="group-code-error"></div>
+                  <div id="group_code-error"></div>
                   @error('group_code')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -177,6 +174,7 @@
                   @enderror
                 </div>
               </div>
+              <input type="hidden" name="client_length" id="client_length">
 
               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
           </div>
@@ -193,7 +191,7 @@
 <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <style>
   label.error.fail-alert {
@@ -225,21 +223,27 @@
     });
 
     $(document).ready(function() {
-        var count = $('#state :selected').length;
-        // console.log(count);
-        if (count > 1) {
-          $('.group_wrapper').show(500);
-        } else {
-          $('.group_wrapper').hide(500);
-        }
+      var count = $('#state :selected').length;
+      // console.log(count);
+      if (count > 1) {
+        $('.group_wrapper').show(500);
+        $("#group_code").prop('disabled', false);
+      } else {
+        $('.group_wrapper').hide(500);
+        $("#group_code").prop('disabled', true);
+        $('#group_code-error').empty();
+      }
     });
 
-    $('#state').on('select2:close', function (evt) {
+    $('#state').on('select2:close', function(evt) {
       var count = $(this).select2('data').length;
       if (count > 1) {
         $('.group_wrapper').show(500);
+        $("#group_code").prop('disabled', false);
       } else {
         $('.group_wrapper').hide(500);
+        $("#group_code").prop('disabled', true);
+        $('#group_code-error').empty();
       }
     });
 
@@ -262,41 +266,114 @@
             } else {
               document.getElementById("character_count_" + element_id).innerHTML = "<strong>" + count + "/255</strong>";
             }
+            tinymce.triggerSave();
           });
         }
       });
 
-      $('#saveBtn').click(function(e) {
-        $('#plan_form').validate({
-          rules: {
-            'client_id': {
-              required: true
-            },
-            'date': {
-              required: true
-            }
+      // $('#saveBtn').click(function(e) {
+      //   $('#plan_form').validate({
+      //     rules: {
+      //       'client_id': {
+      //         required: true
+      //       },
+      //       'date': {
+      //         required: true
+      //       }
+      //     },
+      //     messages: {
+      //       'client_id': {
+      //         required: '<strong class="text-danger">Name is required!</strong>'
+      //       },
+      //       'date': {
+      //         required: '<strong class="text-danger">date is required!</strong>'
+      //       }
+      //     },
+      //     errorPlacement: function(error, element) {
+      //       if (element.attr("name") == "date") {
+      //         error.appendTo("#date-error");
+      //       } else if (element.attr("name") == "client_id") {
+      //         error.appendTo("#client_id-error");
+      //       }
+      //     },
+      //     //submit Handler
+      //     submitHandler: function(form) {
+      //       form.submit();
+      //     }
+      //   });
+      //   console.log('loaded');
+      // });
+
+      $("#saveBtn").click(function(e) {
+        e.preventDefault();
+        var client_length = parseInt($("#state").val().length);
+        // console.log(client_length);
+        $('#client_length').val(client_length);
+        $('#saveBtn').html('Sending..');
+        $('#client-error').empty();
+        $('#group_code-error').empty();
+        $('#date-error').empty();
+        $('#objective-error').empty();
+        $('#success_indicator-error').empty();
+        $('#development_areas-error').empty();
+        $('#support-error').empty();
+
+        var data = $('#plan_form').serialize();
+        console.log(data);
+
+        $.ajax({
+          data: data,
+          url: "{{ route('plans.store') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function(data) {
+
+            $('#saveBtn').html('Submit');
+            window.location = "{{ route('plans.index') }}"
+            // if ($('#action_type').val() == 'create-user') {
+            //   Swal.fire({
+            //     icon: 'success',
+            //     title: 'Account created successfully!',
+            //   });
+            // } else if ($('#action_type').val() == 'edit-user') {
+            //   Swal.fire({
+            //     icon: 'success',
+            //     title: 'Account updated successfully!',
+            //   });
+            // }
+            // table_coach.draw();
+            // table_admin.draw();
+            // table_coachee.draw();
           },
-          messages: {
-            'client_id': {
-              required: '<strong class="text-danger">Name is required!</strong>'
-            },
-            'date': {
-              required: '<strong class="text-danger">date is required!</strong>'
+          error: function(reject) {
+            $('#saveBtn').html('Submit');
+            if (reject.status === 422) {
+              var errors = JSON.parse(reject.responseText);
+              if (errors.client) {
+                $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+              }
+              if (errors.group_code) {
+                $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+              }
+              if (errors.date) {
+                $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+              }
+              if (errors.objective) {
+                $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+              }
+              if (errors.success_indicator) {
+                $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+              }
+              if (errors.development_areas) {
+                $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+              }
+              if (errors.support) {
+                $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+              }
             }
-          },
-          errorPlacement: function(error, element) {
-            if (element.attr("name") == "date") {
-              error.appendTo("#date-error");
-            } else if (element.attr("name") == "client_id") {
-              error.appendTo("#client_id-error");
-            }
-          },
-          //submit Handler
-          submitHandler: function(form) {
-            form.submit();
           }
         });
-        console.log('loaded');
+        /**Ajax code ends**/
       });
 
       today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
