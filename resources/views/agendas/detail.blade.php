@@ -457,9 +457,8 @@
 			@endrole
 		</div>
 	</div>
-</div>
-</div>
-</div>
+
+
 <!-- END: Content-->
 @endsection
 

@@ -82,8 +82,8 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Group ID</label>
                       <input type="text" id="group_id" name="group_id" class="form-control" disabled>
-                      </div>
                     </div>
+                  </div>
 
                   <div class="row client_data_wrapper" style="display: none">
                     <div class="col-md-12 form-group">
@@ -147,91 +147,91 @@
       <!--/ Basic table -->
     </div>
   </div>
-</div>
-<!-- END: Content-->
-@endsection
 
-@push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script type="text/javascript">
-  // popover
-  $(function() {
-    $('[data-toggle="popover"]').popover()
-  })
+  <!-- END: Content-->
+  @endsection
 
-  // $('.livesearch').select2({
-  //   placeholder: 'Select client',
-  //   ajax: {
-  //     url: "{{route('clients.search')}}",
-  //     dataType: 'json',
-  //     delay: 250,
-  //     processResults: function(data) {
-  //       return {
-  //         results: $.map(data, function(item) {
-  //           console.log(item)
-  //           return {
-  //             text: item.name,
-  //             id: item.id,
-  //             org: item.organization,
-  //             co: item.company
-  //           }
-  //         })
-  //       };
-  //     },
-  //     cache: true
-  //   }
-  // });
-  //
-  // $(".livesearch").on('change', function(e) {
-  //   // Access to full data
-  //   console.log($(this).select2('data'));
-  //   console.log($(this).select2('data')[0].id);
-  //   var dd = $(this).select2('data')[0];
-  //   $('#organization').val(dd.org);
-  //   $('#company').val(dd.co);
-  // });
+  @push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script type="text/javascript">
+    // popover
+    $(function() {
+      $('[data-toggle="popover"]').popover()
+    })
 
-  $('.livesearch-plans').select2({
-    placeholder: 'Select plans',
-    ajax: {
-      url: "{{route('plans.search')}}",
-      dataType: 'json',
-      delay: 250,
-      processResults: function(data) {
-        return {
-          results: $.map(data, function(item) {
-            console.log(item)
-            return {
-              text: item.objective,
-              id: item.id,
-              client_id : item.client_id,
-              group_id : item.group_id
-            }
-          })
-        };
-      },
-      cache: true
-    }
-  });
+    // $('.livesearch').select2({
+    //   placeholder: 'Select client',
+    //   ajax: {
+    //     url: "{{route('clients.search')}}",
+    //     dataType: 'json',
+    //     delay: 250,
+    //     processResults: function(data) {
+    //       return {
+    //         results: $.map(data, function(item) {
+    //           console.log(item)
+    //           return {
+    //             text: item.name,
+    //             id: item.id,
+    //             org: item.organization,
+    //             co: item.company
+    //           }
+    //         })
+    //       };
+    //     },
+    //     cache: true
+    //   }
+    // });
+    //
+    // $(".livesearch").on('change', function(e) {
+    //   // Access to full data
+    //   console.log($(this).select2('data'));
+    //   console.log($(this).select2('data')[0].id);
+    //   var dd = $(this).select2('data')[0];
+    //   $('#organization').val(dd.org);
+    //   $('#company').val(dd.co);
+    // });
 
-  $(".livesearch-plans").on('change', function(e) {
-    // Access to full data
-    console.log($(this).select2('data'));
-    console.log($(this).select2('data')[0].text);
-    var dd = $(this).select2('data')[0];
-    if (dd.client_id != null) {
-      $(".group_id_wrapper").hide();
-      $.get("" + '/get_client_data/' + dd.client_id, function(data) {
-				$("#client_name").val(data.name);
-        $("#client_organization").val(data.organization);
-        $("#client_company").val(data.company);
-			});
-      $(".client_data_wrapper").show();
-    } else if (dd.group_id != null) {
-      $(".client_data_wrapper").hide();
-      $(".group_id_wrapper").show();
-      $("#group_id").val(dd.group_id);
-    }
-  });
-</script>
-@endpush
+    $('.livesearch-plans').select2({
+      placeholder: 'Select plans',
+      ajax: {
+        url: "{{route('plans.search')}}",
+        dataType: 'json',
+        delay: 250,
+        processResults: function(data) {
+          return {
+            results: $.map(data, function(item) {
+              console.log(item)
+              return {
+                text: item.objective,
+                id: item.id,
+                client_id: item.client_id,
+                group_id: item.group_id
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+
+    $(".livesearch-plans").on('change', function(e) {
+      // Access to full data
+      console.log($(this).select2('data'));
+      console.log($(this).select2('data')[0].text);
+      var dd = $(this).select2('data')[0];
+      if (dd.client_id != null) {
+        $(".group_id_wrapper").hide();
+        $.get("" + '/get_client_data/' + dd.client_id, function(data) {
+          $("#client_name").val(data.name);
+          $("#client_organization").val(data.organization);
+          $("#client_company").val(data.company);
+        });
+        $(".client_data_wrapper").show();
+      } else if (dd.group_id != null) {
+        $(".client_data_wrapper").hide();
+        $(".group_id_wrapper").show();
+        $("#group_id").val(dd.group_id);
+      }
+    });
+  </script>
+  @endpush

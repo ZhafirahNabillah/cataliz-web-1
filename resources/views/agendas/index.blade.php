@@ -225,169 +225,168 @@
 			</div>
 		</div>
 	</div>
-</div>
-</div>
-<!-- END: Content-->
-@endsection
 
-@push('scripts')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-<script type="text/javascript">
-	// popover
-	$(function() {
-		$('[data-toggle="popover"]').popover({
-			html: true,
-			trigger: 'hover',
-			placement: 'top',
-			content: function() {
-				return '<img src="' + $(this).data('img') + '" />';
-			}
-		})
-	})
+	<!-- END: Content-->
+	@endsection
 
-	$(function() {
-		var table_sessions_individual = $('.sessions-datatable-individual').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax: "{{ route('agendas.sessions_individual') }}",
-			columns: [{
-					data: 'DT_RowIndex',
-					name: 'DT_RowIndex'
-				},
-				{
-					data: 'name',
-					name: 'name'
-				},
-				{
-					data: 'session_name',
-					name: 'session_name'
-				},
-				{
-					data: 'date',
-					name: 'date',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'duration',
-					name: 'duration',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'status_colored',
-					name: 'status_colored'
-				},
-				{
-					data: 'action',
-					name: 'action',
-					orderable: true,
-					searchable: true
-				},
-			],
-			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-			language: {
-				paginate: {
-					// remove previous & next text from pagination
-					previous: '&nbsp;',
-					next: '&nbsp;'
-				},
-				// render: '<i data-feather="search"></i>',
-				// search: '<i data-feather="search"/>',
-				searchPlaceholder: "Search records"
-			}
-		});
-
-		var table_sessions_group = $('.sessions-datatable-group').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax: "{{ route('agendas.sessions_group') }}",
-			columns: [{
-					data: 'DT_RowIndex',
-					name: 'DT_RowIndex'
-				},
-				{
-					data: 'group',
-					name: 'group'
-				},
-				{
-					data: 'session_name',
-					name: 'session_name'
-				},
-				{
-					data: 'date',
-					name: 'date',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'duration',
-					name: 'duration',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'status_colored',
-					name: 'status_colored'
-				},
-				{
-					data: 'action',
-					name: 'action',
-					orderable: true,
-					searchable: true
-				},
-			],
-			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-			language: {
-				paginate: {
-					// remove previous & next text from pagination
-					previous: '&nbsp;',
-					next: '&nbsp;'
-				},
-				// render: '<i data-feather="search"></i>',
-				// search: '<i data-feather="search"/>',
-				searchPlaceholder: "Search records"
-			}
-		});
-
-		$('body').on('click', '.deleteAgenda', function(e) {
-
-			var agenda_id = $(this).data("id");
-			console.log(agenda_id);
-
-			Swal.fire({
-				title: "Are you sure?",
-				text: "You'll delete your agenda",
-				icon: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Yes, Sure",
-				cancelButtonText: "Cancel"
-			}).then((result) => {
-				if (result.isConfirmed) {
-
-					$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
-
-					$.ajax({
-						type: "DELETE",
-						url: "" + '/agendas/' + agenda_id,
-						success: function(data) {
-							Swal.fire({
-								icon: 'success',
-								title: 'Delete Successfully!',
-							});
-							table_sessions_group.draw();
-							table_sessions_individual.draw();
-						},
-						error: function(data) {
-							console.log('Error:', data);
-						}
-					});
+	@push('scripts')
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+	<script type="text/javascript">
+		// popover
+		$(function() {
+			$('[data-toggle="popover"]').popover({
+				html: true,
+				trigger: 'hover',
+				placement: 'top',
+				content: function() {
+					return '<img src="' + $(this).data('img') + '" />';
 				}
 			})
+		})
+
+		$(function() {
+			var table_sessions_individual = $('.sessions-datatable-individual').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('agendas.sessions_individual') }}",
+				columns: [{
+						data: 'DT_RowIndex',
+						name: 'DT_RowIndex'
+					},
+					{
+						data: 'name',
+						name: 'name'
+					},
+					{
+						data: 'session_name',
+						name: 'session_name'
+					},
+					{
+						data: 'date',
+						name: 'date',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'duration',
+						name: 'duration',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'status_colored',
+						name: 'status_colored'
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: true,
+						searchable: true
+					},
+				],
+				dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+				language: {
+					paginate: {
+						// remove previous & next text from pagination
+						previous: '&nbsp;',
+						next: '&nbsp;'
+					},
+					// render: '<i data-feather="search"></i>',
+					// search: '<i data-feather="search"/>',
+					searchPlaceholder: "Search records"
+				}
+			});
+
+			var table_sessions_group = $('.sessions-datatable-group').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{ route('agendas.sessions_group') }}",
+				columns: [{
+						data: 'DT_RowIndex',
+						name: 'DT_RowIndex'
+					},
+					{
+						data: 'group',
+						name: 'group'
+					},
+					{
+						data: 'session_name',
+						name: 'session_name'
+					},
+					{
+						data: 'date',
+						name: 'date',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'duration',
+						name: 'duration',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'status_colored',
+						name: 'status_colored'
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: true,
+						searchable: true
+					},
+				],
+				dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+				language: {
+					paginate: {
+						// remove previous & next text from pagination
+						previous: '&nbsp;',
+						next: '&nbsp;'
+					},
+					// render: '<i data-feather="search"></i>',
+					// search: '<i data-feather="search"/>',
+					searchPlaceholder: "Search records"
+				}
+			});
+
+			$('body').on('click', '.deleteAgenda', function(e) {
+
+				var agenda_id = $(this).data("id");
+				console.log(agenda_id);
+
+				Swal.fire({
+					title: "Are you sure?",
+					text: "You'll delete your agenda",
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#DD6B55",
+					confirmButtonText: "Yes, Sure",
+					cancelButtonText: "Cancel"
+				}).then((result) => {
+					if (result.isConfirmed) {
+
+						$.ajaxSetup({
+							headers: {
+								'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+							}
+						});
+
+						$.ajax({
+							type: "DELETE",
+							url: "" + '/agendas/' + agenda_id,
+							success: function(data) {
+								Swal.fire({
+									icon: 'success',
+									title: 'Delete Successfully!',
+								});
+								table_sessions_group.draw();
+								table_sessions_individual.draw();
+							},
+							error: function(data) {
+								console.log('Error:', data);
+							}
+						});
+					}
+				})
+			});
 		});
-	});
-</script>
-@endpush
+	</script>
+	@endpush

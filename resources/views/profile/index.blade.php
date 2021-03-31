@@ -493,289 +493,289 @@
 			</div>
 		</div>
 	</div>
-</div>
-<!-- END: Content-->
-@endsection
 
-@push('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-<script type="text/javascript">
-	$(function() {
-		// popover
-		$('[data-toggle="popover"]').popover({
-			html: true,
-			trigger: 'hover',
-			placement: 'top',
-			content: function() {
-				return '<img src="' + $(this).data('img') + '" />';
-			}
-		});
+	<!-- END: Content-->
+	@endsection
 
-		$(document).on('click', '#btn_edit_profil', function() {
-			$('#modals_profil').modal('hide');
-		})
-
-		$(document).on('click', '#btn_edit_picture', function() {
-			$('#modals_profil').modal('hide');
-		})
-
-		$(document).on('click', '#btn_edit_background', function() {
-			$('#modals_profil').modal('hide');
-		})
-
-		//script for coachee role
-		@role('coachee')
-		//datatable for feedbacks table
-		var table = $('.yajra-datatable-feedback').DataTable({
-			processing: true,
-			serverSide: true,
-			ajax: "{{route('clients.show_feedbacks', $user->id)}}",
-			columns: [{
-					data: 'DT_RowIndex',
-					name: 'DT_RowIndex'
-				},
-				{
-					data: 'name',
-					name: 'name',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'session_name',
-					name: 'session_name',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'topic',
-					name: 'topic',
-					defaultContent: '<i>-</i>'
-				},
-				{
-					data: 'action',
-					name: 'action',
-					orderable: true,
-					searchable: true
-				},
-			],
-			dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-			language: {
-				paginate: {
-					// remove previous & next text from pagination
-					previous: '&nbsp;',
-					next: '&nbsp;'
-				},
-				search: "<i data-feather='search'></i>",
-				searchPlaceholder: "Search records"
-			}
-		});
-
-		// show_feedback
-		$(document).on("click", "#detailFeedback", function() {
-			console.log('masuk');
-			let detail_agenda_id = $(this).data('id');
-
-			$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
-				$('#modalHeading').html("Detail Feedbacks");
-				$('#name').text(data.name);
-				$('.session_feedback').html(data.session_name);
-				$('.coach_name_feedback').html(data.name);
-				$('.topic_feedback').html(data.topic);
-				$('.feedback').html(data.feedback_from_coach);
-				$('#show_feedback').modal('show');
-
-				if (data.attachment_from_coach == null) {
-					$('.download_button_feedback').css("display", "none");
-					$('.span_none_feedback').html('Tidak ada file');
-				} else {
-					$('.span_none_feedback').html(data.attachment_from_coach);
-					$('.download_button_feedback').removeAttr('style');
-					$('.download_button_feedback').css("display", "relative");
+	@push('scripts')
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			// popover
+			$('[data-toggle="popover"]').popover({
+				html: true,
+				trigger: 'hover',
+				placement: 'top',
+				content: function() {
+					return '<img src="' + $(this).data('img') + '" />';
 				}
+			});
 
-				$('.download_button_feedback').on('click', function() {
-					window.location.href = ("" + '/agendas/' + detail_agenda_id + '/feedback_download');
+			$(document).on('click', '#btn_edit_profil', function() {
+				$('#modals_profil').modal('hide');
+			})
+
+			$(document).on('click', '#btn_edit_picture', function() {
+				$('#modals_profil').modal('hide');
+			})
+
+			$(document).on('click', '#btn_edit_background', function() {
+				$('#modals_profil').modal('hide');
+			})
+
+			//script for coachee role
+			@role('coachee')
+			//datatable for feedbacks table
+			var table = $('.yajra-datatable-feedback').DataTable({
+				processing: true,
+				serverSide: true,
+				ajax: "{{route('clients.show_feedbacks', $user->id)}}",
+				columns: [{
+						data: 'DT_RowIndex',
+						name: 'DT_RowIndex'
+					},
+					{
+						data: 'name',
+						name: 'name',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'session_name',
+						name: 'session_name',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'topic',
+						name: 'topic',
+						defaultContent: '<i>-</i>'
+					},
+					{
+						data: 'action',
+						name: 'action',
+						orderable: true,
+						searchable: true
+					},
+				],
+				dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+				language: {
+					paginate: {
+						// remove previous & next text from pagination
+						previous: '&nbsp;',
+						next: '&nbsp;'
+					},
+					search: "<i data-feather='search'></i>",
+					searchPlaceholder: "Search records"
+				}
+			});
+
+			// show_feedback
+			$(document).on("click", "#detailFeedback", function() {
+				console.log('masuk');
+				let detail_agenda_id = $(this).data('id');
+
+				$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
+					$('#modalHeading').html("Detail Feedbacks");
+					$('#name').text(data.name);
+					$('.session_feedback').html(data.session_name);
+					$('.coach_name_feedback').html(data.name);
+					$('.topic_feedback').html(data.topic);
+					$('.feedback').html(data.feedback_from_coach);
+					$('#show_feedback').modal('show');
+
+					if (data.attachment_from_coach == null) {
+						$('.download_button_feedback').css("display", "none");
+						$('.span_none_feedback').html('Tidak ada file');
+					} else {
+						$('.span_none_feedback').html(data.attachment_from_coach);
+						$('.download_button_feedback').removeAttr('style');
+						$('.download_button_feedback').css("display", "relative");
+					}
+
+					$('.download_button_feedback').on('click', function() {
+						window.location.href = ("" + '/agendas/' + detail_agenda_id + '/feedback_download');
+					});
+
 				});
+			});
+			@endrole
 
+		});
+
+		//method for validating phone number
+		$.validator.addMethod("phoneNumber", function(value, element) {
+			return this.optional(element) || /^[1-9][0-9]/.test(value);
+		}, '<strong class="text-danger">Please enter a valid phone number!</strong>');
+
+		$.validator.addMethod('filesize', function(value, element, param) {
+			return this.optional(element) || (element.files[0].size <= param * 1000000)
+		}, '<strong class="text-danger">File must be less than {0}MB!</strong>');
+
+		//submit edit profile and validation
+		$('#saveBtn1').click(function(e) {
+			console.log('masuk');
+			$('#ClientForm').validate({
+				rules: {
+					'phone': {
+						required: true,
+						'phoneNumber': true,
+						minlength: 9,
+						maxlength: 12
+					},
+					'name': {
+						required: true
+					}
+				},
+				messages: {
+					'phone': {
+						required: '<strong class="text-danger">Phone is required!</strong>',
+						minlength: '<strong class="text-danger">Phone number at least contains 9 digits!</strong>',
+						maxlength: '<strong class="text-danger">Phone number maximum contains 13 digits!</strong>'
+					},
+					'name': {
+						required: '<strong class="text-danger">Name is required!</strong>'
+					}
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "phone") {
+						error.appendTo("#phone-error");
+					} else if (element.attr("name") == "name") {
+						error.appendTo("#name-error");
+					}
+				},
+				//submit Handler
+				submitHandler: function(form) {
+					form.submit();
+					Swal.fire({
+						icon: 'success',
+						title: 'Updated succesfully!',
+						showConfirmButton: false,
+						timer: 1500
+					});
+				}
+			});
+			$('#modals_profil').modal('hide');
+		});
+
+		$('#saveProfileCoacheeBtn').click(function(e) {
+			console.log('masuk');
+			$('#formEditProfileCoachee').validate({
+				rules: {
+					'phone': {
+						required: true,
+						'phoneNumber': true,
+						minlength: 9,
+						maxlength: 12
+					},
+					'name': {
+						required: true
+					}
+				},
+				messages: {
+					'phone': {
+						required: '<strong class="text-danger">Phone is required!</strong>',
+						minlength: '<strong class="text-danger">Phone number at least contains 9 digits!</strong>',
+						maxlength: '<strong class="text-danger">Phone number maximum contains 13 digits!</strong>'
+					},
+					'name': {
+						required: '<strong class="text-danger">Name is required!</strong>'
+					}
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "phone") {
+						error.appendTo("#phone-error");
+					} else if (element.attr("name") == "name") {
+						error.appendTo("#name-error");
+					}
+				},
+				//submit Handler
+				submitHandler: function(form) {
+					form.submit();
+					Swal.fire({
+						icon: 'success',
+						title: 'Updated succesfully!',
+						showConfirmButton: false,
+						timer: 1500
+					});
+				}
+			});
+			$('#modals_profil').modal('hide');
+		});
+
+		//submit edit profile picture and validation
+		$('#saveProfilePictureBtn').click(function(e) {
+			console.log('masuk');
+			$('#formProfilePicture').validate({
+				rules: {
+					'profil_picture': {
+						required: true,
+						accept: 'image/*',
+						filesize: 2
+					}
+				},
+				messages: {
+					'profil_picture': {
+						required: '<strong class="text-danger">Profile Picture is required!</strong>',
+						accept: '<strong class="text-danger">Profile Picture must be an image file!</strong>',
+					}
+				},
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "profil_picture") {
+						error.appendTo("#profil_picture-error");
+					}
+				},
+				//submit Handler
+				submitHandler: function(form) {
+					form.submit();
+					Swal.fire({
+						icon: 'success',
+						title: 'Updated succesfully!',
+						showConfirmButton: false,
+						timer: 1500
+					});
+				}
 			});
 		});
-		@endrole
 
-	});
-
-	//method for validating phone number
-	$.validator.addMethod("phoneNumber", function(value, element) {
-		return this.optional(element) || /^[1-9][0-9]/.test(value);
-	}, '<strong class="text-danger">Please enter a valid phone number!</strong>');
-
-	$.validator.addMethod('filesize', function(value, element, param) {
-		return this.optional(element) || (element.files[0].size <= param * 1000000)
-	}, '<strong class="text-danger">File must be less than {0}MB!</strong>');
-
-	//submit edit profile and validation
-	$('#saveBtn1').click(function(e) {
-		console.log('masuk');
-		$('#ClientForm').validate({
-			rules: {
-				'phone': {
-					required: true,
-					'phoneNumber': true,
-					minlength: 9,
-					maxlength: 12
+		//submit edit background picture and validation
+		$('#saveBackgroundPictureBtn').click(function(e) {
+			console.log('masuk');
+			$('#formBackgroundPicture').validate({
+				rules: {
+					'background_picture': {
+						required: true,
+						accept: 'image/*',
+						filesize: 2
+					}
 				},
-				'name': {
-					required: true
-				}
-			},
-			messages: {
-				'phone': {
-					required: '<strong class="text-danger">Phone is required!</strong>',
-					minlength: '<strong class="text-danger">Phone number at least contains 9 digits!</strong>',
-					maxlength: '<strong class="text-danger">Phone number maximum contains 13 digits!</strong>'
+				messages: {
+					'background_picture': {
+						required: '<strong class="text-danger">Background Picture is required!</strong>',
+						accept: '<strong class="text-danger">Background Picture must be an image file!</strong>',
+					}
 				},
-				'name': {
-					required: '<strong class="text-danger">Name is required!</strong>'
-				}
-			},
-			errorPlacement: function(error, element) {
-				if (element.attr("name") == "phone") {
-					error.appendTo("#phone-error");
-				} else if (element.attr("name") == "name") {
-					error.appendTo("#name-error");
-				}
-			},
-			//submit Handler
-			submitHandler: function(form) {
-				form.submit();
-				Swal.fire({
-					icon: 'success',
-					title: 'Updated succesfully!',
-					showConfirmButton: false,
-					timer: 1500
-				});
-			}
-		});
-		$('#modals_profil').modal('hide');
-	});
-
-	$('#saveProfileCoacheeBtn').click(function(e) {
-		console.log('masuk');
-		$('#formEditProfileCoachee').validate({
-			rules: {
-				'phone': {
-					required: true,
-					'phoneNumber': true,
-					minlength: 9,
-					maxlength: 12
+				errorPlacement: function(error, element) {
+					if (element.attr("name") == "background_picture") {
+						error.appendTo("#background_picture-error");
+					}
 				},
-				'name': {
-					required: true
+				//submit Handler
+				submitHandler: function(form) {
+					form.submit();
+					Swal.fire({
+						icon: 'success',
+						title: 'Updated succesfully!',
+						showConfirmButton: false,
+						timer: 1500
+					});
 				}
-			},
-			messages: {
-				'phone': {
-					required: '<strong class="text-danger">Phone is required!</strong>',
-					minlength: '<strong class="text-danger">Phone number at least contains 9 digits!</strong>',
-					maxlength: '<strong class="text-danger">Phone number maximum contains 13 digits!</strong>'
-				},
-				'name': {
-					required: '<strong class="text-danger">Name is required!</strong>'
-				}
-			},
-			errorPlacement: function(error, element) {
-				if (element.attr("name") == "phone") {
-					error.appendTo("#phone-error");
-				} else if (element.attr("name") == "name") {
-					error.appendTo("#name-error");
-				}
-			},
-			//submit Handler
-			submitHandler: function(form) {
-				form.submit();
-				Swal.fire({
-					icon: 'success',
-					title: 'Updated succesfully!',
-					showConfirmButton: false,
-					timer: 1500
-				});
-			}
+			});
 		});
-		$('#modals_profil').modal('hide');
-	});
 
-	//submit edit profile picture and validation
-	$('#saveProfilePictureBtn').click(function(e) {
-		console.log('masuk');
-		$('#formProfilePicture').validate({
-			rules: {
-				'profil_picture': {
-					required: true,
-					accept: 'image/*',
-					filesize: 2
-				}
-			},
-			messages: {
-				'profil_picture': {
-					required: '<strong class="text-danger">Profile Picture is required!</strong>',
-					accept: '<strong class="text-danger">Profile Picture must be an image file!</strong>',
-				}
-			},
-			errorPlacement: function(error, element) {
-				if (element.attr("name") == "profil_picture") {
-					error.appendTo("#profil_picture-error");
-				}
-			},
-			//submit Handler
-			submitHandler: function(form) {
-				form.submit();
-				Swal.fire({
-					icon: 'success',
-					title: 'Updated succesfully!',
-					showConfirmButton: false,
-					timer: 1500
-				});
-			}
+		// modal edit
+		$('body').on('click', '#edit_profil', function() {
+			console.log('edit');
 		});
-	});
-
-	//submit edit background picture and validation
-	$('#saveBackgroundPictureBtn').click(function(e) {
-		console.log('masuk');
-		$('#formBackgroundPicture').validate({
-			rules: {
-				'background_picture': {
-					required: true,
-					accept: 'image/*',
-					filesize: 2
-				}
-			},
-			messages: {
-				'background_picture': {
-					required: '<strong class="text-danger">Background Picture is required!</strong>',
-					accept: '<strong class="text-danger">Background Picture must be an image file!</strong>',
-				}
-			},
-			errorPlacement: function(error, element) {
-				if (element.attr("name") == "background_picture") {
-					error.appendTo("#background_picture-error");
-				}
-			},
-			//submit Handler
-			submitHandler: function(form) {
-				form.submit();
-				Swal.fire({
-					icon: 'success',
-					title: 'Updated succesfully!',
-					showConfirmButton: false,
-					timer: 1500
-				});
-			}
-		});
-	});
-
-	// modal edit
-	$('body').on('click', '#edit_profil', function() {
-		console.log('edit');
-	});
-</script>
-@endpush
+	</script>
+	@endpush

@@ -205,7 +205,7 @@
       <!--/ Basic table -->
     </div>
   </div>
-</div>
+
 <!-- END: Content-->
 @endsection
 

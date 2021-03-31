@@ -9,9 +9,9 @@
 @include('panels.sidemenu')
 
 <div class="app-content content ">
-  <div class="content-overlay"></div>
-  <div class="header-navbar-shadow"></div>
   <div class="content-wrapper">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
     <div class="content-header row">
     </div>
     <div class="content-body">
@@ -162,6 +162,7 @@
               </div>
             </div>
           </div>
+        </div>
       </section>
       <!-- /card -->
       @endrole
@@ -490,6 +491,7 @@
               </div>
             </div>
           </div>
+        </div>
       </section>
       <!-- /card -->
       @endrole
@@ -547,306 +549,302 @@
       <!-- End Modal -->
       @endrole
     </div>
-  </div>
-</div>
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    @endsection
+
+    @push('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="text/javascript">
+      $(function() {
+
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
 
 
+        @role('admin')
+        var table_agenda_individual = $('.agenda-datatable-individual').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('home.show_agenda_individual_events') }}",
+          columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex'
+            },
+            {
+              data: 'name',
+              name: 'name'
+            },
+            {
+              data: 'session_name',
+              name: 'session_name'
+            },
+            {
+              data: 'date',
+              name: 'date',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'duration',
+              name: 'duration',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'status',
+              name: 'status',
+            }
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            },
+            // search: "<i data-feather='search'></i>",
+            searchPlaceholder: "Search records"
+          }
+        });
 
-<div class="sidenav-overlay"></div>
-<div class="drag-target"></div>
+        var table_agenda_group = $('.agenda-datatable-group').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('home.show_agenda_group_events') }}",
+          columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex'
+            },
+            {
+              data: 'group',
+              name: 'group'
+            },
+            {
+              data: 'session_name',
+              name: 'session_name',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'date',
+              name: 'date',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'duration',
+              name: 'duration',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'status',
+              name: 'status',
+            }
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            },
+            // search: "<i data-feather='search'></i>",
+            searchPlaceholder: "Search records"
+          }
+        });
+        @endrole
 
-@endsection
+        @role('coach|coachee')
+        var table_upcoming_individual = $('.upcoming-datatable-individual').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('home.show_upcoming_individual_events') }}",
+          columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex'
+            },
+            {
+              data: 'name',
+              name: 'name'
+            },
+            {
+              data: 'session_name',
+              name: 'session_name'
+            },
+            {
+              data: 'date',
+              name: 'date',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'duration',
+              name: 'duration',
+              defaultContent: '<i>-</i>'
+            }
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            },
+            // search: "<i data-feather='search'></i>",
+            searchPlaceholder: "Search records"
+          }
+        });
 
-@push('scripts')
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script type="text/javascript">
-  $(function() {
+        var table_upcoming_group = $('.upcoming-datatable-group').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('home.show_upcoming_group_events') }}",
+          columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex'
+            },
+            {
+              data: 'group',
+              name: 'group'
+            },
+            {
+              data: 'session_name',
+              name: 'session_name',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'date',
+              name: 'date',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'duration',
+              name: 'duration',
+              defaultContent: '<i>-</i>'
+            },
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            },
+            // search: "<i data-feather='search'></i>",
+            searchPlaceholder: "Search records"
+          }
+        });
 
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
+        var table_agenda_individual = $('.agenda-datatable-individual').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('home.show_agenda_individual_events') }}",
+          columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex'
+            },
+            {
+              data: 'name',
+              name: 'name'
+            },
+            {
+              data: 'session_name',
+              name: 'session_name'
+            },
+            {
+              data: 'date',
+              name: 'date',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'duration',
+              name: 'duration',
+              defaultContent: '<i>-</i>'
+            }
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            },
+            // search: "<i data-feather='search'></i>",
+            searchPlaceholder: "Search records"
+          }
+        });
 
-
-    @role('admin')
-    var table_agenda_individual = $('.agenda-datatable-individual').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('home.show_agenda_individual_events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'session_name',
-          name: 'session_name'
-        },
-        {
-          data: 'date',
-          name: 'date',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'duration',
-          name: 'duration',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'status',
-          name: 'status',
-        }
-      ],
-      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        // search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-    });
-
-    var table_agenda_group = $('.agenda-datatable-group').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('home.show_agenda_group_events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'group',
-          name: 'group'
-        },
-        {
-          data: 'session_name',
-          name: 'session_name',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'date',
-          name: 'date',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'duration',
-          name: 'duration',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'status',
-          name: 'status',
-        }
-      ],
-      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        // search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-    });
-    @endrole
-
-    @role('coach|coachee')
-    var table_upcoming_individual = $('.upcoming-datatable-individual').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('home.show_upcoming_individual_events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'session_name',
-          name: 'session_name'
-        },
-        {
-          data: 'date',
-          name: 'date',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'duration',
-          name: 'duration',
-          defaultContent: '<i>-</i>'
-        }
-      ],
-      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        // search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-    });
-
-    var table_upcoming_group = $('.upcoming-datatable-group').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('home.show_upcoming_group_events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'group',
-          name: 'group'
-        },
-        {
-          data: 'session_name',
-          name: 'session_name',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'date',
-          name: 'date',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'duration',
-          name: 'duration',
-          defaultContent: '<i>-</i>'
-        },
-      ],
-      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        // search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-    });
-
-    var table_agenda_individual = $('.agenda-datatable-individual').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('home.show_agenda_individual_events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'name',
-          name: 'name'
-        },
-        {
-          data: 'session_name',
-          name: 'session_name'
-        },
-        {
-          data: 'date',
-          name: 'date',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'duration',
-          name: 'duration',
-          defaultContent: '<i>-</i>'
-        }
-      ],
-      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        // search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-    });
-
-    var table_agenda_group = $('.agenda-datatable-group').DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "{{ route('home.show_agenda_group_events') }}",
-      columns: [{
-          data: 'DT_RowIndex',
-          name: 'DT_RowIndex'
-        },
-        {
-          data: 'group',
-          name: 'group'
-        },
-        {
-          data: 'session_name',
-          name: 'session_name',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'date',
-          name: 'date',
-          defaultContent: '<i>-</i>'
-        },
-        {
-          data: 'duration',
-          name: 'duration',
-          defaultContent: '<i>-</i>'
-        },
-      ],
-      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      language: {
-        paginate: {
-          // remove previous & next text from pagination
-          previous: '&nbsp;',
-          next: '&nbsp;'
-        },
-        // search: "<i data-feather='search'></i>",
-        searchPlaceholder: "Search records"
-      }
-    });
-    @endrole
+        var table_agenda_group = $('.agenda-datatable-group').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "{{ route('home.show_agenda_group_events') }}",
+          columns: [{
+              data: 'DT_RowIndex',
+              name: 'DT_RowIndex'
+            },
+            {
+              data: 'group',
+              name: 'group'
+            },
+            {
+              data: 'session_name',
+              name: 'session_name',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'date',
+              name: 'date',
+              defaultContent: '<i>-</i>'
+            },
+            {
+              data: 'duration',
+              name: 'duration',
+              defaultContent: '<i>-</i>'
+            },
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+            paginate: {
+              // remove previous & next text from pagination
+              previous: '&nbsp;',
+              next: '&nbsp;'
+            },
+            // search: "<i data-feather='search'></i>",
+            searchPlaceholder: "Search records"
+          }
+        });
+        @endrole
 
 
-    // popover
-    $(function() {
-      $('[data-toggle="popover"]').popover({
-        html: true,
-        trigger: 'hover',
-        placement: 'top',
-        content: function() {
-          return '<img src="' + $(this).data('img') + '" />';
-        }
-      })
-    });
+        // popover
+        $(function() {
+          $('[data-toggle="popover"]').popover({
+            html: true,
+            trigger: 'hover',
+            placement: 'top',
+            content: function() {
+              return '<img src="' + $(this).data('img') + '" />';
+            }
+          })
+        });
 
-    // modal edit
-    $('body').on('click', '#editCoachee', function() {
-      $('#modalHeading').html("Edit Client");
-      $('#saveBtn').val("edit-user");
-      $('#modals-slide-in').modal('show');
-      // save data
-      $('#saveBtn').click(function(e) {
-        // e.preventDefault();
-        $(this).html('Sending..');
-        $('#modals-slide-in').modal('hide');
-        Swal.fire({
-          icon: 'success',
-          title: 'Saved Successfully!',
+        // modal edit
+        $('body').on('click', '#editCoachee', function() {
+          $('#modalHeading').html("Edit Client");
+          $('#saveBtn').val("edit-user");
+          $('#modals-slide-in').modal('show');
+          // save data
+          $('#saveBtn').click(function(e) {
+            // e.preventDefault();
+            $(this).html('Sending..');
+            $('#modals-slide-in').modal('hide');
+            Swal.fire({
+              icon: 'success',
+              title: 'Saved Successfully!',
+            })
+          })
         })
-      })
-    })
-  });
-</script>
-@endpush
+      });
+    </script>
+    @endpush
