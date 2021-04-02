@@ -65,7 +65,7 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
     'php-symlink',
-    'update',
+    #'update',
     'restart-nginx',
 ]);
 
@@ -79,5 +79,5 @@ task ('update', function(){
 });
 
 task ('restart-nginx',function(){
-    run('sudo systemctl restart nginx');
+    run('sudo systemctl reload nginx');
 });
