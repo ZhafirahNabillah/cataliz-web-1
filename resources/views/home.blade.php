@@ -557,8 +557,15 @@
 
     @push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
     <script type="text/javascript">
       $(function() {
+
+         var simplemde = new SimpleMDE({
+            element: document.getElementById('MyID'),
+            initialValue: '## Stuff.... '
+        });
 
         $.ajaxSetup({
           headers: {

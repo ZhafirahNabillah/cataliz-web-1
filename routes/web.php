@@ -16,6 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\DocumentationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/reset', [ResetPasswordController::class, 'show_reset_form'])->name('show_reset_form');
 Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name('reset_password');
 Route::get('/verify', [RegisterController::class, 'verifyUser'])->name('verify_user');
+Route::get('/docs', [DocumentationController::class, 'index'])->name('docs_index');
 
 //Middleware group for admin page
 Route::group(['middleware' => ['auth']], function () {
@@ -92,7 +94,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/agendas/sessions_group', [AgendaController::class, 'show_group_sessions'])->name('agendas.sessions_group');
 
 	Route::resource('agendas', AgendaController::class)->except([
-    'update', 'edit'
+		'update', 'edit'
 	]);
 	Route::post('/agendas/{id}/update', [AgendaController::class, 'update'])->name('agendas.update');
 	Route::get('/agendas/{id}/edit', [AgendaController::class, 'edit'])->name('agendas.edit');
@@ -106,7 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('/coach_pdf', [ClientController::class, 'coach_pdf_download'])->name('coach_pdf');
 
 	Route::resource('clients', ClientController::class)->except([
-    'store'
+		'store'
 	]);;
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}/show_upcoming', [ClientController::class, 'show_upcoming_list'])->name('clients.show_upcoming');
