@@ -71,7 +71,7 @@
                   </label>
                 </div>
                 @endforeach --}}
-                <input type="hidden" name="client_length" id="client_length">
+                {{-- <input type="hidden" name="client_length" id="client_length"> --}}
                 <div id="client-error"></div>
                 {{-- @error('client')
                 <small class="text-danger">
@@ -113,7 +113,7 @@
                   <textarea class="form-control @error('objective') is-invalid @enderror" name="objective" id="objective" value="{{ old('objective') }}" autocomplete="objective">{{ old('objective') }}
                   </textarea>
                   <small id="character_count_objective" class="float-right"></small>
-                  <input type="hidden" name="objective_length" id="objective_length">
+                  {{-- <input type="hidden" name="objective_length" id="objective_length"> --}}
                   <div id="objective-error"></div>
                   {{-- @error('objective')
                   <span class="invalid-feedback" role="alert">
@@ -128,7 +128,7 @@
                   <label for="fp-default">Success Indicator</label>
                   <textarea class="form-control @error('success_indicator') is-invalid @enderror" name="success_indicator" id="success_indicator" autocomplete="success_indicator">{{ old('success_indicator') }}</textarea>
                   <small id="character_count_success_indicator" class="float-right"></small>
-                  <input type="hidden" name="success_indicator_length" id="success_indicator_length">
+                  {{-- <input type="hidden" name="success_indicator_length" id="success_indicator_length"> --}}
                   <div id="success_indicator-error"></div>
                   {{-- @error('success_indicator')
                   <span class="invalid-feedback" role="alert">
@@ -143,7 +143,7 @@
                   <label for="fp-default">Development Areas</label>
                   <textarea class="form-control @error('development_areas') is-invalid @enderror" name="development_areas" id="development_areas" autocomplete="development_areas">{{ old('development_areas') }}</textarea>
                   <small id="character_count_development_areas" class="float-right"></small>
-                  <input type="hidden" name="development_areas_length" id="development_areas_length">
+                  {{-- <input type="hidden" name="development_areas_length" id="development_areas_length"> --}}
                   <div id="development_areas-error"></div>
                   {{-- @error('development_areas')
                   <span class="invalid-feedback" role="alert">
@@ -158,7 +158,7 @@
                   <label for="fp-default">Support</label>
                   <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support" autocomplete="support">{{ old('support') }}</textarea>
                   <small id="character_count_support" class="float-right"></small>
-                  <input type="hidden" name="support_length" id="support_length">
+                  {{-- <input type="hidden" name="support_length" id="support_length"> --}}
                   <div id="support-error"></div>
                   {{-- @error('support')
                   <span class="invalid-feedback" role="alert">
@@ -292,13 +292,8 @@
           var original_element = $(tinyMCE.activeEditor.getElement());
           var element_id = original_element.attr('id');
           var count = CountCharacters();
-          if (count > 1000) {
-            document.getElementById("character_count_" + element_id).innerHTML = "<strong class = 'text-danger'>" + count + "/1000</strong>";
-          } else {
-            document.getElementById("character_count_" + element_id).innerHTML = "<strong>" + count + "/1000</strong>";
-          }
+          $('#character_count_'+element_id).html("<strong>" + count + "</strong>");
           tinymce.triggerSave();
-          $('#'+element_id+'_length').val(count);
         });
       }
     });
@@ -390,14 +385,14 @@
             if (errors.date) {
               $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
             }
-            if (errors.objective_length) {
-              $('#objective-error').html('<strong class="text-danger">' + errors.objective_length[0] + '</strong>'); // and so on
+            if (errors.objective) {
+              $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
             }
-            if (errors.success_indicator_length) {
-              $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator_length[0] + '</strong>'); // and so on
+            if (errors.success_indicator) {
+              $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
             }
-            if (errors.development_areas_length) {
-              $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas_length[0] + '</strong>'); // and so on
+            if (errors.development_areas) {
+              $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
             }
             if (errors.support_length) {
               $('#support-error').html('<strong class="text-danger">' + errors.support_length[0] + '</strong>'); // and so on

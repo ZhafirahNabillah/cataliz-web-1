@@ -211,21 +211,11 @@ class PlanController extends Controller
     $validator = Validator::make($request->all(), [
       'client'  => 'required',
       'date' => 'required',
-      'objective_length' => 'required|numeric|max:1000',
-      'success_indicator_length' => 'required|numeric|max:1000',
-      'development_areas_length' => 'required|numeric|max:1000',
-      'support_length' => 'required|numeric|max:1000',
+      'objective' => 'required',
+      'success_indicator' => 'required',
+      'development_areas' => 'required',
+      'support' => 'required',
       'group_code' => 'sometimes|required|min:5|max:10',
-    ],
-    [
-      'objective_length.required' => 'Objective field is required!',
-      'success_indicator_length.required' => 'Success indicator field is required!',
-      'development_areas_length.required' => 'Development areas field is required!',
-      'support_length.required' => 'Support field is required!',
-      'objective_length.max' => 'Objective field may not be greater than 1000 characters',
-      'success_indicator_length.max' => 'Success indicator field may not be greater than 1000 characters',
-      'development_areas_length.max' => 'Development areas field may not be greater than 1000 characters',
-      'support_length.max' => 'Support field may not be greater than 1000 characters',
     ]);
 
 
@@ -293,8 +283,11 @@ class PlanController extends Controller
     //   'owner_id' => Auth::user()->id,
     //   'client_id' => $plan_type
     // ]);
-
-    $request->session()->flash('success','The plan has been added successfully!');
+    if ($plan->wasRecentlyCreated) {
+      $request->session()->flash('success','The plan has been added successfully!');
+    } else {
+      $request->session()->flash('success','The plan has been updated successfully!');
+    }
     return response()->json(['success' => true]);
     // return redirect('/plans')->with('success', 'The plan has been added successfully!!');
   }

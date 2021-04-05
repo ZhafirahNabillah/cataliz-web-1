@@ -15,10 +15,11 @@ class ChangeColumnAttributteOnPlansTable extends Migration
     {
         Schema::table('plans', function (Blueprint $table) {
             //
-            $table->string('objective', 1100)->change();
-            $table->string('development_areas', 1100)->change();
-            $table->string('success_indicator', 1100)->change();
-            $table->string('support', 1100)->change();
+            $table->string('group_id',10)->change();
+            $table->longText('objective')->change();
+            $table->longText('development_areas')->change();
+            $table->longText('success_indicator')->change();
+            $table->longText('support')->change();
         });
     }
 
