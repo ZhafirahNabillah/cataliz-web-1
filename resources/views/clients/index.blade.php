@@ -612,8 +612,8 @@
                 name: 'DT_RowIndex'
               },
               {
-                data: 'group_id',
-                name: 'group_id'
+                data: 'group_code',
+                name: 'group_code'
               },
               {
                 data: 'participant',

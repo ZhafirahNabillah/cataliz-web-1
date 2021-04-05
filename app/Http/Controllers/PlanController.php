@@ -155,10 +155,20 @@ class PlanController extends Controller
    */
 
   //method to show create plan page
-  public function create()
+  public function create(Request $request)
   {
-    $coach = Coach::where('user_id', auth()->user()->id)->first();
-    $clients = $coach->clients;
+    // $coach = Coach::where('user_id', auth()->user()->id)->first();
+    // $clients = $coach->clients;
+    $clients = null;
+    
+    if ($request->has('client')) {
+      $client_id = $request->get('client');
+      $clients[] = Client::find($client_id);
+    } elseif ($request->has('group')) {
+      $group_id = $request->get('group');
+      $plan = Plan::where('group_id', $group_id)->first();
+      $clients = $plan->clients;
+    }
 
     return view('plans.create', compact('clients'));
   }

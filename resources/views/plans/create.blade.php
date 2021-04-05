@@ -60,7 +60,13 @@
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
                   <!-- nanti di checklist coachee yang masuk ke kelas ininya -->
 
-                  <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" name="client[]" multiple></select>
+                  <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" name="client[]" multiple>
+                    @isset($clients)
+                      @foreach ($clients as $client)
+                        <option id="client-{{ $client->id }}" value="{{ $client->id }}" selected>{{ $client->name }}</option>
+                      @endforeach
+                    @endisset
+                  </select>
                   {{-- <input id="search" type="text" class="form-control" placeholder="Search client name..." /> --}}
                   {{-- @foreach ($clients as $client)
                   <div class="form-check client-list">
@@ -73,17 +79,12 @@
                 @endforeach --}}
                 {{-- <input type="hidden" name="client_length" id="client_length"> --}}
                 <div id="client-error"></div>
-                {{-- @error('client')
-                <small class="text-danger">
-                  <strong>{{ $message }}</strong>
-                </small>
-                @enderror --}}
               </div>
 
               <div class="row group_wrapper" style="display: none;">
                 <div class="col-md-12 form-group">
                   <label for="fp-default">Group Code</label>
-                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" placeholder="Fill group code here.." disabled>
+                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" placeholder="Fill group code here.." disabled value="{{ request()->get('group') ?? '' }}">
                   <small><strong>group code can consist of number and character</strong></small>
                   <div id="group_code-error"></div>
                   {{-- @error('group_code')
@@ -394,8 +395,8 @@
             if (errors.development_areas) {
               $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
             }
-            if (errors.support_length) {
-              $('#support-error').html('<strong class="text-danger">' + errors.support_length[0] + '</strong>'); // and so on
+            if (errors.support) {
+              $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
             }
           }
         }
