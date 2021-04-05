@@ -95,7 +95,7 @@
         <div class="row">
           <div class="col-12">
             <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table coachee-datatable-coach">
+              <table class="datatables-basic table-striped table coachee-datatable-coach">
                 <thead>
                   <tr>
                     <th>No</th>
@@ -192,7 +192,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table yajra-datatable">
+                      <table class="datatables-basic table-striped table yajra-datatable">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -222,7 +222,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table client-datatable-group">
+                      <table class="datatables-basic table-striped table client-datatable-group">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -278,7 +278,7 @@
                     <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
                   </div>
                   <hr class="mb-0">
-                  <table class="datatables-basic table admin-datatable-coach">
+                  <table class="datatables-basic table-striped table admin-datatable-coach">
                     <thead>
                       <tr>
                         <th>NO</th>
@@ -304,7 +304,7 @@
               <!-- adminlist card -->
               <div class="row">
                 <div class="col-12">
-                  <table class="datatables-basic table admin-datatable-admin">
+                  <table class="datatables-basic table-striped table admin-datatable-admin">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -332,7 +332,7 @@
                     <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a>
                   </div>
                   <hr class="mb-0">
-                  <table class="datatables-basic table admin-datatable-coachee">
+                  <table class="datatables-basic table-striped table admin-datatable-coachee">
                     <thead>
                       <tr>
                         <th>No</th>

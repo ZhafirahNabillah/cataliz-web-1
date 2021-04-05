@@ -222,7 +222,7 @@
 									<h5 class="card-title mb-1">Upcoming Event
 										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bgaian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat" />
 									</h5>
-									<table class="datatables-basic table upcoming-datatable">
+									<table class="datatables-basic table-striped table upcoming-datatable">
 										<thead>
 											<tr>
 												<th>No</th>
@@ -245,7 +245,7 @@
 									<h5 class="card-title mb-1">List Agenda
 										<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
 									</h5>
-									<table class="datatables-basic table agenda-datatable">
+									<table class="datatables-basic table-striped table agenda-datatable">
 										<thead>
 											<tr>
 												<th>No</th>
@@ -291,7 +291,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-								<table class="datatables-basic table sessions-datatable">
+								<table class="datatables-basic table-striped table sessions-datatable">
 									<thead>
 										<tr>
 											<th>NO</th>
@@ -333,7 +333,7 @@
 					<div class="row">
 						<div class="col-12">
 							<div class="card">
-								<table class="datatables-basic table plans-datatable">
+								<table class="datatables-basic table-striped table plans-datatable">
 									<thead>
 										<tr>
 											<th>NO</th>
@@ -369,7 +369,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<table class="datatables-basic table notes-datatable">
+						<table class="datatables-basic table-striped table notes-datatable">
 							<thead>
 								<tr>
 									<th>NO</th>
@@ -459,7 +459,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
-						<table class="datatables-basic table feedbacks-datatable">
+						<table class="datatables-basic table-striped table feedbacks-datatable">
 							<thead>
 								<tr>
 									<th>NO</th>

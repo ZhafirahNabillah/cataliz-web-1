@@ -111,7 +111,7 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="card">
-                            <table class="datatables-basic table agenda-datatable-individual">
+                            <table class="datatables-basic table-striped table agenda-datatable-individual">
                               <thead>
                                 <tr>
                                   <th>No</th>
@@ -138,7 +138,7 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="card">
-                            <table class="datatables-basic table agenda-datatable-group">
+                            <table class="datatables-basic table-striped table agenda-datatable-group">
                               <thead>
                                 <tr>
                                   <th>No</th>
@@ -173,7 +173,7 @@
           <div class="container-fluid">
             <div class="row justify-content-left">
               <div class="col-md-12">
-                <div class="card bg-success text-white">
+                <div class="card bg-primary text-white">
                   <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
@@ -181,7 +181,7 @@
                     </div>
                     @endif
 
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/docs'}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>
@@ -368,7 +368,7 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="card">
-                            <table class="datatables-basic table upcoming-datatable-individual">
+                            <table class="datatables-basic table-striped table upcoming-datatable-individual">
                               <thead>
                                 <tr>
                                   <th>No</th>
@@ -394,7 +394,7 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="card">
-                            <table class="datatables-basic table upcoming-datatable-group">
+                            <table class="datatables-basic table-striped table upcoming-datatable-group">
                               <thead>
                                 <tr>
                                   <th>No</th>
@@ -442,7 +442,7 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="card">
-                            <table class="datatables-basic table agenda-datatable-individual">
+                            <table class="datatables-basic table-striped table agenda-datatable-individual">
                               <thead>
                                 <tr>
                                   <th>No</th>
@@ -468,7 +468,7 @@
                       <div class="row">
                         <div class="col-12">
                           <div class="card">
-                            <table class="datatables-basic table agenda-datatable-group">
+                            <table class="datatables-basic table-striped table agenda-datatable-group">
                               <thead>
                                 <tr>
                                   <th>No</th>
