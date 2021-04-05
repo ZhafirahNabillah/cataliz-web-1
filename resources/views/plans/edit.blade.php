@@ -82,6 +82,7 @@
                   @endforeach
                 </select>
                 <div id="client-error"></div>
+                <input type="hidden" name="client_length" id="client_length">
               </div>
 
               <div class="row group_wrapper" style="display: none;">
@@ -90,11 +91,11 @@
                   <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" value="{{ $plan->group_id }}" placeholder="Fill group code here..">
                   <small><strong>group code can consist of number and character</strong></small>
                   <div id="group_code-error"></div>
-                  @error('group_code')
+                  {{-- @error('group_code')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
 
@@ -104,11 +105,11 @@
                   <input type="text" class="form-control @error('date') is-invalid @enderror" name="date" id="date"
                     value="{{ $plan->date }}" placeholder="Select your date...">
                   <div id="date-error"></div>
-                  @error('date')
+                  {{-- @error('date')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
 
@@ -119,12 +120,13 @@
                     id="objective" autocomplete="objective">{{ $plan->objective }}
                     </textarea>
                   <small id="character_count_objective" class="float-right"></small>
+                  <input type="hidden" name="objective_length" id="objective_length">
                   <div id="objective-error"></div>
-                  @error('objective')
+                  {{-- @error('objective')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
 
@@ -135,12 +137,13 @@
                     name="success_indicator" id="success_indicator"
                     autocomplete="success_indicator">{{ $plan->success_indicator }}</textarea>
                   <small id="character_count_success_indicator" class="float-right"></small>
+                  <input type="hidden" name="success_indicator_length" id="success_indicator_length">
                   <div id="success_indicator-error"></div>
-                  @error('success_indicator')
+                  {{-- @error('success_indicator')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
 
@@ -151,12 +154,13 @@
                     name="development_areas" id="development_areas"
                     autocomplete="development_areas">{{ $plan->development_areas }}</textarea>
                   <small id="character_count_development_areas" class="float-right"></small>
+                  <input type="hidden" name="development_areas_length" id="development_areas_length">
                   <div id="development_areas-error"></div>
-                  @error('development_areas')
+                  {{-- @error('development_areas')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
 
@@ -166,15 +170,15 @@
                   <textarea class="form-control @error('support') is-invalid @enderror" name="support" id="support"
                     autocomplete="support">{{ $plan->support }}</textarea>
                   <small id="character_count_support" class="float-right"></small>
+                  <input type="hidden" name="support_length" id="support_length">
                   <div id="support-error"></div>
-                  @error('support')
+                  {{-- @error('support')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                   </span>
-                  @enderror
+                  @enderror --}}
                 </div>
               </div>
-              <input type="hidden" name="client_length" id="client_length">
 
               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
           </div>
@@ -248,25 +252,40 @@
     });
 
     $(function() {
+
       $.ajaxSetup({
         headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
       });
 
+
+
       tinymce.init({
         selector: 'textarea',
         setup: function(editor) {
+          editor.on('init', function () {
+            var count = CountCharacters(editor.id);
+            $('#character_count_'+editor.id).html("<strong>" + count + "/1000</strong>");
+            $('#'+editor.id+'_length').val(count);
+            tinymce.triggerSave();
+          });
+
+          editor.on('click', function () {
+            tinymce.triggerSave();
+          });
+
           editor.on('keyup', function(e) {
             var original_element = $(tinyMCE.activeEditor.getElement());
             var element_id = original_element.attr('id');
-            var count = CountCharacters();
+            var count = CountCharacters(element_id);
             if (count > 255) {
-              document.getElementById("character_count_" + element_id).innerHTML = "<strong class = 'text-danger'>" + count + "/255</strong>";
+              document.getElementById("character_count_" + element_id).innerHTML = "<strong class = 'text-danger'>" + count + "/1000</strong>";
             } else {
-              document.getElementById("character_count_" + element_id).innerHTML = "<strong>" + count + "/255</strong>";
+              document.getElementById("character_count_" + element_id).innerHTML = "<strong>" + count + "/1000</strong>";
             }
             tinymce.triggerSave();
+            $('#'+element_id+'_length').val(count);
           });
         }
       });
@@ -358,17 +377,17 @@
               if (errors.date) {
                 $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
               }
-              if (errors.objective) {
-                $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+              if (errors.objective_length) {
+                $('#objective-error').html('<strong class="text-danger">' + errors.objective_length[0] + '</strong>'); // and so on
               }
-              if (errors.success_indicator) {
-                $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+              if (errors.success_indicator_length) {
+                $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator_length[0] + '</strong>'); // and so on
               }
-              if (errors.development_areas) {
-                $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+              if (errors.development_areas_length) {
+                $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas_length[0] + '</strong>'); // and so on
               }
-              if (errors.support) {
-                $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+              if (errors.support_length) {
+                $('#support-error').html('<strong class="text-danger">' + errors.support_length[0] + '</strong>'); // and so on
               }
             }
           }
@@ -384,10 +403,11 @@
       });
     });
 
-    function CountCharacters() {
-      var body = tinymce.activeEditor.getBody();
+    function CountCharacters(id) {
+      var body = tinymce.get(id).getBody();
       var content = tinymce.trim(body.innerText || body.textContent);
       return content.length;
     };
+
 </script>
 @endpush

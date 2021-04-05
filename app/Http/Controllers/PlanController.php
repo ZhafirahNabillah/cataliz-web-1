@@ -59,6 +59,10 @@ class PlanController extends Controller
             $user = User::where('id', $row->owner->id)->first();
             return $user->name;
           })
+          ->addColumn('objective', function ($row) {
+            $objective = strip_tags($row->objective);
+            return $objective;
+          })
           ->addColumn('action', function ($row) {
 
             //add update button if user have permission
@@ -93,12 +97,16 @@ class PlanController extends Controller
 
             return $actionBtn;
           })
-          ->rawColumns(['action', 'coach_name'])
+          ->rawColumns(['action', 'coach_name','objective'])
           ->make(true);
       } else {
         // code...
         return Datatables::of($data)
           ->addIndexColumn()
+          ->addColumn('objective', function ($row) {
+            $objective = strip_tags($row->objective);
+            return $objective;
+          })
           ->addColumn('action', function ($row) {
 
             //add update button if user have permission
@@ -133,7 +141,7 @@ class PlanController extends Controller
 
             return $actionBtn;
           })
-          ->rawColumns(['action'])
+          ->rawColumns(['action', 'objective'])
           ->make(true);
       }
     }
@@ -199,16 +207,25 @@ class PlanController extends Controller
     //   // return response()->json($count);
     // }
     //
-    // return response()->json($request);
 
     $validator = Validator::make($request->all(), [
       'client'  => 'required',
       'date' => 'required',
-      'objective' => 'required|max:255',
-      'success_indicator' => 'required|max:255',
-      'development_areas' => 'required|max:255',
-      'support' => 'required|max:255',
+      'objective_length' => 'required|numeric|max:1000',
+      'success_indicator_length' => 'required|numeric|max:1000',
+      'development_areas_length' => 'required|numeric|max:1000',
+      'support_length' => 'required|numeric|max:1000',
       'group_code' => 'sometimes|required|min:5|max:10',
+    ],
+    [
+      'objective_length.required' => 'Objective field is required!',
+      'success_indicator_length.required' => 'Success indicator field is required!',
+      'development_areas_length.required' => 'Development areas field is required!',
+      'support_length.required' => 'Support field is required!',
+      'objective_length.max' => 'Objective field may not be greater than 1000 characters',
+      'success_indicator_length.max' => 'Success indicator field may not be greater than 1000 characters',
+      'development_areas_length.max' => 'Development areas field may not be greater than 1000 characters',
+      'support_length.max' => 'Support field may not be greater than 1000 characters',
     ]);
 
 
@@ -222,10 +239,10 @@ class PlanController extends Controller
       $count = $count + 1;
     }
 
-    $objective = strip_tags($request->objective);
-    $success_indicator = strip_tags($request->success_indicator);
-    $development_areas = strip_tags($request->development_areas);
-    $support = strip_tags($request->support);
+    // $objective = strip_tags($request->objective);
+    // $success_indicator = strip_tags($request->success_indicator);
+    // $development_areas = strip_tags($request->development_areas);
+    // $support = strip_tags($request->support);
 
     $coach = Coach::where('user_id', auth()->user()->id)->first();
 
@@ -233,9 +250,10 @@ class PlanController extends Controller
 
       $plan = Plan::updateOrCreate(['id' => $request->id], [
         'date' => $request->date,
-        'objective' => $objective,
-        'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
-        'support' => $support,
+        'objective' => $request->objective,
+        'success_indicator' =>  $request->success_indicator,
+        'development_areas' => $request->development_areas,
+        'support' => $request->support,
         'owner_id' => $coach->id,
         'client_id' => $request->client[0],
         'group_id' => null
@@ -254,9 +272,10 @@ class PlanController extends Controller
 
       $plan = Plan::updateOrCreate(['id' => $request->id], [
         'date' => $request->date,
-        'objective' => $objective,
-        'success_indicator' =>  $success_indicator, 'development_areas' => $development_areas,
-        'support' => $support,
+        'objective' => $request->objective,
+        'success_indicator' =>  $request->success_indicator,
+        'development_areas' => $request->development_areas,
+        'support' => $request->support,
         'owner_id' => $coach->id,
         'group_id' => $request->group_code,
         'client_id' => null
@@ -365,6 +384,10 @@ class PlanController extends Controller
 
       return DataTables::of($data)
         ->addIndexColumn()
+        ->addColumn('objective', function ($row) {
+          $objective = strip_tags($row->objective);
+          return $objective;
+        })
         ->addColumn('action', function ($row) {
 
           //add update button if user have permission
@@ -393,7 +416,7 @@ class PlanController extends Controller
 
           return $actionBtn;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action','objective'])
         ->make(true);
     }
   }

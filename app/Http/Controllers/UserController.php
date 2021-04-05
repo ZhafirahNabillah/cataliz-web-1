@@ -70,26 +70,28 @@ class UserController extends Controller
   public function store(Request $request)
   {
 
-    $validator = Validator::make($request->all(), [
-      'name'  => 'required',
-      'phone' => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
-      'email' => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-      'roles' => 'required',
-    ]);
-
-    if ($validator->fails()) {
-      return response()->json($validator->errors(), 422);
-    }
-
     if ($request->action_type == 'edit-user') {
       $user = User::find($request->user_id);
       $user->syncRoles($request->input('roles'));
     } elseif ($request->action_type == 'create-user') {
-      $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => '0' . $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
+      $validator = Validator::make($request->all(), [
+        'name'  => 'required',
+        'phone' => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+        'email' => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+        'roles' => 'required',
+      ]);
+
+      if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+      }
+      
+      $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
       $user->syncRoles($request->input('roles'));
 
       if ($user->hasRole('coachee')) {
         $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program' => 'Starco']);
+      } elseif ($user->hasRole('coach')) {
+        $coach = Coach::updateOrCreate(['user_id' => $user->id]);
       }
 
       MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);
