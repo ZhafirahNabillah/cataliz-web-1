@@ -202,7 +202,7 @@
             results: $.map(data, function(item) {
               console.log(item)
               return {
-                text: item.objective,
+                text: $(item.objective).text() ,
                 id: item.id,
                 client_id: item.client_id,
                 group_id: item.group_id
