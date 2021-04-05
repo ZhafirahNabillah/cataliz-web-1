@@ -123,7 +123,7 @@
 
         <table class="table table-bordered mb-5">
             <thead>
-                <tr class="table-danger">
+                <tr style="background-color: #F3F2F2;">
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
