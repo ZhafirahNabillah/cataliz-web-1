@@ -133,10 +133,10 @@
             <tbody>
                 @foreach($coachee as $data)
                 <tr>
-                    <th scope="row">{{ $data->id }}</th>
+                    <td>{{ $data->id }}</th>
                     <td>{{ $data->name }}</td>
                     <td>{{ $data->email }}</td>
-                    <td>{{ $data->phone }}</td>
+                    <td>+62{{ $data->phone }}</td>
                 </tr>
                 @endforeach
             </tbody>
