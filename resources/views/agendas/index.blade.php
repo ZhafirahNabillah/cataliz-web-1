@@ -161,7 +161,7 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<table class="datatables-basic table sessions-datatable-individual">
+										<table class="datatables-basic table-striped table sessions-datatable-individual">
 											<thead>
 												<tr>
 													<th>No</th>
@@ -199,7 +199,7 @@
 							<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<table class="datatables-basic table sessions-datatable-group">
+										<table class="datatables-basic table-striped table sessions-datatable-group">
 											<thead>
 												<tr>
 													<th>No</th>

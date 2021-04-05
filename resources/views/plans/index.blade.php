@@ -76,7 +76,7 @@
                                     <div class="col-12">
                                         <div class="card">
                                             @hasanyrole('coach|admin')
-                                            <table class="datatables-basic table plan-datatable-individual">
+                                            <table class="datatables-basic table-striped table plan-datatable-individual">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -90,7 +90,7 @@
                                                 </tbody>
                                             </table>
                                             @else
-                                            <table class="datatables-basic table plan-datatable-individual">
+                                            <table class="datatables-basic table-striped table plan-datatable-individual">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -147,7 +147,7 @@
                                     <div class="col-12">
                                         <div class="card">
                                             @hasanyrole('coach|admin')
-                                            <table class="datatables-basic table plan-datatable-group">
+                                            <table class="datatables-basic table-striped table plan-datatable-group">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -161,7 +161,7 @@
                                                 </tbody>
                                             </table>
                                             @else
-                                            <table class="datatables-basic table plan-datatable-group">
+                                            <table class="datatables-basic table-striped table plan-datatable-group">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
