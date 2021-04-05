@@ -311,7 +311,7 @@
                         <th>Admin Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
-                        <th>Action</th>
+                        <th style="line-height: 40px;">Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -339,7 +339,7 @@
                         <th>Coachee Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
-                        <th>Action</th>
+                        <th style="line-height: 40px;">Action</th>
                       </tr>
                     </thead>
                     <tbody>

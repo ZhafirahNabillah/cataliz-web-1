@@ -190,7 +190,7 @@
 
 
                     <tr>
-                      <td style="text-align: center;background-color: #FCB0B0;">
+                      <td style="text-align: center;background-color: #FCE7B0;">
                         <h1 style="color: black;margin-top: 20px;margin-left: 15px;font-weight: bold;">Removed
                           Successfully</h1>
                         <span style="margin-left: 15px;color: #656565;">You have been successfully removed a client from

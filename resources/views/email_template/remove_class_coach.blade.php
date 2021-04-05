@@ -192,7 +192,7 @@
 
 
                     <tr>
-                      <td style="text-align: center;background-color: #FCB0B0;">
+                      <td style="text-align: center;background-color: #FCE7B0;">
                         <h1 style="color: black;margin-top: 20px;margin-left: 15px;font-weight: bold;">Removed Client
                         </h1>
                         <span style="margin-left: 15px;color: #656565;">Admin has been removed you from your
