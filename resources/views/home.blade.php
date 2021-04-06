@@ -253,7 +253,7 @@
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
-                <h2 class="font-weight-bolder text-center">21 Rating</h2>
+                <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
               </div>
             </div>
           </div>
@@ -319,7 +319,7 @@
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
-                <h2 class="font-weight-bolder text-center">21 Rating</h2>
+                <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
               </div>
             </div>
           </div>

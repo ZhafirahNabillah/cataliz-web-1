@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\Coach;
+use App\Models\Feedback;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -57,6 +58,7 @@ class HomeController extends Controller
             $agenda_detail = Agenda_detail::whereIn('agenda_id',$agenda_id)->get();
             $total_hours = $agenda_detail->where('status', 'finished')->sum('duration') / 60;
             $total_sessions = $agenda_detail->where('status', '!=', 'canceled')->count();
+            $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from','coach')->whereNotNull('rating')->count();
 
             // return $total_sessions;
 
@@ -84,7 +86,7 @@ class HomeController extends Controller
             //         ->make(true);
             // }
 
-            return view('home', compact('total_clients', 'total_hours', 'total_sessions'));
+            return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings'));
         } elseif (auth()->user()->hasRole('admin')) {
 
             $total_coach = User::role('coach')->count();
@@ -118,6 +120,7 @@ class HomeController extends Controller
 
           $total_hours = $agenda_detail->where('status', 'finished')->sum('duration') / 60;
           $total_sessions = $agenda_detail->where('status', '!=', 'canceled')->count();
+          $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from','coachee')->where('user_id', auth()->user()->id)->whereNotNull('rating')->count();
 
           // return $plan_id;
 
@@ -130,7 +133,7 @@ class HomeController extends Controller
             //     ->join('users', 'users.id', '=', 'clients.user_id')
             //     ->where('clients.user_id', Auth::user()->id)
             //     ->first();
-            return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'client'));
+            return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'total_ratings', 'client'));
         }
     }
 
