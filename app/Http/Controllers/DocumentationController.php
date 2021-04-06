@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Documentation;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentationController extends Controller
 {
@@ -45,13 +46,15 @@ class DocumentationController extends Controller
         // return $request->description;
     }
 
-    public function image_upload(Request $request){
-        $fileName=$request->file('file')->getClientOriginalName();
-        $path=$request->file('file')->storeAs('uploads', $fileName, 'public');
-        return response()->json(['location'=> '/storage/'.$path]);
-
-        /*$imgpath = request()->file('file')->store('uploads', 'public');
-        return response()->json(['location' => "/storage/$imgpath"]);*/
+    public function image_upload(Request $request)
+    {
+        $fileName = $request->file('file')->getClientOriginalName();
+        if (Storage::disk('s3')->exists('uploads/' . $fileName)) {
+            Storage::disk('s3')->delete('uploads/' . $fileName);
+        }
+        Storage::disk('s3')->put('uploads/' . $fileName, file_get_contents($request->file('file')));
+        $path = Storage::disk('s3')->url('uploads/' . $fileName);
+        return response()->json(['location' => $path]);
     }
 
     /**

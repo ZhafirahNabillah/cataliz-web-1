@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Coaching Plan')
+@section('title','Documentations')
 
 @push('styles')
 
@@ -53,7 +53,8 @@
             <form action="{{ route('docs.store') }}" method="post">
               @csrf
               <div class="form-group">
-                <textarea name="description" id="MyID" cols="20" rows="20" placeholder="Input Your Docs Here....."></textarea>
+                <textarea name="description" id="MyID" cols="20" rows="20"
+                  placeholder="Input Your Docs Here....."></textarea>
               </div>
               <Button type="submit" class="btn btn-primary">Submit</Button>
             </form>
@@ -68,7 +69,8 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
+  referrerpolicy="origin"></script>
 <script type="text/javascript">
   tinymce.init({
     selector: 'textarea',
