@@ -49,6 +49,9 @@ Route::get('/reset', [ResetPasswordController::class, 'show_reset_form'])->name(
 Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name('reset_password');
 Route::get('/verify', [RegisterController::class, 'verifyUser'])->name('verify_user');
 Route::get('/docs', [DocumentationController::class, 'index'])->name('docs_index');
+Route::get('/docs_tes/{id}', [DocumentationController::class, 'show'])->name('docs_show');
+Route::post('/docs', [DocumentationController::class, 'store'])->name('docs.store');
+Route::post('/docs_upload_image', [DocumentationController::class, 'image_upload'])->name('docs.upload_image');
 
 //Middleware group for admin page
 Route::group(['middleware' => ['auth']], function () {
