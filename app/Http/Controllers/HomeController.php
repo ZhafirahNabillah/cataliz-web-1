@@ -134,6 +134,8 @@ class HomeController extends Controller
       return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'client'));
     } elseif (auth()->user()->hasRole('trainer')) {
       return view('home');
+    } else {
+      return view('home');
     }
   }
 
