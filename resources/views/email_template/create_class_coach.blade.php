@@ -199,7 +199,7 @@
                         <br>
                         <!-- link ke agendas -->
                         <div style="padding-top: 10px;">
-                          <a href="">
+                          <a href="{{ route('clients.index') }}">
                             <button class="button button1">Go To My Clients</button>
                           </a>
                         </div>
@@ -227,9 +227,9 @@
                       <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
                       <!-- /foto profile -->
                       <br>
-                      <b style="padding-top: 10px;">Coachee Name</b>
+                      <b style="padding-top: 10px;">{{ $email_data['client_name'] }}</b>
                       <br>
-                      <span style="font-size: 12px;">Company Name</span>
+                      <span style="font-size: 12px;">{{ $email_data['client_company'] }}</span>
                       <p>You can start planning and scheduling session for your new client. We hope you can give your
                         best contribution and help them in improving their business.</p>
                     </tr>
