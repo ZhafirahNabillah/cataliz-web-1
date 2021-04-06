@@ -231,7 +231,17 @@
                     @role('admin')
                     <div class="user-nav d-sm-flex d-none"><span
                             class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
-                            class="user-status">admin</span></div>
+                            class="user-status">Admin</span></div>
+                    @endrole
+                    @role('trainer')
+                    <div class="user-nav d-sm-flex d-none"><span
+                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
+                            class="user-status">Trainer</span></div>
+                    @endrole
+                    @role('mentor')
+                    <div class="user-nav d-sm-flex d-none"><span
+                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
+                            class="user-status">Mentor</span></div>
                     @endrole
 
                     <span class="avatar bg-light-secondary avatar-lg">

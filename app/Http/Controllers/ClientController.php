@@ -76,13 +76,13 @@ class ClientController extends Controller
             }
 
             if (auth()->user()->can('create-plan')) {
-              $create_plan_btn = '<a href="' . url('/plans/create?client='.$row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Plan</a>';
+              $create_plan_btn = '<a href="' . url('/plans/create?client=' . $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Plan</a>';
             } else {
               $create_plan_btn = null;
             }
 
             if (auth()->user()->can('create-agenda')) {
-              $create_agenda_btn = '<a href="' . url('/agendas/create?client='.$row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Agenda</a>';
+              $create_agenda_btn = '<a href="' . url('/agendas/create?client=' . $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Agenda</a>';
             } else {
               $create_agenda_btn = null;
             }
@@ -92,16 +92,16 @@ class ClientController extends Controller
             <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . $delete_btn . $create_plan_btn . $create_agenda_btn . '</div>';
 
             return $actionBtn;
-          })->addColumn('phone', function($row) {
+          })->addColumn('phone', function ($row) {
             $phone = substr($row->phone, 0, -5) . 'xxxxx';
 
             return $phone;
-          })->addColumn('email', function($row) {
+          })->addColumn('email', function ($row) {
             $email = str_pad(substr($row->email, -11), strlen($row->email), 'x', STR_PAD_LEFT);
 
             return $email;
           })
-          ->rawColumns(['action','phone','email'])
+          ->rawColumns(['action', 'phone', 'email'])
           ->make(true);
       } elseif (auth()->user()->hasRole('coachee')) {
 
@@ -112,23 +112,24 @@ class ClientController extends Controller
           ->addColumn('action', function ($row) {
             $actionBtn = '<a href="javascript:;" class="btn-sm btn-primary detailCoach" data-id = "' . $row->id . '">Detail</a>';
             return $actionBtn;
-          })->addColumn('phone', function($row) {
-            $phone = '+62'.substr($row->phone, 0, -5) . 'xxxxx';
+          })->addColumn('phone', function ($row) {
+            $phone = '+62' . substr($row->phone, 0, -5) . 'xxxxx';
 
             return $phone;
-          })->addColumn('email', function($row) {
+          })->addColumn('email', function ($row) {
             $email = str_pad(substr($row->email, -11), strlen($row->email), 'x', STR_PAD_LEFT);
 
             return $email;
           })
-          ->rawColumns(['action','phone','email'])
+          ->rawColumns(['action', 'phone', 'email'])
           ->make(true);
       }
     }
     return view('clients.index');
   }
 
-  public function show_group_list(Request $request){
+  public function show_group_list(Request $request)
+  {
     $coach = Coach::where('user_id', auth()->user()->id)->first();
     $data = $coach->plan->where('client_id', null)->groupBy('group_id');
 
@@ -137,22 +138,22 @@ class ClientController extends Controller
     if ($request->ajax()) {
       return DataTables::of($data)
         ->addIndexColumn()
-        ->addColumn('participant', function($row) {
+        ->addColumn('participant', function ($row) {
           return $row->first()->clients->count();
         })
-        ->addColumn('group_code', function($row) {
+        ->addColumn('group_code', function ($row) {
           return $row->first()->group_id;
         })
-        ->addColumn('action', function($row) {
+        ->addColumn('action', function ($row) {
 
           if (auth()->user()->can('create-plan')) {
-            $create_plan_btn = '<a href="' . url('/plans/create?group='.$row->first()->group_id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Plan</a>';
+            $create_plan_btn = '<a href="' . url('/plans/create?group=' . $row->first()->group_id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Plan</a>';
           } else {
             $create_plan_btn = null;
           }
 
           if (auth()->user()->can('create-agenda')) {
-            $create_agenda_btn = '<a href="' . url('/agendas/create?group='.$row->first()->group_id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Agenda</a>';
+            $create_agenda_btn = '<a href="' . url('/agendas/create?group=' . $row->first()->group_id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Create Agenda</a>';
           } else {
             $create_agenda_btn = null;
           }
@@ -161,16 +162,17 @@ class ClientController extends Controller
 
           //final dropdown button that shows on view
           $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
-          <div class="dropdown-menu dropdown-menu-right">' . $detail_btn . $create_plan_btn . $create_agenda_btn .'</div>';
+          <div class="dropdown-menu dropdown-menu-right">' . $detail_btn . $create_plan_btn . $create_agenda_btn . '</div>';
 
           return $actionBtn;
         })
-        ->rawColumns(['action','pacticipant','group_code'])
+        ->rawColumns(['action', 'pacticipant', 'group_code'])
         ->make(true);
     }
   }
 
-  public function show_group_detail(Request $request, $id){
+  public function show_group_detail(Request $request, $id)
+  {
     // $coach = Coach::where('user_id', auth()->user()->id)->first();
     $plan = Plan::where('group_id', $id)->first();
     $user = User::where('id', $plan->owner->user_id)->first();
@@ -184,15 +186,15 @@ class ClientController extends Controller
         // ->addColumn('participant', function($row) {
         //   return $row->clients->count();
         // })
-        ->addColumn('action', function($row) {
-          $actionBtn = '<a href="'. route('group.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
+        ->addColumn('action', function ($row) {
+          $actionBtn = '<a href="' . route('group.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
         })
         ->rawColumns(['action'])
         ->make(true);
     }
 
-    return view('clients.detail_group', compact('plan','user'));
+    return view('clients.detail_group', compact('plan', 'user'));
   }
 
   //method to show coach list
@@ -302,6 +304,58 @@ class ClientController extends Controller
     }
   }
 
+  //method to show trainer list
+  public function show_trainer_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::role('trainer')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+
+          if ($row->suspend_status == 1) {
+            // code...
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
+  //method to show mentor list
+  public function show_mentor_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::role('mentor')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+
+          if ($row->suspend_status == 1) {
+            // code...
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
 
   /**
    * Show the form for creating a new resource.
@@ -346,14 +400,15 @@ class ClientController extends Controller
 
     $coaching_note = Coaching_note::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->get();
 
-    $total_event = $agenda_detail->where('status','scheduled')->count();
+    $total_event = $agenda_detail->where('status', 'scheduled')->count();
     $total_agenda = $agendas->count();
     $total_session = $agenda_detail->count();
 
     return view('clients.show', compact('client', 'coaching_note', 'agenda_detail', 'total_event', 'total_agenda', 'total_session'));
   }
 
-  public function show_upcoming_list(Request $request, Client $client){
+  public function show_upcoming_list(Request $request, Client $client)
+  {
     $coach = Coach::where('user_id', auth()->user()->id)->first();
     $plans = $client->plans->where('owner_id', $coach->id);
 
@@ -380,7 +435,6 @@ class ClientController extends Controller
         ->rawColumns(['type'])
         ->make(true);
     }
-
   }
 
 
@@ -442,10 +496,10 @@ class ClientController extends Controller
           return $type;
         })
         ->addColumn('action', function ($row) {
-          $actionBtn = '<a href="'. route('agendas.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
+          $actionBtn = '<a href="' . route('agendas.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
         })
-        ->rawColumns(['type','action'])
+        ->rawColumns(['type', 'action'])
         ->make(true);
     }
   }
@@ -461,7 +515,7 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $actionBtn = '<a href="'. route('plans.show', $row->id) .'" class="btn-sm btn-primary">Detail</a>';
+          $actionBtn = '<a href="' . route('plans.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
         })
         ->rawColumns(['action'])
@@ -477,10 +531,10 @@ class ClientController extends Controller
       $agenda = Agenda::whereIn('plan_id', $plan->pluck('id'))->get();
       $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->get();
 
-      $feedbacks = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->Where(function($query) {
-                    $query->where('feedback', '!=', null)
-                          ->orWhere('attachment', '!=', null);
-                    })->get();
+      $feedbacks = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->Where(function ($query) {
+        $query->where('feedback', '!=', null)
+          ->orWhere('attachment', '!=', null);
+      })->get();
       $feedbacks = $feedbacks->where('from', 'coach');
 
       $data = $feedbacks;
@@ -503,7 +557,7 @@ class ClientController extends Controller
           $actionBtn = '<a href="javascript:;" id="detailFeedback" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Detail</a>';
           return $actionBtn;
         })
-        ->rawColumns(['action','coach_detail','agenda_detail'])
+        ->rawColumns(['action', 'coach_detail', 'agenda_detail'])
         ->make(true);
     }
   }
@@ -598,22 +652,25 @@ class ClientController extends Controller
   }
 
   // download pdf list coach
-  public function coach_pdf_download(){
+  public function coach_pdf_download()
+  {
     $coachs = User::role('coach')->get();
 
-    $pdf = PDF::loadview('pdf_template.coach_list_pdf',compact('coachs'));
+    $pdf = PDF::loadview('pdf_template.coach_list_pdf', compact('coachs'));
     return $pdf->download('coach_list.pdf');
   }
 
   // download pdf list coachee
-  public function coachee_pdf_download(){
+  public function coachee_pdf_download()
+  {
     $coachee = User::role('coachee')->get();
 
-    $pdf = PDF::loadview('pdf_template.coachee_list_pdf',compact('coachee'));
+    $pdf = PDF::loadview('pdf_template.coachee_list_pdf', compact('coachee'));
     return $pdf->download('coachee_list.pdf');
   }
 
-  public function get_client_data($id){
+  public function get_client_data($id)
+  {
     $client = Client::find($id);
     return response()->json($client);
   }

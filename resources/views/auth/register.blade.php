@@ -109,22 +109,24 @@
                 </div>
                 <h5>Register as</h5>
                 <div class="form-group demo-inline-spacing" style="margin-top: -18px;">
-                  <div class="custom-control custom-radio">
+                  <div class="custom-control custom-radio col-3">
                     <input type="radio" id="role_coach" name="role"
                       class="custom-control-input @error('role') is-invalid @enderror" value="coach" />
                     <label class="custom-control-label" for="role_coach">Coach</label>
                   </div>
-                  <div class="custom-control custom-radio">
+                  <div class="custom-control custom-radio col text-left">
                     <input type="radio" id="role_coachee" name="role"
                       class="custom-control-input @error('role') is-invalid @enderror" value="coachee" />
                     <label class="custom-control-label" for="role_coachee">Coachee</label>
                   </div>
-                  <div class="custom-control custom-radio">
+                </div>
+                <div class="form-group demo-inline-spacing" style="margin-top: -25px;">
+                  <div class="custom-control custom-radio col-3">
                     <input type="radio" id="role_trainer" name="role"
                       class="custom-control-input @error('role') is-invalid @enderror" value="trainer" />
                     <label class="custom-control-label" for="role_trainer">Trainer</label>
                   </div>
-                  <div class="custom-control custom-radio">
+                  <div class="custom-control custom-radio col text-left">
                     <input type="radio" id="role_mentor" name="role"
                       class="custom-control-input @error('role') is-invalid @enderror" value="mentor" />
                     <label class="custom-control-label" for="role_mentor">Mentor</label>
