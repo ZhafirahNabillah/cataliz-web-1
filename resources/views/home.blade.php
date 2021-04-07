@@ -22,14 +22,14 @@
           <div class="container-fluid">
             <div class="row justify-content-left">
               <div class="col-md-12">
-                <div class="card bg-success text-white">
+                <div class="card text-white " style="background-color: #7367F0;">
                   <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">
                       {{ session('status') }}
                     </div>
                     @endif
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/docs'}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>
@@ -173,7 +173,7 @@
           <div class="container-fluid">
             <div class="row justify-content-left">
               <div class="col-md-12">
-                <div class="card bg-primary text-white">
+                <div class="card text-white" style="background-color: #7367F0;">
                   <div class="card-body">
                     @if (session('status'))
                     <div class="alert alert-success" role="alert">

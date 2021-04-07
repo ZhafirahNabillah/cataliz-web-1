@@ -205,7 +205,7 @@
                         </div>
                       </td>
                     </tr>
-                    <tr style="height: 80px;">
+                    <tr style="height: 10px;">
                       <td style="text-align: left;">
 
                       </td>
@@ -213,10 +213,9 @@
               </tr>
             </table>
 
-            <table cellspacing="0" cellpadding="15px" class="force-full-width" style="background-color:#3bcdb0;border: 1px solid #9B93EF;margin-top: -51px;">
+            <table cellspacing="0" cellpadding="15px" class="force-full-width" style="background-color:#3bcdb0;border: 1px solid #9B93EF;">
               <tr>
                 <td style="background-color:white;text-align: center;">
-
                   <table cellspacing="0" cellpadding="0" class="force-full-width">
                     <tr>
                       <!-- Nama user coach -->
