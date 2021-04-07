@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeColumnAttributeOnDocumentationsTable extends Migration
+class RenameColumnOnDocumentationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,8 +18,8 @@ class ChangeColumnAttributeOnDocumentationsTable extends Migration
             //
             $table->renameColumn('menu_id', 'title');
             $table->renameColumn('version', 'description');
-            $table->text('title')->change();
-            $table->longText('description')->change();
+            // $table->text('title')->change();
+            // $table->longText('description')->change();
         });
     }
 
