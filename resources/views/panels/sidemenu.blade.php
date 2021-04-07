@@ -84,7 +84,7 @@
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Others</span><i
                     data-feather="more-horizontal"></i></li>
             <li class=" nav-item {{ 'docs' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('docs_index')}}"><i data-feather="inbox"></i><span
+                <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="inbox"></i><span
                         class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
             </li>
             @endrole

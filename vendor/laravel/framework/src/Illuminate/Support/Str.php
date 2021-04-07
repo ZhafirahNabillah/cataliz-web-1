@@ -492,6 +492,18 @@ class Str
     }
 
     /**
+     * Repeat the given string.
+     *
+     * @param  string  $string
+     * @param  int  $times
+     * @return string
+     */
+    public static function repeat(string $string, int $times)
+    {
+        return str_repeat($string, $times);
+    }
+
+    /**
      * Replace a given value in the string sequentially with an array.
      *
      * @param  string  $search
@@ -568,11 +580,9 @@ class Str
      */
     public static function remove($search, $subject, $caseSensitive = true)
     {
-        foreach (Arr::wrap($search) as $s) {
-            $subject = $caseSensitive
-                        ? str_replace($search, '', $subject)
-                        : str_ireplace($search, '', $subject);
-        }
+        $subject = $caseSensitive
+                    ? str_replace($search, '', $subject)
+                    : str_ireplace($search, '', $subject);
 
         return $subject;
     }

@@ -53,10 +53,17 @@
             <form action="{{ route('docs.store') }}" method="post">
               @csrf
               <div class="form-group">
-                <textarea name="description" id="MyID" cols="20" rows="20"
-                  placeholder="Input Your Docs Here....."></textarea>
+                <label for="title">Title</label>
+                <input class="form-control" type="text" name="" value="" placeholder="Your documentation title here...">
               </div>
-              <Button type="submit" class="btn btn-primary">Submit</Button>
+              <div class="form-group">
+                <label for="description">Documentation Content</label>
+                <textarea name="description" id="description" cols="20" rows="20"
+                  placeholder="Your documentation content here..."></textarea>
+              </div>
+              <div class="form-group text-right mb-0">
+                <Button type="submit" class="btn btn-primary">Submit</Button>
+              </div>
             </form>
           </div>
         </div>
@@ -93,7 +100,7 @@
 
     image_title: true,
     automatic_uploads: true,
-    images_upload_url: '/docs_upload_image',
+    images_upload_url: '/docs/upload_image',
     file_picker_types: 'image',
     file_picker_callback: function(cb, value, meta) {
       var input = document.createElement('input');
