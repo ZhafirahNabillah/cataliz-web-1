@@ -29,7 +29,7 @@
                       {{ session('status') }}
                     </div>
                     @endif
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/docs'}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>

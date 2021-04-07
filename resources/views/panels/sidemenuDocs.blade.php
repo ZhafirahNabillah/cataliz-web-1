@@ -14,7 +14,7 @@
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
       <li class="nav-item {{ 'dashboard' == request()->path() ? 'active' : '' }}">
-        <a class=" d-flex align-items-center" href="#">
+        <a class=" d-flex align-items-center" href="{{route('clients.index')}}">
           <i data-feather="grid"></i><span class="menu-item" data-i18n="Analytics">Overview</span>
         </a>
       </li>

@@ -43,6 +43,9 @@ Route::get('/pdf_show', function () {
 Route::get('/documentation/account', function () {
 	return view('docs.account');
 });
+Route::get('/documentation/overview', function () {
+	return view('docs.overview');
+});
 //Authenticate route
 Auth::routes();
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');
