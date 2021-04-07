@@ -8,7 +8,5 @@ $baseDir = dirname($vendorDir);
 return array(
     'Sabberworm\\CSS' => array($vendorDir . '/sabberworm/php-css-parser/lib'),
     'Pimple' => array($vendorDir . '/pimple/pimple/src'),
-    'ParsedownExtra' => array($vendorDir . '/erusev/parsedown-extra'),
-    'Parsedown' => array($vendorDir . '/erusev/parsedown'),
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
 );

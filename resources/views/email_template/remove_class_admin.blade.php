@@ -216,7 +216,7 @@
                     <tr>
                       <td colspan="3">
                         <!-- Nama user coach -->
-                        <h3 style="color: black;">Hai, Admin Name</h3>
+                        <h3 style="color: black;">Hai, {{ $email_data['admin_name'] }}</h3>
                         <p style="color: black;">You have been successfully removed :
                         </p>
                       </td>
@@ -235,12 +235,12 @@
                       </td>
                     </tr>
                     <tr>
-                      <td><b style="padding-top: 10px;">Coach Name</b></td>
+                      <td><b style="padding-top: 10px;">{{ $email_data['coach_name'] }}</b></td>
                       <td><br></td>
                       <td>
-                        <b style="padding-top: 10px;">Coachee Name</b>
+                        <b style="padding-top: 10px;">{{ $email_data['client_name'] }}</b>
                         <br>
-                        <span style="font-size: 12px;">Company Name</span>
+                        <span style="font-size: 12px;">{{ $email_data['client_company'] ?? 'Data not available' }}</span>
                       </td>
                     </tr>
                     <tr>
@@ -248,7 +248,7 @@
                         <p>Email notification will be sent to the party concerned. If you don't think you've paired it,
                           please cancel it by accessing the Class menu or clicking on the button below.</p>
                         <div style="padding-top: 10px;">
-                          <a href="">
+                          <a href="{{ route('clients.index') }}">
                             <button class="button button1">Go To My Class</button>
                           </a>
                         </div>

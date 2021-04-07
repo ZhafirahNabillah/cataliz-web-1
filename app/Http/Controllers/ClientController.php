@@ -304,6 +304,58 @@ class ClientController extends Controller
     }
   }
 
+  //method to show trainer list
+  public function show_trainer_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::role('trainer')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+
+          if ($row->suspend_status == 1) {
+            // code...
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
+  //method to show mentor list
+  public function show_mentor_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::role('mentor')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
+          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
+          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+
+          if ($row->suspend_status == 1) {
+            // code...
+            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+          } else {
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+          }
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
 
   /**
    * Show the form for creating a new resource.

@@ -126,12 +126,13 @@ class MailController extends Controller
       foreach ($clients as $client) {
         // code...
         $data = [
-          'client_name' => $client->name,
-          'client_email' => $client->email,
-          'coach_name' => $coach_detail->name,
-          'coach_email' => $coach_detail->email,
-          'admin_name' => auth()->user()->name,
-          'admin_email' => auth()->user()->email
+          'client_name'     => $client->name,
+          'client_email'    => $client->email,
+          'client_company'  => $client->company,
+          'coach_name'      => $coach_detail->name,
+          'coach_email'     => $coach_detail->email,
+          'admin_name'      => auth()->user()->name,
+          'admin_email'     => auth()->user()->email
         ];
 
         SendAddClassMailJob::dispatch($data);
@@ -144,12 +145,13 @@ class MailController extends Controller
 
     public static function SendRemoveClassMail($client, $coach_detail){
       $data = [
-        'client_name' => $client->name,
-        'client_email' => $client->email,
-        'coach_name' => $coach_detail->name,
-        'coach_email' => $coach_detail->email,
-        'admin_name' => auth()->user()->name,
-        'admin_email' => auth()->user()->email
+        'client_name'     => $client->name,
+        'client_email'    => $client->email,
+        'client_company'  => $client->company,
+        'coach_name'      => $coach_detail->name,
+        'coach_email'     => $coach_detail->email,
+        'admin_name'      => auth()->user()->name,
+        'admin_email'     => auth()->user()->email
       ];
 
       SendRemoveClassMailJob::dispatch($data);

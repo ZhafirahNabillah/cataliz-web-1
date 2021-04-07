@@ -219,7 +219,7 @@
                   <table cellspacing="0" cellpadding="0" class="force-full-width">
                     <tr>
                       <!-- Nama user coach -->
-                      <h3 style="color: black;">Hai, {{ $email_data['coach_name'] }}</h3>
+                      <h3 style="color: black;">Hai, {{ $email_data['client_name'] }}</h3>
                       <p style="color: black;">Admin has been removed you from your coach. This is your coach’s
                         introduction.
                       </p>
@@ -227,14 +227,14 @@
                       <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
                       <!-- /foto profile -->
                       <br>
-                      <b style="padding-top: 10px;">Coach Name</b>
+                      <b style="padding-top: 10px;">{{ $email_data['coach_name'] }}</b>
                       <br>
                       <p>
                         Thank you for studying with this coach. You are not a client of this coach again. Sorry and see
                         you for your next business
                       </p>
                       <div style="padding-top: 10px;">
-                        <a href="">
+                        <a href="{{ route('clients.index') }}">
                           <button class="button button1">Go To My Coaches</button>
                         </a>
                       </div>

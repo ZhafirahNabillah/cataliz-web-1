@@ -61,7 +61,8 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/vendors.min.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/charts/apexcharts.css')}}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/extensions/toastr.min.css')}}">
-<link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.css" rel="stylesheet"/>
+<link href="https://rawgit.com/tempusdominus/bootstrap-4/master/build/css/tempusdominus-bootstrap-4.css"
+    rel="stylesheet" />
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->
@@ -82,5 +83,7 @@
 
 <!-- BEGIN: Custom CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+
 <!-- END: Custom CSS-->
 @endif

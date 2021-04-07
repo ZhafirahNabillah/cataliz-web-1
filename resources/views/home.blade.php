@@ -29,7 +29,7 @@
                       {{ session('status') }}
                     </div>
                     @endif
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/docs'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a href="{{'/docs'}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>
@@ -253,7 +253,7 @@
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
-                <h2 class="font-weight-bolder text-center">21 Rating</h2>
+                <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
               </div>
             </div>
           </div>
@@ -319,7 +319,7 @@
                 <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
-                <h2 class="font-weight-bolder text-center">21 Rating</h2>
+                <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
               </div>
             </div>
           </div>
@@ -548,6 +548,12 @@
       </div>
       <!-- End Modal -->
       @endrole
+
+      @role('trainer')
+      @endrole
+
+      @role('mentor')
+      @endrole
     </div>
 
     <div class="sidenav-overlay"></div>
@@ -557,8 +563,15 @@
 
     @push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+
     <script type="text/javascript">
       $(function() {
+
+        var simplemde = new SimpleMDE({
+          element: document.getElementById('MyID'),
+          initialValue: '## Stuff.... '
+        });
 
         $.ajaxSetup({
           headers: {

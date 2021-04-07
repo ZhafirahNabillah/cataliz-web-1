@@ -39,7 +39,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         '9cdd7b9056abc3081735233ba9dd9c7f' => __DIR__ . '/..' . '/facade/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        '9be1c2bab389f876c8b9376199151a90' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Helpers/helpers.php',
         'eb7e98e63c68d07fafdbd92bdcaa497e' => __DIR__ . '/..' . '/deployer/recipes/autoload.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
@@ -101,7 +100,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\ErrorHandler\\' => 31,
-            'Symfony\\Component\\DomCrawler\\' => 29,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
             'Svg\\' => 4,
@@ -206,7 +204,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'B' => 
         array (
             'Brick\\Math\\' => 11,
-            'BinaryTorch\\LaRecipe\\' => 21,
             'Barryvdh\\DomPDF\\' => 16,
         ),
         'A' => 
@@ -351,10 +348,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'Symfony\\Component\\ErrorHandler\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/error-handler',
-        ),
-        'Symfony\\Component\\DomCrawler\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/symfony/dom-crawler',
         ),
         'Symfony\\Component\\CssSelector\\' => 
         array (
@@ -605,10 +598,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
-        'BinaryTorch\\LaRecipe\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/binarytorch/larecipe/src',
-        ),
         'Barryvdh\\DomPDF\\' => 
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src',
@@ -641,14 +630,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
             array (
                 0 => __DIR__ . '/..' . '/pimple/pimple/src',
             ),
-            'ParsedownExtra' => 
-            array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown-extra',
-            ),
-            'Parsedown' => 
-            array (
-                0 => __DIR__ . '/..' . '/erusev/parsedown',
-            ),
         ),
         'M' => 
         array (
@@ -672,6 +653,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Http\\Controllers\\ClassController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClassController.php',
         'App\\Http\\Controllers\\ClientController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClientController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DocumentationController' => __DIR__ . '/../..' . '/app/Http/Controllers/DocumentationController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
         'App\\Http\\Controllers\\PermissionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermissionController.php',
@@ -711,6 +693,8 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Client' => __DIR__ . '/../..' . '/app/Models/Client.php',
         'App\\Models\\Coach' => __DIR__ . '/../..' . '/app/Models/Coach.php',
         'App\\Models\\Coaching_note' => __DIR__ . '/../..' . '/app/Models/Coaching_note.php',
+        'App\\Models\\Documentation' => __DIR__ . '/../..' . '/app/Models/Documentation.php',
+        'App\\Models\\Documentation_details' => __DIR__ . '/../..' . '/app/Models/Documentation_details.php',
         'App\\Models\\Feedback' => __DIR__ . '/../..' . '/app/Models/Feedback.php',
         'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -1495,26 +1479,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'Barryvdh\\DomPDF\\Facade' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade.php',
         'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
         'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
-        'BinaryTorch\\LaRecipe\\Cache' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Cache.php',
-        'BinaryTorch\\LaRecipe\\Commands\\AssetCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/AssetCommand.php',
-        'BinaryTorch\\LaRecipe\\Commands\\GenerateDocumentationCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/GenerateDocumentationCommand.php',
-        'BinaryTorch\\LaRecipe\\Commands\\InstallCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/InstallCommand.php',
-        'BinaryTorch\\LaRecipe\\Commands\\ThemeCommand' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Commands/ThemeCommand.php',
-        'BinaryTorch\\LaRecipe\\DocumentationRepository' => __DIR__ . '/..' . '/binarytorch/larecipe/src/DocumentationRepository.php',
-        'BinaryTorch\\LaRecipe\\Facades\\LaRecipe' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Facades/LaRecipe.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\Controller' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/Controller.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\DocumentationController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/DocumentationController.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\ScriptController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/ScriptController.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\SearchController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/SearchController.php',
-        'BinaryTorch\\LaRecipe\\Http\\Controllers\\StyleController' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Http/Controllers/StyleController.php',
-        'BinaryTorch\\LaRecipe\\LaRecipe' => __DIR__ . '/..' . '/binarytorch/larecipe/src/LaRecipe.php',
-        'BinaryTorch\\LaRecipe\\LaRecipeServiceProvider' => __DIR__ . '/..' . '/binarytorch/larecipe/src/LaRecipeServiceProvider.php',
-        'BinaryTorch\\LaRecipe\\Models\\Documentation' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Models/Documentation.php',
-        'BinaryTorch\\LaRecipe\\Traits\\HasBladeParser' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/HasBladeParser.php',
-        'BinaryTorch\\LaRecipe\\Traits\\HasDocumentationAttributes' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/HasDocumentationAttributes.php',
-        'BinaryTorch\\LaRecipe\\Traits\\HasMarkdownParser' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/HasMarkdownParser.php',
-        'BinaryTorch\\LaRecipe\\Traits\\Indexable' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/Indexable.php',
-        'BinaryTorch\\LaRecipe\\Traits\\RunProcess' => __DIR__ . '/..' . '/binarytorch/larecipe/src/Traits/RunProcess.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -4925,8 +4889,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'PackageVersions\\FallbackVersions' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/FallbackVersions.php',
         'PackageVersions\\Installer' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/Installer.php',
         'PackageVersions\\Versions' => __DIR__ . '/..' . '/composer/package-versions-deprecated/src/PackageVersions/Versions.php',
-        'Parsedown' => __DIR__ . '/..' . '/erusev/parsedown/Parsedown.php',
-        'ParsedownExtra' => __DIR__ . '/..' . '/erusev/parsedown-extra/ParsedownExtra.php',
         'PharIo\\Manifest\\Application' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Application.php',
         'PharIo\\Manifest\\ApplicationName' => __DIR__ . '/..' . '/phar-io/manifest/src/values/ApplicationName.php',
         'PharIo\\Manifest\\Author' => __DIR__ . '/..' . '/phar-io/manifest/src/values/Author.php',
@@ -6085,22 +6047,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'Symfony\\Component\\CssSelector\\XPath\\Translator' => __DIR__ . '/..' . '/symfony/css-selector/XPath/Translator.php',
         'Symfony\\Component\\CssSelector\\XPath\\TranslatorInterface' => __DIR__ . '/..' . '/symfony/css-selector/XPath/TranslatorInterface.php',
         'Symfony\\Component\\CssSelector\\XPath\\XPathExpr' => __DIR__ . '/..' . '/symfony/css-selector/XPath/XPathExpr.php',
-        'Symfony\\Component\\DomCrawler\\AbstractUriElement' => __DIR__ . '/..' . '/symfony/dom-crawler/AbstractUriElement.php',
-        'Symfony\\Component\\DomCrawler\\Crawler' => __DIR__ . '/..' . '/symfony/dom-crawler/Crawler.php',
-        'Symfony\\Component\\DomCrawler\\Field\\ChoiceFormField' => __DIR__ . '/..' . '/symfony/dom-crawler/Field/ChoiceFormField.php',
-        'Symfony\\Component\\DomCrawler\\Field\\FileFormField' => __DIR__ . '/..' . '/symfony/dom-crawler/Field/FileFormField.php',
-        'Symfony\\Component\\DomCrawler\\Field\\FormField' => __DIR__ . '/..' . '/symfony/dom-crawler/Field/FormField.php',
-        'Symfony\\Component\\DomCrawler\\Field\\InputFormField' => __DIR__ . '/..' . '/symfony/dom-crawler/Field/InputFormField.php',
-        'Symfony\\Component\\DomCrawler\\Field\\TextareaFormField' => __DIR__ . '/..' . '/symfony/dom-crawler/Field/TextareaFormField.php',
-        'Symfony\\Component\\DomCrawler\\Form' => __DIR__ . '/..' . '/symfony/dom-crawler/Form.php',
-        'Symfony\\Component\\DomCrawler\\FormFieldRegistry' => __DIR__ . '/..' . '/symfony/dom-crawler/FormFieldRegistry.php',
-        'Symfony\\Component\\DomCrawler\\Image' => __DIR__ . '/..' . '/symfony/dom-crawler/Image.php',
-        'Symfony\\Component\\DomCrawler\\Link' => __DIR__ . '/..' . '/symfony/dom-crawler/Link.php',
-        'Symfony\\Component\\DomCrawler\\Test\\Constraint\\CrawlerSelectorAttributeValueSame' => __DIR__ . '/..' . '/symfony/dom-crawler/Test/Constraint/CrawlerSelectorAttributeValueSame.php',
-        'Symfony\\Component\\DomCrawler\\Test\\Constraint\\CrawlerSelectorExists' => __DIR__ . '/..' . '/symfony/dom-crawler/Test/Constraint/CrawlerSelectorExists.php',
-        'Symfony\\Component\\DomCrawler\\Test\\Constraint\\CrawlerSelectorTextContains' => __DIR__ . '/..' . '/symfony/dom-crawler/Test/Constraint/CrawlerSelectorTextContains.php',
-        'Symfony\\Component\\DomCrawler\\Test\\Constraint\\CrawlerSelectorTextSame' => __DIR__ . '/..' . '/symfony/dom-crawler/Test/Constraint/CrawlerSelectorTextSame.php',
-        'Symfony\\Component\\DomCrawler\\UriResolver' => __DIR__ . '/..' . '/symfony/dom-crawler/UriResolver.php',
         'Symfony\\Component\\ErrorHandler\\BufferingLogger' => __DIR__ . '/..' . '/symfony/error-handler/BufferingLogger.php',
         'Symfony\\Component\\ErrorHandler\\Debug' => __DIR__ . '/..' . '/symfony/error-handler/Debug.php',
         'Symfony\\Component\\ErrorHandler\\DebugClassLoader' => __DIR__ . '/..' . '/symfony/error-handler/DebugClassLoader.php',

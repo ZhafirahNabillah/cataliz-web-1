@@ -198,7 +198,7 @@
                         <br>
                         <!-- link ke agendas -->
                         <div style="padding-top: 10px;">
-                          <a href="">
+                          <a href="{{ route('clients.index') }}">
                             <button class="button button1">Go To My Coaches</button>
                           </a>
                         </div>
@@ -219,14 +219,14 @@
                   <table cellspacing="0" cellpadding="0" class="force-full-width">
                     <tr>
                       <!-- Nama user coach -->
-                      <h3 style="color: black;">Hai, {{ $email_data['coach_name'] }}</h3>
+                      <h3 style="color: black;">Hai, {{ $email_data['client_name'] }}</h3>
                       <p style="color: black;">Admin has been assigned you to a new coach. Let’s introduce your new
                         coach
                       </p>
                       <!-- profile picture -->
                       <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
                       <br>
-                      <b style="padding-top: 10px;">Coachee Name</b>
+                      <b style="padding-top: 10px;">{{ $email_data['coach_name'] }}</b>
                       <p>Your coach will planning and scheduling your session. We hope you will have the best experience
                         and improve your business.</p>
                     </tr>

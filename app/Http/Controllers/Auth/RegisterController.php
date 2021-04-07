@@ -110,6 +110,30 @@ class RegisterController extends Controller
         'user_id' => $user->id,
       ]);
       $user->assignRole('coachee');
+    } elseif ($request->role == 'trainer') {
+      Client::create([
+        'name' => $user->name,
+        'phone' => $user->phone,
+        'email' => $user->email,
+        'occupation' => null,
+        'company' => null,
+        'organization' => null,
+        'program' => 'Starco',
+        'user_id' => $user->id,
+      ]);
+      $user->assignRole('trainer');
+    } elseif ($request->role == 'mentor') {
+      Client::create([
+        'name' => $user->name,
+        'phone' => $user->phone,
+        'email' => $user->email,
+        'occupation' => null,
+        'company' => null,
+        'organization' => null,
+        'program' => 'Starco',
+        'user_id' => $user->id,
+      ]);
+      $user->assignRole('mentor');
     }
 
     MailController::SendSignUpMail($user);
