@@ -97,7 +97,7 @@ class PlanController extends Controller
 
             return $actionBtn;
           })
-          ->rawColumns(['action', 'coach_name','objective'])
+          ->rawColumns(['action', 'coach_name', 'objective'])
           ->make(true);
       } else {
         // code...
@@ -160,7 +160,7 @@ class PlanController extends Controller
     // $coach = Coach::where('user_id', auth()->user()->id)->first();
     // $clients = $coach->clients;
     $clients = null;
-    
+
     if ($request->has('client')) {
       $client_id = $request->get('client');
       $clients[] = Client::find($client_id);
@@ -294,9 +294,9 @@ class PlanController extends Controller
     //   'client_id' => $plan_type
     // ]);
     if ($plan->wasRecentlyCreated) {
-      $request->session()->flash('success','The plan has been added successfully!');
+      $request->session()->flash('success', 'The plan has been added successfully!');
     } else {
-      $request->session()->flash('success','The plan has been updated successfully!');
+      $request->session()->flash('success', 'The plan has been updated successfully!');
     }
     return response()->json(['success' => true]);
     // return redirect('/plans')->with('success', 'The plan has been added successfully!!');
@@ -348,7 +348,8 @@ class PlanController extends Controller
    */
 
   //method to delete plan
-  public function destroy($id){
+  public function destroy($id)
+  {
     $plan = Plan::find($id);
     $plan->clients()->detach();
     $plan->delete();
@@ -359,20 +360,22 @@ class PlanController extends Controller
   }
 
   //method to export plan on detail plan page
-  public function plan_detail_to_pdf($id){
+  public function plan_detail_to_pdf($id)
+  {
     $plan = Plan::find($id);
     $coach = User::find($plan->owner_id);
     $coachee = Client::find($plan->client_id);
 
     $pdf = PDF::loadview('pdf_template.plans_detail_pdf', compact('plan', 'coach', 'coachee'));
-    $pdf->setPaper('A4','portrait');
+    $pdf->setPaper('A4', 'portrait');
     $pdf->setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
     return $pdf->stream();
     // return $pdf->download('plan_detail_' . $plan->id . '.pdf');
   }
 
   //method to show plan group list on plan index page (plan tab)
-  public function show_group_list(Request $request){
+  public function show_group_list(Request $request)
+  {
     if (auth()->user()->hasRole('admin')) {
       $data = Plan::where('client_id', null)->latest()->get();
     } elseif (auth()->user()->hasRole('coach')) {
@@ -419,7 +422,7 @@ class PlanController extends Controller
 
           return $actionBtn;
         })
-        ->rawColumns(['action','objective'])
+        ->rawColumns(['action', 'objective'])
         ->make(true);
     }
   }
@@ -432,7 +435,7 @@ class PlanController extends Controller
 
     $search = trim($request->q);
 
-    if (empty($search)){
+    if (empty($search)) {
       $clients = $coach->clients;
     } else {
       $client_id = $coach->clients->pluck('id');
