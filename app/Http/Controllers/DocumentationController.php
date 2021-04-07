@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Documentation;
+use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
 use DataTables;
 
@@ -16,10 +17,11 @@ class DocumentationController extends Controller
      */
     public function index(Request $request)
     {
+      $roles = Role::all();
 
       if ($request->ajax()) {
 
-        $data = Documentation::all();
+        $data = Documentation::where('role','admin')->get();
 
         //return data as datatable json
         return DataTables::of($data)
@@ -56,7 +58,55 @@ class DocumentationController extends Controller
           ->make(true);
       }
 
-      return view('docs.index');
+      return view('docs.index', compact('roles'));
+    }
+
+    public function coachee_docs(Request $request)
+    {
+      if ($request->ajax()) {
+        $data = Documentation::where('role', 'coachee')->get();
+
+        return DataTables::of($data)
+          ->addIndexColumn()
+          ->addColumn('action', function ($row) {
+            $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
+            $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
+            $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+
+            if ($row->suspend_status == 1) {
+              $actionBtn = $detail_btn . ' ' . $suspend_btn;
+            } else {
+              $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            }
+            return $actionBtn;
+          })
+          ->rawColumns(['action'])
+          ->make(true);
+      }
+    }
+
+    public function coach_docs(Request $request)
+    {
+      if ($request->ajax()) {
+        $data = Documentation::where('role', 'coach')->get();
+
+        return DataTables::of($data)
+          ->addIndexColumn()
+          ->addColumn('action', function ($row) {
+            $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
+            $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
+            $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+
+            if ($row->suspend_status == 1) {
+              $actionBtn = $detail_btn . ' ' . $suspend_btn;
+            } else {
+              $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            }
+            return $actionBtn;
+          })
+          ->rawColumns(['action'])
+          ->make(true);
+      }
     }
 
     /**
@@ -65,14 +115,11 @@ class DocumentationController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show_documentations_list(Request $request)
-    {
-    }
-
     public function create()
     {
       $documentations = Documentation::get()->groupBy('category');
-      return view('docs.create', compact('documentations'));
+      $roles = Role::all();
+      return view('docs.create', compact('documentations','roles'));
     }
 
     /**
@@ -91,7 +138,8 @@ class DocumentationController extends Controller
           [
             'title'       => $request->title,
             'category'    => $request->category,
-            'description' => $request->description
+            'description' => $request->description,
+            'role'        => $request->role
           ]
         );
         // $documentation = new Documentation;
@@ -125,6 +173,7 @@ class DocumentationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
         //
@@ -144,7 +193,8 @@ class DocumentationController extends Controller
         //
         $documentation = Documentation::find($id);
         $documentations = Documentation::get()->groupBy('category');
-        return view('docs.edit', compact('documentation','documentations'));
+        $roles = Role::all();
+        return view('docs.edit', compact('documentation','documentations', 'roles'));
     }
 
     /**

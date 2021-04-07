@@ -58,19 +58,33 @@
                 <input class="form-control" type="text" name="title" value="{{ $documentation->title }}" placeholder="Your documentation title here...">
               </div>
               <div class="form-group">
-                <label for="fp-default">Category</label>
-                <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
-                  @foreach ($documentations as $doc)
-                    <option @if ($doc->first()->category == $documentation->category)
-                      selected
-                    @endif >{{ $doc->first()->category }}</option>
-                  @endforeach
-                </select>
-                @error('category')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="fp-default">Category</label>
+                    <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
+                      @foreach ($documentations as $doc)
+                        <option @if ($doc->first()->category == $documentation->category)
+                          selected
+                        @endif >{{ $doc->first()->category }}</option>
+                      @endforeach
+                    </select>
+                    @error('category')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+                  <div class="col-md-6">
+                    <label for="role">Role</label>
+                    <select class="form-control" name="role">
+                      @foreach ($roles as $role)
+                        <option value="{{ $role->name }}" @if ($documentation->role == $role->name)
+                          selected
+                        @endif>{{ ucfirst($role->name) }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="description">Documentation Content</label>

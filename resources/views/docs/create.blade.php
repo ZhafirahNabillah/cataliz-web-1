@@ -36,17 +36,6 @@
     </div>
 
     <div class="content-body">
-      @if ($message = Session::get('success'))
-      <div class="alert alert-success alert-dissmisable">
-        <h4 class="alert-heading">Success</h4>
-        <div class="alert-body">{{ $message }}</div>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      @endif
-
-      <!-- Basic table -->
       <div class="row">
         <div class="col-12">
           <div class="card p-2">
@@ -57,17 +46,30 @@
                 <input class="form-control" type="text" name="title" value="" placeholder="Your documentation title here...">
               </div>
               <div class="form-group">
-                <label for="fp-default">Category</label>
-                <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
-                  @foreach ($documentations as $documentation)
-                    <option>{{ $documentation->first()->category }}</option>
-                  @endforeach
-                </select>
-                @error('category')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+                <div class="row">
+                  <div class="col-md-6">
+                    <label for="fp-default">Category</label>
+                    <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
+                      @foreach ($documentations as $documentation)
+                        <option>{{ $documentation->first()->category }}</option>
+                      @endforeach
+                    </select>
+                    @error('category')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
+                  </div>
+                  <div class="col-md-6">
+                    <label for="role">Role</label>
+                    <select class="form-control" name="role">
+                      <option hidden disabled selected>Select role</option>
+                      @foreach ($roles as $role)
+                        <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                      @endforeach
+                    </select>
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="description">Documentation Content</label>
@@ -84,7 +86,6 @@
     </div>
   </div>
 </div>
-
 <!-- END: Content-->
 @endsection
 
