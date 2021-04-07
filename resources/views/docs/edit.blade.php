@@ -52,9 +52,25 @@
           <div class="card p-2">
             <form action="{{ route('docs.store') }}" method="post">
               @csrf
+              <input type="hidden" name="id" value="{{ $documentation->id }}">
               <div class="form-group">
                 <label for="title">Title</label>
-                <input class="form-control" type="text" name="" value="{{ $documentation->title }}" placeholder="Your documentation title here...">
+                <input class="form-control" type="text" name="title" value="{{ $documentation->title }}" placeholder="Your documentation title here...">
+              </div>
+              <div class="form-group">
+                <label for="fp-default">Category</label>
+                <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
+                  @foreach ($documentations as $doc)
+                    <option @if ($doc->first()->category == $documentation->category)
+                      selected
+                    @endif >{{ $doc->first()->category }}</option>
+                  @endforeach
+                </select>
+                @error('category')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
               </div>
               <div class="form-group">
                 <label for="description">Documentation Content</label>
@@ -76,9 +92,15 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
   referrerpolicy="origin"></script>
 <script type="text/javascript">
+  $('.category-select').select2({
+    placeholder: 'Select plans',
+    tags: true
+  });
+
   tinymce.init({
     selector: 'textarea',
 

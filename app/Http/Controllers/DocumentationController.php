@@ -71,7 +71,8 @@ class DocumentationController extends Controller
 
     public function create()
     {
-      return view('docs.create');
+      $documentations = Documentation::get()->groupBy('category');
+      return view('docs.create', compact('documentations'));
     }
 
     /**
@@ -83,12 +84,27 @@ class DocumentationController extends Controller
     public function store(Request $request)
     {
         //
-        $documentation = new Documentation;
-        $documentation->title = 'tes';
-        $documentation->description = $request->description;
-        $documentation->save();
+        $documentation = Documentation::updateOrCreate(
+          [
+            'id' => $request->id
+          ],
+          [
+            'title'       => $request->title,
+            'category'    => $request->category,
+            'description' => $request->description
+          ]
+        );
+        // $documentation = new Documentation;
+        // $documentation->title = $request->title;
+        // $documentation->category = $request->category;
+        // $documentation->description = $request->description;
+        // $documentation->save();
 
-        return redirect('/docs');
+        if ($documentation->wasRecentlyCreated) {
+          return redirect('/docs')->with('success', 'New Documentation succesfully saved');
+        } else {
+          return redirect('/docs')->with('success', 'Documentation succesfully updated');
+        }
         // return $request->description;
     }
 
@@ -127,7 +143,8 @@ class DocumentationController extends Controller
     {
         //
         $documentation = Documentation::find($id);
-        return view('docs.edit', compact('documentation'));
+        $documentations = Documentation::get()->groupBy('category');
+        return view('docs.edit', compact('documentation','documentations'));
     }
 
     /**

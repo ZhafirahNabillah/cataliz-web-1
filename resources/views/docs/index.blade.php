@@ -14,7 +14,7 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Coaching Plans
+            <h2 class="content-header-title float-left mb-0">Documentations
               <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
                 data-content="Pada bagian ini ditampilkan daftar rencana dari coach yang ada dalam sistem." />
             </h2>
@@ -22,7 +22,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active">Coaching Plans
+                <li class="breadcrumb-item active">Documentations
                 </li>
               </ol>
             </div>
@@ -52,6 +52,7 @@
                   <thead>
                     <tr>
                       <th>No</th>
+                      <th>Category</th>
                       <th>Title</th>
                       <th>Action</th>
                     </tr>
@@ -118,6 +119,10 @@
           columns: [{
               data: 'DT_RowIndex',
               name: 'DT_RowIndex'
+            },
+            {
+              data: 'category',
+              name: 'category'
             },
             {
               data: 'title',
