@@ -229,7 +229,7 @@
                       <b style="padding-top: 10px;">{{ $email_data['client_name'] }}</b>
                       <br>
                       <span style="font-size: 12px;">{{ $email_data['client_company'] }}</span>
-                      <p>You can start planning and scheduling session for your new client. We hope you can give your
+                      <p style="color: black;">You can start planning and scheduling session for your new client. We hope you can give your
                         best contribution and help them in improving their business.</p>
                     </tr>
                   </table>
