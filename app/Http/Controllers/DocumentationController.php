@@ -150,6 +150,14 @@ class DocumentationController extends Controller
     return view('docs.create', compact('documentations', 'roles'));
   }
 
+  public function documentation_view(Documentation $documentation){
+    $documentations = Documentation::where('category', $documentation->category)->get();
+    $active_category = $documentation->category;
+    $categories = Documentation::get()->groupBy('category');
+
+    return view('docs.overview', compact('documentations', 'active_category', 'categories'));
+  }
+
   /**
    * Store a newly created resource in storage.
    *

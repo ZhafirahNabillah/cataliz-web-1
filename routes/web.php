@@ -40,13 +40,15 @@ Route::get('/home', function () {
 Route::get('/pdf_show', function () {
 	return view('pdf_template.plans_detail_pdf');
 });
-Route::get('/documentation/account', function () {
-	return view('docs.account');
-});
-Route::get('/documentation/overview', function () {
-	return view('docs.overview');
-});
-//Authenticate route
+// Route::get('/documentation/account', function () {
+// 	return view('docs.account');
+// });
+// Route::get('/documentation/overview', function () {
+// 	return view('docs.overview');
+// });
+
+Route::get('/documentation/{documentation:category}', [DocumentationController::class, 'documentation_view'])->name('documentation.view');
+
 Auth::routes();
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');
 Route::post('/register', [RegisterController::class, 'create'])->name('register');

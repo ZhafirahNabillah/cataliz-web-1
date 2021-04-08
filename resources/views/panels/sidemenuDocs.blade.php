@@ -13,13 +13,15 @@
   <div class="shadow-bottom"></div><br>
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-      <li class="nav-item {{ 'dashboard' == request()->path() ? 'active' : '' }}">
-        <a class=" d-flex align-items-center" href="{{route('clients.index')}}">
-          <i data-feather="grid"></i><span class="menu-item" data-i18n="Analytics">Overview</span>
-        </a>
-      </li>
+      @foreach ($categories as $category)
+        <li class="nav-item @if ($active_category == $category->first()->category) active @endif">
+          <a class=" d-flex align-items-center" href="{{route('documentation.view', $category->first()->category)}}">
+            <i data-feather="grid"></i><span class="menu-item" data-i18n="Analytics">{{ $category->first()->category }}</span>
+          </a>
+        </li>
+      @endforeach
 
-      <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
+      {{-- <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
         <a class="d-flex align-items-center" href="#"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Account</span></a>
       </li>
 
@@ -30,7 +32,7 @@
 
       <li class=" nav-item {{ 'agendas' == request()->path() ? 'active' : '' }}">
         <a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Document</span></a>
-      </li>
+      </li> --}}
 
 
 
