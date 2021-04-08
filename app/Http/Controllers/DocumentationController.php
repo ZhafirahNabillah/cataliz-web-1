@@ -151,9 +151,17 @@ class DocumentationController extends Controller
   }
 
   public function documentation_view(Documentation $documentation){
-    $documentations = Documentation::where('category', $documentation->category)->get();
+    $role = auth()->user()->getRoleNames()->first();
+
+    $all_documentations = Documentation::all();
     $active_category = $documentation->category;
-    $categories = Documentation::get()->groupBy('category');
+    $role_documentations = $all_documentations->where('role', $role);
+    $documentations = $role_documentations->where('category', $active_category);
+    $categories = $all_documentations->groupBy('category');
+
+    // if ($documentations->isEmpty()) {
+    //   return 'null';
+    // }
 
     return view('docs.overview', compact('documentations', 'active_category', 'categories'));
   }
