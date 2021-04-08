@@ -12,6 +12,7 @@ class Documentation extends Model
     protected $fillable = [
         'title',
         'description',
-        'category'
+        'category',
+        'role'
     ];
 }
