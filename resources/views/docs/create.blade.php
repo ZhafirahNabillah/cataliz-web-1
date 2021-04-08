@@ -65,7 +65,9 @@
                     <select class="form-control" name="role">
                       <option hidden disabled selected>Select role</option>
                       @foreach ($roles as $role)
-                        <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                        <option value="{{ $role->name }}" @if (request()->get('role') == $role->name)
+                          selected
+                        @endif>{{ ucfirst($role->name) }}</option>
                       @endforeach
                     </select>
                   </div>
