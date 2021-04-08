@@ -14,7 +14,7 @@
         <!-- Vertical Left Tabs start -->
         <div class="Col-sm-12 col-md-12">
           <div class="nav-vertical">
-            <ul class="nav nav-tabs nav-left flex-column col-2" role="tablist">
+            <ul class="nav nav-tabs nav-left flex-column col-sm-12 col-md-2" role="tablist">
               @foreach ($documentations as $documentation)
                 {{-- <li class="nav-item">
                   <a class="nav-link @if ($loop->first) active @endif" id="baseVerticalLeft-tab1" data-toggle="tab" aria-controls="tabVerticalLeft1" href="#{{ $documentation->id }}" role="tab" aria-selected="true">{{ $documentation->title }}</a>
@@ -25,7 +25,7 @@
                 </li>
               @endforeach
             </ul>
-            <div class="card">
+            <div class="card col-sm-12 col-md-auto">
               <div class="card-body">
                 <div class="tab-content">
                   {{-- @foreach ($documentations as $documentation)
