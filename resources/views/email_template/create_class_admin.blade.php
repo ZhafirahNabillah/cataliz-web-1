@@ -250,7 +250,7 @@
                     </tr>
                     <tr>
                       <td colspan="3">
-                        <p>Email notification will be sent to the party concerned. If you don't think you've paired it,
+                        <p style="color: black;">Email notification will be sent to the party concerned. If you don't think you've paired it,
                           please cancel it by accessing the Class menu or clicking on the button below.</p>
                       </td>
                     </tr>

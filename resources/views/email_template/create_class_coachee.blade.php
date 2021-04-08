@@ -227,7 +227,7 @@
                       <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
                       <br>
                       <b style="padding-top: 10px;">{{ $email_data['coach_name'] }}</b>
-                      <p>Your coach will planning and scheduling your session. We hope you will have the best experience
+                      <p style="color: black;">Your coach will planning and scheduling your session. We hope you will have the best experience
                         and improve your business.</p>
                     </tr>
                   </table>
