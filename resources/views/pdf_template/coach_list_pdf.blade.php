@@ -161,7 +161,7 @@
         <table class="table table-striped table-bordered table-sm mb-5">
             <thead>
                 <tr style="background-color: #F3F2F2;">
-                    <th scope="col">#</th>
+                    <th scope="col">No</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
@@ -169,16 +169,14 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i = 1;
-                ?>
+
                 @foreach($coachs as $data)
                 <tr>
-                    <th scope="row">{{$i}}</th>
+                    <th scope="row">{{$loop->iteration}}</th>
                     <td style="width: 250px;">{{ $data->name }}</td>
                     <td>{{ $data->email }}</td>
                     <td>+62{{ $data->phone }}</td>
                 </tr>
-                <?php $i++; ?>
                 @endforeach
             </tbody>
         </table>

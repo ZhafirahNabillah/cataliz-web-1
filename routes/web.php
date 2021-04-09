@@ -29,6 +29,8 @@ use App\Http\Controllers\DocumentationController;
 |
 */
 
+
+
 Route::get('/', function () {
 	return redirect('login');
 });
@@ -39,6 +41,9 @@ Route::get('/home', function () {
 
 Route::get('/pdf_show', function () {
 	return view('pdf_template.plans_detail_pdf');
+});
+Route::get('/topic', function () {
+	return view('topic.index');
 });
 // Route::get('/documentation/account', function () {
 // 	return view('docs.account');

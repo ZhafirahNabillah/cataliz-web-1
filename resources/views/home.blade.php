@@ -550,6 +550,261 @@
       @endrole
 
       @role('trainer')
+      <section id="card-demo-example">
+        <div class="row match-height">
+          <div class="container-fluid">
+            <div class="row justify-content-left">
+              <div class="col-md-12">
+                <div class="card text-white " style="background-color: #7367F0;">
+                  <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                      {{ session('status') }}
+                    </div>
+                    @endif
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/documentation/overview'}}" target="_blank"><u>See
+                        Documentations</u></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <a href="#">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah latihan yang ada" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Exercise</small>
+                  <h2 class="font-weight-bolder text-center"># Exercise</h2>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <a href="#">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah materi yang disampaikan" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Topic</small>
+                  <h2 class="font-weight-bolder text-center"># Topic</h2>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-4 col-lg-4">
+            <a href="#">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee yang terdaftar" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Coachee</small>
+                  <h2 class="font-weight-bolder text-center"># Plan</h2>
+                </div>
+              </div>
+            </a>
+          </div>
+
+
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">List Agenda
+                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                </h5>
+              </div>
+              <div class="card-body">
+                <section id="basic-datatable">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <table class="datatables-basic table-striped table agenda-datatable-individual">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Name</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Duration</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <!-- <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  start agenda Individu
+                  <div class="tab-pane active" id="agenda-individual" role="tabpanel">
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <table class="datatables-basic table-striped table agenda-datatable-individual">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Name</th>
+                                  <th>Date</th>
+                                  <th>Time</th>
+                                  <th>Session</th>
+                                  <th>Duration</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  /end agenda individu
+
+                  start tab agenda group
+                  <div class="tab-pane" id="agenda-group" role="tabpanel">
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <table class="datatables-basic table-striped table agenda-datatable-group">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Group Code</th>
+                                  <th>Session</th>
+                                  <th>Date</th>
+                                  <th>Duration</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  /end tab agenda group
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">Upcoming Event
+                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bgaian ini menampilkan sesi dengan status scheduled yang dijadwalkan terlaksana dalam waktu dekat" />
+                </h5>
+              </div>
+              <div class="card-body">
+                <section id="basic-datatable">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <table class="datatables-basic table-striped table agenda-datatable-individual">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Name</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Session</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <!-- <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  start agenda Individu
+                  <div class="tab-pane active" id="agenda-individual" role="tabpanel">
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <table class="datatables-basic table-striped table agenda-datatable-individual">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Name</th>
+                                  <th>Date</th>
+                                  <th>Time</th>
+                                  <th>Session</th>
+                                  <th>Duration</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  /end agenda individu
+
+                  start tab agenda group
+                  <div class="tab-pane" id="agenda-group" role="tabpanel">
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <table class="datatables-basic table-striped table agenda-datatable-group">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Group Code</th>
+                                  <th>Session</th>
+                                  <th>Date</th>
+                                  <th>Duration</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  /end tab agenda group
+                </div> -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <!-- /card -->
       @endrole
 
       @role('mentor')

@@ -14,15 +14,15 @@
   <div class="main-menu-content">
     <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
       @foreach ($categories as $category)
-        <li class="nav-item @if ($active_category == $category->first()->category) active @endif">
-          <a class=" d-flex align-items-center" href="{{route('documentation.view', $category->first()->category)}}">
-            <i data-feather="grid"></i><span class="menu-item" data-i18n="Analytics">{{ $category->first()->category }}</span>
-          </a>
-        </li>
+      <li class="nav-item @if ($active_category == $category->first()->category) active @endif">
+        <a class=" d-flex align-items-center" href="{{route('documentation.view', $category->first()->category)}}">
+          <i data-feather="file-text"></i><span class="menu-item" data-i18n="Analytics">{{ $category->first()->category }}</span>
+        </a>
+      </li>
       @endforeach
 
       {{-- <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
-        <a class="d-flex align-items-center" href="#"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Account</span></a>
+      <a class="d-flex align-items-center" href="#"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Account</span></a>
       </li>
 
       <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
