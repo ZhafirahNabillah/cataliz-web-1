@@ -55,7 +55,12 @@
               <input type="hidden" name="id" value="{{ $documentation->id }}">
               <div class="form-group">
                 <label for="title">Title</label>
-                <input class="form-control" type="text" name="title" value="{{ $documentation->title }}" placeholder="Your documentation title here...">
+                <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ $documentation->title }}" placeholder="Your documentation title here...">
+                @error('title')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
               </div>
               <div class="form-group">
                 <div class="row">
@@ -76,13 +81,18 @@
                   </div>
                   <div class="col-md-6">
                     <label for="role">Role</label>
-                    <select class="form-control" name="role">
+                    <select class="form-control @error('role') is-invalid @enderror" name="role">
                       @foreach ($roles as $role)
                         <option value="{{ $role->name }}" @if ($documentation->role == $role->name)
                           selected
                         @endif>{{ ucfirst($role->name) }}</option>
                       @endforeach
                     </select>
+                    @error('role')
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                   </div>
                 </div>
               </div>
@@ -90,6 +100,11 @@
                 <label for="description">Documentation Content</label>
                 <textarea name="description" id="description" cols="20" rows="20"
                   placeholder="Your documentation content here...">{{ $documentation->description }}</textarea>
+                @error('description')
+                  <small class="text-danger">
+                    <strong>{{ $message }}</strong>
+                  </small>
+                @enderror
               </div>
               <div class="form-group text-right mb-0">
                 <Button type="submit" class="btn btn-primary">Submit</Button>

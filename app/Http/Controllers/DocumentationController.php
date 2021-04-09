@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Documentation;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use DataTables;
 
 class DocumentationController extends Controller
@@ -175,6 +176,19 @@ class DocumentationController extends Controller
   public function store(Request $request)
   {
     //
+    $validator = Validator::make($request->all(), [
+      'title'       => 'required',
+      'category'    => 'required',
+      'description' => 'required',
+      'role'        => 'required'
+    ]);
+
+    if ($validator->fails()) {
+      return back()
+      ->withErrors($validator)
+      ->withInput();
+    }
+
     $documentation = Documentation::updateOrCreate(
       [
         'id' => $request->id
