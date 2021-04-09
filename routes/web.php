@@ -17,6 +17,9 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\DocumentationController;
+use App\Http\Controllers\TopicController;
+use App\Http\Controllers\ExerciseController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -142,4 +145,10 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::post('/class/{class}/ubah_status', [ClassController::class, 'ubah_status'])->name('class.ubah_status');
 	Route::get('/groups', [ClientController::class, 'show_group_list'])->name('group.index');
 	Route::get('/groups/{id}', [ClientController::class, 'show_group_detail'])->name('group.show');
+});
+
+//Middleware group for trainer page
+Route::group(['middleware' => ['auth']], function () {
+	Route::resource('topic', TopicController::class);
+	Route::resource('exercise', ExerciseController::class);
 });

@@ -17,7 +17,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Topics
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -35,10 +37,12 @@
       <div class="card-body">
         <ul class="nav nav-tabs justify-content-center" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+            <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab"
+              aria-selected="true">Individual</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
+              aria-selected="false">Group</a>
           </li>
         </ul>
 
@@ -111,6 +115,7 @@
                   <span aria-hidden="true">×</span>
                 </button>
               </div>
+              @endif
 
               <div class="row">
                 <div class="col-12">
@@ -158,7 +163,8 @@
     @endsection
 
     @push('scripts')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
+      id="theme-styles">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
     <script type="text/javascript">
