@@ -52,6 +52,7 @@ Route::get('/topic', function () {
 // 	return view('docs.overview');
 // });
 
+Route::get('/documentation', [DocumentationController::class, 'documentation_view'])->name('documentation');
 Route::get('/documentation/{documentation:category}', [DocumentationController::class, 'documentation_view'])->name('documentation.view');
 
 Auth::routes();

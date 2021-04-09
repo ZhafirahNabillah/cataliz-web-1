@@ -29,7 +29,8 @@
                       {{ session('status') }}
                     </div>
                     @endif
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/documentation/overview'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;"
+                      href="{{route('documentation')}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>
@@ -40,8 +41,11 @@
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <img class="rounded mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Coach</small>
                   <h2 class="font-weight-bolder text-center">{{$total_coach}} Coach</h2>
                 </div>
@@ -52,8 +56,11 @@
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah client coachee yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah client coachee yang terdaftar" />
+                  <img class="rounded mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Coachee</small>
                   <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
                 </div>
@@ -65,8 +72,11 @@
             <a href="{{ route('plans.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah plan yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah plan yang terdaftar" />
+                  <img class="rounded mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Plan</small>
                   <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
                 </div>
@@ -78,8 +88,11 @@
             <a href="{{ route('agendas.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang terdaftar" />
-                  <img class="rounded text-center mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardSessions.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah sesi yang terdaftar" />
+                  <img class="rounded text-center mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardSessions.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Session</small>
                   <h2 class="font-weight-bolder text-center">{{$total_sessions}} Sessions</h2>
                 </div>
@@ -91,16 +104,21 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">List Agenda
-                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                  <img class="align-text width=" 15px" height="15px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top"
+                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
                 </h5>
               </div>
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual"
+                      aria-controls="coach" role="tab" aria-selected="true">Individual</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile"
+                      role="tab" aria-selected="false">Group</a>
                   </li>
                 </ul>
 
@@ -181,7 +199,8 @@
                     </div>
                     @endif
 
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/documentation/overview'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;"
+                      href="{{route('documentation')}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>
@@ -214,9 +233,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.svg') }}" alt="Card image cap" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.svg') }}"
+                    alt="Card image cap" />
                   <small class="card text-center text-muted mb-1">Total Coaching Hour
                   </small>
                   @if ($total_hours == null)
@@ -234,9 +256,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Jumlah coachee" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\client.svg') }}" alt="Card image cap" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\client.svg') }}"
+                    alt="Card image cap" />
                   <small class="card text-center text-muted mb-1">Total Coachee
                   </small>
                   <h2 class="font-weight-bolder text-center">{{$total_clients}} Clients</h2>
@@ -248,9 +273,12 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah rating yang diberikan oleh client" />
+                  <img class="rounded float-right width=" 15px" height="15px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah rating yang diberikan oleh client" />
                 </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}"
+                  alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
                 <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
@@ -262,9 +290,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\session.svg') }}" alt="Card image cap" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\session.svg') }}"
+                    alt="Card image cap" />
                   <small class="card text-center text-muted mb-1">Total Session
                   </small>
                   <h2 class="font-weight-bolder text-center">{{ $total_sessions }} Sessions</h2>
@@ -280,9 +311,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
-                    <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
+                    <img class="rounded float-right width=" 18px" height="18px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.svg') }}" alt="Card image cap" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.svg') }}"
+                    alt="Card image cap" />
                   <small class="card text-center text-muted mb-1">Total Coaching Hour
                   </small>
                   @if ($total_hours == null)
@@ -300,9 +334,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
+                    <img class="rounded float-right width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Jumlah coachee" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\client.svg') }}" alt="Card image cap" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\client.svg') }}"
+                    alt="Card image cap" />
                   <small class="card text-center text-muted mb-1">Total Coach
                   </small>
                   <h2 class="font-weight-bolder text-center">{{$total_coach}} Coaches</h2>
@@ -314,9 +351,12 @@
             <div class="card">
               <div class="card-body">
                 <div class="card-title">
-                  <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="" />
+                  <img class="rounded float-right width=" 18px" height="18px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="" />
                 </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}"
+                  alt="Card image cap" />
                 <small class="card text-center text-muted mb-1">Total Rating
                 </small>
                 <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
@@ -328,9 +368,12 @@
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
-                    <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
+                    <img class="rounded float-right width=" 18px" height="18px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\session.svg') }}" alt="Card image cap" />
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\session.svg') }}"
+                    alt="Card image cap" />
                   <small class="card text-center text-muted mb-1">Total Session
                   </small>
                   @if ($total_sessions == null)
@@ -348,16 +391,21 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Upcoming Events
-                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                  <img class="align-text width=" 15px" height="15px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top"
+                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
                 </h5>
               </div>
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#upcoming-individual" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#upcoming-individual"
+                      aria-controls="coach" role="tab" aria-selected="true">Individual</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#upcoming-group" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#upcoming-group"
+                      aria-controls="profile" role="tab" aria-selected="false">Group</a>
                   </li>
                 </ul>
 
@@ -422,16 +470,21 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">List Agenda
-                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                  <img class="align-text width=" 15px" height="15px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top"
+                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
                 </h5>
               </div>
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual"
+                      aria-controls="coach" role="tab" aria-selected="true">Individual</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile"
+                      role="tab" aria-selected="false">Group</a>
                   </li>
                 </ul>
 
@@ -500,7 +553,8 @@
       <!-- Modal to Complete Profile -->
       <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
         <div class="modal-dialog sidebar-sm">
-          <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('home.store_data', $client->id)}}">
+          <form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST"
+            action="{{route('home.store_data', $client->id)}}">
             @csrf
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
             <div class="modal-header mb-1">
@@ -510,7 +564,8 @@
             <div class="modal-body flex-grow-1">
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                <input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$client->name}}" />
+                <input id="name" name="name" type="text" class="form-control dt-full-name"
+                  id="basic-icon-default-fullname" value="{{$client->name}}" />
               </div>
               <label class="form-label" for="basic-icon-default-post">Phone</label>
               <div class="input-group input-group-merge mb-2">
@@ -521,20 +576,24 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-email">Email</label>
-                <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$client->email}}" disabled />
+                <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+                  value="{{$client->email}}" disabled />
                 <small class="form-text text-muted"> You can use letters, numbers & periods </small>
               </div>
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-fullname">Organization</label>
-                <input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$client->organization}}" />
+                <input id="organization" name="organization" type="text" class="form-control dt-full-name"
+                  id="basic-icon-default-fullname" value="{{$client->organization}}" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-fullname">Company</label>
-                <input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$client->company}}" />
+                <input id="company" name="company" type="text" class="form-control dt-full-name"
+                  id="basic-icon-default-fullname" value="{{$client->company}}" />
               </div>
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-fullname">Occupation</label>
-                <input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$client->occupation}}" />
+                <input id="occupation" name="occupation" type="text" class="form-control dt-full-name"
+                  id="basic-icon-default-fullname" value="{{$client->occupation}}" />
               </div>
 
               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">
