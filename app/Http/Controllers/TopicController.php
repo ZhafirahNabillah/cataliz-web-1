@@ -23,7 +23,7 @@ class TopicController extends Controller
      */
     public function create()
     {
-        //
+        return view('topic.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class TopicController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('topic.detailTopic');
     }
 
     /**
