@@ -73,7 +73,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
-                      <table class="datatables-basic table-striped table plan-datatable-individual">
+                      <table class="datatables-basic table-striped table topic-datatable-individual">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -115,9 +115,7 @@
 
               <div class="row">
                 <div class="col-12">
-
                   <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
-
                 </div>
               </div>
               <br>
@@ -126,8 +124,7 @@
                 <div class="row">
                   <div class="col-12">
                     <div class="card">
-
-                      <table class="datatables-basic table-striped table plan-datatable-group">
+                      <table class="datatables-basic table-striped table topic-datatable-group">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -139,22 +136,15 @@
                         <tbody>
                         </tbody>
                       </table>
-
                     </div>
                   </div>
                 </div>
               </section>
-              <!--/ Basic table -->
             </div>
           </div>
-          <!-- /coachee list admin -->
         </div>
       </div>
     </div>
-    <!-- /panel coachee -->
-
-
-
     <!-- END: Content-->
     @endsection
 
@@ -182,8 +172,7 @@
           }
         });
 
-        @role('coach|admin')
-        var table_plans_individual = $('.plan-datatable-individual').DataTable({
+        var table_topic_individuals = $('.topic-datatable-individual').DataTable({
           processing: true,
           serverSide: true,
           ajax: "",
@@ -192,189 +181,13 @@
               name: 'DT_RowIndex'
             },
             {
-              data: 'client.name',
-              name: 'client.name'
+              data: 'topic',
+              name: 'topic'
             },
             {
-              data: 'objective',
-              name: 'objective'
-            },
-            {
-              data: 'date',
-              name: 'date'
-            },
-            {
-              data: 'action',
-              name: 'action',
-              orderable: true,
-              searchable: true
-            },
-          ],
-
-          columnDefs: [{
-              // Avatar image/badge, Name and post
-              targets: 1,
-              responsivePriority: 4,
-              render: function(data, type, full, meta) {
-                var $user_img = full['avatar'],
-                  $name = full['client']['name'],
-                  $post = full['client']['company'];
-                $org = full['client']['organization'];
-                if ($user_img) {
-                  // For Avatar image
-                  var $output =
-                    '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
-                } else {
-                  // For Avatar badge
-                  var stateNum = full['status'];
-                  var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-                  var $state = states[stateNum],
-                    $name = full['client']['name'],
-                    $initials = $name.match(/\b\w/g) || [];
-                  $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-                  $output = '<span class="avatar-content">' + $initials + '</span>';
-                }
-
-                var colorClass = $user_img === '' ? ' bg-light-' + $state + ' ' : '';
-                // Creates full output for row
-                var $row_output =
-                  '<div class="d-flex justify-content-left align-items-center">' +
-                  '<div class="avatar ' +
-                  colorClass +
-                  ' mr-1">' +
-                  $output +
-                  '</div>' +
-                  '<div class="d-flex flex-column">' +
-                  '<span class="emp_name text-truncate font-weight-bold">' +
-                  $name;
-                return $row_output;
-              }
-            },
-            // {
-            //     targets: 4,
-            //     render: function(data, type, full, meta) {
-            //         var $phone = full['phone'],
-            //             $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
-            //             '</div>';
-            //         return $output;
-            //     }
-            // }
-          ],
-
-          order: [
-            [2, 'desc']
-          ],
-          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-
-          responsive: {
-            details: {
-              display: $.fn.dataTable.Responsive.display.modal({
-                header: function(row) {
-                  var data = row.data();
-                  return 'Details of ' + data['client']['name'];
-                }
-              }),
-              type: 'column',
-              renderer: function(api, rowIdx, columns) {
-                var data = $.map(columns, function(col, i) {
-                  console.log(columns);
-                  return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                    ?
-                    '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>' :
-                    '';
-                }).join('');
-
-                return data ? $('<table class="table"/>').append(data) : false;
-              }
-            }
-          },
-
-          language: {
-            paginate: {
-              // remove previous & next text from pagination
-              previous: '&nbsp;',
-              next: '&nbsp;'
-            },
-            search: "<i data-feather='search'></i>",
-            searchPlaceholder: "Search records"
-          }
-        });
-        @endrole
-
-        @role('coachee')
-        var table_plans_individual = $('.plan-datatable-individual').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "",
-          columns: [{
-              data: 'DT_RowIndex',
-              name: 'DT_RowIndex'
-            },
-            {
-              data: 'coach_name',
-              name: 'coach_name'
-            },
-            {
-              data: 'objective',
-              name: 'objective'
-            },
-            {
-              data: 'date',
-              name: 'date',
-              defaultContent: '<i>-</i>'
-            },
-            {
-              data: 'action',
-              name: 'action',
-              orderable: true,
-              searchable: true
-            },
-          ],
-          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-          language: {
-            paginate: {
-              // remove previous & next text from pagination
-              previous: '&nbsp;',
-              next: '&nbsp;'
-            },
-            search: "<i data-feather='search'></i>",
-            searchPlaceholder: "Search records"
-          }
-        });
-        @endrole
-
-        var table_plans_group = $('.plan-datatable-group').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "{{route('plans.show_group')}}",
-          columns: [{
-              data: 'DT_RowIndex',
-              name: 'DT_RowIndex'
-            },
-            {
-              data: 'group_id',
-              name: 'group_id'
-            },
-            {
-              data: 'objective',
-              name: 'objective'
-            },
-            {
-              data: 'date',
-              name: 'date',
-              defaultContent: '<i>-</i>'
+              data: 'participant',
+              name: 'participant',
+              defaultContent: '0'
             },
             {
               data: 'action',
