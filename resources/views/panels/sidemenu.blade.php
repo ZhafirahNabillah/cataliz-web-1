@@ -7,10 +7,7 @@
                     @include('panels.logo')
                 </a>
             </li>
-            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
-                        class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i
-                        class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc"
-                        data-ticon="disc"></i></a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
         </ul>
     </div>
     <div class="shadow-bottom"></div>
@@ -31,18 +28,15 @@
             <li class="nav-item collapse {{ 'clients' == request()->path() ? 'active show' : '' }}" id="collapse-1"
                 role="tabpanel" aria-labelledby="headingCollapse-1">
                 @role('admin')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Users</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Users</span></a>
                 @endrole
 
                 @role('coach')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Clients</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Clients</span></a>
                 @endrole
 
                 @role('coachee')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Coaches</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Coaches</span></a>
                 @endrole
             </li>
             @endcan

@@ -25,6 +25,8 @@
                 </li>
                 <li class="breadcrumb-item active">Topic
                 </li>
+                <li class="breadcrumb-item active">Detail Participant
+                </li>
               </ol>
             </div>
           </div>
@@ -77,8 +79,10 @@
                         <thead>
                           <tr>
                             <th>No</th>
-                            <th>Topic</th>
-                            <th>Participant</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Program</th>
+                            <th>Point</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -131,8 +135,8 @@
                         <thead>
                           <tr>
                             <th>No</th>
-                            <th>Topic</th>
-                            <th>Participant</th>
+                            <th>Code Group</th>
+                            <th>Program</th>
                             <th>Action</th>
                           </tr>
                         </thead>
