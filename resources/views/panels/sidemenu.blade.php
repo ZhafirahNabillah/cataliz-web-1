@@ -21,10 +21,15 @@
                     <i data-feather="home"></i><span class="menu-item" data-i18n="Analytics">Dashboard</span>
                 </a>
             </li>
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Main Menu</span><i
-                    data-feather="more-horizontal"></i></li>
+
+            <div class="navigation-header" id="headingCollapse-1" data-toggle="collapse" role="button"
+                data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1"><span><b>Main
+                        Menu</b></span><i class="float-right mr-2 mb-2" data-feather="chevrons-down"></i>
+            </div>
+
             @can('list-user')
-            <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
+            <li class="nav-item collapse {{ 'clients' == request()->path() ? 'active show' : '' }}" id="collapse-1"
+                role="tabpanel" aria-labelledby="headingCollapse-1">
                 @role('admin')
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
                         class="menu-title text-truncate" data-i18n="Email">Users</span></a>
@@ -41,29 +46,73 @@
                 @endrole
             </li>
             @endcan
+            @role('admin')
+            <li class=" nav-item  collapse {{ 'docs' == request()->path() ? 'active show' : '' }}" id="collapse-1"
+                role="tabpanel" aria-labelledby="headingCollapse-1">
+                <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="inbox"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
+            </li>
+            @endrole
+
+            <div class="navigation-header" id="headingCollapse-2" data-toggle="collapse" role="button"
+                data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+                <span><b>Coaching</b></span><i class="float-right mr-2 mb-2" data-feather="chevrons-down"></i></div>
+
             @can('list-plan')
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+            <li class="nav-item collapse {{ 'plans' == request()->path() ? 'active show' : '' }}" id="collapse-2"
+                role="tabpanel" aria-labelledby="headingCollapse-2">
                 <a class="d-flex align-items-center" href="{{route('plans.index')}}"><i
                         data-feather="check-square"></i><span class="menu-title text-truncate"
                         data-i18n="Todo">Plans</span></a>
             </li>
             @endcan
             @can('list-agenda')
-            <li class=" nav-item {{ 'agendas' == request()->path() ? 'active' : '' }}">
+            <li class=" nav-item collapse {{ 'agendas' == request()->path() ? 'active show' : '' }}" id="collapse-2"
+                role="tabpanel" aria-labelledby="headingCollapse-2">
                 <a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i
                         data-feather="calendar"></i><span class="menu-title text-truncate"
                         data-i18n="Todo">Agenda</span></a>
             </li>
             @endcan
             @canany('list-class', 'create-class', 'detail-class')
-            <li class=" nav-item {{ 'class' == request()->path() ? 'active' : '' }}">
+            <li class=" nav-item collapse {{ 'class' == request()->path() ? 'active show' : '' }}" id="collapse-2"
+                role="tabpanel" aria-labelledby="headingCollapse-2">
                 <a class="d-flex align-items-center" href="{{route('class.index')}}"><i data-feather="monitor"></i><span
                         class="menu-title text-truncate" data-i18n="Todo">Class</span></a>
             </li>
             @endcan
 
+            @canany('list-role','list-permission')
+            <div class="navigation-header" id="headingCollapse-3" data-toggle="collapse" role="button"
+                data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3"><span><b>Role and
+                        Permission</b></span><i class="float-right mr-2 mb-2" data-feather="chevrons-down"></i></div>
+            @endcan
+
+            @can('list-role')
+            <li class=" nav-item collapse {{ 'roles' == request()->path() ? 'active show' : '' }}" id="collapse-3"
+                role="tabpanel" aria-labelledby="headingCollapse-3">
+                <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="inbox"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Role</span></a>
+            </li>
+            @endcan
+            @can('list-permission')
+            <li class=" nav-item collapse {{ 'permissions' == request()->path() ? 'active show' : '' }}" id="collapse-3"
+                role="tabpanel" aria-labelledby="headingCollapse-3">
+                <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i
+                        data-feather="edit-3"></i><span class="menu-title text-truncate"
+                        data-i18n="Email">Permission</span></a>
+            </li>
+            @endcan
+
+            @canany('list-topic','list-exercise')
+            <div class="navigation-header" id="headingCollapse-4" data-toggle="collapse" role="button"
+                data-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+                <span><b>Training</b></span><i class="float-right mr-2 mb-2" data-feather="chevrons-down"></i></div>
+            @endcan
+
             @can('list-topic')
-            <li class="nav-item  {{ 'topic' == request()->path() ? 'active' : '' }}">
+            <li class="nav-item collapse {{ 'topic' == request()->path() ? 'active show' : '' }}" id="collapse-4"
+                role="tabpanel" aria-labelledby="headingCollapse-4">
                 <a class="d-flex align-items-center" href="{{route('topic.index')}}"><i
                         data-feather="file-text"></i><span class="menu-title text-truncate"
                         data-i18n="Todo">Topic</span></a>
@@ -75,33 +124,6 @@
                         class="menu-title text-truncate" data-i18n="Todo">Exercise</span></a>
             </li>
             @endcan
-
-            @canany('list-role','list-permission')
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Role and Permission</span><i
-                    data-feather="more-horizontal"></i></li>
-            @endcan
-            @can('list-role')
-            <li class=" nav-item {{ 'roles' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="inbox"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Role</span></a>
-            </li>
-            @endcan
-            @can('list-permission')
-            <li class=" nav-item {{ 'permissions' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i
-                        data-feather="edit-3"></i><span class="menu-title text-truncate"
-                        data-i18n="Email">Permission</span></a>
-            </li>
-            @endcan
-
-            @role('admin')
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Others</span><i
-                    data-feather="more-horizontal"></i></li>
-            <li class=" nav-item {{ 'docs' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="inbox"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
-            </li>
-            @endrole
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>
