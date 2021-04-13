@@ -46,10 +46,9 @@
             <div class="card-header">
               <h4 class="card-title"><b>Detail Topic</b>
               </h4>
-              <a href="#" class="btn btn-primary">Download PDF</a>
+              <a href="{{ route('topic.download', $topic->id) }}" class="btn btn-primary">Download PDF</a>
             </div>
-            <div class="card">
-              <div class="card-body">
+            <div class="card-body">
                 <div class="card border">
                   <h5 class="text-center card-title mt-2"><b>{{ $topic->topic }}</b></h5>
                   <div class="card-body">
@@ -93,6 +92,32 @@
                   </div>
                 </div>
               </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h4 class="card-title"><b>Detail Participant</b>
+              </h4>
+            </div>
+            <div class="card-body">
+              <!-- Basic table -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <table class="datatables-basic table-striped table topic-participant-datatable">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Program</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </div>
@@ -114,7 +139,40 @@
         content: function() {
           return '<img src="' + $(this).data('img') + '" />';
         }
-      })
-    })
+      });
+
+      var table_topic_participant = $('.topic-participant-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "",
+        columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'name',
+            name: 'name'
+          },
+          {
+            data: 'email',
+            name: 'email',
+          },
+          {
+            data: 'program',
+            name: 'program',
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
+    });
     </script>
     @endpush

@@ -36,6 +36,11 @@ class Client extends Model
         return $this->belongsToMany('App\Models\Plan');
     }
 
+    public function topics()
+    {
+        return $this->belongsToMany('App\Models\Topic');
+    }
+
     public function plan()
     {
         return $this->hasMany('App\Models\Plan');

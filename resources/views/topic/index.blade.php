@@ -52,6 +52,7 @@
           </div>
         </div>
         <br>
+        
         <!-- Basic table -->
         <section id="basic-datatable">
           <div class="row">
