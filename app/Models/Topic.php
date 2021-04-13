@@ -12,10 +12,13 @@ class Topic extends Model
     protected $fillable = [
         'topic',
         'description',
-        'trainer_id'
+        'trainer_id',
+        'client_requirement',
+        'client_target'
     ];
 
-    public function trainer(){
-  		return $this->belongsTo('App\Models\User');
-  	}
+    public function trainer()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

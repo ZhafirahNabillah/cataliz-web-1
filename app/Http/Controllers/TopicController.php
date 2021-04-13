@@ -81,6 +81,8 @@ class TopicController extends Controller
 
     $validator = Validator::make($request->all(), [
       'topic'       => 'required',
+      'client_requirement' => 'required',
+      'client_target' => 'required',
       'description' => 'required'
     ]);
 
@@ -88,63 +90,6 @@ class TopicController extends Controller
       return back()
         ->withErrors($validator)
         ->withInput();
-      }
-
-      $topic = Topic::updateOrCreate(
-        [
-          'id' => $request->id
-        ],
-        [
-          'topic'       => $request->topic,
-          'description' => $request->description,
-          'trainer_id'  => auth()->user()->id
-        ]
-      );
-
-      if ($topic->wasRecentlyCreated) {
-        return redirect('/topic')->with('success', 'New Topic succesfully saved');
-      } else {
-        return redirect('/topic')->with('success', 'Topic succesfully updated');
-      }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Topic $topic)
-    {
-        return view('topic.detailTopic', compact('topic'));
-    }
-
-    public function show_detail_participant($id)
-    {
-      return view('topic.detailParticipant');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
 
     $topic = Topic::updateOrCreate(
@@ -153,6 +98,8 @@ class TopicController extends Controller
       ],
       [
         'topic'       => $request->topic,
+        'client_requirement' => $request->requirement,
+        'client_target' => $request->topic_target,
         'description' => $request->description,
         'trainer_id'  => auth()->user()->id
       ]
@@ -171,9 +118,8 @@ class TopicController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function show($id)
+  public function show(Topic $topic)
   {
-    $topic = Topic::where('trainer_id', auth()->user()->id)->first();
     return view('topic.detailTopic', compact('topic'));
   }
 

@@ -20,7 +20,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Topics
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -51,7 +53,16 @@
                 <div class="card border">
                   <h5 class="text-center card-title mt-2">{{ $topic->topic }}</h5>
                   <div class="card-body">
+                    <h4>Requirement :</h4>
+                    {!! $topic->requirement !!}
+                  </div>
+                  <div class="card-body">
+                    <h4>Description :</h4>
                     {!! $topic->description !!}
+                  </div>
+                  <h4>Who Is This Topic For? :</h4>
+                  <div class="card-body">
+                    {!! $topic->topic_target !!}
                   </div>
                 </div>
               </div>
