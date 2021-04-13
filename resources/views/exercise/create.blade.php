@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Topic')
+@section('title','Exercise')
 
 @section('content')
 
@@ -105,11 +105,9 @@
         // console.log(input);
         let temp_html = '';
         for (i = 0; i < input; i++) {
-          temp_html += '<div class="card "><div class="card-body"><div class="form-group"><label for="">Topic</label><input type="text" class="form-control col-sm-6" id="" aria-describedby="emailHelp" placeholder="Choose your topic"></div><div class="form-group"><label for="question">Question</label><textarea name="question" id="question" placeholder="Your question here..."></textarea></div><div class="form-group"><label for="">Answer A</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer B</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer C</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer D</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer E</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">True Answer</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input True Answer..."></div></div></div>';
+          temp_html += '<div class="card "><div class="card-body"><div class="form-group"><label for="">Topic</label><input type="text" class="form-control col-sm-6" id="" aria-describedby="emailHelp" placeholder="Choose your topic"></div><div class="form-group"><label for="question">Question</label><textarea name="question" id="question" placeholder="Your question here..."></textarea></div><div class="form-group"><label for="">Answer A</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer B</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer C</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer D</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><label for="">Answer E</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div><div class="form-group"><select class="form-control " aria-label="select example"><option selected disabled>Select True Answer</option><option value="1">A</option><option value="2">B</option><option value="3">C</option><option value="4">D</option><option value="5">E</option></select></div></div></div>';
         }
         $('.forms').append(temp_html);
-
-
 
         tinymce.init({
           selector: 'textarea',
