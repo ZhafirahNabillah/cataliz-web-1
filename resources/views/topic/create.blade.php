@@ -46,11 +46,11 @@
             <form action="{{ route('topic.store') }}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="title">Topic Name</label>
+                <label for="topic">Topic Name</label>
                 <input class="form-control" type="text" name="topic" value="" placeholder="Your Topic Here...">
               </div>
               <div class="form-group">
-                <label for="description">Requirements</label>
+                <label for="client_requirement">Requirements</label>
                 <textarea name="client_requirement" id="client_requirement" cols="20" rows="20"
                   placeholder="Your Requirement Here....."></textarea>
               </div>
@@ -60,7 +60,7 @@
                   placeholder="Your Description Here....."></textarea>
               </div>
               <div class="form-group">
-                <label for="description">Who Is This Topic For?</label>
+                <label for="client_target">Who Is This Topic For?</label>
                 <textarea name="client_target" id="client_target" cols="20" rows="20"
                   placeholder="Your List Here....."></textarea>
               </div>

@@ -62,7 +62,7 @@
                           </div>
                           <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                             <div class="card-body">
-                              {!!$topic->requirement!!}
+                              {!!$topic->client_requirement!!}
                             </div>
                           </div>
                         </div>
