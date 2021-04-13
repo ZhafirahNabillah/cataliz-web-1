@@ -13,7 +13,7 @@ class AddRequirementAndTargetColumnToTopicTable extends Migration
      */
     public function up()
     {
-        Schema::table('topic', function (Blueprint $table) {
+        Schema::table('topics', function (Blueprint $table) {
             $table->longText('client_requirement');
             $table->longText('client_target');
         });
@@ -26,7 +26,7 @@ class AddRequirementAndTargetColumnToTopicTable extends Migration
      */
     public function down()
     {
-        Schema::table('topic', function (Blueprint $table) {
+        Schema::table('topics', function (Blueprint $table) {
             //
         });
     }
