@@ -49,11 +49,9 @@
             <div class="card">
               <div class="card-body">
                 <div class="card border">
-                  <h5 class="text-center card-title">Special title treatment</h5>
+                  <h5 class="text-center card-title mt-2">{{ $topic->topic }}</h5>
                   <div class="card-body">
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
-
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
+                    {!! $topic->description !!}
                   </div>
                 </div>
               </div>

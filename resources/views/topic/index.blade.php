@@ -8,9 +8,7 @@
 
 @include('panels.sidemenu')
 <!-- BEGIN: Content-->
-<div class="app-content content ">
-  <div class="content-overlay"></div>
-  <div class="header-navbar-shadow"></div>
+<div class="app-content content">
   <div class="content-wrapper">
     <div class="content-header row">
       <div class="content-header-left col-md-9 col-12 mb-2">
@@ -33,118 +31,49 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <ul class="nav nav-tabs justify-content-center" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
-          </li>
-        </ul>
-
-        <div class="tab-content">
-          <!-- Panel Individu -->
-          <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-            <div class="content-body">
-              <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-dissmisable">
-                <h4 class="alert-heading">Success</h4>
-                <div class="alert-body">{{ $message }}</div>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              @endif
-              <div class="row">
-                <div class="col-12">
-
-                  <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
-
-                </div>
-              </div>
-              <br>
-              <!-- Basic table -->
-              <section id="basic-datatable">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
-                      <table class="datatables-basic table-striped table topic-datatable-individual">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Topic</th>
-                            <th>Participant</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <!--/ Basic table -->
-            </div>
+        <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dissmisable">
+            <h4 class="alert-heading">Success</h4>
+            <div class="alert-body">{{ $message }}</div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
           </div>
-          <!-- /panel individu -->
+        @endif
 
-
-          <!-- Panel Grup -->
-          <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
-            <div class="content-body">
-              <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              @if ($message = Session::get('success'))
-              <div class="alert alert-success alert-dissmisable">
-                <h4 class="alert-heading">Success</h4>
-                <div class="alert-body">{{ $message }}</div>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">×</span>
-                </button>
-              </div>
-              @endif
-
-              <div class="row">
-                <div class="col-12">
-                  <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
-                </div>
-              </div>
-              <br>
-              <!-- Basic table -->
-              <section id="basic-datatable">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="card">
-                      <table class="datatables-basic table-striped table topic-datatable-group">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Topic</th>
-                            <th>Participant</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
+        <div class="row">
+          <div class="col-12">
+            <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
           </div>
         </div>
+        <br>
+        <!-- Basic table -->
+        <section id="basic-datatable">
+          <div class="row">
+            <div class="col-12">
+              <table class="datatables-basic table-striped table topic-datatable">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Topic</th>
+                    <th>Participant</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
+  </div>
     <!-- END: Content-->
     @endsection
 
@@ -172,7 +101,7 @@
           }
         });
 
-        var table_topic_individuals = $('.topic-datatable-individual').DataTable({
+        var table_topic_individuals = $('.topic-datatable').DataTable({
           processing: true,
           serverSide: true,
           ajax: "",
