@@ -28,7 +28,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Topic</a>
+                <li class="breadcrumb-item"><a href="{{route('topic.index')}}">Topic</a>
                 </li>
                 <li class="breadcrumb-item active">Detail Topic
                 </li>
@@ -51,18 +51,45 @@
             <div class="card">
               <div class="card-body">
                 <div class="card border">
-                  <h5 class="text-center card-title mt-2">{{ $topic->topic }}</h5>
+                  <h5 class="text-center card-title mt-2"><b>{{ $topic->topic }}</b></h5>
                   <div class="card-body">
-                    <h4>Requirement :</h4>
-                    {!! $topic->requirement !!}
-                  </div>
-                  <div class="card-body">
-                    <h4>Description :</h4>
-                    {!! $topic->description !!}
-                  </div>
-                  <h4>Who Is This Topic For? :</h4>
-                  <div class="card-body">
-                    {!! $topic->client_target !!}
+                    <div class="collapse-icon">
+                      <div class="collapse-default">
+                        <div class="card">
+                          <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
+                            data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                            <span class="lead collapse-title"><b>Requirement</b></span>
+                          </div>
+                          <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                            <div class="card-body">
+                              {!!$topic->requirement!!}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
+                            data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                            <span class="lead collapse-title"><b>Description</b></span>
+                          </div>
+                          <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse">
+                            <div class="card-body">
+                              {!!$topic->description!!}
+                            </div>
+                          </div>
+                        </div>
+                        <div class="card">
+                          <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button"
+                            data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                            <span class="lead collapse-title"><b>Who Is This Topic For?</b></span>
+                          </div>
+                          <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse">
+                            <div class="card-body">
+                              {!!$topic->client_target!!}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -71,15 +98,14 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- END: Content-->
-  @endsection
+    <!-- END: Content-->
+    @endsection
 
-  @push('scripts')
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script type="text/javascript">
-    // popover
+    @push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script type="text/javascript">
+      // popover
     $(function() {
       $('[data-toggle="popover"]').popover({
         html: true,
@@ -90,5 +116,5 @@
         }
       })
     })
-  </script>
-  @endpush
+    </script>
+    @endpush
