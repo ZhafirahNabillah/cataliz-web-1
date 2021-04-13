@@ -163,6 +163,7 @@ Route::middleware(['auth'])->group(function () {
 //Topic Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('topic', TopicController::class);
+	Route::get('topic/{topic}/participant', [TopicController::class, 'show_detail_participant'])->name('topic.participant');
 });
 
 //Exercise Controller

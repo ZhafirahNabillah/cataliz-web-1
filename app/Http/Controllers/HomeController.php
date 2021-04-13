@@ -9,6 +9,7 @@ use App\Models\Client;
 use App\Models\User;
 use App\Models\Coach;
 use App\Models\Feedback;
+use App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -136,7 +137,8 @@ class HomeController extends Controller
 
       return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'total_ratings', 'client'));
     } elseif (auth()->user()->hasRole('trainer')) {
-      return view('home');
+      $total_topic = Topic::where('trainer_id', auth()->user()->id)->count();
+      return view('home', compact('total_topic'));
     } else {
       return view('home');
     }

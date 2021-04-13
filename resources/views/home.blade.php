@@ -621,7 +621,8 @@
                       {{ session('status') }}
                     </div>
                     @endif
-                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;" href="{{'/documentation'}}" target="_blank"><u>See
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;"
+                      href="{{'/documentation'}}" target="_blank"><u>See
                         Documentations</u></a>
                   </div>
                 </div>
@@ -632,8 +633,11 @@
             <a href="#">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah latihan yang ada" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah latihan yang ada" />
+                  <img class="rounded mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Exercise</small>
                   <h2 class="font-weight-bolder text-center"># Exercise</h2>
                 </div>
@@ -644,10 +648,13 @@
             <a href="#">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah materi yang disampaikan" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="jumlah materi yang disampaikan" />
+                  <img class="rounded mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Topic</small>
-                  <h2 class="font-weight-bolder text-center"># Topic</h2>
+                  <h2 class="font-weight-bolder text-center">{{$total_topic}} Topic</h2>
                 </div>
               </div>
             </a>
@@ -657,8 +664,11 @@
             <a href="#">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
+                  <img class="rounded float-right" width="15px" height="15px"
+                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top" data-content="Jumlah coachee yang terdaftar" />
+                  <img class="rounded mx-auto d-block center"
+                    src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Trainee</small>
                   <h2 class="font-weight-bolder text-center"># Trainee</h2>
                 </div>
@@ -671,7 +681,10 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">List Topic
-                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                  <img class="align-text width=" 15px" height="15px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top"
+                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
                 </h5>
               </div>
               <div class="card-body">

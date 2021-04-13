@@ -30,7 +30,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="#">Topic</a>
                 </li>
-                <li class="breadcrumb-item active">Create Topic
+                <li class="breadcrumb-item active">Edit Topic
                 </li>
               </ol>
             </div>
@@ -47,22 +47,23 @@
               @csrf
               <div class="form-group">
                 <label for="title">Topic Name</label>
-                <input class="form-control" type="text" name="topic" value="" placeholder="Your Topic Here...">
+                <input class="form-control" type="text" name="topic" value="{{ $topic->topic }}" placeholder="Your Topic Here...">
+                <input type="hidden" name="id" value="{{ $topic->id }}">
               </div>
               <div class="form-group">
                 <label for="description">Requirements</label>
                 <textarea name="client_requirement" id="client_requirement" cols="20" rows="20"
-                  placeholder="Your Requirement Here....."></textarea>
+                  placeholder="Your Requirement Here.....">{{ $topic->client_requirement }}</textarea>
               </div>
               <div class="form-group">
                 <label for="description">Description</label>
                 <textarea name="description" id="description" cols="20" rows="20"
-                  placeholder="Your Description Here....."></textarea>
+                  placeholder="Your Description Here.....">{{ $topic->description }}</textarea>
               </div>
               <div class="form-group">
                 <label for="description">Who Is This Topic For?</label>
                 <textarea name="client_target" id="client_target" cols="20" rows="20"
-                  placeholder="Your List Here....."></textarea>
+                  placeholder="Your List Here.....">{{ $topic->client_target }}</textarea>
               </div>
               <div class="form-group text-right mb-0">
                 <Button type="submit" class="btn btn-primary">Submit</Button>
