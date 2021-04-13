@@ -109,7 +109,7 @@
             </li>
             @endcan
             @can('list-exercise')
-            <li class="nav-item">
+            <li class="nav-item {{ 'exercise' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('exercise.index')}}"><i data-feather="copy"></i><span
                         class="menu-title text-truncate" data-i18n="Todo">Exercise</span></a>
             </li>
