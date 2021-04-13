@@ -37,13 +37,13 @@
           </button>
         </div>
         @if ($message = Session::get('success'))
-          <div class="alert alert-success alert-dissmisable">
-            <h4 class="alert-heading">Success</h4>
-            <div class="alert-body">{{ $message }}</div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
+        <div class="alert alert-success alert-dissmisable">
+          <h4 class="alert-heading">Success</h4>
+          <div class="alert-body">{{ $message }}</div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
         @endif
 
         <div class="row">
@@ -74,25 +74,25 @@
       </div>
     </div>
   </div>
-    <!-- END: Content-->
-    @endsection
+  <!-- END: Content-->
+  @endsection
 
-    @push('scripts')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-    <script type="text/javascript">
-      // popover
-      $(function() {
-        $('[data-toggle="popover"]').popover({
-          html: true,
-          trigger: 'hover',
-          placement: 'top',
-          content: function() {
-            return '<img src="' + $(this).data('img') + '" />';
-          }
-        })
+  @push('scripts')
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+  <script type="text/javascript">
+    // popover
+    $(function() {
+      $('[data-toggle="popover"]').popover({
+        html: true,
+        trigger: 'hover',
+        placement: 'top',
+        content: function() {
+          return '<img src="' + $(this).data('img') + '" />';
+        }
       })
+    })
 
       $(function() {
         $.ajaxSetup({
@@ -144,22 +144,7 @@
           console.log(topic_id);
           // ganti sweetalert
 
-          Swal.fire({
-            title: "Are you sure?",
-            text: "You'll delete your plan",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, Sure",
-            cancelButtonText: "Cancel"
-          }).then((result) => {
-            if (result.isConfirmed) {
 
-              $.ajaxSetup({
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
 
               $.ajax({
                 type: "DELETE",
@@ -181,4 +166,4 @@
       });
     </script>
 
-    @endpush
+  @endpush

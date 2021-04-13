@@ -1,6 +1,6 @@
 <?php
 return [
-    'welcome' => 'Welcome to our website.',
+    'requirement' => 'Requirement',
     "title" => "Please fill form below correctly.",
     "profil" => [
         "name" => "Your Name",
