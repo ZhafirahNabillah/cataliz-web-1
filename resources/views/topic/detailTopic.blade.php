@@ -62,7 +62,7 @@
                   </div>
                   <h4>Who Is This Topic For? :</h4>
                   <div class="card-body">
-                    {!! $topic->topic_target !!}
+                    {!! $topic->client_target !!}
                   </div>
                 </div>
               </div>
