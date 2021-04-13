@@ -80,10 +80,10 @@ class TopicController extends Controller
   {
 
     $validator = Validator::make($request->all(), [
-      'topic'       => 'required',
-      'client_requirement' => 'required',
-      'client_target' => 'required',
-      'description' => 'required'
+      'topic'               => 'required',
+      'client_requirement'  => 'required',
+      'client_target'       => 'required',
+      'description'         => 'required'
     ]);
 
     if ($validator->fails()) {
@@ -97,11 +97,11 @@ class TopicController extends Controller
         'id' => $request->id
       ],
       [
-        'topic'       => $request->topic,
-        'client_requirement' => $request->requirement,
-        'client_target' => $request->topic_target,
-        'description' => $request->description,
-        'trainer_id'  => auth()->user()->id
+        'topic'               => $request->topic,
+        'client_requirement'  => $request->client_requirement,
+        'client_target'       => $request->client_target,
+        'description'         => $request->description,
+        'trainer_id'          => auth()->user()->id
       ]
     );
 
@@ -134,9 +134,10 @@ class TopicController extends Controller
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function edit($id)
+  public function edit(Topic $topic)
   {
     //
+    return view('topic.edit', compact('topic'));
   }
 
   /**

@@ -37,13 +37,13 @@
           </button>
         </div>
         @if ($message = Session::get('success'))
-          <div class="alert alert-success alert-dissmisable">
-            <h4 class="alert-heading">Success</h4>
-            <div class="alert-body">{{ $message }}</div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
+        <div class="alert alert-success alert-dissmisable">
+          <h4 class="alert-heading">Success</h4>
+          <div class="alert-body">{{ $message }}</div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
         @endif
 
         <div class="row">
@@ -74,112 +74,36 @@
       </div>
     </div>
   </div>
-    <!-- END: Content-->
-    @endsection
+  <!-- END: Content-->
+  @endsection
 
-    @push('scripts')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-    <script type="text/javascript">
-      // popover
-      $(function() {
-        $('[data-toggle="popover"]').popover({
-          html: true,
-          trigger: 'hover',
-          placement: 'top',
-          content: function() {
-            return '<img src="' + $(this).data('img') + '" />';
-          }
-        })
+  @push('scripts')
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+  <script type="text/javascript">
+    // popover
+    $(function() {
+      $('[data-toggle="popover"]').popover({
+        html: true,
+        trigger: 'hover',
+        placement: 'top',
+        content: function() {
+          return '<img src="' + $(this).data('img') + '" />';
+        }
       })
+    })
 
-      $(function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-
-        var table_topic_individuals = $('.topic-datatable').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "",
-          columns: [{
-              data: 'DT_RowIndex',
-              name: 'DT_RowIndex'
-            },
-            {
-              data: 'topic',
-              name: 'topic'
-            },
-            {
-              data: 'participant',
-              name: 'participant',
-              defaultContent: '0'
-            },
-            {
-              data: 'action',
-              name: 'action',
-              orderable: true,
-              searchable: true
-            },
-          ],
-          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-          language: {
-            paginate: {
-              // remove previous & next text from pagination
-              previous: '&nbsp;',
-              next: '&nbsp;'
-            },
-            search: "<i data-feather='search'></i>",
-            searchPlaceholder: "Search records"
-          }
-        });
-
-
-        $('body').on('click', '.deletePlan', function(e) {
-
-          var plan_id = $(this).data("id");
-          console.log(plan_id);
-          // ganti sweetalert
-
-          Swal.fire({
-            title: "Are you sure?",
-            text: "You'll delete your plan",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, Sure",
-            cancelButtonText: "Cancel"
-          }).then((result) => {
-            if (result.isConfirmed) {
-
-              $.ajaxSetup({
-                headers: {
-                  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-              });
-
-              $.ajax({
-                type: "DELETE",
-                url: "" + '/plans/' + plan_id,
-                success: function(data) {
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Deleted Successfully!',
-                  });
-                  table_plans_individual.draw();
-                  table_plans.group.draw();
-                },
-                error: function(data) {
-                  console.log('Error:', data);
-                }
-              });
-            }
-          })
-        });
+    $(function() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
       });
-    </script>
 
-    @endpush
+
+
+    });
+  </script>
+
+  @endpush
