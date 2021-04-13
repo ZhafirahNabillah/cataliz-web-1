@@ -101,7 +101,7 @@
           }
         });
 
-        var table_topic_individuals = $('.topic-datatable').DataTable({
+        var table_topic = $('.topic-datatable').DataTable({
           processing: true,
           serverSide: true,
           ajax: "",
@@ -138,10 +138,10 @@
         });
 
 
-        $('body').on('click', '.deletePlan', function(e) {
+        $('body').on('click', '.deleteTopic', function(e) {
 
-          var plan_id = $(this).data("id");
-          console.log(plan_id);
+          var topic_id = $(this).data("id");
+          console.log(topic_id);
           // ganti sweetalert
 
           Swal.fire({
@@ -163,14 +163,13 @@
 
               $.ajax({
                 type: "DELETE",
-                url: "" + '/plans/' + plan_id,
+                url: "" + '/topic/' + topic_id,
                 success: function(data) {
                   Swal.fire({
                     icon: 'success',
                     title: 'Deleted Successfully!',
                   });
-                  table_plans_individual.draw();
-                  table_plans.group.draw();
+                  table_topic.draw();
                 },
                 error: function(data) {
                   console.log('Error:', data);
