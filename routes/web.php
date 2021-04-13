@@ -19,6 +19,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\ExerciseController;
+use App\Http\Controllers\QuestionController;
 
 
 /*
@@ -169,4 +170,9 @@ Route::middleware(['auth'])->group(function () {
 //Exercise Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('exercise', ExerciseController::class);
+});
+
+//Exercise Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('question', QuestionController::class);
 });
