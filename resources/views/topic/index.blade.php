@@ -91,79 +91,74 @@
         content: function() {
           return '<img src="' + $(this).data('img') + '" />';
         }
-      })
-    })
+      });
+    });
 
-      $(function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $(function() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      var table_topic = $('.topic-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "",
+        columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'topic',
+            name: 'topic'
+          },
+          {
+            data: 'participant',
+            name: 'participant',
+            defaultContent: '0'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
+
+      $('body').on('click', '.deleteTopic', function(e) {
+
+        var topic_id = $(this).data("id");
+        console.log(topic_id);
+        // ganti sweetalert
+
+        $.ajax({
+          type: "DELETE",
+          url: "" + '/topic/' + topic_id,
+          success: function(data) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Deleted Successfully!',
+            });
+            table_topic.draw();
+          },
+          error: function(data) {
+            console.log('Error:', data);
           }
-        });
-
-        var table_topic = $('.topic-datatable').DataTable({
-          processing: true,
-          serverSide: true,
-          ajax: "",
-          columns: [{
-              data: 'DT_RowIndex',
-              name: 'DT_RowIndex'
-            },
-            {
-              data: 'topic',
-              name: 'topic'
-            },
-            {
-              data: 'participant',
-              name: 'participant',
-              defaultContent: '0'
-            },
-            {
-              data: 'action',
-              name: 'action',
-              orderable: true,
-              searchable: true
-            },
-          ],
-          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-          language: {
-            paginate: {
-              // remove previous & next text from pagination
-              previous: '&nbsp;',
-              next: '&nbsp;'
-            },
-            search: "<i data-feather='search'></i>",
-            searchPlaceholder: "Search records"
-          }
-        });
-
-
-        $('body').on('click', '.deleteTopic', function(e) {
-
-          var topic_id = $(this).data("id");
-          console.log(topic_id);
-          // ganti sweetalert
-
-
-
-              $.ajax({
-                type: "DELETE",
-                url: "" + '/topic/' + topic_id,
-                success: function(data) {
-                  Swal.fire({
-                    icon: 'success',
-                    title: 'Deleted Successfully!',
-                  });
-                  table_topic.draw();
-                },
-                error: function(data) {
-                  console.log('Error:', data);
-                }
-              });
-            }
-          })
         });
       });
-    </script>
+    });
+  </script>
 
   @endpush
