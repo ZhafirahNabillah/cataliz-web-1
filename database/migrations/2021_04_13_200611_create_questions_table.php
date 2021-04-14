@@ -15,7 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->integer('exercise_id');
+            $table->integer('topic_id');
             $table->longText('question');
             $table->longText('answers');
             $table->tinyInteger('weight');
