@@ -17,11 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->id();
             $table->integer('exercise_id');
             $table->longText('question');
-            $table->longText('answer_1');
-            $table->longText('answer_2');
-            $table->longText('answer_3')->nullable();
-            $table->longText('answer_4')->nullable();
-            $table->longText('answer_5')->nullable();
+            $table->longText('answers');
             $table->tinyInteger('weight');
             $table->string('true_answer');
             $table->timestamps();
