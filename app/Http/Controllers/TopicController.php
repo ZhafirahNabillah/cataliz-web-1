@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 use PDF;
@@ -185,5 +186,18 @@ class TopicController extends Controller
   {
     $pdf = PDF::loadview('pdf_template.topic_detail_pdf', compact('topic'));
     return $pdf->download('topic_detail.pdf');
+  }
+
+  public function topic_search(Request $request)
+  {
+    $topic = [];
+    $trainer = User::find(auth()->user()->id);
+    if ($request->has('q')) {
+      $search = $request->q;
+      $topic = $trainer->topic->where('topic', 'LIKE', "%$search%");
+    } else {
+      $topic = $trainer->topic;
+    }
+    return response()->json($topic);
   }
 }

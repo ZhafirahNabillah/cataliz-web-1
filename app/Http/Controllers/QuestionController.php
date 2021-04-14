@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Question;
 
 class QuestionController extends Controller
 {
@@ -11,9 +12,9 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+      
     }
 
     /**
@@ -34,8 +35,20 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        return $request;
+        // return $request;
+        // $question_id = 1;
+        // return $request->input('question-'.$question_id);
+        foreach ($request->all_questions_id as $question_id) {
+          $question = new Question;
+          $question->topic_id = $request->topic_id;
+          $question->question = $request->input('question-'.$question_id);
+          $question->answers = implode(',', $request->input('answer-'.$question_id));
+          $question->true_answer = $request->input('true-answer-'.$question_id);
+          $question->weight = $request->input('point-'.$question_id);
+          $question->save();
+        }
+
+        return redirect('/exercise')->with('success', 'exercise has been created successfully');
     }
 
     /**

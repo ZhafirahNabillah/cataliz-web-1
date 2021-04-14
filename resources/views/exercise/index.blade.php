@@ -60,7 +60,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <table class="datatables-basic table-striped table plan-datatable-individual">
+                  <table class="datatables-basic table-striped table exercise-datatable">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -113,8 +113,41 @@
         }
       });
 
-
-
+      var table_exercise = $('.exercise-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "",
+        columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'topic',
+            name: 'topic'
+          },
+          {
+            data: 'total_questions',
+            name: 'total_questions',
+            defaultContent: '0'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
     });
   </script>
 
