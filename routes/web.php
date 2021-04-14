@@ -176,5 +176,4 @@ Route::middleware(['auth'])->group(function () {
 //Exercise Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('question', QuestionController::class);
-	Route::post('/question/{id}/store', [QuestionController::class, 'update_question'])->name('question_update');
 });

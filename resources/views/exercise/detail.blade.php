@@ -37,7 +37,18 @@
         </div>
       </div>
     </div>
-    <div class="row ">
+    <div class="row">
+      <div class="col-lg-12">
+        @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dissmisable">
+            <h4 class="alert-heading">Success</h4>
+            <div class="alert-body">{{ $message }}</div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        @endif
+      </div>
       <div class="col-lg-12">
         <div class="card ">
           <div class="card-body">

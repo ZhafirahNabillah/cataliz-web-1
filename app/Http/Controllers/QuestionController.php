@@ -35,20 +35,21 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'question'      => 'required',
-            'answers'       => 'required',
-            'true_answer'   => 'required',
-            'weight'        => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            return back()
-                ->withErrors($validator)
-                ->withInput();
-        }
-
         foreach ($request->all_questions_id as $question_id) {
+
+            $validator = Validator::make($request->all(), [
+              'question-'.$question_id      => 'required',
+              'answer-'.$question_id        => 'required',
+              'true-answer-'.$question_id   => 'required',
+              'point-'.$question_id         => 'required'
+            ]);
+
+            if ($validator->fails()) {
+              return back()
+              ->withErrors($validator)
+              ->withInput();
+            }
+
             $question = new Question;
             $question->topic_id = $request->topic_id;
             $question->question = $request->input('question-' . $question_id);
@@ -100,7 +101,7 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update_question(Request $request, $id)
+    public function update(Request $request, $id)
     {
         // return $request;
         $question = Question::find($id);
@@ -109,7 +110,7 @@ class QuestionController extends Controller
         $question->true_answer = $request->true_answer;
         $question->weight = $request->point;
         $question->update();
-        return redirect('/exercise')->with('success', 'question has been edi    ted successfully');
+        return redirect()->route('exercise.show', ['exercise' => $question->topic_id])->with('success', 'question has been edited successfully');
     }
 
     /**
