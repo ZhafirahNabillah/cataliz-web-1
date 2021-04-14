@@ -26,4 +26,9 @@ class Topic extends Model
   	{
   		return $this->belongsToMany('App\Models\Client');
   	}
+
+    public function question()
+  	{
+  		return $this->hasMany('App\Models\Question');
+  	}
 }

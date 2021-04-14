@@ -164,7 +164,8 @@ Route::middleware(['auth'])->group(function () {
 //Topic Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('topic', TopicController::class);
-	Route::get('topic/{topic}/download', [TopicController::class, 'topic_pdf_download'])->name('topic.download');
+	Route::get('/topic/{topic}/download', [TopicController::class, 'topic_pdf_download'])->name('topic.download');
+	Route::get('/topic_search', [TopicController::class, 'topic_search'])->name('topic.search');
 });
 
 //Exercise Controller
