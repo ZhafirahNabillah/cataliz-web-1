@@ -27,7 +27,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Exercise</a>
+                <li class="breadcrumb-item"><a href="{{route('exercise.index')}}">Exercise</a>
                 </li>
                 <li class="breadcrumb-item active">Detail Exercise
                 </li>

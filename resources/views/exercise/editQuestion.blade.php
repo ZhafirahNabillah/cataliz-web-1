@@ -17,7 +17,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Exercise
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -37,23 +39,34 @@
       <div class="col-lg-12">
         <div class="card ">
           <div class="card-body">
-            <div class="form-group"><label for="">Topic</label><input type="text" class="form-control col-sm-12" id="" aria-describedby="emailHelp" placeholder="Choose your topic" disabled></div>
-            <div class="form-group"><label for="question">Question</label><textarea name="question" id="question" placeholder="Your question here..."></textarea></div>
-            <div class="form-group"><label for="">Answer A</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div>
-            <div class="form-group"><label for="">Answer B</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div>
-            <div class="form-group"><label for="">Answer C</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div>
-            <div class="form-group"><label for="">Answer D</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div>
-            <div class="form-group"><label for="">Answer E</label><input type="text" class="form-control col-sm-6" id="" placeholder="Input your Answer..."></div>
-            <div class="form-group">
-              <select class="form-control col-sm-6" aria-label=" select example">
-                <option selected disabled>Select True Answer</option>
-                <option value="1">A</option>
-                <option value="2">B</option>
-                <option value="3">C</option>
-                <option value="4">D</option>
-                <option value="5">E</option>
-              </select>
-            </div>
+            <form action="{{ route('question_update', $question->id) }}" method="post">
+              @csrf
+              {{-- <div class="form-group"><label for="">Topic</label><input type="text" class="form-control col-sm-12" id="" aria-describedby="emailHelp" placeholder="Choose your topic" disabled></div> --}}
+              <div class="form-group"><label for="question">Question</label><textarea name="question" id="question"
+                  placeholder="Your question here...">{{$question->question}}</textarea></div>
+              @foreach ($ans_array as $dt)
+              <div class="form-group"><label for="">Answer {{$choice_itr++}}</label><input type="text" name="answer-1[]"
+                  class="form-control col-sm-6" id="{{strtolower($choice_itr++)}}-answer-1" value="{!!$dt!!}"></div>
+              @endforeach
+              <div class="form-group">
+                <label for="true_answer">Select True Answer</label>
+                <select class="form-control col-sm-6" aria-label=" select example" name="true_answer">
+                  {{-- <option selected disabled>Select True Answer</option> --}}
+                  <option value="A" @if($question->true_answer == 'A') selected @endif>A</option>
+                  <option value="B" @if($question->true_answer == 'B') selected @endif>B</option>
+                  <option value="C" @if($question->true_answer == 'C') selected @endif>C</option>
+                  <option value="D" @if($question->true_answer == 'D') selected @endif>D</option>
+                  <option value="E" @if($question->true_answer == 'E') selected @endif>E</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <div class="form-group"><label for="point">Point</label><input type="text" class="form-control col-sm-6"
+                    id="" name="point" value="{{$question->weight}}"></div>
+              </div>
+              <div class="form-group text-right mb-0">
+                <Button type="submit" class="btn btn-primary">Submit</Button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -73,13 +86,17 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
   </script>
-  <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
 
 
   <script type="text/javascript">

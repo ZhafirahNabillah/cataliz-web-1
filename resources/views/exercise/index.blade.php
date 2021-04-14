@@ -65,7 +65,7 @@
                       <tr>
                         <th>No</th>
                         <th>Topic</th>
-                        <th>Exercise</th>
+                        <th>Total Questions</th>
                         <th>Action</th>
                       </tr>
                     </thead>
