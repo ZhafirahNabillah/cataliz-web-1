@@ -32,4 +32,9 @@ class Topic extends Model
   	{
   		return $this->hasMany('App\Models\Question');
   	}
+
+    public function sub_topics()
+  	{
+  		return $this->hasMany('App\Models\Sub_topic');
+  	}
 }

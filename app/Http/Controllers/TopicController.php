@@ -144,12 +144,14 @@ class TopicController extends Controller
           $email = str_pad(substr($row->email, -15), strlen($row->email), 'x', STR_PAD_LEFT);
 
           return $email;
-          })
+        })
         ->rawColumns(['email'])
         ->make(true);
     }
 
-    return view('topic.detailTopic', compact('topic', 'category'));
+    $sub_topics = $topic->sub_topics;
+
+    return view('topic.detailTopic', compact('topic', 'category', 'sub_topics'));
   }
 
   public function show_detail_participant($id)
@@ -165,8 +167,8 @@ class TopicController extends Controller
    */
   public function edit(Topic $topic)
   {
-    $category = Category::where('id',$topic->category_id)->pluck('category')->first();
-    return view('topic.edit', compact('topic','category'));
+    $category = Category::where('id', $topic->category_id)->pluck('category')->first();
+    return view('topic.edit', compact('topic', 'category'));
   }
 
   /**
