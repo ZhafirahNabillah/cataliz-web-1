@@ -31,11 +31,8 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
+
+        {{-- Alert for success message --}}
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-dissmisable">
           <h4 class="alert-heading">Success</h4>
@@ -46,14 +43,17 @@
         </div>
         @endif
 
-        <div class="row">
-          <div class="col-12">
-            <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
+        {{-- create topic button --}}
+        @can('create-topic')
+          <div class="row">
+            <div class="col-12">
+              <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
+            </div>
           </div>
-        </div>
+        @endcan
         <br>
-        
-        <!-- Basic table -->
+
+        {{-- topic datatable  --}}
         <section id="basic-datatable">
           <div class="row">
             <div class="col-12">

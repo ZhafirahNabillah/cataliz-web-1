@@ -262,16 +262,26 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
-          $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
-          $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+          if (auth()->user()->hasRole('admin')) {
 
-          if ($row->suspend_status == 1) {
-            $actionBtn = $detail_btn . ' ' . $suspend_btn;
-          } else {
-            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
+            $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
+            $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+
+            if ($row->suspend_status == 1) {
+              // code...
+              $actionBtn = $update_btn . ' ' . $suspend_btn;
+            } else {
+              $actionBtn = $update_btn . ' ' . $unsuspend_btn;
+            }
+            return $actionBtn;
+
+          } elseif (auth()->user()->hasRole('mentor')) {
+            $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+
+            $actionBtn = $detail_btn;
+            return $actionBtn;
           }
-          return $actionBtn;
         })
         ->rawColumns(['action'])
         ->make(true);
@@ -313,17 +323,27 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
-          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
-          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+          if (auth()->user()->hasRole('admin')) {
 
-          if ($row->suspend_status == 1) {
-            // code...
-            $actionBtn = $detail_btn . ' ' . $suspend_btn;
-          } else {
-            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
+            $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
+            $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+
+            if ($row->suspend_status == 1) {
+              // code...
+              $actionBtn = $update_btn . ' ' . $suspend_btn;
+            } else {
+              $actionBtn = $update_btn . ' ' . $unsuspend_btn;
+            }
+            return $actionBtn;
+
+          } elseif (auth()->user()->hasRole('mentor')) {
+            $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailTrainer" data-id="' . $row->id . '">Detail</a>';
+
+            $actionBtn = $detail_btn;
+            return $actionBtn;
           }
-          return $actionBtn;
+
         })
         ->rawColumns(['action'])
         ->make(true);
@@ -339,15 +359,15 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a>';
-          $suspend_btn = '<a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a>';
-          $unsuspend_btn = '<a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a>';
+          $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
+          $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
+          $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
 
           if ($row->suspend_status == 1) {
             // code...
-            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+            $actionBtn = $update_btn . ' ' . $suspend_btn;
           } else {
-            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            $actionBtn = $update_btn . ' ' . $unsuspend_btn;
           }
           return $actionBtn;
         })

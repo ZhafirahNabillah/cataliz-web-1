@@ -94,31 +94,75 @@
               </div>
           </div>
           <div class="card">
-            <div class="card-header">
-              <h4 class="card-title"><b>Detail Participant</b>
-              </h4>
-            </div>
-            <div class="card-body">
-              <!-- Basic table -->
-              <section id="basic-datatable">
-                <div class="row">
-                  <div class="col-12">
-                    <table class="datatables-basic table-striped table topic-participant-datatable">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Name</th>
-                          <th>Email</th>
-                          <th>Program</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      </tbody>
-                    </table>
-                  </div>
+            <ul class="nav nav-tabs justify-content-center pt-1" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#participant" aria-controls="coach" role="tab" aria-selected="true">Participant</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#sub-topic" aria-controls="profile" role="tab" aria-selected="false">Sub Topic</a>
+              </li>
+            </ul>
+
+            <div class="tab-content">
+              <div class="tab-pane active" id="participant" aria-labelledby="participant-tab" role="tabpanel">
+                <div class="card-header py-0">
+                  <h4 class="card-title"><b>Detail Participant</b>
+                  </h4>
                 </div>
-              </section>
+                <div class="card-body">
+                  <!-- Basic table -->
+                  <section id="basic-datatable">
+                    <div class="row">
+                      <div class="col-12">
+                        <table class="datatables-basic table-striped table topic-participant-datatable">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                              <th>Program</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
+              <div class="tab-pane" id="sub-topic" aria-labelledby="sub-topic-tab" role="tabpanel">
+                <div class="card-header py-0">
+                  <h4 class="card-title"><b>Sub Topic</b></h4>
+                </div>
+                <div class="card-body">
+                  <!-- Basic table -->
+                  <section id="basic-datatable">
+                    <div class="row">
+                      <div class="col-12">
+                        <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Sub Topic</a>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <table class="datatables-basic table-striped table sub-topic-datatable">
+                          <thead>
+                            <tr>
+                              <th>No</th>
+                              <th>Sub Topic</th>
+                              <th>Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+              </div>
             </div>
+
           </div>
         </div>
       </div>

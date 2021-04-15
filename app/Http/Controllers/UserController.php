@@ -23,22 +23,24 @@ class UserController extends Controller
     // $data = User::with('role')->get();
     // return($data);
 
-    if ($request->ajax()) {
-      $data = User::with('roles')->get();
+    return view('clients.index');
+  }
 
+  public function show_trainer_list(Request $request) {
+    $data = User::role('trainer')->get();
+
+    if ($request->ajax()) {
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $edit_btn = '<a href="javascript:;" id="editUser" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Update</a>';
-          // $delete_btn = '<a href="javascript:;" id="deleteUser" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Delete</a>';
-          $actionBtn = $edit_btn;
+          $detail_btn = '<a href="javascript:;" id="detailTrainer" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="detail feedback">Detail</a>';
+
+          $actionBtn = $detail_btn;
           return $actionBtn;
         })
         ->rawColumns(['action'])
         ->make(true);
     }
-
-    return view('users.index');
   }
 
   public function edit($id)
@@ -63,6 +65,12 @@ class UserController extends Controller
       return response()->json(array('total_coaching' => $total_coaching, 'total_client' => $total_client, 'user' => $user));
     }
 
+    if (auth()->user()->hasRole('mentor')) {
+      $user = User::with('roles')->where('id', $id)->first();
+
+      return response()->json($user);
+    }
+
     // return response()->json($user);
   }
 
@@ -84,7 +92,7 @@ class UserController extends Controller
       if ($validator->fails()) {
         return response()->json($validator->errors(), 422);
       }
-      
+
       $user = User::updateOrCreate(['id' => $request->user_id], ['name' => $request->name, 'email' => $request->email, 'phone' => $request->phone, 'password' => Hash::make('default123'), 'reset_code' => sha1(time())]);
       $user->syncRoles($request->input('roles'));
 

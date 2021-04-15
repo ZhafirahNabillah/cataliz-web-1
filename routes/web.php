@@ -177,3 +177,8 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 	Route::resource('question', QuestionController::class);
 });
+
+//User Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('users', UserController::class);
+});

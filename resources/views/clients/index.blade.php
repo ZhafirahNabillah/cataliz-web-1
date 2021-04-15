@@ -499,113 +499,154 @@
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Trainer</a>
+              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#trainer" aria-controls="coach" role="tab" aria-selected="true">Trainer</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Coachee</a>
             </li>
           </ul>
-          <a href="javascript:;" id="detailTrainer">Detail</a>
+
           <div class="tab-content">
             <!-- Panel Trainer -->
-            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-              <!-- Basic table -->
+            <div class="tab-pane active" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
+              <!-- trainerlist card -->
               <section id="basic-datatable">
                 <div class="row">
                   <div class="col-12">
-                    <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table-striped table yajra-datatable">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
+                    <table class="datatables-basic table-striped table admin-datatable-trainer">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Handphone</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </section>
-              <!--/ Basic table -->
             </div>
-            <!-- /panel Trainer -->
+            <!-- /trainer list admin -->
 
 
-            <!-- Panel coachee -->
+            <!-- Panel Coachee -->
             <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
               <!-- Basic table -->
               <section id="basic-datatable">
                 <div class="row">
                   <div class="col-12">
-                    <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table-striped table yajra-datatable">
-                        <thead>
-                          <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
+                    <table class="datatables-basic table-striped table admin-datatable-coachee">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Handphone</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </section>
               <!--/ Basic table -->
             </div>
-            <!-- /coachee  -->
+            <!-- /Panel Coachee  -->
           </div>
         </div>
       </div>
-      <!-- Modal to detail user Trainer -->
-      <div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
-        <div class="modal-dialog sidebar-sm">
 
-          <div class="modal-body flex-grow-1">
-
-            <div class="card-body">
-              <dl class="row">
-                <dt class="col-sm-6">Full Name</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-6 name"></small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-6">Phone</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-6 phone"></small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-6">Email</dt>
-              </dl>
-              <dl class="row">
-                <small class="col-sm-6 email"></small>
-              </dl>
-              <dl class="row">
-                <dt class="col-sm-6">Special Skill</dt>
-              </dl>
-              <dl class="row">
-                <li>skill 1</li>
-                <li>skill 2</li>
-              </dl>
+      <!-- Modal Detail Trainer -->
+      <div class="modal modal-slide-in fade" id="modal-trainer-detail" role="dialog" aria-hidden="true">
+        <div class="modal-dialog sidebar-sm" role="document">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalHeadingTrainer"></h5>
 
             </div>
-            <!-- </Card modal>-->
+
+            <div class="modal-body flex-grow-1">
+              <div class="card-body">
+                <dl class="row">
+                  <dt class="col-sm-6">Full Name</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 name"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Phone</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 phone"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Email</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 email"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Skills</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 skills"></small>
+                </dl>
+              </div>
+              <!-- </Card modal>-->
+            </div>
           </div>
         </div>
       </div>
       <!-- End Modal -->
-      <!-- /panel coachee -->
+
+      <!-- Modal Detail Coachee -->
+      <div class="modal modal-slide-in fade" id="modal-coachee-detail" role="dialog" aria-hidden="true">
+        <div class="modal-dialog sidebar-sm" role="document">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalHeadingCoachee"></h5>
+
+            </div>
+
+            <div class="modal-body flex-grow-1">
+              <div class="card-body">
+                <dl class="row">
+                  <dt class="col-sm-6">Full Name</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 name"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Phone</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 phone"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Email</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 email"></small>
+                </dl>
+              </div>
+              <!-- </Card modal>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
       @endrole
 
       <!-- END: Content-->
@@ -1001,7 +1042,7 @@
             },
           });
 
-          var table_admin = $('.admin-datatable-trainer').DataTable({
+          var table_trainer = $('.admin-datatable-trainer').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('show_trainer_list') }}",
@@ -1044,7 +1085,7 @@
             },
           });
 
-          var table_admin = $('.admin-datatable-mentor').DataTable({
+          var table_mentor = $('.admin-datatable-mentor').DataTable({
             processing: true,
             serverSide: true,
             ajax: "{{ route('show_mentor_list') }}",
@@ -1144,6 +1185,30 @@
             })
           });
 
+          $('body').on('click', '.detailTrainer', function() {
+            var trainer_id = $(this).data('id');
+            $.get("" + '/users/' + trainer_id + '/edit', function(data) {
+              console.log(data);
+              $('#modal-trainer-detail').modal('show');
+              $('#modalHeadingTrainer').html("Detail Trainer");
+              $('.name').html(data.name);
+              $('.phone').html('+62'+data.phone);
+              $('.email').html(data.email);
+            })
+          });
+
+          $('body').on('click', '.detailCoachee', function() {
+            var coachee_id = $(this).data('id');
+            $.get("" + '/users/' + coachee_id + '/edit', function(data) {
+              console.log(data);
+              $('#modal-coachee-detail').modal('show');
+              $('#modalHeadingCoachee').html("Detail Coachee");
+              $('.name').html(data.name);
+              $('.phone').html('+62'+data.phone);
+              $('.email').html(data.email);
+            })
+          });
+
           $("#saveBtn").click(function(e) {
             e.preventDefault();
             $('#saveBtn').html('Sending..');
@@ -1179,6 +1244,8 @@
                 table_coach.draw();
                 table_admin.draw();
                 table_coachee.draw();
+                table_trainer.draw();
+                table_mentor.draw();
               },
               error: function(reject) {
                 $('#saveBtn').html('Submit');
@@ -1231,6 +1298,8 @@
                     table_admin.draw();
                     table_coach.draw();
                     table_coachee.draw();
+                    table_trainer.draw();
+                    table_mentor.draw();
                   },
                   error: function(data) {
                     console.log('Error:', data);
@@ -1269,6 +1338,8 @@
                     table_admin.draw();
                     table_coach.draw();
                     table_coachee.draw();
+                    table_trainer.draw();
+                    table_mentor.draw();
                   },
                   error: function(data) {
                     console.log('Error:', data);

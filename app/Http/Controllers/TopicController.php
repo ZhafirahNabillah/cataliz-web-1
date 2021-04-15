@@ -18,8 +18,14 @@ class TopicController extends Controller
    */
   public function index(Request $request)
   {
-    if ($request->ajax()) {
+
+    if (auth()->user()->hasRole('trainer')) {
       $data = Topic::where('trainer_id', auth()->user()->id)->get();
+    } elseif (auth()->user()->hasRole('mentor')) {
+      $data = Topic::all();
+    }
+
+    if ($request->ajax()) {
 
       //return data as datatable json
       return Datatables::of($data)
