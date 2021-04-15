@@ -11,6 +11,7 @@ class Topic extends Model
 
     protected $fillable = [
         'topic',
+        'category_id',
         'description',
         'trainer_id',
         'client_requirement',

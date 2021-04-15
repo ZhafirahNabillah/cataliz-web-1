@@ -3,7 +3,8 @@
 @section('title','Coaching Plan')
 
 @push('styles')
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 @endpush
 
 @section('content')
@@ -28,7 +29,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Topic</a>
+                <li class="breadcrumb-item"><a href="{{route('topic.index')}}">Topic</a>
                 </li>
                 <li class="breadcrumb-item active">Edit Topic
                 </li>
@@ -51,6 +52,12 @@
                 <input type="hidden" name="id" value="{{ $topic->id }}">
               </div>
               <div class="form-group">
+                <label for="category">Category</label>
+                <select class="livesearch-categories form-control" name="category">
+                  <option selected hidden value="{{ $topic->category_id }}">{{ $category }}</option>
+                </select>
+              </div>
+              <div class="form-group">
                 <label for="description">Requirements</label>
                 <textarea name="client_requirement" id="client_requirement" cols="20" rows="20"
                   placeholder="Your Requirement Here.....">{{ $topic->client_requirement }}</textarea>
@@ -65,7 +72,7 @@
                 <textarea name="client_target" id="client_target" cols="20" rows="20"
                   placeholder="Your List Here.....">{{ $topic->client_target }}</textarea>
               </div>
-              <div class="form-group text-right mb-0">
+              <div class="form-group text-left mb-0">
                 <Button type="submit" class="btn btn-primary">Submit</Button>
               </div>
             </form>
@@ -81,21 +88,66 @@
   @push('scripts')
   <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
   <script type="text/javascript">
-    tinymce.init({
-      selector: 'textarea',
-      plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools"
-      ],
-      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
-      height: 300,
-      setup: function(editor) {
-        editor.on('init change', function() {
-          editor.save();
-        });
-      }
-    });
+
+  $('.livesearch-categories').select2({
+    placeholder: 'Select Category',
+    ajax: {
+      url: "{{route('category.search')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            console.log(item)
+            return {
+              text: item.category,
+              id: item.id,
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+  $('.livesearch-sub-categories').select2({
+    placeholder: 'Select Sub-Category',
+    ajax: {
+      url: "{{route('topic.search')}}",
+      dataType: 'json',
+      delay: 250,
+      processResults: function(data) {
+        return {
+          results: $.map(data, function(item) {
+            console.log(item)
+            return {
+              text: item.topic,
+              id: item.id,
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+  tinymce.init({
+    selector: 'textarea',
+    plugins: [
+      "advlist autolink lists link image charmap print preview anchor",
+      "searchreplace visualblocks code fullscreen",
+      "insertdatetime media table contextmenu paste imagetools"
+    ],
+    toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+    height: 300,
+    setup: function(editor) {
+      editor.on('init change', function() {
+        editor.save();
+      });
+    }
+  });
   </script>
   @endpush

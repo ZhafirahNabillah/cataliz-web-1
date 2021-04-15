@@ -51,6 +51,7 @@
             <div class="card-body">
                 <div class="card border">
                   <h5 class="text-center card-title mt-2"><b>{{ $topic->topic }}</b></h5>
+                  <p class="text-center">Category : {{ $category }}</p>
                   <div class="card-body">
                     <div class="collapse-icon">
                       <div class="collapse-default">

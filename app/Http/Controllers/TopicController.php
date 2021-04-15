@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 use PDF;
@@ -109,6 +110,7 @@ class TopicController extends Controller
       ],
       [
         'topic'               => $request->topic,
+        'category_id'         => $request->category,
         'client_requirement'  => $request->client_requirement,
         'client_target'       => $request->client_target,
         'description'         => $request->description,
@@ -131,6 +133,7 @@ class TopicController extends Controller
    */
   public function show(Request $request, Topic $topic)
   {
+    $category = Category::where('id', $topic->category_id)->pluck('category')->first();
     $data = $topic->clients;
 
     if ($request->ajax()) {
@@ -146,7 +149,7 @@ class TopicController extends Controller
         ->make(true);
     }
 
-    return view('topic.detailTopic', compact('topic'));
+    return view('topic.detailTopic', compact('topic', 'category'));
   }
 
   public function show_detail_participant($id)
@@ -162,8 +165,8 @@ class TopicController extends Controller
    */
   public function edit(Topic $topic)
   {
-    //
-    return view('topic.edit', compact('topic'));
+    $category = Category::where('id',$topic->category_id)->pluck('category')->first();
+    return view('topic.edit', compact('topic','category'));
   }
 
   /**

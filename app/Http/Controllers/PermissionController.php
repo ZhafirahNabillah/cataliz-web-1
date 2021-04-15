@@ -8,7 +8,6 @@ use DataTables;
 
 class PermissionController extends Controller
 {
-  //
   public function index(Request $request)
   {
     if ($request->ajax()) {

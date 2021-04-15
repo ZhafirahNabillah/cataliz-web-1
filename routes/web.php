@@ -20,6 +20,7 @@ use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\CategoryController;
 
 
 /*
@@ -173,9 +174,16 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('exercise', ExerciseController::class);
 });
 
-//Exercise Controller
+//Question Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('question', QuestionController::class);
+});
+
+//Category Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('category', CategoryController::class);
+	Route::get('/category_search', [CategoryController::class, 'category_search'])->name('category.search');
+	Route::get('/sub_category_search', [CategoryController::class, 'sub_category_search'])->name('sub_category.search');
 });
 
 //User Controller

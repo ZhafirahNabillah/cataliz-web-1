@@ -3,7 +3,8 @@
 @section('title','Coaching Plan')
 
 @push('styles')
-
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 @endpush
 
 @section('content')
@@ -20,7 +21,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Topics
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+              <img class="align-text width="15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
                 alt="Card image cap" data-toggle="popover" data-placement="top"
                 data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
             </h2>
@@ -49,6 +50,16 @@
                 <label for="topic">Topic Name</label>
                 <input class="form-control" type="text" name="topic" value="" placeholder="Your Topic Here...">
               </div>
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select class="livesearch-categories form-control" name="category">
+                </select>
+              </div>
+              {{-- <div class="form-group">
+                <label for="sub_category">Sub-Category</label>
+                <select class="livesearch-sub-categories form-control"
+                  name="sub_category" multiple></select>
+              </div> --}}
               <div class="form-group">
                 <label for="client_requirement">Requirements</label>
                 <textarea name="client_requirement" id="client_requirement" cols="20" rows="20"
@@ -80,21 +91,73 @@
   @push('scripts')
   <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  
   <script type="text/javascript">
-    tinymce.init({
-      selector: 'textarea',
-      plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools"
-      ],
-      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
-      height: 300,
-      setup: function(editor) {
-        editor.on('init change', function() {
-          editor.save();
-        });
-      }
+    $(function() {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      $('.livesearch-categories').select2({
+        placeholder: 'Select Category',
+        ajax: {
+          url: "{{route('category.search')}}",
+          dataType: 'json',
+          delay: 250,
+          processResults: function(data) {
+            return {
+              results: $.map(data, function(item) {
+                console.log(item)
+                return {
+                  text: item.category,
+                  id: item.id,
+                }
+              })
+            };
+          },
+          cache: true
+        }
+      });
+
+      $('.livesearch-sub-categories').select2({
+        placeholder: 'Select Sub-Category',
+        ajax: {
+          url: "{{route('topic.search')}}",
+          dataType: 'json',
+          delay: 250,
+          processResults: function(data) {
+            return {
+              results: $.map(data, function(item) {
+                console.log(item)
+                return {
+                  text: item.topic,
+                  id: item.id,
+                }
+              })
+            };
+          },
+          cache: true
+        }
+      });
+
+      tinymce.init({
+        selector: 'textarea',
+        plugins: [
+          "advlist autolink lists link image charmap print preview anchor",
+          "searchreplace visualblocks code fullscreen",
+          "insertdatetime media table contextmenu paste imagetools"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent",
+        height: 300,
+        setup: function(editor) {
+          editor.on('init change', function() {
+            editor.save();
+          });
+        }
+      });
     });
   </script>
   @endpush
