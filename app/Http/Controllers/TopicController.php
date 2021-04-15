@@ -146,7 +146,9 @@ class TopicController extends Controller
         ->make(true);
     }
 
-    return view('topic.detailTopic', compact('topic'));
+    $sub_topics = $topic->sub_topics;
+
+    return view('topic.detailTopic', compact('topic', 'sub_topics'));
   }
 
   public function show_detail_participant($id)

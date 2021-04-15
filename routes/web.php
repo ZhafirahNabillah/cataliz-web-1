@@ -18,6 +18,7 @@ use App\Http\Controllers\ClassController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\DocumentationController;
 use App\Http\Controllers\TopicController;
+use App\Http\Controllers\SubTopicController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\QuestionController;
 
@@ -181,4 +182,9 @@ Route::middleware(['auth'])->group(function () {
 //User Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('users', UserController::class);
+});
+
+//Sub-topic Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('sub-topic', SubTopicController::class);
 });

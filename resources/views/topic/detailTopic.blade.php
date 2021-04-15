@@ -3,8 +3,8 @@
 @section('title','Coaching Plan')
 
 @push('styles')
-
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 @endpush
 
 @section('content')
@@ -128,10 +128,10 @@
               </div>
               <div class="tab-pane" id="sub-topic" aria-labelledby="sub-topic-tab" role="tabpanel">
                 <div class="card-body">
-                  <div class="row">
+                  <div class="row mb-1">
                     <div class="col-12">
                       <!-- Button trigger modal -->
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" id="add-sub-topic-btn">
                         New Sub Topic
                       </button>
                     </div>
@@ -139,53 +139,40 @@
                   <div class="card border">
                     <div class="card-body">
                       <div class="collapse-icon">
-                        <div class="collapse-default">
-                          <div class="card">
-                            <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#sub1" aria-expanded="false" aria-controls="collapse1">
-                              <span class="lead collapse-title"><b>Sub Topic 1</b></span>
-                            </div>
-                            <div id="sub1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                              <div class="card-body">
-                                <div class="text-right">
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMateri">
-                                    New Materi
-                                  </button>
-                                  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMateri">
-                                    Edit Materi
-                                  </button>
-                                </div>
-                                <div class="row mb-2">
-                                  <div class="col-sm-6">
-                                    <b><a href="#">pembukaan</a></b>
+                        <div class="collapse-default sub-topic-wrapper">
+                          @forelse ($sub_topics as $sub_topic)
+                            <div class="card">
+                              <div class="card-header" data-toggle="collapse" role="button" data-target="#sub-topic-{{ $sub_topic->id }}" aria-expanded="false" aria-controls="collapse1">
+                                <span class="lead collapse-title"><b>{{ $sub_topic->sub_topic }}</b></span>
+                              </div>
+                              <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
+                                <div class="card-body">
+                                  <div class="text-left">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMateri">
+                                      New Materi
+                                    </button>
                                   </div>
-                                  <div class="col-sm-6">
-                                    Lihat video
+                                  <div class="row mb-1 align-items-center">
+                                    <div class="col-sm-4">
+                                      <b>pembukaan</b>
+                                    </div>
+                                    <div class="col-sm-4">
+                                      <button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#createMateri">
+                                        Lihat video
+                                      </button>
+                                      <button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#createMateri">
+                                        Edit Materi
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
-
                               </div>
                             </div>
-                          </div>
-                          <div class="card">
-                            <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#sub2" aria-expanded="false" aria-controls="collapse2">
-                              <span class="lead collapse-title"><b>Sub Topic 2</b></span>
+                          @empty
+                            <div class="sub-topic-empty">
+                              No sub topic available
                             </div>
-                            <div id="sub2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse">
-                              <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card">
-                            <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button" data-target="#sub3" aria-expanded="false" aria-controls="collapse3">
-                              <span class="lead collapse-title"><b>Sub Topic 3</b></span>
-                            </div>
-                            <div id="sub3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse">
-                              <div class="card-body">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.
-                              </div>
-                            </div>
-                          </div>
+                          @endforelse
                         </div>
                       </div>
                     </div>
@@ -193,25 +180,27 @@
                 </div>
 
                 <!-- modal create sub topic -->
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal fade" id="create-sub-topic-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Create Sub Topic</h5>
+                        <h5 class="modal-title">Create Sub Topic</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
                       <div class="modal-body">
-                        <div class="form-group">
-                          <label for="topic">Name</label>
-                          <input class="form-control" type="text" name="topic" value="" placeholder="Your Sub Topic Here...">
-                        </div>
+                        <form class="create-sub-topic-form">
+                          <div class="form-group">
+                            <label for="sub_topic">Name</label>
+                            <input class="form-control" type="text" name="sub_topic" placeholder="Your Sub Topic Here...">
+                            <input type="hidden" name="topic_id" value="{{ $topic->id }}">
+                          </div>
+                        </form>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" id="save-sub-topic-btn">Save changes</button>
                       </div>
                     </div>
                   </div>
@@ -266,6 +255,7 @@
 
     @push('scripts')
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
     <script type="text/javascript">
       // popover
       $(function() {
@@ -310,25 +300,76 @@
             searchPlaceholder: "Search records"
           }
         });
-        $('#addQuestionBtn').click(append_form);
 
-        function append_form() {
-          var last_question_index = $('.question-wrapper:last').attr('id');
-          var this_question_id = parseInt(last_question_index) + 1;
-          $('.question-wrapper:last').after('<div class="question-wrapper" id="' + this_question_id + '"></div>');
-          // console.log(this_question_id);
-          var hr = '<hr>';
-          var question_title = ' <div class="form-group"> <label     for = "topic" > Materi < /label> <  input class = "form-control"    type = "text"    name = "topic"      value = ""     placeholder = "Tittle ..." >  <         div class = "input-group mb-3" > < div class = "input-group-prepend" > <  span class = "input-group-text" > Upload Video < /span> < /div> < div class = "custom-file" > <input type = "file"class = "custom-file-input" id = "inputGroupFile01" > < label class = "custom-file-label"  for = "inputGroupFile01" > Choose file < /label> < /div> </div> </div>';
-          var question_id = '<input type="hidden" name="all_questions_id[]" value="' + this_question_id + '">';
+        $('#add-sub-topic-btn').click(function () {
+          $('#create-sub-topic-modal').modal('show');
+        });
 
-          $(".question-wrapper:last").append(hr, question_title, question_box, option_A, option_B, option_C, option_D, option_E, true_answer, point, question_id);
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
 
-          tinymce.init({
-            selector: 'textarea'
+        $('#save-sub-topic-btn').click(function () {
+          var data = $('.create-sub-topic-form').serialize();
+          console.log(data);
+
+          $.ajax({
+            data: data,
+            url: "{{ route('sub-topic.store') }}",
+            type: "POST",
+            dataType: 'json',
+            success: function(data) {
+              console.log(data);
+              $('#create-sub-topic-modal').modal('hide');
+              $('.create-sub-topic-form').trigger("reset");
+              $('.sub-topic-empty').empty();
+              append_sub_topic(data.id, data.sub_topic);
+              Swal.fire({
+                icon: 'success',
+                title: 'Account updated successfully!',
+              });
+            },
+            error: function(reject) {
+              $('#saveBtn').html('Submit');
+              // if (reject.status === 422) {
+              //   var errors = JSON.parse(reject.responseText);
+              //   if (errors.name) {
+              //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+              //   }
+              //   if (errors.phone) {
+              //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+              //   }
+              //   if (errors.email) {
+              //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+              //   }
+              //   if (errors.roles) {
+              //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+              //   }
+              // }
+            }
           });
+        });
 
-          question_length = question_length + 1;
-          $('#question_length').val(question_length);
+        function append_sub_topic(id, sub_topic) {
+          var sub_topic_html = '<div class="card">';
+          sub_topic_html+= '<div class="card-header" data-toggle="collapse" role="button" data-target="#sub-topic-'+ id +'" aria-expanded="false" aria-controls="collapse1"><span class="lead collapse-title"><b>'+ sub_topic +'</b></span></div>';
+          sub_topic_html+= '<div id="sub-topic-'+ id +'" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">';
+          sub_topic_html+= '<div class="card-body">';
+          sub_topic_html+= '<div class="text-left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMateri">New Materi</button></div>';
+          sub_topic_html+= '<div class="row mb-1 align-items-center">';
+          sub_topic_html+= '<div class="col-sm-4"><b>pembukaan</b></div>';
+          sub_topic_html+= '<div class="col-sm-4">';
+          sub_topic_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#createMateri">Lihat video</button>';
+          sub_topic_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#createMateri">Edit Materi</button>';
+          sub_topic_html+= '</div>';
+          sub_topic_html+= '</div>';
+          sub_topic_html+= '</div>';
+          sub_topic_html+= '</div>';
+          sub_topic_html+= '</div>';
+
+          $('.sub-topic-wrapper').append(sub_topic_html);
         }
       });
     </script>
