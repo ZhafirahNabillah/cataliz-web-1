@@ -30,6 +30,9 @@ class TopicController extends Controller
       //return data as datatable json
       return Datatables::of($data)
         ->addIndexColumn()
+        ->addColumn('participant', function ($row) {
+          return $total_participant = $row->clients->count();
+        })
         ->addColumn('action', function ($row) {
 
           //add update button if user have permission
