@@ -22,6 +22,7 @@ use App\Http\Controllers\SubTopicController;
 use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LessonController;
 
 
 /*
@@ -195,4 +196,9 @@ Route::middleware(['auth'])->group(function () {
 //Sub-topic Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('sub-topic', SubTopicController::class);
+});
+
+//Lesson Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('lesson', LessonController::class);
 });

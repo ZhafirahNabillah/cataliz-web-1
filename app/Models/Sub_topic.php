@@ -18,4 +18,9 @@ class Sub_topic extends Model
     {
         return $this->belongsTo('App\Models\Topic');
     }
+
+    public function lessons()
+    {
+        return $this->hasMany('App\Models\Lesson');
+    }
 }

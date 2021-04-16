@@ -100,7 +100,8 @@
             </div>
           </div>
         </div>
-        <div class="card">
+        <div class="col-12">
+          <div class="card">
           <ul class="nav nav-tabs justify-content-center pt-1" role="tablist">
             <li class="nav-item">
               <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#participant" aria-controls="coach"
@@ -155,7 +156,7 @@
                     <div class="collapse-icon">
                       <div class="collapse-default sub-topic-wrapper">
                         @forelse ($sub_topics as $sub_topic)
-                        <div class="card">
+                        <div class="card" id="{{ $sub_topic->id }}">
                           <div class="card-header" data-toggle="collapse" role="button"
                             data-target="#sub-topic-{{ $sub_topic->id }}" aria-expanded="false"
                             aria-controls="collapse1">
@@ -164,25 +165,20 @@
                           <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
                             <div class="card-body">
                               <div class="text-left">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                  data-target="#createMateri">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ $sub_topic->id }}" id="create-lesson-btn">
                                   New Materi
                                 </button>
                               </div>
-                              <div class="row mb-1 align-items-center">
-                                <div class="col-sm-4">
-                                  <b>pembukaan</b>
-                                </div>
-                                <div class="col-sm-4">
-                                  <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#createMateri">
-                                    Lihat video
-                                  </button>
-                                  <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                                    data-target="#createMateri">
-                                    Edit Materi
-                                  </button>
-                                </div>
+                              <div class="lesson-wrapper">
+                                @foreach ($sub_topic->lessons as $lesson)
+                                  <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">
+                                    <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
+                                    <div class="col-sm-4">
+                                      <button type="button" class="btn-sm btn-primary" data-toggle="modal">Play</button>
+                                      <button type="button" class="btn-sm btn-primary" data-toggle="modal">Edit</button>
+                                    </div>
+                                  </div>
+                                @endforeach
                               </div>
                             </div>
                           </div>
@@ -226,9 +222,8 @@
                 </div>
               </div>
 
-              <!-- modal create Materi -->
-              <!-- Modal -->
-              <div class="modal fade" id="createMateri" tabindex="-1" role="dialog"
+              <!-- Modal create Materi -->
+              <div class="modal fade" id="create-lesson-modal" tabindex="-1" role="dialog"
                 aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                   <div class="modal-content">
@@ -239,38 +234,40 @@
                       </button>
                     </div>
                     <div class="modal-body">
-
-                      <div class="form-group">
-                        <label for="topic">Materi</label>
-                        <input class="form-control" type="text" name="topic" value="" placeholder="Tittle ...">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text">Upload Video</span>
-                          </div>
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01">
-                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                      <form class="create-lesson-form" id="create-lesson-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                          <label for="topic">Lesson Title</label>
+                          <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Upload Video</span>
+                            </div>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" name="video" id="video_input">
+                              <label class="custom-file-label" for="video_input">Choose file</label>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <button type="button" name="button" class="btn btn-secondary" id="addQuestionBtn">+ Add
-                        materi</button>
+                        <input type="hidden" name="sub_topic_id" id="sub_topic_id">
+                      </form>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
+                      <button type="button" class="btn btn-primary" id="save-lesson-btn">Save changes</button>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
-
+        </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!-- END: Content-->
   @endsection
@@ -327,6 +324,13 @@
           $('#create-sub-topic-modal').modal('show');
         });
 
+        var sub_topic_active = 0;
+        $('#create-lesson-btn').click(function () {
+          sub_topic_active = $(this).data('id');
+          $('#create-lesson-modal').modal('show');
+          $('#sub_topic_id').val(sub_topic_active);
+        });
+
         $.ajaxSetup({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -374,8 +378,53 @@
           });
         });
 
+        $('#save-lesson-btn').click(function () {
+          // var data = $('.create-lesson-form').serialize();
+          var formData = new FormData(document.getElementById('create-lesson-form'));
+          console.log(formData);
+          $(this).html('Submitting...')
+
+          $.ajax({
+            url: "{{ route('lesson.store') }}",
+            type: "POST",
+            data: formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success: function(data) {
+              console.log(data);
+              $('#create-lesson-modal').modal('hide');
+              $('.create-lesson-form').trigger("reset");
+              // $('.sub-topic-empty').empty();
+              append_lesson(data.id, data.lesson_name);
+              Swal.fire({
+                icon: 'success',
+                title: 'Account updated successfully!',
+              });
+            },
+            error: function(reject) {
+              $('#saveBtn').html('Submit');
+              // if (reject.status === 422) {
+              //   var errors = JSON.parse(reject.responseText);
+              //   if (errors.name) {
+              //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+              //   }
+              //   if (errors.phone) {
+              //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+              //   }
+              //   if (errors.email) {
+              //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+              //   }
+              //   if (errors.roles) {
+              //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+              //   }
+              // }
+            }
+          });
+        });
+
         function append_sub_topic(id, sub_topic) {
-          var sub_topic_html = '<div class="card">';
+          var sub_topic_html = '<div class="card" id="'+ id +'">';
           sub_topic_html+= '<div class="card-header" data-toggle="collapse" role="button" data-target="#sub-topic-'+ id +'" aria-expanded="false" aria-controls="collapse1"><span class="lead collapse-title"><b>'+ sub_topic +'</b></span></div>';
           sub_topic_html+= '<div id="sub-topic-'+ id +'" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">';
           sub_topic_html+= '<div class="card-body">';
@@ -392,6 +441,34 @@
           sub_topic_html+= '</div>';
 
           $('.sub-topic-wrapper').append(sub_topic_html);
+        }
+
+        function append_lesson(id, lesson_name) {
+          var lesson_html = '<div class="row mb-1 align-items-center lesson-'+id+'">';
+          lesson_html+= '<div class="col-sm-4"><b>'+lesson_name+'</b></div>';
+          lesson_html+= '<div class="col-sm-4">';
+          lesson_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal">Play</button> ';
+          lesson_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal">Edit</button>';
+          lesson_html+= '</div>';
+          lesson_html+= '</div>';
+
+          {{-- <div class="row mb-1 align-items-center">
+            <div class="col-sm-4">
+              <b>pembukaan</b>
+            </div>
+            <div class="col-sm-4">
+              <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                data-target="#createMateri">
+                Lihat video
+              </button>
+              <button type="button" class="btn-sm btn-primary" data-toggle="modal"
+                data-target="#createMateri">
+                Edit Materi
+              </button>
+            </div>
+          </div> --}}
+
+          $('.lesson-wrapper').append(lesson_html);
         }
       });
   </script>
