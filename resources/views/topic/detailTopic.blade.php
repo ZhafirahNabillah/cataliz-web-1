@@ -165,17 +165,17 @@
                           <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
                             <div class="card-body">
                               <div class="text-left">
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-id="{{ $sub_topic->id }}" id="create-lesson-btn">
+                                <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
                                   New Materi
                                 </button>
                               </div>
-                              <div class="lesson-wrapper">
+                              <div class="lesson-wrapper-{{ $sub_topic->id }}">
                                 @foreach ($sub_topic->lessons as $lesson)
                                   <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">
                                     <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
                                     <div class="col-sm-4">
-                                      <button type="button" class="btn-sm btn-primary" data-toggle="modal">Play</button>
-                                      <button type="button" class="btn-sm btn-primary" data-toggle="modal">Edit</button>
+                                      <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
+                                      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>
                                     </div>
                                   </div>
                                 @endforeach
@@ -260,6 +260,25 @@
                   </div>
                 </div>
               </div>
+
+              <div class="modal fade" id="play-lesson-modal" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="lesson-title"></h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <video width="100%" controls>
+                        <source id="video_source" src="movie.mp4" type="video/mp4">
+                      </video>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -324,8 +343,18 @@
           $('#create-sub-topic-modal').modal('show');
         });
 
+        $('body').on('click', '.playLessonBtn', function() {
+          var lesson_id = $(this).data('id');
+          $.get("" + '/lesson/' + lesson_id , function(data) {
+            $('#lesson-title').html(data.lesson_name);
+            video_file = data.video;
+            $('#video_source').attr('src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/lesson_video/1/Setting up the tools_1618544409.mp4');
+            $('#play-lesson-modal').modal('show');
+          })
+        });
+
         var sub_topic_active = 0;
-        $('#create-lesson-btn').click(function () {
+        $('body').on('click', '.create-lesson-btn', function() {
           sub_topic_active = $(this).data('id');
           $('#create-lesson-modal').modal('show');
           $('#sub_topic_id').val(sub_topic_active);
@@ -396,7 +425,7 @@
               $('#create-lesson-modal').modal('hide');
               $('.create-lesson-form').trigger("reset");
               // $('.sub-topic-empty').empty();
-              append_lesson(data.id, data.lesson_name);
+              append_lesson(data.id, data.lesson_name, data.sub_topic_id);
               Swal.fire({
                 icon: 'success',
                 title: 'Account updated successfully!',
@@ -428,13 +457,8 @@
           sub_topic_html+= '<div class="card-header" data-toggle="collapse" role="button" data-target="#sub-topic-'+ id +'" aria-expanded="false" aria-controls="collapse1"><span class="lead collapse-title"><b>'+ sub_topic +'</b></span></div>';
           sub_topic_html+= '<div id="sub-topic-'+ id +'" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">';
           sub_topic_html+= '<div class="card-body">';
-          sub_topic_html+= '<div class="text-left"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createMateri">New Materi</button></div>';
-          sub_topic_html+= '<div class="row mb-1 align-items-center">';
-          sub_topic_html+= '<div class="col-sm-4"><b>pembukaan</b></div>';
-          sub_topic_html+= '<div class="col-sm-4">';
-          sub_topic_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#createMateri">Lihat video</button>';
-          sub_topic_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal" data-target="#createMateri">Edit Materi</button>';
-          sub_topic_html+= '</div>';
+          sub_topic_html+= '<div class="text-left"><button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="'+id+'">New Materi</button></div>';
+          sub_topic_html+= '<div class="lesson-wrapper-'+id+'">'
           sub_topic_html+= '</div>';
           sub_topic_html+= '</div>';
           sub_topic_html+= '</div>';
@@ -443,32 +467,16 @@
           $('.sub-topic-wrapper').append(sub_topic_html);
         }
 
-        function append_lesson(id, lesson_name) {
+        function append_lesson(id, lesson_name, sub_topic_id) {
           var lesson_html = '<div class="row mb-1 align-items-center lesson-'+id+'">';
           lesson_html+= '<div class="col-sm-4"><b>'+lesson_name+'</b></div>';
           lesson_html+= '<div class="col-sm-4">';
-          lesson_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal">Play</button> ';
-          lesson_html+= '<button type="button" class="btn-sm btn-primary" data-toggle="modal">Edit</button>';
+          lesson_html+= '<button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="'+id+'" data-toggle="modal">Play</button>';
+          lesson_html+= '<button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>';
           lesson_html+= '</div>';
           lesson_html+= '</div>';
 
-          {{-- <div class="row mb-1 align-items-center">
-            <div class="col-sm-4">
-              <b>pembukaan</b>
-            </div>
-            <div class="col-sm-4">
-              <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                data-target="#createMateri">
-                Lihat video
-              </button>
-              <button type="button" class="btn-sm btn-primary" data-toggle="modal"
-                data-target="#createMateri">
-                Edit Materi
-              </button>
-            </div>
-          </div> --}}
-
-          $('.lesson-wrapper').append(lesson_html);
+          $('.lesson-wrapper-'+sub_topic_id).append(lesson_html);
         }
       });
   </script>
