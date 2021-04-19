@@ -23,6 +23,7 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ParticipantController;
 
 
 /*
@@ -204,4 +205,9 @@ Route::middleware(['auth'])->group(function () {
 //Lesson Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('lesson', LessonController::class);
+});
+
+//Participant Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('participant', ParticipantController::class);
 });
