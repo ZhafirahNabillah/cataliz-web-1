@@ -23,6 +23,7 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\ParticipantController;
 
 
 /*
@@ -47,7 +48,9 @@ Route::get('/home', function () {
 // Route::get('/pdf_show', function () {
 // 	return view('pdf_template.plans_detail_pdf');
 // });
-
+Route::get('/participant', function () {
+	return view('participant.index');
+});
 //Auth Routes
 Auth::routes();
 
@@ -110,6 +113,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/home/show_upcoming_group_events', [HomeController::class, 'show_upcoming_group_events'])->name('home.show_upcoming_group_events');
 	Route::get('/home/show_agenda_individual_events', [HomeController::class, 'show_agenda_individual_events'])->name('home.show_agenda_individual_events');
 	Route::get('/home/show_agenda_group_events', [HomeController::class, 'show_agenda_group_events'])->name('home.show_agenda_group_events');
+	Route::get('/home/show_topics', [HomeController::class, 'show_topics'])->name('home.show_topics');
 	Route::post('/home/{id}/store', [HomeController::class, 'store_data'])->name('home.store_data');
 });
 
@@ -201,4 +205,9 @@ Route::middleware(['auth'])->group(function () {
 //Lesson Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('lesson', LessonController::class);
+});
+
+//Participant Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('participant', ParticipantController::class);
 });
