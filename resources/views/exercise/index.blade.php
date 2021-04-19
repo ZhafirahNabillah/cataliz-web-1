@@ -110,14 +110,14 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <table class="datatables-basic table-striped table ">
+                  <table class="datatables-basic table-striped table exam-result-datatable">
                     <thead>
                       <tr>
                         <th>No</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Program</th>
-                        <th>Point</th>
+                        <th>Grade</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -180,6 +180,52 @@
           {
             data: 'total_questions',
             name: 'total_questions',
+            defaultContent: '0'
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
+
+      var table_exam_result = $('.exam-result-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "",
+        columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'user.name',
+            name: 'user.name'
+          },
+          {
+            data: 'user.email',
+            name: 'user.email',
+            defaultConteent: '0'
+          },
+          {
+            data: 'user.program',
+            name: 'user.program',
+            defaultContent: '0'
+          },
+          {
+            data: 'grade',
+            name: 'grade',
             defaultContent: '0'
           },
           {
