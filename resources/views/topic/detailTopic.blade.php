@@ -66,31 +66,26 @@
                           </div>
                         </div>
                       </div>
-                      <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                        <div class="card-body">
-                          {!!$topic->client_requirement!!}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card">
-                      <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
+                      <div class="card">
+                        <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
                         data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                        <span class="lead collapse-title"><b>Description</b></span>
-                      </div>
-                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse">
-                        <div class="card-body">
-                          {!!$topic->description!!}
+                          <span class="lead collapse-title"><b>Description</b></span>
+                        </div>
+                        <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse">
+                          <div class="card-body">
+                            {!!$topic->description!!}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="card">
-                      <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button"
+                      <div class="card">
+                        <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button"
                         data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                        <span class="lead collapse-title"><b>Who Is This Topic For?</b></span>
-                      </div>
-                      <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse">
-                        <div class="card-body">
-                          {!!$topic->client_target!!}
+                          <span class="lead collapse-title"><b>Who Is This Topic For?</b></span>
+                        </div>
+                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse">
+                          <div class="card-body">
+                            {!!$topic->client_target!!}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -271,9 +266,9 @@
                         <span aria-hidden="true">&times;</span>
                       </button>
                     </div>
-                    <div class="modal-body">
-                      <video width="100%" controls>
-                        <source id="video_source" src="movie.mp4" type="video/mp4">
+                    <div class="modal-body video_wrapper">
+                      <video width="100%" controls autoplay name="media">
+                        <source id="video_source" src="" type="video/mp4">
                       </video>
                     </div>
                   </div>
@@ -347,8 +342,9 @@
           var lesson_id = $(this).data('id');
           $.get("" + '/lesson/' + lesson_id , function(data) {
             $('#lesson-title').html(data.lesson_name);
-            video_file = data.video;
-            $('#video_source').attr('src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/lesson_video/1/Setting up the tools_1618544409.mp4');
+            // console.log(data);
+            $('#video_source').attr('src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/lesson_video/'+data.sub_topic_id+'/'+data.video);
+            $('.video_wrapper video')[0].load();
             $('#play-lesson-modal').modal('show');
           })
         });
