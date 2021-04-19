@@ -23,7 +23,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Exercise</a>
+                <li class="breadcrumb-item active"><a href="{{route('exercise.index')}}">Exam</a>
                 </li>
               </ol>
             </div>
@@ -31,6 +31,8 @@
         </div>
       </div>
     </div>
+
+    @role('trainer')
     <div class="card">
       <div class="card-body">
         <div class="content-body">
@@ -79,8 +81,58 @@
           <!--/ Basic table -->
         </div>
       </div>
-
     </div>
+    @endrole
+
+    @role('mentor')
+    <div class="card">
+      <div class="card-body">
+        <div class="content-body">
+          <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dissmisable">
+            <h4 class="alert-heading">Success</h4>
+            <div class="alert-body">{{ $message }}</div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @endif
+          <div class="row">
+          </div>
+          <br>
+          <!-- Basic table -->
+          <section id="basic-datatable">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <table class="datatables-basic table-striped table ">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Program</th>
+                        <th>Point</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--/ Basic table -->
+        </div>
+      </div>
+    </div>
+    @endrole
   </div>
   <!-- /panel coachee -->
 
