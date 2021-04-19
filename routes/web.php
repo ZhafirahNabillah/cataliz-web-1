@@ -47,7 +47,9 @@ Route::get('/home', function () {
 // Route::get('/pdf_show', function () {
 // 	return view('pdf_template.plans_detail_pdf');
 // });
-
+Route::get('/participant', function () {
+	return view('participant.index');
+});
 //Auth Routes
 Auth::routes();
 
