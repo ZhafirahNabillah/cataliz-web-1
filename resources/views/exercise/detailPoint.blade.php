@@ -69,7 +69,11 @@
                     </div>
                     <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                       <div class="card-body">
-                        #
+                        <li>a. answer A</li>
+                        <li>b. answer B</li>
+                        <li>c. answer C</li>
+                        <li>d. answer D</li>
+                        <li>e. answer E</li>
                       </div>
                     </div>
                   </div>
@@ -79,7 +83,11 @@
                     </div>
                     <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
                       <div class="card-body">
-                        #
+                        <li>a. answer A</li>
+                        <li>b. answer B</li>
+                        <li>c. answer C</li>
+                        <li>d. answer D</li>
+                        <li>e. answer E</li>
                       </div>
                     </div>
                   </div>
@@ -89,7 +97,11 @@
                     </div>
                     <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
                       <div class="card-body">
-                        #
+                        <li>a. answer A</li>
+                        <li>b. answer B</li>
+                        <li>c. answer C</li>
+                        <li>d. answer D</li>
+                        <li>e. answer E</li>
                       </div>
                     </div>
                   </div>
