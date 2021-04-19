@@ -13,8 +13,8 @@ set('rsync_src', function () {
     return __DIR__; // If your project isn't in the root, you'll need to change this.
 });
 
-// Configuring the rsync exclusions. 
-// You'll want to exclude anything that you don't want on the production server.  
+// Configuring the rsync exclusions.
+// You'll want to exclude anything that you don't want on the production server.
 add('rsync', [
     'exclude' => [
         '.git',
@@ -27,7 +27,7 @@ add('rsync', [
     ],
 ]);
 
-// Set up a deployer task to copy secrets to the server. 
+// Set up a deployer task to copy secrets to the server.
 // Grabs the dotenv file from the github secret
 task('deploy:secrets', function () {
     file_put_contents(__DIR__ . '/.env', getenv('DOT_ENV'));
@@ -58,15 +58,16 @@ task('deploy', [
     'artisan:storage:link', // |
     'artisan:view:cache',   // |
     'artisan:cache:clear',  // | Laravel specific steps
-    'artisan:config:cache', // | 
+    'artisan:config:cache', // |
     #'artisan:optimize',     // |
-    #'artisan:migrate',      // |
+    'artisan:migrate',      // |
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
     'php-symlink',
     #'update',
     'restart-nginx',
+    'scheduler'
 ]);
 
 task ('php-symlink', function(){
@@ -80,4 +81,8 @@ task ('update', function(){
 
 task ('restart-nginx',function(){
     run('sudo systemctl reload nginx');
+});
+
+task ('scheduler',function(){
+    run('php /var/www/html/current/artisan schedule:run 1>> /dev/null 2>&1');
 });
