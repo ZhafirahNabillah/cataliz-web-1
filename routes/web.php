@@ -110,6 +110,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/home/show_upcoming_group_events', [HomeController::class, 'show_upcoming_group_events'])->name('home.show_upcoming_group_events');
 	Route::get('/home/show_agenda_individual_events', [HomeController::class, 'show_agenda_individual_events'])->name('home.show_agenda_individual_events');
 	Route::get('/home/show_agenda_group_events', [HomeController::class, 'show_agenda_group_events'])->name('home.show_agenda_group_events');
+	Route::get('/home/show_topics', [HomeController::class, 'show_topics'])->name('home.show_topics');
 	Route::post('/home/{id}/store', [HomeController::class, 'store_data'])->name('home.store_data');
 });
 
