@@ -206,8 +206,3 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 	Route::resource('lesson', LessonController::class);
 });
-
-//Participant Controller
-Route::middleware(['auth'])->group(function () {
-	Route::resource('participant', ParticipantController::class);
-});

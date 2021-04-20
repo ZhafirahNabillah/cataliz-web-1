@@ -11,18 +11,13 @@ use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
     public function profil($id)
     {
-        if (auth()->user()->hasRole('admin')) {
-            $user = User::where('id', Auth::user()->id)->first();
-            $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
-            $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
-
-            return view('profile.index', compact('user', 'contents'));
-        } elseif (auth()->user()->hasRole('coachee')) {
+        if (auth()->user()->hasRole('coachee')) {
             $user = User::select('*')
                 ->join('clients', 'user_id', '=', 'users.id')
                 ->where('users.id', Auth::user()->id)
@@ -72,20 +67,12 @@ class ProfileController extends Controller
             $client->company = $request->company;
             $client->occupation = $request->occupation;
             $client->update();
-        } elseif (auth()->user()->hasRole('admin')) {
+        } else {
 
             $user = User::find($id);
             $user->name = $request->name;
             $user->phone = $request->phone;
             $user->update();
-            // return $user;
-        } elseif (auth()->user()->hasRole('coach')) {
-
-            $user = User::find($id);
-            $user->name = $request->name;
-            $user->phone = $request->phone;
-            $user->update();
-            // return $user;
         }
         return redirect(route('profil', Auth::user()->id));
     }
@@ -100,11 +87,27 @@ class ProfileController extends Controller
                 $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension = $request->file('profil_picture')->getClientOriginalExtension();
                 $filenameSave = $filename . '_' . time() . '.' . $extension;
+
+                $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
+
+                if (!file_exists(public_path('storage/profil/crop'))) {
+                    mkdir(public_path('storage/profil/crop'), 0755);
+                }
+
+                // crop image
+                $img = Image::make(public_path('storage/profil/' . $filenameSave));
+                $croppath = public_path('storage/profil/crop/' . $filenameSave);
+
+                $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+                $img->save($croppath);
+
                 if (Storage::disk('s3')->exists('images/profil_picture/' . $user->profil_picture)) {
                     Storage::disk('s3')->delete('images/profil_picture/' . $user->profil_picture);
                 }
-                Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents($request->file('profil_picture')));
-                // $path = $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
+                Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents(public_path('storage/profil/crop/' . $filenameSave)));
+                unlink(public_path('storage/profil/' . $filenameSave));
+                unlink(public_path('storage/profil/crop/' . $filenameSave));
+
                 $user->profil_picture = $filenameSave;
             }
         }

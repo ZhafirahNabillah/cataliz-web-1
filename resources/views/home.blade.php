@@ -630,7 +630,7 @@
             </div>
           </div>
           <div class="col-md-6 col-lg-6">
-            <a href="#">
+            <a href="{{route('topic.index')}}">
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px"
@@ -722,23 +722,8 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="#">
-              <div class="card">
-                <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px"
-                    src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                    data-placement="top" data-content="Jumlah latihan yang ada" />
-                  <img class="rounded mx-auto d-block center"
-                    src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Exercise</small>
-                  <h2 class="font-weight-bolder text-center"># Exercise</h2>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="#">
+          <div class="col-md-6 col-lg-6">
+            <a href="{{route('topic.index')}}">
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px"
@@ -753,7 +738,7 @@
             </a>
           </div>
 
-          <div class="col-md-4 col-lg-4">
+          <div class="col-md-6 col-lg-6">
             <a href="#">
               <div class="card">
                 <div class="card-body">
@@ -762,15 +747,15 @@
                     data-placement="top" data-content="Jumlah coachee yang terdaftar" />
                   <img class="rounded mx-auto d-block center"
                     src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Trainee</small>
-                  <h2 class="font-weight-bolder text-center"># Trainee</h2>
+                  <small class="card text-center text-muted my-1">Total Mentee</small>
+                  <h2 class="font-weight-bolder text-center"># Mentee</h2>
                 </div>
               </div>
             </a>
           </div>
 
           <!-- list topic -->
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">List Topic
@@ -785,14 +770,13 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="card">
-                        <table class="datatables-basic table-striped table agenda-datatable-individual">
+                        <table class="datatables-basic table-striped table topic-datatable">
                           <thead>
                             <tr>
                               <th>No</th>
                               <th>Name</th>
-                              <th>Date</th>
-                              <th>Time</th>
-                              <th>Session</th>
+                              <th>Total Participant</th>
+                              <th>Action</th>
                             </tr>
                           </thead>
                           <tbody>
@@ -806,45 +790,6 @@
             </div>
           </div>
           <!-- /list topic -->
-
-          <!-- list agenda -->
-          <div class="col-sm-6">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="card-title">List Agenda
-                  <img class="align-text width=" 15px" height="15px"" src="
-                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                    data-placement="top"
-                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
-                </h5>
-              </div>
-              <div class="card-body">
-                <section id="basic-datatable">
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="card">
-                        <table class="datatables-basic table-striped table agenda-datatable-individual">
-                          <thead>
-                            <tr>
-                              <th>No</th>
-                              <th>Name</th>
-                              <th>Date</th>
-                              <th>Time</th>
-                              <th>Duration</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </div>
-          <!-- / list agenda -->
-
 
         </div>
       </section>
@@ -1119,7 +1064,7 @@
         });
         @endrole
 
-        @role('trainer')
+        @role('trainer|mentor')
         var table_topic = $('.topic-datatable').DataTable({
           processing: true,
           serverSide: true,
