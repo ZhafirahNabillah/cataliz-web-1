@@ -93,9 +93,14 @@
 
             @canany('list-topic','list-exercise','list-category','lits-participant')
             <div class="navigation-header">
+                @role('coach')
+                <span><b>Mentoring</b></span><i class="float-right mr-2 mb-2"></i>
+                @else
                 <span><b>Training</b></span><i class="float-right mr-2 mb-2"></i>
+                @endrole
             </div>
             @endcan
+
 
             @can('list-topic')
             <li class="nav-item {{ 'topic' == request()->path() ? 'active' : '' }}">
@@ -113,9 +118,9 @@
                 <a class="d-flex align-items-center" href="{{route('category.index')}}"><i data-feather="edit-3"></i><span class="menu-title text-truncate" data-i18n="Email">Category</span></a>
             </li>
             @endcan
-            @can('list-participant')
+            @can('list-result')
             <li class=" nav-item ">
-                <a class="d-flex align-items-center" href="{{route('category.index')}}"><i data-feather="monitor"></i><span class="menu-title text-truncate" data-i18n="Email">participant</span></a>
+                <a class="d-flex align-items-center" href=""><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Email">Result</span></a>
             </li>
             @endcan
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
