@@ -413,6 +413,7 @@
             url: "{{ route('lesson.store') }}",
             type: "POST",
             data: formData,
+            dataType:'JSON',
             cache:false,
             contentType: false,
             processData: false,

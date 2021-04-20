@@ -215,18 +215,18 @@
           },
           {
             data: 'user.email',
-            name: 'user.email',
-            defaultConteent: '0'
+            name: 'user.email'
           },
           {
             data: 'user.program',
-            name: 'user.program',
-            defaultContent: '0'
+            name: 'user.program'
           },
           {
             data: 'grade',
             name: 'grade',
-            defaultContent: '0'
+            render: function (data) {
+              return data + '/100' ;
+            }
           },
           {
             data: 'action',

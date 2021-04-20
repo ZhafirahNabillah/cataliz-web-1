@@ -37,6 +37,9 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         //
+        ini_set('max_execution_time', 3000);
+        ini_set('memory_limit','256M');
+
         $lesson = new Lesson;
         $lesson->lesson_name = $request->lesson_name;
         $lesson->sub_topic_id = $request->sub_topic_id;
