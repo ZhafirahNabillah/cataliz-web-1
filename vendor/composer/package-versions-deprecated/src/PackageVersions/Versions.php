@@ -56,6 +56,7 @@ final class Versions
   'guzzlehttp/guzzle' => '7.3.0@7008573787b430c1c1f650e3722d9bba59967628',
   'guzzlehttp/promises' => '1.4.1@8e7d04f1f6450fef59366c399cfad4b9383aa30d',
   'guzzlehttp/psr7' => '1.8.1@35ea11d335fd638b5882ff1725228b3d35496ab1',
+  'intervention/image' => '2.5.1@abbf18d5ab8367f96b3205ca3c89fb2fa598c69e',
   'laravel/framework' => 'v8.36.1@91c454715b81b9a39f718651d4e2f8104d45e7c2',
   'laravel/tinker' => 'v2.6.1@04ad32c1a3328081097a181875733fa51f402083',
   'laravel/ui' => 'v3.2.0@a1f82c6283c8373ea1958b8a27c3d5c98cade351',
@@ -159,7 +160,7 @@ final class Versions
   'sebastian/type' => '2.3.1@81cd61ab7bbf2de744aba0ea61fae32f721df3d2',
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-main@96b2912eaf08097227b1ecf5b1cdfe75ad16615c',
+  'laravel/laravel' => 'dev-main@a78894c4f09edf0f4d2baca21208a752a2c61724',
 );
 
     private function __construct()

@@ -20,8 +20,7 @@
             </li>
 
             @can('list-user')
-            <li class="navigation-header"><span><b>Main
-                        Menu</b></span><i class="float-right mr-2 mb-2"></i>
+            <li class="navigation-header"><span><b>Main Menu</b></span><i class="float-right mr-2 mb-2"></i>
             </li>
 
             <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
@@ -40,13 +39,15 @@
                 @role('mentor')
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">User</span></a>
                 @endrole
+
             </li>
             @endcan
-            @role('mentor')
+            {{-- @role('mentor')
             <li class=" nav-item ">
-                <a class="d-flex align-items-center" href=""><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Participant</span></a>
+                <a class="d-flex align-items-center" href=""><i data-feather="users"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Participant</span></a>
             </li>
-            @endrole
+            @endrole --}}
             @role('admin')
             <li class=" nav-item {{ 'docs' == request()->path() ? 'active show' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
@@ -91,11 +92,16 @@
             </li>
             @endcan
 
-            @canany('list-topic','list-exercise','list-category','lits-participant')
+            @canany('list-topic','list-exercise','list-category')
             <div class="navigation-header">
+                @role('coach')
+                <span><b>Mentoring</b></span><i class="float-right mr-2 mb-2"></i>
+                @else
                 <span><b>Training</b></span><i class="float-right mr-2 mb-2"></i>
+                @endrole
             </div>
             @endcan
+
 
             @can('list-topic')
             <li class="nav-item {{ 'topic' == request()->path() ? 'active' : '' }}">
@@ -104,18 +110,18 @@
             @endcan
             @can('list-exercise')
             <li class="nav-item {{ 'exercise' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('exercise.index')}}"><i data-feather="copy"></i><span class="menu-title text-truncate" data-i18n="Todo">Exam</span></a>
+                <a class="d-flex align-items-center" href="{{route('exercise.index')}}"><i data-feather="edit-3"></i><span class="menu-title text-truncate" data-i18n="Todo">Exam</span></a>
             </li>
             @endcan
 
             @can('list-category')
             <li class=" nav-item {{ 'category' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('category.index')}}"><i data-feather="edit-3"></i><span class="menu-title text-truncate" data-i18n="Email">Category</span></a>
+                <a class="d-flex align-items-center" href="{{route('category.index')}}"><i data-feather="folder-plus"></i><span class="menu-title text-truncate" data-i18n="Email">Category</span></a>
             </li>
             @endcan
-            @can('list-participant')
+            @can('list-result')
             <li class=" nav-item ">
-                <a class="d-flex align-items-center" href="{{route('category.index')}}"><i data-feather="monitor"></i><span class="menu-title text-truncate" data-i18n="Email">participant</span></a>
+                <a class="d-flex align-items-center" href=""><i data-feather="trending-up"></i><span class="menu-title text-truncate" data-i18n="Email">Result</span></a>
             </li>
             @endcan
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>

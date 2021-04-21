@@ -15,7 +15,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Topics
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien Anda." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -45,11 +45,11 @@
 
         {{-- create topic button --}}
         @can('create-topic')
-          <div class="row">
-            <div class="col-12">
-              <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
-            </div>
+        <div class="row">
+          <div class="col-12">
+            <a href={{ route('topic.create')}} class="create-new btn btn-primary">New Topic</a>
           </div>
+        </div>
         @endcan
         <br>
 
@@ -62,6 +62,8 @@
                   <tr>
                     <th>No</th>
                     <th>Topic</th>
+                    <th>Category</th>
+                    <th>Sub Topic</th>
                     <th>Participant</th>
                     <th>Action</th>
                   </tr>
