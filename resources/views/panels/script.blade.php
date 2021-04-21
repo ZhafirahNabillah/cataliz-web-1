@@ -29,9 +29,8 @@
 
 @elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show',
 'plans.show', 'dashboard','roles.index','agendas.show_group','permissions.index','users.index', 'class.index',
-'class.show',
-'profil','auth.register', 'group.show', 'docs.index', 'topic.index','topic.show','exercise.index','exercise.create',
-'exercise.show', 'topic','category.index']))
+'class.show', 'profil','auth.register', 'group.show', 'docs.index', 'topic.index','topic.show','exercise.index','exercise.create',
+'exercise.show', 'topic','category.index', 'result.index']))
 
 
 <!-- BEGIN: Vendor JS-->

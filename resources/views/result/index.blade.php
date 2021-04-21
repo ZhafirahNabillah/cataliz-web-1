@@ -78,7 +78,6 @@
       </div>
     </div>
     @endrole
-
   </div>
   <!-- /panel coachee -->
 
@@ -88,9 +87,6 @@
   @endsection
 
   @push('scripts')
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
   <script type="text/javascript">
     // popover
     $(function() {
@@ -111,7 +107,44 @@
         }
       });
 
-
+      var result_table = $('.exam-result-datatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "",
+        columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'user.name',
+            name: 'user.name'
+          },
+          {
+            data: 'topic.topic',
+            name: 'topic.topic',
+          },
+          {
+            data: 'grade',
+            name: 'grade',
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
     });
   </script>
 
