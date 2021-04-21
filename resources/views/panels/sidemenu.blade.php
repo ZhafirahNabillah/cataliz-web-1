@@ -20,8 +20,7 @@
             </li>
 
             @can('list-user')
-            <li class="navigation-header"><span><b>Main
-                        Menu</b></span><i class="float-right mr-2 mb-2"></i>
+            <li class="navigation-header"><span><b>Main Menu</b></span><i class="float-right mr-2 mb-2"></i>
             </li>
 
             <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
@@ -40,6 +39,7 @@
                 @role('mentor')
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">User</span></a>
                 @endrole
+
             </li>
             @endcan
             {{-- @role('mentor')

@@ -62,6 +62,8 @@
                   <tr>
                     <th>No</th>
                     <th>Topic</th>
+                    <th>Category</th>
+                    <th>Sub Topic</th>
                     <th>Participant</th>
                     <th>Action</th>
                   </tr>

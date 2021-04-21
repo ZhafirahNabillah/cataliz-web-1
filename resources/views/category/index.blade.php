@@ -76,14 +76,14 @@
 						<form class="add-new-record modal-content pt-0" id="CategoryForm" name="CategoryForm">
 
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
-							<div class="modal-header mb-1">
+							<div class="modal-header mb-1" style="background-color: #CDC8FF;">
 								<h5 class="modal-title" id="modalHeading"></h5>
 							</div>
 							<input type="hidden" name="category_id" id="category_id">
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
 									<label class="form-label" for="basic-icon-default-fullname">Category Name</label>
-									<input id="category" name="category" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
+									<input id="category" name="category" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Type here .." aria-label="John Doe" />
 									<div id="category-error"></div>
 								</div>
 								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="">Submit</button>

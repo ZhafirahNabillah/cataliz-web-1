@@ -192,11 +192,8 @@
               <div class="col-md-12">
                 <div class="card text-white bg-warning mb-3">
                   <div class="card-body">
-                    <a class="text-white" href="javascript:;" id="editCoachee"> Welcome {{auth()->user()->name}}, Yuk
-                      <b>Klik Disini</b> Untuk
-                      Melengkapi Akunmu
-                      Untuk Lebih
-                      Menikmati Layanan Kami !</a>
+                    <a class="text-white" href="javascript:;" id="editCoachee"> Yuk, segera lengkapi data diri kamu!
+                      <b> Klik Disini</b> </a>
                   </div>
                 </div>
               </div>
@@ -573,7 +570,7 @@
             <a href="{{route('topic.index')}}">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah materi yang disampaikan" />
+                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
                   <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Topic</small>
                   <h2 class="font-weight-bolder text-center">{{$total_topic}} Topic</h2>
@@ -586,7 +583,7 @@
             <a href="#">
               <div class="card">
                 <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee yang terdaftar" />
+                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah mentee yang dipasangkan dengan Anda" />
                   <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Trainee</small>
                   <h2 class="font-weight-bolder text-center"># Trainee</h2>
@@ -600,7 +597,7 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">List Topic
-                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar topik yang tersedia untuk Anda" />
                 </h5>
               </div>
               <div class="card-body">
@@ -612,8 +609,10 @@
                           <thead>
                             <tr>
                               <th>No</th>
-                              <th>Name</th>
-                              <th>Total Participant</th>
+                              <th>Topic</th>
+                              <th>Category</th>
+                              <th>Sub Topic</th>
+                              <th>Participant</th>
                               <th>Action</th>
                             </tr>
                           </thead>
@@ -695,7 +694,7 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">List Topic
-                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                  <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Bagian ini menampilkan daftar topik yang tersedia untuk Anda" />
                 </h5>
               </div>
               <div class="card-body">
