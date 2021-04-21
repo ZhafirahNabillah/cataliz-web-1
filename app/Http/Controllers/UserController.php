@@ -71,6 +71,12 @@ class UserController extends Controller
       return response()->json($user);
     }
 
+    if (auth()->user()->hasRole('coach')) {
+      $user = User::with('roles')->where('id', $id)->first();
+
+      return response()->json($user);
+    }
+
     // return response()->json($user);
   }
 
