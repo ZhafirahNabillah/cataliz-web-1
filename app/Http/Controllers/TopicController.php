@@ -34,13 +34,19 @@ class TopicController extends Controller
         ->addColumn('participant', function ($row) {
           return $total_participant = $row->clients->count();
         })
+        ->addColumn('category', function ($row) {
+          return $row->category->toArray();
+        })
+        ->addColumn('sub_topic', function ($row) {
+          return $row->sub_topics->count();
+        })
         ->addColumn('action', function ($row) {
 
           //add update button if user have permission
           if (auth()->user()->can('update-topic')) {
             // $edit_btn = '<a href="' . route('topic.edit', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Edit Topic</a>';
 
-            $edit_btn = '<a href="' . route('topic.edit', $row->id) . '" id="editBtn" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="edit topic">Edit</a>';
+            $edit_btn = '<a href="' . route('topic.edit', $row->id) . '" id="editBtn" class="btn-sm btn-primary">Edit</a>';
           } else {
             $edit_btn = null;
           }
@@ -50,7 +56,7 @@ class TopicController extends Controller
             // $detail_topic_btn = '<a href="' . route('topic.show', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Detail Topic</a>';
             // $detail_participant_btn = '<a href="' . route('topic.participant', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Detail Participant</a>';
 
-            $detail_topic_btn = '<a href="' . route('topic.show', $row->id) . '" id="detailBtn" class="btn-sm btn-primary" data-id="' . $row->id . '" data-original-title="edit topic">Detail</a>';
+            $detail_topic_btn = '<a href="' . route('topic.show', $row->id) . '" id="detailBtn" class="btn-sm btn-primary">Detail</a>';
           } else {
             $detail_topic_btn = null;
             // $detail_participant_btn = null;
@@ -58,8 +64,8 @@ class TopicController extends Controller
 
           //add delete button if user have permission
           if (auth()->user()->can('delete-topic')) {
-            $delete_btn = '<a href="javascript:;" class="dropdown-item deleteTopic" data-id="' . $row->id . '" data-original-title="Delete" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>Delete</a>';
-            $delete_btn = '<a href="javascript:;" id="deleteBtn" class="btn-sm btn-danger deleteTopic" data-id="' . $row->id . '" data-original-title="delete topic">Delete</a>';
+            // $delete_btn = '<a href="javascript:;" class="dropdown-item deleteTopic" data-id="' . $row->id . '" data-original-title="Delete" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2 font-small-4 mr-50"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>Delete</a>';
+            $delete_btn = '<a href="javascript:;" class="btn-sm btn-danger deleteTopic" data-id="' . $row->id . '">Delete</a>';
           } else {
             $delete_btn = null;
           }
@@ -73,7 +79,7 @@ class TopicController extends Controller
           $actionBtn = $detail_topic_btn . ' ' . $edit_btn . ' ' . $delete_btn;
           return $actionBtn;
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action', 'participant', 'category', 'sub_topic'])
         ->make(true);
     }
 

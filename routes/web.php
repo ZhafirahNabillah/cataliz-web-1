@@ -203,4 +203,10 @@ Route::middleware(['auth'])->group(function () {
 //Lesson Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('lesson', LessonController::class);
+	Route::post('/lesson/video_upload', [LessonController::class, 'lesson_video_upload'])->name('lesson.video_upload');
+});
+
+//Participant Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('participant', ParticipantController::class);
 });
