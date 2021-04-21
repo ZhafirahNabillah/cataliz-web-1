@@ -17,7 +17,7 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Category List
-							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar permission yang dapat diakses di dalam website." />
+							<img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan kategori yang anda tersedia dan dapat digunakan untuk mengelompokkan topik" />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
