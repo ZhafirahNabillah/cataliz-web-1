@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Topic')
+@section('title','Exam')
 
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
@@ -20,16 +20,16 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Exercise
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
+            <h2 class="content-header-title float-left mb-0">Exam
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{route('exercise.index')}}">Exercise</a>
+                <li class="breadcrumb-item"><a href="{{route('exercise.index')}}">Exam</a>
                 </li>
-                <li class="breadcrumb-item active">Detail Exercise
+                <li class="breadcrumb-item active">Detail Exam
                 </li>
               </ol>
             </div>
@@ -40,13 +40,13 @@
     <div class="row">
       <div class="col-lg-12">
         @if ($message = Session::get('success'))
-          <div class="alert alert-success alert-dissmisable">
-            <h4 class="alert-heading">Success</h4>
-            <div class="alert-body">{{ $message }}</div>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
+        <div class="alert alert-success alert-dissmisable">
+          <h4 class="alert-heading">Success</h4>
+          <div class="alert-body">{{ $message }}</div>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
         @endif
       </div>
       <div class="col-lg-12">

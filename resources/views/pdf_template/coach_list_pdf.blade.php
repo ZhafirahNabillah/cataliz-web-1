@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel 7 PDF Example</title>
+    <title>Coach List</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     {{--
   <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" /> --}}
@@ -93,6 +93,16 @@
             color: #625F6E;
         }
 
+        .copyright {
+            position: absolute;
+            bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
         td {
             padding: 0 !important;
         }
@@ -149,7 +159,7 @@
 
             </table>
         </div>
-        <div class="header" style="color: white;">Copyright &copy;
+        <div class="copyright" style="color: white;">Copyright &copy;
             <?php echo date("Y"); ?> Cataliz.id. All Right Reserved
         </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Topic')
+@section('title','Exam')
 
 @section('content')
 
@@ -16,8 +16,8 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Exercise
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
+            <h2 class="content-header-title float-left mb-0">Exam
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -53,7 +53,7 @@
           <div class="row">
             <div class="col-12">
 
-              <a href={{ route('exercise.create')}} class="create-new btn btn-primary">New Exercise</a>
+              <a href={{ route('exercise.create')}} class="create-new btn btn-primary">New Exam</a>
             </div>
           </div>
           <br>

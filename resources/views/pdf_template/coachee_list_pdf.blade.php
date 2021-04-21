@@ -21,7 +21,7 @@
       color:black;
     }
     .header {
-      position: absolute;
+      position: relative;
       bottom: 0;
       margin-left: auto;
       margin-right: auto;
@@ -93,6 +93,16 @@
             color: #625F6E;
         }
 
+        .copyright {
+            position: absolute;
+            bottom: 0;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+
         td {
             padding: 0 !important;
         }
@@ -149,14 +159,14 @@
 
             </table>
         </div>
-        <div class="header" style="color: white;">Copyright &copy;
+        <div class="copyright" style="color: white;">Copyright &copy;
             <?php echo date("Y"); ?> Cataliz.id. All Right Reserved
         </div>
     </footer>
     <div class="container mt-5">
         <h4 class="text-center mb-3">Coachee List</h4>
 
-        <table class="table table-striped table-bordered table-sm mb-5">
+        <table class="table table-striped table-bordered table-sm ">
             <thead>
                 <tr style="background-color: #F3F2F2;">
                     <th scope="col">No</th>
@@ -171,7 +181,7 @@
                 @foreach($coachee as $data)
                 <tr>
                     <td scope="row">{{$loop->iteration}}</th>
-                    <td style="width: 250px;">{{ $data->name }}</td>
+                    <td style="width: 150px;">{{ $data->name }}</td>
                     <td>{{ $data->email }}</td>
                     <td>+62{{ $data->phone }}</td>
                 </tr>
