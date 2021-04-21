@@ -16,6 +16,7 @@ class LessonController extends Controller
     public function index()
     {
         //
+        return ('hallo');
     }
 
     /**
@@ -26,6 +27,7 @@ class LessonController extends Controller
     public function create()
     {
         //
+        return view('topic.create_lesson');
     }
 
     /**
@@ -37,8 +39,10 @@ class LessonController extends Controller
     public function store(Request $request)
     {
         //
-        ini_set('max_execution_time', 3000);
-        ini_set('memory_limit','256M');
+        // ini_set('max_execution_time', 3000);
+        // ini_set('memory_limit','256M');
+
+        // dd($request);
 
         $lesson = new Lesson;
         $lesson->lesson_name = $request->lesson_name;
@@ -55,13 +59,24 @@ class LessonController extends Controller
           $filename = $request->lesson_name;
           $extension = $request->file('video')->getClientOriginalExtension();
           $filenameSave = $filename . '_' . time() . '.' . $extension;
-          Storage::disk('s3')->put('lesson_video/'.$request->sub_topic_id.'/'.$filenameSave, file_get_contents($request->file('video')));
+          Storage::disk('s3')->put('lesson_video/'.$request->sub_topic_id.'/'.$filenameSave, fopen($request->file('video'), 'r+'));
           $lesson->video = $filenameSave;
         }
 
         $lesson->save();
 
-        return response()->json($lesson);
+        return redirect('/topic')->with('success', 'New Lesson successfully created!');
+        // return response()->json($lesson);
+    }
+
+    public function lesson_video_upload(Request $request)
+    {
+      $filenameWithExt = $request->file('file')->getClientOriginalName();
+      // $filename = 'tes';
+      // $extension = $request->file('file')->getClientOriginalExtension();
+      // $filenameSave = $filename . '_' . time() . '.' . $extension;
+      Storage::disk('s3')->put('tes/'.$filenameWithExt, fopen($request->file('file'), 'r+'));
+      // $lesson->video = $filenameSave;
     }
 
     /**

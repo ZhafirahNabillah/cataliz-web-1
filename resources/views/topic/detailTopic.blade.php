@@ -163,6 +163,7 @@
                                 <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
                                   New Materi
                                 </button>
+                                <a href="{{ url('/lesson/create?sub_topic='.$sub_topic->id) }}" class="btn btn-primary">New Lesson</a>
                               </div>
                               <div class="lesson-wrapper-{{ $sub_topic->id }}">
                                 @foreach ($sub_topic->lessons as $lesson)
@@ -229,7 +230,8 @@
                       </button>
                     </div>
                     <div class="modal-body">
-                      <form class="create-lesson-form" id="create-lesson-form" enctype="multipart/form-data">
+                      <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                           <label for="topic">Lesson Title</label>
                           <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
@@ -404,49 +406,50 @@
         });
 
         $('#save-lesson-btn').click(function () {
+          $('.create-lesson-form').submit();
           // var data = $('.create-lesson-form').serialize();
-          var formData = new FormData(document.getElementById('create-lesson-form'));
-          console.log(formData);
-          $(this).html('Submitting...')
-
-          $.ajax({
-            url: "{{ route('lesson.store') }}",
-            type: "POST",
-            data: formData,
-            dataType:'JSON',
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-              console.log(data);
-              $('#create-lesson-modal').modal('hide');
-              $('.create-lesson-form').trigger("reset");
-              // $('.sub-topic-empty').empty();
-              append_lesson(data.id, data.lesson_name, data.sub_topic_id);
-              Swal.fire({
-                icon: 'success',
-                title: 'Account updated successfully!',
-              });
-            },
-            error: function(reject) {
-              $('#saveBtn').html('Submit');
-              // if (reject.status === 422) {
-              //   var errors = JSON.parse(reject.responseText);
-              //   if (errors.name) {
-              //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
-              //   }
-              //   if (errors.phone) {
-              //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
-              //   }
-              //   if (errors.email) {
-              //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
-              //   }
-              //   if (errors.roles) {
-              //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
-              //   }
-              // }
-            }
-          });
+          // var formData = new FormData(document.getElementById('create-lesson-form'));
+          // console.log(formData);
+          // $(this).html('Submitting...')
+          //
+          // $.ajax({
+          //   url: "",
+          //   type: "POST",
+          //   data: formData,
+          //   dataType:'JSON',
+          //   cache:false,
+          //   contentType: false,
+          //   processData: false,
+          //   success: function(data) {
+          //     console.log(data);
+          //     $('#create-lesson-modal').modal('hide');
+          //     $('.create-lesson-form').trigger("reset");
+          //     // $('.sub-topic-empty').empty();
+          //     append_lesson(data.id, data.lesson_name, data.sub_topic_id);
+          //     Swal.fire({
+          //       icon: 'success',
+          //       title: 'Account updated successfully!',
+          //     });
+          //   },
+          //   error: function(reject) {
+          //     $('#saveBtn').html('Submit');
+          //     // if (reject.status === 422) {
+          //     //   var errors = JSON.parse(reject.responseText);
+          //     //   if (errors.name) {
+          //     //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+          //     //   }
+          //     //   if (errors.phone) {
+          //     //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+          //     //   }
+          //     //   if (errors.email) {
+          //     //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+          //     //   }
+          //     //   if (errors.roles) {
+          //     //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+          //     //   }
+          //     // }
+          //   }
+          // });
         });
 
         function append_sub_topic(id, sub_topic) {
