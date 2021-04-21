@@ -17,8 +17,8 @@ class Exam_result extends Model
       'attempt_submit'
     ];
 
-    public function exercise() {
-  		return $this->belongsTo('App\Models\Exercise');
+    public function topic() {
+  		return $this->belongsTo('App\Models\Topic');
   	}
 
     public function user() {

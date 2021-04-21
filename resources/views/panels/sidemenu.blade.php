@@ -120,8 +120,8 @@
             </li>
             @endcan
             @can('list-result')
-            <li class=" nav-item ">
-                <a class="d-flex align-items-center" href=""><i data-feather="trending-up"></i><span class="menu-title text-truncate" data-i18n="Email">Result</span></a>
+            <li class=" nav-item {{ 'result' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('result.index') }}"><i data-feather="trending-up"></i><span class="menu-title text-truncate" data-i18n="Email">Result</span></a>
             </li>
             @endcan
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
