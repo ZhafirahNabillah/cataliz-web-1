@@ -177,10 +177,16 @@
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Client Individual</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Group</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Client Group</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#trainer" aria-controls="profile" role="tab" aria-selected="false">Trainer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab" aria-selected="false">Mentor</a>
             </li>
           </ul>
 
@@ -241,11 +247,71 @@
               </section>
               <!--/ Basic table -->
             </div>
-            <!-- /coachee list admin -->
+            <!-- /coachee list -->
+
+
+            <!-- Panel Grup -->
+            <div class="tab-pane" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
+              <!-- Basic table -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card style=" border-radius: 15px;>
+                      <table class="datatables-basic table-striped table ">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Skill</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </section>
+              <!--/ Basic table -->
+            </div>
+            <!-- /Trainer list  -->
+
+            <!-- Panel Grup -->
+            <div class="tab-pane" id="mentor" aria-labelledby="mentor-tab" role="tabpanel">
+              <!-- Basic table -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card style=" border-radius: 15px;>
+                      <table class="datatables-basic table-striped table ">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Skill</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+
+              </section>
+              <!--/ Basic table -->
+            </div>
+            <!-- /Trainer list  -->
+
           </div>
         </div>
       </div>
-      <!-- /panel coachee -->
+      <!-- /panel  -->
 
       @endrole
 
@@ -1192,7 +1258,7 @@
               $('#modal-trainer-detail').modal('show');
               $('#modalHeadingTrainer').html("Detail Trainer");
               $('.name').html(data.name);
-              $('.phone').html('+62'+data.phone);
+              $('.phone').html('+62' + data.phone);
               $('.email').html(data.email);
             })
           });
@@ -1204,7 +1270,7 @@
               $('#modal-coachee-detail').modal('show');
               $('#modalHeadingCoachee').html("Detail Coachee");
               $('.name').html(data.name);
-              $('.phone').html('+62'+data.phone);
+              $('.phone').html('+62' + data.phone);
               $('.email').html(data.email);
             })
           });
