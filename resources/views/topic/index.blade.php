@@ -154,21 +154,32 @@
         var topic_id = $(this).data("id");
         console.log(topic_id);
         // ganti sweetalert
-
-        $.ajax({
-          type: "DELETE",
-          url: "" + '/topic/' + topic_id,
-          success: function(data) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Deleted Successfully!',
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You'll delete your topic",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, Sure",
+            cancelButtonText: "Cancel"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              type: "DELETE",
+              url: "" + '/topic/' + topic_id,
+              success: function(data) {
+                Swal.fire({
+                  icon: 'success',
+                  title: 'Deleted Successfully!',
+                });
+                table_topic.draw();
+              },
+              error: function(data) {
+                console.log('Error:', data);
+              }
             });
-            table_topic.draw();
-          },
-          error: function(data) {
-            console.log('Error:', data);
           }
-        });
+        })
       });
     });
   </script>

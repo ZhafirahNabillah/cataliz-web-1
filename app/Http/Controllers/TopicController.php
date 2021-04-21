@@ -165,6 +165,8 @@ class TopicController extends Controller
 
     $sub_topics = $topic->sub_topics;
 
+    // return $sub_topics;
+
     return view('topic.detailTopic', compact('topic', 'category', 'sub_topics'));
   }
 

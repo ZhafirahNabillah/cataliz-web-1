@@ -48,8 +48,8 @@
             </div>
             <div class="card-body">
               <div class="card border">
-                <div class="text-center card-tittle">
-                  <h2><b> {{ $topic->topic }}</b></h2><span>created by: #namaTrainer</span>
+                <div class="text-center card-title mt-1">
+                  <h2><b> {{ $topic->topic }}</b></h2><span>created by: {{ $topic->trainer->name }}</span>
                 </div>
                 <div class="card-body">
                   <div class="collapse-icon">
@@ -113,180 +113,168 @@
                       </button>
                     </div>
                   </div>
-                </section>
-              </div>
-            </div>
-            <div class="tab-pane" id="sub-topic" aria-labelledby="sub-topic-tab" role="tabpanel">
-              <div class="card-body">
-                <div class="row mb-1">
-                  <div class="col-12">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" id="add-sub-topic-btn">
-                      New Sub Topic
-                    </button>
-                  </div>
-                </div>
-                <div class="card border">
-                  <div class="card-body">
-                    <div class="collapse-icon">
-                      <div class="collapse-default sub-topic-wrapper">
-                        @forelse ($sub_topics as $sub_topic)
-                        <div class="card" id="{{ $sub_topic->id }}">
-                          <div class="card-header" data-toggle="collapse" role="button"
-                            data-target="#sub-topic-{{ $sub_topic->id }}" aria-expanded="false"
-                            aria-controls="collapse1">
-                            <span class="lead collapse-title"><b>{{ $sub_topic->sub_topic }}</b></span>
-                          </div>
-                          <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
-                            <div class="card-body">
-                              <div class="text-left">
-                                <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
-                                  New Materi
-                                </button>
-                                <a href="{{ url('/lesson/create?sub_topic='.$sub_topic->id) }}" class="btn btn-primary">New Lesson</a>
+                  <div class="card border">
+                    <div class="card-body">
+                      <div class="collapse-icon">
+                        <div class="collapse-default sub-topic-wrapper">
+                          @forelse ($sub_topics as $sub_topic)
+                            <div class="card" id="{{ $sub_topic->id }}">
+                              <div class="card-header" data-toggle="collapse" role="button"
+                                data-target="#sub-topic-{{ $sub_topic->id }}" aria-expanded="false"
+                                aria-controls="collapse1">
+                                <span class="lead collapse-title"><b>{{ $sub_topic->sub_topic }}</b></span>
                               </div>
-                              <div class="lesson-wrapper-{{ $sub_topic->id }}">
-                                @foreach ($sub_topic->lessons as $lesson)
-                                  <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">
-                                    <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
-                                    <div class="col-sm-4">
-                                      <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
-                                      <button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>
-                                    </div>
+                              <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
+                                <div class="card-body">
+                                  <div class="text-left">
+                                    <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
+                                      New Materi
+                                    </button>
+                                    <a href="{{ url('/lesson/create?sub_topic='.$sub_topic->id) }}" class="btn btn-primary mb-1nama">New Lesson</a>
                                   </div>
-                                  @endforeach
+                                  <div class="lesson-wrapper-{{ $sub_topic->id }}">
+                                    @foreach ($sub_topic->lessons as $lesson)
+                                    <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">
+                                      <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
+                                      <div class="col-sm-4">
+                                        <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>
+                                      </div>
+                                    </div>
+                                    @endforeach
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
                           @empty
-                          <div class="sub-topic-empty">
-                            No sub topic available
-                          </div>
+                            <div class="sub-topic-empty">
+                              No sub topic available
+                            </div>
                           @endforelse
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <!-- modal create sub topic -->
-                <div class="modal fade" id="create-sub-topic-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Create Sub Topic</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <form class="create-sub-topic-form">
-                          <div class="form-group">
-                            <label for="sub_topic">Name</label>
-                            <input class="form-control" type="text" name="sub_topic" placeholder="Your Sub Topic Here...">
-                            <input type="hidden" name="topic_id" value="{{ $topic->id }}">
-                          </div>
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save-sub-topic-btn">Save changes</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              <!-- Modal create Materi -->
-              <div class="modal fade" id="create-lesson-modal" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Create Materi</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="form-group">
-                          <label for="topic">Lesson Title</label>
-                          <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
+                  <!-- Modal create sub topic -->
+                  <div class="modal fade" id="create-sub-topic-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">Create Sub Topic</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
                         </div>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text">Upload Video</span>
+                        <div class="modal-body">
+                          <form class="create-sub-topic-form">
+                            <div class="form-group">
+                              <label for="sub_topic">Name</label>
+                              <input class="form-control" type="text" name="sub_topic" placeholder="Your Sub Topic Here...">
+                              <input type="hidden" name="topic_id" value="{{ $topic->id }}">
                             </div>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" name="video" id="video_input">
-                              <label class="custom-file-label" for="video_input">Choose file</label>
-                            </div>
-                          </div>
-                          <input type="hidden" name="sub_topic_id" id="sub_topic_id">
-                        </form>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="save-lesson-btn">Save changes</button>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" id="save-sub-topic-btn">Save changes</button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="modal fade" id="play-lesson-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="lesson-title"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body video_wrapper">
-                        <video width="100%" controls autoplay name="media">
-                          <source id="video_source" src="" type="video/mp4">
-                        </video>
+                  <!-- Modal create lesson -->
+                  <div class="modal fade" id="create-lesson-modal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Create Materi</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                              <label for="topic">Lesson Title</label>
+                              <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
+                            </div>
+                            <div class="form-group">
+                              <div class="input-group">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">Upload Video</span>
+                                </div>
+                                <div class="custom-file">
+                                  <input type="file" class="custom-file-input" name="video" id="video_input">
+                                  <label class="custom-file-label" for="video_input">Choose file</label>
+                                </div>
+                              </div>
+                              <input type="hidden" name="sub_topic_id" id="sub_topic_id">
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" id="save-lesson-btn">Save changes</button>
+                          </div>
                       </div>
                     </div>
                   </div>
+
+                  <!-- Modal play lesson -->
+                  <div class="modal fade" id="play-lesson-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="lesson-title"></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body video_wrapper">
+                            <video width="100%" controls autoplay name="media">
+                              <source id="video_source" src="" type="video/mp4">
+                            </video>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
               <div class="tab-pane" id="participant" aria-labelledby="participant-tab" role="tabpanel">
-                <div class="card-header py-0">
-                  <h4 class="card-title"><b>Detail Participant</b>
-                  </h4>
-                </div>
-                <div class="card-body">
-                  <!-- Basic table -->
-                  <section id="basic-datatable">
-                    <div class="row">
-                      <div class="col-12">
-                        <table class="datatables-basic table-striped table topic-participant-datatable">
-                          <thead>
-                            <tr>
-                              <th>No</th>
-                              <th>Name</th>
-                              <th>Email</th>
-                              <th>Program</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                          </tbody>
-                        </table>
+                  <div class="card-header py-0">
+                    <h4 class="card-title"><b>Detail Participant</b>
+                    </h4>
+                  </div>
+                  <div class="card-body">
+                    <!-- Basic table -->
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <table class="datatables-basic table-striped table topic-participant-datatable">
+                            <thead>
+                              <tr>
+                                <th>No</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Program</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
-                    </div>
-                  </section>
+                    </section>
+                  </div>
                 </div>
-              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 </div>
 
 <!-- END: Content-->

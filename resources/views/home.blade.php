@@ -1012,16 +1012,25 @@
               name: 'topic'
             },
             {
-              data: 'session_name',
-              name: 'session_name',
-              defaultContent: '<i>-</i>'
+              data: 'category.category',
+              name: 'category.category'
+            },
+            {
+              data: 'sub_topic',
+              name: 'sub_topic',
+              defaultContent: '0'
+            },
+            {
+              data: 'participant',
+              name: 'participant',
+              defaultContent: '0'
             },
             {
               data: 'action',
               name: 'action',
               orderable: true,
               searchable: true
-            }
+            },
           ],
           dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
           language: {
