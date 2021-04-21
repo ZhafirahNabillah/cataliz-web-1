@@ -23,6 +23,11 @@ class Topic extends Model
         return $this->belongsTo('App\Models\User');
     }
 
+    public function category()
+    {
+        return $this->belongsTo('App\Models\Category');
+    }
+
     public function clients()
   	{
   		return $this->belongsToMany('App\Models\Client');

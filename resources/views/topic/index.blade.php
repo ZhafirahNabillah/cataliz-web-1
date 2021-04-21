@@ -117,6 +117,15 @@
             name: 'topic'
           },
           {
+            data: 'category.category',
+            name: 'category.category'
+          },
+          {
+            data: 'sub_topic',
+            name: 'sub_topic',
+            defaultContent: '0'
+          },
+          {
             data: 'participant',
             name: 'participant',
             defaultContent: '0'
