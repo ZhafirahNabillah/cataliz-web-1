@@ -75,10 +75,17 @@ class ResultController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Exam_result $exam_result)
+    public function show($id)
     {
         //
-        return view('result.detailPoint');
+        $exam_result = Exam_result::find($id);
+        $topic = $exam_result->topic;
+        $user = $exam_result->user;
+        $client = $user->client;
+        $answers = $exam_result->answers;
+        // return $answers;
+
+        return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers'));
     }
 
     /**

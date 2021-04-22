@@ -18,7 +18,8 @@ class Question extends Model
     ];
 
     protected $casts = [
-        'answers' => 'array'
+        'answers' => 'array',
+        'true_answer' => 'integer'
     ];
 
     public function topic()

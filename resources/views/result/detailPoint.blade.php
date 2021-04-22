@@ -49,13 +49,13 @@
                   <strong>Full Name</strong>
                 </div>
                 <div class="col-6">
-                  <strong>#</strong>
+                  <strong>{{ $client->name }}</strong>
                 </div>
                 <div class="col-12">
                   <strong>Program</strong>
                 </div>
                 <div class="col-6">
-                  <strong>#</strong>
+                  <strong>{{ $client->program }}</strong>
                 </div>
               </div>
 
@@ -63,54 +63,30 @@
 
               <div class="collapse-icon">
                 <div class="collapse-default">
-                  <div class="card">
-                    <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>1. Question 1 (10)</b></span>
-                    </div>
-                    <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                      <div class="card-body">
-                        <li>a. answer A</li>
-                        <li>b. answer B</li>
-                        <li>c. answer C</li>
-                        <li>d. answer D</li>
-                        <li>e. answer E</li>
-
-                        <p>True answer : answer D</p>
+                  @foreach ($answers as $answer)
+                    <div class="card">
+                      <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
+                        <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b></span>
+                      </div>
+                      <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                        <div class="card-body">
+                          <div class="question d-inline-flex">
+                            {!! $answer->question->question !!}({{ $answer->question->weight }})
+                          </div>
+                          @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
+                            @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
+                              <li class="text-success">{{ $answer_choice }}</li>
+                            @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
+                              <li class="text-danger">{{ $answer_choice }}</li>
+                            @else
+                              <li>{{ $answer_choice }}</li>
+                            @endif
+                          @endforeach
+                          <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="card">
-                    <div id="headingCollapse2" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                      <span class="lead collapse-title"><b>2. Question 2 (10)</b></span>
-                    </div>
-                    <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" aria-expanded="false">
-                      <div class="card-body">
-                        <li>a. answer A</li>
-                        <li>b. answer B</li>
-                        <li>c. answer C</li>
-                        <li>d. answer D</li>
-                        <li>e. answer E</li>
-
-                        <p>True answer : answer A</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card">
-                    <div id="headingCollapse3" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                      <span class="lead collapse-title"><b>3. Question 3 (10)</b></span>
-                    </div>
-                    <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" aria-expanded="false">
-                      <div class="card-body">
-                        <li>a. answer A</li>
-                        <li>b. answer B</li>
-                        <li>c. answer C</li>
-                        <li>d. answer D</li>
-                        <li>e. answer E</li>
-
-                        <p>True answer : answer C</p>
-                      </div>
-                    </div>
-                  </div>
+                  @endforeach
                 </div>
               </div>
             </div>

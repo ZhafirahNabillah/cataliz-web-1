@@ -24,4 +24,8 @@ class Exam_result extends Model
     public function user() {
       return $this->belongsTo('App\Models\User');
     }
+
+    public function answers() {
+      return $this->hasMany('App\Models\Answer', 'exam_id');
+    }
 }
