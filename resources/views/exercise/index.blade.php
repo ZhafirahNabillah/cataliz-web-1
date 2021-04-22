@@ -114,10 +114,9 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Program</th>
-                        <th>Grade</th>
+                        <th>Topic</th>
+                        <th>Category</th>
+                        <th>Question</th>
                         <th>Action</th>
                       </tr>
                     </thead>
