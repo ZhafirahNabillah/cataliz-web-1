@@ -630,18 +630,12 @@
             <a href="{{route('topic.index')}}">
               <div class="card">
                 <div class="card-body">
-<<<<<<< Updated upstream
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\mentor\topic.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1" style="padding-right: 15px;">Total Topic</small>
-=======
                   <img class="rounded float-right" width="15px" height="15px"
                     src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
                   <img class="rounded mx-auto d-block center"
                     src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Topic</small>
->>>>>>> Stashed changes
                   <h2 class="font-weight-bolder text-center">{{$total_topic}} Topic</h2>
                 </div>
               </div>
@@ -652,12 +646,6 @@
             <a href="#">
               <div class="card">
                 <div class="card-body">
-<<<<<<< Updated upstream
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah mentee yang dipasangkan dengan Anda" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\mentor\mentee.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1" style="padding-right: 15px;">Total Trainee</small>
-                  <h2 class="font-weight-bolder text-center"># Trainee</h2>
-=======
                   <img class="rounded float-right" width="15px" height="15px"
                     src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top" data-content="Jumlah mentee yang dipasangkan dengan Anda" />
@@ -665,7 +653,6 @@
                     src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
                   <small class="card text-center text-muted my-1">Total Trainee</small>
                   <h2 class="font-weight-bolder text-center">{{$total_participant}} Trainee</h2>
->>>>>>> Stashed changes
                 </div>
               </div>
             </a>
@@ -735,40 +722,6 @@
           </div>
           {{-- <div class="col-md-4 col-lg-4">
             <a href="{{route('exercise.index')}}">
-<<<<<<< Updated upstream
-              <div class="card">
-                <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah pertanyaan yang ada" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\mentor\exam.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1" style="padding-right: 15px;">Total Exam</small>
-                  <h2 class="font-weight-bolder text-center"># Exam</h2>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-4 col-lg-4">
-            <a href="{{route('topic.index')}}">
-              <div class="card">
-                <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\mentor\topic.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1" style="padding-right: 15px;">Total Topic</small>
-                  <h2 class="font-weight-bolder text-center"># Topic</h2>
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div class="col-md-4 col-lg-4">
-            <a href="#">
-              <div class="card">
-                <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah mentee yang dipasangkan dengan Anda" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\mentor\mentee.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1" style="padding-right: 15px;">Total Mentee</small>
-                  <h2 class="font-weight-bolder text-center"># Mentee</h2>
-                </div>
-=======
           <div class="card">
             <div class="card-body">
               <img class="rounded float-right" width="15px" height="15px"
@@ -793,7 +746,6 @@
                   src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted my-1">Total Topic</small>
                 <h2 class="font-weight-bolder text-center"># Topic</h2>
->>>>>>> Stashed changes
               </div>
             </div>
           </a>
@@ -1203,10 +1155,5 @@
           })
         })
       });
-<<<<<<< Updated upstream
-    </script>
-    @endpush
-=======
   </script>
   @endpush
->>>>>>> Stashed changes
