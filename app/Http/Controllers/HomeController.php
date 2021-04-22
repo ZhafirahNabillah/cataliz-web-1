@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Models\Client;
 use App\Models\User;
 use App\Models\Coach;
+use App\Models\Exam_result;
 use App\Models\Feedback;
 use App\Models\Topic;
 use Illuminate\Support\Facades\Auth;
@@ -138,7 +139,11 @@ class HomeController extends Controller
       return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'total_ratings', 'client'));
     } elseif (auth()->user()->hasRole('trainer')) {
       $total_topic = Topic::where('trainer_id', auth()->user()->id)->count();
-      return view('home', compact('total_topic'));
+      $topic = Topic::where('trainer_id', auth()->user()->id)->pluck('id');
+      $user = Exam_result::whereIn('topic_id', $topic)->pluck('user_id');
+      $total_participant = Client::whereIn('id', $user)->count();
+      // return $total_participant;
+      return view('home', compact('total_topic', 'total_participant'));
     } else {
       return view('home');
     }

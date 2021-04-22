@@ -212,6 +212,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('participant', ParticipantController::class);
 });
 
+// Result Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('result', ResultController::class);
 });
