@@ -108,9 +108,11 @@
                   <div class="row mb-1">
                     <div class="col-12">
                       <!-- Button trigger modal -->
+                      @can('create-topic')
                       <button type="button" class="btn btn-primary" data-toggle="modal" id="add-sub-topic-btn">
                         New Sub Topic
                       </button>
+                      @endcan
                     </div>
                   </div>
                   <div class="card border">
@@ -126,12 +128,14 @@
                               </div>
                               <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
                                 <div class="card-body">
+                                  @can('create-topic')
                                   <div class="text-left">
                                     <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
                                       New Materi
                                     </button>
-                                    <a href="{{ url('/lesson/create?sub_topic='.$sub_topic->id) }}" class="btn btn-primary mb-1nama">New Lesson</a>
+                                    <a href="{{ url('/lesson/create?sub_topic='.$sub_topic->id) }}" class="btn btn-primary mb-1">New Lesson</a>
                                   </div>
+                                  @endcan
                                   <div class="lesson-wrapper-{{ $sub_topic->id }}">
                                     @foreach ($sub_topic->lessons as $lesson)
                                     <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">

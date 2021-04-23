@@ -2,6 +2,14 @@
 
 @section('title','Topic')
 
+@push('styles')
+<style media="screen">
+  li{
+    list-style-type: none;
+  }
+</style>
+@endpush
+
 @section('content')
 
 @include('panels.navbar')
@@ -73,13 +81,14 @@
                           <div class="question d-inline-flex">
                             {!! $answer->question->question !!}({{ $answer->question->weight }})
                           </div>
+                          @php ($choice_itr = 'A')
                           @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
                             @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
-                              <li class="text-success">{{ $answer_choice }}</li>
+                              <li class="text-success">{{$choice_itr++}}. {{ $answer_choice }}</li>
                             @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
-                              <li class="text-danger">{{ $answer_choice }}</li>
+                              <li class="text-danger">{{$choice_itr++}}. {{ $answer_choice }}</li>
                             @else
-                              <li>{{ $answer_choice }}</li>
+                              <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
                             @endif
                           @endforeach
                           <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
