@@ -117,8 +117,8 @@
                       <tr>
                         <th>No</th>
                         <th>Name</th>
-                        {{-- <th>Category</th>
-                        <th>Question</th> --}}
+                        <th>Category</th>
+                        <th>Question</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -264,21 +264,14 @@
             data: 'user.name',
             name: 'user.name'
           },
-          // {
-          //   data: 'user.email',
-          //   name: 'user.email'
-          // },
-          // {
-          //   data: 'user.program',
-          //   name: 'user.program'
-          // },
-          // {
-          //   data: 'grade',
-          //   name: 'grade',
-          //   render: function(data) {
-          //     return data + '/100';
-          //   }
-          // },
+          {
+            data: 'category.category',
+            name: 'category.category'
+          },
+          {
+            data: 'total_questions',
+            name: 'total_questions'
+          },
           {
             data: 'action',
             name: 'action',
