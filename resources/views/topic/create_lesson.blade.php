@@ -65,8 +65,20 @@
               <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->get('sub_topic') }}">
               <button type="submit" class="btn btn-primary" name="button">Submit</button>
             </form> --}}
-            <form action="{{ route('lesson.chunk_upload') }}" class='dropzone'>
+            <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}">
+              @csrf
+              <div class="form-group">
+                <label for="topic">Lesson Title</label>
+                <input class="form-control" type="text" name="lesson_name" placeholder="Title ...">
+              </div>
+              <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->sub_topic }}">
+              <input type="hidden" name="video_name" id="video_name">
             </form>
+            <label for="dropzone">Video Upload</label>
+            <form action="{{ route('lesson.chunk_upload') }}" class='dropzone' id="dropzone"></form>
+            <div class="text-right mt-2">
+              <button type="button" class="btn btn-primary" id="save-lesson-btn">Create</button>
+            </div>
           </div>
         </div>
       </div>
@@ -94,12 +106,22 @@
           method: "POST",
           maxFilesize: 400000000,
           chunkSize: 1000000,
+          forceChunking: true,
           // If true, the individual chunks of a file are being uploaded simultaneously.
           parallelChunkUploads: true
       });
 
       myDropzone.on("sending", function(file, xhr, formData) {
          formData.append("_token", CSRF_TOKEN);
+      });
+
+      myDropzone.on("success", function(file, response) {
+         console.log(response);
+         $('#video_name').val(response.name);
+      });
+
+      $('#save-lesson-btn').click(function () {
+        $('.create-lesson-form').submit();
       });
   </script>
   @endpush

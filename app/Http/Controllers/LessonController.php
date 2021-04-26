@@ -49,26 +49,28 @@ class LessonController extends Controller
         // ini_set('max_execution_time', 3000);
         // ini_set('memory_limit','256M');
 
-        dd($request);
+        // dd($request);
 
         $lesson = new Lesson;
         $lesson->lesson_name = $request->lesson_name;
         $lesson->sub_topic_id = $request->sub_topic_id;
+        $lesson->video = $request->video_name;
 
-        if ($request->hasFile('video')) {
-          // $this->validate($request, [
-          //   'video'                 => 'max:2048|mimes:pdf,doc,docx,txt',
-          // ], [
-          //   'note_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
-          //   'note_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
-          // ]);
-          $filenameWithExt = $request->file('video')->getClientOriginalName();
-          $filename = $request->lesson_name;
-          $extension = $request->file('video')->getClientOriginalExtension();
-          $filenameSave = $filename . '_' . time() . '.' . $extension;
-          Storage::disk('s3')->put('lesson_video/'.$request->sub_topic_id.'/'.$filenameSave, fopen($request->file('video'), 'r+'));
-          $lesson->video = $filenameSave;
-        }
+
+        // if ($request->hasFile('video')) {
+        //   $this->validate($request, [
+        //     'video'                 => 'max:2048|mimes:pdf,doc,docx,txt',
+        //   ], [
+        //     'note_attachment.max'   => "Ukuran file feedback tidak boleh melebihi 2Mb!",
+        //     'note_attachment.mimes' => "Format file feedback yang didukung adalah .pdf .doc .docx .txt!",
+        //   ]);
+        //   $filenameWithExt = $request->file('video')->getClientOriginalName();
+        //   $filename = $request->lesson_name;
+        //   $extension = $request->file('video')->getClientOriginalExtension();
+        //   $filenameSave = $filename . '_' . time() . '.' . $extension;
+        //   Storage::disk('s3')->put('lesson_video/'.$request->sub_topic_id.'/'.$filenameSave, fopen($request->file('video'), 'r+'));
+        //   $lesson->video = $filenameSave;
+        // }
 
         $lesson->save();
 

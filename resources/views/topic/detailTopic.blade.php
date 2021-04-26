@@ -5,6 +5,7 @@
 @push('styles')
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
 @endpush
 
 @section('content')
@@ -130,9 +131,9 @@
                                 <div class="card-body">
                                   @can('create-topic')
                                   <div class="text-left">
-                                    <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
+                                    {{-- <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
                                       New Materi
-                                    </button>
+                                    </button> --}}
                                     <a href="{{ url('/lesson/create?sub_topic='.$sub_topic->id) }}" class="btn btn-primary mb-1">New Lesson</a>
                                   </div>
                                   @endcan
@@ -203,26 +204,18 @@
                             @csrf
                             <div class="form-group">
                               <label for="topic">Lesson Title</label>
-                              <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
+                              <input class="form-control" type="text" name="lesson_name" placeholder="Title ...">
                             </div>
-                            <div class="form-group">
-                              <div class="input-group">
-                                <div class="input-group-prepend">
-                                  <span class="input-group-text">Upload Video</span>
-                                </div>
-                                <div class="custom-file">
-                                  <input type="file" class="custom-file-input" name="video" id="video_input">
-                                  <label class="custom-file-label" for="video_input">Choose file</label>
-                                </div>
-                              </div>
-                              <input type="hidden" name="sub_topic_id" id="sub_topic_id">
-                            </div>
+                            <input type="hidden" name="sub_topic_id" id="sub_topic_id">
+                            <input type="hidden" name="video_name" id="video_name">
                           </form>
+                          <label for="dropzone">Upload Lesson Video</label>
+                          <form action="{{ route('lesson.chunk_upload') }}" class='dropzone' id="dropzone"></form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="save-lesson-btn">Save changes</button>
-                          </div>
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" id="save-lesson-btn">Create</button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -287,6 +280,7 @@
 @push('scripts')
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
 <script type="text/javascript">
   // popover
   $(function() {
@@ -341,7 +335,7 @@
       $.get("" + '/lesson/' + lesson_id, function(data) {
         $('#lesson-title').html(data.lesson_name);
         // console.log(data);
-        $('#video_source').attr('src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/lesson_video/' + data.sub_topic_id + '/' + data.video);
+        $('#video_source').attr('src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/lessons/' + data.video);
         $('.video_wrapper video')[0].load();
         $('#play-lesson-modal').modal('show');
       })
@@ -401,8 +395,8 @@
       });
     });
 
-        $('#save-lesson-btn').click(function () {
-          $('.create-lesson-form').submit();
+    $('#save-lesson-btn').click(function () {
+      $('.create-lesson-form').submit();
           // var data = $('.create-lesson-form').serialize();
           // var formData = new FormData(document.getElementById('create-lesson-form'));
           // console.log(formData);
@@ -446,7 +440,34 @@
           //     // }
           //   }
           // });
-        });
+    });
+
+    var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+
+    Dropzone.autoDiscover = false;
+    var myDropzone = new Dropzone(".dropzone",{
+        // maxFilesize: 20,  // 3 mb
+        // acceptedFiles: ".mp4, .mkv",
+        // chunking: true,
+        // chunkSize: 1024,
+        // retryChunks: true,
+        // retryChunksLimit: 3
+        acceptedFiles: ".mp4, .mkv",
+        chunking: true,
+        method: "POST",
+        maxFilesize: 400000000,
+        chunkSize: 1000000,
+        // If true, the individual chunks of a file are being uploaded simultaneously.
+        parallelChunkUploads: true
+    });
+
+    myDropzone.on("sending", function(file, xhr, formData) {
+       formData.append("_token", {{ csrf_token() }});
+    });
+
+    myDropzone.on("success", function(file, response) {
+       console.log(response);
+    });
 
     function append_sub_topic(id, sub_topic) {
       var sub_topic_html = '<div class="card" id="' + id + '">';
