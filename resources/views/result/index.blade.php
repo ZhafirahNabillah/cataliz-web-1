@@ -17,13 +17,15 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Result
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="">Result</a>
+                <li class="breadcrumb-item active">Result
                 </li>
               </ol>
             </div>
@@ -33,6 +35,100 @@
     </div>
 
     @role('coach')
+    <div class="card">
+      <div class="card-body">
+        <div class="content-body">
+          <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dissmisable">
+            <h4 class="alert-heading">Success</h4>
+            <div class="alert-body">{{ $message }}</div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @endif
+          <div class="row">
+          </div>
+          <br>
+          <!-- Basic table -->
+          <section id="basic-datatable">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <table class="datatables-basic table-striped table exam-result-datatable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Topic</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--/ Basic table -->
+        </div>
+      </div>
+    </div>
+    @endrole
+
+    @role('trainer')
+    <div class="card">
+      <div class="card-body">
+        <div class="content-body">
+          <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dissmisable">
+            <h4 class="alert-heading">Success</h4>
+            <div class="alert-body">{{ $message }}</div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @endif
+          <div class="row">
+          </div>
+          <br>
+          <!-- Basic table -->
+          <section id="basic-datatable">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <table class="datatables-basic table-striped table exam-result-datatable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Topic</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--/ Basic table -->
+        </div>
+      </div>
+    </div>
+    @endrole
+
+    @role('mentor')
     <div class="card">
       <div class="card-body">
         <div class="content-body">

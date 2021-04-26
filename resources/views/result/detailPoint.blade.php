@@ -4,7 +4,7 @@
 
 @push('styles')
 <style media="screen">
-  li{
+  li {
     list-style-type: none;
   }
 </style>
@@ -25,13 +25,17 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Result
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Result</a>
+                <li class="breadcrumb-item"><a href="{{route('result.index')}}">Result</a>
+                </li>
+                <li class="breadcrumb-item active">{{ $client->name }}
                 </li>
               </ol>
             </div>
@@ -72,29 +76,31 @@
               <div class="collapse-icon">
                 <div class="collapse-default">
                   @foreach ($answers as $answer)
-                    <div class="card">
-                      <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
-                        <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b></span>
-                      </div>
-                      <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                        <div class="card-body">
-                          <div class="question d-inline-flex">
-                            {!! $answer->question->question !!}({{ $answer->question->weight }})
-                          </div>
-                          @php ($choice_itr = 'A')
-                          @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
-                            @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
-                              <li class="text-success">{{$choice_itr++}}. {{ $answer_choice }}</li>
-                            @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
-                              <li class="text-danger">{{$choice_itr++}}. {{ $answer_choice }}</li>
-                            @else
-                              <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
-                            @endif
-                          @endforeach
-                          <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
+                  <div class="card">
+                    <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
+                      <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b></span>
+                    </div>
+                    <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1"
+                      class="collapse">
+                      <div class="card-body">
+                        <div class="question d-inline-flex">
+                          {!! $answer->question->question !!}({{ $answer->question->weight }})
                         </div>
+                        @php ($choice_itr = 'A')
+                        @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
+                        @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
+                        <li class="text-success">{{$choice_itr++}}. {{ $answer_choice }}</li>
+                        @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
+                        <li class="text-danger">{{$choice_itr++}}. {{ $answer_choice }}</li>
+                        @else
+                        <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
+                        @endif
+                        @endforeach
+                        <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
                       </div>
                     </div>
+                  </div>
                   @endforeach
                 </div>
               </div>
