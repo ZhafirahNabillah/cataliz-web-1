@@ -132,9 +132,11 @@
                         </div>
                         <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                           <div class="card-body">
+                            <p><b>Score:{{ $answer->question->weight }}</b></p>
                             <div class="question d-inline-flex">
-                              {!! $answer->question->question !!}({{ $answer->question->weight }})
+                              <p> {!! $answer->question->question !!}</p>
                             </div>
+                            <p>Answer</p>
                             @php ($choice_itr = 'A')
                             @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
                             @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
@@ -145,20 +147,12 @@
                             <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
                             @endif
                             @endforeach
-                            <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
+                            <br>
+                            <p><b> The correct answer is:</b><br>
+                              <span style="background-color: #9EEEA1;" class="d-block p-1"> {{ $answer_choices[$answer->question->true_answer] }}</span>
+                            </p>
                           </div>
                         </div>
-                        @php ($choice_itr = 'A')
-                        @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
-                        @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
-                        <li class="text-success">{{$choice_itr++}}. {{ $answer_choice }}</li>
-                        @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
-                        <li class="text-danger">{{$choice_itr++}}. {{ $answer_choice }}</li>
-                        @else
-                        <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
-                        @endif
-                        @endforeach
-                        <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
                       </div>
                       @endforeach
                     </div>
