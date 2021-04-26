@@ -74,6 +74,7 @@ final class Versions
   'phenx/php-svg-lib' => 'v0.3.3@5fa61b65e612ce1ae15f69b3d223cb14ecc60e32',
   'phpoption/phpoption' => '1.7.5@994ecccd8f3283ecf5ac33254543eb0ac946d525',
   'pimple/pimple' => 'v3.4.0@86406047271859ffc13424a048541f4531f53601',
+  'pion/laravel-chunk-upload' => 'v1.4.1@149f911041f94efc6b030ee92691f075e29afb9d',
   'psr/container' => '1.1.1@8622567409010282b7aeebe4bb841fe98b58dcaf',
   'psr/event-dispatcher' => '1.0.0@dbefd12671e8a14ec7f180cab83036ed26714bb0',
   'psr/http-client' => '1.0.1@2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
@@ -160,7 +161,7 @@ final class Versions
   'sebastian/type' => '2.3.1@81cd61ab7bbf2de744aba0ea61fae32f721df3d2',
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-main@8a11c1fdf7eb9cd78e7cb6ac27be883bffeec0dd',
+  'laravel/laravel' => 'dev-main@17166cfda109cf2d5f5c66fc0e034e18e9f4ef91',
 );
 
     private function __construct()

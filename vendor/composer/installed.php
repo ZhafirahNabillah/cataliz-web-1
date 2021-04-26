@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'a78894c4f09edf0f4d2baca21208a752a2c61724',
+    'reference' => '17166cfda109cf2d5f5c66fc0e034e18e9f4ef91',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -548,7 +548,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'a78894c4f09edf0f4d2baca21208a752a2c61724',
+      'reference' => '17166cfda109cf2d5f5c66fc0e034e18e9f4ef91',
     ),
     'laravel/sail' => 
     array (
@@ -855,6 +855,15 @@
       array (
       ),
       'reference' => '86406047271859ffc13424a048541f4531f53601',
+    ),
+    'pion/laravel-chunk-upload' => 
+    array (
+      'pretty_version' => 'v1.4.1',
+      'version' => '1.4.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '149f911041f94efc6b030ee92691f075e29afb9d',
     ),
     'psr/container' => 
     array (

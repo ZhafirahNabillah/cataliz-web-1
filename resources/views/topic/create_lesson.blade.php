@@ -65,7 +65,7 @@
               <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->get('sub_topic') }}">
               <button type="submit" class="btn btn-primary" name="button">Submit</button>
             </form> --}}
-            <form action="{{ route('lesson.video_upload') }}" class='dropzone'>
+            <form action="{{ route('lesson.chunk_upload') }}" class='dropzone'>
             </form>
           </div>
         </div>
@@ -79,15 +79,27 @@
   @push('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
   <script type="text/javascript">
-      // var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+      var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
       Dropzone.autoDiscover = false;
       var myDropzone = new Dropzone(".dropzone",{
-          maxFilesize: 20,  // 3 mb
+          // maxFilesize: 20,  // 3 mb
+          // acceptedFiles: ".mp4, .mkv",
+          // chunking: true,
+          // chunkSize: 1024,
+          // retryChunks: true,
+          // retryChunksLimit: 3
           acceptedFiles: ".mp4, .mkv",
+          chunking: true,
+          method: "POST",
+          maxFilesize: 400000000,
+          chunkSize: 1000000,
+          // If true, the individual chunks of a file are being uploaded simultaneously.
+          parallelChunkUploads: true
       });
+
       myDropzone.on("sending", function(file, xhr, formData) {
-         formData.append("_token", {{ csrf_token() }});
+         formData.append("_token", CSRF_TOKEN);
       });
   </script>
   @endpush

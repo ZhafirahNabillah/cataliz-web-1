@@ -205,6 +205,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 	Route::resource('lesson', LessonController::class);
 	Route::post('/lesson/video_upload', [LessonController::class, 'lesson_video_upload'])->name('lesson.video_upload');
+	Route::post('/chunk_upload', [LessonController::class, 'lesson_chunk_upload'])->name('lesson.chunk_upload');
 });
 
 //Participant Controller
