@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    @role('coach')
+
     <div class="card">
       <div class="card-body">
         <div class="content-body">
@@ -77,7 +77,8 @@
         </div>
       </div>
     </div>
-    @endrole
+
+
   </div>
   <!-- /panel coachee -->
 
