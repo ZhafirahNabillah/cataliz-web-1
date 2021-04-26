@@ -220,6 +220,9 @@
           {
             data: 'grade',
             name: 'grade',
+            render: function(data) {
+              return '<strong>'+data+'</strong>' + '/100';
+            }
           },
           {
             data: 'action',
