@@ -36,7 +36,7 @@ task('deploy:secrets', function () {
 
 // Hosts
 host('app.cataliz.id') // Name of the server or domain
-    ->hostname('18.136.248.105') // Hostname or IP address
+    ->hostname('52.205.83.22') // Hostname or IP address
     ->stage('staging') // Deployment stage (production, staging, etc)
     ->user('ubuntu') // SSH user
     ->set('deploy_path', '/var/www/html'); // Deploy path
