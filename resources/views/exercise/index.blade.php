@@ -17,13 +17,15 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Exam
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="{{route('exercise.index')}}">Exam</a>
+                <li class="breadcrumb-item active">Exam
                 </li>
               </ol>
             </div>
@@ -110,13 +112,13 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <table class="datatables-basic table-striped table exam-result-datatable">
+                  <table class="datatables-basic table-striped table exam-result-datatable-mentor">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Topic</th>
-                        <th>Category</th>
-                        <th>Question</th>
+                        <th>Name</th>
+                        {{-- <th>Category</th>
+                        <th>Question</th> --}}
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -250,7 +252,7 @@
         }
       });
 
-      var table_exam_result = $('.exam-result-datatable').DataTable({
+      var table_exam_result_mentor = $('.exam-result-datatable-mentor').DataTable({
         processing: true,
         serverSide: true,
         ajax: "",
@@ -262,21 +264,21 @@
             data: 'user.name',
             name: 'user.name'
           },
-          {
-            data: 'user.email',
-            name: 'user.email'
-          },
-          {
-            data: 'user.program',
-            name: 'user.program'
-          },
-          {
-            data: 'grade',
-            name: 'grade',
-            render: function(data) {
-              return data + '/100';
-            }
-          },
+          // {
+          //   data: 'user.email',
+          //   name: 'user.email'
+          // },
+          // {
+          //   data: 'user.program',
+          //   name: 'user.program'
+          // },
+          // {
+          //   data: 'grade',
+          //   name: 'grade',
+          //   render: function(data) {
+          //     return data + '/100';
+          //   }
+          // },
           {
             data: 'action',
             name: 'action',

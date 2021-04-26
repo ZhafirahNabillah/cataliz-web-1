@@ -25,13 +25,18 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Result
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="This page displays a list of the exam results that the mentee has obtained." />
+              <<<<<<< HEAD <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="This page displays a list of the exam results that the mentee has obtained." />
+              =======
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
+              >>>>>>> 64999bdaa0f4e5d5e392b6996336ad3fa54d0581
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Result</a>
+                <li class="breadcrumb-item"><a href="{{route('result.index')}}">Result</a>
+                </li>
+                <li class="breadcrumb-item active">{{ $client->name }}
                 </li>
               </ol>
             </div>
@@ -145,6 +150,17 @@
                             <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
                           </div>
                         </div>
+                        @php ($choice_itr = 'A')
+                        @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
+                        @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
+                        <li class="text-success">{{$choice_itr++}}. {{ $answer_choice }}</li>
+                        @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
+                        <li class="text-danger">{{$choice_itr++}}. {{ $answer_choice }}</li>
+                        @else
+                        <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
+                        @endif
+                        @endforeach
+                        <p>True answer : {{ $answer_choices[$answer->question->true_answer] }}</p>
                       </div>
                       @endforeach
                     </div>
