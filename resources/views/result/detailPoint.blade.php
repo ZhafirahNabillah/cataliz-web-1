@@ -26,8 +26,6 @@
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Result
               <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="This page displays a list of the exam results that the mentee has obtained." />
-              =======
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
 
             </h2>
             <div class="breadcrumb-wrapper">
@@ -64,7 +62,7 @@
                   @role('mentor')
                   <b>Mentee name</b>
                   @endrole
-                  @role('mentor')
+                  @role('coach')
                   <b>Coachee name</b>
                   @endrole
                 </div>
