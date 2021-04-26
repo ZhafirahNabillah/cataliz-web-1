@@ -25,10 +25,10 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Result
-              <<<<<<< HEAD <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="This page displays a list of the exam results that the mentee has obtained." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="This page displays a list of the exam results that the mentee has obtained." />
               =======
               <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan Exercise yang anda miliki untuk klien ini." />
-              >>>>>>> 64999bdaa0f4e5d5e392b6996336ad3fa54d0581
+
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
