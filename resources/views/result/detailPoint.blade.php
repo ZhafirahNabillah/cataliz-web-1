@@ -169,12 +169,38 @@
 
                       <div class="card">
                         <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
-                          <span class="lead collapse-title"><b>Feedback</b> <span data-feather="edit"></span> </span>
+                          <span class="lead collapse-title"><b>Feedback</b> </span>
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
+                            <a href="javascript:;" class="createNewFeedback"><span data-feather="edit"></span></a>
 
-                            Feedback is not yet available
+                            <p>Feedback is not yet available</p>
+
+                            <!-- Modal Feedback-->
+                            <div class="modal fade bd-example-modal-lg" id="modalCreateFeedback" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Feedback to Mentee</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="form-group">
+                                      <label for="description">New Feedback</label>
+                                      <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /modal Feedback-->
 
                           </div>
                         </div>
@@ -185,7 +211,66 @@
                         </div>
                         <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse show">
                           <div class="card-body">
-                            The meeting has not been scheduled
+                            <a href="javascript:;" class="createNewMeeting text-right"><span data-feather="edit"></span></a>
+                            <p>The meeting has not been scheduled</p>
+
+                            <!-- Modal Meeting-->
+                            <div class="modal fade bd-example-modal-lg" id="modalCreateMeeting" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Meeting</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label for="meetingDate">Meeting Date</label>
+                                          <input type="date" class="form-control" name="date" id="date" value="" placeholder="Select Meeting Date...">
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-6">
+                                        <div class="form-group">
+                                          <label for="meetingTime">Meeting Time</label>
+                                          <label for="appt"></label>
+                                          <input class="form-control" type="time" id="appt" name="appt">
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label for="meetingTime">Meeting Media</label>
+                                          <select class="form-select form-control" aria-label="Default select example">
+                                            <option selected disabled>Select your media</option>
+                                            <option value="1">Sub One</option>
+                                            <option value="2">Sub Two</option>
+                                            <option value="3">Sub Three</option>
+                                          </select>
+                                        </div>
+                                      </div>
+
+                                      <div class="col-md-12">
+                                        <div class="form-group">
+                                          <label for="meetingTime">Meeting Media</label>
+                                          <input class="form-control" id="" type="text" name="" placeholder="Your url link ..." aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /modal Meeting-->
+
                           </div>
                         </div>
                       </div>
@@ -207,9 +292,33 @@
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
+                            <a href="javascript:;" class="createNewReport text-right"><span data-feather="edit"></span></a>
+                            <p> Report is not yet available</p>
 
-                            Report is not yet available
-
+                            <!-- Modal Report-->
+                            <div class="modal fade bd-example-modal-lg" id="modalCreateReport" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Report to Coach</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <div class="form-group">
+                                      <label for="description">New Report</label>
+                                      <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- /modal Feedback-->
                           </div>
                         </div>
                       </div>
@@ -238,6 +347,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+  <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
   <script type="text/javascript">
     // popover
     $(function() {
@@ -250,6 +360,73 @@
         }
       })
     })
+    // feedback
+    $('body').on('click', '.createNewFeedback', function() {
+      $('#modalHeading').html("Feedback to Mentee");
+      $('#modalCreateFeedback').modal('show');
+    });
+
+    // meeting
+    $('body').on('click', '.createNewMeeting', function() {
+      $('#modalHeading').html("Meeting");
+      $('#modalCreateMeeting').modal('show');
+    });
+
+    // Report
+    $('body').on('click', '.createNewReport', function() {
+      $('#modalHeading').html("Meeting");
+      $('#modalCreateReport').modal('show');
+    });
+
+
+    // textarea
+    tinymce.init({
+      selector: 'textarea',
+
+      image_class_list: [{
+        title: 'img-fluid',
+        value: 'img-fluid'
+      }, ],
+      height: 283,
+      setup: function(editor) {
+        editor.on('init change', function() {
+          editor.save();
+        });
+      },
+      plugins: [
+        "advlist autolink lists link image charmap print preview anchor",
+        "searchreplace visualblocks code fullscreen",
+        "insertdatetime media table contextmenu paste imagetools"
+      ],
+      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
+
+      image_title: true,
+      automatic_uploads: true,
+      images_upload_url: '/docs/upload_image',
+      file_picker_types: 'image',
+      file_picker_callback: function(cb, value, meta) {
+        var input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.setAttribute('accept', 'image/*');
+        input.onchange = function() {
+          var file = this.files[0];
+
+          var reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = function() {
+            var id = 'blobid' + (new Date()).getTime();
+            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+            var base64 = reader.result.split(',')[1];
+            var blobInfo = blobCache.create(id, file, base64);
+            blobCache.add(blobInfo);
+            cb(blobInfo.blobUri(), {
+              title: file.name
+            });
+          };
+        };
+        input.click();
+      }
+    });
   </script>
 
   @endpush
