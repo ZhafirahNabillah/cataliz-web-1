@@ -113,7 +113,12 @@
                   <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#review" aria-controls="coach" role="tab" aria-selected="true">Review</a>
                 </li>
                 <li class="nav-item">
+                  @role('mentor')
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedback to Mentee</a>
+                  @endrole
+                  @role('trainer')
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedback to Trainee</a>
+                  @endrole
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#report" aria-controls="profile" role="tab" aria-selected="false">Report to Coach</a>
@@ -302,14 +307,23 @@
 
                       <div class="card">
                         <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
-                          <span class="lead collapse-title"><b>Report</b> <span data-feather="edit"></span> </span>
+                          <span class="lead collapse-title"><b>Report</b></span>
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
-                            <a href="javascript:;" class="createNewReport text-right"><span data-feather="edit"></span></a>
-                            <p> Report is not yet available</p>
+                            @empty ($report)
+                              <a href="javascript:;" class="createNewReport btn btn-primary">Create<span data-feather="edit"></span></a>
+                            @endempty
 
-                            <!-- Modal Report-->
+                            <div id="report_wrapper">
+                              @if($report)
+                                {!! $report->description !!}
+                              @else
+                                Report is not yet available
+                              @endif
+                            </div>
+
+                            <!-- Modal Feedback-->
                             <div class="modal fade bd-example-modal-lg" id="modalCreateReport" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                                 <div class="modal-content">
@@ -320,14 +334,18 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <div class="form-group">
-                                      <label for="description">New Report</label>
-                                      <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
-                                    </div>
+                                    <form id="reportForm">
+                                      <div class="form-group">
+                                        <label for="description">Report</label>
+                                        <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
+                                      </div>
+                                      <input type="hidden" name="to" value="coach">
+                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary saveReport">Submit</button>
                                   </div>
                                 </div>
                               </div>
@@ -398,7 +416,7 @@
       $('#modalCreateReport').modal('show');
     });
 
-    // Report
+    // Feedback Submit
     $('body').on('click', '.saveFeedback', function() {
       var data = $('#feedbackForm').serialize();
       $('#modalCreateFeedback').html('Submitting...');
@@ -424,6 +442,51 @@
         },
         error: function(reject) {
           $('#modalCreateFeedback').html('Submit');
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.name) {
+          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.phone) {
+          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.email) {
+          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.roles) {
+          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+    // Report Submit
+    $('body').on('click', '.saveReport', function() {
+      var data = $('#reportForm').serialize();
+      $('.saveReport').html('Submitting...');
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('training_feedback.store') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#modalCreateReport').modal('hide');
+          $('#reportForm').trigger("reset");
+          // $('.sub-topic-empty').empty();
+          // append_sub_topic(data.id, data.sub_topic);
+          $('#report_wrapper').html(data.description);
+          $('.createNewReport').hide();
+          Swal.fire({
+            icon: 'success',
+            title: 'Feedback saved successfully!',
+          });
+        },
+        error: function(reject) {
+          $('#modalCreateReport').html('Submit');
           // if (reject.status === 422) {
           //   var errors = JSON.parse(reject.responseText);
           //   if (errors.name) {
