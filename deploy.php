@@ -66,7 +66,7 @@ task('deploy', [
     'cleanup',
     'php-symlink',
     #'update',
-    'restart-nginx',
+    'reload-nginx',
     'scheduler'
 ]);
 
@@ -79,7 +79,7 @@ task ('update', function(){
     run('sudo apt update');
 });
 
-task ('restart-nginx',function(){
+task ('reload-nginx',function(){
     run('sudo systemctl reload nginx');
 });
 
