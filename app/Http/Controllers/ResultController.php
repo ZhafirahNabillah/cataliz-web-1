@@ -83,9 +83,10 @@ class ResultController extends Controller
         $user = $exam_result->user;
         $client = $user->client;
         $answers = $exam_result->answers;
+        $feedback = $exam_result->training_feedbacks()->where('from', 'trainer')->first();
         // return $answers;
 
-        return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers'));
+        return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'feedback'));
     }
 
     /**
