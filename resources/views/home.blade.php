@@ -735,6 +735,7 @@
           </div>
           </a>
         </div> --}}
+
         <div class="col-md-6 col-lg-6">
           <a href="{{route('topic.index')}}">
             <div class="card">
@@ -805,22 +806,21 @@
         </div>
         <!-- /list topic -->
 
+      </section>
+      <!-- /card -->
+      @endrole
     </div>
-    </section>
-    <!-- /card -->
-    @endrole
-  </div>
 
-  <div class="sidenav-overlay"></div>
-  <div class="drag-target"></div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
 
-  @endsection
+    @endsection
 
-  @push('scripts')
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    @push('scripts')
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-  <script type="text/javascript">
-    $(function() {
+    <script type="text/javascript">
+      $(function() {
 
         $.ajaxSetup({
           headers: {
@@ -1155,5 +1155,5 @@
           })
         })
       });
-  </script>
-  @endpush
+    </script>
+    @endpush
