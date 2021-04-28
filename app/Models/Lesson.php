@@ -18,4 +18,9 @@ class Lesson extends Model
     public function sub_topic() {
   		return $this->belongsTo('App\Models\Sub_topic');
   	}
+
+    public function meeting()
+    {
+      return $this->hasMany('App\Models\Training_meeting', 'lesson_id');
+    }
 }

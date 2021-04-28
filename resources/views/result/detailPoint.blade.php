@@ -181,7 +181,7 @@
                       <div class="card">
                         <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
                           data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
-                          <span class="lead collapse-title"><b>Feedback</b> </span>
+                          <span class="lead collapse-title"><b>Feedback</b></span>
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
@@ -233,7 +233,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="card">
+                      {{-- <div class="card">
                         <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                           <span class="lead collapse-title"><b>Meeting</b></span>
                         </div>
@@ -241,7 +241,24 @@
                           <div class="card-body">
                             <a href="javascript:;" class="createNewMeeting text-right"><span
                                 data-feather="edit"></span></a>
-                            <p>The meeting has not been scheduled</p>
+                            <div id="meeting_wrapper">
+                              @forelse ($meetings as $meeting)
+                                <div class="card" id="meeting-{{ $meeting->id }}">
+                                  <div class="row">
+                                    <div class="col-sm-6">
+                                      <strong>Time: </strong>{{ $meeting->date_time }}
+                                    </div>
+                                    <div class="col-sm-6">
+                                      <strong>Media: </strong>{{ $meeting->media }}
+                                    </div>
+                                  </div>
+                                </div>
+                              @empty
+                                <div id="meeting_empty">
+                                  The meeting has not been scheduled
+                                </div>
+                              @endforelse
+                            </div>
 
                             <!-- Modal Meeting-->
                             <div class="modal fade bd-example-modal-lg" id="modalCreateMeeting" tabindex="-1"
@@ -255,49 +272,49 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <div class="row">
-                                      <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label for="meetingDate">Meeting Date</label>
-                                          <input type="date" class="form-control" name="date" id="date" value=""
-                                            placeholder="Select Meeting Date...">
+                                    <form id="meetingForm">
+                                      <div class="row">
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                            <label for="meetingDate">Meeting Date</label>
+                                            <input type="date" class="form-control" name="date" id="date" value=""
+                                              placeholder="Select Meeting Date...">
+                                          </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                          <div class="form-group">
+                                            <label for="meetingTime">Meeting Time</label>
+                                            <label for="appt"></label>
+                                            <input class="form-control" type="time" id="time" name="time">
+                                          </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="meetingTime">Meeting Media</label>
+                                            <select class="form-select form-control" name="media">
+                                              <option selected disabled>Select your media</option>
+                                              <option value="zoom">Zoom</option>
+                                              <option value="whatsapp">WhatsApp</option>
+                                            </select>
+                                          </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                          <div class="form-group">
+                                            <label for="meetingTime">Media URL</label>
+                                            <input class="form-control" id="" type="text" name="meeting_url"
+                                              placeholder="Your url link ..."/>
+                                          </div>
                                         </div>
                                       </div>
-
-                                      <div class="col-md-6">
-                                        <div class="form-group">
-                                          <label for="meetingTime">Meeting Time</label>
-                                          <label for="appt"></label>
-                                          <input class="form-control" type="time" id="appt" name="appt">
-                                        </div>
-                                      </div>
-
-                                      <div class="col-md-12">
-                                        <div class="form-group">
-                                          <label for="meetingTime">Meeting Media</label>
-                                          <select class="form-select form-control" aria-label="Default select example">
-                                            <option selected disabled>Select your media</option>
-                                            <option value="1">Sub One</option>
-                                            <option value="2">Sub Two</option>
-                                            <option value="3">Sub Three</option>
-                                          </select>
-                                        </div>
-                                      </div>
-
-                                      <div class="col-md-12">
-                                        <div class="form-group">
-                                          <label for="meetingTime">Meeting Media</label>
-                                          <input class="form-control" id="" type="text" name=""
-                                            placeholder="Your url link ..." aria-describedby="" value="" autocomplete=""
-                                            autofocus tabindex="1" />
-                                        </div>
-                                      </div>
-                                    </div>
-
+                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary submitMeetingBtn">Submit</button>
                                   </div>
                                 </div>
                               </div>
@@ -306,7 +323,7 @@
 
                           </div>
                         </div>
-                      </div>
+                      </div> --}}
                     </div>
                   </div>
 
@@ -520,6 +537,63 @@
         }
       });
     });
+
+    //Meeting Submit
+    $('body').on('click', '.submitMeetingBtn', function() {
+      var data = $('#meetingForm').serialize();
+      $('.submitMeetingBtn').html('Submitting...');
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('training_meeting.store') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#modalCreateMeeting').modal('hide');
+          $('#meetingForm').trigger("reset");
+          // $('.sub-topic-empty').empty();
+          // append_sub_topic(data.id, data.sub_topic);
+          // $('#meeting_wrapper').html(data.description);
+          append_meeting(data.date_time, data.media, data.id);
+          // $('.createNewMeeting').hide();
+          Swal.fire({
+            icon: 'success',
+            title: 'Meeting created successfully!',
+          });
+        },
+        error: function(reject) {
+          $('#modalCreateMeeting').html('Submit');
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.name) {
+          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.phone) {
+          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.email) {
+          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.roles) {
+          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+    function append_meeting(date_time, media, meeting_id)
+    {
+      var meeting_html = '<div class="card" id="meeting'+meeting_id+'"><div class="row">';
+      meeting_html += '<div class="col-sm-6"><strong>Time: </strong>'+date_time+'</div>';
+      meeting_html += '<div class="col-sm-6"><strong>Media: </strong>'+media+'</div>';
+      meeting_html += '</div></div>';
+
+      $('#meeting_empty').empty();
+      $('#meeting_wrapper').append(meeting_html);
+    }
 
     // textarea
     tinymce.init({

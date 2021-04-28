@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\JsonResponse;
 use App\Models\Lesson;
+use App\Models\Training_meeting;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\AbstractHandler;
@@ -55,7 +56,21 @@ class LessonController extends Controller
         $lesson->lesson_name = $request->lesson_name;
         $lesson->sub_topic_id = $request->sub_topic_id;
         $lesson->video = $request->video_name;
+        $lesson->save();
 
+        $training_meeting = new Training_meeting;
+        $training_meeting->lesson_id = $lesson->id;
+        $training_meeting->date_time = $request->date.' '.$request->time;
+        $training_meeting->media = $request->media;
+        $training_meeting->meeting_url = $request->meeting_url;
+        $training_meeting->save();
+
+        $request->session()->flash('success', 'Lesson has been added successfully!');
+
+        return response()->json([
+          'meeting' => $training_meeting,
+          'lesson'  => $lesson
+        ]);
 
         // if ($request->hasFile('video')) {
         //   $this->validate($request, [
@@ -72,9 +87,7 @@ class LessonController extends Controller
         //   $lesson->video = $filenameSave;
         // }
 
-        $lesson->save();
-
-        return redirect('/topic')->with('success', 'New Lesson successfully created!');
+        // return redirect('/topic')->with('success', 'New Lesson successfully created!');
         // return response()->json($lesson);
     }
 

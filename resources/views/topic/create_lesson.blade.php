@@ -65,7 +65,7 @@
               <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->get('sub_topic') }}">
               <button type="submit" class="btn btn-primary" name="button">Submit</button>
             </form> --}}
-            <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}">
+            <form class="create-lesson-form" id="create-lesson-form">
               @csrf
               <div class="form-group">
                 <label for="topic">Lesson Title</label>
@@ -76,7 +76,45 @@
             </form>
             <label for="dropzone">Video Upload</label>
             <form action="{{ route('lesson.chunk_upload') }}" class='dropzone' id="dropzone"></form>
-            <div class="text-right mt-2">
+            <form class="mt-1" id="meetingForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="meetingDate">Meeting Date</label>
+                    <input type="date" class="form-control" name="date" id="date" value=""
+                      placeholder="Select Meeting Date...">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="meetingTime">Meeting Time</label>
+                    <label for="appt"></label>
+                    <input class="form-control" type="time" id="time" name="time">
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="meetingTime">Meeting Media</label>
+                    <select class="form-select form-control" name="media">
+                      <option selected disabled>Select your media</option>
+                      <option value="zoom">Zoom</option>
+                      <option value="whatsapp">WhatsApp</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="meetingTime">Media URL</label>
+                    <input class="form-control" id="" type="text" name="meeting_url"
+                      placeholder="Your url link ..."/>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="text-right">
               <button type="button" class="btn btn-primary" id="save-lesson-btn">Create</button>
             </div>
           </div>
@@ -120,8 +158,62 @@
          $('#video_name').val(response.name);
       });
 
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
       $('#save-lesson-btn').click(function () {
-        $('.create-lesson-form').submit();
+        var lesson_data = $('#create-lesson-form').serialize();
+        var meeting_data = $('#meetingForm').serialize();
+
+        var data = lesson_data+'&'+meeting_data;
+        $('#save-lesson-button').html('Creating...');
+        console.log(data);
+
+        // $('.create-lesson-form').submit();
+
+        $.ajax({
+          data: data,
+          url: "{{ route('lesson.store') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function(data) {
+            console.log(data);
+            // $('#modalCreateMeeting').modal('hide');
+            $('#meetingForm').trigger("reset");
+            $('#create-lesson-form').trigger("reset");
+            window.location = "{{ url()->previous() }}"+"#sub-topic-"+data.lesson.sub_topic_id
+            // $('.sub-topic-empty').empty();
+            // append_sub_topic(data.id, data.sub_topic);
+            // $('#meeting_wrapper').html(data.description);
+            // append_meeting(data.date_time, data.media, data.id);
+            // $('.createNewMeeting').hide();
+            // Swal.fire({
+            //   icon: 'success',
+            //   title: 'Meeting created successfully!',
+            // });
+          },
+          error: function(reject) {
+            $('#save-lesson-button').html('Create');
+            // if (reject.status === 422) {
+            //   var errors = JSON.parse(reject.responseText);
+            //   if (errors.name) {
+            //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+            //   }
+            //   if (errors.phone) {
+            //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+            //   }
+            //   if (errors.email) {
+            //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+            //   }
+            //   if (errors.roles) {
+            //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+            //   }
+            // }
+          }
+        });
       });
   </script>
   @endpush

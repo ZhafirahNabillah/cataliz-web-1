@@ -80,8 +80,9 @@ class ResultController extends Controller
       $feedback = $exam_result->training_feedbacks()->where('from', 'mentor')->where('to', 'mentee')->first();
       $report = $exam_result->training_feedbacks()->where('from', 'mentor')->where('to', 'coach')->first();
     }
+    $meetings = $exam_result->training_meeting;
 
-    return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'feedback', 'report'));
+    return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'feedback', 'report', 'meetings'));
   }
 
 
