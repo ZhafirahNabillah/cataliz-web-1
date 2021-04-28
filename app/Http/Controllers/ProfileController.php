@@ -83,35 +83,47 @@ class ProfileController extends Controller
 
         if ($request->has('profil_picture')) {
             if ($request->hasFile('profil_picture')) {
-                $filenameWithExt = $request->file('profil_picture')->getClientOriginalName();
-                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                $extension = $request->file('profil_picture')->getClientOriginalExtension();
-                $filenameSave = $filename . '_' . time() . '.' . $extension;
+                // $filenameWithExt = $request->file('profil_picture')->getClientOriginalName();
+                // $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // $extension = $request->file('profil_picture')->getClientOriginalExtension();
+                // $filenameSave = $filename . '_' . time() . '.' . $extension;
 
-                $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
+                $file = $request->file('profil_picture');
+                $filenameSave = 'UIMG' . date('YmdHis') . uniqid() . '.jpg';
 
-                if (!file_exists(public_path('storage/profil/crop'))) {
-                    mkdir(public_path('storage/profil/crop'), 0755);
+                $move = $file->move(public_path('storage/profil/crop'), $filenameSave);
+
+                if ($move) {
+                    $user->profil_picture = $filenameSave;
+                    $user->update();
+
+                    if (Storage::disk('s3')->exists('images/profil_picture/' . $user->profil_picture)) {
+                        Storage::disk('s3')->delete('images/profil_picture/' . $user->profil_picture);
+                    }
+                    Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents(public_path('storage/profil/crop/' . $filenameSave)));
+
+                    return response()->json(['status' => 1, 'msg' => 'Image has been cropped successfully.']);
+                } else {
+                    return response()->json(['status' => 0, 'msg' => 'Something went wrong, try again later']);
                 }
+
+                // $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
+
+                // if (!file_exists(public_path('storage/profil/crop'))) {
+                //     mkdir(public_path('storage/profil/crop'), 0755);
+                // }
 
                 // crop image
-                $img = Image::make(public_path('storage/profil/' . $filenameSave));
-                $croppath = public_path('storage/profil/crop/' . $filenameSave);
+                // $img = Image::make(public_path('storage/profil/' . $filenameSave));
+                // $croppath = public_path('storage/profil/crop/' . $filenameSave);
 
-                $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
-                $img->save($croppath);
+                // $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
+                // $img->save($croppath);
 
-                if (Storage::disk('s3')->exists('images/profil_picture/' . $user->profil_picture)) {
-                    Storage::disk('s3')->delete('images/profil_picture/' . $user->profil_picture);
-                }
-                Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents(public_path('storage/profil/crop/' . $filenameSave)));
-                unlink(public_path('storage/profil/' . $filenameSave));
                 unlink(public_path('storage/profil/crop/' . $filenameSave));
 
-                $user->profil_picture = $filenameSave;
             }
         }
-        $user->update();
 
         return redirect(route('profil', Auth::user()->id));
     }
