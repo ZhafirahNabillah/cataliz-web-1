@@ -129,6 +129,17 @@
                               </div>
                               <div id="sub-topic-{{ $sub_topic->id }}" role="tabpanel" class="collapse">
                                 <div class="card-body">
+
+                                  @if ($message = Session::get('success'))
+                                  <div class="alert alert-success alert-dissmisable">
+                                      <h4 class="alert-heading">Success</h4>
+                                      <div class="alert-body">{{ $message }}</div>
+                                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                          <span aria-hidden="true">×</span>
+                                      </button>
+                                  </div>
+                                  @endif
+
                                   @can('create-topic')
                                   <div class="text-left">
                                     {{-- <button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="{{ $sub_topic->id }}">
@@ -143,6 +154,7 @@
                                       <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
                                       <div class="col-sm-4">
                                         <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
+                                        <a href="{{ $lesson->meeting->first()->meeting_url }}" class="btn btn-sm btn-primary">URL</a>
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>
                                       </div>
                                     </div>
@@ -284,6 +296,10 @@
 <script type="text/javascript">
   // popover
   $(function() {
+    var collapse_id = $(location).attr('hash');
+    console.log(collapse_id);
+    $(collapse_id).collapse('show');
+
     $('[data-toggle="popover"]').popover({
       html: true,
       trigger: 'hover',
@@ -470,11 +486,12 @@
     });
 
     function append_sub_topic(id, sub_topic) {
+      var base_url = window.location.origin;
       var sub_topic_html = '<div class="card" id="' + id + '">';
       sub_topic_html += '<div class="card-header" data-toggle="collapse" role="button" data-target="#sub-topic-' + id + '" aria-expanded="false" aria-controls="collapse1"><span class="lead collapse-title"><b>' + sub_topic + '</b></span></div>';
       sub_topic_html += '<div id="sub-topic-' + id + '" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">';
       sub_topic_html += '<div class="card-body">';
-      sub_topic_html += '<div class="text-left"><button type="button" class="btn btn-primary create-lesson-btn mb-1" data-toggle="modal" data-id="' + id + '">New Materi</button></div>';
+      sub_topic_html += '<div class="text-left"><a href="'+base_url+'/lesson/create?sub_topic='+id+'" class="btn btn-primary mb-1">New Lesson</a></div>';
       sub_topic_html += '<div class="lesson-wrapper-' + id + '">'
       sub_topic_html += '</div>';
       sub_topic_html += '</div>';
