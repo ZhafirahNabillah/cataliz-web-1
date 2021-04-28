@@ -36,6 +36,15 @@ class ProfileController extends Controller
         }
     }
 
+    public function profil_detail($id)
+    {
+        $user = User::where('id', Auth::user()->id)->first();
+        $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
+        $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
+
+        return view('profile.detail', compact('user', 'contents', 'contents_bg'));
+    }
+
     public function simpan_password(Request $request, $id)
     {
         $request->validate([
@@ -121,7 +130,6 @@ class ProfileController extends Controller
                 // $img->save($croppath);
 
                 unlink(public_path('storage/profil/crop/' . $filenameSave));
-
             }
         }
 

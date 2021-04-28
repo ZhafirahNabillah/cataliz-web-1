@@ -92,6 +92,7 @@ Route::middleware(['auth'])->group(function () {
 //Profile Controller
 Route::middleware(['auth'])->group(function () {
 	Route::get('/{id}/profil', [ProfileController::class, 'profil'])->name('profil');
+	Route::get('/{id}/profil/detail', [ProfileController::class, 'profil_detail'])->name('profil.detail');
 	Route::post('/{id}/change-password', [ProfileController::class, 'simpan_password'])->name('simpan_password');
 	Route::post('/{id}/update_profil', [ProfileController::class, 'update_profil'])->name('update_profil');
 	Route::post('/{id}/update_background', [ProfileController::class, 'update_background'])->name('update_background');
