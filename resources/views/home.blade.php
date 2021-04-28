@@ -746,7 +746,7 @@
                 <img class="rounded mx-auto d-block center"
                   src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted my-1">Total Topic</small>
-                <h2 class="font-weight-bolder text-center"># Topic</h2>
+                <h2 class="font-weight-bolder text-center">{{$total_topic}} Topic</h2>
               </div>
             </div>
           </a>
@@ -762,7 +762,7 @@
                 <img class="rounded mx-auto d-block center"
                   src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
                 <small class="card text-center text-muted my-1">Total Mentee</small>
-                <h2 class="font-weight-bolder text-center"># Mentee</h2>
+                <h2 class="font-weight-bolder text-center">{{$total_participant}} Mentee</h2>
               </div>
             </div>
           </a>

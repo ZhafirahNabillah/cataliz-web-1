@@ -23,6 +23,12 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_coach->givePermissionTo(['list-plan', 'create-plan', 'update-plan', 'delete-plan', 'detail-plan']);
         //give permission to coach to create,update,delete agendas
         $role_coach->givePermissionTo(['list-agenda', 'create-agenda', 'update-agenda', 'delete-agenda', 'detail-agenda']);
+        //give permission to coach to list and detail topic
+        $role_coach->givePermissionTo(['list-topic', 'detail-topic']);
+        //give permission to coach to list and detail exam
+        $role_coach->givePermissionTo(['list-exam', 'detail-exam']);
+        //give permission to coach to list and detail result
+        $role_coach->givePermissionTo(['list-result', 'detail-result']);
 
         $role_admin = Role::where('name', 'admin')->first();
 
@@ -49,6 +55,23 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_coachee->givePermissionTo(['list-agenda', 'detail-agenda']);
 
         $role_mentor = Role::where('name', 'mentor')->first();
+
+        //give permission to mentor to list and detail exam
+        $role_mentor->givePermissionTo(['list-topic', 'detail-topic']);
+        //give permission to mentor to list and detail exam
+        $role_mentor->givePermissionTo(['list-exam', 'detail-exam']);
+        //give permission to mentor to list and detail result
+        $role_mentor->givePermissionTo(['list-result', 'detail-result']);
+
         $role_trainer = Role::where('name', 'trainer')->first();
+
+        //give permission to mentor to list, create, update, delete and detail exam
+        $role_trainer->givePermissionTo(['list-topic', 'create-topic', 'update-topic', 'delete-topic', 'detail-topic']);
+        //give permission to mentor to list and detail exam
+        $role_trainer->givePermissionTo(['list-exam', 'detail-exam']);
+        //give permission to mentor to list and detail result
+        $role_trainer->givePermissionTo(['list-result', 'detail-result']);
+        //give permission to mentor to list, create, update, delete category
+        $role_trainer->givePermissionTo(['list-category', 'create-category', 'update-category', 'delete-category']);
     }
 }

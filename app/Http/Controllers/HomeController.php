@@ -141,11 +141,15 @@ class HomeController extends Controller
       $total_topic = Topic::where('trainer_id', auth()->user()->id)->count();
       $topic = Topic::where('trainer_id', auth()->user()->id)->pluck('id');
       $user = Exam_result::whereIn('topic_id', $topic)->pluck('user_id');
-      $total_participant = Client::whereIn('id', $user)->count();
+      $total_participant = Client::whereIn('user_id', $user)->count();
       // return $total_participant;
       return view('home', compact('total_topic', 'total_participant'));
     } else {
-      return view('home');
+      $total_topic = Topic::count();
+      $topic = Topic::all()->pluck('id');
+      $user = Exam_result::whereIn('topic_id', $topic)->pluck('user_id');
+      $total_participant = Client::whereIn('user_id', $user)->count();
+      return view('home', compact('total_topic', 'total_participant'));
     }
   }
 

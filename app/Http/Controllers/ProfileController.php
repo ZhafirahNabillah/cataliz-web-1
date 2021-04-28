@@ -111,6 +111,7 @@ class ProfileController extends Controller
                     }
                     Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents(public_path('storage/profil/crop/' . $filenameSave)));
 
+                    unlink(public_path('storage/profil/crop/' . $filenameSave));
                     return response()->json(['status' => 1, 'msg' => 'Image has been cropped successfully.']);
                 } else {
                     return response()->json(['status' => 0, 'msg' => 'Something went wrong, try again later']);
@@ -129,7 +130,6 @@ class ProfileController extends Controller
                 // $img->crop($request->input('w'), $request->input('h'), $request->input('x1'), $request->input('y1'));
                 // $img->save($croppath);
 
-                unlink(public_path('storage/profil/crop/' . $filenameSave));
             }
         }
 
