@@ -28,4 +28,9 @@ class Exam_result extends Model
     public function answers() {
       return $this->hasMany('App\Models\Answer', 'exam_id');
     }
+
+    public function training_feedbacks()
+    {
+      return $this->hasMany('App\Models\Training_feedback', 'exam_id');
+    }
 }

@@ -77,6 +77,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Topic', 'trainer_id');
     }
 
+    public function Exams()
+    {
+        return $this->hasMany('App\Models\Exam_result', 'user_id');
+    }
+
+    public function training_feedbacks()
+    {
+        return $this->hasMany('App\Models\Training_feedback', 'owner_id');
+    }
+
     // protected $appends = ['profil_picture_url', 'background_picture_url'];
 
     // public function getAvatarUrlAttribute($value)

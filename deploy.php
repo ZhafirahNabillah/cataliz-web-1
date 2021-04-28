@@ -35,8 +35,10 @@ task('deploy:secrets', function () {
 });
 
 // Hosts
-host('app.cataliz.id') // Name of the server or domain
-    ->hostname('18.136.248.105') // Hostname or IP address
+//host('app.cataliz.id') // Name of the server or domain
+    //->hostname('52.205.83.22') // Hostname or IP address
+host('18.136.248.105') 
+    ->hostname('18.136.248.105') //IP Server akun Cataliz
     ->stage('staging') // Deployment stage (production, staging, etc)
     ->user('ubuntu') // SSH user
     ->set('deploy_path', '/var/www/html'); // Deploy path
@@ -66,7 +68,7 @@ task('deploy', [
     'cleanup',
     'php-symlink',
     #'update',
-    'restart-nginx',
+    'reload-nginx',
     'scheduler'
 ]);
 
@@ -79,7 +81,7 @@ task ('update', function(){
     run('sudo apt update');
 });
 
-task ('restart-nginx',function(){
+task ('reload-nginx',function(){
     run('sudo systemctl reload nginx');
 });
 

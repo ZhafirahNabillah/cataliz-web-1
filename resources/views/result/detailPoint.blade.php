@@ -8,6 +8,7 @@
     list-style-type: none;
   }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 @endpush
 
 @section('content')
@@ -50,8 +51,8 @@
         <div class="col-12">
           <div class="card">
             <div class="text-center card-title ">
-              <h3 class="mt-1"><b>{{$topic->topic}}</b></h3>
-              <p><span>created by {{$trainer_name->name}} </span></p>
+              <h3 class="mt-1"><b>{{ $topic->topic }}</b></h3>
+              <p><span>created by {{ $topic->trainer->name }} </span></p>
             </div>
 
             <div class="card-body">
@@ -59,17 +60,17 @@
               <div class="row mb-2">
                 <div class="col-sm-2">
                   @role('trainer')
-                  <b>Trainee name</b>
+                    <b>Trainee name</b>
                   @endrole
                   @role('mentor')
-                  <b>Mentee name</b>
+                    <b>Mentee name</b>
                   @endrole
                   @role('coach')
-                  <b>Coachee name</b>
+                    <b>Coachee name</b>
                   @endrole
                 </div>
                 <div class="col-sm-3">
-                  {{$client->name}}
+                  {{ $client->name }}
                 </div>
               </div>
               <div class="row mb-2">
@@ -77,7 +78,7 @@
                   <b>State</b>
                 </div>
                 <div class="col-sm-3">
-                  15/20
+                  Not yet available
                 </div>
               </div>
               <div class="row mb-2">
@@ -85,7 +86,7 @@
                   <b>Submitted at</b>
                 </div>
                 <div class="col-sm-3">
-                  Day, dd mm yyyy
+                  {{ $exam_result->attempt_submit }}
                 </div>
               </div>
               <div class="row mb-2">
@@ -93,15 +94,15 @@
                   <b>Score</b>
                 </div>
                 <div class="col-sm-3">
-                  {{$grade}} out of 100
+                  {{ $exam_result->grade }} out of 100
                 </div>
               </div>
               <div class="row mb-2">
                 <div class="col-sm-2">
-                  <b>Question</b>
+                  <b>Total Question</b>
                 </div>
                 <div class="col-sm-3">
-                  15 out of 20
+                  {{ $exam_result->answers->count() }}
                 </div>
               </div>
             </div>
@@ -115,8 +116,12 @@
                     role="tab" aria-selected="true">Review</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile"
-                    role="tab" aria-selected="false">Feedback to Mentee</a>
+                  @role('mentor')
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedback to Mentee</a>
+                  @endrole
+                  @role('trainer')
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedback to Trainee</a>
+                  @endrole
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#report" aria-controls="profile"
@@ -171,10 +176,8 @@
 
                 <!-- Panel Feedback -->
                 <div class="tab-pane" id="feedback" aria-labelledby="feedback-tab" role="tabpanel">
-
                   <div class="collapse-icon">
                     <div class="collapse-default">
-
                       <div class="card">
                         <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
                           data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
@@ -182,10 +185,17 @@
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
-                            <a href="javascript:;" class="createNewFeedback"><span data-feather="edit"></span></a>
+                            @empty ($feedback)
+                              <a href="javascript:;" class="createNewFeedback btn btn-primary">Create<span data-feather="edit"></span></a>
+                            @endempty
 
-                            <p>Feedback is not yet available</p>
-
+                            <div id="feedback_wrapper">
+                              @if($feedback)
+                                {!! $feedback->description !!}
+                              @else
+                                Feedback is not yet available
+                              @endif
+                            </div>
                             <!-- Modal Feedback-->
                             <div class="modal fade bd-example-modal-lg" id="modalCreateFeedback" tabindex="-1"
                               role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -198,28 +208,34 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <div class="form-group">
-                                      <label for="description">New Feedback</label>
-                                      <textarea name="description" id="description" cols="20" rows="20"
-                                        placeholder="Type your text here ..."></textarea>
-                                    </div>
+                                    <form id="feedbackForm">
+                                      <div class="form-group">
+                                        <label for="description">Feedback</label>
+                                        <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
+                                      </div>
+                                      @role('mentor')
+                                      <input type="hidden" name="to" value="mentee">
+                                      @endrole
+                                      @role('trainer')
+                                      <input type="hidden" name="to" value="trainee">
+                                      @endrole
+                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary saveFeedback">Submit</button>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <!-- /modal Feedback-->
-
                           </div>
                         </div>
                       </div>
                       <div class="card">
-                        <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
-                          data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                          <span class="lead collapse-title"><b>Meeting</b> <span data-feather="edit"></span> </span>
+                        <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                          <span class="lead collapse-title"><b>Meeting</b></span>
                         </div>
                         <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse show">
                           <div class="card-body">
@@ -304,19 +320,25 @@
                     <div class="collapse-default">
 
                       <div class="card">
-                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
-                          data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
-                          <span class="lead collapse-title"><b>Report</b> <span data-feather="edit"></span> </span>
+                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
+                          <span class="lead collapse-title"><b>Report</b></span>
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
-                            <a href="javascript:;" class="createNewReport text-right"><span
-                                data-feather="edit"></span></a>
-                            <p> Report is not yet available</p>
+                            @empty ($report)
+                              <a href="javascript:;" class="createNewReport btn btn-primary">Create<span data-feather="edit"></span></a>
+                            @endempty
 
-                            <!-- Modal Report-->
-                            <div class="modal fade bd-example-modal-lg" id="modalCreateReport" tabindex="-1"
-                              role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div id="report_wrapper">
+                              @if($report)
+                                {!! $report->description !!}
+                              @else
+                                Report is not yet available
+                              @endif
+                            </div>
+
+                            <!-- Modal Feedback-->
+                            <div class="modal fade bd-example-modal-lg" id="modalCreateReport" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -326,15 +348,18 @@
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                    <div class="form-group">
-                                      <label for="description">New Report</label>
-                                      <textarea name="description" id="description" cols="20" rows="20"
-                                        placeholder="Type your text here ..."></textarea>
-                                    </div>
+                                    <form id="reportForm">
+                                      <div class="form-group">
+                                        <label for="description">Report</label>
+                                        <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
+                                      </div>
+                                      <input type="hidden" name="to" value="coach">
+                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    </form>
                                   </div>
                                   <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-primary saveReport">Submit</button>
                                   </div>
                                 </div>
                               </div>
@@ -365,7 +390,6 @@
   @endsection
 
   @push('scripts')
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
   <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
@@ -382,6 +406,13 @@
         }
       })
     })
+
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
     // feedback
     $('body').on('click', '.createNewFeedback', function() {
       $('#modalHeading').html("Feedback to Mentee");
@@ -400,53 +431,104 @@
       $('#modalCreateReport').modal('show');
     });
 
+    // Feedback Submit
+    $('body').on('click', '.saveFeedback', function() {
+      var data = $('#feedbackForm').serialize();
+      $('#modalCreateFeedback').html('Submitting...');
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('training_feedback.store') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#modalCreateFeedback').modal('hide');
+          $('.feedbackForm').trigger("reset");
+          // $('.sub-topic-empty').empty();
+          // append_sub_topic(data.id, data.sub_topic);
+          $('#feedback_wrapper').html(data.description);
+          $('.createNewFeedback').hide();
+          Swal.fire({
+            icon: 'success',
+            title: 'Feedback saved successfully!',
+          });
+        },
+        error: function(reject) {
+          $('#modalCreateFeedback').html('Submit');
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.name) {
+          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.phone) {
+          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.email) {
+          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.roles) {
+          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+    // Report Submit
+    $('body').on('click', '.saveReport', function() {
+      var data = $('#reportForm').serialize();
+      $('.saveReport').html('Submitting...');
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('training_feedback.store') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#modalCreateReport').modal('hide');
+          $('#reportForm').trigger("reset");
+          // $('.sub-topic-empty').empty();
+          // append_sub_topic(data.id, data.sub_topic);
+          $('#report_wrapper').html(data.description);
+          $('.createNewReport').hide();
+          Swal.fire({
+            icon: 'success',
+            title: 'Feedback saved successfully!',
+          });
+        },
+        error: function(reject) {
+          $('#modalCreateReport').html('Submit');
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.name) {
+          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.phone) {
+          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.email) {
+          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.roles) {
+          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
 
     // textarea
     tinymce.init({
       selector: 'textarea',
-
-      image_class_list: [{
-        title: 'img-fluid',
-        value: 'img-fluid'
-      }, ],
       height: 283,
       setup: function(editor) {
         editor.on('init change', function() {
           editor.save();
         });
-      },
-      plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools"
-      ],
-      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
-
-      image_title: true,
-      automatic_uploads: true,
-      images_upload_url: '/docs/upload_image',
-      file_picker_types: 'image',
-      file_picker_callback: function(cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.onchange = function() {
-          var file = this.files[0];
-
-          var reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = function() {
-            var id = 'blobid' + (new Date()).getTime();
-            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-            var base64 = reader.result.split(',')[1];
-            var blobInfo = blobCache.create(id, file, base64);
-            blobCache.add(blobInfo);
-            cb(blobInfo.blobUri(), {
-              title: file.name
-            });
-          };
-        };
-        input.click();
       }
     });
   </script>

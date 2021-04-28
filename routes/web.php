@@ -25,6 +25,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ResultController;
+use App\Http\Controllers\TrainingFeedbackController;
 
 
 /*
@@ -204,7 +205,7 @@ Route::middleware(['auth'])->group(function () {
 //Lesson Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('lesson', LessonController::class);
-	Route::post('/lesson/video_upload', [LessonController::class, 'lesson_video_upload'])->name('lesson.video_upload');
+	// Route::post('/lesson/video_upload', [LessonController::class, 'lesson_video_upload'])->name('lesson.video_upload');
 	Route::post('/chunk_upload', [LessonController::class, 'lesson_chunk_upload'])->name('lesson.chunk_upload');
 });
 
@@ -216,4 +217,9 @@ Route::middleware(['auth'])->group(function () {
 // Result Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('result', ResultController::class);
+});
+
+// Training Feedback Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('training_feedback', TrainingFeedbackController::class);
 });

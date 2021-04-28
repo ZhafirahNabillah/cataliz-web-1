@@ -60,17 +60,6 @@ class ResultController extends Controller
   }
 
   /**
-   * Store a newly created resource in storage.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
-   */
-  public function store(Request $request)
-  {
-    //
-  }
-
-  /**
    * Display the specified resource.
    *
    * @param  int  $id
@@ -78,20 +67,23 @@ class ResultController extends Controller
    */
   public function show($id)
   {
+    //
     $exam_result = Exam_result::find($id);
-    // return $exam_result;
-    $topic = $exam_result->topic->first();
-    $trainer_id = $exam_result->topic->trainer_id;
-    $trainer_name = User::where('id', $trainer_id)->first();
-    // return $trainer_name;
+    $topic = $exam_result->topic;
     $user = $exam_result->user;
     $client = $user->client;
-    $grade = $exam_result->grade;
     $answers = $exam_result->answers;
-    $name = auth()->user()->name;
+    if (auth()->user()->hasRole('trainer')) {
+      $feedback = $exam_result->training_feedbacks()->where('from', 'trainer')->where('to', 'trainee')->first();
+      $report = $exam_result->training_feedbacks()->where('from', 'trainer')->where('to', 'coach')->first();
+    } elseif (auth()->user()->hasRole('mentor')) {
+      $feedback = $exam_result->training_feedbacks()->where('from', 'mentor')->where('to', 'mentee')->first();
+      $report = $exam_result->training_feedbacks()->where('from', 'mentor')->where('to', 'coach')->first();
+    }
 
-    return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'name', 'grade','trainer_name'));
+    return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'feedback', 'report'));
   }
+
 
   /**
    * Show the form for editing the specified resource.
