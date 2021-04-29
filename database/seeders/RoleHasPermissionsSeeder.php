@@ -26,7 +26,7 @@ class RoleHasPermissionsSeeder extends Seeder
         //give permission to coach to list and detail topic
         $role_coach->givePermissionTo(['list-topic', 'detail-topic']);
         //give permission to coach to list and detail exam
-        $role_coach->givePermissionTo(['list-exam', 'detail-exam']);
+        $role_coach->givePermissionTo(['list-exercise', 'detail-exercise']);
         //give permission to coach to list and detail result
         $role_coach->givePermissionTo(['list-result', 'detail-result']);
 
@@ -59,7 +59,7 @@ class RoleHasPermissionsSeeder extends Seeder
         //give permission to mentor to list and detail exam
         $role_mentor->givePermissionTo(['list-topic', 'detail-topic']);
         //give permission to mentor to list and detail exam
-        $role_mentor->givePermissionTo(['list-exam', 'detail-exam']);
+        $role_mentor->givePermissionTo(['list-exercise', 'detail-exercise']);
         //give permission to mentor to list and detail result
         $role_mentor->givePermissionTo(['list-result', 'detail-result']);
 
@@ -68,7 +68,7 @@ class RoleHasPermissionsSeeder extends Seeder
         //give permission to mentor to list, create, update, delete and detail exam
         $role_trainer->givePermissionTo(['list-topic', 'create-topic', 'update-topic', 'delete-topic', 'detail-topic']);
         //give permission to mentor to list and detail exam
-        $role_trainer->givePermissionTo(['list-exam', 'detail-exam']);
+        $role_trainer->givePermissionTo(['list-exercise', 'detail-exercise']);
         //give permission to mentor to list and detail result
         $role_trainer->givePermissionTo(['list-result', 'detail-result']);
         //give permission to mentor to list, create, update, delete category
