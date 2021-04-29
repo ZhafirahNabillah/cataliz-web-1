@@ -30,9 +30,11 @@
 							<ol class="breadcrumb">
 								<li class="breadcrumb-item"><a href="/">Home</a>
 								</li>
-								<li class="breadcrumb-item"><a href="">Profile</a>
+								<li class="breadcrumb-item"><a href="{{route('profil', $user->id)}}">Profile</a>
 								</li>
-								<li class="breadcrumb-item active">{{$user->name}}
+								<li class="breadcrumb-item">{{$user->name}}
+								</li>
+								<li class="breadcrumb-item active">Detail
 								</li>
 							</ol>
 						</div>
