@@ -79,6 +79,9 @@ class ResultController extends Controller
     } elseif (auth()->user()->hasRole('mentor')) {
       $feedback = $exam_result->training_feedbacks()->where('from', 'mentor')->where('to', 'mentee')->first();
       $report = $exam_result->training_feedbacks()->where('from', 'mentor')->where('to', 'coach')->first();
+    } elseif (auth()->user()->hasRole('coach')) {
+      $feedback = null;
+      $report = $exam_result->training_feedbacks()->where('to','coach')->first();
     }
     $meetings = $exam_result->training_meeting;
 

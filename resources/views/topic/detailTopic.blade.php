@@ -252,6 +252,7 @@
                     </div>
                 </div>
               </div>
+
               <div class="tab-pane" id="participant" aria-labelledby="participant-tab" role="tabpanel">
                   <div class="card-header py-0">
                     <h4 class="card-title"><b>Detail Participant</b>
@@ -346,7 +347,15 @@
       $('#create-sub-topic-modal').modal('show');
     });
 
+    var sub_topic_active = 0;
+    $('body').on('click', '.create-lesson-btn', function() {
+      sub_topic_active = $(this).data('id');
+      $('#create-lesson-modal').modal('show');
+      $('#sub_topic_id').val(sub_topic_active);
+    });
+
     $('body').on('click', '.playLessonBtn', function() {
+      console.log('tes');
       var lesson_id = $(this).data('id');
       $.get("" + '/lesson/' + lesson_id, function(data) {
         $('#lesson-title').html(data.lesson_name);
@@ -357,18 +366,11 @@
       })
     });
 
-    var sub_topic_active = 0;
-    $('body').on('click', '.create-lesson-btn', function() {
-      sub_topic_active = $(this).data('id');
-      $('#create-lesson-modal').modal('show');
-      $('#sub_topic_id').val(sub_topic_active);
-    });
-
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
+    // $.ajaxSetup({
+    //   headers: {
+    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //   }
+    // });
 
     $('#save-sub-topic-btn').click(function() {
       var data = $('.create-sub-topic-form').serialize();
@@ -411,79 +413,79 @@
       });
     });
 
-    $('#save-lesson-btn').click(function () {
-      $('.create-lesson-form').submit();
-          // var data = $('.create-lesson-form').serialize();
-          // var formData = new FormData(document.getElementById('create-lesson-form'));
-          // console.log(formData);
-          // $(this).html('Submitting...')
-          //
-          // $.ajax({
-          //   url: "",
-          //   type: "POST",
-          //   data: formData,
-          //   dataType:'JSON',
-          //   cache:false,
-          //   contentType: false,
-          //   processData: false,
-          //   success: function(data) {
-          //     console.log(data);
-          //     $('#create-lesson-modal').modal('hide');
-          //     $('.create-lesson-form').trigger("reset");
-          //     // $('.sub-topic-empty').empty();
-          //     append_lesson(data.id, data.lesson_name, data.sub_topic_id);
-          //     Swal.fire({
-          //       icon: 'success',
-          //       title: 'Account updated successfully!',
-          //     });
-          //   },
-          //   error: function(reject) {
-          //     $('#saveBtn').html('Submit');
-          //     // if (reject.status === 422) {
-          //     //   var errors = JSON.parse(reject.responseText);
-          //     //   if (errors.name) {
-          //     //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
-          //     //   }
-          //     //   if (errors.phone) {
-          //     //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
-          //     //   }
-          //     //   if (errors.email) {
-          //     //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
-          //     //   }
-          //     //   if (errors.roles) {
-          //     //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
-          //     //   }
-          //     // }
-          //   }
-          // });
-    });
+    // $('#save-lesson-btn').click(function () {
+    //   $('.create-lesson-form').submit();
+    //       // var data = $('.create-lesson-form').serialize();
+    //       // var formData = new FormData(document.getElementById('create-lesson-form'));
+    //       // console.log(formData);
+    //       // $(this).html('Submitting...')
+    //       //
+    //       // $.ajax({
+    //       //   url: "",
+    //       //   type: "POST",
+    //       //   data: formData,
+    //       //   dataType:'JSON',
+    //       //   cache:false,
+    //       //   contentType: false,
+    //       //   processData: false,
+    //       //   success: function(data) {
+    //       //     console.log(data);
+    //       //     $('#create-lesson-modal').modal('hide');
+    //       //     $('.create-lesson-form').trigger("reset");
+    //       //     // $('.sub-topic-empty').empty();
+    //       //     append_lesson(data.id, data.lesson_name, data.sub_topic_id);
+    //       //     Swal.fire({
+    //       //       icon: 'success',
+    //       //       title: 'Account updated successfully!',
+    //       //     });
+    //       //   },
+    //       //   error: function(reject) {
+    //       //     $('#saveBtn').html('Submit');
+    //       //     // if (reject.status === 422) {
+    //       //     //   var errors = JSON.parse(reject.responseText);
+    //       //     //   if (errors.name) {
+    //       //     //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+    //       //     //   }
+    //       //     //   if (errors.phone) {
+    //       //     //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+    //       //     //   }
+    //       //     //   if (errors.email) {
+    //       //     //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+    //       //     //   }
+    //       //     //   if (errors.roles) {
+    //       //     //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+    //       //     //   }
+    //       //     // }
+    //       //   }
+    //       // });
+    // });
 
-    var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    // var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    //
+    // Dropzone.autoDiscover = false;
+    // var myDropzone = new Dropzone(".dropzone",{
+    //     // maxFilesize: 20,  // 3 mb
+    //     // acceptedFiles: ".mp4, .mkv",
+    //     // chunking: true,
+    //     // chunkSize: 1024,
+    //     // retryChunks: true,
+    //     // retryChunksLimit: 3
+    //     acceptedFiles: ".mp4, .mkv",
+    //     chunking: true,
+    //     method: "POST",
+    //     maxFilesize: 400000000,
+    //     chunkSize: 1000000,
+    //     // If true, the individual chunks of a file are being uploaded simultaneously.
+    //     parallelChunkUploads: true
+    // });
 
-    Dropzone.autoDiscover = false;
-    var myDropzone = new Dropzone(".dropzone",{
-        // maxFilesize: 20,  // 3 mb
-        // acceptedFiles: ".mp4, .mkv",
-        // chunking: true,
-        // chunkSize: 1024,
-        // retryChunks: true,
-        // retryChunksLimit: 3
-        acceptedFiles: ".mp4, .mkv",
-        chunking: true,
-        method: "POST",
-        maxFilesize: 400000000,
-        chunkSize: 1000000,
-        // If true, the individual chunks of a file are being uploaded simultaneously.
-        parallelChunkUploads: true
-    });
+    // myDropzone.on("sending", function(file, xhr, formData) {
+    //    formData.append("_token", {{ csrf_token() }});
+    // });
 
-    myDropzone.on("sending", function(file, xhr, formData) {
-       formData.append("_token", {{ csrf_token() }});
-    });
-
-    myDropzone.on("success", function(file, response) {
-       console.log(response);
-    });
+    // myDropzone.on("success", function(file, response) {
+    //    console.log(response);
+    // });
 
     function append_sub_topic(id, sub_topic) {
       var base_url = window.location.origin;
@@ -501,17 +503,17 @@
       $('.sub-topic-wrapper').append(sub_topic_html);
     }
 
-    function append_lesson(id, lesson_name, sub_topic_id) {
-      var lesson_html = '<div class="row mb-1 align-items-center lesson-' + id + '">';
-      lesson_html += '<div class="col-sm-4"><b>' + lesson_name + '</b></div>';
-      lesson_html += '<div class="col-sm-4">';
-      lesson_html += '<button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="' + id + '" data-toggle="modal">Play</button>';
-      lesson_html += '<button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>';
-      lesson_html += '</div>';
-      lesson_html += '</div>';
-
-      $('.lesson-wrapper-' + sub_topic_id).append(lesson_html);
-    }
+    // function append_lesson(id, lesson_name, sub_topic_id) {
+    //   var lesson_html = '<div class="row mb-1 align-items-center lesson-' + id + '">';
+    //   lesson_html += '<div class="col-sm-4"><b>' + lesson_name + '</b></div>';
+    //   lesson_html += '<div class="col-sm-4">';
+    //   lesson_html += '<button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="' + id + '" data-toggle="modal">Play</button>';
+    //   lesson_html += '<button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button>';
+    //   lesson_html += '</div>';
+    //   lesson_html += '</div>';
+    //
+    //   $('.lesson-wrapper-' + sub_topic_id).append(lesson_html);
+    // }
   });
 </script>
 @endpush
