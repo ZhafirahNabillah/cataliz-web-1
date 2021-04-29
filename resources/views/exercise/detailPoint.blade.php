@@ -23,7 +23,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active"><a href="#">Detail Point</a>
+                <li class="breadcrumb-item active">Detail Point</a>
                 </li>
               </ol>
             </div>

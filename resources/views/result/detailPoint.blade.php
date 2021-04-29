@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Topic')
+@section('title','Result')
 
 @push('styles')
 <style media="screen">

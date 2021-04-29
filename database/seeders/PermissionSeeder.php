@@ -51,5 +51,28 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'list-class']);
         Permission::create(['name' => 'create-class']);
         Permission::create(['name' => 'detail-class']);
+
+        // crud exercise
+        Permission::create(['name' => 'list-exercise']);
+        Permission::create(['name' => 'create-exercise']);
+        Permission::create(['name' => 'update-exercise']);
+        Permission::create(['name' => 'delete-exercise']);
+
+        // crud topic
+        Permission::create(['name' => 'list-topic']);
+        Permission::create(['name' => 'create-topic']);
+        Permission::create(['name' => 'update-topic']);
+        Permission::create(['name' => 'delete-topic']);
+
+        // crud result
+        Permission::create(['name' => 'list-result']);
+        Permission::create(['name' => 'create-result']);
+        Permission::create(['name' => 'detail-result']);
+
+        // crud category
+        Permission::create(['name' => 'list-category']);
+        Permission::create(['name' => 'create-category']);
+        Permission::create(['name' => 'update-category']);
+        Permission::create(['name' => 'delete-category']);
     }
 }
