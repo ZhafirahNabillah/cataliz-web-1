@@ -26,9 +26,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Result
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
-                alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="This page displays a list of the exam results that the mentee has obtained." />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="This page displays a list of the exam results that the mentee has obtained." />
 
             </h2>
             <div class="breadcrumb-wrapper">
@@ -59,14 +57,14 @@
 
               <div class="row mb-2">
                 <div class="col-sm-2">
-                  @role('trainer')
-                    <b>Trainee name</b>
+                  @role('trainer|admin')
+                  <b>Trainee name</b>
                   @endrole
                   @role('mentor')
-                    <b>Mentee name</b>
+                  <b>Mentee name</b>
                   @endrole
                   @role('coach')
-                    <b>Coachee name</b>
+                  <b>Coachee name</b>
                   @endrole
                 </div>
                 <div class="col-sm-3">
@@ -112,8 +110,7 @@
             <div class="card-body">
               <ul class="nav nav-tabs justify-content-center" role="tablist">
                 <li class="nav-item">
-                  <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#review" aria-controls="coach"
-                    role="tab" aria-selected="true">Review</a>
+                  <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#review" aria-controls="coach" role="tab" aria-selected="true">Review</a>
                 </li>
                 <li class="nav-item">
                   @role('mentor')
@@ -124,8 +121,7 @@
                   @endrole
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#report" aria-controls="profile"
-                    role="tab" aria-selected="false">Report to Coach</a>
+                  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#report" aria-controls="profile" role="tab" aria-selected="false">Report to Coach</a>
                 </li>
 
               </ul>
@@ -137,12 +133,10 @@
                     <div class="collapse-default">
                       @foreach ($answers as $answer)
                       <div class="card">
-                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
-                          data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
+                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
                           <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b></span>
                         </div>
-                        <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1"
-                          class="collapse">
+                        <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                           <div class="card-body">
                             <p><b>Score:{{ $answer->question->weight }}</b></p>
                             <div class="question d-inline-flex">
@@ -179,26 +173,24 @@
                   <div class="collapse-icon">
                     <div class="collapse-default">
                       <div class="card">
-                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button"
-                          data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
+                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
                           <span class="lead collapse-title"><b>Feedback</b></span>
                         </div>
                         <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
                           <div class="card-body">
                             @empty ($feedback)
-                              <a href="javascript:;" class="createNewFeedback btn btn-primary">Create<span data-feather="edit"></span></a>
+                            <a href="javascript:;" class="createNewFeedback btn btn-primary">Create<span data-feather="edit"></span></a>
                             @endempty
 
                             <div id="feedback_wrapper">
                               @if($feedback)
-                                {!! $feedback->description !!}
+                              {!! $feedback->description !!}
                               @else
-                                Feedback is not yet available
+                              Feedback is not yet available
                               @endif
                             </div>
                             <!-- Modal Feedback-->
-                            <div class="modal fade bd-example-modal-lg" id="modalCreateFeedback" tabindex="-1"
-                              role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                            <div class="modal fade bd-example-modal-lg" id="modalCreateFeedback" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
                                 <div class="modal-content">
                                   <div class="modal-header">
@@ -244,367 +236,362 @@
                             <div id="meeting_wrapper">
                               @forelse ($meetings as $meeting)
                                 <div class="card" id="meeting-{{ $meeting->id }}">
-                                  <div class="row">
-                                    <div class="col-sm-6">
-                                      <strong>Time: </strong>{{ $meeting->date_time }}
-                                    </div>
-                                    <div class="col-sm-6">
-                                      <strong>Media: </strong>{{ $meeting->media }}
-                                    </div>
-                                  </div>
-                                </div>
-                              @empty
-                                <div id="meeting_empty">
-                                  The meeting has not been scheduled
-                                </div>
-                              @endforelse
-                            </div>
-
-                            <!-- Modal Meeting-->
-                            <div class="modal fade bd-example-modal-lg" id="modalCreateMeeting" tabindex="-1"
-                              role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Meeting</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <form id="meetingForm">
-                                      <div class="row">
-                                        <div class="col-md-6">
-                                          <div class="form-group">
-                                            <label for="meetingDate">Meeting Date</label>
-                                            <input type="date" class="form-control" name="date" id="date" value=""
-                                              placeholder="Select Meeting Date...">
-                                          </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                          <div class="form-group">
-                                            <label for="meetingTime">Meeting Time</label>
-                                            <label for="appt"></label>
-                                            <input class="form-control" type="time" id="time" name="time">
-                                          </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                          <div class="form-group">
-                                            <label for="meetingTime">Meeting Media</label>
-                                            <select class="form-select form-control" name="media">
-                                              <option selected disabled>Select your media</option>
-                                              <option value="zoom">Zoom</option>
-                                              <option value="whatsapp">WhatsApp</option>
-                                            </select>
-                                          </div>
-                                        </div>
-
-                                        <div class="col-md-12">
-                                          <div class="form-group">
-                                            <label for="meetingTime">Media URL</label>
-                                            <input class="form-control" id="" type="text" name="meeting_url"
-                                              placeholder="Your url link ..."/>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
-                                    </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary submitMeetingBtn">Submit</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /modal Meeting-->
-
-                          </div>
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <strong>Time: </strong>{{ $meeting->date_time }}
                         </div>
-                      </div> --}}
-                    </div>
-                  </div>
-
-                </div>
-                <!-- /feedback-->
-
-
-                <!-- Panel Report -->
-                <div class="tab-pane" id="report" aria-labelledby="report-tab" role="tabpanel">
-                  <div class="collapse-icon">
-                    <div class="collapse-default">
-
-                      <div class="card">
-                        <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
-                          <span class="lead collapse-title"><b>Report</b></span>
-                        </div>
-                        <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
-                          <div class="card-body">
-                            @empty ($report)
-                              <a href="javascript:;" class="createNewReport btn btn-primary">Create<span data-feather="edit"></span></a>
-                            @endempty
-
-                            <div id="report_wrapper">
-                              @if($report)
-                                {!! $report->description !!}
-                              @else
-                                Report is not yet available
-                              @endif
-                            </div>
-
-                            <!-- Modal Feedback-->
-                            <div class="modal fade bd-example-modal-lg" id="modalCreateReport" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Report to Coach</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                    </button>
-                                  </div>
-                                  <div class="modal-body">
-                                    <form id="reportForm">
-                                      <div class="form-group">
-                                        <label for="description">Report</label>
-                                        <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
-                                      </div>
-                                      <input type="hidden" name="to" value="coach">
-                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
-                                    </form>
-                                  </div>
-                                  <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary saveReport">Submit</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!-- /modal Feedback-->
-                          </div>
+                        <div class="col-sm-6">
+                          <strong>Media: </strong>{{ $meeting->media }}
                         </div>
                       </div>
+                    </div>
+                    @empty
+                    <div id="meeting_empty">
+                      The meeting has not been scheduled
+                    </div>
+                    @endforelse
+                  </div>
 
+                  <!-- Modal Meeting-->
+                  <div class="modal fade bd-example-modal-lg" id="modalCreateMeeting" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Meeting</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="meetingForm">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="meetingDate">Meeting Date</label>
+                                  <input type="date" class="form-control" name="date" id="date" value="" placeholder="Select Meeting Date...">
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="meetingTime">Meeting Time</label>
+                                  <label for="appt"></label>
+                                  <input class="form-control" type="time" id="time" name="time">
+                                </div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label for="meetingTime">Meeting Media</label>
+                                  <select class="form-select form-control" name="media">
+                                    <option selected disabled>Select your media</option>
+                                    <option value="zoom">Zoom</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div class="col-md-12">
+                                <div class="form-group">
+                                  <label for="meetingTime">Media URL</label>
+                                  <input class="form-control" id="" type="text" name="meeting_url" placeholder="Your url link ..." />
+                                </div>
+                              </div>
+                            </div>
+                            <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary submitMeetingBtn">Submit</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
+                  <!-- /modal Meeting-->
+
                 </div>
-                <!-- /Report -->
+              </div>
+            </div> --}}
+          </div>
+        </div>
+
+      </div>
+      <!-- /feedback-->
+
+
+      <!-- Panel Report -->
+      <div class="tab-pane" id="report" aria-labelledby="report-tab" role="tabpanel">
+        <div class="collapse-icon">
+          <div class="collapse-default">
+
+            <div class="card">
+              <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse" aria-expanded="false" aria-controls="collapse1">
+                <span class="lead collapse-title"><b>Report</b></span>
+              </div>
+              <div id="collapse" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show">
+                <div class="card-body">
+                  @empty ($report)
+                  <a href="javascript:;" class="createNewReport btn btn-primary">Create<span data-feather="edit"></span></a>
+                  @endempty
+
+                  <div id="report_wrapper">
+                    @if($report)
+                    {!! $report->description !!}
+                    @else
+                    Report is not yet available
+                    @endif
+                  </div>
+
+                  <!-- Modal Feedback-->
+                  <div class="modal fade bd-example-modal-lg" id="modalCreateReport" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Report to Coach</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <form id="reportForm">
+                            <div class="form-group">
+                              <label for="description">Report</label>
+                              <textarea name="description" id="description" cols="20" rows="20" placeholder="Type your text here ..."></textarea>
+                            </div>
+                            <input type="hidden" name="to" value="coach">
+                            <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary saveReport">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /modal Feedback-->
+                </div>
               </div>
             </div>
-          </div>
-          <!-- /panel  -->
 
+          </div>
         </div>
       </div>
+      <!-- /Report -->
     </div>
   </div>
-  <!-- /panel coachee -->
+</div>
+<!-- /panel  -->
+
+</div>
+</div>
+</div>
+</div>
+<!-- /panel coachee -->
 
 
 
-  <!-- END: Content-->
-  @endsection
+<!-- END: Content-->
+@endsection
 
-  @push('scripts')
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-  <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
-    referrerpolicy="origin"></script>
-  <script type="text/javascript">
-    // popover
-    $(function() {
-      $('[data-toggle="popover"]').popover({
-        html: true,
-        trigger: 'hover',
-        placement: 'top',
-        content: function() {
-          return '<img src="' + $(this).data('img') + '" />';
-        }
-      })
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+<script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+  // popover
+  $(function() {
+    $('[data-toggle="popover"]').popover({
+      html: true,
+      trigger: 'hover',
+      placement: 'top',
+      content: function() {
+        return '<img src="' + $(this).data('img') + '" />';
+      }
     })
+  })
 
-    $.ajaxSetup({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      }
-    });
-
-    // feedback
-    $('body').on('click', '.createNewFeedback', function() {
-      $('#modalHeading').html("Feedback to Mentee");
-      $('#modalCreateFeedback').modal('show');
-    });
-
-    // meeting
-    $('body').on('click', '.createNewMeeting', function() {
-      $('#modalHeading').html("Meeting");
-      $('#modalCreateMeeting').modal('show');
-    });
-
-    // Report
-    $('body').on('click', '.createNewReport', function() {
-      $('#modalHeading').html("Meeting");
-      $('#modalCreateReport').modal('show');
-    });
-
-    // Feedback Submit
-    $('body').on('click', '.saveFeedback', function() {
-      var data = $('#feedbackForm').serialize();
-      $('#modalCreateFeedback').html('Submitting...');
-      console.log(data);
-
-      $.ajax({
-        data: data,
-        url: "{{ route('training_feedback.store') }}",
-        type: "POST",
-        dataType: 'json',
-        success: function(data) {
-          console.log(data);
-          $('#modalCreateFeedback').modal('hide');
-          $('.feedbackForm').trigger("reset");
-          // $('.sub-topic-empty').empty();
-          // append_sub_topic(data.id, data.sub_topic);
-          $('#feedback_wrapper').html(data.description);
-          $('.createNewFeedback').hide();
-          Swal.fire({
-            icon: 'success',
-            title: 'Feedback saved successfully!',
-          });
-        },
-        error: function(reject) {
-          $('#modalCreateFeedback').html('Submit');
-          // if (reject.status === 422) {
-          //   var errors = JSON.parse(reject.responseText);
-          //   if (errors.name) {
-          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.phone) {
-          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.email) {
-          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.roles) {
-          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
-          //   }
-          // }
-        }
-      });
-    });
-
-    // Report Submit
-    $('body').on('click', '.saveReport', function() {
-      var data = $('#reportForm').serialize();
-      $('.saveReport').html('Submitting...');
-      console.log(data);
-
-      $.ajax({
-        data: data,
-        url: "{{ route('training_feedback.store') }}",
-        type: "POST",
-        dataType: 'json',
-        success: function(data) {
-          console.log(data);
-          $('#modalCreateReport').modal('hide');
-          $('#reportForm').trigger("reset");
-          // $('.sub-topic-empty').empty();
-          // append_sub_topic(data.id, data.sub_topic);
-          $('#report_wrapper').html(data.description);
-          $('.createNewReport').hide();
-          Swal.fire({
-            icon: 'success',
-            title: 'Feedback saved successfully!',
-          });
-        },
-        error: function(reject) {
-          $('#modalCreateReport').html('Submit');
-          // if (reject.status === 422) {
-          //   var errors = JSON.parse(reject.responseText);
-          //   if (errors.name) {
-          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.phone) {
-          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.email) {
-          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.roles) {
-          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
-          //   }
-          // }
-        }
-      });
-    });
-
-    //Meeting Submit
-    $('body').on('click', '.submitMeetingBtn', function() {
-      var data = $('#meetingForm').serialize();
-      $('.submitMeetingBtn').html('Submitting...');
-      console.log(data);
-
-      $.ajax({
-        data: data,
-        url: "{{ route('training_meeting.store') }}",
-        type: "POST",
-        dataType: 'json',
-        success: function(data) {
-          console.log(data);
-          $('#modalCreateMeeting').modal('hide');
-          $('#meetingForm').trigger("reset");
-          // $('.sub-topic-empty').empty();
-          // append_sub_topic(data.id, data.sub_topic);
-          // $('#meeting_wrapper').html(data.description);
-          append_meeting(data.date_time, data.media, data.id);
-          // $('.createNewMeeting').hide();
-          Swal.fire({
-            icon: 'success',
-            title: 'Meeting created successfully!',
-          });
-        },
-        error: function(reject) {
-          $('#modalCreateMeeting').html('Submit');
-          // if (reject.status === 422) {
-          //   var errors = JSON.parse(reject.responseText);
-          //   if (errors.name) {
-          //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.phone) {
-          //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.email) {
-          //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
-          //   }
-          //   if (errors.roles) {
-          //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
-          //   }
-          // }
-        }
-      });
-    });
-
-    function append_meeting(date_time, media, meeting_id)
-    {
-      var meeting_html = '<div class="card" id="meeting'+meeting_id+'"><div class="row">';
-      meeting_html += '<div class="col-sm-6"><strong>Time: </strong>'+date_time+'</div>';
-      meeting_html += '<div class="col-sm-6"><strong>Media: </strong>'+media+'</div>';
-      meeting_html += '</div></div>';
-
-      $('#meeting_empty').empty();
-      $('#meeting_wrapper').append(meeting_html);
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
+  });
 
-    // textarea
-    tinymce.init({
-      selector: 'textarea',
-      height: 283,
-      setup: function(editor) {
-        editor.on('init change', function() {
-          editor.save();
+  // feedback
+  $('body').on('click', '.createNewFeedback', function() {
+    $('#modalHeading').html("Feedback to Mentee");
+    $('#modalCreateFeedback').modal('show');
+  });
+
+  // meeting
+  $('body').on('click', '.createNewMeeting', function() {
+    $('#modalHeading').html("Meeting");
+    $('#modalCreateMeeting').modal('show');
+  });
+
+  // Report
+  $('body').on('click', '.createNewReport', function() {
+    $('#modalHeading').html("Meeting");
+    $('#modalCreateReport').modal('show');
+  });
+
+  // Feedback Submit
+  $('body').on('click', '.saveFeedback', function() {
+    var data = $('#feedbackForm').serialize();
+    $('#modalCreateFeedback').html('Submitting...');
+    console.log(data);
+
+    $.ajax({
+      data: data,
+      url: "{{ route('training_feedback.store') }}",
+      type: "POST",
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        $('#modalCreateFeedback').modal('hide');
+        $('.feedbackForm').trigger("reset");
+        // $('.sub-topic-empty').empty();
+        // append_sub_topic(data.id, data.sub_topic);
+        $('#feedback_wrapper').html(data.description);
+        $('.createNewFeedback').hide();
+        Swal.fire({
+          icon: 'success',
+          title: 'Feedback saved successfully!',
         });
+      },
+      error: function(reject) {
+        $('#modalCreateFeedback').html('Submit');
+        // if (reject.status === 422) {
+        //   var errors = JSON.parse(reject.responseText);
+        //   if (errors.name) {
+        //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.phone) {
+        //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.email) {
+        //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.roles) {
+        //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+        //   }
+        // }
       }
     });
-  </script>
+  });
 
-  @endpush
+  // Report Submit
+  $('body').on('click', '.saveReport', function() {
+    var data = $('#reportForm').serialize();
+    $('.saveReport').html('Submitting...');
+    console.log(data);
+
+    $.ajax({
+      data: data,
+      url: "{{ route('training_feedback.store') }}",
+      type: "POST",
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        $('#modalCreateReport').modal('hide');
+        $('#reportForm').trigger("reset");
+        // $('.sub-topic-empty').empty();
+        // append_sub_topic(data.id, data.sub_topic);
+        $('#report_wrapper').html(data.description);
+        $('.createNewReport').hide();
+        Swal.fire({
+          icon: 'success',
+          title: 'Feedback saved successfully!',
+        });
+      },
+      error: function(reject) {
+        $('#modalCreateReport').html('Submit');
+        // if (reject.status === 422) {
+        //   var errors = JSON.parse(reject.responseText);
+        //   if (errors.name) {
+        //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.phone) {
+        //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.email) {
+        //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.roles) {
+        //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+        //   }
+        // }
+      }
+    });
+  });
+
+  //Meeting Submit
+  $('body').on('click', '.submitMeetingBtn', function() {
+    var data = $('#meetingForm').serialize();
+    $('.submitMeetingBtn').html('Submitting...');
+    console.log(data);
+
+    $.ajax({
+      data: data,
+      url: "{{ route('training_meeting.store') }}",
+      type: "POST",
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        $('#modalCreateMeeting').modal('hide');
+        $('#meetingForm').trigger("reset");
+        // $('.sub-topic-empty').empty();
+        // append_sub_topic(data.id, data.sub_topic);
+        // $('#meeting_wrapper').html(data.description);
+        append_meeting(data.date_time, data.media, data.id);
+        // $('.createNewMeeting').hide();
+        Swal.fire({
+          icon: 'success',
+          title: 'Meeting created successfully!',
+        });
+      },
+      error: function(reject) {
+        $('#modalCreateMeeting').html('Submit');
+        // if (reject.status === 422) {
+        //   var errors = JSON.parse(reject.responseText);
+        //   if (errors.name) {
+        //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.phone) {
+        //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.email) {
+        //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+        //   }
+        //   if (errors.roles) {
+        //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+        //   }
+        // }
+      }
+    });
+  });
+
+  function append_meeting(date_time, media, meeting_id) {
+    var meeting_html = '<div class="card" id="meeting' + meeting_id + '"><div class="row">';
+    meeting_html += '<div class="col-sm-6"><strong>Time: </strong>' + date_time + '</div>';
+    meeting_html += '<div class="col-sm-6"><strong>Media: </strong>' + media + '</div>';
+    meeting_html += '</div></div>';
+
+    $('#meeting_empty').empty();
+    $('#meeting_wrapper').append(meeting_html);
+  }
+
+  // textarea
+  tinymce.init({
+    selector: 'textarea',
+    height: 283,
+    setup: function(editor) {
+      editor.on('init change', function() {
+        editor.save();
+      });
+    }
+  });
+</script>
+
+@endpush

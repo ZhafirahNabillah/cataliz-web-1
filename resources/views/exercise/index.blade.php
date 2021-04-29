@@ -17,9 +17,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Exam
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
-                alt="Card image cap" data-toggle="popover" data-placement="top"
-                data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -135,7 +133,7 @@
     </div>
     @endrole
 
-    @role('coach')
+    @role('coach|admin')
     <div class="card">
       <div class="card-body">
         <div class="content-body">

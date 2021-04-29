@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    @role('coach')
+    @role('coach|admin')
     <div class="card">
       <div class="card-body">
         <div class="content-body">
@@ -221,7 +221,7 @@
             data: 'grade',
             name: 'grade',
             render: function(data) {
-              return '<strong>'+data+'</strong>' + '/100';
+              return '<strong>' + data + '</strong>' + '/100';
             }
           },
           {
