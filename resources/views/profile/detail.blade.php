@@ -221,13 +221,16 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Profile
-                            <img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
+                            <img class="align-text  width=" 15" height="15"" src="
+                                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
+                                data-toggle="popover" data-placement="top"
+                                data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="/">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="">Profile</a>
+                                <li class="breadcrumb-item"><a href="{{route('profil', $user->id)}}">Profile</a>
                                 </li>
                                 <li class="breadcrumb-item active">{{$user->name}}
                                 </li>
@@ -262,7 +265,9 @@
                             <br>
                             <div class="form-group text-left">
                                 <label class="form-label" for="register-username">Others</label>
-                                <input class="form-control" id="" type="text" name="" placeholder="Type category that match on you ..." aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="Type category that match on you ..." aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <br>
                             <h5 class="text-left">Select Sub Category</h5>
@@ -287,7 +292,8 @@
                             <br>
                             <h5>Select skill</h5>
                             <div class="form-group">
-                                <select id="state" class="livesearch-plans form-control " name="#" placeholder="Type skill that match on you ..." multiple></select>
+                                <select id="state" class="livesearch-plans form-control " name="#"
+                                    placeholder="Type skill that match on you ..." multiple></select>
                                 @error('')
                                 <strong class="text-danger">{{ $message }}</strong>
                                 @enderror
@@ -296,7 +302,8 @@
                                 <a class="card-text" href="#"><small class="text-muted">Skip this
                                         step</small></a>
                             </div>
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -305,15 +312,20 @@
                             <br>
                             <h5>School</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
                             </div>
                             <h5>Field of study</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Information System" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. Information System" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
                             </div>
                             <h5>Degree</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Bachelor Degree" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Bachelor Degree"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <div class="row">
                                 <div class="col-6">
@@ -345,7 +357,8 @@
                                 </div>
 
                             </div>
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -354,26 +367,33 @@
                             <br>
                             <h5>Are you beginner?</h5>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                                    value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                                    value="option2">
                                 <label class="form-check-label" for="inlineRadio2">No</label>
                             </div>
                             <h5>Add Employment</h5>
                             <hr>
                             <h5>Company</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. PT. Wahana Integra Nusantara" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. PT. Wahana Integra Nusantara" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Location</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Street name, City, Province, Nation" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. Street name, City, Province, Nation" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Current Position</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Manager" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Manager"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <div class="row">
                                 <div class="col-3">
@@ -429,7 +449,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             No, I currently work here
                                         </label>
@@ -451,11 +472,13 @@
                             </div>
                             <h5>Description (Optional)</h5>
                             <div class="form-group">
-                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value="" autocomplete="" autofocus tabindex="1"> </textarea>
+                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1"> </textarea>
                             </div>
 
 
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -465,23 +488,28 @@
                             <input type="text" name="twitter" placeholder="Twitter" />
                             <input type="text" name="facebook" placeholder="Facebook" />
                             <input type="text" name="gplus" placeholder="Google Plus" />
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
                         <fieldset>
-                            <h2 class="fs-title">Write a great profile or description about your skills in your category!</h2>
+                            <h2 class="fs-title">Write a great profile or description about your skills in your
+                                category!</h2>
 
                             <h5>Title</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="Enter tittle" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="Enter tittle"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Overview</h5>
                             <div class="form-group">
-                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value="" autocomplete="" autofocus tabindex="1"> </textarea>
+                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1"> </textarea>
                             </div>
 
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -489,19 +517,24 @@
                             <h2 class="fs-title">Where are you based?</h2>
                             <h5>Street</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. 1234 Main Street, Apartment 101" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. 1234 Main Street, Apartment 101" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>City</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Malang" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Malang"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Country</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Indonesia" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Indonesia"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Postal Code</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. 098811" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. 098811"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
 
 
@@ -513,7 +546,8 @@
                             <h3 class="fs-subtitle">Fill in your credentials to authorize submission</h3>
                             <input type="text" name="email" placeholder="Username" />
                             <input type="password" name="pass" placeholder="Password" />
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="submit" name="submit" class="submit action-button" value="Submit" />
                         </fieldset>
                     </form>

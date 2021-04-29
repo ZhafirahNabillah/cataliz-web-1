@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Coaching Plan')
+@section('title','Topic')
 
 @push('styles')
 <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/min/dropzone.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Topics
-              <img class="align-text width="15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
                 alt="Card image cap" data-toggle="popover" data-placement="top"
                 data-content="Halaman ini menampilkan topik-topik yang anda miliki untuk klien ini." />
             </h2>
@@ -28,7 +28,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="#">Topic</a>
+                <li class="breadcrumb-item"><a href="{{route('topic.index')}}">Topic</a>
                 </li>
                 <li class="breadcrumb-item"><a href="#">Detail Topic</a>
                 </li>
@@ -45,25 +45,26 @@
       <div class="row">
         <div class="col-12">
           <div class="card p-2">
-            {{-- <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}" enctype="multipart/form-data">
-              @csrf
-              <div class="form-group">
-                <label for="topic">Lesson Title</label>
-                <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
-              </div>
-              <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Upload Video</span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" class="custom-file-input" name="video" id="video_input">
-                    <label class="custom-file-label" for="video_input">Choose file</label>
-                  </div>
+            {{-- <form class="create-lesson-form" id="create-lesson-form" method="post" action="{{ route('lesson.store') }}"
+            enctype="multipart/form-data">
+            @csrf
+            <div class="form-group">
+              <label for="topic">Lesson Title</label>
+              <input class="form-control" type="text" name="lesson_name" placeholder="Tittle ...">
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Upload Video</span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" class="custom-file-input" name="video" id="video_input">
+                  <label class="custom-file-label" for="video_input">Choose file</label>
                 </div>
               </div>
-              <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->get('sub_topic') }}">
-              <button type="submit" class="btn btn-primary" name="button">Submit</button>
+            </div>
+            <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->get('sub_topic') }}">
+            <button type="submit" class="btn btn-primary" name="button">Submit</button>
             </form> --}}
             <form class="create-lesson-form" id="create-lesson-form">
               @csrf
@@ -108,8 +109,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="meetingTime">Media URL</label>
-                    <input class="form-control" id="" type="text" name="meeting_url"
-                      placeholder="Your url link ..."/>
+                    <input class="form-control" id="" type="text" name="meeting_url" placeholder="Your url link ..." />
                   </div>
                 </div>
               </div>
@@ -129,7 +129,7 @@
   @push('scripts')
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.2.0/min/dropzone.min.js"></script>
   <script type="text/javascript">
-      var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    var CSRF_TOKEN = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
 
       Dropzone.autoDiscover = false;
       var myDropzone = new Dropzone(".dropzone",{

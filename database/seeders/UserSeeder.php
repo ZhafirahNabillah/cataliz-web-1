@@ -75,17 +75,6 @@ class UserSeeder extends Seeder
 
     $mentor->assignRole('mentor');
 
-    $mentor_client = Client::create([
-      'user_id'       => $mentor->id,
-      'name'          => $mentor->name,
-      'phone'         => $mentor->phone,
-      'email'         => $mentor->email,
-      'program'       => 'starco',
-      'company'       => 'Cataliz.id',
-      'occupation'    => 'Developer',
-      'organization'  => 'Universitas Jember'
-    ]);
-
     //create trainer seeder
     $trainer = User::create([
       'name'        => 'User Trainer',
@@ -96,16 +85,5 @@ class UserSeeder extends Seeder
     ]);
 
     $trainer->assignRole('trainer');
-
-    $trainer_client = Client::create([
-      'user_id'       => $trainer->id,
-      'name'          => $trainer->name,
-      'phone'         => $trainer->phone,
-      'email'         => $trainer->email,
-      'program'       => 'starco',
-      'company'       => 'Cataliz.id',
-      'occupation'    => 'Developer',
-      'organization'  => 'Universitas Jember'
-    ]);
   }
 }
