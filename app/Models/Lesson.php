@@ -21,6 +21,6 @@ class Lesson extends Model
 
     public function meeting()
     {
-      return $this->hasMany('App\Models\Training_meeting', 'lesson_id');
+      return $this->hasOne('App\Models\Training_meeting', 'lesson_id');
     }
 }

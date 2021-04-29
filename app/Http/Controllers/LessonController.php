@@ -35,7 +35,7 @@ class LessonController extends Controller
     public function create()
     {
         //
-        return view('topic.create_lesson');
+        return view('lessons.create');
     }
 
     /**
@@ -89,21 +89,6 @@ class LessonController extends Controller
 
         // return redirect('/topic')->with('success', 'New Lesson successfully created!');
         // return response()->json($lesson);
-    }
-
-
-
-    public function lesson_video_upload(Request $request)
-    {
-      // dd($request);
-
-      $filenameWithExt = $request->file->getClientOriginalName();
-      $request->file->move(public_path('/upload'), $filenameWithExt);
-      // $filename = 'tes';
-      // $extension = $request->file('file')->getClientOriginalExtension();
-      // $filenameSave = $filename . '_' . time() . '.' . $extension;
-      // Storage::disk('s3')->put('tes/'.$filenameWithExt, fopen($request->file('file'), 'r+'));
-      // $lesson->video = $filenameSave;
     }
 
     public function lesson_chunk_upload(Request $request)
@@ -188,9 +173,10 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Lesson $lesson)
     {
         //
+        return view('lessons.edit',compact('lesson'));
     }
 
     /**
@@ -200,9 +186,33 @@ class LessonController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lesson $lesson)
     {
         //
+
+        $old_video = $lesson->getRawOriginal('video');
+
+        $lesson->lesson_name = $request->lesson_name;
+        $lesson->video = $request->video_name;
+        $lesson->update();
+
+        if ($lesson->wasChanged('video')) {
+          Storage::disk('s3')->delete('/lessons/'.$old_video);
+        }
+
+        $meeting = $lesson->meeting;
+        $meeting->date_time = $request->date.' '.$request->time;
+        $meeting->media = $request->media;
+        $meeting->meeting_url = $request->meeting_url;
+        $meeting->update();
+
+        $request->session()->flash('success', 'Lesson has been updated successfully!');
+
+        return response()->json([
+          'meeting' => $meeting,
+          'lesson'  => $lesson,
+          'old_video' => $old_video
+        ]);
     }
 
     /**
