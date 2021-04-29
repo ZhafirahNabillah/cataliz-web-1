@@ -366,11 +366,11 @@
       })
     });
 
-    // $.ajaxSetup({
-    //   headers: {
-    //     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //   }
-    // });
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
 
     $('#save-sub-topic-btn').click(function() {
       var data = $('.create-sub-topic-form').serialize();
