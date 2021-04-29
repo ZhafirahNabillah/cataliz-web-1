@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/page-profile.css') }}">
 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+
 <style>
     /*custom font*/
     @import url(https://fonts.googleapis.com/css?family=Montserrat);
@@ -88,7 +89,7 @@
 
     #msform .action-button-previous {
         width: 100px;
-        background: #C5C5F1;
+        background: #7367F0;
         font-weight: bold;
         color: white;
         border: 0 none;
@@ -175,7 +176,7 @@
     /*The number of the step and the connector before it = green*/
     #progressbar li.active:before,
     #progressbar li.active:after {
-        background: blue;
+        background: #7367F0;
         color: white;
     }
 
@@ -201,6 +202,39 @@
     .dme_link a:focus {
         background: #C5C5F1;
         text-decoration: none;
+    }
+
+
+    /* Hiding the checkbox, but allowing it to be focused */
+    .badgebox {
+        opacity: 0;
+    }
+
+    .badgebox+.badge {
+        /* Move the check mark away when unchecked */
+        text-indent: -999999px;
+        /* Makes the badge's width stay the same checked and unchecked */
+        width: 27px;
+    }
+
+    .badgebox:focus+.badge {
+        /* Set something to make the badge looks focused */
+        /* This really depends on the application, in my case it was: */
+
+        /* Adding a light border */
+        box-shadow: inset 0px 0px 5px;
+        /* Taking the difference out of the padding */
+    }
+
+    .badgebox:checked+.badge {
+        /* Move the check mark back when checked */
+        text-indent: 0;
+    }
+
+    .btn .badge {
+        color: black;
+        background-color: white;
+        border: 1px solid black;
     }
 </style>
 @endpush
@@ -252,12 +286,18 @@
                             <li>Languages</li>
                             <li>Overview</li>
                             <li>Address</li>
-                            <li>Submit</li>
+                            <li>Review</li>
                         </ul>
                         <!-- fieldsets -->
                         <fieldset>
                             <h2 class="fs-title">Tell us about the work you do!</h2>
                             <h5 class="text-left">Select Category</h5>
+                            <div class="text-left">
+                                <label for="primary" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary2" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary2" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary3" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary3" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary4" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary4" class="badgebox"><span class="badge">&check;</span></label>
+                            </div>
 
                             <br>
                             <div class="form-group text-left">
@@ -278,7 +318,7 @@
                                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
                             </div>
 
-                            <input type="button" name="next" class="next action-button" value="Next" />
+                            <input type="button" name="next" class="next action-button " value="Next" />
                         </fieldset>
 
                         <fieldset>
@@ -353,14 +393,15 @@
                             <h2 class="fs-title">Add your past work experience</h2>
                             <br>
                             <h5>Are you beginner?</h5>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+
+                            <div class="form-group text-left">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
                                 <label class="form-check-label" for="inlineRadio2">No</label>
                             </div>
+
                             <h5>Add Employment</h5>
                             <hr>
                             <h5>Company</h5>
@@ -461,10 +502,42 @@
 
                         <fieldset>
                             <!-- <h2 class="fs-title">TRIP Information</h2> -->
-                            <h3 class="fs-subtitle">Your presence on the social network</h3>
-                            <input type="text" name="twitter" placeholder="Twitter" />
-                            <input type="text" name="facebook" placeholder="Facebook" />
-                            <input type="text" name="gplus" placeholder="Google Plus" />
+                            <h5>What is your English proficiency?</h5>
+                            <div class="form-group text-left">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Basic</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Good</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Fluent</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Native</label>
+
+                            </div>
+
+                            <h5>What other languages do you speak?</h5>
+                            <h5>Language</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Arabian" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>Proficiency</h5>
+                            <div class="form-group text-left">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Basic</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Good</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Fluent</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label" for="inlineRadio1">Native</label>
+
+                            </div>
                             <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
@@ -504,15 +577,107 @@
                                 <input class="form-control" id="" type="text" name="" placeholder="ex. 098811" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
 
-
+                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
                         <fieldset>
                             <h2 class="fs-title">Review Profile</h2>
-                            <h3 class="fs-subtitle">Fill in your credentials to authorize submission</h3>
-                            <input type="text" name="email" placeholder="Username" />
-                            <input type="password" name="pass" placeholder="Password" />
+
+                            <br>
+
+                            <div class="collapse-icon">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                            <span class="lead collapse-title"><b>Category</b></span>
+                                        </div>
+                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body text-left">
+                                                <div class="row">
+                                                    <div class="col-2">
+                                                        <strong>Category</strong>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <span>#Category</span>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+
+                                                    <div class="col-2">
+                                                        <strong>Sub Category</strong>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <span>#Sub Category</span>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                            <span class="lead collapse-title"><b>Expertise</b></span>
+                                        </div>
+                                        <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                            <span class="lead collapse-title"><b>Education</b></span>
+                                        </div>
+                                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse4" class="card-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                            <span class="lead collapse-title"><b>Employment</b></span>
+                                        </div>
+                                        <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse5" class="card-header" data-toggle="collapse" role="button" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                            <span class="lead collapse-title"><b>Languages</b></span>
+                                        </div>
+                                        <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse6" class="card-header" data-toggle="collapse" role="button" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                            <span class="lead collapse-title"><b>Overview</b></span>
+                                        </div>
+                                        <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse7" class="card-header" data-toggle="collapse" role="button" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                            <span class="lead collapse-title"><b>Address</b></span>
+                                        </div>
+                                        <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7" class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
                             <input type="submit" name="submit" class="submit action-button" value="Submit" />
                         </fieldset>

@@ -94,11 +94,9 @@
 
             @canany('list-topic','list-exercise','list-category')
             <div class="navigation-header">
-                @role('coach')
-                <span><b>Mentoring</b></span><i class="float-right mr-2 mb-2"></i>
-                @else
+
                 <span><b>Training</b></span><i class="float-right mr-2 mb-2"></i>
-                @endrole
+
             </div>
             @endcan
 
