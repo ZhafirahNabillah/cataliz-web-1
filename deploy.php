@@ -67,7 +67,6 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
     'php-symlink',
-    #'update',
     'reload-nginx',
     'scheduler'
 ]);
@@ -75,10 +74,6 @@ task('deploy', [
 task ('php-symlink', function(){
     run('sudo ln -s /var/www/html/db-cataliz /var/www/html/current/public');
     #run('sudo mv /var/www/html/current/public/phpmyadmin /var/www/html/current/public/db-cataliz');
-});
-
-task ('update', function(){
-    run('sudo apt update');
 });
 
 task ('reload-nginx',function(){
