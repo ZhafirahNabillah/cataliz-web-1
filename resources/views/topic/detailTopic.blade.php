@@ -154,7 +154,7 @@
                                       <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
                                       <div class="col-sm-4">
                                         <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
-                                        <a href="{{ $lesson->meeting->first()->meeting_url }}" class="btn btn-sm btn-primary">URL</a>
+                                        <a href="{{ $lesson->meeting->meeting_url }}" class="btn btn-sm btn-primary">URL</a>
                                         {{-- <button type="button" class="btn btn-sm btn-primary" data-toggle="modal">Edit</button> --}}
                                         <a href="{{ route('lesson.edit', $lesson->id) }}" class="btn btn-sm btn-primary">Edit</a>
                                       </div>

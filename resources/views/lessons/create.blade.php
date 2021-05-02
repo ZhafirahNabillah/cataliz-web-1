@@ -71,12 +71,14 @@
               <div class="form-group">
                 <label for="topic">Lesson Title</label>
                 <input class="form-control" type="text" name="lesson_name" placeholder="Title ...">
+                <div id="lesson_name_error"></div>
               </div>
               <input type="hidden" name="sub_topic_id" id="sub_topic_id" value="{{ request()->sub_topic }}">
               <input type="hidden" name="video_name" id="video_name">
             </form>
             <label for="dropzone">Video Upload</label>
             <form action="{{ route('lesson.chunk_upload') }}" class='dropzone' id="dropzone"></form>
+            <div id="video_error"></div>
             <form class="mt-1" id="meetingForm">
               <div class="row">
                 <div class="col-md-6">
@@ -84,6 +86,7 @@
                     <label for="meetingDate">Meeting Date</label>
                     <input type="date" class="form-control" name="date" id="date" value=""
                       placeholder="Select Meeting Date...">
+                      <div id="date_error"></div>
                   </div>
                 </div>
 
@@ -92,6 +95,7 @@
                     <label for="meetingTime">Meeting Time</label>
                     <label for="appt"></label>
                     <input class="form-control" type="time" id="time" name="time">
+                    <div id="time_error"></div>
                   </div>
                 </div>
 
@@ -103,6 +107,7 @@
                       <option value="zoom">Zoom</option>
                       <option value="whatsapp">WhatsApp</option>
                     </select>
+                    <div id="media_error"></div>
                   </div>
                 </div>
 
@@ -110,6 +115,7 @@
                   <div class="form-group">
                     <label for="meetingTime">Media URL</label>
                     <input class="form-control" id="" type="text" name="meeting_url" placeholder="Your url link ..." />
+                    <div id="meeting_url_error"></div>
                   </div>
                 </div>
               </div>
@@ -170,7 +176,13 @@
 
         var data = lesson_data+'&'+meeting_data;
         $('#save-lesson-button').html('Creating...');
-        console.log(data);
+        $('#lesson_name_error').empty();
+        $('#video_error').empty();
+        $('#date_error').empty();
+        $('#time_error').empty();
+        $('#media_error').empty();
+        $('#meeting_url_error').empty();
+        // console.log(data);
 
         // $('.create-lesson-form').submit();
 
@@ -197,21 +209,31 @@
           },
           error: function(reject) {
             $('#save-lesson-button').html('Create');
-            // if (reject.status === 422) {
-            //   var errors = JSON.parse(reject.responseText);
-            //   if (errors.name) {
-            //     $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
-            //   }
-            //   if (errors.phone) {
-            //     $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
-            //   }
-            //   if (errors.email) {
-            //     $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
-            //   }
-            //   if (errors.roles) {
-            //     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
-            //   }
-            // }
+            if (reject.status === 422) {
+              var errors = JSON.parse(reject.responseText);
+              console.log(errors);
+              if (errors.lesson_name) {
+                $('#lesson_name_error').html('<strong class="text-danger">' + errors.lesson_name[0] + '</strong>'); // and so on
+              }
+              if (errors.video_name) {
+                $('#video_error').html('<strong class="text-danger">' + errors.video_name[0] + '</strong>'); // and so on
+              }
+              if (errors.date) {
+                $('#date_error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+              }
+              if (errors.time) {
+                $('#time_error').html('<strong class="text-danger">' + errors.time[0] + '</strong>'); // and so on
+              }
+              if (errors.media) {
+                $('#media_error').html('<strong class="text-danger">' + errors.media[0] + '</strong>'); // and so on
+              }
+              if (errors.meeting_url) {
+                $('#meeting_url_error').html('<strong class="text-danger">' + errors.meeting_url[0] + '</strong>'); // and so on
+              }
+              // if (errors.support) {
+              //   $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+              // }
+            }
           }
         });
       });

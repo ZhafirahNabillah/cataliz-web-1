@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Http\JsonResponse;
@@ -51,6 +52,26 @@ class LessonController extends Controller
         // ini_set('memory_limit','256M');
 
         // dd($request);
+
+        $validator = Validator::make($request->all(), [
+          'lesson_name'  => 'required',
+          'video_name'   => 'required',
+          'date'         => 'required',
+          'time'         => 'required',
+          'media'        => 'required',
+          'meeting_url'  => 'required'
+        ],[
+          'lesson_name.required' => "Lesson name is required!",
+          'video_name.required'  => "Video file is required!",
+          'date.required'        => "Date is required!",
+          'time.required'        => "Time is required!",
+          'media.required'       => "Media is required!",
+          'meeting_url.required' => "meeting URL is required!"
+        ]);
+
+        if ($validator->fails()) {
+          return response()->json($validator->errors(), 422);
+        }
 
         $lesson = new Lesson;
         $lesson->lesson_name = $request->lesson_name;
