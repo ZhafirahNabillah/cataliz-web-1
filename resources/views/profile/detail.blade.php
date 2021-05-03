@@ -293,10 +293,10 @@
                             <h2 class="fs-title">Tell us about the work you do!</h2>
                             <h5 class="text-left">Select Category</h5>
                             <div class="text-left">
-                                <label for="primary" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary" class="badgebox"><span class="badge">&check;</span></label>
-                                <label for="primary2" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary2" class="badgebox"><span class="badge">&check;</span></label>
-                                <label for="primary3" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary3" class="badgebox"><span class="badge">&check;</span></label>
-                                <label for="primary4" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary4" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary" class="btn btn-outline-dark text-left">Category2 <input type="checkbox" id="primary" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary2" class="btn btn-outline-dark text-left">Category3 <input type="checkbox" id="primary2" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary3" class="btn btn-outline-dark text-left">Category4 <input type="checkbox" id="primary3" class="badgebox"><span class="badge">&check;</span></label>
+                                <label for="primary4" class="btn btn-outline-dark text-left">Category5 <input type="checkbox" id="primary4" class="badgebox"><span class="badge">&check;</span></label>
                             </div>
 
                             <br>

@@ -37,16 +37,46 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="card-body">
-            <div class="card border">
-              <p class="mt-2 ml-2"><b>{{strip_tags($question->question)}}</b></p>
-              <div class="card-body">
-                @foreach ($ans_array as $dt)
 
-                <ul>{{$choice_itr++}}. {{$dt}}</ul>
-                @endforeach
-              </div>
-              <p class="ml-2">Answer : <b>{!!$question->true_answer!!}</b></p>
+            <div class="text-center card-title ">
+              <h3 class="mt-1"><b>{{ $topic->topic }}</b></h3>
+              <p><span>created by {{ $topic->trainer->name }} </span></p>
+              <p><span>Question:#totalQuestion </span></p>
             </div>
+
+            <!-- Panel Exam -->
+            <div class="tab-pane active" id="review" aria-labelledby="review-tab" role="tabpanel">
+              <div class="collapse-icon">
+                <div class="collapse-default">
+                  @foreach ($answers as $answer)
+                  <div class="card">
+                    <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
+                      <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b></span>
+                    </div>
+                    <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                      <div class="card-body">
+                        <p><b>Score:{{ $answer->question->weight }}</b></p>
+                        <div class="question d-inline-flex">
+                          <div class="form-group">
+                            <input class="form-check-input form-control" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                              {!! $answer->question->question !!}
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  @endforeach
+                </div>
+              </div>
+            </div>
+            <!-- /panel Exam-->
+            <!-- tbl submit -->
+            <div class="text-left">
+              <button class="btn btn-sm btn-primary" type="submit">Submit All</button>
+            </div>
+            <!-- /tbl submit -->
           </div>
         </div>
       </div>
