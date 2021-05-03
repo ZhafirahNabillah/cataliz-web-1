@@ -24,7 +24,8 @@
 @elseif (in_array(Route::currentRouteName(), ['clients.index', 'plans.index', 'agendas.index', 'clients.show',
 'plans.show', 'dashboard','roles.index','agendas.show_group' ,'permissions.index','users.index', 'class.index',
 'class.show','profil','auth.register', 'group.show', 'docs.index',
-'topic.index','topic.show','exercise.index','exercise.create', 'exercise.show','category.index', 'result.index']))
+'topic.index','topic.show','exercise.index','exercise.create', 'exercise.show','category.index',
+'result.index','profil.detail']))
 
 <!-- BEGIN: Vendor CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/vendors.min.css') }}">
@@ -37,6 +38,8 @@
 <link rel="stylesheet" type="text/css"
     href="{{ asset('assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/pickers/flatpickr/flatpickr.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 <!-- END: Vendor CSS-->
 
 <!-- BEGIN: Theme CSS-->

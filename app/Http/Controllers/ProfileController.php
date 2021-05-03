@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use app\Models\User;
 use App\Models\Client;
+use App\Models\Skill;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -39,10 +41,22 @@ class ProfileController extends Controller
     public function profil_detail($id)
     {
         $user = User::where('id', Auth::user()->id)->first();
-        $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
-        $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
+        $category = Category::all();
+        $all_skills = Skill::get();
 
-        return view('profile.detail', compact('user', 'contents', 'contents_bg'));
+        return view('profile.detail', compact('user', 'category', 'all_skills'));
+    }
+
+    public function skill_search(Request $request)
+    {
+        $skill = [];
+        if ($request->has('q')) {
+            $search = $request->q;
+            $skill = Skill::where('skill_name', 'LIKE', "%$search%");
+        } else {
+            $skill = Skill::all();
+        }
+        return response()->json($skill);
     }
 
     public function simpan_password(Request $request, $id)

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameColumnExamIdOnTrainingMeetingsTable extends Migration
+class CreateSkillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class RenameColumnExamIdOnTrainingMeetingsTable extends Migration
      */
     public function up()
     {
-        Schema::table('training_meetings', function (Blueprint $table) {
-            $table->renameColumn('exam_id', 'lesson_id');
+        Schema::create('skills', function (Blueprint $table) {
+            $table->id();
+            $table->string('skill_name', 20)->nullable();
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class RenameColumnExamIdOnTrainingMeetingsTable extends Migration
      */
     public function down()
     {
-        Schema::table('training_meetings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('skills');
     }
 }

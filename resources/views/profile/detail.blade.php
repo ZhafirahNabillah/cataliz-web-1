@@ -255,7 +255,10 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Profile
-                            <img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
+                            <img class="align-text  width=" 15" height="15"" src="
+                                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
+                                data-toggle="popover" data-placement="top"
+                                data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
@@ -293,16 +296,31 @@
                             <h2 class="fs-title">Tell us about the work you do!</h2>
                             <h5 class="text-left">Select Category</h5>
                             <div class="text-left">
-                                <label for="primary" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary" class="badgebox"><span class="badge">&check;</span></label>
-                                <label for="primary2" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary2" class="badgebox"><span class="badge">&check;</span></label>
-                                <label for="primary3" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary3" class="badgebox"><span class="badge">&check;</span></label>
-                                <label for="primary4" class="btn btn-outline-dark text-left">Category <input type="checkbox" id="primary4" class="badgebox"><span class="badge">&check;</span></label>
+                                @foreach ($category as $ctg)
+
+                                <label for="primary" class="btn btn-outline-dark text-left">{{$ctg->category}} <input
+                                        type="checkbox" id="primary" class="badgebox"><span
+                                        class="badge">&check;</span></label>
+                                @endforeach
                             </div>
 
                             <br>
                             <div class="form-group text-left">
                                 <label class="form-label" for="register-username">Others</label>
-                                <input class="form-control" id="" type="text" name="" placeholder="Type category that match on you ..." aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <select class="category-select form-control @error('category') is-invalid @enderror"
+                                    name="category">
+                                    @foreach ($category as $ctg)
+                                    <option>{{ $ctg->category }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                {{-- <input class="form-control" id="" type="text" name=""
+                                    placeholder="Type category that match on you ..." aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" /> --}}
                             </div>
                             <br>
                             <h5 class="text-left">Select Sub Category</h5>
@@ -327,16 +345,19 @@
                             <br>
                             <h5>Select skill</h5>
                             <div class="form-group">
-                                <select id="state" class="livesearch-plans form-control " name="#" placeholder="Type skill that match on you ..." multiple></select>
-                                @error('')
-                                <strong class="text-danger">{{ $message }}</strong>
-                                @enderror
+                                <select class="skill-select form-control @error('category') is-invalid @enderror"
+                                    name="skill">
+                                    @foreach ($all_skills as $all_skill)
+                                    <option>{{ $all_skill->skill_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="text-left ">
                                 <a class="card-text" href="#"><small class="text-muted">Skip this
                                         step</small></a>
                             </div>
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -345,15 +366,20 @@
                             <br>
                             <h5>School</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
                             </div>
                             <h5>Field of study</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Information System" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. Information System" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
                             </div>
                             <h5>Degree</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Bachelor Degree" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Bachelor Degree"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <div class="row">
                                 <div class="col-6">
@@ -383,9 +409,9 @@
                                         </select>
                                     </div>
                                 </div>
-
                             </div>
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -406,15 +432,20 @@
                             <hr>
                             <h5>Company</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. PT. Wahana Integra Nusantara" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. PT. Wahana Integra Nusantara" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Location</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Street name, City, Province, Nation" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. Street name, City, Province, Nation" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Current Position</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Manager" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Manager"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <div class="row">
                                 <div class="col-3">
@@ -470,7 +501,8 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                            id="flexRadioDefault1">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             No, I currently work here
                                         </label>
@@ -492,11 +524,13 @@
                             </div>
                             <h5>Description (Optional)</h5>
                             <div class="form-group">
-                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value="" autocomplete="" autofocus tabindex="1"> </textarea>
+                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1"> </textarea>
                             </div>
 
 
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -521,7 +555,8 @@
                             <h5>What other languages do you speak?</h5>
                             <h5>Language</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Arabian" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Arabian"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Proficiency</h5>
                             <div class="form-group text-left">
@@ -538,23 +573,28 @@
                                 <label class="form-check-label" for="inlineRadio1">Native</label>
 
                             </div>
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
                         <fieldset>
-                            <h2 class="fs-title">Write a great profile or description about your skills in your category!</h2>
+                            <h2 class="fs-title">Write a great profile or description about your skills in your
+                                category!</h2>
 
                             <h5>Title</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="Enter tittle" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="Enter tittle"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Overview</h5>
                             <div class="form-group">
-                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value="" autocomplete="" autofocus tabindex="1"> </textarea>
+                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1"> </textarea>
                             </div>
 
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -562,22 +602,28 @@
                             <h2 class="fs-title">Where are you based?</h2>
                             <h5>Street</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. 1234 Main Street, Apartment 101" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name=""
+                                    placeholder="ex. 1234 Main Street, Apartment 101" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>City</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Malang" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Malang"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Country</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Indonesia" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. Indonesia"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Postal Code</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. 098811" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="" type="text" name="" placeholder="ex. 098811"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
 
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="button" name="next" class="next action-button" value="Next" />
                         </fieldset>
 
@@ -589,10 +635,13 @@
                             <div class="collapse-icon">
                                 <div class="accordion" id="accordionExample">
                                     <div class="card">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                                        <div id="headingCollapse1" class="card-header" id="headingOne"
+                                            data-toggle="collapse" role="button" data-target="#collapse1"
+                                            aria-expanded="false" aria-controls="collapse1">
                                             <span class="lead collapse-title"><b>Category</b></span>
                                         </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
+                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                            class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body text-left">
                                                 <div class="row">
                                                     <div class="col-2">
@@ -616,60 +665,78 @@
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                        <div id="headingCollapse2" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse2" aria-expanded="false"
+                                            aria-controls="collapse2">
                                             <span class="lead collapse-title"><b>Expertise</b></span>
                                         </div>
-                                        <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" data-parent="#accordionExample">
+                                        <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2"
+                                            class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                        <div id="headingCollapse3" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse3" aria-expanded="false"
+                                            aria-controls="collapse3">
                                             <span class="lead collapse-title"><b>Education</b></span>
                                         </div>
-                                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" data-parent="#accordionExample">
+                                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3"
+                                            class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div id="headingCollapse4" class="card-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                        <div id="headingCollapse4" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse4" aria-expanded="false"
+                                            aria-controls="collapse4">
                                             <span class="lead collapse-title"><b>Employment</b></span>
                                         </div>
-                                        <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" data-parent="#accordionExample">
+                                        <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4"
+                                            class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div id="headingCollapse5" class="card-header" data-toggle="collapse" role="button" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                        <div id="headingCollapse5" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse5" aria-expanded="false"
+                                            aria-controls="collapse5">
                                             <span class="lead collapse-title"><b>Languages</b></span>
                                         </div>
-                                        <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse" data-parent="#accordionExample">
+                                        <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5"
+                                            class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div id="headingCollapse6" class="card-header" data-toggle="collapse" role="button" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                        <div id="headingCollapse6" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse6" aria-expanded="false"
+                                            aria-controls="collapse6">
                                             <span class="lead collapse-title"><b>Overview</b></span>
                                         </div>
-                                        <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6" class="collapse" data-parent="#accordionExample">
+                                        <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6"
+                                            class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
 
                                             </div>
                                         </div>
                                     </div>
                                     <div class="card">
-                                        <div id="headingCollapse7" class="card-header" data-toggle="collapse" role="button" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                        <div id="headingCollapse7" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse7" aria-expanded="false"
+                                            aria-controls="collapse7">
                                             <span class="lead collapse-title"><b>Address</b></span>
                                         </div>
-                                        <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7" class="collapse" data-parent="#accordionExample">
+                                        <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7"
+                                            class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
 
                                             </div>
@@ -678,236 +745,14 @@
                                 </div>
                             </div>
 
-                            <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
                             <input type="submit" name="submit" class="submit action-button" value="Submit" />
                         </fieldset>
                     </form>
 
                 </div>
             </div>
-            <!-- /.MultiStep Form -->
-
-            <!-- <div class="tab-content">
-                {{-- home tab --}}
-                <div class="tab-pane active" id="home" aria-labelledby="home-tab" role="tabpanel">
-                    <section id="profile-info">
-                        <div class="row">
-                            @if ($message = Session::get('success'))
-                            <div class="col-sm-12">
-                                <div class="alert alert-success alert-dissmisable">
-                                    <h4 class="alert-heading">Success</h4>
-                                    <div class="alert-body">{{ $message }}</div>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-                        <div class="card-body">
-                            <div class="nav-vertical">
-                                <ul class="nav nav-tabs nav-left flex-column" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="baseVerticalLeft-tab1" data-toggle="tab" aria-controls="tabVerticalLeft1" href="#tabVerticalLeft1" role="tab" aria-selected="true">Category</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="baseVerticalLeft-tab2" data-toggle="tab" aria-controls="tabVerticalLeft2" href="#tabVerticalLeft2" role="tab" aria-selected="false">Expertise</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="baseVerticalLeft-tab3" data-toggle="tab" aria-controls="tabVerticalLeft3" href="#tabVerticalLeft3" role="tab" aria-selected="false">Education</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="baseVerticalLeft-tab4" data-toggle="tab" aria-controls="tabVerticalLeft4" href="#tabVerticalLeft4" role="tab" aria-selected="false">Employment</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="baseVerticalLeft-tab5" data-toggle="tab" aria-controls="tabVerticalLeft5" href="#tabVerticalLeft5" role="tab" aria-selected="false">languages</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="baseVerticalLeft-tab6" data-toggle="tab" aria-controls="tabVerticalLeft6" href="#tabVerticalLeft6" role="tab" aria-selected="false">Overview</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="baseVerticalLeft-tab7" data-toggle="tab" aria-controls="tabVerticalLeft7" href="#tabVerticalLeft7" role="tab" aria-selected="false">Address</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane active" id="tabVerticalLeft1" role="tabpanel" aria-labelledby="baseVerticalLeft-tab1">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h3>Tell us about the work you do!</h3>
-                                                <br>
-                                                <h5>Select Category</h5>
-                                                <div class="form-group">
-                                                    <label class="form-label" for="register-username">Others</label>
-                                                    <input class="form-control" id="" type="text" name="" placeholder="Type category that match on you ..." aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
-                                                </div>
-
-                                                <h5>Select Sub Category</h5>
-                                                <div class="form-group">
-                                                    <select class="form-select form-control" aria-label="Default select example">
-                                                        <option selected disabled>Open this select menu</option>
-                                                        <option value="1">Sub One</option>
-                                                        <option value="2">Sub Two</option>
-                                                        <option value="3">Sub Three</option>
-                                                    </select>
-                                                </div>
-                                                <div class="text-left ">
-                                                    <a class="card-text" href="#"><small class="text-muted">Skip this
-                                                            step</small></a>
-                                                </div>
-
-                                                <div class="text-right">
-                                                    <button class="btn btn-primary ">Next: Expertise</button>
-                                                    <button class="btn btn-outline-dark">Review & Save</button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tabVerticalLeft2" role="tabpanel" aria-labelledby="baseVerticalLeft-tab2">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h3>What is your skill?</h3>
-                                                <br>
-                                                <h5>Select skill</h5>
-                                                <div class="form-group">
-                                                    <select id="state" class="livesearch-plans form-control " name="#" placeholder="Type skill that match on you ..." multiple></select>
-                                                    @error('')
-                                                    <strong class="text-danger">{{ $message }}</strong>
-                                                    @enderror
-                                                </div>
-                                                <div class="text-left ">
-                                                    <a class="card-text" href="#"><small class="text-muted">Skip this
-                                                            step</small></a>
-                                                </div>
-
-                                                <div class="text-right">
-                                                    <button class="btn btn-primary ">Next: Expertise</button>
-                                                    <button class="btn btn-outline-dark">Review & Save</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane" id="tabVerticalLeft3" role="tabpanel" aria-labelledby="baseVerticalLeft-tab3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h3>Add the schools you attended, areas of study, and degrees earned!
-                                                </h3>
-                                                <br>
-                                                <h5>School</h5>
-                                                <div class="form-group">
-                                                    <input class="form-control" id="" type="text" name="" placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
-                                                </div>
-                                                <h5>Field of study</h5>
-                                                <div class="form-group">
-                                                    <input class="form-control" id="" type="text" name="" placeholder="ex. Information System" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
-                                                </div>
-                                                <h5>Degree</h5>
-                                                <div class="form-group">
-                                                    <input class="form-control" id="" type="text" name="" placeholder="ex. Bachelor Degree" aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h5>Start Year</h5>
-
-                                                        <div class="form-group">
-                                                            <select class="form-control" name="provinsi" id="provinsi">
-                                                                <option disabled selected> Pilih </option>
-                                                                <?php for ($i = 1950; $i < date('Y'); $i++) {
-
-                                                                    echo '<option value=' . $i . ' >' . $i . '</option>';
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        <h5>End Year(or expected)</h5>
-                                                        <div class="form-group">
-                                                            <select class="form-control" name="provinsi" id="provinsi">
-                                                                <option disabled selected> Pilih </option>
-                                                                <?php for ($i = 1950; $i < date('Y') + 5; $i++) {
-
-                                                                    echo '<option value=' . $i . ' >' . $i . '</option>';
-                                                                }
-                                                                ?>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabVerticalLeft4" role="tabpanel" aria-labelledby="baseVerticalLeft-tab4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p>
-                                                        Sugar plum tootsie roll biscuit caramels. Liquorice brownie pastry
-                                                        cotton candy
-                                                        oat cake fruitcake
-                                                        jelly chupa chups. Sweet fruitcake cheesecake biscuit cotton candy.
-                                                        Cookie
-                                                        powder marshmallow donut.
-                                                        Pudding caramels pastry powder cake soufflé wafer caramels. Jelly-o
-                                                        pie cupcake.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabVerticalLeft5" role="tabpanel" aria-labelledby="baseVerticalLeft-tab5">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p>
-                                                        Sugar plum tootsie roll biscuit caramels. Liquorice brownie pastry
-                                                        cotton candy
-                                                        oat cake fruitcake
-                                                        jelly chupa chups. Sweet fruitcake cheesecake biscuit cotton candy.
-                                                        Cookie
-                                                        powder marshmallow donut.
-                                                        Pudding caramels pastry powder cake soufflé wafer caramels. Jelly-o
-                                                        pie cupcake.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabVerticalLeft6" role="tabpanel" aria-labelledby="baseVerticalLeft-tab6">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p>
-                                                        Sugar plum tootsie roll biscuit caramels. Liquorice brownie pastry
-                                                        cotton candy
-                                                        oat cake fruitcake
-                                                        jelly chupa chups. Sweet fruitcake cheesecake biscuit cotton candy.
-                                                        Cookie
-                                                        powder marshmallow donut.
-                                                        Pudding caramels pastry powder cake soufflé wafer caramels. Jelly-o
-                                                        pie cupcake.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane" id="tabVerticalLeft7" role="tabpanel" aria-labelledby="baseVerticalLeft-tab7">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <p>
-                                                        Sugar plum tootsie roll biscuit caramels. Liquorice brownie pastry
-                                                        cotton candy
-                                                        oat cake fruitcake
-                                                        jelly chupa chups. Sweet fruitcake cheesecake biscuit cotton candy.
-                                                        Cookie
-                                                        powder marshmallow donut.
-                                                        Pudding caramels pastry powder cake soufflé wafer caramels. Jelly-o
-                                                        pie cupcake.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </section>
-                </div>
-            </div>
-        </div> -->
         </div>
     </div>
 </div>
@@ -919,39 +764,21 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-
-
 <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
-    $(function() {
-
-
-        // popover
-        $('[data-toggle="popover"]').popover({
-            html: true,
-            trigger: 'hover',
-            placement: 'top',
-            content: function() {
-                return '<img src="' + $(this).data('img') + '" />';
-            }
-        });
-        $(document).on('click', '#btn_edit_profil', function() {
-            $('#modals_profil').modal('hide');
-        })
-        $(document).on('click', '#btn_edit_picture', function() {
-            $('#modals_profil').modal('hide');
-        })
-        $(document).on('click', '#btn_edit_background', function() {
-            $('#modals_profil').modal('hide');
-        })
-
+    $('.category-select').select2({
+        placeholder: 'Type category that match on you ...',
+        tags: true
     });
 
-
-
+    $('.skill-select').select2({
+        placeholder: 'Type skill that match on you ...',
+        tags: true
+    });
 
     //jQuery time
     var current_fs, next_fs, previous_fs; //fieldsets

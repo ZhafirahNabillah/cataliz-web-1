@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameColumnOnDocumentationsTable extends Migration
+class RenameColumnSkillOnCoachesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,8 @@ class RenameColumnOnDocumentationsTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::table('documentations', function (Blueprint $table) {
-            //
-            $table->renameColumn('menu_id', 'title');
-            $table->renameColumn('version', 'description');
-            // $table->text('title')->change();
-            // $table->longText('description')->change();
+        Schema::table('coaches', function (Blueprint $table) {
+            $table->renameColumn('skill', 'skill_id');
         });
     }
 
