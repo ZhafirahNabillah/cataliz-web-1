@@ -109,11 +109,13 @@
           <div class="card">
             <div class="card-body">
               <ul class="nav nav-tabs justify-content-center" role="tablist">
+                @role('mentor|trainer|admin|coach')
                 <li class="nav-item">
                   <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#review" aria-controls="coach" role="tab" aria-selected="true">Review</a>
                 </li>
+                @endrole
                 <li class="nav-item">
-                  @role('mentor')
+                  @role('mentor|coachee')
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="profile" role="tab" aria-selected="false">Feedback to Mentee</a>
                   @endrole
                   @role('trainer')
@@ -123,10 +125,9 @@
                 <li class="nav-item">
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#report" aria-controls="profile" role="tab" aria-selected="false">Report to Coach</a>
                 </li>
-
               </ul>
-
               <div class="tab-content">
+                @role('mentor|trainer|admin|coach')
                 <!-- Panel Review -->
                 <div class="tab-pane active" id="review" aria-labelledby="review-tab" role="tabpanel">
                   <div class="collapse-icon">
@@ -166,7 +167,7 @@
                   </div>
                 </div>
                 <!-- /panel Review-->
-
+                @endrole
 
                 <!-- Panel Feedback -->
                 <div class="tab-pane" id="feedback" aria-labelledby="feedback-tab" role="tabpanel">
