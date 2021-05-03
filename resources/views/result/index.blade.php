@@ -31,6 +31,51 @@
         </div>
       </div>
     </div>
+    @role('coachee')
+    <div class="card">
+      <div class="card-body">
+        <div class="content-body">
+          <div class="alert alert-danger alert-dissmisable fade show" style="display:none" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @if ($message = Session::get('success'))
+          <div class="alert alert-success alert-dissmisable">
+            <h4 class="alert-heading">Success</h4>
+            <div class="alert-body">{{ $message }}</div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          @endif
+          <div class="row">
+          </div>
+          <br>
+          <!-- Basic table -->
+          <section id="basic-datatable">
+            <div class="row">
+              <div class="col-12">
+                <div class="card">
+                  <table class="datatables-basic table-striped table exam-result-datatable">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Topic</th>
+                        <th>Grade</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!--/ Basic table -->
+        </div>
+      </div>
+    </div>
+    @endrole
 
     @role('coach|admin')
     <div class="card">
