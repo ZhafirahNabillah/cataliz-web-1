@@ -180,6 +180,7 @@ Route::middleware(['auth'])->group(function () {
 //Exercise Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('exercise', ExerciseController::class);
+	Route::get('/exercise/{topic}/start', [ExerciseController::class, 'start_exam'])->name('exercise.start');
 });
 
 //Question Controller

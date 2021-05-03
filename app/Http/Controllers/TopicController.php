@@ -26,6 +26,9 @@ class TopicController extends Controller
       $data = Topic::all();
     } elseif (auth()->user()->hasRole('coach')) {
       $data = Topic::all();
+    } elseif (auth()->user()->hasRole('coachee')) {
+      $client = auth()->user()->client;
+      $data = $client->topics;
     }
 
     if ($request->ajax()) {

@@ -17,7 +17,11 @@ class ResultController extends Controller
   public function index(Request $request)
   {
     //
-    $exam_results = Exam_result::all();
+    if (auth()->user()->hasRole('coachee')) {
+      $exam_results  = Exam_result::where('user_id', auth()->user()->id)->get();
+    } else {
+      $exam_results = Exam_result::all();
+    }
 
     if ($request->ajax()) {
       //return data as datatable json

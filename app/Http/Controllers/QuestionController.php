@@ -72,11 +72,12 @@ class QuestionController extends Controller
     {
         $question = Question::find($id);
         $answer = $question->answers;
+        $topic = $question->topic;
         $ans_array = explode(',', $answer);
         // $ans = shuffle($ans_array);
         $choice_itr = 'A';
         // return $ans_array;
-        return view('exercise.detailQuestion', compact('question', 'ans_array', 'choice_itr'));
+        return view('exercise.detailQuestion', compact('topic','question', 'ans_array', 'choice_itr'));
     }
 
     /**

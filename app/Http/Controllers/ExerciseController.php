@@ -125,9 +125,47 @@ class ExerciseController extends Controller
           ->rawColumns(['action', 'total_questions', 'category'])
           ->make(true);
       }
+    } elseif (auth()->user()->hasRole('coachee')) {
+
+      $client = auth()->user()->client;
+      $data = $client->topics;
+
+      if ($request->ajax()) {
+
+        //return data as datatable json
+        return Datatables::of($data)
+          ->addIndexColumn()
+          ->addColumn('total_questions', function ($row) {
+            $total_questions = $row->question->count();
+            return $total_questions;
+          })
+          ->addColumn('category', function ($row) {
+            $category = $row->category->category;
+            return $category;
+          })
+          ->addColumn('action', function ($row) {
+
+            //add detail and whatsapp button if user have permission
+            $start_exam_btn = '<a href="' . route('exercise.start', $row->id) . '" class="btn-sm btn-primary">Start</a>';
+
+            //final dropdown button that shows on view
+            // $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
+            //   <div class="dropdown-menu dropdown-menu-right">' . $detail_exercise_btn . '</div>';
+
+            return $start_exam_btn;
+          })
+          ->rawColumns(['action', 'total_questions', 'category'])
+          ->make(true);
+      }
     }
 
     return view('exercise.index');
+  }
+
+  public function start_exam(Topic $topic){
+    $questions = $topic->question;
+
+    return view('exercise.start', compact('topic', 'questions'));
   }
 
   /**

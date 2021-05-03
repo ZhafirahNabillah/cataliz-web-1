@@ -41,29 +41,33 @@
 
             <div class="text-center card-title ">
               <h3 class="mt-1"><b>{{ $topic->topic }}</b></h3>
-              <p><span>created by {{ $topic->trainer->name }} </span></p>
-              <p><span>Question:#totalQuestion </span></p>
+              <p><span>Created by {{ $topic->trainer->name }} </span></p>
+              <p><span>Total questions: {{ $questions->count() }} </span></p>
             </div>
 
             <!-- Panel Exam -->
             <div class="tab-pane active" id="review" aria-labelledby="review-tab" role="tabpanel">
               <div class="collapse-icon">
                 <div class="collapse-default">
-                  @foreach ($answers as $answer)
+                  @foreach ($questions as $question)
                   <div class="card">
                     <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b></span>
+                      <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b> | Score: {{ $question->weight }}</span>
                     </div>
                     <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
                       <div class="card-body">
-                        <p><b>Score:{{ $answer->question->weight }}</b></p>
-                        <div class="question d-inline-flex">
-                          <div class="form-group">
-                            <input class="form-check-input form-control" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                              {!! $answer->question->question !!}
-                            </label>
-                          </div>
+                        <div class="question_wrapper">
+                          {!! $question->question !!}
+                        </div>
+                        <div class="answer_choice_wrapper">
+                          @foreach (explode(',', $question->answers) as $answer_choice)
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="answer_{{ $question->id }}" id="{{ $question->id.'-'.$loop->iteration }}">
+                              <label class="form-check-label" for="{{ $question->id.'-'.$loop->iteration }}">
+                                {{ $answer_choice }}
+                              </label>
+                            </div>
+                          @endforeach
                         </div>
                       </div>
                     </div>
@@ -75,7 +79,7 @@
             <!-- /panel Exam-->
             <!-- tbl submit -->
             <div class="text-left">
-              <button class="btn btn-sm btn-primary" type="submit">Submit All</button>
+              <button class="btn btn-primary" type="submit">Submit All</button>
             </div>
             <!-- /tbl submit -->
           </div>

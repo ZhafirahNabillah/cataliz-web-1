@@ -57,7 +57,7 @@
             <div class="row">
               <div class="col-12">
                 <div class="card">
-                  <table class="datatables-basic table-striped table exam-result-datatable">
+                  <table class="datatables-basic table-striped table exam-result-datatable-coachee">
                     <thead>
                       <tr>
                         <th>No</th>
@@ -240,11 +240,6 @@
     })
 
     $(function() {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
 
       var result_table = $('.exam-result-datatable').DataTable({
         processing: true,
@@ -257,6 +252,44 @@
           {
             data: 'user.name',
             name: 'user.name'
+          },
+          {
+            data: 'topic.topic',
+            name: 'topic.topic',
+          },
+          {
+            data: 'grade',
+            name: 'grade',
+            render: function(data) {
+              return '<strong>' + data + '</strong>' + '/100';
+            }
+          },
+          {
+            data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+          },
+        ],
+        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+        language: {
+          paginate: {
+            // remove previous & next text from pagination
+            previous: '&nbsp;',
+            next: '&nbsp;'
+          },
+          search: "<i data-feather='search'></i>",
+          searchPlaceholder: "Search records"
+        }
+      });
+
+      var result_table_coachee = $('.exam-result-datatable-coachee').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: "",
+        columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
           },
           {
             data: 'topic.topic',
