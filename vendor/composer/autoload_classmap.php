@@ -74,6 +74,7 @@ return array(
     'App\\Models\\Education' => $baseDir . '/app/Models/Education.php',
     'App\\Models\\Exam_result' => $baseDir . '/app/Models/Exam_result.php',
     'App\\Models\\Feedback' => $baseDir . '/app/Models/Feedback.php',
+    'App\\Models\\Language' => $baseDir . '/app/Models/Language.php',
     'App\\Models\\Lesson' => $baseDir . '/app/Models/Lesson.php',
     'App\\Models\\Plan' => $baseDir . '/app/Models/Plan.php',
     'App\\Models\\Question' => $baseDir . '/app/Models/Question.php',
