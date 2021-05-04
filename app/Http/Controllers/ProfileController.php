@@ -174,4 +174,8 @@ class ProfileController extends Controller
 
         return redirect(route('profil', Auth::user()->id));
     }
+
+    public function update_full_profil(){
+        return redirect(route('profil', Auth::user()->id))
+    }
 }

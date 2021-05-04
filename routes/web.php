@@ -99,6 +99,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/{id}/update_profil', [ProfileController::class, 'update_profil'])->name('update_profil');
 	Route::post('/{id}/update_background', [ProfileController::class, 'update_background'])->name('update_background');
 	Route::post('/{id}/store', [ProfileController::class, 'store_data'])->name('store_data');
+	Route::post('/{id}/update_full_profil', [ProfileController::class, 'update_full_profil'])->name('update_full_profil');
 });
 
 //User Controller

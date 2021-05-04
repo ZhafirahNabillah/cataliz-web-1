@@ -300,8 +300,9 @@
                                 @foreach ($category as $ctg)
                                 <label for="primary{{$loop->iteration}}"
                                     class="btn btn-outline-dark text-left">{{$ctg->category}} <input type="checkbox"
-                                        id="primary{{$loop->iteration}}" class="badgebox"><span
-                                        class="badge">&check;</span></label>
+                                        id="primary{{$loop->iteration}}" class="badgebox"
+                                        value="{{$ctg->category}}"><span class="badge"
+                                        id="checked{{$loop->iteration}}">&check;</span></label>
                                 @endforeach
                             </div>
 
@@ -319,9 +320,6 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
-                                {{-- <input class="form-control" id="" type="text" name=""
-                                    placeholder="Type category that match on you ..." aria-describedby="" value=""
-                                    autocomplete="" autofocus tabindex="1" /> --}}
                             </div>
                             <div class="text-left ">
                                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
@@ -340,7 +338,7 @@
                                     class="livesearch-plans form-control @error('category') is-invalid @enderror"
                                     name="skill[]" multiple>
                                     @foreach ($all_skills as $all_skill)
-                                    <option>{{ $all_skill->skill_name }}</option>
+                                    <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -358,27 +356,28 @@
                             <br>
                             <h5>School</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name=""
+                                <input class="form-control" id="school" type="text" name="school"
                                     placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete=""
                                     autofocus tabindex="1" />
                             </div>
                             <h5>Field of study</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name=""
+                                <input class="form-control" id="field_of_study" type="text" name="field_of_study"
                                     placeholder="ex. Information System" aria-describedby="" value="" autocomplete=""
                                     autofocus tabindex="1" />
                             </div>
                             <h5>Degree</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Bachelor Degree"
-                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="degree" type="text" name="degree"
+                                    placeholder="ex. Bachelor Degree" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <h5>Start Year</h5>
 
                                     <div class="form-group">
-                                        <select class="form-control" name="provinsi" id="provinsi">
+                                        <select class="form-control" name="provinsi" id="start_year">
                                             <option disabled selected> Pilih </option>
                                             <?php for ($i = 1950; $i < date('Y'); $i++) {
 
@@ -391,7 +390,7 @@
                                 <div class="col-6">
                                     <h5>End Year(or expected)</h5>
                                     <div class="form-group">
-                                        <select class="form-control" name="provinsi" id="provinsi">
+                                        <select class="form-control" name="provinsi" id="end_year">
                                             <option disabled selected> Pilih </option>
                                             <?php for ($i = 1950; $i < date('Y') + 5; $i++) {
 
@@ -424,46 +423,47 @@
                             <hr>
                             <h5>Company</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name=""
+                                <input class="form-control" id="company" type="text" name=""
                                     placeholder="ex. PT. Wahana Integra Nusantara" aria-describedby="" value=""
                                     autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Location</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name=""
+                                <input class="form-control" id="location" type="text" name=""
                                     placeholder="ex. Street name, City, Province, Nation" aria-describedby="" value=""
                                     autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Current Position</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Manager"
-                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="current_position" type="text" name=""
+                                    placeholder="ex. Manager" aria-describedby="" value="" autocomplete="" autofocus
+                                    tabindex="1" />
                             </div>
                             <div class="row">
                                 <div class="col-3">
                                     <h5>Entry</h5>
                                     <div class="form-group">
-                                        <select class="form-control" name="bulan" id="bulan">
+                                        <select class="form-control" name="bulan" id="entry_month">
                                             <option disabled selected> Select month </option>
-                                            <option value='01'>January</option>
-                                            <option value='02'>February</option>
-                                            <option value='03'>March</option>
-                                            <option value='04'>April</option>
-                                            <option value='05'>May</option>
-                                            <option value='06'>June</option>
-                                            <option value='07'>July</option>
-                                            <option value='08'>August</option>
-                                            <option value='09'>September</option>
-                                            <option value='10'>October</option>
-                                            <option value='11'>November</option>
-                                            <option value='12'>December</option>
+                                            <option value='January'>January</option>
+                                            <option value='February'>February</option>
+                                            <option value='March'>March</option>
+                                            <option value='April'>April</option>
+                                            <option value='May'>May</option>
+                                            <option value='June'>June</option>
+                                            <option value='July'>July</option>
+                                            <option value='August'>August</option>
+                                            <option value='September'>September</option>
+                                            <option value='October'>October</option>
+                                            <option value='November'>November</option>
+                                            <option value='December'>December</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <h5>&nbsp;</h5>
                                     <div class="form-group">
-                                        <select class="form-control" name="year" id="year">
+                                        <select class="form-control" name="year" id="entry_year">
                                             <option disabled selected> Select year </option>
                                             <?php for ($i = 1950; $i < date('Y') + 5; $i++) {
 
@@ -476,20 +476,20 @@
                                 <div class="col-3">
                                     <h5>Out</h5>
                                     <div class="form-group">
-                                        <select class="form-control" name="bulan" id="bulan">
+                                        <select class="form-control" name="bulan" id="out_month">
                                             <option disabled selected> Select month </option>
-                                            <option value='01'>January</option>
-                                            <option value='02'>February</option>
-                                            <option value='03'>March</option>
-                                            <option value='04'>April</option>
-                                            <option value='05'>May</option>
-                                            <option value='06'>June</option>
-                                            <option value='07'>July</option>
-                                            <option value='08'>August</option>
-                                            <option value='09'>September</option>
-                                            <option value='10'>October</option>
-                                            <option value='11'>November</option>
-                                            <option value='12'>December</option>
+                                            <option value='January'>January</option>
+                                            <option value='February'>February</option>
+                                            <option value='March'>March</option>
+                                            <option value='April'>April</option>
+                                            <option value='May'>May</option>
+                                            <option value='June'>June</option>
+                                            <option value='July'>July</option>
+                                            <option value='August'>August</option>
+                                            <option value='September'>September</option>
+                                            <option value='October'>October</option>
+                                            <option value='November'>November</option>
+                                            <option value='December'>December</option>
                                         </select>
                                     </div>
                                     <div class="form-group">
@@ -503,7 +503,7 @@
                                 <div class="col-3">
                                     <h5>&nbsp;</h5>
                                     <div class="form-group">
-                                        <select class="form-control" name="year" id="year">
+                                        <select class="form-control" name="year" id="out_year">
                                             <option disabled selected> Select year </option>
                                             <?php for ($i = 1950; $i < date('Y'); $i++) {
 
@@ -516,10 +516,9 @@
                             </div>
                             <h5>Description (Optional)</h5>
                             <div class="form-group">
-                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value=""
-                                    autocomplete="" autofocus tabindex="1"> </textarea>
+                                <textarea class="form-control" id="description" type="text" name="" aria-describedby=""
+                                    value="" autocomplete="" autofocus tabindex="1"> </textarea>
                             </div>
-
 
                             <input type="button" name="previous" class="previous action-button-previous"
                                 value="Previous" />
@@ -576,13 +575,13 @@
 
                             <h5>Title</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="Enter tittle"
+                                <input class="form-control" id="title" type="text" name="" placeholder="Enter tittle"
                                     aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Overview</h5>
                             <div class="form-group">
-                                <textarea class="form-control" id="" type="text" name="" aria-describedby="" value=""
-                                    autocomplete="" autofocus tabindex="1"> </textarea>
+                                <textarea class="form-control" id="overview" type="text" name="" aria-describedby=""
+                                    value="" autocomplete="" autofocus tabindex="1"> </textarea>
                             </div>
 
                             <input type="button" name="previous" class="previous action-button-previous"
@@ -594,24 +593,25 @@
                             <h2 class="fs-title">Where are you based?</h2>
                             <h5>Street</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name=""
+                                <input class="form-control" id="street" type="text" name=""
                                     placeholder="ex. 1234 Main Street, Apartment 101" aria-describedby="" value=""
                                     autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>City</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Malang"
+                                <input class="form-control" id="city" type="text" name="" placeholder="ex. Malang"
                                     aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Country</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Indonesia"
+                                <input class="form-control" id="country" type="text" name="" placeholder="ex. Indonesia"
                                     aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
                             </div>
                             <h5>Postal Code</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. 098811"
-                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="postal_code" type="text" name=""
+                                    placeholder="ex. 098811" aria-describedby="" value="" autocomplete="" autofocus
+                                    tabindex="1" />
                             </div>
 
                             <input type="button" name="previous" class="previous action-button-previous"
@@ -640,18 +640,8 @@
                                                         <strong>Category</strong>
                                                     </div>
                                                     <div class="col-3">
-                                                        <span>#Category</span>
+                                                        <span id="category"></span>
                                                     </div>
-                                                </div>
-                                                <div class="row ">
-
-                                                    <div class="col-2">
-                                                        <strong>Sub Category</strong>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span>#Sub Category</span>
-                                                    </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -665,7 +655,7 @@
                                         <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-
+                                                <h5 id="skill_new"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -678,7 +668,46 @@
                                         <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>School </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="school_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Field of Study </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="field_of_study_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Degree </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="degree_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Start Year </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="start_year_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>End Year </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="end_year_new"></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -691,7 +720,62 @@
                                         <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Beginner Status </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="beginner_status_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Company </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="company_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Location : </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="location_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Current Position </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="current_position_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Entry </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="entry_month_year_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Out </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="out_month_year_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Description </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="description_new"></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -704,7 +788,30 @@
                                         <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>English Proficiency </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="english_proficiency_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Other Languages </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="other_language_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Proficiency </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="proficiency_new"></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -717,7 +824,22 @@
                                         <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Title </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="title_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Overview </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="overview_new"></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -730,7 +852,38 @@
                                         <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Street </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="street_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>City </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="city_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Country </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="country_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Postal Code </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="postal_code_new"></h5>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -882,6 +1035,57 @@
             //this comes from the custom easing plugin
             easing: 'easeInOutBack'
         });
+    });
+
+    // $(".next").first().click(function() {
+    //     for (i = 1; i <= $('.badgebox').length; i++){
+    //         if($('#checked1').html() == '&check;') {
+    //             console.log('ok');
+    //         } else {
+    //             console.log('not ok');
+    //         }
+    //         // console.log($('#primary'+i).val());
+    //     }
+    // });
+
+    $(".next").last().click(function() {
+        console.log($('#skill').val());
+        // CATEGORY FIELD
+        // $("span#category_new").html($('.badgebox').val());
+
+        // EXPERTISE FIELD
+        // $("h5#skill_new").html($('#skill').val());
+
+        // EDUCATION FIELD
+        $("h5#school_new").html(': ' + $('#school').val());
+        $("h5#field_of_study_new").html(': ' + $('#field_of_study').val());
+        $("h5#degree_new").html(': ' + $('#degree').val());
+        $("h5#start_year_new").html(': ' + $('#start_year').val());
+        $("h5#end_year_new").html(': ' + $('#end_year').val());
+
+        // EMPLOYMENT FIELD
+        // $("h5#beginner_status_new").html(': ' + $('#beginner_status').val());
+        $("h5#company_new").html(': ' + $('#company').val());
+        $("h5#location_new").html(': ' + $('#location').val());
+        $("h5#current_position_new").html(': ' + $('#current_position').val());
+        $("h5#entry_month_year_new").html(': ' + $('#entry_month').val() + '-' + $('#entry_year').val());
+        $("h5#out_month_year_new").html(': ' + $('#out_month').val() + '-' + $('#out_year').val());
+        $("h5#description_new").html(': ' + $('#description').val());
+
+        // LANGUAGES FIELD
+        // $("h5#english_proficiency_new").html(': ' + $('#english_proficiency').val());
+        // $("h5#other_language_new").html(': ' + $('#other_language').val());
+        // $("h5#proficiency_new").html(': ' + $('#proficiency').val());
+
+        // OVERVIEW FIELD
+        $("h5#title_new").html(': ' + $('#title').val());
+        $("h5#overview_new").html(': ' + $('#overview').val());
+        
+        // ADDRESS FIELD
+        $("h5#street_new").html(': ' + $('#street').val());
+        $("h5#city_new").html(': ' + $('#city').val());
+        $("h5#country_new").html(': ' + $('#country').val());
+        $("h5#postal_code_new").html(': ' + $('#postal_code').val());
     });
 
     $(".submit").click(function() {
