@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/page-profile.css') }}">
 <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css'>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <style>
     /*custom font*/
@@ -297,9 +298,9 @@
                             <h5 class="text-left">Select Category</h5>
                             <div class="text-left">
                                 @foreach ($category as $ctg)
-
-                                <label for="primary" class="btn btn-outline-dark text-left">{{$ctg->category}} <input
-                                        type="checkbox" id="primary" class="badgebox"><span
+                                <label for="primary{{$loop->iteration}}"
+                                    class="btn btn-outline-dark text-left">{{$ctg->category}} <input type="checkbox"
+                                        id="primary{{$loop->iteration}}" class="badgebox"><span
                                         class="badge">&check;</span></label>
                                 @endforeach
                             </div>
@@ -322,16 +323,6 @@
                                     placeholder="Type category that match on you ..." aria-describedby="" value=""
                                     autocomplete="" autofocus tabindex="1" /> --}}
                             </div>
-                            <br>
-                            <h5 class="text-left">Select Sub Category</h5>
-                            <div class="form-group">
-                                <select class="form-input form-control" aria-label="Default select example">
-                                    <option selected>Open this select menu</option>
-                                    <option value="1">Sub One</option>
-                                    <option value="2">Sub Two</option>
-                                    <option value="3">Sub Three</option>
-                                </select>
-                            </div>
                             <div class="text-left ">
                                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
                             </div>
@@ -345,8 +336,9 @@
                             <br>
                             <h5>Select skill</h5>
                             <div class="form-group">
-                                <select class="skill-select form-control @error('category') is-invalid @enderror"
-                                    name="skill">
+                                <select id="skill-select"
+                                    class="livesearch-plans form-control @error('category') is-invalid @enderror"
+                                    name="skill[]" multiple>
                                     @foreach ($all_skills as $all_skill)
                                     <option>{{ $all_skill->skill_name }}</option>
                                     @endforeach
@@ -775,9 +767,31 @@
         tags: true
     });
 
-    $('.skill-select').select2({
+    $("#skill-select").select2({
         placeholder: 'Type skill that match on you ...',
-        tags: true
+        ajax: {
+            url: "{{route('skill.search')}}",
+            dataType: 'json',
+            delay: 250,
+            data: function(params) {
+              return {
+                q: $.trim(params.term)
+              };
+            },
+            processResults: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  // console.log(item)
+                  return {
+                    text: item.skill_name,
+                    id: item.id,
+                    // client_id: item.client_id,
+                  }
+                })
+              };
+            },
+            cache: true
+        }
     });
 
     //jQuery time

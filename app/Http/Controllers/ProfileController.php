@@ -49,13 +49,15 @@ class ProfileController extends Controller
 
     public function skill_search(Request $request)
     {
-        $skill = [];
-        if ($request->has('q')) {
-            $search = $request->q;
-            $skill = Skill::where('skill_name', 'LIKE', "%$search%");
+        $skill = [];    
+        $search = trim($request->q);
+    
+        if (empty($search)) {
+          $skill = Skill::all();
         } else {
-            $skill = Skill::all();
+          $skill = Skill::where('skill_name', 'LIKE', "%$search%")->get();
         }
+
         return response()->json($skill);
     }
 

@@ -27,7 +27,6 @@ class AddMultiplesColumnToCoaches extends Migration
             $table->date('entry_year')->nullable();
             $table->date('out_month')->nullable();
             $table->date('out_year')->nullable();
-            $table->string('location')->nullable();
         });
     }
 
