@@ -296,7 +296,7 @@
                         <fieldset>
                             <h2 class="fs-title">Tell us about the work you do!</h2>
                             <h5 class="text-left">Select Category</h5>
-                            <div class="text-left">
+                            <div class="text-center">
                                 @foreach ($category as $ctg)
                                 <label for="primary{{$loop->iteration}}"
                                     class="btn btn-outline-dark text-left">{{$ctg->category}}
@@ -311,8 +311,9 @@
                             <div class="form-group text-left">
                                 <label class="form-label" for="register-username">Others</label>
                                 <select class="category-select form-control @error('category') is-invalid @enderror"
-                                    name="category">
-                                    @foreach ($category as $ctg)
+                                    name="category" id="category-select">
+                                    @foreach ($other_category as $ctg)
+                                    <option></option>
                                     <option>{{ $ctg->category }}</option>
                                     @endforeach
                                 </select>
@@ -337,7 +338,7 @@
                             <div class="form-group">
                                 <select id="skill-select"
                                     class="livesearch-plans form-control @error('category') is-invalid @enderror"
-                                    name="skill[]" multiple>
+                                    name="skill" multiple>
                                     @foreach ($all_skills as $all_skill)
                                     <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
                                     @endforeach
@@ -636,9 +637,7 @@
                                         <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
                                             class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body text-left">
-                                                <div class="row">
-                                                    <div id="category_review_wrapper">: -</div>
-                                                </div>
+                                                <h5 id="category_review_wrapper"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -651,7 +650,7 @@
                                         <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <h5 id="skill_new">: -</h5>
+                                                <h5 id="skill_new"></h5>
                                             </div>
                                         </div>
                                     </div>
@@ -1057,12 +1056,16 @@
         // CATEGORY FIELD 
         $("#category_review_wrapper").empty();
         $('input[name="category"]:checked').each(function() {
-           console.log(this.value);
-           $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
+           $("#category_review_wrapper").append('<div class="col-12"><ul><li>'+this.value+'</li></ul></div>');
+        });
+        $('#category-select option:selected').each(function() {
+           $("#category_review_wrapper").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
         });
 
         // EXPERTISE FIELD
-        // $("h5#skill_new").html($('#skill').val());
+        $('#skill-select option:selected').each(function() {
+           $("#skill_new").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
+        });
 
         // EDUCATION FIELD
         $("h5#school_new").html(': ' + $('#school').val());
