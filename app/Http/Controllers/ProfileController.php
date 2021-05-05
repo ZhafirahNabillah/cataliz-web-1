@@ -41,11 +41,11 @@ class ProfileController extends Controller
     public function profil_detail($id)
     {
         $user = User::where('id', Auth::user()->id)->first();
-        $category = Category::all()->take(7);
-        $other_category = Category::whereNotIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
+        $main_categories = Category::all()->take(7);
+        $other_categories = Category::whereNotIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
         $all_skills = Skill::get();
 
-        return view('profile.detail', compact('user', 'category', 'all_skills', 'other_category'));
+        return view('profile.detail', compact('user', 'main_categories', 'all_skills', 'other_categories'));
     }
 
     public function skill_search(Request $request)

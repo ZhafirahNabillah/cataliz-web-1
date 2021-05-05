@@ -294,48 +294,51 @@
             </ul>
 
             <!-- fieldset category -->
-            <fieldset>
-              <h2 class="fs-title">Tell us about the work you do!</h2>
-              <h5 class="text-left">Select Category</h5>
-              <div class="text-left">
-                @foreach ($category as $ctg)
-                  <label for="primary{{$loop->iteration}}"
-                    class="btn btn-outline-dark text-left">{{$ctg->category}}
-                    <input name="category" type="checkbox" id="primary{{$loop->iteration}}"
-                    class="badgebox" value="{{$ctg->category}}">
-                    <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
-                  </label>
-                @endforeach
-              </div>
-              <br>
-              <div class="form-group text-left">
-                <label class="form-label" for="register-username">Others</label>
-                <select class="category-select form-control @error('category') is-invalid @enderror"
-                  name="category">
-                  @foreach ($category as $ctg)
-                    <option>{{ $ctg->category }}</option>
+            <fieldset id="categories_fieldset">
+
+                <h2 class="fs-title">Tell us about the work you do!</h2>
+                <h5 class="text-left">Select Category</h5>
+                <div class="text-left">
+                  @foreach ($main_categories as $category)
+                    <label for="primary{{$loop->iteration}}"
+                      class="btn btn-outline-dark text-left">{{$category->category}}
+                      <input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}"
+                      class="badgebox" value="{{$category->category}}">
+                      <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+                    </label>
                   @endforeach
-                </select>
-                @error('category')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
+                </div>
+                <br>
+                <div class="form-group text-left">
+                  <label class="form-label" for="register-username">Others</label>
+                  <select class="category-select form-control @error('category') is-invalid @enderror"
+                    name="categories[]" multiple>
+                    @foreach ($other_categories as $category)
+                      <option>{{ $category->category }}</option>
+                    @endforeach
+                  </select>
+                  @error('category')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+
+
               <div class="text-left ">
                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
               </div>
 
-              <input type="button" name="next" class="next action-button " value="Next" />
+              <input type="button" name="next" class="next action-button " value="Next" id="saveCategoriesBtn"/>
             </fieldset>
 
             {{-- fieldset skill --}}
-            <fieldset>
+            <fieldset id="skills_fieldset">
               <h2 class="fs-title">What is your skill?</h2>
               <br>
               <h5>Select skill</h5>
               <div class="form-group">
-                <select id="skill-select" class="livesearch-plans form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
+                <select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
                   @foreach ($all_skills as $all_skill)
                     <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
                   @endforeach
@@ -345,11 +348,11 @@
                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
               </div>
               <input type="button" name="previous" class="previous action-button-previous"value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" />
+              <input type="button" name="next" class="next action-button" value="Next" id="saveSkillsBtn" />
             </fieldset>
 
             {{-- fieldset education --}}
-            <fieldset>
+            <fieldset id="education_fieldset">
               <h2 class="fs-title">Add the schools you attended, areas of study, and degrees earned!</h2>
               <br>
               <div class="eduacation_wrapper">
@@ -397,11 +400,11 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input type="button" name="next" class="next action-button" value="Next"/>
+              <input type="button" name="next" class="next action-button" value="Next" id="saveEducationBtn"/>
             </fieldset>
 
             {{-- fieldset work experience --}}
-            <fieldset>
+            <fieldset id="work_experiences_fieldset">
               <h2 class="fs-title">Add your past work experience</h2>
               <br>
 
@@ -513,11 +516,11 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" />
+              <input type="button" name="next" class="next action-button" value="Next" id="saveWorkExperienceBtn"/>
             </fieldset>
 
             {{-- fieldset language --}}
-            <fieldset>
+            <fieldset id="languages_fieldset">
               <div class="form-group text-left">
                 <h5>What is your English proficiency?</h5>
                 <input type="radio" name="ep_radio" id="englist_basic" value="Basic">
@@ -537,32 +540,32 @@
               <div class="others_languange_wrapper">
                 <div class="form-group">
                   <h5>Language</h5>
-                  <input class="form-control" id="other_language" type="text" name="other_language[]" placeholder="ex. Arabian"/>
+                  <input class="form-control" id="other_language" type="text" name="others_0_language" placeholder="ex. Arabian"/>
                 </div>
                 <div class="form-group text-left">
                   <h5>Proficiency</h5>
-                  <input type="radio" name="ol_proficiency[]" id="others_1_basic" value="Basic">
-                  <label class="form-check-label" for="others_1_basic">Basic</label>
+                  <input type="radio" name="ol_0_proficiency" id="others_0_basic" value="Basic">
+                  <label class="form-check-label" for="others_0_basic">Basic</label>
 
-                  <input type="radio" name="ol_proficiency[]" id="others_1_good" value="Good">
-                  <label class="form-check-label" for="others_1_good">Good</label>
+                  <input type="radio" name="ol_0_proficiency" id="others_0_good" value="Good">
+                  <label class="form-check-label" for="others_0_good">Good</label>
 
-                  <input type="radio" name="ol_proficiency[]" id="others_1_fluent" value="Fluent">
-                  <label class="form-check-label" for="others_1_fluent">Fluent</label>
+                  <input type="radio" name="ol_0_proficiency" id="others_0_fluent" value="Fluent">
+                  <label class="form-check-label" for="others_0_fluent">Fluent</label>
 
-                  <input type="radio" name="ol_proficiency[]" id="others_1_native" value="Native">
-                  <label class="form-check-label" for="others_1_native">Native</label>
+                  <input type="radio" name="ol_0_proficiency" id="others_0_native" value="Native">
+                  <label class="form-check-label" for="others_0_native">Native</label>
                 </div>
               </div>
               <div class="text-left">
                 <input type="button" id="addOthersLanguangeBtn" class="btn btn-primary" value="+ Add Others Languange">
               </div>
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" />
+              <input type="button" name="next" class="next action-button" value="Next" id="saveLanguagesBtn"/>
             </fieldset>
 
             {{-- fieldset skills description --}}
-            <fieldset>
+            <fieldset id="skill_description_fieldset">
               <h2 class="fs-title">Write a great profile or description about your skills in your category!</h2>
               <div class="form-group">
                 <h5>Title</h5>
@@ -574,11 +577,11 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" />
+              <input type="button" name="next" class="next action-button" value="Next" id="saveSkillsDescriptionBtn"/>
             </fieldset>
 
             {{-- fieldset adress --}}
-            <fieldset>
+            <fieldset id="address_fieldset">
               <h2 class="fs-title">Where are you based?</h2>
               <div class="form-group">
                 <h5>Street</h5>
@@ -598,11 +601,11 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" />
+              <input type="button" name="next" class="next action-button" value="Next" id="saveAddressBtn"/>
             </fieldset>
 
             {{-- fieldset review --}}
-            <fieldset>
+            <fieldset id="review_fieldset">
               <h2 class="fs-title">Review Profile</h2>
               <br>
               <div class="collapse-icon">
@@ -878,29 +881,7 @@
 
     $("#skill-select").select2({
         placeholder: 'Type skill that match on you ...',
-        ajax: {
-            url: "{{route('skill.search')}}",
-            dataType: 'json',
-            delay: 250,
-            data: function(params) {
-              return {
-                q: $.trim(params.term)
-              };
-            },
-            processResults: function(data) {
-              return {
-                results: $.map(data, function(item) {
-                  // console.log(item)
-                  return {
-                    text: item.skill_name,
-                    id: item.id,
-                    // client_id: item.client_id,
-                  }
-                })
-              };
-            },
-            cache: true
-        }
+        tags: true
     });
 
     //jQuery time
@@ -909,88 +890,53 @@
     var animating; //flag to prevent quick multi-click glitches
 
     $(".next").click(function() {
-        if (animating) return false;
-        animating = true;
-
-        current_fs = $(this).parent();
-        next_fs = $(this).parent().next();
-
-        //activate next step on progressbar using the index of next_fs
-        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-
-        //show the next fieldset
-        next_fs.show();
-        //hide the current fieldset with style
-        current_fs.animate({
-            opacity: 0
-        }, {
-            step: function(now, mx) {
-                //as the opacity of current_fs reduces to 0 - stored in "now"
-                //1. scale current_fs down to 80%
-                scale = 1 - (1 - now) * 0.2;
-                //2. bring next_fs from the right(50%)
-                left = (now * 50) + "%";
-                //3. increase opacity of next_fs to 1 as it moves in
-                opacity = 1 - now;
-                current_fs.css({
-                    'transform': 'scale(' + scale + ')',
-                    'position': 'absolute'
-                });
-                next_fs.css({
-                    'left': left,
-                    'opacity': opacity
-                });
-            },
-            duration: 800,
-            complete: function() {
-                current_fs.hide();
-                animating = false;
-            },
-            //this comes from the custom easing plugin
-            easing: 'easeInOutBack'
-        });
+      change_form_next($(this));
     });
 
     $(".previous").click(function() {
-        if (animating) return false;
-        animating = true;
+      change_form_previous($(this));
+    });
 
-        current_fs = $(this).parent();
-        previous_fs = $(this).parent().prev();
+    //submit categories fieldset
+    $("#saveCategoriesBtn").click(function() {
+      var data = $('#categories_fieldset').serialize();
+      console.log(data);
+    });
 
-        //de-activate current step on progressbar
-        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+    //submit skills fieldset
+    $("#saveSkillsBtn").click(function() {
+      var data = $('#skills_fieldset').serialize();
+      console.log(data);
+    });
 
-        //show the previous fieldset
-        previous_fs.show();
-        //hide the current fieldset with style
-        current_fs.animate({
-            opacity: 0
-        }, {
-            step: function(now, mx) {
-                //as the opacity of current_fs reduces to 0 - stored in "now"
-                //1. scale previous_fs from 80% to 100%
-                scale = 0.8 + (1 - now) * 0.2;
-                //2. take current_fs to the right(50%) - from 0%
-                left = ((1 - now) * 50) + "%";
-                //3. increase opacity of previous_fs to 1 as it moves in
-                opacity = 1 - now;
-                current_fs.css({
-                    'left': left
-                });
-                previous_fs.css({
-                    'transform': 'scale(' + scale + ')',
-                    'opacity': opacity
-                });
-            },
-            duration: 800,
-            complete: function() {
-                current_fs.hide();
-                animating = false;
-            },
-            //this comes from the custom easing plugin
-            easing: 'easeInOutBack'
-        });
+    //submit education fieldset
+    $("#saveEducationBtn").click(function() {
+      var data = $('#education_fieldset').serialize();
+      console.log(data);
+    });
+
+    //submit work experience fieldset
+    $("#saveWorkExperienceBtn").click(function() {
+      var data = $('#work_experiences_fieldset').serialize();
+      console.log(data);
+    });
+
+    //submit languages fieldset
+    $("#saveLanguagesBtn").click(function() {
+      var data = $('#languages_fieldset').serialize();
+      console.log(data);
+    });
+
+    //submit skills description fieldset
+    $("#saveSkillsDescriptionBtn").click(function() {
+      var data = $('#skill_description_fieldset').serialize();
+      console.log(data);
+    });
+
+    //submit address fieldset
+    $("#saveAddressBtn").click(function() {
+      var data = $('#address_fieldset').serialize();
+      console.log(data);
     });
 
     $(".next").last().click(function() {
@@ -1066,17 +1012,104 @@
       append_work_experience();
     });
 
+    // method to go next fieldset
+    function change_form_next(current){
+      if (animating) return false;
+      animating = true;
+
+      current_fs = current.parent();
+      next_fs = current.parent().next();
+
+      //activate next step on progressbar using the index of next_fs
+      $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+      //show the next fieldset
+      next_fs.show();
+      //hide the current fieldset with style
+      current_fs.animate({
+          opacity: 0
+      }, {
+          step: function(now, mx) {
+              //as the opacity of current_fs reduces to 0 - stored in "now"
+              //1. scale current_fs down to 80%
+              scale = 1 - (1 - now) * 0.2;
+              //2. bring next_fs from the right(50%)
+              left = (now * 50) + "%";
+              //3. increase opacity of next_fs to 1 as it moves in
+              opacity = 1 - now;
+              current_fs.css({
+                  'transform': 'scale(' + scale + ')',
+                  'position': 'absolute'
+              });
+              next_fs.css({
+                  'left': left,
+                  'opacity': opacity
+              });
+          },
+          duration: 800,
+          complete: function() {
+              current_fs.hide();
+              animating = false;
+          },
+          //this comes from the custom easing plugin
+          easing: 'easeInOutBack'
+      });
+    }
+
+    // method to go previous fieldset
+    function change_form_previous(current){
+      if (animating) return false;
+      animating = true;
+
+      current_fs = current.parent();
+      previous_fs = current.parent().prev();
+
+      //de-activate current step on progressbar
+      $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+      //show the previous fieldset
+      previous_fs.show();
+      //hide the current fieldset with style
+      current_fs.animate({
+          opacity: 0
+      }, {
+          step: function(now, mx) {
+              //as the opacity of current_fs reduces to 0 - stored in "now"
+              //1. scale previous_fs from 80% to 100%
+              scale = 0.8 + (1 - now) * 0.2;
+              //2. take current_fs to the right(50%) - from 0%
+              left = ((1 - now) * 50) + "%";
+              //3. increase opacity of previous_fs to 1 as it moves in
+              opacity = 1 - now;
+              current_fs.css({
+                  'left': left
+              });
+              previous_fs.css({
+                  'transform': 'scale(' + scale + ')',
+                  'opacity': opacity
+              });
+          },
+          duration: 800,
+          complete: function() {
+              current_fs.hide();
+              animating = false;
+          },
+          //this comes from the custom easing plugin
+          easing: 'easeInOutBack'
+      });
+    }
+
     var index_language = 1;
     // method to append new language
     function append_language(){
       index = index_language++;
-      var others_language_html = '<div class="form-group"><h5>Language</h5><input class="form-control" id="other_language[]" type="text" name="other_language" placeholder="ex. Arabian"/></div>';
+      var others_language_html = '<div class="form-group"><h5>Language</h5><input class="form-control" type="text" name="others_'+index+'_language" placeholder="ex. Arabian"/></div>';
       others_language_html += '<div class="form-group text-left">';
       others_language_html += '<h5>Proficiency</h5>';
-      others_language_html += '<input type="radio" name="ol_proficiency[]" id="others_'+index+'_basic" value="Basic"> <label class="form-check-label" for="others_'+index+'_basic">Basic</label> ';
-      others_language_html += '<input type="radio" name="ol_proficiency[]" id="others_'+index+'_good" value="Good"> <label class="form-check-label" for="others_'+index+'_good">Good</label> ';
-      others_language_html += '<input type="radio" name="ol_proficiency[]" id="others_'+index+'_fluent" value="Fluent"> <label class="form-check-label" for="others_'+index+'_fluent">Fluent</label> ';
-      others_language_html += '<input type="radio" name="ol_proficiency[]" id="others_'+index+'_native" value="Native"> <label class="form-check-label" for="others_'+index+'_native">Native</label> ';
+      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_basic" value="Basic"> <label class="form-check-label" for="others_'+index+'_basic">Basic</label> ';
+      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_good" value="Good"> <label class="form-check-label" for="others_'+index+'_good">Good</label> ';
+      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_fluent" value="Fluent"> <label class="form-check-label" for="others_'+index+'_fluent">Fluent</label> ';
+      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_native" value="Native"> <label class="form-check-label" for="others_'+index+'_native">Native</label> ';
       others_language_html += '</div>';
 
       $('.others_languange_wrapper').append(others_language_html);
