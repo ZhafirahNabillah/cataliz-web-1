@@ -352,42 +352,48 @@
             <fieldset>
               <h2 class="fs-title">Add the schools you attended, areas of study, and degrees earned!</h2>
               <br>
-              <div class="form-group">
-                <h5>School</h5>
-                <input class="form-control" id="school" type="text" name="school" placeholder="ex. Oxford University"/>
-              </div>
-              <div class="form-group">
-                <h5>Field of study</h5>
-                <input class="form-control" id="field_of_study" type="text" name="field_of_study" placeholder="ex. Information System"/>
-              </div>
-              <div class="form-group">
-                <h5>Degree</h5>
-                <input class="form-control" id="degree" type="text" name="degree" placeholder="ex. Bachelor Degree"/>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <h5>Start Year</h5>
+              <div class="eduacation_wrapper">
+                <div class="form-group">
+                  <h5>University</h5>
+                  <input class="form-control" id="university" type="text" name="education[0][university]" placeholder="ex. Oxford University"/>
+                </div>
+                <div class="form-group">
+                  <h5>Field of study</h5>
+                  <input class="form-control" id="field_of_study" type="text" name="education[0][field_of_study]" placeholder="ex. Information System"/>
+                </div>
+                <div class="form-group">
+                  <h5>Degree</h5>
+                  <input class="form-control" id="degree" type="text" name="education[0][degree]" placeholder="ex. Bachelor Degree"/>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <h5>Start Year</h5>
 
-                  <div class="form-group">
-                    <select class="form-control" name="provinsi" id="start_year">
-                      <option disabled selected> Pilih </option>
-                      @for ($i=1950; $i < date('Y')+1; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                      @endfor
-                    </select>
+                    <div class="form-group">
+                      <select class="form-control" name="education[0][start_year]" id="start_year">
+                        <option disabled selected> Pilih </option>
+                        @for ($i=1950; $i < date('Y')+1; $i++)
+                          <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <h5>End Year(or expected)</h5>
+                    <div class="form-group">
+                      <select class="form-control" name="education[0][end_year]" id="end_year">
+                        <option disabled selected> Pilih </option>
+                        @for ($i=1950; $i < date('Y')+5; $i++)
+                          <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                      </select>
+                    </div>
                   </div>
                 </div>
-                <div class="col-6">
-                  <h5>End Year(or expected)</h5>
-                  <div class="form-group">
-                    <select class="form-control" name="provinsi" id="end_year">
-                      <option disabled selected> Pilih </option>
-                      @for ($i=1950; $i < date('Y')+5; $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                      @endfor
-                    </select>
-                  </div>
-                </div>
+                <hr class="mt-0">
+              </div>
+              <div class="text-left">
+                <input type="button" id="addOthersEducationBtn" class="btn btn-primary" value="+ Add Others Education">
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
@@ -411,92 +417,99 @@
 
               <h5>Add Employment</h5>
               <hr>
-              <div class="form-group">
-                <h5>Company</h5>
-                <input class="form-control" id="company" type="text" name="" placeholder="ex. PT. Wahana Integra Nusantara"/>
-              </div>
-              <div class="form-group">
-                <h5>Location</h5>
-                <input class="form-control" id="location" type="text" name="" placeholder="ex. Street name, City, Province, Nation" />
-              </div>
-              <div class="form-group">
-                <h5>Current Position</h5>
-                <input class="form-control" id="current_position" type="text" name="" placeholder="ex. Manager"/>
-              </div>
-              <div class="row">
-                <div class="col-3">
-                  <h5>Entry</h5>
-                  <div class="form-group">
-                    <select class="form-control" name="bulan" id="entry_month">
-                      <option disabled selected> Select month </option>
-                      <option value='January'>January</option>
-                      <option value='February'>February</option>
-                      <option value='March'>March</option>
-                      <option value='April'>April</option>
-                      <option value='May'>May</option>
-                      <option value='June'>June</option>
-                      <option value='July'>July</option>
-                      <option value='August'>August</option>
-                      <option value='September'>September</option>
-                      <option value='October'>October</option>
-                      <option value='November'>November</option>
-                      <option value='December'>December</option>
-                    </select>
+              <div class="work_experiences_wrapper">
+                <div class="form-group">
+                  <h5>Company</h5>
+                  <input class="form-control" id="company" type="text" name="work_experiences[0][company]" placeholder="ex. PT. Wahana Integra Nusantara"/>
+                </div>
+                <div class="form-group">
+                  <h5>Location</h5>
+                  <input class="form-control" id="location" type="text" name="work_experiences[0][location]" placeholder="ex. Street name, City, Province, Nation" />
+                </div>
+                <div class="form-group">
+                  <h5>Current Position</h5>
+                  <input class="form-control" id="current_position" type="text" name="work_experiences[0][position]" placeholder="ex. Manager"/>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <h5>Entry</h5>
+                    <div class="form-group">
+                      <select class="form-control" name="work_experiences[0][entry_month]" id="entry_month">
+                        <option disabled selected> Select month </option>
+                        <option value='January'>January</option>
+                        <option value='February'>February</option>
+                        <option value='March'>March</option>
+                        <option value='April'>April</option>
+                        <option value='May'>May</option>
+                        <option value='June'>June</option>
+                        <option value='July'>July</option>
+                        <option value='August'>August</option>
+                        <option value='September'>September</option>
+                        <option value='October'>October</option>
+                        <option value='November'>November</option>
+                        <option value='December'>December</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <h5>&nbsp;</h5>
+                    <div class="form-group">
+                      <select class="form-control" name="work_experiences[0][entry_year]" id="entry_year">
+                        <option disabled selected> Select year </option>
+                        @for ($i=1950; $i < date('Y'); $i++)
+                          <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <h5>Out</h5>
+                    <div class="form-group">
+                      <select class="form-control" name="work_experiences[0][out_month]" id="out_month">
+                        <option disabled selected> Select month </option>
+                        <option value='January'>January</option>
+                        <option value='February'>February</option>
+                        <option value='March'>March</option>
+                        <option value='April'>April</option>
+                        <option value='May'>May</option>
+                        <option value='June'>June</option>
+                        <option value='July'>July</option>
+                        <option value='August'>August</option>
+                        <option value='September'>September</option>
+                        <option value='October'>October</option>
+                        <option value='November'>November</option>
+                        <option value='December'>December</option>
+                      </select>
+                    </div>
+                    <div class="form-group" id="n_form">
+                      <input class="form-check-input" type="radio" name="work_experiences[0][is_currently_work]"
+                      id="is_currently_work" value="Yes">
+                      <label class="form-check-label" for="is_currently_work">
+                        No, I currently work here
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <h5>&nbsp;</h5>
+                    <div class="form-group">
+                      <select class="form-control" name="work_experiences[0][out_year]" id="out_year">
+                        <option disabled selected> Select year </option>
+                        @for ($i=1950; $i < date('Y'); $i++)
+                          <option value="{{ $i }}">{{ $i }}</option>
+                        @endfor
+                      </select>
+                    </div>
                   </div>
                 </div>
-                <div class="col-3">
-                  <h5>&nbsp;</h5>
-                  <div class="form-group">
-                    <select class="form-control" name="year" id="entry_year">
-                      <option disabled selected> Select year </option>
-                      @for ($i=1950; $i < date('Y'); $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                      @endfor
-                    </select>
-                  </div>
+                <div class="form-group">
+                  <h5>Description (Optional)</h5>
+                  <textarea class="form-control" id="description" type="text" name="work_experiences[0][description]"></textarea>
                 </div>
-                <div class="col-3">
-                  <h5>Out</h5>
-                  <div class="form-group">
-                    <select class="form-control" name="bulan" id="out_month">
-                      <option disabled selected> Select month </option>
-                      <option value='January'>January</option>
-                      <option value='February'>February</option>
-                      <option value='March'>March</option>
-                      <option value='April'>April</option>
-                      <option value='May'>May</option>
-                      <option value='June'>June</option>
-                      <option value='July'>July</option>
-                      <option value='August'>August</option>
-                      <option value='September'>September</option>
-                      <option value='October'>October</option>
-                      <option value='November'>November</option>
-                      <option value='December'>December</option>
-                    </select>
-                  </div>
-                  <div class="form-group" id="n_form">
-                    <input class="form-check-input" type="radio" name="n_radio"
-                    id="flexRadioDefault1" value="Yes">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      No, I currently work here
-                    </label>
-                  </div>
-                </div>
-                <div class="col-3">
-                  <h5>&nbsp;</h5>
-                  <div class="form-group">
-                    <select class="form-control" name="year" id="out_year">
-                      <option disabled selected> Select year </option>
-                      @for ($i=1950; $i < date('Y'); $i++)
-                        <option value="{{ $i }}">{{ $i }}</option>
-                      @endfor
-                    </select>
-                  </div>
-                </div>
+                <hr class="mt-0">
               </div>
-              <div class="form-group">
-                <h5>Description (Optional)</h5>
-                <textarea class="form-control" id="description" type="text" name=""></textarea>
+
+              <div class="text-left">
+                <input type="button" id="addOthersWorkExperienceBtn" class="btn btn-primary" value="+ Add Others Work Experience">
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
@@ -980,17 +993,6 @@
         });
     });
 
-    // $(".next").first().click(function() {
-    //     for (i = 1; i <= $('.badgebox').length; i++){
-    //         if($('#checked1').html() == '&check;') {
-    //             console.log('ok');
-    //         } else {
-    //             console.log('not ok');
-    //         }
-    //         // console.log($('#primary'+i).val());
-    //     }
-    // });
-
     $(".next").last().click(function() {
         console.log($('#skill').val());
         // CATEGORY FIELD
@@ -998,6 +1000,7 @@
         $('input[name="category"]:checked').each(function() {
            $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
         });
+
         // $("h5#category_review_wrapper").html(': ');
         $('#category-select option:selected').each(function() {
             $("h5#category_review_wrapper").empty();
@@ -1052,12 +1055,21 @@
     });
 
     $('#addOthersLanguangeBtn').click(function() {
+      append_language();
+    });
+
+    $('#addOthersEducationBtn').click(function() {
       append_education();
     });
 
-    var index = 1;
-    function append_education(){
-      index++;
+    $('#addOthersWorkExperienceBtn').click(function() {
+      append_work_experience();
+    });
+
+    var index_language = 1;
+    // method to append new language
+    function append_language(){
+      index = index_language++;
       var others_language_html = '<div class="form-group"><h5>Language</h5><input class="form-control" id="other_language[]" type="text" name="other_language" placeholder="ex. Arabian"/></div>';
       others_language_html += '<div class="form-group text-left">';
       others_language_html += '<h5>Proficiency</h5>';
@@ -1068,6 +1080,130 @@
       others_language_html += '</div>';
 
       $('.others_languange_wrapper').append(others_language_html);
+    }
+
+    var date_now = new Date();
+    var year = date_now.getFullYear();
+    index_education = 1;
+    // method to append new education
+    function append_education(){
+      index = index_education++;
+      var others_education_html = '<div class="form-group"><h5>University</h5><input class="form-control" id="university" type="text" name="education['+index+'][university]" placeholder="ex. Oxford University"/></div>';
+      others_education_html += '<div class="form-group"><h5>Field of study</h5><input class="form-control" id="field_of_study" type="text" name="education['+index+'][field_of_study]" placeholder="ex. Information System"/></div>';
+      others_education_html += '<div class="form-group"><h5>Degree</h5><input class="form-control" id="degree" type="text" name="education['+index+'][degree]" placeholder="ex. Bachelor Degree"/></div>';
+      others_education_html += '<div class="row">';
+      others_education_html += '<div class="col-6"><h5>Start Year</h5><div class="form-group"><select class="form-control" name="education['+index+'][start_year]" id="start_year"><option disabled selected>Pilih</option>';
+      for (var i = 1950; i < year; i++) {
+        others_education_html += '<option value="'+i+'">'+i+'</option>';
+      }
+      others_education_html += '</select></div></div>';
+      others_education_html += '<div class="col-6"><h5>End Year(or expected)</h5><div class="form-group"><select class="form-control" name="education['+index+'][end_year]" id="end_year"><option disabled selected> Pilih </option>';
+      for (var i = 1950; i < year+5; i++) {
+        others_education_html += '<option value="'+i+'">'+i+'</option>';
+      }
+      others_education_html += '</select></div></div>';
+      others_education_html += '</div><hr class="mt-0">';
+
+      $('.eduacation_wrapper').append(others_education_html);
+    }
+
+    //method to append new work experiences
+    index_work_experience = 1;
+    function append_work_experience(){
+      index = index_work_experience++;
+
+      var others_work_experience_html =
+        `<div class="form-group">
+          <h5>Company</h5>
+          <input class="form-control" id="company" type="text" name="work_experiences[`+index+`][company]" placeholder="ex. PT. Wahana Integra Nusantara"/>
+        </div>
+        <div class="form-group">
+          <h5>Location</h5>
+          <input class="form-control" id="location" type="text" name="work_experiences[`+index+`][location]" placeholder="ex. Street name, City, Province, Nation" />
+        </div>
+        <div class="form-group">
+          <h5>Current Position</h5>
+          <input class="form-control" id="current_position" type="text" name="work_experiences[`+index+`][position]" placeholder="ex. Manager"/>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <h5>Entry</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[`+index+`][entry_month]" id="entry_month">
+                <option disabled selected> Select month </option>
+                <option value='January'>January</option>
+                <option value='February'>February</option>
+                <option value='March'>March</option>
+                <option value='April'>April</option>
+                <option value='May'>May</option>
+                <option value='June'>June</option>
+                <option value='July'>July</option>
+                <option value='August'>August</option>
+                <option value='September'>September</option>
+                <option value='October'>October</option>
+                <option value='November'>November</option>
+                <option value='December'>December</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <h5>&nbsp;</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[`+index+`][entry_year]" id="entry_year">
+                <option disabled selected> Select year </option>
+                @for ($i=1950; $i < date('Y'); $i++)
+                  <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <h5>Out</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[`+index+`][out_month]" id="out_month">
+                <option disabled selected> Select month </option>
+                <option value='January'>January</option>
+                <option value='February'>February</option>
+                <option value='March'>March</option>
+                <option value='April'>April</option>
+                <option value='May'>May</option>
+                <option value='June'>June</option>
+                <option value='July'>July</option>
+                <option value='August'>August</option>
+                <option value='September'>September</option>
+                <option value='October'>October</option>
+                <option value='November'>November</option>
+                <option value='December'>December</option>
+              </select>
+            </div>
+            <div class="form-group" id="n_form">
+              <input class="form-check-input" type="radio" name="work_experiences[`+index+`][is_currently_work]"
+              id="is_currently_work" value="Yes">
+              <label class="form-check-label" for="is_currently_work">
+                No, I currently work here
+              </label>
+            </div>
+          </div>
+          <div class="col-3">
+            <h5>&nbsp;</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[`+index+`][out_year]" id="out_year">
+                <option disabled selected> Select year </option>
+                @for ($i=1950; $i < date('Y'); $i++)
+                  <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Description (Optional)</h5>
+          <textarea class="form-control" id="description" type="text" name="work_experiences[`+index+`][description]"></textarea>
+        </div>
+        <hr class="mt-0">`
+      ;
+
+      $('.work_experiences_wrapper').append(others_work_experience_html);
     }
 
     $(".submit").click(function() {
