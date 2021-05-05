@@ -298,9 +298,11 @@
                             <h5 class="text-left">Select Category</h5>
                             <div class="text-left">
                                 @foreach ($category as $ctg)
-                                <label for="primary{{$loop->iteration}}" class="btn btn-outline-dark text-left">{{$ctg->category}}
-                                  <input name="category" type="checkbox" id="primary{{$loop->iteration}}" class="badgebox" value="{{$ctg->category}}">
-                                  <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+                                <label for="primary{{$loop->iteration}}"
+                                    class="btn btn-outline-dark text-left">{{$ctg->category}}
+                                    <input name="category" type="checkbox" id="primary{{$loop->iteration}}"
+                                        class="badgebox" value="{{$ctg->category}}">
+                                    <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
                                 </label>
                                 @endforeach
                             </div>
@@ -410,11 +412,11 @@
                             <br>
                             <h5>Are you beginner?</h5>
 
-                            <div class="form-group text-left">
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <div class="form-group text-left" id="beginner_form">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Yes">
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="No">
                                 <label class="form-check-label" for="inlineRadio2">No</label>
                             </div>
 
@@ -491,9 +493,9 @@
                                             <option value='December'>December</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                            id="flexRadioDefault1">
+                                    <div class="form-group" id="n_form">
+                                        <input class="form-check-input" type="radio" name="n_radio"
+                                            id="flexRadioDefault1" value="Yes">
                                         <label class="form-check-label" for="flexRadioDefault1">
                                             No, I currently work here
                                         </label>
@@ -527,39 +529,39 @@
                         <fieldset>
                             <!-- <h2 class="fs-title">TRIP Information</h2> -->
                             <h5>What is your English proficiency?</h5>
-                            <div class="form-group text-left">
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <div class="form-group text-left" id="ep_form">
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Basic">
                                 <label class="form-check-label" for="inlineRadio1">Basic</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Good">
                                 <label class="form-check-label" for="inlineRadio1">Good</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Fluent">
                                 <label class="form-check-label" for="inlineRadio1">Fluent</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Native">
                                 <label class="form-check-label" for="inlineRadio1">Native</label>
-
                             </div>
 
                             <h5>What other languages do you speak?</h5>
                             <h5>Language</h5>
                             <div class="form-group">
-                                <input class="form-control" id="" type="text" name="" placeholder="ex. Arabian"
-                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                                <input class="form-control" id="other_language" type="text" name=""
+                                    placeholder="ex. Arabian" aria-describedby="" value="" autocomplete="" autofocus
+                                    tabindex="1" />
                             </div>
                             <h5>Proficiency</h5>
-                            <div class="form-group text-left">
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <div class="form-group text-left" id="p_form">
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Basic">
                                 <label class="form-check-label" for="inlineRadio1">Basic</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Good">
                                 <label class="form-check-label" for="inlineRadio1">Good</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Fluent">
                                 <label class="form-check-label" for="inlineRadio1">Fluent</label>
 
-                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Native">
                                 <label class="form-check-label" for="inlineRadio1">Native</label>
 
                             </div>
@@ -635,7 +637,7 @@
                                             class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body text-left">
                                                 <div class="row">
-                                                    <div id="category_review_wrapper"></div>
+                                                    <div id="category_review_wrapper">: -</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -649,7 +651,7 @@
                                         <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2"
                                             class="collapse" data-parent="#accordionExample">
                                             <div class="card-body">
-                                                <h5 id="skill_new"></h5>
+                                                <h5 id="skill_new">: -</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -667,7 +669,7 @@
                                                         <h5><b>School </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="school_new"></h5>
+                                                        <h5 id="school_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -675,7 +677,7 @@
                                                         <h5><b>Field of Study </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="field_of_study_new"></h5>
+                                                        <h5 id="field_of_study_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -683,7 +685,7 @@
                                                         <h5><b>Degree </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="degree_new"></h5>
+                                                        <h5 id="degree_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -691,7 +693,7 @@
                                                         <h5><b>Start Year </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="start_year_new"></h5>
+                                                        <h5 id="start_year_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -699,7 +701,7 @@
                                                         <h5><b>End Year </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="end_year_new"></h5>
+                                                        <h5 id="end_year_new">: -</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -719,7 +721,7 @@
                                                         <h5><b>Beginner Status </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="beginner_status_new"></h5>
+                                                        <h5 id="beginner_status_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -727,7 +729,7 @@
                                                         <h5><b>Company </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="company_new"></h5>
+                                                        <h5 id="company_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -735,7 +737,7 @@
                                                         <h5><b>Location : </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="location_new"></h5>
+                                                        <h5 id="location_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -743,7 +745,7 @@
                                                         <h5><b>Current Position </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="current_position_new"></h5>
+                                                        <h5 id="current_position_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -751,7 +753,7 @@
                                                         <h5><b>Entry </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="entry_month_year_new"></h5>
+                                                        <h5 id="entry_month_year_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -759,7 +761,7 @@
                                                         <h5><b>Out </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="out_month_year_new"></h5>
+                                                        <h5 id="out_month_year_new">: -</h5>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -767,7 +769,15 @@
                                                         <h5><b>Description </b></h5>
                                                     </div>
                                                     <div class="col-8">
-                                                        <h5 id="description_new"></h5>
+                                                        <h5 id="description_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Currently Work? </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="n_new">: -</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1062,18 +1072,28 @@
         $("h5#end_year_new").html(': ' + $('#end_year').val());
 
         // EMPLOYMENT FIELD
-        // $("h5#beginner_status_new").html(': ' + $('#beginner_status').val());
+        $("h5#beginner_status_new").empty();
+        $('input[name="inlineRadioOptions"]:checked', '#beginner_form').each(function() {
+           $("h5#beginner_status_new").append(': '+this.value);
+        });
         $("h5#company_new").html(': ' + $('#company').val());
         $("h5#location_new").html(': ' + $('#location').val());
         $("h5#current_position_new").html(': ' + $('#current_position').val());
         $("h5#entry_month_year_new").html(': ' + $('#entry_month').val() + '-' + $('#entry_year').val());
         $("h5#out_month_year_new").html(': ' + $('#out_month').val() + '-' + $('#out_year').val());
         $("h5#description_new").html(': ' + $('#description').val());
+        $('input[name="n_radio"]:checked', '#n_form').each(function() {
+           $("h5#n_new").append(': '+this.value);
+        });
 
         // LANGUAGES FIELD
-        // $("h5#english_proficiency_new").html(': ' + $('#english_proficiency').val());
-        // $("h5#other_language_new").html(': ' + $('#other_language').val());
-        // $("h5#proficiency_new").html(': ' + $('#proficiency').val());
+        $('input[name="ep_radio"]:checked', '#ep_form').each(function() {
+           $("h5#english_proficiency_new").append(': '+this.value);
+        });
+        $("h5#other_language_new").html(': ' + $('#other_language').val());
+        $('input[name="p_radio"]:checked', '#ep_form').each(function() {
+           $("h5#proficiency_new").append(': '+this.value);
+        });
 
         // OVERVIEW FIELD
         $("h5#title_new").html(': ' + $('#title').val());
