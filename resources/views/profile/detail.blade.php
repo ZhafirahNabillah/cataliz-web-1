@@ -7,236 +7,236 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <style>
-    /*custom font*/
-    @import url(https://fonts.googleapis.com/css?family=Montserrat);
+  /*custom font*/
+  @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
-    /*basic reset*/
-    * {
-        margin: 0;
-        padding: 0;
-    }
-
-
-    body {
-        font-family: montserrat, arial, verdana;
-        background: transparent;
-    }
-
-    h5 {
-        text-align: left;
-    }
-
-    /*form styles*/
-    #msform {
-        text-align: center;
-        position: relative;
-        margin-top: 30px;
-    }
-
-    #msform fieldset {
-        background: white;
-        border: 0 none;
-        border-radius: 0px;
-        box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-        padding: 20px 30px;
-        box-sizing: border-box;
-        width: 80%;
-        margin: 0 10%;
-
-        /*stacking fieldsets above each other*/
-        position: relative;
-    }
-
-    /*Hide all except first fieldset*/
-    #msform fieldset:not(:first-of-type) {
-        display: none;
-    }
-
-    /*inputs*/
+  /*basic reset*/
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
 
+  body {
+    font-family: montserrat, arial, verdana;
+    background: transparent;
+  }
+
+  h5 {
+    text-align: left;
+  }
+
+  /*form styles*/
+  #msform {
+    text-align: center;
+    position: relative;
+    margin-top: 30px;
+  }
+
+  #msform fieldset {
+    background: white;
+    border: 0 none;
+    border-radius: 0px;
+    box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 10%;
+
+    /*stacking fieldsets above each other*/
+    position: relative;
+  }
+
+  /*Hide all except first fieldset*/
+  #msform fieldset:not(:first-of-type) {
+    display: none;
+  }
+
+  /*inputs*/
 
 
-    #msform input:focus,
-    #msform textarea:focus {
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        border: 1px solid #ee0979;
-        outline-width: 0;
-        transition: All 0.5s ease-in;
-        -webkit-transition: All 0.5s ease-in;
-        -moz-transition: All 0.5s ease-in;
-        -o-transition: All 0.5s ease-in;
-    }
-
-    /*buttons*/
-    #msform .action-button {
-        width: 100px;
-        background: #ee0979;
-        font-weight: bold;
-        color: white;
-        border: 0 none;
-        border-radius: 25px;
-        cursor: pointer;
-        padding: 10px 5px;
-        margin: 10px 5px;
-    }
-
-    #msform .action-button:hover,
-    #msform .action-button:focus {
-        box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
-    }
-
-    #msform .action-button-previous {
-        width: 100px;
-        background: #7367F0;
-        font-weight: bold;
-        color: white;
-        border: 0 none;
-        border-radius: 25px;
-        cursor: pointer;
-        padding: 10px 5px;
-        margin: 10px 5px;
-    }
-
-    #msform .action-button-previous:hover,
-    #msform .action-button-previous:focus {
-        box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
-    }
-
-    /*headings*/
-    .fs-title {
-        font-size: 18px;
-        text-transform: uppercase;
-        color: #2C3E50;
-        margin-bottom: 10px;
-        letter-spacing: 2px;
-        font-weight: bold;
-    }
-
-    .fs-subtitle {
-        font-weight: normal;
-        font-size: 13px;
-        color: #666;
-        margin-bottom: 20px;
-    }
-
-    /*progressbar*/
-    #progressbar {
-        margin-bottom: 30px;
-        overflow: hidden;
-        /*CSS counters to number the steps*/
-        counter-reset: step;
-    }
-
-    #progressbar li {
-        list-style-type: none;
-        color: black;
-        text-transform: uppercase;
-        font-size: 9px;
-        width: 12%;
-        float: left;
-        position: relative;
-        letter-spacing: 1px;
-    }
-
-    #progressbar li:before {
-        content: counter(step);
-        counter-increment: step;
-        width: 24px;
-        height: 24px;
-        line-height: 26px;
-        display: block;
-        font-size: 12px;
-        color: #333;
-        background: white;
-        border-radius: 25px;
-        margin: 0 auto 10px auto;
-    }
-
-    /*progressbar connectors*/
-    #progressbar li:after {
-        content: '';
-        width: 100%;
-        height: 2px;
-        background: white;
-        position: absolute;
-        left: -50%;
-        top: 9px;
-        z-index: -1;
-        /*put it behind the numbers*/
-    }
-
-    #progressbar li:first-child:after {
-        /*connector not needed before the first step*/
-        content: none;
-    }
-
-    /*marking active/completed steps green*/
-    /*The number of the step and the connector before it = green*/
-    #progressbar li.active:before,
-    #progressbar li.active:after {
-        background: #7367F0;
-        color: white;
-    }
 
 
-    /* Not relevant to this form */
-    .dme_link {
-        margin-top: 30px;
-        text-align: center;
-    }
+  #msform input:focus,
+  #msform textarea:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    border: 1px solid #ee0979;
+    outline-width: 0;
+    transition: All 0.5s ease-in;
+    -webkit-transition: All 0.5s ease-in;
+    -moz-transition: All 0.5s ease-in;
+    -o-transition: All 0.5s ease-in;
+  }
 
-    .dme_link a {
-        background: #FFF;
-        font-weight: bold;
-        color: #ee0979;
-        border: 0 none;
-        border-radius: 25px;
-        cursor: pointer;
-        padding: 5px 25px;
-        font-size: 12px;
-    }
+  /*buttons*/
+  #msform .action-button {
+    width: 100px;
+    background: #ee0979;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+  }
 
-    .dme_link a:hover,
-    .dme_link a:focus {
-        background: #C5C5F1;
-        text-decoration: none;
-    }
+  #msform .action-button:hover,
+  #msform .action-button:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #ee0979;
+  }
+
+  #msform .action-button-previous {
+    width: 100px;
+    background: #7367F0;
+    font-weight: bold;
+    color: white;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 10px 5px;
+    margin: 10px 5px;
+  }
+
+  #msform .action-button-previous:hover,
+  #msform .action-button-previous:focus {
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #C5C5F1;
+  }
+
+  /*headings*/
+  .fs-title {
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    font-weight: bold;
+  }
+
+  .fs-subtitle {
+    font-weight: normal;
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  /*progressbar*/
+  #progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    /*CSS counters to number the steps*/
+    counter-reset: step;
+  }
+
+  #progressbar li {
+    list-style-type: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 9px;
+    width: 12%;
+    float: left;
+    position: relative;
+    letter-spacing: 1px;
+  }
+
+  #progressbar li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 24px;
+    height: 24px;
+    line-height: 26px;
+    display: block;
+    font-size: 12px;
+    color: #333;
+    background: white;
+    border-radius: 25px;
+    margin: 0 auto 10px auto;
+  }
+
+  /*progressbar connectors*/
+  #progressbar li:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: -50%;
+    top: 9px;
+    z-index: -1;
+    /*put it behind the numbers*/
+  }
+
+  #progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none;
+  }
+
+  /*marking active/completed steps green*/
+  /*The number of the step and the connector before it = green*/
+  #progressbar li.active:before,
+  #progressbar li.active:after {
+    background: #7367F0;
+    color: white;
+  }
 
 
-    /* Hiding the checkbox, but allowing it to be focused */
-    .badgebox {
-        opacity: 0;
-    }
+  /* Not relevant to this form */
+  .dme_link {
+    margin-top: 30px;
+    text-align: center;
+  }
 
-    .badgebox+.badge {
-        /* Move the check mark away when unchecked */
-        text-indent: -999999px;
-        /* Makes the badge's width stay the same checked and unchecked */
-        width: 27px;
-    }
+  .dme_link a {
+    background: #FFF;
+    font-weight: bold;
+    color: #ee0979;
+    border: 0 none;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 5px 25px;
+    font-size: 12px;
+  }
 
-    .badgebox:focus+.badge {
-        /* Set something to make the badge looks focused */
-        /* This really depends on the application, in my case it was: */
+  .dme_link a:hover,
+  .dme_link a:focus {
+    background: #C5C5F1;
+    text-decoration: none;
+  }
 
-        /* Adding a light border */
-        box-shadow: inset 0px 0px 5px;
-        /* Taking the difference out of the padding */
-    }
 
-    .badgebox:checked+.badge {
-        /* Move the check mark back when checked */
-        text-indent: 0;
-    }
+  /* Hiding the checkbox, but allowing it to be focused */
+  .badgebox {
+    opacity: 0;
+  }
 
-    .btn .badge {
-        color: black;
-        background-color: white;
-        border: 1px solid black;
-    }
+  .badgebox+.badge {
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 27px;
+  }
+
+  .badgebox:focus+.badge {
+    /* Set something to make the badge looks focused */
+    /* This really depends on the application, in my case it was: */
+
+    /* Adding a light border */
+    box-shadow: inset 0px 0px 5px;
+    /* Taking the difference out of the padding */
+  }
+
+  .badgebox:checked+.badge {
+    /* Move the check mark back when checked */
+    text-indent: 0;
+  }
+
+  .btn .badge {
+    color: black;
+    background-color: white;
+    border: 1px solid black;
+  }
 </style>
 @endpush
 
@@ -256,10 +256,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Profile
-              <img class="align-text  width=" 15" height="15"" src="
-              {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-              data-toggle="popover" data-placement="top"
-              data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
+              <img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -299,27 +298,25 @@
               <h5 class="text-left">Select Category</h5>
               <div class="text-left">
                 @foreach ($category as $ctg)
-                  <label for="primary{{$loop->iteration}}"
-                    class="btn btn-outline-dark text-left">{{$ctg->category}}
-                    <input name="category" type="checkbox" id="primary{{$loop->iteration}}"
-                    class="badgebox" value="{{$ctg->category}}">
-                    <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
-                  </label>
+                <label for="primary{{$loop->iteration}}" class="btn btn-outline-dark text-left">{{$ctg->category}}
+                  <input name="category" type="checkbox" id="primary{{$loop->iteration}}" class="badgebox"
+                    value="{{$ctg->category}}">
+                  <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+                </label>
                 @endforeach
               </div>
               <br>
               <div class="form-group text-left">
                 <label class="form-label" for="register-username">Others</label>
-                <select class="category-select form-control @error('category') is-invalid @enderror"
-                  name="category">
+                <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
                   @foreach ($category as $ctg)
-                    <option>{{ $ctg->category }}</option>
+                  <option>{{ $ctg->category }}</option>
                   @endforeach
                 </select>
                 @error('category')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
                 @enderror
               </div>
               <div class="text-left ">
@@ -335,16 +332,17 @@
               <br>
               <h5>Select skill</h5>
               <div class="form-group">
-                <select id="skill-select" class="livesearch-plans form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
+                <select id="skill-select" class="livesearch-plans form-control @error('category') is-invalid @enderror"
+                  name="skill[]" multiple>
                   @foreach ($all_skills as $all_skill)
-                    <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
+                  <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
                   @endforeach
                 </select>
               </div>
               <div class="text-left ">
                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
               </div>
-              <input type="button" name="previous" class="previous action-button-previous"value="Previous" />
+              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
               <input type="button" name="next" class="next action-button" value="Next" />
             </fieldset>
 
@@ -355,15 +353,18 @@
               <div class="eduacation_wrapper">
                 <div class="form-group">
                   <h5>University</h5>
-                  <input class="form-control" id="university" type="text" name="education[0][university]" placeholder="ex. Oxford University"/>
+                  <input class="form-control" id="university" type="text" name="education[0][university]"
+                    placeholder="ex. Oxford University" />
                 </div>
                 <div class="form-group">
                   <h5>Field of study</h5>
-                  <input class="form-control" id="field_of_study" type="text" name="education[0][field_of_study]" placeholder="ex. Information System"/>
+                  <input class="form-control" id="field_of_study" type="text" name="education[0][field_of_study]"
+                    placeholder="ex. Information System" />
                 </div>
                 <div class="form-group">
                   <h5>Degree</h5>
-                  <input class="form-control" id="degree" type="text" name="education[0][degree]" placeholder="ex. Bachelor Degree"/>
+                  <input class="form-control" id="degree" type="text" name="education[0][degree]"
+                    placeholder="ex. Bachelor Degree" />
                 </div>
                 <div class="row">
                   <div class="col-6">
@@ -372,9 +373,8 @@
                     <div class="form-group">
                       <select class="form-control" name="education[0][start_year]" id="start_year">
                         <option disabled selected> Pilih </option>
-                        @for ($i=1950; $i < date('Y')+1; $i++)
-                          <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
+                        @for ($i=1950; $i < date('Y')+1; $i++) <option value="{{ $i }}">{{ $i }}</option>
+                          @endfor
                       </select>
                     </div>
                   </div>
@@ -383,9 +383,8 @@
                     <div class="form-group">
                       <select class="form-control" name="education[0][end_year]" id="end_year">
                         <option disabled selected> Pilih </option>
-                        @for ($i=1950; $i < date('Y')+5; $i++)
-                          <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
+                        @for ($i=1950; $i < date('Y')+5; $i++) <option value="{{ $i }}">{{ $i }}</option>
+                          @endfor
                       </select>
                     </div>
                   </div>
@@ -396,8 +395,8 @@
                 <input type="button" id="addOthersEducationBtn" class="btn btn-primary" value="+ Add Others Education">
               </div>
 
-              <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input type="button" name="next" class="next action-button" value="Next"/>
+              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+              <input type="button" name="next" class="next action-button" value="Next" />
             </fieldset>
 
             {{-- fieldset work experience --}}
@@ -420,15 +419,18 @@
               <div class="work_experiences_wrapper">
                 <div class="form-group">
                   <h5>Company</h5>
-                  <input class="form-control" id="company" type="text" name="work_experiences[0][company]" placeholder="ex. PT. Wahana Integra Nusantara"/>
+                  <input class="form-control" id="company" type="text" name="work_experiences[0][company]"
+                    placeholder="ex. PT. Wahana Integra Nusantara" />
                 </div>
                 <div class="form-group">
                   <h5>Location</h5>
-                  <input class="form-control" id="location" type="text" name="work_experiences[0][location]" placeholder="ex. Street name, City, Province, Nation" />
+                  <input class="form-control" id="location" type="text" name="work_experiences[0][location]"
+                    placeholder="ex. Street name, City, Province, Nation" />
                 </div>
                 <div class="form-group">
                   <h5>Current Position</h5>
-                  <input class="form-control" id="current_position" type="text" name="work_experiences[0][position]" placeholder="ex. Manager"/>
+                  <input class="form-control" id="current_position" type="text" name="work_experiences[0][position]"
+                    placeholder="ex. Manager" />
                 </div>
                 <div class="row">
                   <div class="col-3">
@@ -456,9 +458,8 @@
                     <div class="form-group">
                       <select class="form-control" name="work_experiences[0][entry_year]" id="entry_year">
                         <option disabled selected> Select year </option>
-                        @for ($i=1950; $i < date('Y'); $i++)
-                          <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
+                        @for ($i=1950; $i < date('Y'); $i++) <option value="{{ $i }}">{{ $i }}</option>
+                          @endfor
                       </select>
                     </div>
                   </div>
@@ -483,7 +484,7 @@
                     </div>
                     <div class="form-group" id="n_form">
                       <input class="form-check-input" type="radio" name="work_experiences[0][is_currently_work]"
-                      id="is_currently_work" value="Yes">
+                        id="is_currently_work" value="Yes">
                       <label class="form-check-label" for="is_currently_work">
                         No, I currently work here
                       </label>
@@ -494,22 +495,23 @@
                     <div class="form-group">
                       <select class="form-control" name="work_experiences[0][out_year]" id="out_year">
                         <option disabled selected> Select year </option>
-                        @for ($i=1950; $i < date('Y'); $i++)
-                          <option value="{{ $i }}">{{ $i }}</option>
-                        @endfor
+                        @for ($i=1950; $i < date('Y'); $i++) <option value="{{ $i }}">{{ $i }}</option>
+                          @endfor
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
                   <h5>Description (Optional)</h5>
-                  <textarea class="form-control" id="description" type="text" name="work_experiences[0][description]"></textarea>
+                  <textarea class="form-control" id="description" type="text"
+                    name="work_experiences[0][description]"></textarea>
                 </div>
                 <hr class="mt-0">
               </div>
 
               <div class="text-left">
-                <input type="button" id="addOthersWorkExperienceBtn" class="btn btn-primary" value="+ Add Others Work Experience">
+                <input type="button" id="addOthersWorkExperienceBtn" class="btn btn-primary"
+                  value="+ Add Others Work Experience">
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
@@ -537,7 +539,8 @@
               <div class="others_languange_wrapper">
                 <div class="form-group">
                   <h5>Language</h5>
-                  <input class="form-control" id="other_language" type="text" name="other_language[]" placeholder="ex. Arabian"/>
+                  <input class="form-control" id="other_language" type="text" name="other_language[]"
+                    placeholder="ex. Arabian" />
                 </div>
                 <div class="form-group text-left">
                   <h5>Proficiency</h5>
@@ -566,7 +569,8 @@
               <h2 class="fs-title">Write a great profile or description about your skills in your category!</h2>
               <div class="form-group">
                 <h5>Title</h5>
-                <input class="form-control" id="title" type="text" name="description_title" placeholder="Enter tittle"/>
+                <input class="form-control" id="title" type="text" name="description_title"
+                  placeholder="Enter tittle" />
               </div>
               <div class="form-group">
                 <h5>Overview</h5>
@@ -582,19 +586,22 @@
               <h2 class="fs-title">Where are you based?</h2>
               <div class="form-group">
                 <h5>Street</h5>
-                <input class="form-control" id="street" type="text" name="loaction_street" placeholder="ex. 1234 Main Street, Apartment 101"/>
+                <input class="form-control" id="street" type="text" name="loaction_street"
+                  placeholder="ex. 1234 Main Street, Apartment 101" />
               </div>
               <div class="form-group">
                 <h5>City</h5>
-                <input class="form-control" id="city" type="text" name="location_city" placeholder="ex. Malang"/>
+                <input class="form-control" id="city" type="text" name="location_city" placeholder="ex. Malang" />
               </div>
               <div class="form-group">
                 <h5>Country</h5>
-                <input class="form-control" id="country" type="text" name="location_country" placeholder="ex. Indonesia"/>
+                <input class="form-control" id="country" type="text" name="location_country"
+                  placeholder="ex. Indonesia" />
               </div>
               <div class="form-group">
                 <h5>Postal Code</h5>
-                <input class="form-control" id="postal_code" type="text" name="location_postal_code" placeholder="ex. 098811"/>
+                <input class="form-control" id="postal_code" type="text" name="location_postal_code"
+                  placeholder="ex. 098811" />
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
@@ -608,10 +615,12 @@
               <div class="collapse-icon">
                 <div class="accordion" id="accordionExample">
                   <div class="card">
-                    <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                    <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button"
+                      data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                       <span class="lead collapse-title"><b>Category</b></span>
                     </div>
-                    <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
+                    <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show"
+                      data-parent="#accordionExample">
                       <div class="card-body text-left">
                         <div class="row">
                           <div id="category_review_wrapper">: -</div>
@@ -620,20 +629,24 @@
                     </div>
                   </div>
                   <div class="card">
-                    <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                    <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
                       <span class="lead collapse-title"><b>Expertise</b></span>
                     </div>
-                    <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" data-parent="#accordionExample">
+                    <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse"
+                      data-parent="#accordionExample">
                       <div class="card-body">
                         <h5 id="skill_new">: -</h5>
                       </div>
                     </div>
                   </div>
                   <div class="card">
-                    <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                    <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
                       <span class="lead collapse-title"><b>Education</b></span>
                     </div>
-                    <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" data-parent="#accordionExample">
+                    <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse"
+                      data-parent="#accordionExample">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
@@ -679,10 +692,12 @@
                     </div>
                   </div>
                   <div class="card">
-                    <div id="headingCollapse4" class="card-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                    <div id="headingCollapse4" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                       <span class="lead collapse-title"><b>Employment</b></span>
                     </div>
-                    <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" data-parent="#accordionExample">
+                    <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse"
+                      data-parent="#accordionExample">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
@@ -752,10 +767,12 @@
                     </div>
                   </div>
                   <div class="card">
-                    <div id="headingCollapse5" class="card-header" data-toggle="collapse" role="button" data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                    <div id="headingCollapse5" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
                       <span class="lead collapse-title"><b>Languages</b></span>
                     </div>
-                    <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse" data-parent="#accordionExample">
+                    <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse"
+                      data-parent="#accordionExample">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
@@ -785,10 +802,12 @@
                     </div>
                   </div>
                   <div class="card">
-                    <div id="headingCollapse6" class="card-header" data-toggle="collapse" role="button" data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                    <div id="headingCollapse6" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
                       <span class="lead collapse-title"><b>Overview</b></span>
                     </div>
-                    <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6" class="collapse" data-parent="#accordionExample">
+                    <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6" class="collapse"
+                      data-parent="#accordionExample">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
@@ -810,10 +829,12 @@
                     </div>
                   </div>
                   <div class="card">
-                    <div id="headingCollapse7" class="card-header" data-toggle="collapse" role="button" data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                    <div id="headingCollapse7" class="card-header" data-toggle="collapse" role="button"
+                      data-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
                       <span class="lead collapse-title"><b>Address</b></span>
                     </div>
-                    <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7" class="collapse" data-parent="#accordionExample">
+                    <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7" class="collapse"
+                      data-parent="#accordionExample">
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
@@ -1059,103 +1080,6 @@
         return false;
     });
 
-
-    //method for validating phone number
-    $.validator.addMethod("phoneNumber", function(value, element) {
-        return this.optional(element) || /^[1-9][0-9]/.test(value);
-    }, '<strong class="text-danger">Please enter a valid phone number!</strong>');
-    $.validator.addMethod('filesize', function(value, element, param) {
-        return this.optional(element) || (element.files[0].size <= param * 1000000)
-    }, '<strong class="text-danger">File must be less than {0}MB!</strong>');
-    //submit edit profile and validation
-    $('#saveBtn1').click(function(e) {
-        console.log('masuk');
-        $('#ClientForm').validate({
-            rules: {
-                'phone': {
-                    required: true,
-                    'phoneNumber': true,
-                    minlength: 9,
-                    maxlength: 12
-                },
-                'name': {
-                    required: true
-                }
-            },
-            messages: {
-                'phone': {
-                    required: '<strong class="text-danger">Phone is required!</strong>',
-                    minlength: '<strong class="text-danger">Phone number at least contains 9 digits!</strong>',
-                    maxlength: '<strong class="text-danger">Phone number maximum contains 13 digits!</strong>'
-                },
-                'name': {
-                    required: '<strong class="text-danger">Name is required!</strong>'
-                }
-            },
-            errorPlacement: function(error, element) {
-                if (element.attr("name") == "phone") {
-                    error.appendTo("#phone-error");
-                } else if (element.attr("name") == "name") {
-                    error.appendTo("#name-error");
-                }
-            },
-            //submit Handler
-            submitHandler: function(form) {
-                form.submit();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Updated succesfully!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
-        });
-        $('#modals_profil').modal('hide');
-    });
-    $('#saveProfileCoacheeBtn').click(function(e) {
-        console.log('masuk');
-        $('#formEditProfileCoachee').validate({
-            rules: {
-                'phone': {
-                    required: true,
-                    'phoneNumber': true,
-                    minlength: 9,
-                    maxlength: 12
-                },
-                'name': {
-                    required: true
-                }
-            },
-            messages: {
-                'phone': {
-                    required: '<strong class="text-danger">Phone is required!</strong>',
-                    minlength: '<strong class="text-danger">Phone number at least contains 9 digits!</strong>',
-                    maxlength: '<strong class="text-danger">Phone number maximum contains 13 digits!</strong>'
-                },
-                'name': {
-                    required: '<strong class="text-danger">Name is required!</strong>'
-                }
-            },
-            errorPlacement: function(error, element) {
-                if (element.attr("name") == "phone") {
-                    error.appendTo("#phone-error");
-                } else if (element.attr("name") == "name") {
-                    error.appendTo("#name-error");
-                }
-            },
-            //submit Handler
-            submitHandler: function(form) {
-                form.submit();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Updated succesfully!',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-            }
-        });
-        $('#modals_profil').modal('hide');
-        
     $('#addOthersLanguangeBtn').click(function() {
       append_language();
     });
@@ -1187,6 +1111,7 @@
     var date_now = new Date();
     var year = date_now.getFullYear();
     index_education = 1;
+    
     // method to append new education
     function append_education(){
       index = index_education++;
@@ -1307,12 +1232,5 @@
 
       $('.work_experiences_wrapper').append(others_work_experience_html);
     }
-
-    $(".submit").click(function() {
-        return false;
-    })
-
-
-    // multistep
 </script>
 @endpush
