@@ -298,11 +298,10 @@
                             <h5 class="text-left">Select Category</h5>
                             <div class="text-left">
                                 @foreach ($category as $ctg)
-                                <label for="primary{{$loop->iteration}}"
-                                    class="btn btn-outline-dark text-left">{{$ctg->category}} <input type="checkbox"
-                                        id="primary{{$loop->iteration}}" class="badgebox"
-                                        value="{{$ctg->category}}"><span class="badge"
-                                        id="checked{{$loop->iteration}}">&check;</span></label>
+                                <label for="primary{{$loop->iteration}}" class="btn btn-outline-dark text-left">{{$ctg->category}}
+                                  <input name="category" type="checkbox" id="primary{{$loop->iteration}}" class="badgebox" value="{{$ctg->category}}">
+                                  <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+                                </label>
                                 @endforeach
                             </div>
 
@@ -636,12 +635,7 @@
                                             class="collapse show" data-parent="#accordionExample">
                                             <div class="card-body text-left">
                                                 <div class="row">
-                                                    <div class="col-2">
-                                                        <strong>Category</strong>
-                                                    </div>
-                                                    <div class="col-3">
-                                                        <span id="category"></span>
-                                                    </div>
+                                                    <div id="category_review_wrapper"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1050,8 +1044,12 @@
 
     $(".next").last().click(function() {
         console.log($('#skill').val());
-        // CATEGORY FIELD
-        // $("span#category_new").html($('.badgebox').val());
+        // CATEGORY FIELD 
+        $("#category_review_wrapper").empty();
+        $('input[name="category"]:checked').each(function() {
+           console.log(this.value);
+           $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
+        });
 
         // EXPERTISE FIELD
         // $("h5#skill_new").html($('#skill').val());
@@ -1080,7 +1078,7 @@
         // OVERVIEW FIELD
         $("h5#title_new").html(': ' + $('#title').val());
         $("h5#overview_new").html(': ' + $('#overview').val());
-        
+
         // ADDRESS FIELD
         $("h5#street_new").html(': ' + $('#street').val());
         $("h5#city_new").html(': ' + $('#city').val());
