@@ -21,10 +21,7 @@
 				<div class="row breadcrumbs-top">
 					<div class="col-12">
 						<h2 class="content-header-title float-left mb-0">Profile
-							<img class="align-text  width=" 15" height="15"" src="
-								{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-								data-toggle="popover" data-placement="top"
-								data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
+							<img class="align-text  width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini, ditampilkan detail profile dari pemilik akun. Pada halaman ini pula, pengguna dapat mengubah kata sandi dan detail informasi akunnya." />
 						</h2>
 						<div class="breadcrumb-wrapper">
 							<ol class="breadcrumb">
@@ -53,12 +50,9 @@
 
 							<!-- profile cover photo -->
 							@if ($user->background_picture == 'background_default.jpg')
-							<img class="card-img-top" style="height: 569px;"
-								src="{{ asset('assets/images/avatars/'.$user->background_picture) }}"
-								alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ asset('assets/images/avatars/'.$user->background_picture) }}" alt="User Profile Image" />
 							@else
-							<img class="card-img-top" style="height: 569px;" src="{{ $contents_bg }}"
-								alt="User Profile Image" />
+							<img class="card-img-top" style="height: 569px;" src="{{ $contents_bg }}" alt="User Profile Image" />
 							@endif
 							<!--/ profile cover photo -->
 
@@ -67,12 +61,9 @@
 								<div class="profile-img-container d-flex align-items-center">
 									<div class="profile-img">
 										@if ($user->profil_picture == 'cataliz.jpg')
-										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}"
-											class="rounded img-fluid" alt="Card image" id="profil" />
+										<img src="{{ asset('assets/images/avatars/'.$user->profil_picture) }}" class="rounded img-fluid" alt="Card image" id="profil" />
 										@else
-										<img src="{{ $contents }}" class="rounded img-fluid" alt="Card image"
-											id="profil"
-											style="width: 115px; height: 115px; background-position: center;" />
+										<img src="{{ $contents }}" class="rounded img-fluid" alt="Card image" id="profil" style="width: 115px; height: 115px; background-position: center;" />
 										@endif
 									</div>
 									<!-- profile title -->
@@ -85,11 +76,8 @@
 							<!-- tabs pill -->
 							<div class="profile-header-nav position-relative">
 								<!-- navbar -->
-								<nav
-									class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
-									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse"
-										data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-										aria-expanded="false" aria-label="Toggle navigation">
+								<nav class="navbar navbar-expand-md navbar-light justify-content-end justify-content-md-between w-100 position-relative">
+									<button class="btn btn-icon navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 										<i data-feather="align-justify" class="font-medium-5"></i>
 									</button>
 
@@ -98,15 +86,16 @@
 										<div class="profile-tabs d-flex justify-content-between flex-wrap mt-1 mt-md-0">
 											<ul class="nav nav-tabs" role="tablist">
 												<li class="nav-item">
-													<a class="nav-link active" id="home-tab" data-toggle="tab"
-														href="#home" aria-controls="home" role="tab"
-														aria-selected="true">Home</a>
+													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
+												@role('mentor')
+												<li class="nav-item">
+													<a class="nav-link " id="detailProfile-tab" data-toggle="tab" href="#detailProfile" aria-controls="detailProfile" role="tab" aria-selected="true">Detail Profile</a>
+												</li>
+												@endrole
 												@role('coachee')
 												<li class="nav-item">
-													<a class="nav-link " id="profile-tab" data-toggle="tab"
-														href="#feedback" aria-controls="feedback" role="tab"
-														aria-selected="true">Feedback</a>
+													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
 												</li>
 												@endrole
 											</ul>
@@ -114,38 +103,30 @@
 
 										<!-- edit button -->
 										<div class="position-relative">
-											<button type="button" class="btn btn-primary" data-toggle="modal"
-												data-target="#modals_profil" aria-expanded="false" id="edit_profil">
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
 										</div>
 
 										<!-- Modal Profil Picture-->
-										<div class="modal fade" id="modal_edit_profil" tabindex="-1"
-											aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modal_edit_profil" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog modal-lg">
 												<div class="modal-content">
 													<div class="modal-header">
 														<h5 class="modal-title" id="exampleModalLabel">Update Foto
 															Profil</h5>
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 															<span aria-hidden="true">&times;</span>
 														</button>
 													</div>
-													<form action="{{route('update_profil', Auth::user()->id)}}"
-														method="POST" enctype="multipart/form-data"
-														id="formProfilePicture">
+													<form action="{{route('update_profil', Auth::user()->id)}}" method="POST" enctype="multipart/form-data" id="formProfilePicture">
 														<div class="modal-body">
 															@csrf
-															<input type="file" name="profil_picture" id="profil_picture"
-																class="profil_picture">
+															<input type="file" name="profil_picture" id="profil_picture" class="profil_picture">
 														</div>
 														<div class="modal-footer">
-															<button type="submit" class="btn btn-primary"
-																id="saveProfilePictureBtn">Simpan</button>
-															<button type="button" class="btn btn-secondary"
-																data-dismiss="modal">Batal</button>
+															<button type="submit" class="btn btn-primary" id="saveProfilePictureBtn">Simpan</button>
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 														</div>
 													</form>
 												</div>
@@ -154,33 +135,26 @@
 										<!--/ Modal Profil Picture-->
 
 										<!-- Modal Background picture -->
-										<div class="modal fade" id="modal_edit_background" tabindex="-1"
-											aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal fade" id="modal_edit_background" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 											<div class="modal-dialog">
 												<div class="modal-content">
 													<div class="modal-header">
 														<h5 class="modal-title" id="exampleModalLabel">Update Background
 														</h5>
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 															<span aria-hidden="true">&times;</span>
 														</button>
 													</div>
 													<div class="modal-body">
-														<form action="{{route('update_background', Auth::user()->id)}}"
-															method="POST" enctype="multipart/form-data"
-															id="formBackgroundPicture">
+														<form action="{{route('update_background', Auth::user()->id)}}" method="POST" enctype="multipart/form-data" id="formBackgroundPicture">
 															@csrf
-															<input type="file" name="background_picture"
-																id="background_picture">
+															<input type="file" name="background_picture" id="background_picture">
 															<div id="background_picture-error"></div>
 													</div>
 													<div class="modal-footer">
-														<button type="submit" class="btn btn-primary"
-															id="saveBackgroundPictureBtn">Simpan</button>
+														<button type="submit" class="btn btn-primary" id="saveBackgroundPictureBtn">Simpan</button>
 														</form>
-														<button type="button" class="btn btn-secondary"
-															data-dismiss="modal">Batal</button>
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
 													</div>
 												</div>
 											</div>
@@ -188,13 +162,11 @@
 										<!--/ Modal Background picture -->
 
 										<!-- modal edit profile-->
-										<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog"
-											aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+										<div class="modal fade" id="modals_profil" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 											<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 												<div class="modal-content">
 													<div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal"
-															aria-label="Close">
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 															<span aria-hidden="true">&times;</span>
 														</button>
 													</div>
@@ -202,39 +174,24 @@
 														<div class="container">
 															<div class="col-auto ">
 																<div class="card">
-																	<img class=" width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\profile.png')}}"
-																		alt="Card image cap" />
-																	<button type="button" class="btn btn-primary"
-																		aria-haspopup="true" id="btn_edit_profil"
-																		aria-expanded="false" data-toggle="modal"
-																		data-target="#modals-slide-in">
+																	<img class=" width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\profile.png')}}" alt="Card image cap" />
+																	<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_profil" aria-expanded="false" data-toggle="modal" data-target="#modals-slide-in">
 																		Edit Profile
 																	</button>
 																</div>
 															</div>
 															<div class="col-auto">
 																<div class="card">
-																	<img class="width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\picture.png')}}"
-																		alt="Card image cap" />
-																	<button type="button" class="btn btn-primary"
-																		aria-haspopup="true" id="btn_edit_picture"
-																		aria-expanded="false" data-toggle="modal"
-																		data-target="#modal_edit_profil">
+																	<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\picture.png')}}" alt="Card image cap" />
+																	<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_picture" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_profil">
 																		Edit Picture
 																	</button>
 																</div>
 															</div>
 															<div class="col-auto">
 																<div class="card">
-																	<img class="width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\cover.png')}}"
-																		alt="Card image cap" />
-																	<button type="button" class="btn btn-primary"
-																		aria-haspopup="true" id="btn_edit_background"
-																		aria-expanded="false" data-toggle="modal"
-																		data-target="#modal_edit_background">
+																	<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
+																	<button type="button" class="btn btn-primary" aria-haspopup="true" id="btn_edit_background" aria-expanded="false" data-toggle="modal" data-target="#modal_edit_background">
 																		Edit Cover
 																	</button>
 																</div>
@@ -242,12 +199,8 @@
 															@role('mentor')
 															<div class="col-auto">
 																<div class="card">
-																	<img class="width=" 120px" height="120px"" src="
-																		{{asset('assets\images\icons\profile\cover.png')}}"
-																		alt="Card image cap" />
-																	<a href="{{route('profil.detail', Auth::user()->id)}}"
-																		class="btn btn-primary"
-																		id="btn_edit_background">Full Profile</a>
+																	<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
+																	<a href="{{route('profil.detail', Auth::user()->id)}}" class="btn btn-primary" id="btn_edit_background">Full Profile</a>
 																</div>
 															</div>
 															@endrole
@@ -262,78 +215,50 @@
 										@role('coachee')
 										<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 											<div class="modal-dialog sidebar-sm">
-												<form class="add-new-record modal-content pt-0"
-													id="formEditProfileCoachee" name="formEditProfileCoachee"
-													method="POST" action="{{route('store_data', Auth::user()->id)}}">
+												<form class="add-new-record modal-content pt-0" id="formEditProfileCoachee" name="formEditProfileCoachee" method="POST" action="{{route('store_data', Auth::user()->id)}}">
 													@csrf
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">×</button>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 													<div class="modal-header mb-1">
 														<h5 class="modal-title" id="modalHeading"></h5>
 													</div>
 													<input type="hidden" name="Client_id" id="Client_id">
 													<div class="modal-body flex-grow-1">
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-fullname">Full
+															<label class="form-label" for="basic-icon-default-fullname">Full
 																Name</label>
-															<input id="name" name="name" type="text"
-																class="form-control dt-full-name"
-																id="basic-icon-default-fullname"
-																value="{{$user->name}}" />
+															<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->name}}" />
 															<div id="name-error"></div>
 														</div>
-														<label class="form-label"
-															for="basic-icon-default-post">Phone</label>
+														<label class="form-label" for="basic-icon-default-post">Phone</label>
 														<div class="form-group">
 															<div class="input-group input-group-merge">
 																<div class="input-group-prepend">
-																	<span class="input-group-text"
-																		id="basic-addon5">+62</span>
+																	<span class="input-group-text" id="basic-addon5">+62</span>
 																</div>
-																<input id="phone" name="phone" type="text"
-																	class="form-control" value="{{$user->phone}}">
+																<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
 															</div>
 															<div id="phone-error"></div>
 														</div>
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-email">Email</label>
-															<input id="email" name="email" type="text"
-																id="basic-icon-default-email"
-																class="form-control dt-email" value="{{$user->email}}"
-																readonly />
+															<label class="form-label" for="basic-icon-default-email">Email</label>
+															<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$user->email}}" readonly />
 															<small class="form-text text-muted"> You can use letters,
 																numbers & periods </small>
 														</div>
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-fullname">Organization</label>
-															<input id="organization" name="organization" type="text"
-																class="form-control dt-full-name"
-																id="basic-icon-default-fullname"
-																value="{{$user->organization}}" readonly />
+															<label class="form-label" for="basic-icon-default-fullname">Organization</label>
+															<input id="organization" name="organization" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->organization}}" readonly />
 														</div>
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-fullname">Company</label>
-															<input id="company" name="company" type="text"
-																class="form-control dt-full-name"
-																id="basic-icon-default-fullname"
-																value="{{$user->company}}" readonly />
+															<label class="form-label" for="basic-icon-default-fullname">Company</label>
+															<input id="company" name="company" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->company}}" readonly />
 														</div>
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-fullname">Occupation</label>
-															<input id="occupation" name="occupation" type="text"
-																class="form-control dt-full-name"
-																id="basic-icon-default-fullname"
-																value="{{$user->occupation}}" readonly />
+															<label class="form-label" for="basic-icon-default-fullname">Occupation</label>
+															<input id="occupation" name="occupation" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->occupation}}" readonly />
 														</div>
-														<button type="submit" class="btn btn-primary data-submit mr-1"
-															id="saveProfileCoacheeBtn">Submit</button>
-														<button type="reset" class="btn btn-outline-secondary"
-															data-dismiss="modal">Cancel</button>
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveProfileCoacheeBtn">Submit</button>
+														<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 													</div>
 												</form>
 											</div>
@@ -341,54 +266,38 @@
 										@else
 										<div class="modal modal-slide-in fade" id="modals-slide-in" aria-hidden="true">
 											<div class="modal-dialog sidebar-sm">
-												<form class="add-new-record modal-content pt-0" id="ClientForm"
-													name="ClientForm" method="POST"
-													action="{{route('store_data', Auth::user()->id)}}">
+												<form class="add-new-record modal-content pt-0" id="ClientForm" name="ClientForm" method="POST" action="{{route('store_data', Auth::user()->id)}}">
 													@csrf
-													<button type="button" class="close" data-dismiss="modal"
-														aria-label="Close">×</button>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
 													<div class="modal-header mb-1">
 														<h5 class="modal-title" id="modalHeading"></h5>
 													</div>
 													<input type="hidden" name="Client_id" id="Client_id">
 													<div class="modal-body flex-grow-1">
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-fullname">Full
+															<label class="form-label" for="basic-icon-default-fullname">Full
 																Name</label>
-															<input id="name" name="name" type="text"
-																class="form-control dt-full-name"
-																id="basic-icon-default-fullname"
-																value="{{$user->name}}" />
+															<input id="name" name="name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" value="{{$user->name}}" />
 															<div id="name-error"></div>
 														</div>
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-post">Phone</label>
+															<label class="form-label" for="basic-icon-default-post">Phone</label>
 															<div class="input-group input-group-merge">
 																<div class="input-group-prepend">
-																	<span class="input-group-text"
-																		id="basic-addon5">+62</span>
+																	<span class="input-group-text" id="basic-addon5">+62</span>
 																</div>
-																<input id="phone" name="phone" type="text"
-																	class="form-control" value="{{$user->phone}}">
+																<input id="phone" name="phone" type="text" class="form-control" value="{{$user->phone}}">
 															</div>
 															<div id="phone-error"></div>
 														</div>
 														<div class="form-group">
-															<label class="form-label"
-																for="basic-icon-default-email">Email</label>
-															<input id="email" name="email" type="text"
-																id="basic-icon-default-email"
-																class="form-control dt-email" value="{{$user->email}}"
-																readonly />
+															<label class="form-label" for="basic-icon-default-email">Email</label>
+															<input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email" value="{{$user->email}}" readonly />
 															<small class="form-text text-muted"> You can use letters,
 																numbers & periods </small>
 														</div>
-														<button type="submit" class="btn btn-primary data-submit mr-1"
-															id="saveBtn1" value="create">Submit</button>
-														<button type="reset" class="btn btn-outline-secondary"
-															data-dismiss="modal">Cancel</button>
+														<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn1" value="create">Submit</button>
+														<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 													</div>
 												</form>
 											</div>
@@ -464,21 +373,14 @@
 
 												<div class="card-header">
 													<h4 class="card-title">Change Password
-														<img class="text-align width=" 15" height="15"" src="
-															{{asset('assets\images\icons\popovers.png')}}"
-															alt="Card image cap" data-toggle="popover"
-															data-placement="top"
-															data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
+														<img class="text-align width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada bagian ini, Anda dapat melakukan perubahan kata sandi akun Anda. Kata sandi baru sebaiknya berbeda dari kata sandi sebelumnya." />
 													</h4>
 												</div>
 
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">Old password</label>
-													<input
-														class="form-control @error('old_password') is-invalid @enderror"
-														type="password" name="old_password"
-														placeholder="Type old password here...">
+													<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
 													@error('old_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -488,10 +390,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">New Password</label>
-													<input
-														class="form-control @error('new_password') is-invalid @enderror"
-														type="password" name="new_password"
-														placeholder="Type new password here...">
+													<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
 													@error('new_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -501,10 +400,7 @@
 
 												<div class="col-md-12 form-group">
 													<label for="fp-default">Confirm New Password</label>
-													<input
-														class="form-control @error('new_confirm_password') is-invalid @enderror"
-														type="password" name="new_confirm_password"
-														placeholder="New password confirmation">
+													<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
 													@error('new_confirm_password')
 													<span class="invalid-feedback" role="alert">
 														<strong>{{ $message }}</strong>
@@ -513,8 +409,7 @@
 												</div>
 
 												<div class="col-md-12 form-group">
-													<button type="submit" class="btn btn-primary data-submit mr-1"
-														id="saveBtn" value="create">Save Change</button>
+													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save Change</button>
 												</div>
 											</div>
 										</div>
@@ -533,10 +428,7 @@
 							<div class="row breadcrumbs-top">
 								<div class="col-12">
 									<h4 class="breadcrumb-item active tes">Feedback
-										<img class="rounded float-right width=" 15" height="15"" src="
-											{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
-											data-toggle="popover" data-placement="top"
-											data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
+										<img class="rounded float-right width=" 15" height="15"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar feedbacks dari session yang telah diikuti oleh client yang dipilih." />
 									</h4>
 								</div>
 							</div>
@@ -565,8 +457,7 @@
 					<!-- /Feedback note -->
 
 					<!-- Feedback detail modal -->
-					<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog"
-						aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal fade" id="show_feedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 						<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -617,6 +508,203 @@
 					</div>
 				</div>
 				@endrole
+
+
+				@role('mentor')
+				{{-- detailProfile tab --}}
+				<div class="tab-pane" id="detailProfile" aria-labelledby="about-tab" role="tabpanel">
+
+					<div class="card-body">
+						<div class="nav-vertical">
+							<ul class="nav nav-tabs nav-left flex-column" role="tablist">
+								<li class="nav-item">
+									<a class="nav-link active" id="baseVerticalLeft-tab1" data-toggle="tab" aria-controls="tabVerticalLeft1" href="#tabVerticalLeft1" role="tab" aria-selected="true">Category</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="baseVerticalLeft-tab2" data-toggle="tab" aria-controls="tabVerticalLeft2" href="#tabVerticalLeft2" role="tab" aria-selected="false">Expertise</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="baseVerticalLeft-tab3" data-toggle="tab" aria-controls="tabVerticalLeft3" href="#tabVerticalLeft3" role="tab" aria-selected="false">Education</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="baseVerticalLeft-tab4" data-toggle="tab" aria-controls="tabVerticalLeft4" href="#tabVerticalLeft4" role="tab" aria-selected="false">Employment</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="baseVerticalLeft-tab5" data-toggle="tab" aria-controls="tabVerticalLeft5" href="#tabVerticalLeft5" role="tab" aria-selected="false">languages</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="baseVerticalLeft-tab6" data-toggle="tab" aria-controls="tabVerticalLeft6" href="#tabVerticalLeft6" role="tab" aria-selected="false">Overview</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" id="baseVerticalLeft-tab7" data-toggle="tab" aria-controls="tabVerticalLeft7" href="#tabVerticalLeft7" role="tab" aria-selected="false">Address</a>
+								</li>
+							</ul>
+							<!-- category -->
+							<div class="tab-content">
+								<div class="tab-pane active" id="tabVerticalLeft1" role="tabpanel" aria-labelledby="baseVerticalLeft-tab1">
+									<div class="card">
+										<div class="card-body">
+											<h3>Tell us about the work you do!</h3>
+											<br>
+											<h5>Select Category</h5>
+											<span>#Category</span>
+											<br> <br>
+											<h5>Other</h5>
+											<span>#Category</span>
+
+
+										</div>
+									</div>
+								</div>
+
+								<!-- expertise -->
+								<div class="tab-pane" id="tabVerticalLeft2" role="tabpanel" aria-labelledby="baseVerticalLeft-tab2">
+									<div class="card">
+										<div class="card-body">
+											<h3>What is your skill?</h3>
+											<br>
+											<h5>Skill</h5>
+											<li>Skill 1</li>
+											<li>Skill 2</li>
+											<li>Skill 3</li>
+										</div>
+									</div>
+								</div>
+
+								<!-- Education -->
+								<div class="tab-pane" id="tabVerticalLeft3" role="tabpanel" aria-labelledby="baseVerticalLeft-tab3">
+									<div class="card">
+										<div class="card-body">
+											<h3>Add the schools you attended, areas of study, and degrees earned!</h3>
+											<br>
+											<h5>School</h5>
+											<span>#school</span>
+											<br><br>
+											<h5>Field of study</h5>
+											<span>#Field of study</span>
+											<br><br>
+											<h5>Degree</h5>
+											<span>#degree</span>
+											<br><br>
+											<h5>Year</h5>
+											<span>#startYear until #Year</span>
+											<br><br>
+											<h5>Description</h5>
+											<div class="text-justify">
+												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
+												</span>
+											</div>
+											<hr>
+											<h5>School</h5>
+											<span>#school2</span>
+											<br><br>
+											<h5>Field of study</h5>
+											<span>#Field of study2</span>
+											<br><br>
+											<h5>Degree</h5>
+											<span>#degree2</span>
+											<br><br>
+											<h5>Year</h5>
+											<span>#startYear until #Year</span>
+											<br><br>
+											<h5>Description</h5>
+											<div class="text-justify">
+												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- employment -->
+								<div class="tab-pane" id="tabVerticalLeft4" role="tabpanel" aria-labelledby="baseVerticalLeft-tab4">
+									<div class="card">
+										<div class="card-body">
+											<h3>My work experience</h3>
+											<br>
+											<h5>Beginner</h5>
+											<span>##selectedoption</span>
+											<br><br>
+											<h5>Company</h5>
+											<span>#Company</span>
+											<br><br>
+											<h5>Location</h5>
+											<span>#Location</span>
+											<br><br>
+											<h5>Current Posotion</h5>
+											<span>#Position</span>
+											<br><br>
+											<h5>Work Period</h5>
+											<span>#Entry until #Out</span>
+											<br><br>
+											<h5>Description</h5>
+											<div class="text-justify">
+												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
+												</span>
+											</div>
+											<hr>
+
+										</div>
+									</div>
+								</div>
+
+								<!-- languages -->
+								<div class="tab-pane" id="tabVerticalLeft5" role="tabpanel" aria-labelledby="baseVerticalLeft-tab5">
+									<div class="card">
+										<div class="card-body">
+											<h3>Add the language you are good at</h3>
+											<br>
+											<h5>English Proficiency</h5>
+											<span>#proficiecy</span>
+											<br><br>
+											<h5>Other Languages</h5>
+											<span>#language (#proficiency)</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- overview -->
+								<div class="tab-pane" id="tabVerticalLeft6" role="tabpanel" aria-labelledby="baseVerticalLeft-tab6">
+									<div class="card">
+										<div class="card-body">
+											<h3>Write a great profile or description about your skills in your category!</h3>
+											<br>
+											<h5>Tittle</h5>
+											<span>#Tittle</span>
+											<br><br>
+											<h5>Overview</h5>
+											<div class="text-justify">
+												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!-- address -->
+								<div class="tab-pane" id="tabVerticalLeft7" role="tabpanel" aria-labelledby="baseVerticalLeft-tab7">
+									<div class="card">
+										<div class="card-body">
+											<h3>My Address</h3>
+											<br>
+											<h5>Street</h5>
+											<span>#street</span>
+											<br><br>
+											<h5>City</h5>
+											<span>#City</span>
+											<br><br>
+											<h5>Country</h5>
+											<span>#Country</span>
+											<br><br>
+											<h5>Postal Code</h5>
+											<span>#Postal Code</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				@endrole
 			</div>
 		</div>
 	</div>
@@ -625,8 +713,7 @@
 	@endsection
 
 	@push('scripts')
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
-		id="theme-styles">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
 	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
@@ -636,7 +723,7 @@
 
 	<script type="text/javascript">
 		$(function() {
-			
+
 			// Cropping Image For Profil Picture
 			$('.profil_picture').ijaboCropTool({
 				preview: '#profil',
@@ -653,7 +740,7 @@
 					Swal.fire({
 						icon: 'warning',
 						title: message,
-					});				
+					});
 				}
 			});
 
