@@ -176,8 +176,43 @@ class ProfileController extends Controller
         return redirect(route('profil', Auth::user()->id));
     }
 
-    public function update_full_profil()
+    public function create_category(Request $request)
     {
-        return redirect(route('profil', Auth::user()->id));
+        $all_category = Category::all();
+        $category = new Category;
+        if ($request->category != $all_category) {
+            $category->category = $request->category;
+        }
+        return response()->json(['success' => 'Category saved successfully!']);
+    }
+
+    public function create_expertise()
+    {
+        return response()->json(['success' => 'Expertise saved successfully!']);
+    }
+
+    public function create_education()
+    {
+        return response()->json(['success' => 'Education saved successfully!']);
+    }
+
+    public function create_employment()
+    {
+        return response()->json(['success' => 'Employment saved successfully!']);
+    }
+
+    public function create_languages()
+    {
+        return response()->json(['success' => 'Languages saved successfully!']);
+    }
+
+    public function create_overview()
+    {
+        return response()->json(['success' => 'Overview saved successfully!']);
+    }
+
+    public function create_address()
+    {
+        return response()->json(['success' => 'Address saved successfully!']);
     }
 }

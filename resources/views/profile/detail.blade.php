@@ -311,7 +311,7 @@
                             <div class="form-group text-left">
                                 <label class="form-label" for="register-username">Others</label>
                                 <select class="category-select form-control @error('category') is-invalid @enderror"
-                                    name="category" id="category-select">
+                                    name="category" id="category-select" multiple>
                                     @foreach ($other_category as $ctg)
                                     <option></option>
                                     <option>{{ $ctg->category }}</option>
@@ -895,6 +895,8 @@
 
                             <input type="button" name="previous" class="previous action-button-previous"
                                 value="Previous" />
+                            {{-- <a href="{{route('profil', Auth::user()->id)}}" class="action-button pl-1
+                            pr-1">Submit</a> --}}
                             <input type="submit" name="submit" class="submit action-button" value="Submit" />
                         </fieldset>
                     </form>
@@ -1040,17 +1042,6 @@
         });
     });
 
-    // $(".next").first().click(function() {
-    //     for (i = 1; i <= $('.badgebox').length; i++){
-    //         if($('#checked1').html() == '&check;') {
-    //             console.log('ok');
-    //         } else {
-    //             console.log('not ok');
-    //         }
-    //         // console.log($('#primary'+i).val());
-    //     }
-    // });
-
     $(".next").last().click(function() {
         console.log($('#skill').val());
         // CATEGORY FIELD 
@@ -1112,8 +1103,9 @@
     });
 
     $(".submit").click(function() {
+        window.location.href = "{{route('profil', Auth::user()->id)}}";
         return false;
-    })
+    });
 
 
     //method for validating phone number
