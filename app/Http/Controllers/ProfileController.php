@@ -41,21 +41,22 @@ class ProfileController extends Controller
     public function profil_detail($id)
     {
         $user = User::where('id', Auth::user()->id)->first();
-        $category = Category::all();
+        $category = Category::all()->take(7);
+        $other_category = Category::whereNotIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
         $all_skills = Skill::get();
 
-        return view('profile.detail', compact('user', 'category', 'all_skills'));
+        return view('profile.detail', compact('user', 'category', 'all_skills', 'other_category'));
     }
 
     public function skill_search(Request $request)
     {
-        $skill = [];    
+        $skill = [];
         $search = trim($request->q);
-    
+
         if (empty($search)) {
-          $skill = Skill::all();
+            $skill = Skill::all();
         } else {
-          $skill = Skill::where('skill_name', 'LIKE', "%$search%")->get();
+            $skill = Skill::where('skill_name', 'LIKE', "%$search%")->get();
         }
 
         return response()->json($skill);
@@ -175,7 +176,8 @@ class ProfileController extends Controller
         return redirect(route('profil', Auth::user()->id));
     }
 
-    public function update_full_profil(){
+    public function update_full_profil()
+    {
         return redirect(route('profil', Auth::user()->id));
     }
 }

@@ -534,8 +534,633 @@
                   <input type="radio" name="ol_proficiency[]" id="others_1_good" value="Good">
                   <label class="form-check-label" for="others_1_good">Good</label>
 
+<<<<<<< HEAD
                   <input type="radio" name="ol_proficiency[]" id="others_1_fluent" value="Fluent">
                   <label class="form-check-label" for="others_1_fluent">Fluent</label>
+=======
+        <div class="content-body">
+            <!-- MultiStep Form -->
+            <div class="row justify-content-center">
+                <div class="col-md-9 col-md-offset-3 ">
+                    <form id="msform">
+                        <!-- progressbar -->
+                        <ul id="progressbar">
+                            <li class="active">Category</li>
+                            <li>Expertise</li>
+                            <li>Education</li>
+                            <li>Employment</li>
+                            <li>Languages</li>
+                            <li>Overview</li>
+                            <li>Address</li>
+                            <li>Review</li>
+                        </ul>
+                        <!-- fieldsets -->
+                        <fieldset>
+                            <h2 class="fs-title">Tell us about the work you do!</h2>
+                            <h5 class="text-left">Select Category</h5>
+                            <div class="text-center">
+                                @foreach ($category as $ctg)
+                                <label for="primary{{$loop->iteration}}"
+                                    class="btn btn-outline-dark text-left">{{$ctg->category}}
+                                    <input name="category" type="checkbox" id="primary{{$loop->iteration}}"
+                                        class="badgebox" value="{{$ctg->category}}">
+                                    <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+                                </label>
+                                @endforeach
+                            </div>
+
+                            <br>
+                            <div class="form-group text-left">
+                                <label class="form-label" for="register-username">Others</label>
+                                <select class="category-select form-control @error('category') is-invalid @enderror"
+                                    name="category" id="category-select">
+                                    @foreach ($other_category as $ctg)
+                                    <option></option>
+                                    <option>{{ $ctg->category }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="text-left ">
+                                <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
+                            </div>
+
+                            <input type="button" name="next" class="next action-button " value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">What is your skill?</h2>
+
+                            <br>
+                            <h5>Select skill</h5>
+                            <div class="form-group">
+                                <select id="skill-select"
+                                    class="livesearch-plans form-control @error('category') is-invalid @enderror"
+                                    name="skill" multiple>
+                                    @foreach ($all_skills as $all_skill)
+                                    <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="text-left ">
+                                <a class="card-text" href="#"><small class="text-muted">Skip this
+                                        step</small></a>
+                            </div>
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">Add the schools you attended, areas of study, and degrees earned!</h2>
+                            <br>
+                            <h5>School</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="school" type="text" name="school"
+                                    placeholder="ex. Oxford University" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
+                            </div>
+                            <h5>Field of study</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="field_of_study" type="text" name="field_of_study"
+                                    placeholder="ex. Information System" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
+                            </div>
+                            <h5>Degree</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="degree" type="text" name="degree"
+                                    placeholder="ex. Bachelor Degree" aria-describedby="" value="" autocomplete=""
+                                    autofocus tabindex="1" />
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <h5>Start Year</h5>
+
+                                    <div class="form-group">
+                                        <select class="form-control" name="provinsi" id="start_year">
+                                            <option disabled selected> Pilih </option>
+                                            <?php for ($i = 1950; $i < date('Y'); $i++) {
+
+                                                echo '<option value=' . $i . ' >' . $i . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5>End Year(or expected)</h5>
+                                    <div class="form-group">
+                                        <select class="form-control" name="provinsi" id="end_year">
+                                            <option disabled selected> Pilih </option>
+                                            <?php for ($i = 1950; $i < date('Y') + 5; $i++) {
+
+                                                echo '<option value=' . $i . ' >' . $i . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">Add your past work experience</h2>
+                            <br>
+                            <h5>Are you beginner?</h5>
+
+                            <div class="form-group text-left" id="beginner_form">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Yes">
+                                <label class="form-check-label" for="inlineRadio1">Yes</label>
+
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="No">
+                                <label class="form-check-label" for="inlineRadio2">No</label>
+                            </div>
+
+                            <h5>Add Employment</h5>
+                            <hr>
+                            <h5>Company</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="company" type="text" name=""
+                                    placeholder="ex. PT. Wahana Integra Nusantara" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>Location</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="location" type="text" name=""
+                                    placeholder="ex. Street name, City, Province, Nation" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>Current Position</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="current_position" type="text" name=""
+                                    placeholder="ex. Manager" aria-describedby="" value="" autocomplete="" autofocus
+                                    tabindex="1" />
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <h5>Entry</h5>
+                                    <div class="form-group">
+                                        <select class="form-control" name="bulan" id="entry_month">
+                                            <option disabled selected> Select month </option>
+                                            <option value='January'>January</option>
+                                            <option value='February'>February</option>
+                                            <option value='March'>March</option>
+                                            <option value='April'>April</option>
+                                            <option value='May'>May</option>
+                                            <option value='June'>June</option>
+                                            <option value='July'>July</option>
+                                            <option value='August'>August</option>
+                                            <option value='September'>September</option>
+                                            <option value='October'>October</option>
+                                            <option value='November'>November</option>
+                                            <option value='December'>December</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <h5>&nbsp;</h5>
+                                    <div class="form-group">
+                                        <select class="form-control" name="year" id="entry_year">
+                                            <option disabled selected> Select year </option>
+                                            <?php for ($i = 1950; $i < date('Y') + 5; $i++) {
+
+                                                echo '<option value=' . $i . ' >' . $i . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <h5>Out</h5>
+                                    <div class="form-group">
+                                        <select class="form-control" name="bulan" id="out_month">
+                                            <option disabled selected> Select month </option>
+                                            <option value='January'>January</option>
+                                            <option value='February'>February</option>
+                                            <option value='March'>March</option>
+                                            <option value='April'>April</option>
+                                            <option value='May'>May</option>
+                                            <option value='June'>June</option>
+                                            <option value='July'>July</option>
+                                            <option value='August'>August</option>
+                                            <option value='September'>September</option>
+                                            <option value='October'>October</option>
+                                            <option value='November'>November</option>
+                                            <option value='December'>December</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="n_form">
+                                        <input class="form-check-input" type="radio" name="n_radio"
+                                            id="flexRadioDefault1" value="Yes">
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            No, I currently work here
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <h5>&nbsp;</h5>
+                                    <div class="form-group">
+                                        <select class="form-control" name="year" id="out_year">
+                                            <option disabled selected> Select year </option>
+                                            <?php for ($i = 1950; $i < date('Y'); $i++) {
+
+                                                echo '<option value=' . $i . ' >' . $i . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5>Description (Optional)</h5>
+                            <div class="form-group">
+                                <textarea class="form-control" id="description" type="text" name="" aria-describedby=""
+                                    value="" autocomplete="" autofocus tabindex="1"> </textarea>
+                            </div>
+
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <!-- <h2 class="fs-title">TRIP Information</h2> -->
+                            <h5>What is your English proficiency?</h5>
+                            <div class="form-group text-left" id="ep_form">
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Basic">
+                                <label class="form-check-label" for="inlineRadio1">Basic</label>
+
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Good">
+                                <label class="form-check-label" for="inlineRadio1">Good</label>
+
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Fluent">
+                                <label class="form-check-label" for="inlineRadio1">Fluent</label>
+
+                                <input type="radio" name="ep_radio" id="inlineRadio1" value="Native">
+                                <label class="form-check-label" for="inlineRadio1">Native</label>
+                            </div>
+
+                            <h5>What other languages do you speak?</h5>
+                            <h5>Language</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="other_language" type="text" name=""
+                                    placeholder="ex. Arabian" aria-describedby="" value="" autocomplete="" autofocus
+                                    tabindex="1" />
+                            </div>
+                            <h5>Proficiency</h5>
+                            <div class="form-group text-left" id="p_form">
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Basic">
+                                <label class="form-check-label" for="inlineRadio1">Basic</label>
+
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Good">
+                                <label class="form-check-label" for="inlineRadio1">Good</label>
+
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Fluent">
+                                <label class="form-check-label" for="inlineRadio1">Fluent</label>
+
+                                <input type="radio" name="p_radio" id="inlineRadio1" value="Native">
+                                <label class="form-check-label" for="inlineRadio1">Native</label>
+
+                            </div>
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">Write a great profile or description about your skills in your
+                                category!</h2>
+
+                            <h5>Title</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="title" type="text" name="" placeholder="Enter tittle"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>Overview</h5>
+                            <div class="form-group">
+                                <textarea class="form-control" id="overview" type="text" name="" aria-describedby=""
+                                    value="" autocomplete="" autofocus tabindex="1"> </textarea>
+                            </div>
+
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">Where are you based?</h2>
+                            <h5>Street</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="street" type="text" name=""
+                                    placeholder="ex. 1234 Main Street, Apartment 101" aria-describedby="" value=""
+                                    autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>City</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="city" type="text" name="" placeholder="ex. Malang"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>Country</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="country" type="text" name="" placeholder="ex. Indonesia"
+                                    aria-describedby="" value="" autocomplete="" autofocus tabindex="1" />
+                            </div>
+                            <h5>Postal Code</h5>
+                            <div class="form-group">
+                                <input class="form-control" id="postal_code" type="text" name=""
+                                    placeholder="ex. 098811" aria-describedby="" value="" autocomplete="" autofocus
+                                    tabindex="1" />
+                            </div>
+
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="button" name="next" class="next action-button" value="Next" />
+                        </fieldset>
+
+                        <fieldset>
+                            <h2 class="fs-title">Review Profile</h2>
+
+                            <br>
+
+                            <div class="collapse-icon">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div id="headingCollapse1" class="card-header" id="headingOne"
+                                            data-toggle="collapse" role="button" data-target="#collapse1"
+                                            aria-expanded="false" aria-controls="collapse1">
+                                            <span class="lead collapse-title"><b>Category</b></span>
+                                        </div>
+                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                            class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body text-left">
+                                                <h5 id="category_review_wrapper"></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse2" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse2" aria-expanded="false"
+                                            aria-controls="collapse2">
+                                            <span class="lead collapse-title"><b>Expertise</b></span>
+                                        </div>
+                                        <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2"
+                                            class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <h5 id="skill_new"></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse3" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse3" aria-expanded="false"
+                                            aria-controls="collapse3">
+                                            <span class="lead collapse-title"><b>Education</b></span>
+                                        </div>
+                                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3"
+                                            class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>School </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="school_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Field of Study </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="field_of_study_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Degree </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="degree_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Start Year </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="start_year_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>End Year </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="end_year_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse4" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse4" aria-expanded="false"
+                                            aria-controls="collapse4">
+                                            <span class="lead collapse-title"><b>Employment</b></span>
+                                        </div>
+                                        <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4"
+                                            class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Beginner Status </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="beginner_status_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Company </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="company_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Location : </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="location_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Current Position </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="current_position_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Entry </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="entry_month_year_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Out </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="out_month_year_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Description </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="description_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Currently Work? </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="n_new">: -</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse5" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse5" aria-expanded="false"
+                                            aria-controls="collapse5">
+                                            <span class="lead collapse-title"><b>Languages</b></span>
+                                        </div>
+                                        <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5"
+                                            class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>English Proficiency </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="english_proficiency_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Other Languages </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="other_language_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Proficiency </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="proficiency_new"></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse6" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse6" aria-expanded="false"
+                                            aria-controls="collapse6">
+                                            <span class="lead collapse-title"><b>Overview</b></span>
+                                        </div>
+                                        <div id="collapse6" role="tabpanel" aria-labelledby="headingCollapse6"
+                                            class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Title </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="title_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Overview </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="overview_new"></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div id="headingCollapse7" class="card-header" data-toggle="collapse"
+                                            role="button" data-target="#collapse7" aria-expanded="false"
+                                            aria-controls="collapse7">
+                                            <span class="lead collapse-title"><b>Address</b></span>
+                                        </div>
+                                        <div id="collapse7" role="tabpanel" aria-labelledby="headingCollapse7"
+                                            class="collapse" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Street </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="street_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>City </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="city_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Country </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="country_new"></h5>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <h5><b>Postal Code </b></h5>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <h5 id="postal_code_new"></h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input type="button" name="previous" class="previous action-button-previous"
+                                value="Previous" />
+                            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+                        </fieldset>
+                    </form>
+>>>>>>> c8edf147a1b7585b073383b345c1d5fa6afc378f
 
                   <input type="radio" name="ol_proficiency[]" id="others_1_native" value="Native">
                   <label class="form-check-label" for="others_1_native">Native</label>
@@ -996,12 +1621,18 @@
         // CATEGORY FIELD
         $("#category_review_wrapper").empty();
         $('input[name="category"]:checked').each(function() {
-           console.log(this.value);
            $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
+        });
+        // $("h5#category_review_wrapper").html(': ');
+        $('#category-select option:selected').each(function() {
+            $("h5#category_review_wrapper").empty();
+            $("#category_review_wrapper").append('<div class="col-12">'+this.text+'</div>');
         });
 
         // EXPERTISE FIELD
-        // $("h5#skill_new").html($('#skill').val());
+        $('#skill-select option:selected').each(function() {
+           $("#skill_new").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
+        });
 
         // EDUCATION FIELD
         $("h5#school_new").html(': ' + $('#school').val());
