@@ -1056,10 +1056,12 @@
         // CATEGORY FIELD 
         $("#category_review_wrapper").empty();
         $('input[name="category"]:checked').each(function() {
-           $("#category_review_wrapper").append('<div class="col-12"><ul><li>'+this.value+'</li></ul></div>');
+           $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
         });
+        // $("h5#category_review_wrapper").html(': ');
         $('#category-select option:selected').each(function() {
-           $("#category_review_wrapper").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
+            $("h5#category_review_wrapper").empty();
+            $("#category_review_wrapper").append('<div class="col-12">'+this.text+'</div>');
         });
 
         // EXPERTISE FIELD
