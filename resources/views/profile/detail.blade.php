@@ -302,7 +302,7 @@
                     <label for="primary{{$loop->iteration}}"
                       class="btn btn-outline-dark text-left">{{$category->category}}
                       <input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}"
-                      class="badgebox" value="{{$category->category}}">
+                      class="badgebox" value="{{$category->id}}">
                       <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
                     </label>
                   @endforeach
@@ -313,7 +313,7 @@
                   <select class="category-select form-control @error('category') is-invalid @enderror"
                     name="categories[]" multiple>
                     @foreach ($other_categories as $category)
-                      <option>{{ $category->category }}</option>
+                      <option value="{{ $category->id }}">{{ $category->category }}</option>
                     @endforeach
                   </select>
                   @error('category')
@@ -338,8 +338,8 @@
               <h5>Select skill</h5>
               <div class="form-group">
                 <select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
-                  @foreach ($all_skills as $all_skill)
-                  <option id="skill-{{$all_skill->id}}">{{ $all_skill->skill_name }}</option>
+                  @foreach ($all_skills as $skill)
+                  <option id="skill-{{$skill->id}}" value="{{ $skill->id }}">{{ $skill->skill_name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -411,10 +411,10 @@
               <div class="form-group text-left" id="beginner_form">
                 <h5>Are you beginner?</h5>
 
-                <input type="radio" name="beginner" id="beginner_yes" value="Yes">
+                <input type="radio" name="beginner" id="beginner_yes" value="1">
                 <label class="form-check-label" for="beginner_yes">Yes</label>
 
-                <input type="radio" name="beginner" id="beginner_no" value="No">
+                <input type="radio" name="beginner" id="beginner_no" value="0">
                 <label class="form-check-label" for="beginner_no">No</label>
               </div>
 
@@ -526,16 +526,17 @@
             <fieldset id="languages_fieldset">
               <div class="form-group text-left">
                 <h5>What is your English proficiency?</h5>
-                <input type="radio" name="ep_radio" id="englist_basic" value="Basic">
+                <input type="hidden" name="languages[0][language]" value="english">
+                <input type="radio" name="languages[0][proficiency]" id="englist_basic" value="Basic">
                 <label class="form-check-label" for="englist_basic">Basic</label>
 
-                <input type="radio" name="ep_radio" id="english_good" value="Good">
+                <input type="radio" name="languages[0][proficiency]" id="english_good" value="Good">
                 <label class="form-check-label" for="english_good">Good</label>
 
-                <input type="radio" name="ep_radio" id="english_fluent" value="Fluent">
+                <input type="radio" name="languages[0][proficiency]" id="english_fluent" value="Fluent">
                 <label class="form-check-label" for="english_fluent">Fluent</label>
 
-                <input type="radio" name="ep_radio" id="english_native" value="Native">
+                <input type="radio" name="languages[0][proficiency]" id="english_native" value="Native">
                 <label class="form-check-label" for="english_native">Native</label>
               </div>
 
@@ -543,21 +544,21 @@
               <div class="others_languange_wrapper">
                 <div class="form-group">
                   <h5>Language</h5>
-                  <input class="form-control" id="other_language" type="text" name="others_0_language" placeholder="ex. Arabian"/>
+                  <input class="form-control" id="other_language" type="text" name="languages[1][language]" placeholder="ex. Arabian"/>
                 </div>
                 <div class="form-group text-left">
                   <h5>Proficiency</h5>
-                  <input type="radio" name="ol_0_proficiency" id="others_0_basic" value="Basic">
-                  <label class="form-check-label" for="others_0_basic">Basic</label>
+                  <input type="radio" name="languages[1][proficiency]" id="others_1_basic" value="Basic">
+                  <label class="form-check-label" for="others_1_basic">Basic</label>
 
-                  <input type="radio" name="ol_0_proficiency" id="others_0_good" value="Good">
-                  <label class="form-check-label" for="others_0_good">Good</label>
+                  <input type="radio" name="languages[1][proficiency]" id="others_1_good" value="Good">
+                  <label class="form-check-label" for="others_1_good">Good</label>
 
-                  <input type="radio" name="ol_0_proficiency" id="others_0_fluent" value="Fluent">
-                  <label class="form-check-label" for="others_0_fluent">Fluent</label>
+                  <input type="radio" name="languages[1][proficiency]" id="others_1_fluent" value="Fluent">
+                  <label class="form-check-label" for="others_1_fluent">Fluent</label>
 
-                  <input type="radio" name="ol_0_proficiency" id="others_0_native" value="Native">
-                  <label class="form-check-label" for="others_0_native">Native</label>
+                  <input type="radio" name="languages[1][proficiency]" id="others_1_native" value="Native">
+                  <label class="form-check-label" for="others_1_native">Native</label>
                 </div>
               </div>
               <div class="text-left">
@@ -589,26 +590,26 @@
               <h2 class="fs-title">Where are you based?</h2>
               <div class="form-group">
                 <h5>Street</h5>
-                <input class="form-control" id="street" type="text" name="loaction_street"
+                <input class="form-control" id="street" type="text" name="location[street]"
                   placeholder="ex. 1234 Main Street, Apartment 101" />
               </div>
               <div class="form-group">
                 <h5>City</h5>
-                <input class="form-control" id="city" type="text" name="location_city" placeholder="ex. Malang" />
+                <input class="form-control" id="city" type="text" name="location[city]" placeholder="ex. Malang" />
               </div>
               <div class="form-group">
                 <h5>Country</h5>
-                <input class="form-control" id="country" type="text" name="location_country"
+                <input class="form-control" id="country" type="text" name="location[country]"
                   placeholder="ex. Indonesia" />
               </div>
               <div class="form-group">
                 <h5>Postal Code</h5>
-                <input class="form-control" id="postal_code" type="text" name="location_postal_code"
+                <input class="form-control" id="postal_code" type="text" name="location[postal_code]"
                   placeholder="ex. 098811" />
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" id="saveAddressBtn"/>
+              <input type="button" name="next" class="next action-button" value="Next" data-id="{{ auth()->user()->id }}" id="saveAddressBtn"/>
             </fieldset>
 
             {{-- fieldset review --}}
@@ -625,8 +626,9 @@
                     <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show"
                       data-parent="#accordionExample">
                       <div class="card-body text-left">
-                        <div class="row">
-                          <div id="category_review_wrapper">: -</div>
+                        <div id="category_review_wrapper">
+                          <ul>
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -887,6 +889,7 @@
   </div>
 </div>
 
+
 <!-- END: Content-->
 @endsection
 
@@ -918,107 +921,373 @@
       change_form_previous($(this));
     });
 
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
     //submit categories fieldset
     $("#saveCategoriesBtn").click(function() {
       var data = $('#categories_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_categories', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+      /**Ajax code ends**/
     });
 
     //submit skills fieldset
     $("#saveSkillsBtn").click(function() {
       var data = $('#skills_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_skills', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
     });
 
     //submit education fieldset
     $("#saveEducationBtn").click(function() {
       var data = $('#education_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_educations', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
     });
 
     //submit work experience fieldset
     $("#saveWorkExperienceBtn").click(function() {
       var data = $('#work_experiences_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_employments', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
     });
 
     //submit languages fieldset
     $("#saveLanguagesBtn").click(function() {
       var data = $('#languages_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_languages', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
     });
 
     //submit skills description fieldset
     $("#saveSkillsDescriptionBtn").click(function() {
       var data = $('#skill_description_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_overview', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
     });
 
     //submit address fieldset
     $("#saveAddressBtn").click(function() {
       var data = $('#address_fieldset').serialize();
       console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_address', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
     });
 
     $(".next").last().click(function() {
-        console.log($('#skill').val());
-        // CATEGORY FIELD
-        $("#category_review_wrapper").empty();
-        $('input[name="category"]:checked').each(function() {
-           $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
-        });
+        var user_id = $(this).data('id');
+        // console.log($('#skill').val());
+        // // CATEGORY FIELD
+        // $("#category_review_wrapper").empty();
+        // $('input[name="category"]:checked').each(function() {
+        //    $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
+        // });
+        //
+        // // $("h5#category_review_wrapper").html(': ');
+        // $('#category-select option:selected').each(function() {
+        //     $("h5#category_review_wrapper").empty();
+        //     $("#category_review_wrapper").append('<div class="col-12">'+this.text+'</div>');
+        // });
+        //
+        // // EXPERTISE FIELD
+        // $('#skill-select option:selected').each(function() {
+        //    $("#skill_new").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
+        // });
+        //
+        // // EDUCATION FIELD
+        // $("h5#school_new").html(': ' + $('#school').val());
+        // $("h5#field_of_study_new").html(': ' + $('#field_of_study').val());
+        // $("h5#degree_new").html(': ' + $('#degree').val());
+        // $("h5#start_year_new").html(': ' + $('#start_year').val());
+        // $("h5#end_year_new").html(': ' + $('#end_year').val());
+        //
+        // // EMPLOYMENT FIELD
+        // $("h5#beginner_status_new").empty();
+        // $('input[name="inlineRadioOptions"]:checked', '#beginner_form').each(function() {
+        //    $("h5#beginner_status_new").append(': '+this.value);
+        // });
+        // $("h5#company_new").html(': ' + $('#company').val());
+        // $("h5#location_new").html(': ' + $('#location').val());
+        // $("h5#current_position_new").html(': ' + $('#current_position').val());
+        // $("h5#entry_month_year_new").html(': ' + $('#entry_month').val() + '-' + $('#entry_year').val());
+        // $("h5#out_month_year_new").html(': ' + $('#out_month').val() + '-' + $('#out_year').val());
+        // $("h5#description_new").html(': ' + $('#description').val());
+        // $('input[name="n_radio"]:checked', '#n_form').each(function() {
+        //    $("h5#n_new").append(': '+this.value);
+        // });
+        //
+        // // LANGUAGES FIELD
+        // $('input[name="ep_radio"]:checked', '#ep_form').each(function() {
+        //    $("h5#english_proficiency_new").append(': '+this.value);
+        // });
+        // $("h5#other_language_new").html(': ' + $('#other_language').val());
+        // $('input[name="p_radio"]:checked', '#ep_form').each(function() {
+        //    $("h5#proficiency_new").append(': '+this.value);
+        // });
+        //
+        // // OVERVIEW FIELD
+        // $("h5#title_new").html(': ' + $('#title').val());
+        // $("h5#overview_new").html(': ' + $('#overview').val());
+        //
+        // // ADDRESS FIELD
+        // $("h5#street_new").html(': ' + $('#street').val());
+        // $("h5#city_new").html(': ' + $('#city').val());
+        // $("h5#country_new").html(': ' + $('#country').val());
+        // $("h5#postal_code_new").html(': ' + $('#postal_code').val());
 
-        // $("h5#category_review_wrapper").html(': ');
-        $('#category-select option:selected').each(function() {
-            $("h5#category_review_wrapper").empty();
-            $("#category_review_wrapper").append('<div class="col-12">'+this.text+'</div>');
-        });
-
-        // EXPERTISE FIELD
-        $('#skill-select option:selected').each(function() {
-           $("#skill_new").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
-        });
-
-        // EDUCATION FIELD
-        $("h5#school_new").html(': ' + $('#school').val());
-        $("h5#field_of_study_new").html(': ' + $('#field_of_study').val());
-        $("h5#degree_new").html(': ' + $('#degree').val());
-        $("h5#start_year_new").html(': ' + $('#start_year').val());
-        $("h5#end_year_new").html(': ' + $('#end_year').val());
-
-        // EMPLOYMENT FIELD
-        $("h5#beginner_status_new").empty();
-        $('input[name="inlineRadioOptions"]:checked', '#beginner_form').each(function() {
-           $("h5#beginner_status_new").append(': '+this.value);
-        });
-        $("h5#company_new").html(': ' + $('#company').val());
-        $("h5#location_new").html(': ' + $('#location').val());
-        $("h5#current_position_new").html(': ' + $('#current_position').val());
-        $("h5#entry_month_year_new").html(': ' + $('#entry_month').val() + '-' + $('#entry_year').val());
-        $("h5#out_month_year_new").html(': ' + $('#out_month').val() + '-' + $('#out_year').val());
-        $("h5#description_new").html(': ' + $('#description').val());
-        $('input[name="n_radio"]:checked', '#n_form').each(function() {
-           $("h5#n_new").append(': '+this.value);
-        });
-
-        // LANGUAGES FIELD
-        $('input[name="ep_radio"]:checked', '#ep_form').each(function() {
-           $("h5#english_proficiency_new").append(': '+this.value);
-        });
-        $("h5#other_language_new").html(': ' + $('#other_language').val());
-        $('input[name="p_radio"]:checked', '#ep_form').each(function() {
-           $("h5#proficiency_new").append(': '+this.value);
-        });
-
-        // OVERVIEW FIELD
-        $("h5#title_new").html(': ' + $('#title').val());
-        $("h5#overview_new").html(': ' + $('#overview').val());
-
-        // ADDRESS FIELD
-        $("h5#street_new").html(': ' + $('#street').val());
-        $("h5#city_new").html(': ' + $('#city').val());
-        $("h5#country_new").html(': ' + $('#country').val());
-        $("h5#postal_code_new").html(': ' + $('#postal_code').val());
+        $.get("" + '/profile/' + user_id + '/review', function(data) {
+          jQuery.each(data.category, function( i, val ) {
+            $('#category_review_wrapper ul').append('<li>'+val+'</li>')
+          });
+        })
     });
 
     $(".submit").click(function() {
@@ -1128,14 +1397,14 @@
     var index_language = 1;
     // method to append new language
     function append_language(){
-      index = index_language++;
-      var others_language_html = '<div class="form-group"><h5>Language</h5><input class="form-control" type="text" name="others_'+index+'_language" placeholder="ex. Arabian"/></div>';
+      index_language++;
+      var others_language_html = '<div class="form-group"><h5>Language</h5><input class="form-control" type="text" name="languages['+index_language+'][language]" placeholder="ex. Arabian"/></div>';
       others_language_html += '<div class="form-group text-left">';
       others_language_html += '<h5>Proficiency</h5>';
-      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_basic" value="Basic"> <label class="form-check-label" for="others_'+index+'_basic">Basic</label> ';
-      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_good" value="Good"> <label class="form-check-label" for="others_'+index+'_good">Good</label> ';
-      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_fluent" value="Fluent"> <label class="form-check-label" for="others_'+index+'_fluent">Fluent</label> ';
-      others_language_html += '<input type="radio" name="ol_'+index+'_proficiency[]" id="others_'+index+'_native" value="Native"> <label class="form-check-label" for="others_'+index+'_native">Native</label> ';
+      others_language_html += '<input type="radio" name="languages['+index_language+'][proficiency]" id="others_'+index_language+'_basic" value="Basic"> <label class="form-check-label" for="others_'+index_language+'_basic">Basic</label> ';
+      others_language_html += '<input type="radio" name="languages['+index_language+'][proficiency]" id="others_'+index_language+'_good" value="Good"> <label class="form-check-label" for="others_'+index_language+'_good">Good</label> ';
+      others_language_html += '<input type="radio" name="languages['+index_language+'][proficiency]" id="others_'+index_language+'_fluent" value="Fluent"> <label class="form-check-label" for="others_'+index_language+'_fluent">Fluent</label> ';
+      others_language_html += '<input type="radio" name="languages['+index_language+'][proficiency]" id="others_'+index_language+'_native" value="Native"> <label class="form-check-label" for="others_'+index_language+'_native">Native</label> ';
       others_language_html += '</div>';
 
       $('.others_languange_wrapper').append(others_language_html);

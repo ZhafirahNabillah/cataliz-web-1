@@ -9,6 +9,7 @@ use App\Models\Category;
 use app\Models\User;
 use App\Models\Client;
 use App\Models\Skill;
+use App\Models\Coach;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -176,43 +177,98 @@ class ProfileController extends Controller
         return redirect(route('profil', Auth::user()->id));
     }
 
-    public function create_category(Request $request)
+    public function save_categories(Request $request, $id)
     {
-        $all_category = Category::all();
-        $category = new Category;
-        if ($request->category != $all_category) {
-            $category->category = $request->category;
-        }
-        return response()->json(['success' => 'Category saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->category_id = $request->categories;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Category saved successfully!',
+          'detail'  => $coach
+        ]);
     }
 
-    public function create_expertise()
+    public function save_skills(Request $request, $id)
     {
-        return response()->json(['success' => 'Expertise saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->skill_id = $request->skill;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Skill saved successfully!',
+          'detail'  => $coach
+        ]);
     }
 
-    public function create_education()
+    public function save_educations(Request $request, $id)
     {
-        return response()->json(['success' => 'Education saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->education = $request->education;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Education saved successfully!',
+          'detail'  => $coach
+        ]);
     }
 
-    public function create_employment()
+    public function save_employments(Request $request, $id)
     {
-        return response()->json(['success' => 'Employment saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->employment = $request->work_experiences;
+        $coach->beginner_status = $request->beginner;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Work experiences saved successfully!',
+          'detail'  => $coach
+        ]);
     }
 
-    public function create_languages()
+    public function save_languages(Request $request, $id)
     {
-        return response()->json(['success' => 'Languages saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->language = $request->languages;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Languages saved successfully!',
+          'detail'  => $coach
+        ]);
     }
 
-    public function create_overview()
+    public function save_overview(Request $request, $id)
     {
-        return response()->json(['success' => 'Overview saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->skills_description_title = $request->description_title;
+        $coach->skills_description_overview = $request->description_overview;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Overview saved successfully!',
+          'detail'  => $coach
+        ]);
     }
 
-    public function create_address()
+    public function save_address(Request $request, $id)
     {
-        return response()->json(['success' => 'Address saved successfully!']);
+        $coach = Coach::where('user_id', $id)->first();
+        $coach->location = $request->location;
+        $coach->save();
+
+        return response()->json([
+          'success' => 'Location saved successfully!',
+          'detail'  => $coach
+        ]);
+    }
+
+    public function profile_review($id){
+      $coach = Coach::where('user_id', $id)->first();
+      $category = json_decode($coach->category_id);
+
+      return response()->json([
+        'category'  => $category
+      ]);
     }
 }
