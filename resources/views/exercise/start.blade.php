@@ -124,10 +124,16 @@
     border: none;
     border-radius: 4px;
     margin-top: 30px;
+    color: white;
   }
 
   .next-step {
-    background-color: #0db02b;
+    background-color: #7367F0;
+  }
+
+  .prev-step {
+    background-color: #C4C4C4;
+    color: black;
   }
 
   .skip-btn {
@@ -260,7 +266,7 @@
                             </label>
                           </div>
                           <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn next-step">Continue to next step</button></li>
+                            <li><button type="button" class="default-btn next-step">Next</button></li>
                           </ul>
 
                         </div>
@@ -302,9 +308,8 @@
 
 
                           <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Back</button></li>
-                            <li><button type="button" class="default-btn next-step skip-btn">Skip</button></li>
-                            <li><button type="button" class="default-btn next-step">Continue</button></li>
+                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
+                            <li><button type="button" class="default-btn next-step">Next</button></li>
                           </ul>
                         </div>
 
@@ -342,9 +347,8 @@
                             </label>
                           </div>
                           <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Back</button></li>
-                            <li><button type="button" class="default-btn next-step skip-btn">Skip</button></li>
-                            <li><button type="button" class="default-btn next-step">Continue</button></li>
+                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
+                            <li><button type="button" class="default-btn next-step">Next</button></li>
                           </ul>
                         </div>
 
@@ -384,8 +388,8 @@
 
 
                           <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Back</button></li>
-                            <li><button type="button" class="default-btn next-step">Finish</button></li>
+                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
+                            <li><button type="button" class="default-btn next-step">Next</button></li>
                           </ul>
                         </div>
 
@@ -423,15 +427,10 @@
                               Answer 5
                             </label>
                           </div>
-                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn next-step">Continue to next step</button></li>
-                          </ul>
-
 
                           <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Back</button></li>
-                            <li><button type="button" class="default-btn next-step skip-btn">Skip</button></li>
-                            <li><button type="button" class="default-btn next-step">Continue</button></li>
+                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
+                            <li><button type="button" class="default-btn next-step">Finish and Submit</button></li>
                           </ul>
                         </div>
 
@@ -443,44 +442,6 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <!-- Panel Exam -->
-            <div class="tab-pane active" id="review" aria-labelledby="review-tab" role="tabpanel">
-              <div class="collapse-icon">
-                <div class="collapse-default">
-                  @foreach ($questions as $question)
-                  <div class="card">
-                    <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>{{ 'Question '.$loop->iteration }}</b> | Score: {{ $question->weight }}</span>
-                    </div>
-                    <div id="collapse{{ $loop->iteration }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
-                      <div class="card-body">
-                        <div class="question_wrapper">
-                          {!! $question->question !!}
-                        </div>
-                        <div class="answer_choice_wrapper">
-                          @foreach (explode(',', $question->answers) as $answer_choice)
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="answer_{{ $question->id }}" id="{{ $question->id.'-'.$loop->iteration }}">
-                            <label class="form-check-label" for="{{ $question->id.'-'.$loop->iteration }}">
-                              {{ $answer_choice }}
-                            </label>
-                          </div>
-                          @endforeach
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  @endforeach
-                </div>
-              </div>
-            </div>
-            <!-- /panel Exam-->
           </div>
         </div>
       </div>
