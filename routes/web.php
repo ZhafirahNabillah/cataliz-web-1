@@ -100,6 +100,14 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/{id}/update_background', [ProfileController::class, 'update_background'])->name('update_background');
 	Route::post('/{id}/store', [ProfileController::class, 'store_data'])->name('store_data');
 	Route::post('/{id}/update_full_profil', [ProfileController::class, 'update_full_profil'])->name('update_full_profil');
+	Route::post('/{id}/detail/save_categories', [ProfileController::class, 'save_categories'])->name('profile.save_categories');
+	Route::post('/{id}/detail/save_skills', [ProfileController::class, 'save_skills'])->name('profile.save_skills');
+	Route::post('/{id}/detail/save_educations', [ProfileController::class, 'save_educations'])->name('profile.save_educations');
+	Route::post('/{id}/detail/save_employments', [ProfileController::class, 'save_employments'])->name('profile.save_employments');
+	Route::post('/{id}/detail/save_languages', [ProfileController::class, 'save_languages'])->name('profile.save_languages');
+	Route::post('/{id}/detail/save_overview', [ProfileController::class, 'save_overview'])->name('profile.save_overview');
+	Route::post('/{id}/detail/save_address', [ProfileController::class, 'save_address'])->name('profile.save_address');
+	Route::get('profile/{id}/review', [ProfileController::class, 'profile_review'])->name('profile.review');
 });
 
 //User Controller
