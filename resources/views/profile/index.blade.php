@@ -544,14 +544,52 @@
 								<div class="tab-pane active" id="tabVerticalLeft1" role="tabpanel" aria-labelledby="baseVerticalLeft-tab1">
 									<div class="card">
 										<div class="card-body">
-											<h3>Tell us about the work you do!</h3>
+											<h3><a href="javascript:;" class="editCategory"><span data-feather="edit"></span></a>Tell us about the work you do! </h3>
 											<br>
 											<h5>Select Category</h5>
 											<span>#Category</span>
 											<br> <br>
 											<h5>Other</h5>
 											<span>#Category</span>
-
+											<!-- Modal Category-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditCategory" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Category</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<h5 class="text-left">Select Category</h5>
+															<div class="text-left">
+																<label for="" class="btn btn-outline-dark text-left">
+																	<input name="categories[]" type="checkbox" id="" class="badgebox" value="">
+																	<span class="badge" id="">&check;</span>
+																</label>
+															</div>
+															<br>
+															<div class="form-group text-left">
+																<label class="form-label" for="register-username">Others</label>
+																<select class="category-select form-control @error('category') is-invalid @enderror" name="categories[]" multiple>
+																	<option value=""></option>
+																</select>
+																@error('category')
+																<span class="invalid-feedback" role="alert">
+																	<strong>{{ $message }}</strong>
+																</span>
+																@enderror
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Category-->
 
 										</div>
 									</div>
@@ -561,12 +599,42 @@
 								<div class="tab-pane" id="tabVerticalLeft2" role="tabpanel" aria-labelledby="baseVerticalLeft-tab2">
 									<div class="card">
 										<div class="card-body">
-											<h3>What is your skill?</h3>
+											<h3><a href="javascript:;" class="editExpertise"><span data-feather="edit"></span></a>What is your skill?</h3>
 											<br>
 											<h5>Skill</h5>
 											<li>Skill 1</li>
 											<li>Skill 2</li>
 											<li>Skill 3</li>
+
+											<!-- Modal Category-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditExpertise" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Expertise</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<h5>Select skill</h5>
+															<div class="form-group">
+																<select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
+
+																	<option id="" value=""></option>
+
+																</select>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Category-->
+
 										</div>
 									</div>
 								</div>
@@ -575,7 +643,7 @@
 								<div class="tab-pane" id="tabVerticalLeft3" role="tabpanel" aria-labelledby="baseVerticalLeft-tab3">
 									<div class="card">
 										<div class="card-body">
-											<h3>Add the schools you attended, areas of study, and degrees earned!</h3>
+											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a>The schools you attended, areas of study, and degrees earned!</h3>
 											<br>
 											<h5>School</h5>
 											<span>#school</span>
@@ -612,6 +680,71 @@
 												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
 												</span>
 											</div>
+
+											<!-- Modal Education-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditEducation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Education</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<h2 class="fs-title">Add the schools you attended, areas of study, and degrees earned!</h2>
+															<br>
+															<div class="eduacation_wrapper">
+																<div class="form-group">
+																	<h5>University</h5>
+																	<input class="form-control" id="university" type="text" name="education[0][university]" placeholder="ex. Oxford University" />
+																</div>
+																<div class="form-group">
+																	<h5>Field of study</h5>
+																	<input class="form-control" id="field_of_study" type="text" name="education[0][field_of_study]" placeholder="ex. Information System" />
+																</div>
+																<div class="form-group">
+																	<h5>Degree</h5>
+																	<input class="form-control" id="degree" type="text" name="education[0][degree]" placeholder="ex. Bachelor Degree" />
+																</div>
+																<div class="row">
+																	<div class="col-6">
+																		<h5>Start Year</h5>
+
+																		<div class="form-group">
+																			<select class="form-control" name="education[0][start_year]" id="start_year">
+																				<option disabled selected> Pilih </option>
+																				@for ($i=1950; $i < date('Y')+1; $i++) <option value="{{ $i }}">{{ $i }}</option>
+																					@endfor
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-6">
+																		<h5>End Year(or expected)</h5>
+																		<div class="form-group">
+																			<select class="form-control" name="education[0][end_year]" id="end_year">
+																				<option disabled selected> Pilih </option>
+																				@for ($i=1950; $i < date('Y')+5; $i++) <option value="{{ $i }}">{{ $i }}</option>
+																					@endfor
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																<hr class="mt-0">
+															</div>
+															<div class="text-left">
+																<input type="button" id="addOthersEducationBtn" class="btn btn-primary" value="+ Add Others Education">
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Education-->
+
 										</div>
 									</div>
 								</div>
@@ -619,7 +752,7 @@
 								<div class="tab-pane" id="tabVerticalLeft4" role="tabpanel" aria-labelledby="baseVerticalLeft-tab4">
 									<div class="card">
 										<div class="card-body">
-											<h3>My work experience</h3>
+											<h3><a href="javascript:;" class="editEmployment"><span data-feather="edit"></span></a>My work experience </h3>
 											<br>
 											<h5>Beginner</h5>
 											<span>##selectedoption</span>
@@ -643,6 +776,130 @@
 											</div>
 											<hr>
 
+											<!-- Modal Employment-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditEmployment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Employment</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="form-group text-left" id="beginner_form">
+																<h5>Are you beginner?</h5>
+
+																<input type="radio" name="beginner" id="beginner_yes" value="1">
+																<label class="form-check-label" for="beginner_yes">Yes</label>
+
+																<input type="radio" name="beginner" id="beginner_no" value="0">
+																<label class="form-check-label" for="beginner_no">No</label>
+															</div>
+
+															<h5>Add Employment</h5>
+															<hr>
+															<div class="work_experiences_wrapper">
+																<div class="form-group">
+																	<h5>Company</h5>
+																	<input class="form-control" id="company" type="text" name="work_experiences[0][company]" placeholder="ex. PT. Wahana Integra Nusantara" />
+																</div>
+																<div class="form-group">
+																	<h5>Location</h5>
+																	<input class="form-control" id="location" type="text" name="work_experiences[0][location]" placeholder="ex. Street name, City, Province, Nation" />
+																</div>
+																<div class="form-group">
+																	<h5>Current Position</h5>
+																	<input class="form-control" id="current_position" type="text" name="work_experiences[0][position]" placeholder="ex. Manager" />
+																</div>
+																<div class="row">
+																	<div class="col-3">
+																		<h5>Entry</h5>
+																		<div class="form-group">
+																			<select class="form-control" name="work_experiences[0][entry_month]" id="entry_month">
+																				<option disabled selected> Select month </option>
+																				<option value='January'>January</option>
+																				<option value='February'>February</option>
+																				<option value='March'>March</option>
+																				<option value='April'>April</option>
+																				<option value='May'>May</option>
+																				<option value='June'>June</option>
+																				<option value='July'>July</option>
+																				<option value='August'>August</option>
+																				<option value='September'>September</option>
+																				<option value='October'>October</option>
+																				<option value='November'>November</option>
+																				<option value='December'>December</option>
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<h5>&nbsp;</h5>
+																		<div class="form-group">
+																			<select class="form-control" name="work_experiences[0][entry_year]" id="entry_year">
+																				<option disabled selected> Select year </option>
+																				@for ($i=1950; $i < date('Y'); $i++) <option value="{{ $i }}">{{ $i }}</option>
+																					@endfor
+																			</select>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<h5>Out</h5>
+																		<div class="form-group">
+																			<select class="form-control" name="work_experiences[0][out_month]" id="out_month">
+																				<option disabled selected> Select month </option>
+																				<option value='January'>January</option>
+																				<option value='February'>February</option>
+																				<option value='March'>March</option>
+																				<option value='April'>April</option>
+																				<option value='May'>May</option>
+																				<option value='June'>June</option>
+																				<option value='July'>July</option>
+																				<option value='August'>August</option>
+																				<option value='September'>September</option>
+																				<option value='October'>October</option>
+																				<option value='November'>November</option>
+																				<option value='December'>December</option>
+																			</select>
+																		</div>
+																		<div class="form-group" id="n_form">
+																			<input class="form-check-input" type="radio" name="work_experiences[0][is_currently_work]" id="is_currently_work" value="Yes">
+																			<label class="form-check-label" for="is_currently_work">
+																				No, I currently work here
+																			</label>
+																		</div>
+																	</div>
+																	<div class="col-3">
+																		<h5>&nbsp;</h5>
+																		<div class="form-group">
+																			<select class="form-control" name="work_experiences[0][out_year]" id="out_year">
+																				<option disabled selected> Select year </option>
+																				@for ($i=1950; $i < date('Y'); $i++) <option value="{{ $i }}">{{ $i }}</option>
+																					@endfor
+																			</select>
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group">
+																	<h5>Description (Optional)</h5>
+																	<textarea class="form-control" id="description" type="text" name="work_experiences[0][description]"></textarea>
+																</div>
+																<hr class="mt-0">
+															</div>
+
+															<div class="text-left">
+																<input type="button" id="addOthersWorkExperienceBtn" class="btn btn-primary" value="+ Add Others Work Experience">
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Employment-->
+
 										</div>
 									</div>
 								</div>
@@ -651,13 +908,59 @@
 								<div class="tab-pane" id="tabVerticalLeft5" role="tabpanel" aria-labelledby="baseVerticalLeft-tab5">
 									<div class="card">
 										<div class="card-body">
-											<h3>Add the language you are good at</h3>
+											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a>Add the language you are good at</h3>
 											<br>
 											<h5>English Proficiency</h5>
 											<span>#proficiecy</span>
 											<br><br>
 											<h5>Other Languages</h5>
 											<span>#language (#proficiency)</span>
+
+
+											<!-- Modal Languages-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditLanguages" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Languages</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="others_languange_wrapper">
+																<div class="form-group">
+																	<h5>Language</h5>
+																	<input class="form-control" id="other_language" type="text" name="languages[1][language]" placeholder="ex. Arabian" />
+																</div>
+																<div class="form-group text-left">
+																	<h5>Proficiency</h5>
+																	<input type="radio" name="languages[1][proficiency]" id="others_1_basic" value="Basic">
+																	<label class="form-check-label" for="others_1_basic">Basic</label>
+
+																	<input type="radio" name="languages[1][proficiency]" id="others_1_good" value="Good">
+																	<label class="form-check-label" for="others_1_good">Good</label>
+
+																	<input type="radio" name="languages[1][proficiency]" id="others_1_fluent" value="Fluent">
+																	<label class="form-check-label" for="others_1_fluent">Fluent</label>
+
+																	<input type="radio" name="languages[1][proficiency]" id="others_1_native" value="Native">
+																	<label class="form-check-label" for="others_1_native">Native</label>
+																</div>
+															</div>
+															<div class="text-left">
+																<input type="button" id="addOthersLanguangeBtn" class="btn btn-primary" value="+ Add Others Languange">
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Languages-->
+
 										</div>
 									</div>
 								</div>
@@ -666,7 +969,7 @@
 								<div class="tab-pane" id="tabVerticalLeft6" role="tabpanel" aria-labelledby="baseVerticalLeft-tab6">
 									<div class="card">
 										<div class="card-body">
-											<h3>Write a great profile or description about your skills in your category!</h3>
+											<h3><a href="javascript:;" class="editOverview"><span data-feather="edit"></span></a>Write a great profile or description about your skills in your category!</h3>
 											<br>
 											<h5>Tittle</h5>
 											<span>#Tittle</span>
@@ -676,6 +979,37 @@
 												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
 												</span>
 											</div>
+
+											<!-- Modal Overview-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditOverview" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Overview</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="form-group">
+																<h5>Title</h5>
+																<input class="form-control" id="title" type="text" name="description_title" placeholder="Enter tittle" />
+															</div>
+															<div class="form-group">
+																<h5>Overview</h5>
+																<textarea class="form-control" id="overview" type="text" name="description_overview"></textarea>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Overview-->
+
+
 										</div>
 									</div>
 								</div>
@@ -684,7 +1018,7 @@
 								<div class="tab-pane" id="tabVerticalLeft7" role="tabpanel" aria-labelledby="baseVerticalLeft-tab7">
 									<div class="card">
 										<div class="card-body">
-											<h3>My Address</h3>
+											<h3><a href="javascript:;" class="editAddress"><span data-feather="edit"></span></a>My Address</h3>
 											<br>
 											<h5>Street</h5>
 											<span>#street</span>
@@ -697,6 +1031,44 @@
 											<br><br>
 											<h5>Postal Code</h5>
 											<span>#Postal Code</span>
+
+											<!-- Modal Address-->
+											<div class="modal fade bd-example-modal-lg" id="modalEditAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
+													<div class="modal-content">
+														<div class="modal-header" style="background-color: #DCD9FF;">
+															<h5 class="modal-title" id="exampleModalLongTitle">Edit Address</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="form-group">
+																<h5>Street</h5>
+																<input class="form-control" id="street" type="text" name="location[street]" placeholder="ex. 1234 Main Street, Apartment 101" />
+															</div>
+															<div class="form-group">
+																<h5>City</h5>
+																<input class="form-control" id="city" type="text" name="location[city]" placeholder="ex. Malang" />
+															</div>
+															<div class="form-group">
+																<h5>Country</h5>
+																<input class="form-control" id="country" type="text" name="location[country]" placeholder="ex. Indonesia" />
+															</div>
+															<div class="form-group">
+																<h5>Postal Code</h5>
+																<input class="form-control" id="postal_code" type="text" name="location[postal_code]" placeholder="ex. 098811" />
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!-- /modal Address-->
+
 										</div>
 									</div>
 								</div>
@@ -722,8 +1094,204 @@
 
 
 	<script type="text/javascript">
-		$(function() {
+		// MODAL
+		// Category
+		$('body').on('click', '.editCategory', function() {
+			$('#modalHeading').html("Edit Category");
+			$('#modalEditCategory').modal('show');
+		});
+		// Expertise
+		$('body').on('click', '.editExpertise', function() {
+			$('#modalHeading').html("Edit Expertise");
+			$('#modalEditExpertise').modal('show');
+		});
+		// Education
+		$('body').on('click', '.editEducation', function() {
+			$('#modalHeading').html("Edit Education");
+			$('#modalEditEducation').modal('show');
+		});
+		// Employment
+		$('body').on('click', '.editEmployment', function() {
+			$('#modalHeading').html("Edit Employment");
+			$('#modalEditEmployment').modal('show');
+		});
+		// Languages
+		$('body').on('click', '.editLanguages', function() {
+			$('#modalHeading').html("Edit Languages");
+			$('#modalEditLanguages').modal('show');
+		});
+		// Overview
+		$('body').on('click', '.editOverview', function() {
+			$('#modalHeading').html("Edit Overview");
+			$('#modalEditOverview').modal('show');
+		});
+		// Address
+		$('body').on('click', '.editAddress', function() {
+			$('#modalHeading').html("Edit Address");
+			$('#modalEditAddress').modal('show');
+		});
 
+		// addEmployment
+		$('#addOthersWorkExperienceBtn').click(function() {
+			append_work_experience();
+		});
+
+		//method to append new work experiences
+		index_work_experience = 1;
+
+		function append_work_experience() {
+			index = index_work_experience++;
+
+			var others_work_experience_html =
+				`<div class="form-group">
+          <h5>Company</h5>
+          <input class="form-control" id="company" type="text" name="work_experiences[` + index + `][company]" placeholder="ex. PT. Wahana Integra Nusantara"/>
+        </div>
+        <div class="form-group">
+          <h5>Location</h5>
+          <input class="form-control" id="location" type="text" name="work_experiences[` + index + `][location]" placeholder="ex. Street name, City, Province, Nation" />
+        </div>
+        <div class="form-group">
+          <h5>Current Position</h5>
+          <input class="form-control" id="current_position" type="text" name="work_experiences[` + index + `][position]" placeholder="ex. Manager"/>
+        </div>
+        <div class="row">
+          <div class="col-3">
+            <h5>Entry</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[` + index + `][entry_month]" id="entry_month">
+                <option disabled selected> Select month </option>
+                <option value='January'>January</option>
+                <option value='February'>February</option>
+                <option value='March'>March</option>
+                <option value='April'>April</option>
+                <option value='May'>May</option>
+                <option value='June'>June</option>
+                <option value='July'>July</option>
+                <option value='August'>August</option>
+                <option value='September'>September</option>
+                <option value='October'>October</option>
+                <option value='November'>November</option>
+                <option value='December'>December</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <h5>&nbsp;</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[` + index + `][entry_year]" id="entry_year">
+                <option disabled selected> Select year </option>
+                @for ($i=1950; $i < date('Y'); $i++)
+                  <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+              </select>
+            </div>
+          </div>
+          <div class="col-3">
+            <h5>Out</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[` + index + `][out_month]" id="out_month">
+                <option disabled selected> Select month </option>
+                <option value='January'>January</option>
+                <option value='February'>February</option>
+                <option value='March'>March</option>
+                <option value='April'>April</option>
+                <option value='May'>May</option>
+                <option value='June'>June</option>
+                <option value='July'>July</option>
+                <option value='August'>August</option>
+                <option value='September'>September</option>
+                <option value='October'>October</option>
+                <option value='November'>November</option>
+                <option value='December'>December</option>
+              </select>
+            </div>
+            <div class="form-group" id="n_form">
+              <input class="form-check-input" type="radio" name="work_experiences[` + index + `][is_currently_work]"
+              id="is_currently_work" value="Yes">
+              <label class="form-check-label" for="is_currently_work">
+                No, I currently work here
+              </label>
+            </div>
+          </div>
+          <div class="col-3">
+            <h5>&nbsp;</h5>
+            <div class="form-group">
+              <select class="form-control" name="work_experiences[` + index + `][out_year]" id="out_year">
+                <option disabled selected> Select year </option>
+                @for ($i=1950; $i < date('Y'); $i++)
+                  <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h5>Description (Optional)</h5>
+          <textarea class="form-control" id="description" type="text" name="work_experiences[` + index + `][description]"></textarea>
+        </div>
+        <hr class="mt-0">`;
+
+			$('.work_experiences_wrapper').append(others_work_experience_html);
+		}
+
+
+		// AddEducation
+		$('#addOthersEducationBtn').click(function() {
+			append_education();
+		});
+		var date_now = new Date();
+		var year = date_now.getFullYear();
+		index_education = 1;
+
+		// method to append new education
+		function append_education() {
+			index = index_education++;
+			var others_education_html = '<div class="form-group"><h5>University</h5><input class="form-control" id="university" type="text" name="education[' + index + '][university]" placeholder="ex. Oxford University"/></div>';
+			others_education_html += '<div class="form-group"><h5>Field of study</h5><input class="form-control" id="field_of_study" type="text" name="education[' + index + '][field_of_study]" placeholder="ex. Information System"/></div>';
+			others_education_html += '<div class="form-group"><h5>Degree</h5><input class="form-control" id="degree" type="text" name="education[' + index + '][degree]" placeholder="ex. Bachelor Degree"/></div>';
+			others_education_html += '<div class="row">';
+			others_education_html += '<div class="col-6"><h5>Start Year</h5><div class="form-group"><select class="form-control" name="education[' + index + '][start_year]" id="start_year"><option disabled selected>Pilih</option>';
+			for (var i = 1950; i < year; i++) {
+				others_education_html += '<option value="' + i + '">' + i + '</option>';
+			}
+			others_education_html += '</select></div></div>';
+			others_education_html += '<div class="col-6"><h5>End Year(or expected)</h5><div class="form-group"><select class="form-control" name="education[' + index + '][end_year]" id="end_year"><option disabled selected> Pilih </option>';
+			for (var i = 1950; i < year + 5; i++) {
+				others_education_html += '<option value="' + i + '">' + i + '</option>';
+			}
+			others_education_html += '</select></div></div>';
+			others_education_html += '</div><hr class="mt-0">';
+
+			$('.eduacation_wrapper').append(others_education_html);
+		}
+
+		// addLanguages
+		$('#addOthersLanguangeBtn').click(function() {
+			append_language();
+		});
+		var index_language = 1;
+		// method to append new language
+		function append_language() {
+			index_language++;
+			var others_language_html = '<div class="form-group"><h5>Language</h5><input class="form-control" type="text" name="languages[' + index_language + '][language]" placeholder="ex. Arabian"/></div>';
+			others_language_html += '<div class="form-group text-left">';
+			others_language_html += '<h5>Proficiency</h5>';
+			others_language_html += '<input type="radio" name="languages[' + index_language + '][proficiency]" id="others_' + index_language + '_basic" value="Basic"> <label class="form-check-label" for="others_' + index_language + '_basic">Basic</label> ';
+			others_language_html += '<input type="radio" name="languages[' + index_language + '][proficiency]" id="others_' + index_language + '_good" value="Good"> <label class="form-check-label" for="others_' + index_language + '_good">Good</label> ';
+			others_language_html += '<input type="radio" name="languages[' + index_language + '][proficiency]" id="others_' + index_language + '_fluent" value="Fluent"> <label class="form-check-label" for="others_' + index_language + '_fluent">Fluent</label> ';
+			others_language_html += '<input type="radio" name="languages[' + index_language + '][proficiency]" id="others_' + index_language + '_native" value="Native"> <label class="form-check-label" for="others_' + index_language + '_native">Native</label> ';
+			others_language_html += '</div>';
+
+			$('.others_languange_wrapper').append(others_language_html);
+		}
+
+
+		// -END MODAL-
+
+
+
+		$(function() {
 			// Cropping Image For Profil Picture
 			$('.profil_picture').ijaboCropTool({
 				preview: '#profil',
