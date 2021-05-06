@@ -539,8 +539,8 @@
 									<a class="nav-link" id="baseVerticalLeft-tab7" data-toggle="tab" aria-controls="tabVerticalLeft7" href="#tabVerticalLeft7" role="tab" aria-selected="false">Address</a>
 								</li>
 							</ul>
-							<!-- category -->
 							<div class="tab-content">
+								<!-- category -->
 								<div class="tab-pane active" id="tabVerticalLeft1" role="tabpanel" aria-labelledby="baseVerticalLeft-tab1">
 									<div class="card">
 										<div class="card-body">
@@ -575,11 +575,11 @@
 																<select class="category-select form-control @error('category') is-invalid @enderror" name="categories[]" multiple>
 																	<option value=""></option>
 																</select>
-																@error('category')
+																<!-- @error('category')
 																<span class="invalid-feedback" role="alert">
 																	<strong>{{ $message }}</strong>
 																</span>
-																@enderror
+																@enderror -->
 															</div>
 														</div>
 														<div class="modal-footer">
@@ -591,6 +591,9 @@
 											</div>
 											<!-- /modal Category-->
 
+											<!-- @foreach ($categories as $category)
+											<li>{{ $category }}</li>
+											@endforeach -->
 										</div>
 									</div>
 								</div>
@@ -602,9 +605,9 @@
 											<h3><a href="javascript:;" class="editExpertise"><span data-feather="edit"></span></a>What is your skill?</h3>
 											<br>
 											<h5>Skill</h5>
-											<li>Skill 1</li>
-											<li>Skill 2</li>
-											<li>Skill 3</li>
+											@foreach ($skills as $skill)
+											<li>{{ $skill }}</li>
+											@endforeach
 
 											<!-- Modal Category-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditExpertise" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -635,6 +638,7 @@
 											</div>
 											<!-- /modal Category-->
 
+
 										</div>
 									</div>
 								</div>
@@ -645,41 +649,24 @@
 										<div class="card-body">
 											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a>The schools you attended, areas of study, and degrees earned!</h3>
 											<br>
-											<h5>School</h5>
-											<span>#school</span>
+											@foreach ($educations as $education)
+											<h5>University</h5>
+											<span>{{ $education->university }}</span>
 											<br><br>
 											<h5>Field of study</h5>
-											<span>#Field of study</span>
+											<span>{{ $education->field_of_study }}</span>
 											<br><br>
 											<h5>Degree</h5>
-											<span>#degree</span>
+											<span>{{ $education->degree }}</span>
 											<br><br>
 											<h5>Year</h5>
-											<span>#startYear until #Year</span>
+											<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
 											<br><br>
-											<h5>Description</h5>
-											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
-											</div>
-											<hr>
-											<h5>School</h5>
-											<span>#school2</span>
-											<br><br>
-											<h5>Field of study</h5>
-											<span>#Field of study2</span>
-											<br><br>
-											<h5>Degree</h5>
-											<span>#degree2</span>
-											<br><br>
-											<h5>Year</h5>
-											<span>#startYear until #Year</span>
-											<br><br>
-											<h5>Description</h5>
-											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
-											</div>
+											@unless ($loop->last)
+											<hr class="mt-0">
+											@endunless
+											@endforeach
+
 
 											<!-- Modal Education-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditEducation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -745,6 +732,7 @@
 											</div>
 											<!-- /modal Education-->
 
+
 										</div>
 									</div>
 								</div>
@@ -757,23 +745,27 @@
 											<h5>Beginner</h5>
 											<span>##selectedoption</span>
 											<br><br>
+											@foreach ($work_experiences as $work_experience)
 											<h5>Company</h5>
-											<span>#Company</span>
+											<span>{{ $work_experience->company }}</span>
 											<br><br>
 											<h5>Location</h5>
-											<span>#Location</span>
+											<span>{{ $work_experience->location }}</span>
 											<br><br>
-											<h5>Current Posotion</h5>
-											<span>#Position</span>
+											<h5>Position</h5>
+											<span>{{ $work_experience->position }}</span>
 											<br><br>
 											<h5>Work Period</h5>
-											<span>#Entry until #Out</span>
+											<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
 											<br><br>
 											<h5>Description</h5>
 											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
+												<span>{{ $work_experience->description }}</span>
 											</div>
+											@unless ($loop->last)
+											<hr>
+											@endunless
+											@endforeach
 											<hr>
 
 											<!-- Modal Employment-->
@@ -900,6 +892,7 @@
 											</div>
 											<!-- /modal Employment-->
 
+
 										</div>
 									</div>
 								</div>
@@ -911,10 +904,11 @@
 											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a>Add the language you are good at</h3>
 											<br>
 											<h5>English Proficiency</h5>
-											<span>#proficiecy</span>
+											@foreach ($languages as $language)
+											<h5>{{ $language->language }}</h5>
+											<span>{{ $language->proficiency }}</span>
 											<br><br>
-											<h5>Other Languages</h5>
-											<span>#language (#proficiency)</span>
+											@endforeach
 
 
 											<!-- Modal Languages-->
@@ -972,12 +966,11 @@
 											<h3><a href="javascript:;" class="editOverview"><span data-feather="edit"></span></a>Write a great profile or description about your skills in your category!</h3>
 											<br>
 											<h5>Tittle</h5>
-											<span>#Tittle</span>
+											<span>{{ $description_title }}</span>
 											<br><br>
 											<h5>Overview</h5>
 											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
+												<span>{{ $description_overview }}</span>
 											</div>
 
 											<!-- Modal Overview-->
@@ -1021,13 +1014,13 @@
 											<h3><a href="javascript:;" class="editAddress"><span data-feather="edit"></span></a>My Address</h3>
 											<br>
 											<h5>Street</h5>
-											<span>#street</span>
+											<span>{{ $location->street }}</span>
 											<br><br>
 											<h5>City</h5>
-											<span>#City</span>
+											<span>{{ $location->city }}</span>
 											<br><br>
 											<h5>Country</h5>
-											<span>#Country</span>
+											<span>{{ $location->country }}</span>
 											<br><br>
 											<h5>Postal Code</h5>
 											<span>#Postal Code</span>
@@ -1058,6 +1051,7 @@
 															<div class="form-group">
 																<h5>Postal Code</h5>
 																<input class="form-control" id="postal_code" type="text" name="location[postal_code]" placeholder="ex. 098811" />
+																<span>{{ $location->postal_code }}</span>
 															</div>
 														</div>
 														<div class="modal-footer">
@@ -1068,6 +1062,7 @@
 												</div>
 											</div>
 											<!-- /modal Address-->
+
 
 										</div>
 									</div>

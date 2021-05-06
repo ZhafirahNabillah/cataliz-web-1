@@ -526,7 +526,7 @@
             <fieldset id="languages_fieldset">
               <div class="form-group text-left">
                 <h5>What is your English proficiency?</h5>
-                <input type="hidden" name="languages[0][language]" value="english">
+                <input type="hidden" name="languages[0][language]" value="English">
                 <input type="radio" name="languages[0][proficiency]" id="englist_basic" value="Basic">
                 <label class="form-check-label" for="englist_basic">Basic</label>
 
@@ -626,9 +626,8 @@
                     <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show"
                       data-parent="#accordionExample">
                       <div class="card-body text-left">
-                        <div id="category_review_wrapper">
-                          <ul>
-                          </ul>
+                        <div id="category_review_wrapper" class="row">
+
                         </div>
                       </div>
                     </div>
@@ -640,8 +639,10 @@
                     </div>
                     <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse"
                       data-parent="#accordionExample">
-                      <div class="card-body">
-                        <h5 id="skill_new">: -</h5>
+                      <div class="card-body text-left">
+                        <div id="skills_review_wrapper" class="row">
+
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -653,45 +654,8 @@
                     <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse"
                       data-parent="#accordionExample">
                       <div class="card-body">
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>School </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="school_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Field of Study </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="field_of_study_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Degree </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="degree_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Start Year </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="start_year_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>End Year </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="end_year_new">: -</h5>
-                          </div>
+                        <div id="educations_review_wrapper">
+
                         </div>
                       </div>
                     </div>
@@ -704,69 +668,8 @@
                     <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse"
                       data-parent="#accordionExample">
                       <div class="card-body">
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Beginner Status </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="beginner_status_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Company </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="company_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Location : </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="location_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Current Position </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="current_position_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Entry </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="entry_month_year_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Out </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="out_month_year_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Description </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="description_new">: -</h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Currently Work? </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="n_new">: -</h5>
-                          </div>
+                        <div id="work_experiences_review_wrapper">
+
                         </div>
                       </div>
                     </div>
@@ -779,29 +682,7 @@
                     <div id="collapse5" role="tabpanel" aria-labelledby="headingCollapse5" class="collapse"
                       data-parent="#accordionExample">
                       <div class="card-body">
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>English Proficiency </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="english_proficiency_new"></h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Other Languages </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="other_language_new"></h5>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-4">
-                            <h5><b>Proficiency </b></h5>
-                          </div>
-                          <div class="col-8">
-                            <h5 id="proficiency_new"></h5>
-                          </div>
+                        <div id="languages_review_wrapper">
                         </div>
                       </div>
                     </div>
@@ -816,18 +697,18 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
-                            <h5><b>Title </b></h5>
+                            <h5><b>Title</b></h5>
                           </div>
                           <div class="col-8">
-                            <h5 id="title_new"></h5>
+                            <h5 id="description_title_review"></h5>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-4">
-                            <h5><b>Overview </b></h5>
+                            <h5><b>Overview</b></h5>
                           </div>
                           <div class="col-8">
-                            <h5 id="overview_new"></h5>
+                            <h5 id="description_overview_review"></h5>
                           </div>
                         </div>
                       </div>
@@ -843,34 +724,34 @@
                       <div class="card-body">
                         <div class="row">
                           <div class="col-4">
-                            <h5><b>Street </b></h5>
+                            <h5><b>Street</b></h5>
                           </div>
                           <div class="col-8">
-                            <h5 id="street_new"></h5>
+                            <h5 id="address_street_review"></h5>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-4">
-                            <h5><b>City </b></h5>
+                            <h5><b>City</b></h5>
                           </div>
                           <div class="col-8">
-                            <h5 id="city_new"></h5>
+                            <h5 id="address_city_review"></h5>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-4">
-                            <h5><b>Country </b></h5>
+                            <h5><b>Country</b></h5>
                           </div>
                           <div class="col-8">
-                            <h5 id="country_new"></h5>
+                            <h5 id="address_country_review"></h5>
                           </div>
                         </div>
                         <div class="row">
                           <div class="col-4">
-                            <h5><b>Postal Code </b></h5>
+                            <h5><b>Postal Code</b></h5>
                           </div>
                           <div class="col-8">
-                            <h5 id="postal_code_new"></h5>
+                            <h5 id="address_postal_code_review"></h5>
                           </div>
                         </div>
                       </div>
@@ -1222,72 +1103,158 @@
       });
     });
 
+    //show review in the review fieldset
     $(".next").last().click(function() {
         var user_id = $(this).data('id');
-        // console.log($('#skill').val());
-        // // CATEGORY FIELD
-        // $("#category_review_wrapper").empty();
-        // $('input[name="category"]:checked').each(function() {
-        //    $("#category_review_wrapper").append('<div class="col-12">'+this.value+'</div>');
-        // });
-        //
-        // // $("h5#category_review_wrapper").html(': ');
-        // $('#category-select option:selected').each(function() {
-        //     $("h5#category_review_wrapper").empty();
-        //     $("#category_review_wrapper").append('<div class="col-12">'+this.text+'</div>');
-        // });
-        //
-        // // EXPERTISE FIELD
-        // $('#skill-select option:selected').each(function() {
-        //    $("#skill_new").append('<div class="col-12"><ul><li>'+this.text+'</li></ul></div>');
-        // });
-        //
-        // // EDUCATION FIELD
-        // $("h5#school_new").html(': ' + $('#school').val());
-        // $("h5#field_of_study_new").html(': ' + $('#field_of_study').val());
-        // $("h5#degree_new").html(': ' + $('#degree').val());
-        // $("h5#start_year_new").html(': ' + $('#start_year').val());
-        // $("h5#end_year_new").html(': ' + $('#end_year').val());
-        //
-        // // EMPLOYMENT FIELD
-        // $("h5#beginner_status_new").empty();
-        // $('input[name="inlineRadioOptions"]:checked', '#beginner_form').each(function() {
-        //    $("h5#beginner_status_new").append(': '+this.value);
-        // });
-        // $("h5#company_new").html(': ' + $('#company').val());
-        // $("h5#location_new").html(': ' + $('#location').val());
-        // $("h5#current_position_new").html(': ' + $('#current_position').val());
-        // $("h5#entry_month_year_new").html(': ' + $('#entry_month').val() + '-' + $('#entry_year').val());
-        // $("h5#out_month_year_new").html(': ' + $('#out_month').val() + '-' + $('#out_year').val());
-        // $("h5#description_new").html(': ' + $('#description').val());
-        // $('input[name="n_radio"]:checked', '#n_form').each(function() {
-        //    $("h5#n_new").append(': '+this.value);
-        // });
-        //
-        // // LANGUAGES FIELD
-        // $('input[name="ep_radio"]:checked', '#ep_form').each(function() {
-        //    $("h5#english_proficiency_new").append(': '+this.value);
-        // });
-        // $("h5#other_language_new").html(': ' + $('#other_language').val());
-        // $('input[name="p_radio"]:checked', '#ep_form').each(function() {
-        //    $("h5#proficiency_new").append(': '+this.value);
-        // });
-        //
-        // // OVERVIEW FIELD
-        // $("h5#title_new").html(': ' + $('#title').val());
-        // $("h5#overview_new").html(': ' + $('#overview').val());
-        //
-        // // ADDRESS FIELD
-        // $("h5#street_new").html(': ' + $('#street').val());
-        // $("h5#city_new").html(': ' + $('#city').val());
-        // $("h5#country_new").html(': ' + $('#country').val());
-        // $("h5#postal_code_new").html(': ' + $('#postal_code').val());
 
         $.get("" + '/profile/' + user_id + '/review', function(data) {
-          jQuery.each(data.category, function( i, val ) {
-            $('#category_review_wrapper ul').append('<li>'+val+'</li>')
+
+          //append data to category review
+          jQuery.each(data.categories, function( i, val ) {
+            $('#category_review_wrapper').append('<div class="col-12">'+val+'</div>');
           });
-        })
+
+          //append data to skills review
+          jQuery.each(data.skills, function( i, val ) {
+            $('#skills_review_wrapper').append('<div class="col-12">'+val+'</div>');
+          });
+
+          //append data to educations review
+          jQuery.each(data.educations, function( i, val ) {
+            if (i > 0) {
+              $('#educations_review_wrapper').append(`<hr>`);
+            }
+
+            $('#educations_review_wrapper').append(
+              `<div class="row">
+                <div class="col-4">
+                  <h5><b>University</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.educations[i].university+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Field of Study</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.educations[i].field_of_study+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Degree</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.educations[i].degree+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Start Year</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.educations[i].start_year+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>End Year</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.educations[i].end_year+`</h5>
+                </div>
+              </div>`
+            );
+          });
+
+          //append data to work experiences review
+          jQuery.each(data.work_experiences, function( i, val ) {
+            if (i > 0) {
+              $('#work_experiences_review_wrapper').append(`<hr>`);
+            }
+            $('#work_experiences_review_wrapper').append(
+              `<div class="row">
+                <div class="col-4">
+                  <h5><b>Company</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.work_experiences[i].company+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Location</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.work_experiences[i].location+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Position</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.work_experiences[i].position+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Entry</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.work_experiences[i].entry_month+`, `+data.work_experiences[i].entry_year+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Until</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.work_experiences[i].out_month+`, `+data.work_experiences[i].out_year+`</h5>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4">
+                  <h5><b>Description</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>: `+data.work_experiences[i].description+`</h5>
+                </div>
+              </div>`
+            );
+          });
+
+          //append data languages review
+          jQuery.each(data.languages, function( i, val ) {
+
+            if (i > 0) {
+              $('#languages_review_wrapper').append(`<hr>`);
+            }
+
+            $('#languages_review_wrapper').append(
+              `<div class="row">
+                <div class="col-4">
+                  <h5><b>`+data.languages[i].language+`</b></h5>
+                </div>
+                <div class="col-8">
+                  <h5>`+data.languages[i].proficiency+`</h5>
+                </div>
+              </div>`
+            );
+          });
+
+          //append data to skills description review
+          $('#description_title_review').text(data.description_title);
+          $('#description_overview_review').text(data.description_overview);
+
+          //append data to address review
+          $('#address_street_review').text(data.location.street);
+          $('#address_city_review').text(data.location.city);
+          $('#address_country_review').text(data.location.country);
+          $('#address_postal_code_review').text(data.location.postal_code);
+        });
     });
 
     $(".submit").click(function() {

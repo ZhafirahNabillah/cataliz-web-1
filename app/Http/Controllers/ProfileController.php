@@ -35,7 +35,27 @@ class ProfileController extends Controller
             $contents = Storage::disk('s3')->url('images/profil_picture/' . $user->profil_picture);
             $contents_bg = Storage::disk('s3')->url('images/background_picture/' . $user->background_picture);
 
-            return view('profile.index', compact('user', 'contents', 'contents_bg'));
+            if (auth()->user()->hasRole('mentor')) {
+              $coach = Coach::where('user_id', auth()->user()->id)->first();
+
+              $category_id = json_decode($coach->category_id);
+              $categories = Category::whereIn('id', $category_id)->pluck('category');
+
+              $skill_id = json_decode($coach->skill_id);
+              $skills = Skill::whereIn('id', $skill_id)->pluck('skill_name');
+
+              $educations = json_decode($coach->education);
+              $work_experiences = json_decode($coach->employment);
+              $languages = json_decode($coach->language);
+              $description_title = $coach->skills_description_title;
+              $description_overview = $coach->skills_description_overview;
+              $location = json_decode($coach->location);
+
+              return view('profile.index', compact('user', 'contents', 'contents_bg', 'categories', 'skills', 'educations', 'work_experiences', 'languages', 'description_title', 'description_overview', 'location'));
+            } else {
+              return view('profile.index', compact('user', 'contents', 'contents_bg'));
+            }
+
         }
     }
 
@@ -265,10 +285,26 @@ class ProfileController extends Controller
 
     public function profile_review($id){
       $coach = Coach::where('user_id', $id)->first();
-      $category = json_decode($coach->category_id);
+      $category_id = json_decode($coach->category_id);
+      $categories = Category::whereIn('id', $category_id)->pluck('category');
+      $skill_id = json_decode($coach->skill_id);
+      $skills = Skill::whereIn('id', $skill_id)->pluck('skill_name');
+      $education = json_decode($coach->education);
+      $work_experiences = json_decode($coach->employment);
+      $languages = json_decode($coach->language);
+      $description_title = $coach->skills_description_title;
+      $description_oveview = $coach->skills_description_overview;
+      $location = json_decode($coach->location);
 
       return response()->json([
-        'category'  => $category
+        'categories'           => $categories,
+        'skills'               => $skills,
+        'educations'            => $education,
+        'work_experiences'     => $work_experiences,
+        'languages'            => $languages,
+        'description_title'    => $description_title,
+        'description_overview' => $description_oveview,
+        'location'             => $location
       ]);
     }
 }
