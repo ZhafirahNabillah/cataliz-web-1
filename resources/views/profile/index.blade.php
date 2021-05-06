@@ -539,20 +539,16 @@
 									<a class="nav-link" id="baseVerticalLeft-tab7" data-toggle="tab" aria-controls="tabVerticalLeft7" href="#tabVerticalLeft7" role="tab" aria-selected="false">Address</a>
 								</li>
 							</ul>
-							<!-- category -->
 							<div class="tab-content">
+								<!-- category -->
 								<div class="tab-pane active" id="tabVerticalLeft1" role="tabpanel" aria-labelledby="baseVerticalLeft-tab1">
 									<div class="card">
 										<div class="card-body">
 											<h3>Tell us about the work you do!</h3>
 											<br>
-											<h5>Select Category</h5>
-											<span>#Category</span>
-											<br> <br>
-											<h5>Other</h5>
-											<span>#Category</span>
-
-
+											@foreach ($categories as $category)
+												<li>{{ $category }}</li>
+											@endforeach
 										</div>
 									</div>
 								</div>
@@ -563,10 +559,9 @@
 										<div class="card-body">
 											<h3>What is your skill?</h3>
 											<br>
-											<h5>Skill</h5>
-											<li>Skill 1</li>
-											<li>Skill 2</li>
-											<li>Skill 3</li>
+											@foreach ($skills as $skill)
+												<li>{{ $skill }}</li>
+											@endforeach
 										</div>
 									</div>
 								</div>
@@ -577,41 +572,23 @@
 										<div class="card-body">
 											<h3>Add the schools you attended, areas of study, and degrees earned!</h3>
 											<br>
-											<h5>School</h5>
-											<span>#school</span>
-											<br><br>
-											<h5>Field of study</h5>
-											<span>#Field of study</span>
-											<br><br>
-											<h5>Degree</h5>
-											<span>#degree</span>
-											<br><br>
-											<h5>Year</h5>
-											<span>#startYear until #Year</span>
-											<br><br>
-											<h5>Description</h5>
-											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
-											</div>
-											<hr>
-											<h5>School</h5>
-											<span>#school2</span>
-											<br><br>
-											<h5>Field of study</h5>
-											<span>#Field of study2</span>
-											<br><br>
-											<h5>Degree</h5>
-											<span>#degree2</span>
-											<br><br>
-											<h5>Year</h5>
-											<span>#startYear until #Year</span>
-											<br><br>
-											<h5>Description</h5>
-											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
-											</div>
+											@foreach ($educations as $education)
+												<h5>University</h5>
+												<span>{{ $education->university }}</span>
+												<br><br>
+												<h5>Field of study</h5>
+												<span>{{ $education->field_of_study }}</span>
+												<br><br>
+												<h5>Degree</h5>
+												<span>{{ $education->degree }}</span>
+												<br><br>
+												<h5>Year</h5>
+												<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
+												<br><br>
+												@unless ($loop->last)
+													<hr class="mt-0">
+												@endunless
+											@endforeach
 										</div>
 									</div>
 								</div>
@@ -621,28 +598,27 @@
 										<div class="card-body">
 											<h3>My work experience</h3>
 											<br>
-											<h5>Beginner</h5>
-											<span>##selectedoption</span>
-											<br><br>
-											<h5>Company</h5>
-											<span>#Company</span>
-											<br><br>
-											<h5>Location</h5>
-											<span>#Location</span>
-											<br><br>
-											<h5>Current Posotion</h5>
-											<span>#Position</span>
-											<br><br>
-											<h5>Work Period</h5>
-											<span>#Entry until #Out</span>
-											<br><br>
-											<h5>Description</h5>
-											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
-											</div>
-											<hr>
-
+											@foreach ($work_experiences as $work_experience)
+												<h5>Company</h5>
+												<span>{{ $work_experience->company }}</span>
+												<br><br>
+												<h5>Location</h5>
+												<span>{{ $work_experience->location }}</span>
+												<br><br>
+												<h5>Position</h5>
+												<span>{{ $work_experience->position }}</span>
+												<br><br>
+												<h5>Work Period</h5>
+												<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
+												<br><br>
+												<h5>Description</h5>
+												<div class="text-justify">
+													<span>{{ $work_experience->description }}</span>
+												</div>
+												@unless ($loop->last)
+													<hr>
+												@endunless
+											@endforeach
 										</div>
 									</div>
 								</div>
@@ -653,11 +629,11 @@
 										<div class="card-body">
 											<h3>Add the language you are good at</h3>
 											<br>
-											<h5>English Proficiency</h5>
-											<span>#proficiecy</span>
-											<br><br>
-											<h5>Other Languages</h5>
-											<span>#language (#proficiency)</span>
+											@foreach ($languages as $language)
+												<h5>{{ $language->language }}</h5>
+												<span>{{ $language->proficiency }}</span>
+												<br><br>
+											@endforeach
 										</div>
 									</div>
 								</div>
@@ -669,12 +645,11 @@
 											<h3>Write a great profile or description about your skills in your category!</h3>
 											<br>
 											<h5>Tittle</h5>
-											<span>#Tittle</span>
+											<span>{{ $description_title }}</span>
 											<br><br>
 											<h5>Overview</h5>
 											<div class="text-justify">
-												<span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat.
-												</span>
+												<span>{{ $description_overview }}</span>
 											</div>
 										</div>
 									</div>
@@ -687,16 +662,16 @@
 											<h3>My Address</h3>
 											<br>
 											<h5>Street</h5>
-											<span>#street</span>
+											<span>{{ $location->street }}</span>
 											<br><br>
 											<h5>City</h5>
-											<span>#City</span>
+											<span>{{ $location->city }}</span>
 											<br><br>
 											<h5>Country</h5>
-											<span>#Country</span>
+											<span>{{ $location->country }}</span>
 											<br><br>
 											<h5>Postal Code</h5>
-											<span>#Postal Code</span>
+											<span>{{ $location->postal_code }}</span>
 										</div>
 									</div>
 								</div>
