@@ -3,6 +3,7 @@
 @push('styles')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/page-profile.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('ijaboCropTool/ijaboCropTool.min.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('title','Profil')
@@ -102,7 +103,7 @@
 										</div>
 
 										<!-- edit button -->
-										<div class="position-relative">
+										<div>
 											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modals_profil" aria-expanded="false" id="edit_profil">
 												Edit
 											</button>
@@ -546,11 +547,12 @@
 										<div class="card-body">
 											<h3><a href="javascript:;" class="editCategory"><span data-feather="edit"></span></a>Tell us about the work you do! </h3>
 											<br>
-											<h5>Select Category</h5>
-											<span>#Category</span>
-											<br> <br>
-											<h5>Other</h5>
-											<span>#Category</span>
+											<div id="categories_wrapper">
+												@foreach ($categories->pluck('category') as $category)
+													<li>{{ $category }}</li>
+												@endforeach
+											</div>
+
 											<!-- Modal Category-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditCategory" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
@@ -562,38 +564,43 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<h5 class="text-left">Select Category</h5>
-															<div class="text-left">
-																<label for="" class="btn btn-outline-dark text-left">
-																	<input name="categories[]" type="checkbox" id="" class="badgebox" value="">
-																	<span class="badge" id="">&check;</span>
-																</label>
-															</div>
-															<br>
-															<div class="form-group text-left">
-																<label class="form-label" for="register-username">Others</label>
-																<select class="category-select form-control @error('category') is-invalid @enderror" name="categories[]" multiple>
-																	<option value=""></option>
-																</select>
-																<!-- @error('category')
-																<span class="invalid-feedback" role="alert">
-																	<strong>{{ $message }}</strong>
-																</span>
-																@enderror -->
-															</div>
+															<form id="categories_edit_form">
+																<h5 class="text-left">Select Category</h5>
+																<div class="text-left">
+																	@foreach ($main_categories = $all_categories->take(7) as $category)
+																		<label for="primary{{$loop->iteration}}"
+																			class="btn btn-outline-dark text-left">{{$category->category}}
+																			<input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}"
+																			class="badgebox" value="{{$category->id}}" @if($categories->pluck('id')->contains($category->id)) checked @endif>
+																				<span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+																			</label>
+																		@endforeach
+																	</div>
+																<br>
+																<div class="form-group text-left">
+																	<label class="form-label" for="register-username">Others</label>
+																	<select class="category-select form-control @error('category') is-invalid @enderror"
+																	name="categories[]" multiple>
+																		@foreach ($all_categories->whereNotIn('id', $main_categories->pluck('id')) as $category)
+																		<option value="{{ $category->id }}" @if($categories->pluck('id')->contains($category->id)) selected @endif>{{ $category->category }}</option>
+																		@endforeach
+																	</select>
+																	@error('category')
+																		<span class="invalid-feedback" role="alert">
+																			<strong>{{ $message }}</strong>
+																		</span>
+																	@enderror
+																</div>
+															</form>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveCategoriesBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
 											</div>
 											<!-- /modal Category-->
-
-											<!-- @foreach ($categories as $category)
-											<li>{{ $category }}</li>
-											@endforeach -->
 										</div>
 									</div>
 								</div>
@@ -605,11 +612,13 @@
 											<h3><a href="javascript:;" class="editExpertise"><span data-feather="edit"></span></a>What is your skill?</h3>
 											<br>
 											<h5>Skill</h5>
-											@foreach ($skills as $skill)
-											<li>{{ $skill }}</li>
-											@endforeach
+											<div id="skills_wrapper">
+												@foreach ($skills->pluck('skill_name') as $skill)
+													<li>{{ $skill }}</li>
+												@endforeach
+											</div>
 
-											<!-- Modal Category-->
+											<!-- Modal expertise-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditExpertise" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 												<div class="modal-dialog modal-dialog-centered modal-lg " role="document">
 													<div class="modal-content">
@@ -620,24 +629,25 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<h5>Select skill</h5>
-															<div class="form-group">
-																<select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
-
-																	<option id="" value=""></option>
-
-																</select>
-															</div>
+															<form id="skills_edit_form">
+																<h5>Select skill</h5>
+																<div class="form-group">
+																	<select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
+																		@foreach ($all_skills as $skill)
+																		<option id="skill-{{$skill->id}}" value="{{ $skill->id }}" @if($skills->pluck('id')->contains($skill->id)) selected @endif>{{ $skill->skill_name }}</option>
+																		@endforeach
+																	</select>
+																</div>
+															</form>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveSkillsBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
 											</div>
-											<!-- /modal Category-->
-
+											<!-- /modal expertise-->
 
 										</div>
 									</div>
@@ -650,23 +660,22 @@
 											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a>The schools you attended, areas of study, and degrees earned!</h3>
 											<br>
 											@foreach ($educations as $education)
-											<h5>University</h5>
-											<span>{{ $education->university }}</span>
-											<br><br>
-											<h5>Field of study</h5>
-											<span>{{ $education->field_of_study }}</span>
-											<br><br>
-											<h5>Degree</h5>
-											<span>{{ $education->degree }}</span>
-											<br><br>
-											<h5>Year</h5>
-											<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
-											<br><br>
-											@unless ($loop->last)
-											<hr class="mt-0">
-											@endunless
+												<h5>University</h5>
+												<span>{{ $education->university }}</span>
+												<br><br>
+												<h5>Field of study</h5>
+												<span>{{ $education->field_of_study }}</span>
+												<br><br>
+												<h5>Degree</h5>
+												<span>{{ $education->degree }}</span>
+												<br><br>
+												<h5>Year</h5>
+												<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
+												<br><br>
+												@unless ($loop->last)
+													<hr class="mt-0">
+												@endunless
 											@endforeach
-
 
 											<!-- Modal Education-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditEducation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -743,30 +752,33 @@
 											<h3><a href="javascript:;" class="editEmployment"><span data-feather="edit"></span></a>My work experience </h3>
 											<br>
 											<h5>Beginner</h5>
-											<span>##selectedoption</span>
-											<br><br>
+											@if ($beginner_status == 1)
+												<span>Yes</span>
+											@else
+												<span>No</span>
+											@endif
+											<hr>
 											@foreach ($work_experiences as $work_experience)
-											<h5>Company</h5>
-											<span>{{ $work_experience->company }}</span>
-											<br><br>
-											<h5>Location</h5>
-											<span>{{ $work_experience->location }}</span>
-											<br><br>
-											<h5>Position</h5>
-											<span>{{ $work_experience->position }}</span>
-											<br><br>
-											<h5>Work Period</h5>
-											<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
-											<br><br>
-											<h5>Description</h5>
-											<div class="text-justify">
-												<span>{{ $work_experience->description }}</span>
-											</div>
-											@unless ($loop->last)
-											<hr>
-											@endunless
+												<h5>Company</h5>
+												<span>{{ $work_experience->company }}</span>
+												<br><br>
+												<h5>Location</h5>
+												<span>{{ $work_experience->location }}</span>
+												<br><br>
+												<h5>Position</h5>
+												<span>{{ $work_experience->position }}</span>
+												<br><br>
+												<h5>Work Period</h5>
+												<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
+												<br><br>
+												<h5>Description</h5>
+												<div class="text-justify">
+													<span>{{ $work_experience->description }}</span>
+												</div>
+												@unless ($loop->last)
+												<hr>
+												@endunless
 											@endforeach
-											<hr>
 
 											<!-- Modal Employment-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditEmployment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -903,7 +915,6 @@
 										<div class="card-body">
 											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a>Add the language you are good at</h3>
 											<br>
-											<h5>English Proficiency</h5>
 											@foreach ($languages as $language)
 											<h5>{{ $language->language }}</h5>
 											<span>{{ $language->proficiency }}</span>
@@ -1001,8 +1012,6 @@
 												</div>
 											</div>
 											<!-- /modal Overview-->
-
-
 										</div>
 									</div>
 								</div>
@@ -1023,7 +1032,7 @@
 											<span>{{ $location->country }}</span>
 											<br><br>
 											<h5>Postal Code</h5>
-											<span>#Postal Code</span>
+											<span>{{ $location->postal_code }}</span>
 
 											<!-- Modal Address-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -1063,7 +1072,6 @@
 											</div>
 											<!-- /modal Address-->
 
-
 										</div>
 									</div>
 								</div>
@@ -1086,9 +1094,20 @@
 	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script src="{{ asset('assets/js/jquery.imgareaselect.min.js') }}"></script>
 	<script src="{{ asset('ijaboCropTool/ijaboCropTool.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 	<script type="text/javascript">
+		$('.category-select').select2({
+				placeholder: 'Type category that match on you ...',
+				tags: true
+		});
+
+		$("#skill-select").select2({
+        placeholder: 'Type skill that match on you ...',
+        tags: true
+    });
+
 		// MODAL
 		// Category
 		$('body').on('click', '.editCategory', function() {
@@ -1126,6 +1145,110 @@
 			$('#modalEditAddress').modal('show');
 		});
 
+		$.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+		//submit categories fieldset
+    $("#saveCategoriesBtn").click(function() {
+      var data = $('#categories_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_categories', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          // console.log(data.categories.length);
+					$('#categories_wrapper').empty();
+
+					for (let i = 0; i < (data.categories.length); i++) {
+						$('#categories_wrapper').append('<li>'+data.categories[i]+'</li>');
+					}
+
+					$('#modalEditCategory').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+		//submit skills fieldset
+    $("#saveSkillsBtn").click(function() {
+      var data = $('#skills_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_skills', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+					$('#skills_wrapper').empty();
+
+					for (let i = 0; i < (data.skills.length); i++) {
+						$('#skills_wrapper').append('<li>'+data.skills[i]+'</li>');
+					}
+
+					$('#modalEditExpertise').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
 		// addEmployment
 		$('#addOthersWorkExperienceBtn').click(function() {
 			append_work_experience();
@@ -1133,7 +1256,6 @@
 
 		//method to append new work experiences
 		index_work_experience = 1;
-
 		function append_work_experience() {
 			index = index_work_experience++;
 
@@ -1280,9 +1402,6 @@
 
 			$('.others_languange_wrapper').append(others_language_html);
 		}
-
-
-		// -END MODAL-
 
 
 
@@ -1560,11 +1679,7 @@
 				}
 			});
 		});
-		$('#datepicker').datepicker({
-			minViewMode: 'years',
-			autoclose: true,
-			format: 'yyyy'
-		});
+
 		// modal edit
 		$('body').on('click', '#edit_profil', function() {
 			console.log('edit');

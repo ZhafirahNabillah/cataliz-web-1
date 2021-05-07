@@ -38,11 +38,13 @@ class ProfileController extends Controller
             if (auth()->user()->hasRole('mentor')) {
               $coach = Coach::where('user_id', auth()->user()->id)->first();
 
-              $category_id = json_decode($coach->category_id);
-              $categories = Category::whereIn('id', $category_id)->pluck('category');
+              $category_id = collect(json_decode($coach->category_id));
+              $categories = Category::whereIn('id', $category_id)->get();
+              $all_categories = Category::all();
 
               $skill_id = json_decode($coach->skill_id);
-              $skills = Skill::whereIn('id', $skill_id)->pluck('skill_name');
+              $skills = Skill::whereIn('id', $skill_id)->get();
+              $all_skills = Skill::all();
 
               $educations = json_decode($coach->education);
               $work_experiences = json_decode($coach->employment);
@@ -50,8 +52,24 @@ class ProfileController extends Controller
               $description_title = $coach->skills_description_title;
               $description_overview = $coach->skills_description_overview;
               $location = json_decode($coach->location);
+              $beginner_status = $coach->beginner_status;
 
-              return view('profile.index', compact('user', 'contents', 'contents_bg', 'categories', 'skills', 'educations', 'work_experiences', 'languages', 'description_title', 'description_overview', 'location'));
+              return view('profile.index', compact(
+                'user',
+                'contents',
+                'contents_bg',
+                'categories',
+                'all_categories',
+                'skills',
+                'all_skills',
+                'educations',
+                'work_experiences',
+                'languages',
+                'description_title',
+                'description_overview',
+                'location',
+                'beginner_status'
+              ));
             } else {
               return view('profile.index', compact('user', 'contents', 'contents_bg'));
             }
@@ -65,6 +83,11 @@ class ProfileController extends Controller
         $main_categories = Category::all()->take(7);
         $other_categories = Category::whereNotIn('id', [1, 2, 3, 4, 5, 6, 7])->get();
         $all_skills = Skill::get();
+
+        //get existing data
+        // $coach = Coach::where('user_id', Auth::user()->id)->first();
+        // $existing_categories = collect(json_decode($coach->category_id));
+        // $existing_skills = collect(json_decode($coach->skill_id));
 
         return view('profile.detail', compact('user', 'main_categories', 'all_skills', 'other_categories'));
     }
@@ -203,9 +226,11 @@ class ProfileController extends Controller
         $coach->category_id = $request->categories;
         $coach->save();
 
+        $category = Category::whereIn('id', $request->categories)->pluck('category');
+
         return response()->json([
-          'success' => 'Category saved successfully!',
-          'detail'  => $coach
+          'success'     => 'Category saved successfully!',
+          'categories'  => $category
         ]);
     }
 
@@ -215,9 +240,11 @@ class ProfileController extends Controller
         $coach->skill_id = $request->skill;
         $coach->save();
 
+        $skill = Skill::whereIn('id', $request->skill)->pluck('skill_name');
+
         return response()->json([
           'success' => 'Skill saved successfully!',
-          'detail'  => $coach
+          'skills'  => $skill
         ]);
     }
 
@@ -295,6 +322,7 @@ class ProfileController extends Controller
       $description_title = $coach->skills_description_title;
       $description_oveview = $coach->skills_description_overview;
       $location = json_decode($coach->location);
+      $beginner_status = $coach->beginner_status;
 
       return response()->json([
         'categories'           => $categories,
@@ -304,7 +332,8 @@ class ProfileController extends Controller
         'languages'            => $languages,
         'description_title'    => $description_title,
         'description_overview' => $description_oveview,
-        'location'             => $location
+        'location'             => $location,
+        'beginner_status'      => $beginner_status
       ]);
     }
 }
