@@ -295,40 +295,39 @@
             <!-- fieldset category -->
             <fieldset id="categories_fieldset">
 
-                <h2 class="fs-title">Tell us about the work you do!</h2>
-                <h5 class="text-left">Select Category</h5>
-                <div class="text-left">
-                  @foreach ($main_categories as $category)
-                    <label for="primary{{$loop->iteration}}"
-                      class="btn btn-outline-dark text-left">{{$category->category}}
-                      <input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}"
-                      class="badgebox" value="{{$category->id}}">
-                      <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
-                    </label>
+              <h2 class="fs-title">Tell us about the work you do!</h2>
+              <h5 class="text-left">Select Category</h5>
+              <div class="text-left">
+                @foreach ($main_categories as $category)
+                <label for="primary{{$loop->iteration}}" class="btn btn-outline-dark text-left">{{$category->category}}
+                  <input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}" class="badgebox"
+                    value="{{$category->id}}">
+                  <span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+                </label>
+                @endforeach
+              </div>
+              <br>
+              <div class="form-group text-left">
+                <label class="form-label" for="register-username">Others</label>
+                <select class="category-select form-control @error('category') is-invalid @enderror" name="categories[]"
+                  multiple>
+                  @foreach ($other_categories as $category)
+                  <option value="{{ $category->id }}">{{ $category->category }}</option>
                   @endforeach
-                </div>
-                <br>
-                <div class="form-group text-left">
-                  <label class="form-label" for="register-username">Others</label>
-                  <select class="category-select form-control @error('category') is-invalid @enderror"
-                    name="categories[]" multiple>
-                    @foreach ($other_categories as $category)
-                      <option value="{{ $category->id }}">{{ $category->category }}</option>
-                    @endforeach
-                  </select>
-                  @error('category')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
-                </div>
+                </select>
+                @error('category')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+              </div>
 
 
               <div class="text-left ">
                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
               </div>
 
-              <input type="button" name="next" class="next action-button " value="Next" id="saveCategoriesBtn"/>
+              <input type="button" name="next" class="next action-button " value="Next" id="saveCategoriesBtn" />
             </fieldset>
 
             {{-- fieldset skill --}}
@@ -337,7 +336,8 @@
               <br>
               <h5>Select skill</h5>
               <div class="form-group">
-                <select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
+                <select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]"
+                  multiple>
                   @foreach ($all_skills as $skill)
                   <option id="skill-{{$skill->id}}" value="{{ $skill->id }}">{{ $skill->skill_name }}</option>
                   @endforeach
@@ -346,7 +346,7 @@
               <div class="text-left ">
                 <a class="card-text" href="#"><small class="text-muted">Skip this step</small></a>
               </div>
-              <input type="button" name="previous" class="previous action-button-previous"value="Previous" />
+              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
               <input type="button" name="next" class="next action-button" value="Next" id="saveSkillsBtn" />
             </fieldset>
 
@@ -396,11 +396,11 @@
                 <hr class="mt-0">
               </div>
               <div class="text-left">
-                <input type="button" id="addOthersEducationBtn" class="btn btn-primary" value="+ Add Others Education">
+                <input type="but ton" id="addOthersEducationBtn" class="btn btn-primary" value="+ Add Others Education">
               </div>
 
-              <input type="button" name="previous" class="previous action-button-previous" value="Previous"/>
-              <input type="button" name="next" class="next action-button" value="Next" id="saveEducationBtn"/>
+              <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+              <input type="button" name="next" class="next action-button" value="Next" id="saveEducationBtn" />
             </fieldset>
 
             {{-- fieldset work experience --}}
@@ -519,7 +519,7 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" id="saveWorkExperienceBtn"/>
+              <input type="button" name="next" class="next action-button" value="Next" id="saveWorkExperienceBtn" />
             </fieldset>
 
             {{-- fieldset language --}}
@@ -544,7 +544,8 @@
               <div class="others_languange_wrapper">
                 <div class="form-group">
                   <h5>Language</h5>
-                  <input class="form-control" id="other_language" type="text" name="languages[1][language]" placeholder="ex. Arabian"/>
+                  <input class="form-control" id="other_language" type="text" name="languages[1][language]"
+                    placeholder="ex. Arabian" />
                 </div>
                 <div class="form-group text-left">
                   <h5>Proficiency</h5>
@@ -565,7 +566,7 @@
                 <input type="button" id="addOthersLanguangeBtn" class="btn btn-primary" value="+ Add Others Languange">
               </div>
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" id="saveLanguagesBtn"/>
+              <input type="button" name="next" class="next action-button" value="Next" id="saveLanguagesBtn" />
             </fieldset>
 
             {{-- fieldset skills description --}}
@@ -582,7 +583,7 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" id="saveSkillsDescriptionBtn"/>
+              <input type="button" name="next" class="next action-button" value="Next" id="saveSkillsDescriptionBtn" />
             </fieldset>
 
             {{-- fieldset adress --}}
@@ -609,7 +610,8 @@
               </div>
 
               <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
-              <input type="button" name="next" class="next action-button" value="Next" data-id="{{ auth()->user()->id }}" id="saveAddressBtn"/>
+              <input type="button" name="next" class="next action-button" value="Next"
+                data-id="{{ auth()->user()->id }}" id="saveAddressBtn" />
             </fieldset>
 
             {{-- fieldset review --}}
@@ -779,14 +781,14 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
-    $('.category-select').select2({
+  $('.category-select').select2({
         placeholder: 'Type category that match on you ...',
         tags: true
     });
 
     $("#skill-select").select2({
         placeholder: 'Type skill that match on you ...',
-        tags: true
+        tags: false
     });
 
     //jQuery time
