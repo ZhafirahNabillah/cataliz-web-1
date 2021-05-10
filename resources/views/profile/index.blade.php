@@ -3,7 +3,7 @@
 @push('styles')
 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/pages/page-profile.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('ijaboCropTool/ijaboCropTool.min.css') }}">
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endpush
 
 @section('title','Profil')

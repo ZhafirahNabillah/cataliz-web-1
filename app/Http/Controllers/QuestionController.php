@@ -89,10 +89,9 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::find($id);
-        $answer = $question->answers;
-        $ans_array = explode(',', $answer);
-        $choice_itr = 'A';
-        return view('exercise.editQuestion', compact('question', 'ans_array', 'choice_itr'));
+        $answers = explode(',', $question->answers);
+
+        return view('exercise.editQuestion', compact('question', 'answers'));
     }
 
     /**
@@ -107,7 +106,7 @@ class QuestionController extends Controller
         // return $request;
         $question = Question::find($id);
         $question->question = $request->question;
-        $question->answers = implode(",", $request->input('answer-1'));
+        $question->answers = implode(",", $request->input('answers'));
         $question->true_answer = $request->true_answer;
         $question->weight = $request->point;
         $question->update();
