@@ -46,9 +46,9 @@ class ProfileController extends Controller
               $skills = Skill::whereIn('id', $skill_id)->get();
               $all_skills = Skill::all();
 
-              $educations = json_decode($coach->education);
-              $work_experiences = json_decode($coach->employment);
-              $languages = json_decode($coach->language);
+              $educations = collect(json_decode($coach->education));
+              $work_experiences = collect(json_decode($coach->employment));
+              $languages = collect(json_decode($coach->language));
               $description_title = $coach->skills_description_title;
               $description_overview = $coach->skills_description_overview;
               $location = json_decode($coach->location);
@@ -255,8 +255,8 @@ class ProfileController extends Controller
         $coach->save();
 
         return response()->json([
-          'success' => 'Education saved successfully!',
-          'detail'  => $coach
+          'success'     => 'Education saved successfully!',
+          'educations'  => $coach->education
         ]);
     }
 
@@ -269,7 +269,8 @@ class ProfileController extends Controller
 
         return response()->json([
           'success' => 'Work experiences saved successfully!',
-          'detail'  => $coach
+          'employments'  => $coach->employment,
+          'beginner_status' => $coach->beginner_status
         ]);
     }
 
@@ -280,8 +281,8 @@ class ProfileController extends Controller
         $coach->save();
 
         return response()->json([
-          'success' => 'Languages saved successfully!',
-          'detail'  => $coach
+          'success'    => 'Languages saved successfully!',
+          'languages'  => $coach->language
         ]);
     }
 
@@ -293,8 +294,9 @@ class ProfileController extends Controller
         $coach->save();
 
         return response()->json([
-          'success' => 'Overview saved successfully!',
-          'detail'  => $coach
+          'success'               => 'Overview saved successfully!',
+          'description_title'     => $coach->skills_description_title,
+          'description_overview'  => $coach->skills_description_overview,
         ]);
     }
 
@@ -305,8 +307,8 @@ class ProfileController extends Controller
         $coach->save();
 
         return response()->json([
-          'success' => 'Location saved successfully!',
-          'detail'  => $coach
+          'success'   => 'Location saved successfully!',
+          'location'  => $coach->location
         ]);
     }
 

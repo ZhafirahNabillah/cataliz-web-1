@@ -51,7 +51,6 @@
 <script src="{{ asset('assets/vendors/js/tables/datatable/buttons.print.min.js')}}"></script>
 <script src="{{ asset('assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js')}}"></script>
 <script src="{{ asset('assets/vendors/js/pickers/flatpickr/flatpickr.min.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 
 <!-- END: Page Vendor JS-->
 

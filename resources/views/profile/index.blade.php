@@ -653,29 +653,31 @@
 									</div>
 								</div>
 
-								<!-- Education -->
+								<!-- education -->
 								<div class="tab-pane" id="tabVerticalLeft3" role="tabpanel" aria-labelledby="baseVerticalLeft-tab3">
 									<div class="card">
 										<div class="card-body">
 											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a>The schools you attended, areas of study, and degrees earned!</h3>
 											<br>
-											@foreach ($educations as $education)
-												<h5>University</h5>
-												<span>{{ $education->university }}</span>
-												<br><br>
-												<h5>Field of study</h5>
-												<span>{{ $education->field_of_study }}</span>
-												<br><br>
-												<h5>Degree</h5>
-												<span>{{ $education->degree }}</span>
-												<br><br>
-												<h5>Year</h5>
-												<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
-												<br><br>
-												@unless ($loop->last)
-													<hr class="mt-0">
-												@endunless
-											@endforeach
+											<div id="educations_wrapper">
+												@foreach ($educations as $education)
+													<h5>University</h5>
+													<span>{{ $education->university }}</span>
+													<br><br>
+													<h5>Field of study</h5>
+													<span>{{ $education->field_of_study }}</span>
+													<br><br>
+													<h5>Degree</h5>
+													<span>{{ $education->degree }}</span>
+													<br><br>
+													<h5>Year</h5>
+													<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
+													<br><br>
+													@unless ($loop->last)
+														<hr class="mt-0">
+													@endunless
+												@endforeach
+											</div>
 
 											<!-- Modal Education-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditEducation" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -688,63 +690,72 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<h2 class="fs-title">Add the schools you attended, areas of study, and degrees earned!</h2>
-															<br>
-															<div class="eduacation_wrapper">
-																<div class="form-group">
-																	<h5>University</h5>
-																	<input class="form-control" id="university" type="text" name="education[0][university]" placeholder="ex. Oxford University" />
-																</div>
-																<div class="form-group">
-																	<h5>Field of study</h5>
-																	<input class="form-control" id="field_of_study" type="text" name="education[0][field_of_study]" placeholder="ex. Information System" />
-																</div>
-																<div class="form-group">
-																	<h5>Degree</h5>
-																	<input class="form-control" id="degree" type="text" name="education[0][degree]" placeholder="ex. Bachelor Degree" />
-																</div>
-																<div class="row">
-																	<div class="col-6">
-																		<h5>Start Year</h5>
-
-																		<div class="form-group">
-																			<select class="form-control" name="education[0][start_year]" id="start_year">
-																				<option disabled selected> Pilih </option>
-																				@for ($i=1950; $i < date('Y')+1; $i++) <option value="{{ $i }}">{{ $i }}</option>
-																					@endfor
-																			</select>
+															<form id="educations_edit_form">
+																<h2 class="fs-title">Add the schools you attended, areas of study, and degrees earned!</h2>
+																<br>
+																<div class="educations_form_wrapper">
+																	@foreach ($educations as $education)
+																		<div class="singe_education_wrapper">
+																			<div class="form-group">
+																				<h5>University</h5>
+																				<input class="form-control" type="text" name="education[{{ $loop->index }}][university]" placeholder="ex. Oxford University" value="{{ $education->university }}"/>
+																			</div>
+																			<div class="form-group">
+																				<h5>Field of study</h5>
+																				<input class="form-control" type="text" name="education[{{ $loop->index }}][field_of_study]" placeholder="ex. Information System" value="{{ $education->field_of_study }}" />
+																			</div>
+																			<div class="form-group">
+																				<h5>Degree</h5>
+																				<input class="form-control" type="text" name="education[{{ $loop->index }}][degree]" placeholder="ex. Bachelor Degree" value="{{ $education->degree }}"/>
+																			</div>
+																			<div class="row">
+																				<div class="col-6">
+																					<h5>Start Year</h5>
+																					<div class="form-group">
+																						<select class="form-control" name="education[{{ $loop->index }}][start_year]">
+																							<option disabled selected> Pilih </option>
+																								@for ($i=1950; $i < date('Y')+1; $i++)
+																								<option value="{{ $i }}" @if ($education->start_year == $i) selected @endif>{{ $i }}</option>
+																								@endfor
+																							</select>
+																						</div>
+																					</div>
+																					<div class="col-6">
+																						<h5>End Year(or expected)</h5>
+																						<div class="form-group">
+																							<select class="form-control" name="education[{{ $loop->index }}][end_year]">
+																								<option disabled selected> Pilih </option>
+																								@for ($i=1950; $i < date('Y')+5; $i++)
+																									<option value="{{ $i }}" @if ($education->end_year == $i) selected @endif>{{ $i }}</option>
+																									@endfor
+																								</select>
+																							</div>
+																						</div>
+																					</div>
+																				</div>
+																				@unless ($loop->last)
+																					<hr class="mt-0">
+																				@endunless
+																			@endforeach
 																		</div>
-																	</div>
-																	<div class="col-6">
-																		<h5>End Year(or expected)</h5>
-																		<div class="form-group">
-																			<select class="form-control" name="education[0][end_year]" id="end_year">
-																				<option disabled selected> Pilih </option>
-																				@for ($i=1950; $i < date('Y')+5; $i++) <option value="{{ $i }}">{{ $i }}</option>
-																					@endfor
-																			</select>
-																		</div>
-																	</div>
-																</div>
-																<hr class="mt-0">
-															</div>
+															</form>
 															<div class="text-left">
+																<hr class="mt-0">
 																<input type="button" id="addOthersEducationBtn" class="btn btn-primary" value="+ Add Others Education">
 															</div>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveEducationBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
 											</div>
 											<!-- /modal Education-->
-
-
 										</div>
 									</div>
 								</div>
+
 								<!-- employment -->
 								<div class="tab-pane" id="tabVerticalLeft4" role="tabpanel" aria-labelledby="baseVerticalLeft-tab4">
 									<div class="card">
@@ -753,32 +764,34 @@
 											<br>
 											<h5>Beginner</h5>
 											@if ($beginner_status == 1)
-												<span>Yes</span>
+												<span id="beginner_status">Yes</span>
 											@else
-												<span>No</span>
+												<span id="beginner_status">No</span>
 											@endif
 											<hr>
-											@foreach ($work_experiences as $work_experience)
-												<h5>Company</h5>
-												<span>{{ $work_experience->company }}</span>
-												<br><br>
-												<h5>Location</h5>
-												<span>{{ $work_experience->location }}</span>
-												<br><br>
-												<h5>Position</h5>
-												<span>{{ $work_experience->position }}</span>
-												<br><br>
-												<h5>Work Period</h5>
-												<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
-												<br><br>
-												<h5>Description</h5>
-												<div class="text-justify">
-													<span>{{ $work_experience->description }}</span>
-												</div>
-												@unless ($loop->last)
-												<hr>
-												@endunless
-											@endforeach
+											<div id="work_experiences_wrapper">
+												@foreach ($work_experiences as $work_experience)
+													<h5>Company</h5>
+													<span>{{ $work_experience->company }}</span>
+													<br><br>
+													<h5>Location</h5>
+													<span>{{ $work_experience->location }}</span>
+													<br><br>
+													<h5>Position</h5>
+													<span>{{ $work_experience->position }}</span>
+													<br><br>
+													<h5>Work Period</h5>
+													<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
+													<br><br>
+													<h5>Description</h5>
+													<div class="text-justify">
+														<span>{{ $work_experience->description }}</span>
+													</div>
+													@unless ($loop->last)
+														<hr>
+													@endunless
+												@endforeach
+											</div>
 
 											<!-- Modal Employment-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditEmployment" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -791,119 +804,129 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<div class="form-group text-left" id="beginner_form">
-																<h5>Are you beginner?</h5>
+															<form id="employment_edit_form">
+																<div class="form-group text-left">
+																	<h5>Are you beginner?</h5>
 
-																<input type="radio" name="beginner" id="beginner_yes" value="1">
-																<label class="form-check-label" for="beginner_yes">Yes</label>
+																	<input type="radio" name="beginner" id="beginner_yes" value="1" @if ($beginner_status == 1) checked @endif>
+																	<label class="form-check-label" for="beginner_yes">Yes</label>
 
-																<input type="radio" name="beginner" id="beginner_no" value="0">
-																<label class="form-check-label" for="beginner_no">No</label>
-															</div>
+																	<input type="radio" name="beginner" id="beginner_no" value="0" @if ($beginner_status == 0) checked @endif>
+																	<label class="form-check-label" for="beginner_no">No</label>
+																</div>
 
-															<h5>Add Employment</h5>
-															<hr>
-															<div class="work_experiences_wrapper">
-																<div class="form-group">
-																	<h5>Company</h5>
-																	<input class="form-control" id="company" type="text" name="work_experiences[0][company]" placeholder="ex. PT. Wahana Integra Nusantara" />
-																</div>
-																<div class="form-group">
-																	<h5>Location</h5>
-																	<input class="form-control" id="location" type="text" name="work_experiences[0][location]" placeholder="ex. Street name, City, Province, Nation" />
-																</div>
-																<div class="form-group">
-																	<h5>Current Position</h5>
-																	<input class="form-control" id="current_position" type="text" name="work_experiences[0][position]" placeholder="ex. Manager" />
-																</div>
-																<div class="row">
-																	<div class="col-3">
-																		<h5>Entry</h5>
-																		<div class="form-group">
-																			<select class="form-control" name="work_experiences[0][entry_month]" id="entry_month">
-																				<option disabled selected> Select month </option>
-																				<option value='January'>January</option>
-																				<option value='February'>February</option>
-																				<option value='March'>March</option>
-																				<option value='April'>April</option>
-																				<option value='May'>May</option>
-																				<option value='June'>June</option>
-																				<option value='July'>July</option>
-																				<option value='August'>August</option>
-																				<option value='September'>September</option>
-																				<option value='October'>October</option>
-																				<option value='November'>November</option>
-																				<option value='December'>December</option>
-																			</select>
+																<h5>Add Employment</h5>
+																<hr>
+																<div class="work_experiences_form_wrapper">
+																	@foreach ($work_experiences as $work_experience)
+																		<div class="single_work_experiences_wrapper">
+																			<div class="form-group">
+																				<h5>Company</h5>
+																				<input class="form-control" type="text" name="work_experiences[{{ $loop->index }}][company]" placeholder="ex. PT. Wahana Integra Nusantara" value="{{ $work_experience->company }}"/>
+																			</div>
+																			<div class="form-group">
+																				<h5>Location</h5>
+																				<input class="form-control" type="text" name="work_experiences[{{ $loop->index }}][location]" placeholder="ex. Street name, City, Province, Nation" value="{{ $work_experience->location }}"/>
+																			</div>
+																			<div class="form-group">
+																				<h5>Current Position</h5>
+																				<input class="form-control" type="text" name="work_experiences[{{ $loop->index }}][position]" placeholder="ex. Manager" value="{{ $work_experience->position }}"/>
+																			</div>
+																			<div class="row">
+																				<div class="col-3">
+																					<h5>Entry</h5>
+																					<div class="form-group">
+																						<select class="form-control" name="work_experiences[{{ $loop->index }}][entry_month]">
+																							<option disabled selected> Select month </option>
+																							<option value='January' @if ($work_experience->entry_month == 'January') selected @endif>January</option>
+																							<option value='February' @if ($work_experience->entry_month == 'February') selected @endif>February</option>
+																							<option value='March' @if ($work_experience->entry_month == 'March') selected @endif>March</option>
+																							<option value='April' @if ($work_experience->entry_month == 'April') selected @endif>April</option>
+																							<option value='May' @if ($work_experience->entry_month == 'May') selected @endif>May</option>
+																							<option value='June' @if ($work_experience->entry_month == 'June') selected @endif>June</option>
+																							<option value='July' @if ($work_experience->entry_month == 'July') selected @endif>July</option>
+																							<option value='August' @if ($work_experience->entry_month == 'August') selected @endif>August</option>
+																							<option value='September' @if ($work_experience->entry_month == 'September') selected @endif>September</option>
+																							<option value='October' @if ($work_experience->entry_month == 'October') selected @endif>October</option>
+																							<option value='November' @if ($work_experience->entry_month == 'November') selected @endif>November</option>
+																							<option value='December' @if ($work_experience->entry_month == 'December') selected @endif>December</option>
+																						</select>
+																					</div>
+																				</div>
+																				<div class="col-3">
+																					<h5>&nbsp;</h5>
+																					<div class="form-group">
+																						<select class="form-control" name="work_experiences[{{ $loop->index }}][entry_year]">
+																							<option disabled selected> Select year </option>
+																							@for ($i=1950; $i < date('Y'); $i++)
+																								<option value="{{ $i }}" @if ($work_experience->entry_year == $i) selected @endif>{{ $i }}</option>
+																							@endfor
+																						</select>
+																					</div>
+																				</div>
+																				<div class="col-3">
+																					<h5>Out</h5>
+																					<div class="form-group">
+																						<select class="form-control" name="work_experiences[{{ $loop->index }}][out_month]">
+																							<option disabled selected> Select month </option>
+																							<option value='January' @if ($work_experience->out_month == 'January') selected @endif>January</option>
+																							<option value='February' @if ($work_experience->out_month == 'February') selected @endif>February</option>
+																							<option value='March' @if ($work_experience->out_month == 'March') selected @endif>March</option>
+																							<option value='April' @if ($work_experience->out_month == 'April') selected @endif>April</option>
+																							<option value='May' @if ($work_experience->out_month == 'May') selected @endif>May</option>
+																							<option value='June' @if ($work_experience->out_month == 'June') selected @endif>June</option>
+																							<option value='July' @if ($work_experience->out_month == 'July') selected @endif>July</option>
+																							<option value='August' @if ($work_experience->out_month == 'August') selected @endif>August</option>
+																							<option value='September' @if ($work_experience->out_month == 'September') selected @endif>September</option>
+																							<option value='October' @if ($work_experience->out_month == 'October') selected @endif>October</option>
+																							<option value='November' @if ($work_experience->out_month == 'November') selected @endif>November</option>
+																							<option value='December' @if ($work_experience->out_month == 'December') selected @endif>December</option>
+																						</select>
+																					</div>
+																					<div class="form-group">
+																						<input class="form-check-input" type="radio" name="work_experiences[{{ $loop->index }}][is_currently_work]" value="1" @isset ($work_experience->is_currently_work) checked @endif>
+																						<label class="form-check-label" for="is_currently_work">
+																							No, I currently work here
+																						</label>
+																					</div>
+																				</div>
+																				<div class="col-3">
+																					<h5>&nbsp;</h5>
+																					<div class="form-group">
+																						<select class="form-control" name="work_experiences[{{ $loop->index }}][out_year]">
+																							<option disabled selected> Select year </option>
+																							@for ($i=1950; $i < date('Y'); $i++)
+																								<option value="{{ $i }}" @if ($work_experience->out_year == $i) selected @endif>{{ $i }}</option>
+																							@endfor
+																						</select>
+																					</div>
+																				</div>
+																			</div>
+																			<div class="form-group">
+																				<h5>Description (Optional)</h5>
+																				<textarea class="form-control" type="text" name="work_experiences[{{ $loop->index }}][description]">{{ $work_experience->description }}</textarea>
+																			</div>
 																		</div>
-																	</div>
-																	<div class="col-3">
-																		<h5>&nbsp;</h5>
-																		<div class="form-group">
-																			<select class="form-control" name="work_experiences[0][entry_year]" id="entry_year">
-																				<option disabled selected> Select year </option>
-																				@for ($i=1950; $i < date('Y'); $i++) <option value="{{ $i }}">{{ $i }}</option>
-																					@endfor
-																			</select>
-																		</div>
-																	</div>
-																	<div class="col-3">
-																		<h5>Out</h5>
-																		<div class="form-group">
-																			<select class="form-control" name="work_experiences[0][out_month]" id="out_month">
-																				<option disabled selected> Select month </option>
-																				<option value='January'>January</option>
-																				<option value='February'>February</option>
-																				<option value='March'>March</option>
-																				<option value='April'>April</option>
-																				<option value='May'>May</option>
-																				<option value='June'>June</option>
-																				<option value='July'>July</option>
-																				<option value='August'>August</option>
-																				<option value='September'>September</option>
-																				<option value='October'>October</option>
-																				<option value='November'>November</option>
-																				<option value='December'>December</option>
-																			</select>
-																		</div>
-																		<div class="form-group" id="n_form">
-																			<input class="form-check-input" type="radio" name="work_experiences[0][is_currently_work]" id="is_currently_work" value="Yes">
-																			<label class="form-check-label" for="is_currently_work">
-																				No, I currently work here
-																			</label>
-																		</div>
-																	</div>
-																	<div class="col-3">
-																		<h5>&nbsp;</h5>
-																		<div class="form-group">
-																			<select class="form-control" name="work_experiences[0][out_year]" id="out_year">
-																				<option disabled selected> Select year </option>
-																				@for ($i=1950; $i < date('Y'); $i++) <option value="{{ $i }}">{{ $i }}</option>
-																					@endfor
-																			</select>
-																		</div>
-																	</div>
+																		@unless ($loop->last)
+																			<hr>
+																		@endunless
+																	@endforeach
 																</div>
-																<div class="form-group">
-																	<h5>Description (Optional)</h5>
-																	<textarea class="form-control" id="description" type="text" name="work_experiences[0][description]"></textarea>
-																</div>
-																<hr class="mt-0">
-															</div>
+															</form>
 
 															<div class="text-left">
+																<hr class="mt-0">
 																<input type="button" id="addOthersWorkExperienceBtn" class="btn btn-primary" value="+ Add Others Work Experience">
 															</div>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveWorkExperienceBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
 											</div>
 											<!-- /modal Employment-->
-
 
 										</div>
 									</div>
@@ -915,11 +938,13 @@
 										<div class="card-body">
 											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a>Add the language you are good at</h3>
 											<br>
-											@foreach ($languages as $language)
-											<h5>{{ $language->language }}</h5>
-											<span>{{ $language->proficiency }}</span>
-											<br><br>
-											@endforeach
+											<div id="languages_wrapper">
+												@foreach ($languages as $language)
+													<h5>{{ $language->language }}</h5>
+													<span>{{ $language->proficiency }}</span>
+													<br><br>
+												@endforeach
+											</div>
 
 
 											<!-- Modal Languages-->
@@ -933,33 +958,60 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<div class="others_languange_wrapper">
-																<div class="form-group">
-																	<h5>Language</h5>
-																	<input class="form-control" id="other_language" type="text" name="languages[1][language]" placeholder="ex. Arabian" />
-																</div>
+															<form id="languages_edit_form">
 																<div class="form-group text-left">
-																	<h5>Proficiency</h5>
-																	<input type="radio" name="languages[1][proficiency]" id="others_1_basic" value="Basic">
-																	<label class="form-check-label" for="others_1_basic">Basic</label>
+									                <h5>What is your English proficiency?</h5>
+									                <input type="hidden" name="languages[0][language]" value="English">
+									                <input type="radio" name="languages[0][proficiency]" id="englist_basic" value="Basic" @if ($languages->first()->proficiency == 'Basic') checked @endif>
+									                <label class="form-check-label" for="englist_basic">Basic</label>
 
-																	<input type="radio" name="languages[1][proficiency]" id="others_1_good" value="Good">
-																	<label class="form-check-label" for="others_1_good">Good</label>
+									                <input type="radio" name="languages[0][proficiency]" id="english_good" value="Good" @if ($languages->first()->proficiency == 'Good') checked @endif>
+									                <label class="form-check-label" for="english_good">Good</label>
 
-																	<input type="radio" name="languages[1][proficiency]" id="others_1_fluent" value="Fluent">
-																	<label class="form-check-label" for="others_1_fluent">Fluent</label>
+									                <input type="radio" name="languages[0][proficiency]" id="english_fluent" value="Fluent" @if ($languages->first()->proficiency == 'Fluent') checked @endif>
+									                <label class="form-check-label" for="english_fluent">Fluent</label>
 
-																	<input type="radio" name="languages[1][proficiency]" id="others_1_native" value="Native">
-																	<label class="form-check-label" for="others_1_native">Native</label>
-																</div>
-															</div>
-															<div class="text-left">
-																<input type="button" id="addOthersLanguangeBtn" class="btn btn-primary" value="+ Add Others Languange">
-															</div>
+									                <input type="radio" name="languages[0][proficiency]" id="english_native" value="Native" @if ($languages->first()->proficiency == 'Native') checked @endif>
+									                <label class="form-check-label" for="english_native">Native</label>
+									              </div>
+
+									              <h5>What other languages do you speak?</h5>
+									              <div class="others_languange_wrapper">
+																	@foreach ($languages as $language)
+																		@unless ($loop->first)
+																			<div class="single_others_language_wrapper">
+																				<div class="form-group">
+																					<h5>Language</h5>
+																					<input class="form-control" id="other_language" type="text" name="languages[{{ $loop->index }}][language]"
+																					placeholder="ex. Arabian" value="{{ $language->language }}" />
+																				</div>
+																				<div class="form-group text-left">
+																					<h5>Proficiency</h5>
+																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic" @if ($language->proficiency == 'Basic') checked @endif>
+																					<label class="form-check-label" for="others_{{ $loop->index }}_basic">Basic</label>
+
+																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_good" value="Good" @if ($language->proficiency == 'Good') checked @endif>
+																					<label class="form-check-label" for="others_{{ $loop->index }}_good">Good</label>
+
+																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_fluent" value="Fluent" @if ($language->proficiency == 'Fluent') checked @endif>
+																					<label class="form-check-label" for="others_{{ $loop->index }}_fluent">Fluent</label>
+
+																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_native" value="Native" @if ($language->proficiency == 'Native') checked @endif>
+																					<label class="form-check-label" for="others_{{ $loop->index }}_native">Native</label>
+																				</div>
+																			</div>
+																			<hr>
+																		@endunless
+																	@endforeach
+									              </div>
+															</form>
+								              <div class="text-left">
+								                <input type="button" id="addOthersLanguangeBtn" class="btn btn-primary" value="+ Add Others Languange">
+								              </div>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveLanguagesBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
@@ -977,11 +1029,11 @@
 											<h3><a href="javascript:;" class="editOverview"><span data-feather="edit"></span></a>Write a great profile or description about your skills in your category!</h3>
 											<br>
 											<h5>Tittle</h5>
-											<span>{{ $description_title }}</span>
+											<span id="description_title">{{ $description_title }}</span>
 											<br><br>
 											<h5>Overview</h5>
 											<div class="text-justify">
-												<span>{{ $description_overview }}</span>
+												<span id="description_overview">{{ $description_overview }}</span>
 											</div>
 
 											<!-- Modal Overview-->
@@ -995,18 +1047,20 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<div class="form-group">
-																<h5>Title</h5>
-																<input class="form-control" id="title" type="text" name="description_title" placeholder="Enter tittle" />
-															</div>
-															<div class="form-group">
-																<h5>Overview</h5>
-																<textarea class="form-control" id="overview" type="text" name="description_overview"></textarea>
-															</div>
+															<form id="skills_description_edit_form">
+																<div class="form-group">
+																	<h5>Title</h5>
+																	<input class="form-control" type="text" name="description_title" placeholder="Enter tittle" value="{{ $description_title }}"/>
+																</div>
+																<div class="form-group">
+																	<h5>Overview</h5>
+																	<textarea class="form-control" type="text" name="description_overview">{{ $description_overview }}</textarea>
+																</div>
+															</form>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveSkillsDescriptionBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
@@ -1023,16 +1077,16 @@
 											<h3><a href="javascript:;" class="editAddress"><span data-feather="edit"></span></a>My Address</h3>
 											<br>
 											<h5>Street</h5>
-											<span>{{ $location->street }}</span>
+											<span id="location_street">{{ $location->street }}</span>
 											<br><br>
 											<h5>City</h5>
-											<span>{{ $location->city }}</span>
+											<span id="location_city">{{ $location->city }}</span>
 											<br><br>
 											<h5>Country</h5>
-											<span>{{ $location->country }}</span>
+											<span id="location_country">{{ $location->country }}</span>
 											<br><br>
 											<h5>Postal Code</h5>
-											<span>{{ $location->postal_code }}</span>
+											<span id="location_postal_code">{{ $location->postal_code }}</span>
 
 											<!-- Modal Address-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -1045,27 +1099,28 @@
 															</button>
 														</div>
 														<div class="modal-body">
-															<div class="form-group">
-																<h5>Street</h5>
-																<input class="form-control" id="street" type="text" name="location[street]" placeholder="ex. 1234 Main Street, Apartment 101" />
-															</div>
-															<div class="form-group">
-																<h5>City</h5>
-																<input class="form-control" id="city" type="text" name="location[city]" placeholder="ex. Malang" />
-															</div>
-															<div class="form-group">
-																<h5>Country</h5>
-																<input class="form-control" id="country" type="text" name="location[country]" placeholder="ex. Indonesia" />
-															</div>
-															<div class="form-group">
-																<h5>Postal Code</h5>
-																<input class="form-control" id="postal_code" type="text" name="location[postal_code]" placeholder="ex. 098811" />
-																<span>{{ $location->postal_code }}</span>
-															</div>
+															<form id="location_edit_form">
+																<div class="form-group">
+																	<h5>Street</h5>
+																	<input class="form-control" type="text" name="location[street]" placeholder="ex. 1234 Main Street, Apartment 101" value="{{ $location->street }}"/>
+																</div>
+																<div class="form-group">
+																	<h5>City</h5>
+																	<input class="form-control" type="text" name="location[city]" placeholder="ex. Malang" value="{{ $location->city }}"/>
+																</div>
+																<div class="form-group">
+																	<h5>Country</h5>
+																	<input class="form-control" type="text" name="location[country]" placeholder="ex. Indonesia" value="{{ $location->country }}"/>
+																</div>
+																<div class="form-group">
+																	<h5>Postal Code</h5>
+																	<input class="form-control" type="text" name="location[postal_code]" placeholder="ex. 098811" value="{{ $location->postal_code }}" />
+																</div>
+															</form>
 														</div>
 														<div class="modal-footer">
 															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="button" class="btn btn-primary saveFeedback">Save Changes</button>
+															<button type="button" class="btn btn-primary" id="saveAddressBtn">Save Changes</button>
 														</div>
 													</div>
 												</div>
@@ -1088,13 +1143,13 @@
 	@endsection
 
 	@push('scripts')
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+	<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+	<script src="//cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script src="{{ asset('assets/js/jquery.imgareaselect.min.js') }}"></script>
 	<script src="{{ asset('ijaboCropTool/ijaboCropTool.min.js') }}"></script>
-	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 	<script type="text/javascript">
@@ -1108,37 +1163,43 @@
         tags: true
     });
 
-		// MODAL
+		// Modal for edit profile detail
 		// Category
 		$('body').on('click', '.editCategory', function() {
 			$('#modalHeading').html("Edit Category");
 			$('#modalEditCategory').modal('show');
 		});
+
 		// Expertise
 		$('body').on('click', '.editExpertise', function() {
 			$('#modalHeading').html("Edit Expertise");
 			$('#modalEditExpertise').modal('show');
 		});
+
 		// Education
 		$('body').on('click', '.editEducation', function() {
 			$('#modalHeading').html("Edit Education");
 			$('#modalEditEducation').modal('show');
 		});
+
 		// Employment
 		$('body').on('click', '.editEmployment', function() {
 			$('#modalHeading').html("Edit Employment");
 			$('#modalEditEmployment').modal('show');
 		});
+
 		// Languages
 		$('body').on('click', '.editLanguages', function() {
 			$('#modalHeading').html("Edit Languages");
 			$('#modalEditLanguages').modal('show');
 		});
+
 		// Overview
 		$('body').on('click', '.editOverview', function() {
 			$('#modalHeading').html("Edit Overview");
 			$('#modalEditOverview').modal('show');
 		});
+
 		// Address
 		$('body').on('click', '.editAddress', function() {
 			$('#modalHeading').html("Edit Address");
@@ -1249,18 +1310,309 @@
       });
     });
 
+		$("#saveEducationBtn").click(function() {
+      var data = $('#educations_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_educations', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+					console.log(data.education);
+					$('#educations_wrapper').empty();
+
+					for (let i = 0; i < (data.educations.length); i++) {
+						if (i != 0) {
+							$('#educations_wrapper').append('<hr class="mt-0">');
+						}
+						$('#educations_wrapper').append(
+							`<h5>University</h5>
+							<span>`+data.educations[i].university+`</span>
+							<br><br>
+							<h5>Field of study</h5>
+							<span>`+data.educations[i].field_of_study+`</span>
+							<br><br>
+							<h5>Degree</h5>
+							<span>`+data.educations[i].degree+`</span>
+							<br><br>
+							<h5>Year</h5>
+							<span>`+data.educations[i].start_year+` - `+data.educations[i].end_year+`</span>
+							<br><br>`
+						);
+					}
+
+					$('#modalEditEducation').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+		//submit work experience fieldset
+    $("#saveWorkExperienceBtn").click(function() {
+      var data = $('#employment_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_employments', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+					console.log(data.employments);
+					$('#beginner_status').empty();
+					$('#work_experiences_wrapper').empty();
+
+					if (data.beginner_status == 1) {
+						$('#beginner_status').text('Yes');
+					} else {
+						$('#beginner_status').text('No');
+					}
+
+					for (let i = 0; i < (data.employments.length); i++) {
+						if (i != 0) {
+							$('#work_experiences_wrapper').append('<hr>');
+						}
+						$('#work_experiences_wrapper').append(
+							`<h5>Company</h5>
+							<span>`+data.employments[i].company+`</span>
+							<br><br>
+							<h5>Location</h5>
+							<span>`+data.employments[i].location+`</span>
+							<br><br>
+							<h5>Position</h5>
+							<span>`+data.employments[i].position+`</span>
+							<br><br>
+							<h5>Work Period</h5>
+							<span>`+data.employments[i].entry_month+`, `+data.employments[i].entry_year+` - `+data.employments[i].out_month+`, `+data.employments[i].out_year+`</span>
+							<br><br>
+							<h5>Description</h5>
+							<div class="text-justify">
+								<span>`+data.employments[i].description+`</span>
+							</div>`
+						);
+					}
+
+					$('#modalEditEmployment').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+		//submit languages fieldset
+    $("#saveLanguagesBtn").click(function() {
+      var data = $('#languages_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_languages', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+
+					$('#languages_wrapper').empty();
+
+					for (let i = 0; i < (data.languages.length); i++) {
+						$('#languages_wrapper').append(
+							`<h5>`+data.languages[i].language+`</h5>
+							<span>`+data.languages[i].proficiency+`</span>
+							<br><br>`
+						);
+					}
+
+					$('#modalEditLanguages').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+		//submit skills description fieldset
+    $("#saveSkillsDescriptionBtn").click(function() {
+      var data = $('#skills_description_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_overview', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+
+					$('#description_title').text(data.description_title);
+					$('#description_overview').text(data.description_overview);
+
+					$('#modalEditOverview').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
+    //submit address fieldset
+    $("#saveAddressBtn").click(function() {
+      var data = $('#location_edit_form').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('profile.save_address', auth()->user()->id) }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+					console.log(data);
+
+					$('#location_street').text(data.location.street);
+					$('#location_city').text(data.location.city);
+					$('#location_country').text(data.location.country);
+					$('#location_postal_code').text(data.location.postal_code);
+
+					$('#modalEditAddress').modal('hide');
+        },
+        error: function(reject) {
+          // if (reject.status === 422) {
+          //   var errors = JSON.parse(reject.responseText);
+          //   if (errors.client) {
+          //     $('#client-error').html('<strong class="text-danger">' + errors.client[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.group_code) {
+          //     $('#group_code-error').html('<strong class="text-danger">' + errors.group_code[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.date) {
+          //     $('#date-error').html('<strong class="text-danger">' + errors.date[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.objective) {
+          //     $('#objective-error').html('<strong class="text-danger">' + errors.objective[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.success_indicator) {
+          //     $('#success_indicator-error').html('<strong class="text-danger">' + errors.success_indicator[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.development_areas) {
+          //     $('#development_areas-error').html('<strong class="text-danger">' + errors.development_areas[0] + '</strong>'); // and so on
+          //   }
+          //   if (errors.support) {
+          //     $('#support-error').html('<strong class="text-danger">' + errors.support[0] + '</strong>'); // and so on
+          //   }
+          // }
+        }
+      });
+    });
+
 		// addEmployment
 		$('#addOthersWorkExperienceBtn').click(function() {
 			append_work_experience();
 		});
 
 		//method to append new work experiences
-		index_work_experience = 1;
+		index_work_experience = $('div.single_work_experiences_wrapper').length;
 		function append_work_experience() {
 			index = index_work_experience++;
 
 			var others_work_experience_html =
-				`<div class="form-group">
+				`<hr class="mt-0">
+				<div class="form-group">
           <h5>Company</h5>
           <input class="form-control" id="company" type="text" name="work_experiences[` + index + `][company]" placeholder="ex. PT. Wahana Integra Nusantara"/>
         </div>
@@ -1346,12 +1698,10 @@
         <div class="form-group">
           <h5>Description (Optional)</h5>
           <textarea class="form-control" id="description" type="text" name="work_experiences[` + index + `][description]"></textarea>
-        </div>
-        <hr class="mt-0">`;
+        </div>`;
 
-			$('.work_experiences_wrapper').append(others_work_experience_html);
+			$('.work_experiences_form_wrapper').append(others_work_experience_html);
 		}
-
 
 		// AddEducation
 		$('#addOthersEducationBtn').click(function() {
@@ -1359,12 +1709,15 @@
 		});
 		var date_now = new Date();
 		var year = date_now.getFullYear();
-		index_education = 1;
+		index_education = $('div.singe_education_wrapper').length;
+		console.log(index_education);
 
 		// method to append new education
 		function append_education() {
 			index = index_education++;
-			var others_education_html = '<div class="form-group"><h5>University</h5><input class="form-control" id="university" type="text" name="education[' + index + '][university]" placeholder="ex. Oxford University"/></div>';
+			console.log(index);
+			var others_education_html = '<hr class="mt-0">';
+			others_education_html += '<div class="form-group"><h5>University</h5><input class="form-control" id="university" type="text" name="education[' + index + '][university]" placeholder="ex. Oxford University"/></div>';
 			others_education_html += '<div class="form-group"><h5>Field of study</h5><input class="form-control" id="field_of_study" type="text" name="education[' + index + '][field_of_study]" placeholder="ex. Information System"/></div>';
 			others_education_html += '<div class="form-group"><h5>Degree</h5><input class="form-control" id="degree" type="text" name="education[' + index + '][degree]" placeholder="ex. Bachelor Degree"/></div>';
 			others_education_html += '<div class="row">';
@@ -1378,16 +1731,16 @@
 				others_education_html += '<option value="' + i + '">' + i + '</option>';
 			}
 			others_education_html += '</select></div></div>';
-			others_education_html += '</div><hr class="mt-0">';
+			others_education_html += '</div>';
 
-			$('.eduacation_wrapper').append(others_education_html);
+			$('.educations_form_wrapper').append(others_education_html);
 		}
 
 		// addLanguages
 		$('#addOthersLanguangeBtn').click(function() {
 			append_language();
 		});
-		var index_language = 1;
+		var index_language = $('div.single_others_language_wrapper').length;
 		// method to append new language
 		function append_language() {
 			index_language++;
@@ -1399,6 +1752,7 @@
 			others_language_html += '<input type="radio" name="languages[' + index_language + '][proficiency]" id="others_' + index_language + '_fluent" value="Fluent"> <label class="form-check-label" for="others_' + index_language + '_fluent">Fluent</label> ';
 			others_language_html += '<input type="radio" name="languages[' + index_language + '][proficiency]" id="others_' + index_language + '_native" value="Native"> <label class="form-check-label" for="others_' + index_language + '_native">Native</label> ';
 			others_language_html += '</div>';
+			others_language_html += '<hr class="mt-0">';
 
 			$('.others_languange_wrapper').append(others_language_html);
 		}
@@ -1444,6 +1798,7 @@
 			$(document).on('click', '#btn_edit_background', function() {
 				$('#modals_profil').modal('hide');
 			})
+
 			//script for coachee role
 			@role('coachee')
 			//datatable for feedbacks table
@@ -1515,6 +1870,7 @@
 			});
 			@endrole
 		});
+
 		//method for validating phone number
 		$.validator.addMethod("phoneNumber", function(value, element) {
 			return this.optional(element) || /^[1-9][0-9]/.test(value);
@@ -1522,6 +1878,7 @@
 		$.validator.addMethod('filesize', function(value, element, param) {
 			return this.optional(element) || (element.files[0].size <= param * 1000000)
 		}, '<strong class="text-danger">File must be less than {0}MB!</strong>');
+
 		//submit edit profile and validation
 		$('#saveBtn1').click(function(e) {
 			console.log('masuk');
@@ -1567,6 +1924,7 @@
 			});
 			$('#modals_profil').modal('hide');
 		});
+
 		$('#saveProfileCoacheeBtn').click(function(e) {
 			console.log('masuk');
 			$('#formEditProfileCoachee').validate({
@@ -1611,6 +1969,7 @@
 			});
 			$('#modals_profil').modal('hide');
 		});
+
 		//submit edit profile picture and validation
 		$('#saveProfilePictureBtn').click(function(e) {
 			console.log('masuk');
@@ -1645,6 +2004,7 @@
 				}
 			});
 		});
+
 		//submit edit background picture and validation
 		$('#saveBackgroundPictureBtn').click(function(e) {
 			console.log('masuk');
