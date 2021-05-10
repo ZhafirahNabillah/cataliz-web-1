@@ -214,6 +214,76 @@
       }
     });
 
+    var documentation_table = $('.docs-datatable-trainer').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('docs.trainer_docs') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'category',
+          name: 'category'
+        },
+        {
+          data: 'title',
+          name: 'title'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: true,
+          searchable: true
+        },
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
+    });
+
+    var documentation_table = $('.docs-datatable-mentor').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('docs.mentor_docs') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'category',
+          name: 'category'
+        },
+        {
+          data: 'title',
+          name: 'title'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: true,
+          searchable: true
+        },
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
+    });
+
     $('body').on('click', '.deleteDocs', function(e) {
 
       var docs_id = $(this).data("id");

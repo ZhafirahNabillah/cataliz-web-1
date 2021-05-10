@@ -78,6 +78,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/docs/upload_image', [DocumentationController::class, 'image_upload'])->name('docs.upload_image');
 	Route::get('/docs/coach_docs', [DocumentationController::class, 'coach_docs'])->name('docs.coach_docs');
 	Route::get('/docs/coachee_docs', [DocumentationController::class, 'coachee_docs'])->name('docs.coachee_docs');
+	Route::get('/docs/trainer_docs', [DocumentationController::class, 'trainer_docs'])->name('docs.trainer_docs');
+	Route::get('/docs/mentor_docs', [DocumentationController::class, 'mentor_docs'])->name('docs.mentor_docs');
 	Route::resource('docs', DocumentationController::class);
 	Route::get('/documentation', [DocumentationController::class, 'documentation_view'])->name('documentation');
 	Route::get('/documentation/{documentation:category}', [DocumentationController::class, 'documentation_view'])->name('documentation.view');
