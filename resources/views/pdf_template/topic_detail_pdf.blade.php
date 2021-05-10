@@ -142,28 +142,28 @@
       <thead>
         <tr class="text-center">
           <th scope="col">
-            <h5 class="mb-0 p-1">Detail Topic</h5>
-            <h3>{{ $topic->topic }}</h3>
+            <h5 class="mb-0 p-1">{{ $topic->topic }}</h5>
+            <h3>Created by: #Nama Trainer</h3>
           </th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td scope="col">
-            <h5 class="mb-0"><strong>Requirements</strong></h5>
-            {!! $topic->client_requirement !!}
-          </td>
-        </tr>
-        <tr>
-          <td scope="col">
             <h5 class="mb-0"><strong>Description</strong></h5>
-            {!! $topic->description !!}
+            <p>{!! $topic->description !!}</p>
           </td>
         </tr>
         <tr>
           <td scope="col">
-            <h5 class="mb-0"><strong>Target</strong></h5>
-            {!! $topic->client_target !!}
+            <h5 class="mb-0"><strong>Requirements</strong></h5>
+            <p>{!! $topic->client_requirement !!}</p>
+          </td>
+        </tr>
+        <tr>
+          <td scope="col">
+            <h5 class="mb-0"><strong>Who is the topic for?</strong></h5>
+            <p>{!! $topic->client_target !!}</p>
           </td>
         </tr>
       </tbody>
