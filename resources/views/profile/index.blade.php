@@ -548,9 +548,13 @@
 											<h3><a href="javascript:;" class="editCategory"><span data-feather="edit"></span></a>Tell us about the work you do! </h3>
 											<br>
 											<div id="categories_wrapper">
-												@foreach ($categories->pluck('category') as $category)
-													<li>{{ $category }}</li>
-												@endforeach
+												@if ($categories == null)
+													<span>No data</span>
+												@else
+													@foreach ($categories->pluck('category') as $category)
+														<li>{{ $category }}</li>
+													@endforeach
+												@endif
 											</div>
 
 											<!-- Modal Category-->
@@ -568,21 +572,28 @@
 																<h5 class="text-left">Select Category</h5>
 																<div class="text-left">
 																	@foreach ($main_categories = $all_categories->take(7) as $category)
-																		<label for="primary{{$loop->iteration}}"
-																			class="btn btn-outline-dark text-left">{{$category->category}}
-																			<input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}"
-																			class="badgebox" value="{{$category->id}}" @if($categories->pluck('id')->contains($category->id)) checked @endif>
-																				<span class="badge" id="checked{{$loop->iteration}}">&check;</span>
-																			</label>
-																		@endforeach
-																	</div>
+																		<label for="primary{{$loop->iteration}}" class="btn btn-outline-dark text-left">
+																			{{$category->category}}
+																			@if ($categories == null)
+																				<input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}" class="badgebox" value="{{$category->id}}">
+																			@else
+																				<input name="categories[]" type="checkbox" id="primary{{$loop->iteration}}" class="badgebox" value="{{$category->id}}" @if($categories->pluck('id')->contains($category->id)) checked @endif>
+																			@endif
+																			<span class="badge" id="checked{{$loop->iteration}}">&check;</span>
+																		</label>
+																	@endforeach
+																</div>
 																<br>
 																<div class="form-group text-left">
 																	<label class="form-label" for="register-username">Others</label>
 																	<select class="category-select form-control @error('category') is-invalid @enderror"
 																	name="categories[]" multiple>
 																		@foreach ($all_categories->whereNotIn('id', $main_categories->pluck('id')) as $category)
-																		<option value="{{ $category->id }}" @if($categories->pluck('id')->contains($category->id)) selected @endif>{{ $category->category }}</option>
+																			@if ($categories == null)
+																				<option value="{{ $category->id }}">{{ $category->category }}</option>
+																			@else
+																				<option value="{{ $category->id }}" @if($categories->pluck('id')->contains($category->id)) selected @endif>{{ $category->category }}</option>
+																			@endif
 																		@endforeach
 																	</select>
 																	@error('category')
@@ -613,9 +624,13 @@
 											<br>
 											<h5>Skill</h5>
 											<div id="skills_wrapper">
-												@foreach ($skills->pluck('skill_name') as $skill)
-													<li>{{ $skill }}</li>
-												@endforeach
+												@if ($skills == null)
+													<span>No data</span>
+												@else
+													@foreach ($skills->pluck('skill_name') as $skill)
+														<li>{{ $skill }}</li>
+													@endforeach
+												@endif
 											</div>
 
 											<!-- Modal expertise-->
@@ -634,7 +649,11 @@
 																<div class="form-group">
 																	<select id="skill-select" class="form-control @error('category') is-invalid @enderror" name="skill[]" multiple>
 																		@foreach ($all_skills as $skill)
-																		<option id="skill-{{$skill->id}}" value="{{ $skill->id }}" @if($skills->pluck('id')->contains($skill->id)) selected @endif>{{ $skill->skill_name }}</option>
+																			@if ($skills == null)
+																				<option id="skill-{{$skill->id}}" value="{{ $skill->id }}">{{ $skill->skill_name }}</option>
+																			@else
+																				<option id="skill-{{$skill->id}}" value="{{ $skill->id }}" @if($skills->pluck('id')->contains($skill->id)) selected @endif>{{ $skill->skill_name }}</option>
+																			@endif
 																		@endforeach
 																	</select>
 																</div>
@@ -660,23 +679,25 @@
 											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a>The schools you attended, areas of study, and degrees earned!</h3>
 											<br>
 											<div id="educations_wrapper">
-												@foreach ($educations as $education)
+												@forelse ($educations as $education)
 													<h5>University</h5>
-													<span>{{ $education->university }}</span>
+													<span>{{ $education->university ?? '-' }}</span>
 													<br><br>
 													<h5>Field of study</h5>
-													<span>{{ $education->field_of_study }}</span>
+													<span>{{ $education->field_of_study ?? '-' }}</span>
 													<br><br>
 													<h5>Degree</h5>
-													<span>{{ $education->degree }}</span>
+													<span>{{ $education->degree ?? '-' }}</span>
 													<br><br>
 													<h5>Year</h5>
-													<span>{{ $education->start_year }} - {{ $education->end_year }}</span>
+													<span>{{ $education->start_year ?? '-' }} - {{ $education->end_year ?? '-' }}</span>
 													<br><br>
 													@unless ($loop->last)
 														<hr class="mt-0">
 													@endunless
-												@endforeach
+												@empty
+													<span>No data</span>
+												@endforelse
 											</div>
 
 											<!-- Modal Education-->
@@ -715,7 +736,11 @@
 																						<select class="form-control" name="education[{{ $loop->index }}][start_year]">
 																							<option disabled selected> Pilih </option>
 																								@for ($i=1950; $i < date('Y')+1; $i++)
-																								<option value="{{ $i }}" @if ($education->start_year == $i) selected @endif>{{ $i }}</option>
+																									@if (isset($education->year))
+																										<option value="{{ $i }}" @if ($education->start_year == $i) selected @endif>{{ $i }}</option>
+																									@else
+																										<option value="{{ $i }}">{{ $i }}</option>
+																									@endif
 																								@endfor
 																							</select>
 																						</div>
@@ -725,8 +750,12 @@
 																						<div class="form-group">
 																							<select class="form-control" name="education[{{ $loop->index }}][end_year]">
 																								<option disabled selected> Pilih </option>
-																								@for ($i=1950; $i < date('Y')+5; $i++)
-																									<option value="{{ $i }}" @if ($education->end_year == $i) selected @endif>{{ $i }}</option>
+																									@for ($i=1950; $i < date('Y')+5; $i++)
+																										@if (isset($education->year))
+																											<option value="{{ $i }}" @if ($education->end_year == $i) selected @endif>{{ $i }}</option>
+																										@else
+																											<option value="{{ $i }}">{{ $i }}</option>
+																										@endif
 																									@endfor
 																								</select>
 																							</div>
@@ -770,7 +799,7 @@
 											@endif
 											<hr>
 											<div id="work_experiences_wrapper">
-												@foreach ($work_experiences as $work_experience)
+												@forelse ($work_experiences as $work_experience)
 													<h5>Company</h5>
 													<span>{{ $work_experience->company }}</span>
 													<br><br>
@@ -790,7 +819,9 @@
 													@unless ($loop->last)
 														<hr>
 													@endunless
-												@endforeach
+												@empty
+													<span>No data</span>
+												@endforelse
 											</div>
 
 											<!-- Modal Employment-->
@@ -939,11 +970,13 @@
 											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a>Add the language you are good at</h3>
 											<br>
 											<div id="languages_wrapper">
-												@foreach ($languages as $language)
-													<h5>{{ $language->language }}</h5>
-													<span>{{ $language->proficiency }}</span>
+												@forelse ($languages as $language)
+													<h5>{{ $language->language ?? '-' }}</h5>
+													<span>{{ $language->proficiency ?? '-' }}</span>
 													<br><br>
-												@endforeach
+												@empty
+													<span>No data</span>
+												@endforelse
 											</div>
 
 
@@ -962,16 +995,32 @@
 																<div class="form-group text-left">
 									                <h5>What is your English proficiency?</h5>
 									                <input type="hidden" name="languages[0][language]" value="English">
-									                <input type="radio" name="languages[0][proficiency]" id="englist_basic" value="Basic" @if ($languages->first()->proficiency == 'Basic') checked @endif>
+																	@if (isset($languages->first()->proficiency))
+																		<input type="radio" name="languages[0][proficiency]" id="englist_basic" value="Basic" @if ($languages->first()->proficiency == 'Basic') checked @endif>
+																	@else
+																		<input type="radio" name="languages[0][proficiency]" id="englist_basic" value="Basic">
+																	@endif
 									                <label class="form-check-label" for="englist_basic">Basic</label>
 
-									                <input type="radio" name="languages[0][proficiency]" id="english_good" value="Good" @if ($languages->first()->proficiency == 'Good') checked @endif>
+																	@if (isset($languages->first()->proficiency))
+																		<input type="radio" name="languages[0][proficiency]" id="english_good" value="Good" @if ($languages->first()->proficiency == 'Good') checked @endif>
+																	@else
+																		<input type="radio" name="languages[0][proficiency]" id="english_good" value="Good">
+																	@endif
 									                <label class="form-check-label" for="english_good">Good</label>
 
-									                <input type="radio" name="languages[0][proficiency]" id="english_fluent" value="Fluent" @if ($languages->first()->proficiency == 'Fluent') checked @endif>
+																	@if (isset($languages->first()->proficiency))
+																		<input type="radio" name="languages[0][proficiency]" id="english_fluent" value="Fluent" @if ($languages->first()->proficiency == 'Fluent') checked @endif>
+																	@else
+																		<input type="radio" name="languages[0][proficiency]" id="english_fluent" value="Fluent">
+																	@endif
 									                <label class="form-check-label" for="english_fluent">Fluent</label>
 
-									                <input type="radio" name="languages[0][proficiency]" id="english_native" value="Native" @if ($languages->first()->proficiency == 'Native') checked @endif>
+																	@if (isset($languages->first()->proficiency))
+																		<input type="radio" name="languages[0][proficiency]" id="english_native" value="Native" @if ($languages->first()->proficiency == 'Native') checked @endif>
+																	@else
+																		<input type="radio" name="languages[0][proficiency]" id="english_native" value="Native">
+																	@endif
 									                <label class="form-check-label" for="english_native">Native</label>
 									              </div>
 
@@ -987,16 +1036,32 @@
 																				</div>
 																				<div class="form-group text-left">
 																					<h5>Proficiency</h5>
-																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic" @if ($language->proficiency == 'Basic') checked @endif>
+																					@if (isset($language->proficiency))
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic" @if ($language->proficiency == 'Basic') checked @endif>
+																					@else
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic">
+																					@endif
 																					<label class="form-check-label" for="others_{{ $loop->index }}_basic">Basic</label>
 
-																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_good" value="Good" @if ($language->proficiency == 'Good') checked @endif>
+																					@if (isset($language->proficiency))
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_good" value="Good" @if ($language->proficiency == 'Good') checked @endif>
+																					@else
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic">
+																					@endif
 																					<label class="form-check-label" for="others_{{ $loop->index }}_good">Good</label>
 
-																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_fluent" value="Fluent" @if ($language->proficiency == 'Fluent') checked @endif>
+																					@if (isset($language->proficiency))
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_fluent" value="Fluent" @if ($language->proficiency == 'Fluent') checked @endif>
+																					@else
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic">
+																					@endif
 																					<label class="form-check-label" for="others_{{ $loop->index }}_fluent">Fluent</label>
 
-																					<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_native" value="Native" @if ($language->proficiency == 'Native') checked @endif>
+																					@if (isset($language->proficiency))
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_native" value="Native" @if ($language->proficiency == 'Native') checked @endif>
+																					@else
+																						<input type="radio" name="languages[{{ $loop->index }}][proficiency]" id="others_{{ $loop->index }}_basic" value="Basic">
+																					@endif
 																					<label class="form-check-label" for="others_{{ $loop->index }}_native">Native</label>
 																				</div>
 																			</div>
@@ -1029,11 +1094,11 @@
 											<h3><a href="javascript:;" class="editOverview"><span data-feather="edit"></span></a>Write a great profile or description about your skills in your category!</h3>
 											<br>
 											<h5>Tittle</h5>
-											<span id="description_title">{{ $description_title }}</span>
+											<span id="description_title">{{ $description_title ?? '-' }}</span>
 											<br><br>
 											<h5>Overview</h5>
 											<div class="text-justify">
-												<span id="description_overview">{{ $description_overview }}</span>
+												<span id="description_overview">{{ $description_overview ?? '-' }}</span>
 											</div>
 
 											<!-- Modal Overview-->
@@ -1050,11 +1115,11 @@
 															<form id="skills_description_edit_form">
 																<div class="form-group">
 																	<h5>Title</h5>
-																	<input class="form-control" type="text" name="description_title" placeholder="Enter tittle" value="{{ $description_title }}"/>
+																	<input class="form-control" type="text" name="description_title" placeholder="Enter tittle" value="{{ $description_title ?? '' }}"/>
 																</div>
 																<div class="form-group">
 																	<h5>Overview</h5>
-																	<textarea class="form-control" type="text" name="description_overview">{{ $description_overview }}</textarea>
+																	<textarea class="form-control" type="text" name="description_overview">{{ $description_overview ?? '' }}</textarea>
 																</div>
 															</form>
 														</div>
@@ -1077,16 +1142,16 @@
 											<h3><a href="javascript:;" class="editAddress"><span data-feather="edit"></span></a>My Address</h3>
 											<br>
 											<h5>Street</h5>
-											<span id="location_street">{{ $location->street }}</span>
+											<span id="location_street">{{ $location->street ?? '-' }}</span>
 											<br><br>
 											<h5>City</h5>
-											<span id="location_city">{{ $location->city }}</span>
+											<span id="location_city">{{ $location->city ?? '-' }}</span>
 											<br><br>
 											<h5>Country</h5>
-											<span id="location_country">{{ $location->country }}</span>
+											<span id="location_country">{{ $location->country ?? '-' }}</span>
 											<br><br>
 											<h5>Postal Code</h5>
-											<span id="location_postal_code">{{ $location->postal_code }}</span>
+											<span id="location_postal_code">{{ $location->postal_code ?? '-' }}</span>
 
 											<!-- Modal Address-->
 											<div class="modal fade bd-example-modal-lg" id="modalEditAddress" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -1102,19 +1167,19 @@
 															<form id="location_edit_form">
 																<div class="form-group">
 																	<h5>Street</h5>
-																	<input class="form-control" type="text" name="location[street]" placeholder="ex. 1234 Main Street, Apartment 101" value="{{ $location->street }}"/>
+																	<input class="form-control" type="text" name="location[street]" placeholder="ex. 1234 Main Street, Apartment 101" value="{{ $location->street ?? '' }}"/>
 																</div>
 																<div class="form-group">
 																	<h5>City</h5>
-																	<input class="form-control" type="text" name="location[city]" placeholder="ex. Malang" value="{{ $location->city }}"/>
+																	<input class="form-control" type="text" name="location[city]" placeholder="ex. Malang" value="{{ $location->city ?? '' }}"/>
 																</div>
 																<div class="form-group">
 																	<h5>Country</h5>
-																	<input class="form-control" type="text" name="location[country]" placeholder="ex. Indonesia" value="{{ $location->country }}"/>
+																	<input class="form-control" type="text" name="location[country]" placeholder="ex. Indonesia" value="{{ $location->country ?? '' }}"/>
 																</div>
 																<div class="form-group">
 																	<h5>Postal Code</h5>
-																	<input class="form-control" type="text" name="location[postal_code]" placeholder="ex. 098811" value="{{ $location->postal_code }}" />
+																	<input class="form-control" type="text" name="location[postal_code]" placeholder="ex. 098811" value="{{ $location->postal_code ?? '' }}" />
 																</div>
 															</form>
 														</div>
