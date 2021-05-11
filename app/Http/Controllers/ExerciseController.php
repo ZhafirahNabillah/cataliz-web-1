@@ -162,10 +162,14 @@ class ExerciseController extends Controller
     return view('exercise.index');
   }
 
-  public function start_exam(Topic $topic){
+  public function start_exam(Topic $topic)
+  {
     $questions = $topic->question;
+    $total_questions = $questions->count();
+    $choice_itr = 1;
+    // return $questions;
 
-    return view('exercise.start', compact('topic', 'questions'));
+    return view('exercise.start', compact('topic', 'questions', 'total_questions', 'choice_itr'));
   }
 
   /**

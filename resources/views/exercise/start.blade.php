@@ -168,7 +168,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Exam
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -194,11 +196,18 @@
             <div class="wizard-inner">
               <div class="connecting-line"></div>
               <ul class="nav nav-tabs" role="tablist">
-
-                <li role="presentation" class="active col-md-2">
-                  <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" aria-expanded="true"><span class="round-tab">01</span></a>
+                <?php
+                for ($i=1;$i<=$total_questions;$i++) {
+                ?>
+                <li role="presentation" class="col-md-2">
+                  <a href="#step{{$i}}" data-toggle="tab" aria-controls="step{{$i}}" role="tab"
+                    aria-expanded="true"><span class="round-tab">{{$i}}</span></a>
                 </li>
-                <li role="presentation" class="disabled col-md-2">
+                <?php
+                }
+                ?>
+
+                {{-- <li role="presentation" class="disabled col-md-2">
                   <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">02</span></a>
                 </li>
                 <li role="presentation" class="disabled col-md-2">
@@ -209,7 +218,7 @@
                 </li>
                 <li role="presentation" class="disabled col-md-2">
                   <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab"><span class="round-tab">05</span> </a>
-                </li>
+                </li> --}}
               </ul>
             </div>
 
@@ -230,18 +239,34 @@
                   <div class="wizard">
                     <form role="form" action="index.html" class="login-box">
                       <div class="tab-content" id="main_form">
-                        Question 1
-                        <!-- tab1 -->
-                        <div class="tab-pane active" role="tabpanel" id="step1">
 
-                          <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
+                        {{-- Question 1 --}}
+                        <div class="tab-pane active" role="tabpanel" id="step">
+                          <h4><b>Click The Question Number To Start</b></h4>
+                        </div>
+
+                        @foreach ($questions as $question)
+                        <!-- tab -->
+                        <div class="tab-pane" role="tabpanel" id="step{{$loop->iteration}}">
+
+                          <p class="text-justify">{{$loop->iteration . '. ' . strip_tags($question->question)}}</p>
+                          {{-- @foreach ($question as $answer) --}}
+                          <?php
+                          $arr = explode(',', $question->answers);
+                          for($i=0; $i<=4; $i++)
+                          {
+                            ?>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="#" id="#">
                             <label class="form-check-label" for="#">
-                              Answer 1
+                              {{$arr[$i]}}
                             </label>
                           </div>
-                          <div class="form-check">
+                          <?php
+                          }
+                          ?>
+                          {{-- @endforeach --}}
+                          {{-- <div class="form-check">
                             <input class="form-check-input" type="radio" name="#" id="#">
                             <label class="form-check-label" for="#">
                               Answer 2
@@ -264,17 +289,23 @@
                             <label class="form-check-label" for="#">
                               Answer 5
                             </label>
-                          </div>
+                          </div> --}}
                           <ul class="list-inline pull-right">
                             <li><button type="button" class="default-btn next-step">Next</button></li>
                           </ul>
 
                         </div>
+                        @endforeach
 
-                        <!-- tab2 -->
+                        {{-- <!-- tab2 -->
                         <div class="tab-pane" role="tabpanel" id="step2">
 
-                          <p class="text-justify">Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
+                          <p class="text-justify">Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra.
+                            In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et,
+                            blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim,
+                            lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi,
+                            quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer
+                            at arcu id risus imperdiet sagittis id ut erat.</p>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="#" id="#">
                             <label class="form-check-label" for="#">
@@ -315,7 +346,9 @@
 
                         <!-- tab3 -->
                         <div class="tab-pane" role="tabpanel" id="step3">
-                          <p class="text-justify">Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
+                          <p class="text-justify">Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed
+                            ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.
+                          </p>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="#" id="#">
                             <label class="form-check-label" for="#">
@@ -354,7 +387,9 @@
 
                         <!-- tab4 -->
                         <div class="tab-pane" role="tabpanel" id="step4">
-                          <p class="text-justify">Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. </p>
+                          <p class="text-justify">Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel
+                            pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim
+                            ante, accumsan ut eros non, viverra egestas lectus. </p>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="#" id="#">
                             <label class="form-check-label" for="#">
@@ -396,7 +431,13 @@
                         <!-- tab5 -->
                         <div class="tab-pane" role="tabpanel" id="step5">
 
-                          <p class="text-justify">Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
+                          <p class="text-justify">Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit
+                            amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis
+                            tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia,
+                            mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet
+                            tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam
+                            auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi
+                            ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
                           <div class="form-check">
                             <input class="form-check-input" type="radio" name="#" id="#">
                             <label class="form-check-label" for="#">
@@ -435,7 +476,7 @@
                         </div>
 
                         <div class="clearfix"></div>
-                      </div>
+                      </div> --}}
 
                     </form>
                   </div>
