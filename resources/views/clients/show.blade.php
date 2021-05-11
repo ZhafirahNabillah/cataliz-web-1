@@ -45,7 +45,7 @@
 					<div class="col-12">
 						<div class="card profile-header mb-2">
 							<!-- profile cover photo -->
-							<img class="card-img-top" src="https://image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg" alt="User Profile Image" />
+							<img class="card-img-top" src="//image.freepik.com/free-photo/cyborg-hand-holding-bulb-lamp-idea-concept-with-start-up-icon-connected-3d-rendering_110893-1792.jpg" alt="User Profile Image" />
 							<!--/ profile cover photo -->
 
 							<div class="position-relative">
@@ -589,7 +589,7 @@
 @endsection
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
 	$(function() {

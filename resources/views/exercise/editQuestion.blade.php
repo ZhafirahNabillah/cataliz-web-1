@@ -41,19 +41,26 @@
               @csrf
               @method('PUT')
               {{-- <div class="form-group"><label for="">Topic</label><input type="text" class="form-control col-sm-12" id="" aria-describedby="emailHelp" placeholder="Choose your topic" disabled></div> --}}
-              <div class="form-group"><label for="question">Question</label><textarea name="question" id="question" placeholder="Your question here...">{{$question->question}}</textarea></div>
-              @foreach ($ans_array as $dt)
-              <div class="form-group"><label for="">Answer {{$choice_itr++}}</label><input type="text" name="answer-1[]" class="form-control col-sm-6" id="{{strtolower($choice_itr++)}}-answer-1" value="{!!$dt!!}"></div>
+              <div class="form-group">
+                <label for="question">Question</label>
+                <textarea name="question" placeholder="Your question here...">{{ $question->question }}</textarea>
+              </div>
+              @php ($choice_itr = 'A')
+              @foreach ($answers as $answer)
+                <div class="form-group">
+                  <label for="">Answer {{$choice_itr++}}</label>
+                  <input type="text" name="answers[]" class="form-control col-sm-6" value="{{ $answer }}">
+                </div>
               @endforeach
               <div class="form-group">
                 <label for="true_answer">Select True Answer</label>
                 <select class="form-control col-sm-6" aria-label=" select example" name="true_answer">
                   {{-- <option selected disabled>Select True Answer</option> --}}
-                  <option value="A" @if($question->true_answer == 'A') selected @endif>A</option>
-                  <option value="B" @if($question->true_answer == 'B') selected @endif>B</option>
-                  <option value="C" @if($question->true_answer == 'C') selected @endif>C</option>
-                  <option value="D" @if($question->true_answer == 'D') selected @endif>D</option>
-                  <option value="E" @if($question->true_answer == 'E') selected @endif>E</option>
+                  <option value="A" @if($question->true_answer == '1') selected @endif>A</option>
+                  <option value="B" @if($question->true_answer == '2') selected @endif>B</option>
+                  <option value="C" @if($question->true_answer == '3') selected @endif>C</option>
+                  <option value="D" @if($question->true_answer == '4') selected @endif>D</option>
+                  <option value="E" @if($question->true_answer == '5') selected @endif>E</option>
                 </select>
               </div>
               <div class="form-group">
@@ -79,10 +86,10 @@
   @endsection
 
   @push('scripts')
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-  <script src="https://cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+  <script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
 
   <script type="text/javascript">
@@ -109,50 +116,6 @@
 
     tinymce.init({
       selector: 'textarea',
-
-      image_class_list: [{
-        title: 'img-fluid',
-        value: 'img-fluid'
-      }, ],
-      height: 700,
-      setup: function(editor) {
-        editor.on('init change', function() {
-          editor.save();
-        });
-      },
-      plugins: [
-        "advlist autolink lists link image charmap print preview anchor",
-        "searchreplace visualblocks code fullscreen",
-        "insertdatetime media table contextmenu paste imagetools"
-      ],
-      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
-
-      image_title: true,
-      automatic_uploads: true,
-      images_upload_url: '/docs/upload_image',
-      file_picker_types: 'image',
-      file_picker_callback: function(cb, value, meta) {
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('accept', 'image/*');
-        input.onchange = function() {
-          var file = this.files[0];
-
-          var reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = function() {
-            var id = 'blobid' + (new Date()).getTime();
-            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-            var base64 = reader.result.split(',')[1];
-            var blobInfo = blobCache.create(id, file, base64);
-            blobCache.add(blobInfo);
-            cb(blobInfo.blobUri(), {
-              title: file.name
-            });
-          };
-        };
-        input.click();
-      }
     });
   </script>
 

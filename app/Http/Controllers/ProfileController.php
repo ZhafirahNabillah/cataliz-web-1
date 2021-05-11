@@ -38,12 +38,22 @@ class ProfileController extends Controller
             if (auth()->user()->hasRole('mentor')) {
               $coach = Coach::where('user_id', auth()->user()->id)->first();
 
-              $category_id = collect(json_decode($coach->category_id));
-              $categories = Category::whereIn('id', $category_id)->get();
+              if ($coach->category_id) {
+                $category_id = json_decode($coach->category_id);
+                $categories = Category::whereIn('id', $category_id)->get();
+              } else {
+                $categories = null;
+              }
+
               $all_categories = Category::all();
 
-              $skill_id = json_decode($coach->skill_id);
-              $skills = Skill::whereIn('id', $skill_id)->get();
+              if ($coach->skill_id) {
+                $skill_id = json_decode($coach->skill_id);
+                $skills = Skill::whereIn('id', $skill_id)->get();
+              } else {
+                $skills = null;
+              }
+              
               $all_skills = Skill::all();
 
               $educations = collect(json_decode($coach->education));

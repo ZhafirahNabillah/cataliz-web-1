@@ -11,7 +11,15 @@ class Coach extends Model
 
     protected $fillable = [
         'user_id',
-        'skill'
+        'skill_id',
+        'category_id',
+        'skills_description_title',
+        'skills_description_overview',
+        'education',
+        'employment',
+        'language',
+        'beginner_status',
+        'location'
     ];
 
     public function clients(){
