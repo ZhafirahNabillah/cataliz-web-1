@@ -148,6 +148,10 @@
   .pull-right {
     float: right;
   }
+
+  .question-wrapper p {
+    display: inline
+  }
 </style>
 @endpush
 
@@ -191,37 +195,15 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body">
-
-
             <div class="wizard-inner">
               <div class="connecting-line"></div>
               <ul class="nav nav-tabs" role="tablist">
-                <?php
-                for ($i=1;$i<=$total_questions;$i++) {
-                ?>
-                <li role="presentation" class="col-md-2">
-                  <a href="#step{{$i}}" data-toggle="tab" aria-controls="step{{$i}}" role="tab"
-                    aria-expanded="true"><span class="round-tab">{{$i}}</span></a>
-                </li>
-                <?php
-                }
-                ?>
-
-                {{-- <li role="presentation" class="disabled col-md-2">
-                  <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" aria-expanded="false"><span class="round-tab">02</span></a>
-                </li>
-                <li role="presentation" class="disabled col-md-2">
-                  <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"><span class="round-tab">03</span> </a>
-                </li>
-                <li role="presentation" class="disabled col-md-2">
-                  <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab"><span class="round-tab">04</span> </a>
-                </li>
-                <li role="presentation" class="disabled col-md-2">
-                  <a href="#step5" data-toggle="tab" aria-controls="step5" role="tab"><span class="round-tab">05</span> </a>
-                </li> --}}
-              </ul>
+                @for ($i=0; $i < $questions->count(); $i++)
+                  <li role="presentation" class="col-md-2 @if ($i == 0) active @endif">
+                    <a href="#step-{{ $i }}" role="tab" data-toggle="tab"><span class="round-tab">{{ $i+1 }}</span></a>
+                  </li>
+                @endfor
             </div>
-
             <br>
             <div class="card-footer" style="color: #F1AF33;">Time remaining 02:19 </div>
           </div>
@@ -232,270 +214,61 @@
       <div class="col-md-8">
         <div class="card">
           <div class="card-body">
+            <div class="row">
+              <div class="col-12">
+                <div class="wizard">
+                    <div class="tab-content" id="main_form">
 
-            <div class="container">
-              <div class="row d-flex ">
-                <div class="col-auto">
-                  <div class="wizard">
-                    <form role="form" action="index.html" class="login-box">
-                      <div class="tab-content" id="main_form">
-
-                        {{-- Question 1 --}}
-                        <div class="tab-pane active" role="tabpanel" id="step">
-                          <h4><b>Click The Question Number To Start</b></h4>
-                        </div>
-
-                        @foreach ($questions as $question)
+                      @foreach ($answers as $answer)
                         <!-- tab -->
-                        <div class="tab-pane" role="tabpanel" id="step{{$loop->iteration}}">
+                        <div class="tab-pane @if ($loop->first) active @endif" role="tabpanel" id="step-{{$loop->index}}">
 
-                          <p class="text-justify">{{$loop->iteration . '. ' . strip_tags($question->question)}}</p>
-                          {{-- @foreach ($question as $answer) --}}
-                          <?php
-                          $arr = explode(',', $question->answers);
-                          for($i=0; $i<=4; $i++)
-                          {
+                          <div class="question-wrapper mb-1">
+                            <span class="round-tab bg-primary text-white">{{ $loop->iteration }}</span>
+                            {!! $answer->question->question !!}
+                          </div>
+
+                          <form id="save_answer_form_{{ $answer->id }}">
+                            <input type="hidden" name="answer_id" value="{{ $answer->id }}">
+                            <?php
+                            $arr = explode(',', $answer->question->answers);
+                            for($i=0; $i<=4; $i++)
+                            {
+                              ?>
+                              <div class="form-check">
+                                @if ($answer->answer == $i+1)
+                                  <input class="form-check-input" type="radio" name="answer" id="choice-{{ $loop->iteration }}-{{ $i }}" value="{{ $i+1 }}" checked>
+                                @else
+                                  <input class="form-check-input" type="radio" name="answer" id="choice-{{ $loop->iteration }}-{{ $i }}" value="{{ $i+1 }}">
+                                @endif
+                                <label class="form-check-label" for="#choice-{{ $loop->iteration }}-{{ $i }}">
+                                  {{$arr[$i]}}
+                                </label>
+                              </div>
+                              <?php
+                            }
                             ?>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              {{$arr[$i]}}
-                            </label>
-                          </div>
-                          <?php
-                          }
-                          ?>
-                          {{-- @endforeach --}}
-                          {{-- <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 2
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 3
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 4
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 5
-                            </label>
-                          </div> --}}
-                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn next-step">Next</button></li>
-                          </ul>
-
-                        </div>
-                        @endforeach
-
-                        {{-- <!-- tab2 -->
-                        <div class="tab-pane" role="tabpanel" id="step2">
-
-                          <p class="text-justify">Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra.
-                            In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et,
-                            blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim,
-                            lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi,
-                            quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer
-                            at arcu id risus imperdiet sagittis id ut erat.</p>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 1
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 2
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 3
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 4
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 5
-                            </label>
-                          </div>
-
+                          </form>
 
                           <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
-                            <li><button type="button" class="default-btn next-step">Next</button></li>
+                            <li>
+                              @if ($loop->last)
+                                <button type="button" class="default-btn next-step mt-0" data-id="{{ $answer->id }}" id="submitExamBtn">Submit All</button>
+                              @else
+                                <button type="button" class="default-btn next-step mt-0" data-id="{{ $answer->id }}">Next</button>
+                              @endif
+                            </li>
                           </ul>
                         </div>
-
-                        <!-- tab3 -->
-                        <div class="tab-pane" role="tabpanel" id="step3">
-                          <p class="text-justify">Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed
-                            ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.
-                          </p>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 1
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 2
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 3
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 4
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 5
-                            </label>
-                          </div>
-                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
-                            <li><button type="button" class="default-btn next-step">Next</button></li>
-                          </ul>
-                        </div>
-
-                        <!-- tab4 -->
-                        <div class="tab-pane" role="tabpanel" id="step4">
-                          <p class="text-justify">Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel
-                            pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim
-                            ante, accumsan ut eros non, viverra egestas lectus. </p>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 1
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 2
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 3
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 4
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 5
-                            </label>
-                          </div>
-
-
-                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
-                            <li><button type="button" class="default-btn next-step">Next</button></li>
-                          </ul>
-                        </div>
-
-                        <!-- tab5 -->
-                        <div class="tab-pane" role="tabpanel" id="step5">
-
-                          <p class="text-justify">Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit
-                            amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis
-                            tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia,
-                            mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet
-                            tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam
-                            auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi
-                            ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat.</p>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 1
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 2
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 3
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 4
-                            </label>
-                          </div>
-                          <div class="form-check">
-                            <input class="form-check-input" type="radio" name="#" id="#">
-                            <label class="form-check-label" for="#">
-                              Answer 5
-                            </label>
-                          </div>
-
-                          <ul class="list-inline pull-right">
-                            <li><button type="button" class="default-btn prev-step">Previous</button></li>
-                            <li><button type="button" class="default-btn next-step">Finish and Submit</button></li>
-                          </ul>
-                        </div>
-
-                        <div class="clearfix"></div>
-                      </div> --}}
-
-                    </form>
-                  </div>
+                      @endforeach
+                    </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-
     </div>
     @endrole
-
-
-
-
-
-
 
 
     <!-- END: Content-->
@@ -545,6 +318,7 @@
           nextTab(active);
 
         });
+
         $(".prev-step").click(function(e) {
 
           var active = $('.wizard-inner .nav-tabs li.active');
@@ -561,13 +335,39 @@
         $(elem).prev().find('a[data-toggle="tab"]').click();
       }
 
-
       $('.nav-tabs').on('click', 'li', function() {
         $('.nav-tabs li.active').removeClass('active');
         $(this).addClass('active');
       });
+
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
+      //submit each answer
+      $(".next-step").click(function() {
+        answer_id = $(this).data("id");
+        var data = $('#save_answer_form_'+answer_id).serialize();
+        console.log(data);
+
+        $.ajax({
+          data: data,
+          url: "{{ route('exercise.save_answer') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function(data) {
+            console.log(data);
+          },
+          error: function(reject) {
+            console.log('something wrong');
+          }
+        });
+      });
+
+      $('#submitExamBtn').click(function() {
+        window.location.href = "{{route('exercise.submit_all', $exam->id)}}";
+      });
     </script>
-
-
-
     @endpush

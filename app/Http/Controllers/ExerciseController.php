@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Topic;
+use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Exam_result;
+use Carbon\Carbon;
 use DataTables;
 
 class ExerciseController extends Controller
@@ -167,9 +169,67 @@ class ExerciseController extends Controller
     $questions = $topic->question;
     $total_questions = $questions->count();
     $choice_itr = 1;
-    // return $questions;
+    $exam = Exam_result::updateOrCreate([
+      'topic_id'      => $topic->id,
+      'user_id'       => auth()->user()->id,
+    ],[
+      'attempt_start' => Carbon::now()->format('Y-m-d H:i:s')
+    ]);
 
-    return view('exercise.start', compact('topic', 'questions', 'total_questions', 'choice_itr'));
+    $answers = collect();
+
+    foreach ($questions as $question) {
+      $answer = Answer::updateOrCreate([
+        'exam_id'           => $exam->id,
+        'question_id'       => $question->id
+      ],[
+
+      ]);
+
+      $answers->push($answer);
+    }
+
+    // return $answers;
+
+    return view('exercise.start', compact('topic', 'questions', 'total_questions', 'choice_itr', 'exam', 'answers'));
+  }
+
+  public function save_answer(Request $request){
+    $answer = Answer::updateOrCreate([
+      'id'                => $request->answer_id
+    ],[
+      'answer'            => $request->answer
+    ]);
+
+    return response()->json([
+      'answer' => $answer
+    ]);
+  }
+
+  public function submit_all(Exam_result $exam_result){
+    $answers = $exam_result->answers;
+
+    foreach ($answers as $answer) {
+      $question = Question::where('id', $answer->question_id)->first();
+
+      if ($answer->answer == $question->true_answer) {
+        $answer->is_correct_answer = 1;
+      } else {
+        $answer->is_correct_answer = 0;
+      }
+
+      $answer->save();
+      // return $answer;
+    }
+
+    $total_answers = $answers->count();
+    $correct_answers = $answers->where('is_correct_answer', 1)->count();
+    $grade = $correct_answers / $total_answers * 100 ;
+
+    $exam_result->grade = $grade;
+    $exam_result->save();
+
+    return redirect()->route('exercise.index')->with('success', 'Your exam has successfully submited, see your exam result on result section!');
   }
 
   /**
