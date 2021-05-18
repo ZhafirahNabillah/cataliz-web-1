@@ -71,7 +71,6 @@ task('deploy', [
 
 task ('php-symlink', function(){
     run('sudo ln -s /var/www/html/db-cataliz /var/www/html/current/public');
-    #run('sudo mv /var/www/html/current/public/phpmyadmin /var/www/html/current/public/db-cataliz');
 });
 
 task ('reload-nginx',function(){
