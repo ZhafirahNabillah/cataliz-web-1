@@ -148,13 +148,23 @@ class ExerciseController extends Controller
           ->addColumn('action', function ($row) {
 
             //add detail and whatsapp button if user have permission
-            $start_exam_btn = '<a href="' . route('exercise.start', $row->id) . '" class="btn-sm btn-primary">Start</a>';
+            $exam_result = Exam_result::where('topic_id', $row->id)->where('user_id', auth()->user()->id)->get();
+
+            if ($exam_result->count() == 0) {
+              $action_btn = '<a href="' . route('exercise.start', $row->id) . '" class="btn-sm btn-primary">Start</a>';
+            } else {
+              if ($exam_result->where('grade', null)->count() > 0) {
+                $action_btn = '<a href="' . route('exercise.continue', $exam_result->first()) . '" class="btn-sm btn-primary">Continue</a>';
+              } else {
+                $action_btn = '<span>Already Taken</a>';
+              }
+            }
 
             //final dropdown button that shows on view
             // $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
             //   <div class="dropdown-menu dropdown-menu-right">' . $detail_exercise_btn . '</div>';
 
-            return $start_exam_btn;
+            return $action_btn;
           })
           ->rawColumns(['action', 'total_questions', 'category'])
           ->make(true);
@@ -166,32 +176,71 @@ class ExerciseController extends Controller
 
   public function start_exam(Topic $topic)
   {
+    // $total_questions = $questions->count();
+    // $choice_itr = 1;
     $questions = $topic->question;
-    $total_questions = $questions->count();
-    $choice_itr = 1;
-    $exam = Exam_result::updateOrCreate([
+    $exam = Exam_result::create([
       'topic_id'      => $topic->id,
       'user_id'       => auth()->user()->id,
-    ],[
-      'attempt_start' => Carbon::now()->format('Y-m-d H:i:s')
+      'attempt_start'   => Carbon::now()->format('Y-m-d H:i:s'),
+      'attempt_submit'  => Carbon::now()->addMinutes(15)->format('Y-m-d H:i:s')
     ]);
 
-    $answers = collect();
+    // $answers = collect();
 
     foreach ($questions as $question) {
-      $answer = Answer::updateOrCreate([
+      $answer = Answer::create([
         'exam_id'           => $exam->id,
         'question_id'       => $question->id
-      ],[
-
       ]);
 
-      $answers->push($answer);
+      // $answers->push($answer);
     }
 
     // return $answers;
 
-    return view('exercise.start', compact('topic', 'questions', 'total_questions', 'choice_itr', 'exam', 'answers'));
+    return redirect()->route('exercise.continue', $exam->id);
+
+    // return view('exercise.start', compact('topic', 'questions', 'exam', 'answers'));
+  }
+
+  public function continue_exam($id)
+  {
+
+
+
+    $exam = Exam_result::find($id);
+
+    // return $exam;
+
+    // $topic = $exam->topic;
+    // $questions = $topic->question;
+    // $total_questions = $questions->count();
+    $choice_itr = 1;
+    // $exam = Exam_result::updateOrCreate([
+    //   'topic_id'      => $topic->id,
+    //   'user_id'       => auth()->user()->id,
+    // ],[
+    //   'attempt_start' => Carbon::now()->format('Y-m-d H:i:s')
+    // ]);
+
+
+    $answers = $exam->answers;
+
+    // foreach ($questions as $question) {
+    //   $answer = Answer::updateOrCreate([
+    //     'exam_id'           => $exam->id,
+    //     'question_id'       => $question->id
+    //   ],[
+    //
+    //   ]);
+    //
+    //   $answers->push($answer);
+    // }
+
+    // return $answers;
+
+    return view('exercise.start', compact('choice_itr', 'exam', 'answers'));
   }
 
   public function save_answer(Request $request){
