@@ -227,6 +227,8 @@ class ExerciseController extends Controller
 
     $answers = $exam->answers;
 
+    $active_question = $answers->where('answer', null)->first();
+
     // foreach ($questions as $question) {
     //   $answer = Answer::updateOrCreate([
     //     'exam_id'           => $exam->id,
@@ -240,7 +242,7 @@ class ExerciseController extends Controller
 
     // return $answers;
 
-    return view('exercise.start', compact('choice_itr', 'exam', 'answers'));
+    return view('exercise.start', compact('choice_itr', 'exam', 'answers','active_question'));
   }
 
   public function save_answer(Request $request){
