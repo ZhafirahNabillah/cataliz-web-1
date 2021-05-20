@@ -1869,18 +1869,18 @@
 						name: 'DT_RowIndex'
 					},
 					{
-						data: 'name',
-						name: 'name',
+						data: 'coach.name',
+						name: 'coach.name',
 						defaultContent: '<i>-</i>'
 					},
 					{
-						data: 'session_name',
-						name: 'session_name',
+						data: 'agenda_detail.session_name',
+						name: 'agenda_detail.session_name',
 						defaultContent: '<i>-</i>'
 					},
 					{
-						data: 'topic',
-						name: 'topic',
+						data: 'agenda_detail.topic',
+						name: 'agenda_detail.topic',
 						defaultContent: '<i>-</i>'
 					},
 					{
@@ -1907,17 +1907,16 @@
 				let detail_agenda_id = $(this).data('id');
 				$.get("" + '/clients/' + detail_agenda_id + '/show_detail_feedbacks', function(data) {
 					$('#modalHeading').html("Detail Feedbacks");
-					$('#name').text(data.name);
-					$('.session_feedback').html(data.session_name);
-					$('.coach_name_feedback').html(data.name);
-					$('.topic_feedback').html(data.topic);
-					$('.feedback').html(data.feedback_from_coach);
+					$('.session_feedback').html(data.session.session_name);
+					$('.coach_name_feedback').html(data.coach.name);
+					$('.topic_feedback').html(data.session.topic);
+					$('.feedback').html(data.feedback.feedback);
 					$('#show_feedback').modal('show');
-					if (data.attachment_from_coach == null) {
+					if (data.feedback.attachment == null) {
 						$('.download_button_feedback').css("display", "none");
 						$('.span_none_feedback').html('Tidak ada file');
 					} else {
-						$('.span_none_feedback').html(data.attachment_from_coach);
+						$('.span_none_feedback').html(data.feedback.attachment);
 						$('.download_button_feedback').removeAttr('style');
 						$('.download_button_feedback').css("display", "relative");
 					}

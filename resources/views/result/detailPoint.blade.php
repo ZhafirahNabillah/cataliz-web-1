@@ -146,9 +146,9 @@
                             <p>Answer</p>
                             @php ($choice_itr = 'A')
                             @foreach ($answer_choices = explode(',', $answer->question->answers) as $answer_choice)
-                            @if ($answer->answer == $loop->index && $answer->is_correct_answer == 1)
+                            @if ($answer->answer == $loop->iteration && $answer->is_correct_answer == 1)
                             <li class="text-success">{{$choice_itr++}}. {{ $answer_choice }}</li>
-                            @elseif ($answer->answer == $loop->index && $answer->is_correct_answer == 0)
+                            @elseif ($answer->answer == $loop->iteration && $answer->is_correct_answer == 0)
                             <li class="text-danger">{{$choice_itr++}}. {{ $answer_choice }}</li>
                             @else
                             <li>{{$choice_itr++}}. {{ $answer_choice }}</li>
@@ -157,7 +157,7 @@
                             <br>
                             <p><b> The correct answer is:</b><br>
                               <span style="background-color: #9EEEA1;" class="d-block p-1">
-                                {{ $answer_choices[$answer->question->true_answer] }}</span>
+                                {{ $answer_choices[$answer->question->true_answer - 1] }}</span>
                             </p>
                           </div>
                         </div>

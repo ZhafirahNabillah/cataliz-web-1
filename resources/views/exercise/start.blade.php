@@ -62,8 +62,14 @@
     background: #7367F0;
     color: #fff;
     border-color: black;
-
   }
+
+  .wizard-inner li.disabled span.round-tab {
+    background: grey;
+    color: #fff;
+    border-color: black;
+  }
+
 
   .wizard li.active span.round-tab i {
     color: #5bc0de;
@@ -152,6 +158,10 @@
   .question-wrapper p {
     display: inline
   }
+
+  span .disabled {
+    background-color: grey;
+  }
 </style>
 @endpush
 
@@ -198,14 +208,14 @@
             <div class="wizard-inner">
               <div class="connecting-line"></div>
               <ul class="nav nav-tabs" role="tablist">
-                @for ($i=0; $i < $questions->count(); $i++)
-                  <li role="presentation" class="col-md-2 @if ($i == 0) active @endif">
-                    <a href="#step-{{ $i }}" role="tab" data-toggle="tab"><span class="round-tab">{{ $i+1 }}</span></a>
+                @foreach ($answers as $answer)
+                  <li role="presentation" data-index={{ $loop->index }} class="col-md-2 @if ($answer->answer != null) disabled @elseif ($answer->answer == null && $answer->id == $active_question->id) active @endif">
+                    <a href="#step-{{ $loop->index }}" role="tab" data-toggle="tab"><span class="round-tab">{{ $loop->iteration }}</span></a>
                   </li>
-                @endfor
+                @endforeach
             </div>
             <br>
-            <div class="card-footer" style="color: #F1AF33;">Time remaining 02:19 </div>
+            <div class="card-footer" style="color: #F1AF33;">Time remaining <span id="time_remaining"></span></div>
           </div>
         </div>
       </div>
@@ -221,14 +231,14 @@
 
                       @foreach ($answers as $answer)
                         <!-- tab -->
-                        <div class="tab-pane @if ($loop->first) active @endif" role="tabpanel" id="step-{{$loop->index}}">
+                        <div class="tab-pane @if ($answer->answer == null && $answer->id == $active_question->id) active @endif" role="tabpanel" id="step-{{$loop->index}}">
 
                           <div class="question-wrapper mb-1">
                             <span class="round-tab bg-primary text-white">{{ $loop->iteration }}</span>
                             {!! $answer->question->question !!}
                           </div>
 
-                          <form id="save_answer_form_{{ $answer->id }}">
+                          <form class="answer_form" id="save_answer_form_{{ $answer->id }}">
                             <input type="hidden" name="answer_id" value="{{ $answer->id }}">
                             <?php
                             $arr = explode(',', $answer->question->answers);
@@ -248,17 +258,16 @@
                               <?php
                             }
                             ?>
+                            <ul class="list-inline pull-right btn_wrapper">
+                              <li>
+                                @if ($loop->last)
+                                  <button type="button" class="default-btn next-step mt-0" data-id="{{ $answer->id }}" id="submitExamBtn">Submit All</button>
+                                @else
+                                  <button type="button" class="default-btn next-step mt-0" data-id="{{ $answer->id }}">Next</button>
+                                @endif
+                              </li>
+                            </ul>
                           </form>
-
-                          <ul class="list-inline pull-right">
-                            <li>
-                              @if ($loop->last)
-                                <button type="button" class="default-btn next-step mt-0" data-id="{{ $answer->id }}" id="submitExamBtn">Submit All</button>
-                              @else
-                                <button type="button" class="default-btn next-step mt-0" data-id="{{ $answer->id }}">Next</button>
-                              @endif
-                            </li>
-                          </ul>
                         </div>
                       @endforeach
                     </div>
@@ -284,6 +293,34 @@
         });
       });
 
+      var countDownDate = new Date("{{ $exam->attempt_submit }}").getTime();
+
+      // Update the count down every 1 second
+      var x = setInterval(function() {
+
+        // Get today's date and time
+        var now = new Date().getTime();
+
+        // Find the distance between now and the count down date
+        var distance = countDownDate - now;
+
+        // Time calculations for days, hours, minutes and seconds
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("time_remaining").innerHTML = hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+          clearInterval(x);
+          document.getElementById("time_remaining").innerHTML = "EXPIRED";
+          $('#submitExamBtn').trigger('click');
+        }
+      }, 1000);
+
       // popover
       $(function() {
         $('[data-toggle="popover"]').popover({
@@ -296,48 +333,52 @@
         })
       });
 
+      $('.btn_wrapper').hide();
+      // $('input:radio[name="answer"]').change(function(){
+      //     if ($(this).is(':checked')) {
+      //         $('.btn_wrapper').show();
+      //     }
+      // });
+
+
+      @foreach ($answers as $answer)
+      if ($('#save_answer_form_'+{{ $answer->id }}+' input:radio[name="answer"]').is(':checked')) {
+        $('#save_answer_form_'+{{ $answer->id }}+' .btn_wrapper').show();
+      }
+
+      $('#save_answer_form_'+{{ $answer->id }}+' input:radio[name="answer"]').change(function(){
+        console.log('tes')
+        if ($(this).is(':checked')) {
+          $('#save_answer_form_'+{{ $answer->id }}+' .btn_wrapper').show();
+        }
+      });
+      @endforeach
 
       // ------------step-wizard-------------
       $(document).ready(function() {
+        $('.wizard-inner .nav-tabs li').click(false);
+
         $('.nav-tabs > li a[title]').tooltip();
 
-        //Wizard
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-
-          var target = $(e.target);
-
-          if (target.parent().hasClass('disabled')) {
-            return false;
-          }
-        });
-
         $(".next-step").click(function(e) {
-
           var active = $('.wizard-inner .nav-tabs li.active');
-          active.next().removeClass('disabled');
-          nextTab(active);
+          active.removeClass('active');
+          active.addClass('disabled');
 
+          if($(this).is($(".next-step:last"))){
+            // console.log('last');
+            window.location.href = "{{route('exercise.submit_all', $exam->id)}}";
+          } else {
+            // console.log('not-last');
+            active.next().addClass('active');
+            active_tab_index = active.data('index');
+            next_tab_index = active.next().data('index');
+            $("#step-"+active_tab_index).removeClass("active");
+            $("#step-"+next_tab_index).addClass("active");
+          }
+          // console.log(active.next());
+          // nextTab(active);
         });
-
-        $(".prev-step").click(function(e) {
-
-          var active = $('.wizard-inner .nav-tabs li.active');
-          prevTab(active);
-
-        });
-      });
-
-      function nextTab(elem) {
-        $(elem).next().find('a[data-toggle="tab"]').click();
-      }
-
-      function prevTab(elem) {
-        $(elem).prev().find('a[data-toggle="tab"]').click();
-      }
-
-      $('.nav-tabs').on('click', 'li', function() {
-        $('.nav-tabs li.active').removeClass('active');
-        $(this).addClass('active');
       });
 
       $.ajaxSetup({
@@ -364,10 +405,6 @@
             console.log('something wrong');
           }
         });
-      });
-
-      $('#submitExamBtn').click(function() {
-        window.location.href = "{{route('exercise.submit_all', $exam->id)}}";
       });
     </script>
     @endpush

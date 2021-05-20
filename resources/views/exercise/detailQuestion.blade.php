@@ -42,7 +42,7 @@
                 <ul>{{$choice_itr++}}. {{$dt}}</ul>
                 @endforeach
               </div>
-              <p class="ml-2">Answer : <b>{!!$question->true_answer!!}</b></p>
+              <p class="ml-2">Answer : <b>{!! $ans_array[$question->true_answer - 1]!!}</b></p>
             </div>
           </div>
         </div>
