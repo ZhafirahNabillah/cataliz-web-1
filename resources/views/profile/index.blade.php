@@ -197,14 +197,7 @@
 																	</button>
 																</div>
 															</div>
-															@role('mentor')
-															<div class="col-auto">
-																<div class="card">
-																	<img class="width=" 120px" height="120px"" src=" {{asset('assets\images\icons\profile\cover.png')}}" alt="Card image cap" />
-																	<a href="{{route('profil.detail', Auth::user()->id)}}" class="btn btn-primary" id="btn_edit_background">Full Profile</a>
-																</div>
-															</div>
-															@endrole
+															
 														</div>
 													</div>
 												</div>
