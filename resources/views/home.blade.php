@@ -1,6 +1,20 @@
 @extends('layouts.layoutVerticalMenu')
-
+@push('styles')
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css"  rel="stylesheet">
+<style>
+ .imgDashboardWrapper{
+  height: 30%;
+  width: 30%;
+  float: left;
+ }
+ .textCard{
+   text-align: left !important;
+   padding-top: 4%;
+ }   
+</style>
+@endpush
 @section('title','Home')
+
 
 @section('content')
 
@@ -213,15 +227,21 @@
                   <div class="card-title">
                     <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted mb-1">Total Coaching Hour
-                  </small>
-                  @if ($total_hours == null)
-                  <h2 class="font-weight-bolder text-center">0 Hours</h2>
-                  @else
-                  <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($total_hours, 1))}}
-                    Hours</h2>
-                  @endif
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Coaching Hour
+                    </small>
+                    
+
+                    @if ($total_hours == null)
+                    <h2 class="align-bottom font-weight-bolder ">0 Hours</h2>
+                    @else
+                    <h2 class=" align-middle font-weight-bolder ">{{str_replace(".", ",", number_format($total_hours, 1))}}
+                      Hours</h2>
+                    @endif
+                  </div>
                 </div>
               </div>
             </a>
@@ -233,10 +253,14 @@
                   <div class="card-title">
                     <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted mb-1">Total Coachee
-                  </small>
-                  <h2 class="font-weight-bolder text-center">{{$total_clients}} Clients</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Coachee
+                    </small>
+                    <h2 class="font-weight-bolder">{{$total_clients}} Clients</h2>
+                  </div>
                 </div>
               </div>
             </a>
@@ -247,10 +271,14 @@
                 <div class="card-title">
                   <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah rating yang diberikan oleh client" />
                 </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Rating
-                </small>
-                <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
+                <div class="imgDashboardWrapper">
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}" alt="Card image cap" />
+                </div>
+                <div class="textCard">
+                  <small class=" text-muted mb-1">Total Rating
+                  </small>
+                  <h2 class="font-weight-bolder" style="padding-left: 30%;">{{ $total_ratings }} Rating</h2>
+                </div>
               </div>
             </div>
           </div>
@@ -261,10 +289,14 @@
                   <div class="card-title">
                     <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted mb-1">Total Session
-                  </small>
-                  <h2 class="font-weight-bolder text-center">{{ $total_sessions }} Sessions</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Session
+                    </small>
+                    <h2 class="font-weight-bolder ">{{ $total_sessions }} Sessions</h2>
+                  </div>
                 </div>
               </div>
             </a>
@@ -671,8 +703,20 @@
           </div>
           </a>
         </div> --}}
+        <div class="col-md-4 col-lg-4">
+          <a href="">
+            <div class="card">
+              <div class="card-body">
+                <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
+                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
+                <small class="card text-center text-muted my-1">Total Exam</small>
+                <h2 class="font-weight-bolder text-center">... Exam</h2>
+              </div>
+            </div>
+          </a>
+        </div>
 
-        <div class="col-md-6 col-lg-6">
+        <div class="col-md-4 col-lg-4">
           <a href="{{route('topic.index')}}">
             <div class="card">
               <div class="card-body">
@@ -685,7 +729,7 @@
           </a>
         </div>
 
-        <div class="col-md-6 col-lg-6">
+        <div class="col-md-4 col-lg-4">
           <a href="#">
             <div class="card">
               <div class="card-body">
@@ -699,7 +743,7 @@
         </div>
 
         <!-- list topic -->
-        <div class="col-sm-12">
+        {{-- <div class="col-sm-12">
           <div class="card">
             <div class="card-header">
               <h5 class="card-title">List Topic
@@ -731,9 +775,17 @@
               </section>
             </div>
           </div>
-        </div>
+        </div> --}}
         <!-- /list topic -->
-
+        
+        {{-- calendar --}}
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-body">
+              <div id='calendar'></div>
+            </div>
+          </div>
+        </div>
       </section>
       <!-- /card -->
       @endrole
@@ -746,8 +798,28 @@
 
     @push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
     <script type="text/javascript">
+
+
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth',
+          initialDate: '2021-05-07',
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          },
+        });
+
+        calendar.render();
+      });
+
+
       $(function() {
 
         $.ajaxSetup({
