@@ -149,7 +149,16 @@ class HomeController extends Controller
       $topic = Topic::all()->pluck('id');
       $user = Exam_result::whereIn('topic_id', $topic)->pluck('user_id');
       $total_participant = Client::whereIn('user_id', $user)->count();
-      return view('home', compact('total_topic', 'total_participant'));
+
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+      // $coach = collect($coach);
+      if (is_null($coach->category_id) && is_null($coach->skill_id) && is_null($coach->skills_description_title) && is_null($coach->skills_description_overview) && is_null($coach->education) && is_null($coach->employment) && is_null($coach->language) && is_null($coach->location)) {
+        $empty_profile = true;
+      } else {
+        $empty_profile = false;
+      }
+      // return $empty_profile;
+      return view('home', compact('total_topic', 'total_participant', 'empty_profile'));
     }
   }
 

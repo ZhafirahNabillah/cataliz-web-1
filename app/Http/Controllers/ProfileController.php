@@ -260,7 +260,18 @@ class ProfileController extends Controller
   public function save_educations(Request $request, $id)
   {
     $coach = Coach::where('user_id', $id)->first();
-    $coach->education = $request->education;
+    $final_education = collect([]);
+    foreach ($request->education as $single_education) {
+      if ($single_education['university'] == null && $single_education['degree'] == null && $single_education['field_of_study'] == null) {
+        //do nothing
+      } else {
+        $final_education->push($single_education);
+      }
+    }
+    if ($final_education->isEmpty()) {
+      $final_education = null;
+    }
+    $coach->education = $final_education;
     $coach->save();
 
     return response()->json([
@@ -286,7 +297,18 @@ class ProfileController extends Controller
   public function save_languages(Request $request, $id)
   {
     $coach = Coach::where('user_id', $id)->first();
-    $coach->language = $request->languages;
+    $final_languages = collect([]);
+    foreach ($request->languages as $single_language) {
+      if (($single_language['language'] == 'English' || $single_language['language'] == null) && array_key_exists('proficiency', $single_language) == false) {
+        //do nothing
+      } else {
+        $final_languages->push($single_language);
+      }
+    }
+    if ($final_languages->isEmpty()) {
+      $final_languages = null;
+    }
+    $coach->language = $final_languages;
     $coach->save();
 
     return response()->json([
@@ -312,7 +334,13 @@ class ProfileController extends Controller
   public function save_address(Request $request, $id)
   {
     $coach = Coach::where('user_id', $id)->first();
-    $coach->location = $request->location;
+    $final_location = null;
+    if ($request->location['street'] == null && $request->location['city'] == null && $request->location['country'] == null && $request->location['postal_code'] == null) {
+      // code...
+    } else {
+      $final_location = $request->location;
+    }
+    $coach->location = $final_location;
     $coach->save();
 
     return response()->json([

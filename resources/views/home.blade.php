@@ -681,14 +681,16 @@
                   </div>
                 </div>
               </div>
-              <div class="col-md-12">
-                <div class="card text-white bg-warning mb-3">
-                  <div class="card-body">
-                    <a class="text-white" href="{{route('profil.detail', Auth::user()->id)}}" > Yuk, segera lengkapi data diri kamu!
-                      <b> Klik Disini</b> </a>
+              @if ($empty_profile == true)
+                <div class="col-md-12">
+                  <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                      <a class="text-white" href="{{route('profil.detail', Auth::user()->id)}}" > Yuk, segera lengkapi data diri kamu!
+                        <b> Klik Disini</b> </a>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+              @endif
             </div>
           </div>
           {{-- <div class="col-md-4 col-lg-4">
