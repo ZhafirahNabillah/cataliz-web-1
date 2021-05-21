@@ -208,11 +208,11 @@
             <div class="wizard-inner">
               <div class="connecting-line"></div>
               <ul class="nav nav-tabs" role="tablist">
-                @for ($i=0; $i < $answers->count(); $i++)
-                  <li role="presentation" class="col-md-2 @if ($i == 0) active @endif">
-                    <a href="#step-{{ $i }}" role="tab" data-toggle="tab" disabled><span class="round-tab">{{ $i+1 }}</span></a>
+                @foreach ($answers as $answer)
+                  <li role="presentation" data-index={{ $loop->index }} class="col-md-2 @if ($answer->answer != null) disabled @elseif ($answer->answer == null && $answer->id == $active_question->id) active @endif">
+                    <a href="#step-{{ $loop->index }}" role="tab" data-toggle="tab"><span class="round-tab">{{ $loop->iteration }}</span></a>
                   </li>
-                @endfor
+                @endforeach
             </div>
             <br>
             <div class="card-footer" style="color: #F1AF33;">Time remaining <span id="time_remaining"></span></div>
@@ -231,7 +231,7 @@
 
                       @foreach ($answers as $answer)
                         <!-- tab -->
-                        <div class="tab-pane @if ($loop->first) active @endif" role="tabpanel" id="step-{{$loop->index}}">
+                        <div class="tab-pane @if ($answer->answer == null && $answer->id == $active_question->id) active @endif" role="tabpanel" id="step-{{$loop->index}}">
 
                           <div class="question-wrapper mb-1">
                             <span class="round-tab bg-primary text-white">{{ $loop->iteration }}</span>
@@ -356,45 +356,29 @@
 
       // ------------step-wizard-------------
       $(document).ready(function() {
+        $('.wizard-inner .nav-tabs li').click(false);
+
         $('.nav-tabs > li a[title]').tooltip();
-
-        //Wizard
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
-
-          var target = $(e.target);
-
-          if (target.parent().hasClass('disabled')) {
-            return false;
-          }
-        });
 
         $(".next-step").click(function(e) {
           var active = $('.wizard-inner .nav-tabs li.active');
-          active.next().removeClass('disabled');
+          active.removeClass('active');
           active.addClass('disabled');
-          active.click(false);
-          nextTab(active);
+
+          if($(this).is($(".next-step:last"))){
+            // console.log('last');
+            window.location.href = "{{route('exercise.submit_all', $exam->id)}}";
+          } else {
+            // console.log('not-last');
+            active.next().addClass('active');
+            active_tab_index = active.data('index');
+            next_tab_index = active.next().data('index');
+            $("#step-"+active_tab_index).removeClass("active");
+            $("#step-"+next_tab_index).addClass("active");
+          }
+          // console.log(active.next());
+          // nextTab(active);
         });
-
-        $(".prev-step").click(function(e) {
-
-          var active = $('.wizard-inner .nav-tabs li.active');
-          prevTab(active);
-
-        });
-      });
-
-      function nextTab(elem) {
-        $(elem).next().find('a[data-toggle="tab"]').click();
-      }
-
-      function prevTab(elem) {
-        $(elem).prev().find('a[data-toggle="tab"]').click();
-      }
-
-      $('.nav-tabs').on('click', 'li', function() {
-        $('.nav-tabs li.active').removeClass('active');
-        $(this).addClass('active');
       });
 
       $.ajaxSetup({
@@ -422,11 +406,5 @@
           }
         });
       });
-
-      $('#submitExamBtn').click(function() {
-        window.location.href = "{{route('exercise.submit_all', $exam->id)}}";
-      });
-
-
     </script>
     @endpush
