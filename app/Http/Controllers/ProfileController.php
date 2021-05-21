@@ -170,22 +170,23 @@ class ProfileController extends Controller
         $file = $request->file('profil_picture');
         $filenameSave = 'UIMG' . date('YmdHis') . uniqid() . '.jpg';
 
-        $move = $file->move(public_path('storage/profil/crop'), $filenameSave);
+        // $move = $file->move(public_path('storage/profil/crop'), $filenameSave);
+        // $move = Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents(public_path('storage/profil/crop/' . $filenameSave)));
 
-        if ($move) {
-          $user->profil_picture = $filenameSave;
-          $user->update();
+        // if ($move) {
+        $user->profil_picture = $filenameSave;
+        $user->update();
 
-          if (Storage::disk('s3')->exists('images/profil_picture/' . $user->profil_picture)) {
-            Storage::disk('s3')->delete('images/profil_picture/' . $user->profil_picture);
-          }
-          Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents(public_path('storage/profil/crop/' . $filenameSave)));
-
-          unlink(public_path('storage/profil/crop/' . $filenameSave));
-          return response()->json(['status' => 1, 'msg' => 'Image has been cropped successfully.']);
-        } else {
-          return response()->json(['status' => 0, 'msg' => 'Something went wrong, try again later']);
+        if (Storage::disk('s3')->exists('images/profil_picture/' . $user->profil_picture)) {
+          Storage::disk('s3')->delete('images/profil_picture/' . $user->profil_picture);
         }
+        Storage::disk('s3')->put('images/profil_picture/' . $filenameSave, file_get_contents($file));
+
+        // unlink(public_path('storage/profil/crop/' . $filenameSave));
+        return response()->json(['status' => 1, 'msg' => 'Image has been cropped successfully.']);
+        // } else {
+        //   return response()->json(['status' => 0, 'msg' => 'Something went wrong, try again later']);
+        // }
 
         // $request->file('profil_picture')->storeAs('public/profil', $filenameSave);
 
