@@ -881,35 +881,82 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
     <script type="text/javascript">
-
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           initialDate: '2021-05-07',
-          eventClick: function(info) {
-            console.log(info.event.id);
-            // alert('Event: '+ info.event.title);
-            var type = info.event.extendedProps.type;
-            if (type == "coaching") {
-              $('#coaching-type').text('Coaching');
-              $('#coaching-topic').text(info.event.extendedProps.topic);
-              $('#coaching-session').text(info.event.extendedProps.session);
-              $('#coaching-coachee').text(info.event.extendedProps.coachee);
-              $('#coaching-start-time').text(info.event.start);
-              $('#coaching-end-time').text(info.event.end);
-              $('#go-to-event-btn').attr("href", "/agendas/"+info.event.id);
-              $('#event_coaching_modal').modal('show');
-            }
+          eventDidMount: function(info) {
+            console.log(info.el);
+            $(info.el).attr('title', "Event Detail");
+            $(info.el).attr('data-toggle', "popover");
+            $(info.el).attr('data-placement', "top");
+            $(info.el).attr(
+              'data-content',
+              `<div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <b>Event Type</b>
+                  </div>
+                  <div class="col-sm-12" id="coaching-type">
+                    Coaching
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <b>Session name</b>
+                  </div>
+                  <div class="col-sm-12" id="coaching-session">
+                    `+info.event.title+`
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <b>Title</b>
+                  </div>
+                  <div class="col-sm-12" id="coaching-topic">
+                    `+info.event.extendedProps.topic+`
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <b>Coachee</b>
+                  </div>
+                  <div class="col-sm-12" id="coaching-coachee">
+                    `+info.event.extendedProps.coachee+`
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <b>Start Time</b>
+                  </div>
+                  <div class="col-sm-12" id="coaching-start-time">
+                    `+info.event.start+`
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <b>End Time</b>
+                  </div>
+                  <div class="col-sm-12" id="coaching-end-time">
+                    `+info.event.end+`
+                  </div>
+                </div>
+              </div>`
+            );
+            $(info.el).attr('data-html', "true");
+
+            $('[data-toggle="popover"]').popover({
+              trigger: 'hover'
+            });
           },
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
           },
-          events: '{{ route('home.get_calendar_data') }}',
-          selectable: true
+          events: '{{ route('home.get_calendar_data') }}'
         });
 
         calendar.render();

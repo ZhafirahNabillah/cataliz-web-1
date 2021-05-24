@@ -429,14 +429,14 @@ class HomeController extends Controller
         $client = $plan->client->name;
       }
       $data->push([
-        'title'       => $session->session_name.' - '.$client,
+        'title'       => $session->session_name,
         'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
         'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
-        'session'     => $session->session_name,
         'topic'       => $session->topic,
         'type'        => 'coaching',
         'coachee'     => $client,
-        'id'          => $session->id
+        'id'          => $session->id,
+        'url'         => route('agendas.show', $session->id)
       ]);
     }
 
