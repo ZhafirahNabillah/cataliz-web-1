@@ -410,4 +410,36 @@ class HomeController extends Controller
 
     return redirect('/dashboard');
   }
+
+  public function load_calendar_data(Request $request){
+    $coach = Coach::where('user_id', auth()->user()->id)->first();
+    $plans = $coach->plan;
+    $agenda = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+
+    $data = collect([]);
+
+    foreach ($agenda_detail as $session) {
+      $client = null;
+      $agenda = $session->agenda;
+      $plan = $agenda->plan;
+      if ($plan->client_id == null) {
+        $client = $plan->group_id;
+      } else {
+        $client = $plan->client->name;
+      }
+      $data->push([
+        'title'       => $session->session_name.' - '.$client,
+        'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
+        'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
+        'session'     => $session->session_name,
+        'topic'       => $session->topic,
+        'type'        => 'coaching',
+        'coachee'     => $client,
+        'id'          => $session->id
+      ]);
+    }
+
+    return response()->json($data);
+  }
 }

@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 @push('styles')
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css"  rel="stylesheet">
+<link href="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css" rel="stylesheet">
 <style>
  .imgDashboardWrapper{
   height: 30%;
@@ -10,7 +10,7 @@
  .textCard{
    text-align: left !important;
    padding-top: 4%;
- }   
+ }
 </style>
 @endpush
 @section('title','Home')
@@ -256,7 +256,7 @@
                   <div class="textCard">
                     <small class=" text-muted mb-1">Total Coaching Hour
                     </small>
-                    
+
 
                     @if ($total_hours == null)
                     <h2 class="align-bottom font-weight-bolder ">0 Hours</h2>
@@ -566,6 +566,85 @@
               </div>
             </div>
           </div>
+
+          @role('coach')
+            {{-- calendar --}}
+            <div class="col-sm-12">
+              <div class="card">
+                <div class="card-body">
+                  <div id='calendar'></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal fade" id="event_coaching_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Event Detail</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <b>Event Type</b>
+                      </div>
+                      <div class="col-sm-6" id="coaching-type">
+                        Coaching Session
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <b>Session name</b>
+                      </div>
+                      <div class="col-sm-6" id="coaching-session">
+                        Session 1
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <b>Title</b>
+                      </div>
+                      <div class="col-sm-6" id="coaching-topic">
+                        Making front end website with HTML5
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <b>Coachee</b>
+                      </div>
+                      <div class="col-sm-6" id="coaching-coachee">
+                        User Coachee
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <b>Start Time</b>
+                      </div>
+                      <div class="col-sm-6" id="coaching-start-time">
+                        21-02-2021 10:00:00
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <b>End Time</b>
+                      </div>
+                      <div class="col-sm-6" id="coaching-end-time">
+                        21-02-2021 11:00:00
+                      </div>
+                    </div>
+                    <div class="row justify-content-center mt-1">
+                      <div class="col-auto">
+                        <a href="#" class="btn btn-primary" id="go-to-event-btn">Go to event</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          @endrole
         </div>
       </section>
       <!-- /card -->
@@ -825,7 +904,7 @@
           </div>
         </div> --}}
         <!-- /list topic -->
-        
+
         {{-- calendar --}}
         <div class="col-sm-12">
           <div class="card">
@@ -846,10 +925,8 @@
 
     @push('scripts')
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
     <script type="text/javascript">
-
-
 
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
@@ -857,18 +934,45 @@
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
           initialDate: '2021-05-07',
+          eventClick: function(info) {
+            console.log(info.event.id);
+            // alert('Event: '+ info.event.title);
+            var type = info.event.extendedProps.type;
+            if (type == "coaching") {
+              $('#coaching-type').text('Coaching');
+              $('#coaching-topic').text(info.event.extendedProps.topic);
+              $('#coaching-session').text(info.event.extendedProps.session);
+              $('#coaching-coachee').text(info.event.extendedProps.coachee);
+              $('#coaching-start-time').text(info.event.start);
+              $('#coaching-end-time').text(info.event.end);
+              $('#go-to-event-btn').attr("href", "/agendas/"+info.event.id);
+              $('#event_coaching_modal').modal('show');
+            }
+          },
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay'
           },
+          events: '{{ route('home.get_calendar_data') }}',
+          selectable: true
         });
 
         calendar.render();
       });
 
-
       $(function() {
+        // var calendar = $('#calendar').fullCalendar({
+        //   initialView: 'dayGridMonth',
+        //   initialDate: '2021-05-07',
+        //   headerToolbar: {
+        //     left: 'prev,next today',
+        //     center: 'title',
+        //     right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        //   },
+        // });
+        //
+        // calendar.render();
 
         $.ajaxSetup({
           headers: {
