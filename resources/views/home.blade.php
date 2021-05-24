@@ -55,9 +55,15 @@
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoach.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Coach</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_coach}} Coach</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\user-check.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Coach
+                    </small>
+                    <h2 class="font-weight-bolder">{{$total_coach}} Coaches</h2>
+                  </div>
+                  
                 </div>
               </div>
             </a>
@@ -67,9 +73,15 @@
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah client coachee yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Coachee</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Coachee
+                    </small>
+                    <h2 class="font-weight-bolder">{{$total_coachee}} Coachee</h2>
+                  </div>
+                 
                 </div>
               </div>
             </a>
@@ -80,9 +92,14 @@
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah plan yang terdaftar" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Plan</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\check-square.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Plan
+                    </small>
+                    <h2 class="font-weight-bolder">{{$total_plans}} Plan</h2>
+                  </div>
                 </div>
               </div>
             </a>
@@ -93,9 +110,15 @@
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang terdaftar" />
-                  <img class="rounded text-center mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardSessions.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Session</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_sessions}} Sessions</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Session
+                    </small>
+                    <h2 class="font-weight-bolder ">{{ $total_sessions }} Sessions</h2>
+                  </div>
+                  
                 </div>
               </div>
             </a>
@@ -311,15 +334,22 @@
                   <div class="card-title">
                     <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\Group 88.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted mb-1">Total Coaching Hour
-                  </small>
-                  @if ($total_hours == null)
-                  <h2 class="font-weight-bolder text-center">0 Hours</h2>
-                  @else
-                  <h2 class="font-weight-bolder text-center">{{str_replace(".", ",", number_format($total_hours, 1))}}
-                    Hours</h2>
-                  @endif
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Coaching Hour
+                    </small>
+                    
+
+                    @if ($total_hours == null)
+                    <h2 class="align-bottom font-weight-bolder ">0 Hours</h2>
+                    @else
+                    <h2 class=" align-middle font-weight-bolder ">{{str_replace(".", ",", number_format($total_hours, 1))}}
+                      Hours</h2>
+                    @endif
+                  </div>
+                  
                 </div>
               </div>
             </a>
@@ -331,10 +361,15 @@
                   <div class="card-title">
                     <img class="rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah coachee" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\client.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted mb-1">Total Coach
-                  </small>
-                  <h2 class="font-weight-bolder text-center">{{$total_coach}} Coaches</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\user-check.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Coach
+                    </small>
+                    <h2 class="font-weight-bolder">{{$total_coach}} Coaches</h2>
+                  </div>
+ 
                 </div>
               </div>
             </a>
@@ -345,10 +380,15 @@
                 <div class="card-title">
                   <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="" />
                 </div>
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\rating.svg') }}" alt="Card image cap" />
-                <small class="card text-center text-muted mb-1">Total Rating
-                </small>
-                <h2 class="font-weight-bolder text-center">{{ $total_ratings }} Rating</h2>
+                <div class="imgDashboardWrapper">
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}" alt="Card image cap" />
+                </div>
+                <div class="textCard">
+                  <small class=" text-muted mb-1">Total Rating
+                  </small>
+                  <h2 class="font-weight-bolder" style="padding-left: 30%;">{{ $total_ratings }} Rating</h2>
+                </div>
+
               </div>
             </div>
           </div>
@@ -359,14 +399,20 @@
                   <div class="card-title">
                     <img class="rounded float-right width=" 18px" height="18px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
                   </div>
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\session.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted mb-1">Total Session
-                  </small>
-                  @if ($total_sessions == null)
-                  <h2 class="font-weight-bolder text-center">0 Sessions</h2>
-                  @else
-                  <h2 class="font-weight-bolder text-center">{{$total_sessions}} Sessions</h2>
-                  @endif
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Session
+                    </small>
+                    @if ($total_sessions == null)
+                    <h2 class="font-weight-bolder ">0 Sessions</h2>
+                    @else
+                    <h2 class="font-weight-bolder ">{{$total_sessions}} Sessions</h2>
+                    @endif
+                  </div>
+                  
+                 
                 </div>
               </div>
             </a>
