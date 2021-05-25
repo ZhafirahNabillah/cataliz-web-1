@@ -2,6 +2,14 @@
 @push('styles')
 <link href="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css" rel="stylesheet">
 <style>
+@media only screen and (min-width: 768px){
+  .imgDashboardWrapper{
+  height: 15%;
+  width: 15%;
+  float: left;
+ }
+}
+  
  .imgDashboardWrapper{
   height: 30%;
   width: 30%;
@@ -728,9 +736,14 @@
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Topic</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_topic}} Topic</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\file-text.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Topic
+                    </small>
+                    <h2 class="font-weight-bolder ">{{$total_topic}} Topic</h2>
+                  </div>
                 </div>
               </div>
             </a>
@@ -741,9 +754,15 @@
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah mentee yang dipasangkan dengan Anda" />
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Trainee</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_participant}} Trainee</h2>
+                  <div class="imgDashboardWrapper">
+                    <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}" alt="Card image cap" />
+                  </div>
+                  <div class="textCard">
+                    <small class=" text-muted mb-1">Total Trainee
+                    </small>
+                    <h2 class="font-weight-bolder ">{{$total_participant}} Trainee</h2>
+                  </div>
+                  
                 </div>
               </div>
             </a>
@@ -830,40 +849,58 @@
           </div>
           </a>
         </div> --}}
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-3 col-lg-3">
           <a href="">
             <div class="card">
               <div class="card-body">
                 <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Exam</small>
-                <h2 class="font-weight-bolder text-center">... Exam</h2>
+                <div class="imgDashboardWrapper">
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\edit.svg') }}" alt="Card image cap" />
+                </div>
+                <div class="textCard">
+                  <small class=" text-muted mb-1">Total Exam
+                  </small>
+                  <h2 class="font-weight-bolder ">... Exam</h2>
+                </div>
+                
               </div>
             </div>
           </a>
         </div>
 
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-3 col-lg-3">
           <a href="{{route('topic.index')}}">
             <div class="card">
               <div class="card-body">
                 <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardCoachee.svg') }}" alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Topic</small>
-                <h2 class="font-weight-bolder text-center">{{$total_topic}} Topic</h2>
+                <div class="imgDashboardWrapper">
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\file-text.svg') }}" alt="Card image cap" />
+                </div>
+                <div class="textCard">
+                  <small class=" text-muted mb-1">Total Topic
+                  </small>
+                  <h2 class="font-weight-bolder ">{{$total_topic}} Topic</h2>
+                </div>
+                
               </div>
             </div>
           </a>
         </div>
 
-        <div class="col-md-4 col-lg-4">
+        <div class="col-md-3 col-lg-3">
           <a href="#">
             <div class="card">
               <div class="card-body">
                 <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah mentee yang dipasangkan dengan Anda" />
-                <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\admin\adminDashboardPlan.svg') }}" alt="Card image cap" />
-                <small class="card text-center text-muted my-1">Total Mentee</small>
-                <h2 class="font-weight-bolder text-center">{{$total_participant}} Mentee</h2>
+                <div class="imgDashboardWrapper">
+                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\user-check.svg') }}" alt="Card image cap" />
+                </div>
+                <div class="textCard">
+                  <small class=" text-muted mb-1">Total Mentee
+                  </small>
+                  <h2 class="font-weight-bolder">{{$total_participant}} Mentee</h2>
+                </div>
+                
               </div>
             </div>
           </a>
