@@ -23,7 +23,6 @@ use App\Http\Controllers\ExerciseController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Controllers\TrainingMeetingController;
@@ -228,10 +227,10 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/chunk_upload', [LessonController::class, 'lesson_chunk_upload'])->name('lesson.chunk_upload');
 });
 
-//Participant Controller
-Route::middleware(['auth'])->group(function () {
-	Route::resource('participant', ParticipantController::class);
-});
+// //Participant Controller
+// Route::middleware(['auth'])->group(function () {
+// 	Route::resource('participant', ParticipantController::class);
+// });
 
 // Result Controller
 Route::middleware(['auth'])->group(function () {
