@@ -148,13 +148,13 @@ class ExerciseController extends Controller
           ->addColumn('action', function ($row) {
 
             //add detail and whatsapp button if user have permission
-            $exam_result = Exam_result::where('topic_id', $row->id)->where('user_id', auth()->user()->id)->get();
+            $exam_result = Exam_result::where('topic_id', $row->id)->where('user_id', auth()->user()->id)->first();
 
-            if ($exam_result->count() == 0) {
+            if (is_null($exam_result)) {
               $action_btn = '<a href="' . route('exercise.start', $row->id) . '" class="btn-sm btn-primary">Start</a>';
             } else {
-              if ($exam_result->where('grade', null)->count() > 0) {
-                $action_btn = '<a href="' . route('exercise.continue', $exam_result->first()) . '" class="btn-sm btn-primary">Continue</a>';
+              if ($exam_result->grade == '') {
+                $action_btn = '<a href="' . route('exercise.continue', $exam_result->id) . '" class="btn-sm btn-primary">Continue</a>';
               } else {
                 $action_btn = '<span>Already Taken</a>';
               }
