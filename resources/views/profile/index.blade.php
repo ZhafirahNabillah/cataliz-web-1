@@ -895,7 +895,7 @@
 																				<div class="col-3">
 																					<h5>Out</h5>
 																					<div class="form-group">
-																						<select class="form-control" name="work_experiences[{{ $loop->index }}][out_month]">
+																						<select class="form-control work_experience_out_{{ $loop->index }}" name="work_experiences[{{ $loop->index }}][out_month]" @if (isset($work_experience->is_currently_work)) disabled @endif>
 																							<option disabled selected> Select month </option>
 																							<option value='January' @if (isset($work_experience->out_month) && $work_experience->out_month == 'January') selected @endif>January</option>
 																							<option value='February' @if (isset($work_experience->out_month) && $work_experience->out_month == 'February') selected @endif>February</option>
@@ -912,8 +912,8 @@
 																						</select>
 																					</div>
 																					<div class="form-group">
-																						<input class="form-check-input" type="checkbox" name="work_experiences[{{ $loop->index }}][is_currently_work]" value="1" @isset ($work_experience->is_currently_work) checked @endif>
-																						<label class="form-check-label" for="is_currently_work">
+																						<input class="form-check-input" id="is_currently_work_{{ $loop->index }}" data-id={{ $loop->index }} type="checkbox" name="work_experiences[{{ $loop->index }}][is_currently_work]" value="1" @isset ($work_experience->is_currently_work) checked @endif>
+																						<label class="form-check-label" for="is_currently_work_{{ $loop->index }}">
 																							No, I currently work here
 																						</label>
 																					</div>
@@ -921,7 +921,7 @@
 																				<div class="col-3">
 																					<h5>&nbsp;</h5>
 																					<div class="form-group">
-																						<select class="form-control" name="work_experiences[{{ $loop->index }}][out_year]">
+																						<select class="form-control work_experience_out_{{ $loop->index }}" name="work_experiences[{{ $loop->index }}][out_year]" @if (isset($work_experience->is_currently_work)) disabled @endif>
 																							<option disabled selected> Select year </option>
 																							@for ($i=1950; $i < date('Y'); $i++)
 																								@if (isset($work_experience->out_year))
@@ -1228,6 +1228,21 @@
         placeholder: 'Type skill that match on you ...',
         tags: true
     });
+
+		for (var i = 0; i < $('.single_work_experiences_wrapper').length; i++) {
+			$('#is_currently_work_'+i).click(function() {
+				// console.log($(this).data('id'));
+				var id = $(this).data('id');
+				if ($(this).is(":checked")) {
+        	// $('#pizza_kind').prop('disabled', false);
+					$('.work_experience_out_'+id).prop('disabled', 'disabled');
+		    }
+		    else {
+					$('.work_experience_out_'+id).prop('disabled', false);
+		    	// $('#pizza_kind').prop('disabled', 'disabled');
+		    }
+			})
+		};
 
 		// Modal for edit profile detail
 		// Category
