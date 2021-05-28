@@ -151,9 +151,11 @@
                                   <div class="lesson-wrapper-{{ $sub_topic->id }}">
                                     @forelse ($sub_topic->lessons as $lesson)
                                     <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">
-                                      <div class="col-sm-4 lesson_name"><b>{{ $lesson->lesson_name }}</b> <span id="lesson_check_{{ $lesson->id }}">@if ($lesson_histories->contains('lesson_id', $lesson->id)) <i data-feather="check"></i>
-
-                                      @endif</span></div>
+                                      @role('coachee')
+                                      <div class="col-sm-4 lesson_name"><b>{{ $lesson->lesson_name }}</b> <span id="lesson_check_{{ $lesson->id }}">@if ($lesson_histories->contains('lesson_id', $lesson->id)) <i data-feather="check"></i> @endif</span></div>
+                                      @else
+                                      <div class="col-sm-4 lesson_name"><b>{{ $lesson->lesson_name }}</b></div>
+                                      @endrole
                                       <div class="col-sm-4">
                                         <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
                                         <a href="{{ $lesson->meeting->meeting_url }}" class="btn btn-sm btn-primary">URL</a>
