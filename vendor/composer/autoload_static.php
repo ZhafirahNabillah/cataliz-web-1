@@ -721,6 +721,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Feedback' => __DIR__ . '/../..' . '/app/Models/Feedback.php',
         'App\\Models\\Language' => __DIR__ . '/../..' . '/app/Models/Language.php',
         'App\\Models\\Lesson' => __DIR__ . '/../..' . '/app/Models/Lesson.php',
+        'App\\Models\\Lesson_history' => __DIR__ . '/../..' . '/app/Models/Lesson_history.php',
         'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
         'App\\Models\\Question' => __DIR__ . '/../..' . '/app/Models/Question.php',
         'App\\Models\\Skill' => __DIR__ . '/../..' . '/app/Models/Skill.php',

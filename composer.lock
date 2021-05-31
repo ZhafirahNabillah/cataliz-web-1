@@ -8971,6 +8971,5 @@
         "ext-gd": "*"
     },
     "platform-dev": [],
-    "platform-overrides": [],
     "plugin-api-version": "2.0.0"
 }
