@@ -442,6 +442,20 @@
 					</div>
 				</div>
 				@endif
+				<div class="card">
+					<div class="card-body">
+						<h4> <strong>Rating from coachee</strong> </h4>
+						@foreach ($feedback_from_coachee as $feedback)
+							<h5>{{ $feedback->user->name }}</h5>
+							@if ($feedback->rating == null)
+								<div>Coach rating not available</div>
+							@else
+								<div id="rateYo-{{ $feedback->id }}" data-rating="{{ $feedback->rating }}"></div>
+							@endif
+							<hr>
+						@endforeach
+					</div>
+				</div>
 				@if((($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
 				$agenda_detail->status
 				== 'finished') && ($agenda_detail->date.' '.$agenda_detail->time) < (\Carbon\Carbon::now()->
@@ -465,12 +479,13 @@
 @push('scripts')
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script type="text/javascript">
 	/* Javascript */
 
 	$(function() {
 
-		@role('coach|coachee')
+		@role('coachee')
 			@if($feedback->rating != null)
 			var rating = $('#rateYo').data("rating");
 			$('#rateYo').rateYo({
@@ -493,7 +508,7 @@
 			@endif
 		@endrole
 
-		@role('admin')
+		@role('admin|coach')
 			@foreach ($feedback_from_coachee as $feedback)
 				var rating = $('#rateYo-'+{{ $feedback->id }}).data("rating");
 				$('#rateYo-'+{{ $feedback->id }}).rateYo({
@@ -506,6 +521,9 @@
 			@endforeach
 		@endrole
 
+		tinymce.init({
+      selector: 'textarea',
+    });
 	});
 </script>
 @endpush
