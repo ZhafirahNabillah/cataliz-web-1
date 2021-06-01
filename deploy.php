@@ -64,12 +64,12 @@ task('deploy', [
     'deploy:symlink',
     'deploy:unlock',
     'cleanup',
-    'phpmyadmin',
+    'phpmyadmin:symlink',
     'reload-nginx',
     'scheduler'
 ]);
 
-task ('phpmyadmin', function(){
+task ('phpmyadmin:symlink', function(){
     run('sudo ln -s /var/www/html/db-cataliz /var/www/html/current/public');
 });
 
