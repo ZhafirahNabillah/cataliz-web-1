@@ -2,11 +2,16 @@
 @push('styles')
 <link href="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.css" rel="stylesheet">
 <style>
-@media only screen and (min-width: 768px){
+@media only screen and (min-device-width : 769px) and (max-device-width : 1639px){
   .imgDashboardWrapper{
-  height: 15%;
-  width: 15%;
+  height: 5% !;
+  width: 5%;
   float: left;
+ }
+ .textCard{
+   text-align: left !important;
+   padding-top: 4%;
+   font-size: 3%;
  }
 }
   
@@ -18,6 +23,7 @@
  .textCard{
    text-align: left !important;
    padding-top: 4%;
+   padding-left: 5%;
  }
 </style>
 @endpush
@@ -854,15 +860,16 @@
             <div class="card">
               <div class="card-body">
                 <img class="rounded float-right" width="15px" height="15px" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="jumlah topik yang tersedia untuk Anda" />
-                <div class="imgDashboardWrapper">
-                  <img class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\edit.svg') }}" alt="Card image cap" />
-                </div>
-                <div class="textCard">
-                  <small class=" text-muted mb-1">Total Exam
-                  </small>
-                  <h2 class="font-weight-bolder ">... Exam</h2>
-                </div>
-                
+                  <div class="row">
+                    <div class="float-md-start">
+                      <img class="rounded mx-auto " src="{{ url('assets\images\icons\edit.svg') }}" alt="Card image cap" />
+                    </div>
+                    <div class="textCard">
+                      <small class=" text-muted mb-1">Total Exam
+                      </small>
+                      <h2 class="font-weight-bolder ">... Exam</h2>
+                    </div>
+                  </div>
               </div>
             </div>
           </a>
