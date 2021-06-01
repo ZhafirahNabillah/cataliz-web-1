@@ -23,4 +23,9 @@ class Lesson extends Model
     {
       return $this->hasOne('App\Models\Training_meeting', 'lesson_id');
     }
+
+    public function lesson_histories()
+    {
+      return $this->hasMany('App\Models\Lesson_history', 'lesson_id');
+    }
 }

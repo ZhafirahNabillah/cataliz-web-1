@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Topic;
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Lesson_history;
 use Illuminate\Support\Facades\Validator;
 use DataTables;
 use PDF;
@@ -170,9 +171,11 @@ class TopicController extends Controller
 
     $sub_topics = $topic->sub_topics;
 
+    $lesson_histories = Lesson_history::where('topic_id', $topic->id)->where('user_id', auth()->user()->id)->get();
+
     // return $sub_topics;
 
-    return view('topic.detailTopic', compact('topic', 'category', 'sub_topics'));
+    return view('topic.detailTopic', compact('topic', 'category', 'sub_topics', 'lesson_histories'));
   }
 
   public function show_detail_participant($id)

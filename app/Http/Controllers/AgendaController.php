@@ -353,7 +353,9 @@ class AgendaController extends Controller
       // return $feedback;
     } elseif (auth()->user()->hasRole('coach')) {
       $feedback = $feedbacks->where('from', 'coach')->where('user_id', auth()->user()->id)->first();
-      // return $feedback;
+      $feedback_from_coachee = $feedbacks->where('from', 'coachee');
+
+      // return $feedback_from_coachee;
     } else {
       $feedbacks = Feedback::where('agenda_detail_id', $id)->get();
       $feedback_from_coach = $feedbacks->where('from', 'coach')->first();
@@ -364,6 +366,8 @@ class AgendaController extends Controller
 
     if (auth()->user()->hasRole('admin')) {
       return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback_from_coach', 'feedback_from_coachee'));
+    } elseif (auth()->user()->hasRole('coach')) {
+      return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback', 'feedback_from_coachee'));
     } else {
       return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback'));
     }

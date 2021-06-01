@@ -143,7 +143,7 @@
         <tr class="text-center">
           <th scope="col">
             <h5 class="mb-0 p-1">{{ $topic->topic }}</h5>
-            <h3>Created by: #Nama Trainer</h3>
+            <h3>Created by: {{ $topic->trainer->name }}</h3>
           </th>
         </tr>
       </thead>

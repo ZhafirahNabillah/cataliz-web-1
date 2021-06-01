@@ -151,7 +151,11 @@
                                   <div class="lesson-wrapper-{{ $sub_topic->id }}">
                                     @forelse ($sub_topic->lessons as $lesson)
                                     <div class="row mb-1 align-items-center lesson-{{ $lesson->id }}">
-                                      <div class="col-sm-4"><b>{{ $lesson->lesson_name }}</b></div>
+                                      @role('coachee')
+                                      <div class="col-sm-4 lesson_name"><b>{{ $lesson->lesson_name }}</b> <span id="lesson_check_{{ $lesson->id }}">@if ($lesson_histories->contains('lesson_id', $lesson->id)) <i data-feather="check"></i> @endif</span></div>
+                                      @else
+                                      <div class="col-sm-4 lesson_name"><b>{{ $lesson->lesson_name }}</b></div>
+                                      @endrole
                                       <div class="col-sm-4">
                                         <button type="button" class="btn btn-sm btn-primary playLessonBtn" data-id="{{ $lesson->id }}" data-toggle="modal">Play</button>
                                         <a href="{{ $lesson->meeting->meeting_url }}" class="btn btn-sm btn-primary">URL</a>
@@ -362,7 +366,7 @@
     });
 
     $('body').on('click', '.playLessonBtn', function() {
-      console.log('tes');
+      // console.log('tes');
       var lesson_id = $(this).data('id');
       $.get("" + '/lesson/' + lesson_id, function(data) {
         $('#lesson-title').html(data.lesson_name);
@@ -370,7 +374,32 @@
         $('#video_source').attr('src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/lessons/' + data.video);
         $('.video_wrapper video')[0].load();
         $('#play-lesson-modal').modal('show');
-      })
+      });
+
+      @role('coachee')
+      $('.video_wrapper video').on('ended', function() {
+        var data = {
+          lesson_id: lesson_id,
+          topic_id: {{ $topic->id }}
+        };
+        // console.log(data);
+
+        $.ajax({
+          data: data,
+          url: "{{ route('lesson.add_to_lesson_history') }}",
+          type: "POST",
+          dataType: 'json',
+          success: function(data) {
+            // console.log(data);
+            $('#lesson_check_'+lesson_id).html(`<i data-feather="check"></i>`);
+            feather.replace();
+          },
+          error: function(reject) {
+            console.log('something wrong');
+          }
+        });
+      });
+      @endrole
     });
 
     $.ajaxSetup({

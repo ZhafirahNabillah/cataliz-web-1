@@ -197,7 +197,7 @@
 																	</button>
 																</div>
 															</div>
-															
+
 														</div>
 													</div>
 												</div>
@@ -803,7 +803,11 @@
 													<span>{{ $work_experience->position }}</span>
 													<br><br>
 													<h5>Work Period</h5>
-													<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
+													@if (isset($work_experience->is_currently_work))
+														<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - Now</span>
+													@else
+														<span>{{ $work_experience->entry_month.', '.$work_experience->entry_year }} - {{ $work_experience->out_month.', '.$work_experience->out_year }}</span>
+													@endif
 													<br><br>
 													<h5>Description</h5>
 													<div class="text-justify">
@@ -891,25 +895,25 @@
 																				<div class="col-3">
 																					<h5>Out</h5>
 																					<div class="form-group">
-																						<select class="form-control" name="work_experiences[{{ $loop->index }}][out_month]">
+																						<select class="form-control work_experience_out_{{ $loop->index }}" name="work_experiences[{{ $loop->index }}][out_month]" @if (isset($work_experience->is_currently_work)) disabled @endif>
 																							<option disabled selected> Select month </option>
-																							<option value='January' @if ($work_experience->out_month == 'January') selected @endif>January</option>
-																							<option value='February' @if ($work_experience->out_month == 'February') selected @endif>February</option>
-																							<option value='March' @if ($work_experience->out_month == 'March') selected @endif>March</option>
-																							<option value='April' @if ($work_experience->out_month == 'April') selected @endif>April</option>
-																							<option value='May' @if ($work_experience->out_month == 'May') selected @endif>May</option>
-																							<option value='June' @if ($work_experience->out_month == 'June') selected @endif>June</option>
-																							<option value='July' @if ($work_experience->out_month == 'July') selected @endif>July</option>
-																							<option value='August' @if ($work_experience->out_month == 'August') selected @endif>August</option>
-																							<option value='September' @if ($work_experience->out_month == 'September') selected @endif>September</option>
-																							<option value='October' @if ($work_experience->out_month == 'October') selected @endif>October</option>
-																							<option value='November' @if ($work_experience->out_month == 'November') selected @endif>November</option>
-																							<option value='December' @if ($work_experience->out_month == 'December') selected @endif>December</option>
+																							<option value='January' @if (isset($work_experience->out_month) && $work_experience->out_month == 'January') selected @endif>January</option>
+																							<option value='February' @if (isset($work_experience->out_month) && $work_experience->out_month == 'February') selected @endif>February</option>
+																							<option value='March' @if (isset($work_experience->out_month) && $work_experience->out_month == 'March') selected @endif>March</option>
+																							<option value='April' @if (isset($work_experience->out_month) && $work_experience->out_month == 'April') selected @endif>April</option>
+																							<option value='May' @if (isset($work_experience->out_month) && $work_experience->out_month == 'May') selected @endif>May</option>
+																							<option value='June' @if (isset($work_experience->out_month) && $work_experience->out_month == 'June') selected @endif>June</option>
+																							<option value='July' @if (isset($work_experience->out_month) && $work_experience->out_month == 'July') selected @endif>July</option>
+																							<option value='August' @if (isset($work_experience->out_month) && $work_experience->out_month == 'August') selected @endif>August</option>
+																							<option value='September' @if (isset($work_experience->out_month) && $work_experience->out_month == 'September') selected @endif>September</option>
+																							<option value='October' @if (isset($work_experience->out_month) && $work_experience->out_month == 'October') selected @endif>October</option>
+																							<option value='November' @if (isset($work_experience->out_month) && $work_experience->out_month == 'November') selected @endif>November</option>
+																							<option value='December' @if (isset($work_experience->out_month) && $work_experience->out_month == 'December') selected @endif>December</option>
 																						</select>
 																					</div>
 																					<div class="form-group">
-																						<input class="form-check-input" type="radio" name="work_experiences[{{ $loop->index }}][is_currently_work]" value="1" @isset ($work_experience->is_currently_work) checked @endif>
-																						<label class="form-check-label" for="is_currently_work">
+																						<input class="form-check-input" id="is_currently_work_{{ $loop->index }}" data-id={{ $loop->index }} type="checkbox" name="work_experiences[{{ $loop->index }}][is_currently_work]" value="1" @isset ($work_experience->is_currently_work) checked @endif>
+																						<label class="form-check-label" for="is_currently_work_{{ $loop->index }}">
 																							No, I currently work here
 																						</label>
 																					</div>
@@ -917,10 +921,14 @@
 																				<div class="col-3">
 																					<h5>&nbsp;</h5>
 																					<div class="form-group">
-																						<select class="form-control" name="work_experiences[{{ $loop->index }}][out_year]">
+																						<select class="form-control work_experience_out_{{ $loop->index }}" name="work_experiences[{{ $loop->index }}][out_year]" @if (isset($work_experience->is_currently_work)) disabled @endif>
 																							<option disabled selected> Select year </option>
 																							@for ($i=1950; $i < date('Y'); $i++)
-																								<option value="{{ $i }}" @if ($work_experience->out_year == $i) selected @endif>{{ $i }}</option>
+																								@if (isset($work_experience->out_year))
+																									<option value="{{ $i }}" @if ($work_experience->out_year == $i) selected @endif>{{ $i }}</option>
+																								@else
+																									<option value="{{ $i }}">{{ $i }}</option>
+																								@endif
 																							@endfor
 																						</select>
 																					</div>
@@ -1221,6 +1229,21 @@
         tags: true
     });
 
+		for (var i = 0; i < $('.single_work_experiences_wrapper').length; i++) {
+			$('#is_currently_work_'+i).click(function() {
+				// console.log($(this).data('id'));
+				var id = $(this).data('id');
+				if ($(this).is(":checked")) {
+        	// $('#pizza_kind').prop('disabled', false);
+					$('.work_experience_out_'+id).prop('disabled', 'disabled');
+		    }
+		    else {
+					$('.work_experience_out_'+id).prop('disabled', false);
+		    	// $('#pizza_kind').prop('disabled', 'disabled');
+		    }
+			})
+		};
+
 		// Modal for edit profile detail
 		// Category
 		$('body').on('click', '.editCategory', function() {
@@ -1457,6 +1480,13 @@
 						if (i != 0) {
 							$('#work_experiences_wrapper').append('<hr>');
 						}
+
+						if (data.employments[i].is_currently_work) {
+							var work_period_html = `<span>`+data.employments[i].entry_month+`, `+data.employments[i].entry_year+` - Now</span>`;
+						} else {
+							var work_period_html = `<span>`+data.employments[i].entry_month+`, `+data.employments[i].entry_year+` - `+data.employments[i].out_month+`, `+data.employments[i].out_year+`</span>`;
+						}
+
 						$('#work_experiences_wrapper').append(
 							`<h5>Company</h5>
 							<span>`+data.employments[i].company+`</span>
@@ -1468,7 +1498,7 @@
 							<span>`+data.employments[i].position+`</span>
 							<br><br>
 							<h5>Work Period</h5>
-							<span>`+data.employments[i].entry_month+`, `+data.employments[i].entry_year+` - `+data.employments[i].out_month+`, `+data.employments[i].out_year+`</span>
+							`+work_period_html+`
 							<br><br>
 							<h5>Description</h5>
 							<div class="text-justify">
@@ -1734,8 +1764,8 @@
               </select>
             </div>
             <div class="form-group" id="n_form">
-              <input class="form-check-input" type="radio" name="work_experiences[` + index + `][is_currently_work]"
-              id="is_currently_work" value="Yes">
+              <input class="form-check-input" type="checkbox" name="work_experiences[` + index + `][is_currently_work]"
+              id="is_currently_work" value="1">
               <label class="form-check-label" for="is_currently_work">
                 No, I currently work here
               </label>

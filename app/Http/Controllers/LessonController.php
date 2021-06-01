@@ -9,6 +9,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Http\JsonResponse;
 use App\Models\Lesson;
 use App\Models\Training_meeting;
+use App\Models\Lesson_history;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadFailedException;
 use Pion\Laravel\ChunkUpload\Exceptions\UploadMissingFileException;
 use Pion\Laravel\ChunkUpload\Handler\AbstractHandler;
@@ -234,6 +235,16 @@ class LessonController extends Controller
           'lesson'  => $lesson,
           'old_video' => $old_video
         ]);
+    }
+
+    public function add_to_lesson_history(Request $request) {
+      $lesson_history = new Lesson_history;
+      $lesson_history->user_id = auth()->user()->id;
+      $lesson_history->lesson_id = $request->lesson_id;
+      $lesson_history->topic_id = $request->topic_id;
+      $lesson_history->save();
+
+      return response()->json($lesson_history);
     }
 
     /**

@@ -87,12 +87,18 @@ class ResultController extends Controller
       $feedback = null;
       $report = $exam_result->training_feedbacks()->where('to','coach')->first();
     } elseif (auth()->user()->hasRole('coachee')) {
-      $feedback = null;
-      $report = $exam_result->training_feedbacks()->where('to','coachee')->orWhere('to','mentee')->orWhere('to', 'trainee')->first();
+      $feedback_from = $exam_result->training_feedbacks->whereIn('from', ['trainee', 'mentee']);
+      $feedback_to = $exam_result->training_feedbacks->whereIn('to', ['trainee', 'mentee']);
+
+      // return $feedback_from;
     }
     $meetings = $exam_result->training_meeting;
 
-    return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'feedback', 'report', 'meetings'));
+    if (auth()->user()->hasRole('coachee')) {
+      return view('result.detailPoint', compact('topic', 'client','exam_result', 'feedback_from', 'feedback_to','meetings'));
+    } else {
+      return view('result.detailPoint', compact('topic', 'client', 'exam_result', 'answers', 'feedback', 'report', 'meetings'));
+    }
   }
 
 

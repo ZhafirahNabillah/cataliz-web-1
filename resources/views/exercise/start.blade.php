@@ -285,14 +285,6 @@
 
     @push('scripts')
     <script type="text/javascript">
-      $(function() {
-        $.ajaxSetup({
-          headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-        });
-      });
-
       var countDownDate = new Date("{{ $exam->attempt_submit }}").getTime();
 
       // Update the count down every 1 second
@@ -317,7 +309,7 @@
         if (distance < 0) {
           clearInterval(x);
           document.getElementById("time_remaining").innerHTML = "EXPIRED";
-          $('#submitExamBtn').trigger('click');
+          $('.next-step').trigger('click');
         }
       }, 1000);
 
@@ -339,7 +331,6 @@
       //         $('.btn_wrapper').show();
       //     }
       // });
-
 
       @foreach ($answers as $answer)
       if ($('#save_answer_form_'+{{ $answer->id }}+' input:radio[name="answer"]').is(':checked')) {
