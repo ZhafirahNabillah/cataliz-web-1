@@ -60,7 +60,7 @@ class HomeController extends Controller
       $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->get();
       $total_hours = $agenda_detail->where('status', 'finished')->sum('duration') / 60;
       $total_sessions = $agenda_detail->where('status', '!=', 'canceled')->count();
-      $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from', 'coachee')->whereNotNull('rating')->count();
+      $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from', 'coachee')->whereNotNull('rating')->avg('rating');
 
       // return $total_sessions;
 
