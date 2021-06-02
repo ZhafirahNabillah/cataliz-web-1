@@ -267,9 +267,16 @@ class AgendaController extends Controller
    */
 
   // method to show create agenda page
-  public function create()
+  public function create(Request $request)
   {
-    return view('agendas.create');
+    $plan = null;
+
+    if ($request->has('plan')) {
+      $plan_id = $request->get('plan');
+      $plan = Plan::find($plan_id);
+    }
+
+    return view('agendas.create', compact('plan'));
   }
 
   /**
