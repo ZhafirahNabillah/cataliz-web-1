@@ -346,8 +346,11 @@ class ClientController extends Controller
             $actionBtn = $detail_btn;
             return $actionBtn;
           }
-        })
-        ->rawColumns(['action'])
+        })->addColumn('phone', function ($row) {
+          $phone = substr($row->phone, 0, -5) . 'xxxxx';
+
+          return $phone;
+        })->rawColumns(['action', 'phone'])
         ->make(true);
     }
   }
