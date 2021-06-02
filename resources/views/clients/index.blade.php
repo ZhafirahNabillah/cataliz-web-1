@@ -279,7 +279,7 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Skill</th>
+                            <th>Phone</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -308,7 +308,7 @@
                             <th>No</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Skill</th>
+                            <th>Phone</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -360,12 +360,12 @@
                 <dl class="row">
                   <small class="col-sm-6 email"></small>
                 </dl>
-                <dl class="row">
+                {{-- <dl class="row">
                   <dt class="col-sm-6">Skills</dt>
                 </dl>
                 <dl class="row">
                   <small class="col-sm-6 skills"></small>
-                </dl>
+                </dl> --}}
               </div>
               <!-- </Card modal>-->
             </div>
@@ -782,12 +782,12 @@
                 <dl class="row">
                   <small class="col-sm-6 email"></small>
                 </dl>
-                <dl class="row">
+                {{-- <dl class="row">
                   <dt class="col-sm-6">Skills</dt>
                 </dl>
                 <dl class="row">
                   <small class="col-sm-6 skills"></small>
-                </dl>
+                </dl> --}}
               </div>
               <!-- </Card modal>-->
             </div>
