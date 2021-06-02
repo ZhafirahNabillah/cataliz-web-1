@@ -212,30 +212,39 @@
               }
             })
           };
-          // $(this).val('1');
-          // $(this).trigger('change');
-          // plan_select.trigger({
-          //     type: 'select2:select',
-          //     params: {
-          //         data: data
-          //     }
-          // });
         },
         cache: true
       }
     });
 
     @unless (is_null($plan))
-    $(document).ready(function() {
-      $(".livesearch-plans").select2("trigger", "select", {
-        data: {
-          id: "{{ $plan->id }}",
-          text: "{{ strip_tags($plan->objective) }}",
-          client_id: "{{ $plan->client_id }}",
-          group_id: "{{ $plan->group_id }}"
+      $(document).ready(function() {
+        var client_id = "{{ $plan->client_id }}";
+        var group_id = "{{ $plan->group_id }}";
+
+        $(".livesearch-plans").select2("trigger", "select", {
+          data: {
+            id: "{{ $plan->id }}",
+            text: "{{ strip_tags($plan->objective) }}",
+            client_id: client_id,
+            group_id: group_id
+          }
+        });
+
+        if (client_id != "") {
+          $(".group_id_wrapper").hide();
+          $.get("" + '/get_client_data/' + client_id, function(data) {
+            $("#client_name").val(data.name);
+            $("#client_organization").val(data.organization);
+            $("#client_company").val(data.company);
+          });
+          $(".client_data_wrapper").show();
+        } else if (group_id != "") {
+          $(".client_data_wrapper").hide();
+          $(".group_id_wrapper").show();
+          $("#group_id").val(group_id);
         }
       });
-    });
     @endunless
 
     $(".livesearch-plans").on('change', function(e) {
