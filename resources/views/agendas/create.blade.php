@@ -68,7 +68,8 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Plan</label>
-                      <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror" name="plan_id"></select>
+                      <select class="livesearch-plans form-control @error('plan_id') is-invalid @enderror" name="plan_id">
+                      </select>
                       @error('plan_id')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -191,6 +192,8 @@
     //   $('#company').val(dd.co);
     // });
 
+    var plan_select = $('.livesearch-plans');
+
     $('.livesearch-plans').select2({
       placeholder: 'Select plans',
       ajax: {
@@ -209,10 +212,31 @@
               }
             })
           };
+          // $(this).val('1');
+          // $(this).trigger('change');
+          // plan_select.trigger({
+          //     type: 'select2:select',
+          //     params: {
+          //         data: data
+          //     }
+          // });
         },
         cache: true
       }
     });
+
+    @unless (is_null($plan))
+    $(document).ready(function() {
+      $(".livesearch-plans").select2("trigger", "select", {
+        data: {
+          id: "{{ $plan->id }}",
+          text: "{{ strip_tags($plan->objective) }}",
+          client_id: "{{ $plan->client_id }}",
+          group_id: "{{ $plan->group_id }}"
+        }
+      });
+    });
+    @endunless
 
     $(".livesearch-plans").on('change', function(e) {
       // Access to full data

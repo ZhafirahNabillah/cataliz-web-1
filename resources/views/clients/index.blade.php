@@ -236,7 +236,6 @@
             </div>
             <!-- /panel individu -->
 
-
             <!-- Panel Grup -->
             <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
               <!-- Basic table -->
@@ -264,7 +263,6 @@
               <!--/ Basic table -->
             </div>
             <!-- /coachee list -->
-
 
             <!-- Panel Grup -->
             <div class="tab-pane" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
@@ -346,19 +344,19 @@
                   <dt class="col-sm-6">Full Name</dt>
                 </dl>
                 <dl class="row">
-                  <small class="col-sm-6 name"></small>
+                  <small class="col-sm-12 name"></small>
                 </dl>
                 <dl class="row">
                   <dt class="col-sm-6">Phone</dt>
                 </dl>
                 <dl class="row">
-                  <small class="col-sm-6 phone"></small>
+                  <small class="col-sm-12 phone"></small>
                 </dl>
                 <dl class="row">
                   <dt class="col-sm-6">Email</dt>
                 </dl>
                 <dl class="row">
-                  <small class="col-sm-6 email"></small>
+                  <small class="col-sm-12 email"></small>
                 </dl>
                 {{-- <dl class="row">
                   <dt class="col-sm-6">Skills</dt>
@@ -409,7 +407,7 @@
                   <dt class="col-sm-6">Skills</dt>
                 </dl>
                 <dl class="row">
-                  <small class="col-sm-6 skills"></small>
+                  <small class="col-sm-12 skills"></small>
                 </dl>
               </div>
               <!-- </Card modal>-->
@@ -418,8 +416,6 @@
         </div>
       </div>
       <!-- End Modal -->
-
-
       @endrole
 
       @role('admin')
@@ -1457,9 +1453,10 @@
               console.log(data);
               $('#modal-trainer-detail').modal('show');
               $('#modalHeadingTrainer').html("Detail Trainer");
-              $('.name').html(data.name);
-              $('.phone').html('+62' + data.phone);
-              $('.email').html(data.email);
+              $('.name').html(data.user.name);
+              $('.phone').html('+62' + data.user.phone);
+              $('.email').html(data.user.email);
+              $('.skills').html(data.skills);
             })
           });
 
@@ -1469,9 +1466,10 @@
               console.log(data);
               $('#modal-trainer-detail').modal('show');
               $('#modalHeadingTrainer').html("Detail Mentor");
-              $('.name').html(data.name);
-              $('.phone').html('+62' + data.phone);
-              $('.email').html(data.email);
+              $('.name').html(data.user.name);
+              $('.phone').html('+62' + data.user.phone);
+              $('.email').html(data.user.email);
+              $('.skills').html(data.skills);
             })
           });
 

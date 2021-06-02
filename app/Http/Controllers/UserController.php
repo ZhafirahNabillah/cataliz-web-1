@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Coach;
 use App\Models\Agenda;
 use App\Models\Agenda_detail;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -67,17 +68,38 @@ class UserController extends Controller
 
     if (auth()->user()->hasRole('mentor')) {
       $user = User::with('roles')->where('id', $id)->first();
+      $coach = $user->coach;
 
-      return response()->json($user);
+      $skill_id = json_decode($coach->skill_id);
+      $skills = Skill::whereIn('id', $skill_id)->get();
+
+      return response()->json([
+        'user'    => $user,
+        'skills'  => $skills
+      ]);
     }
 
     if (auth()->user()->hasRole('coach')) {
       $user = User::with('roles')->where('id', $id)->first();
+      $role = $user->getRoleNames()->first();
 
-      return response()->json($user);
+      if ($role == 'mentor' | $role == 'trainer') {
+        $coach = $user->coach;
+
+        if (is_null($coach->skill_id)) {
+          $skills_name = "Skills not yet available";
+        } else {
+          $skill_id = json_decode($coach->skill_id);
+          $skills = Skill::whereIn('id', $skill_id)->get();
+          $skills_name = $skills->implode('skill_name', ', ');
+        }
+
+        return response()->json([
+          'user'    => $user,
+          'skills'  => $skills_name
+        ]);
+      }
     }
-
-    // return response()->json($user);
   }
 
 

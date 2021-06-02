@@ -452,7 +452,9 @@
 							@else
 								<div id="rateYo-{{ $feedback->id }}" data-rating="{{ $feedback->rating }}"></div>
 							@endif
-							<hr>
+							@unless ($loop->last)
+								<hr>
+							@endunless
 						@endforeach
 					</div>
 				</div>
