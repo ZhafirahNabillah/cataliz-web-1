@@ -504,7 +504,7 @@
 				@endrole
 
 
-				@role('mentor')
+				@role('mentor|trainer')
 				{{-- detailProfile tab --}}
 				<div class="tab-pane" id="detailProfile" aria-labelledby="about-tab" role="tabpanel">
 

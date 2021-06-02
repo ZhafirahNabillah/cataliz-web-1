@@ -358,12 +358,12 @@
                 <dl class="row">
                   <small class="col-sm-12 email"></small>
                 </dl>
-                {{-- <dl class="row">
+                <dl class="row">
                   <dt class="col-sm-6">Skills</dt>
                 </dl>
                 <dl class="row">
                   <small class="col-sm-6 skills"></small>
-                </dl> --}}
+                </dl>
               </div>
               <!-- </Card modal>-->
             </div>
@@ -1464,8 +1464,8 @@
             var mentor_id = $(this).data('id');
             $.get("" + '/users/' + mentor_id + '/edit', function(data) {
               console.log(data);
-              $('#modal-trainer-detail').modal('show');
-              $('#modalHeadingTrainer').html("Detail Mentor");
+              $('#modal-mentor-detail').modal('show');
+              $('#modalHeadingMentor').html("Detail Mentor");
               $('.name').html(data.user.name);
               $('.phone').html('+62' + data.user.phone);
               $('.email').html(data.user.email);
