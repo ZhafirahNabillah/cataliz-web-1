@@ -46,16 +46,16 @@ class QuestionController extends Controller
         foreach ($request->all_questions_id as $question_id) {
 
             $validator = Validator::make($request->all(), [
-              'question-'.$question_id      => 'required',
-              'answer-'.$question_id        => 'required',
-              'true-answer-'.$question_id   => 'required',
-              'point-'.$question_id         => 'required'
+                'question-' . $question_id      => 'required',
+                'answer-' . $question_id        => 'required',
+                'true-answer-' . $question_id   => 'required',
+                'point-' . $question_id         => 'required'
             ]);
 
             if ($validator->fails()) {
-              return back()
-              ->withErrors($validator)
-              ->withInput();
+                return back()
+                    ->withErrors($validator)
+                    ->withInput();
             }
 
             $question = new Question;
@@ -86,7 +86,7 @@ class QuestionController extends Controller
         // $ans = shuffle($ans_array);
         $choice_itr = 'A';
         // return $ans_array;
-        return view('exercise.detailQuestion', compact('topic','question', 'ans_array', 'choice_itr'));
+        return view('exercise.detailQuestion', compact('topic', 'question', 'ans_array', 'choice_itr'));
     }
 
     /**
@@ -119,7 +119,29 @@ class QuestionController extends Controller
         $question->true_answer = $request->true_answer;
         $question->weight = $request->point;
         $question->update();
-        return redirect()->route('exercise.show', ['exercise' => $question->topic_id])->with('success', 'question has been edited successfully');
+        return redirect()->route('exercise.show', ['exercise' => $question->exam_id])->with('success', 'question has been edited successfully');
+    }
+
+    public function add_new_question($id)
+    {
+        // $id = Exam::find($id)->pluck('id');
+        return view('exercise.createQuestionInOneTopic', compact('id'));
+    }
+    public function store_new_question(Request $request, $id)
+    {
+        // $exam = Exam::where('id', $id)->pluck('id');
+        $topic_id = Question::where('exam_id', $id)->pluck('topic_id');
+        $question = new Question;
+        foreach ($topic_id as $tpc_id) {
+            $question->topic_id = $tpc_id;
+        }
+        $question->question = $request->input('question-' . 1);
+        $question->answers = implode(',', $request->input('answer-' . 1));
+        $question->true_answer = $request->input('true-answer-' . 1);
+        $question->weight = $request->input('point-' . 1);
+        $question->exam_id = $id;
+        $question->save();
+        return redirect()->route('exercise.show', ['exercise' => $question->exam_id])->with('success', 'question has been edited successfully');
     }
 
     /**

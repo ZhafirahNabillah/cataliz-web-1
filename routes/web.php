@@ -201,6 +201,8 @@ Route::middleware(['auth'])->group(function () {
 //Question Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('question', QuestionController::class);
+	Route::get('/add_new_question/{id}', [QuestionController::class, 'add_new_question'])->name('question.add_new');
+	Route::post('/add_new_question/{exam}/new', [QuestionController::class, 'store_new_question'])->name('question.store_new');
 });
 
 //Category Controller

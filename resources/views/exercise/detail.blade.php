@@ -21,7 +21,9 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Exam
-              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+                alt="Card image cap" data-toggle="popover" data-placement="top"
+                data-content="Halaman ini menampilkan daftar ujian yang tersedia dalam sistem" />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
@@ -54,10 +56,13 @@
           <div class="card-body">
             <h4>Topic : {{ $topic->topic }}</h4>
             @if ($exam->type == 1)
-              <span>Type : Pre-test</span>
+            <span>Type : Pre-test</span>
             @else
-              <span>Type : Post-test</span>
+            <span>Type : Post-test</span>
             @endif
+            <div class="mt-1">
+              <a class="btn btn-primary" href="{{route('question.add_new', $exam->id)}}">New Question</a>
+            </div>
             <!-- Basic table -->
             <section id="basic-datatable">
               <div class="row">
