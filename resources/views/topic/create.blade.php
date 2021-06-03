@@ -75,7 +75,7 @@
                 <textarea name="client_target" id="client_target" cols="20" rows="20"
                   placeholder="Your List Here....."></textarea>
               </div>
-              <div class="form-group text-right mb-0">
+              <div class="form-group text-left mb-0">
                 <Button type="submit" class="btn btn-primary">Submit</Button>
               </div>
             </form>

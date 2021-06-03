@@ -60,7 +60,7 @@
               <div class="form-group">
                 <label for="exam_duration">Duration</label>
                 <input type="text" name="duration" class="form-control col-sm-12" id="exam_duration" placeholder="Input your exam duration...">
-                <small><i><b>Duration in minutes</b></i></small>
+                <small style="color: red"><i><b>Duration in minutes</b></i></small>
               </div>
               <div class="question-wrapper" id="1">
                 <div class="title">
@@ -105,7 +105,7 @@
                 <div class="form-group">
                   <label for="">Point</label>
                   <input type="text" name="point-1" class="form-control col-sm-6" id="point-1" placeholder="Input your point for this answer...">
-                  <small style="color: red"><b>Point must be a number</b></small>
+                  <small style="color: red"><i><b>Point must be a number</b></i></small>
                 </div>
                 <input type="hidden" name="all_questions_id[]" value="1">
               </div>
