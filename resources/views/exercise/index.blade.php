@@ -68,6 +68,7 @@
                         <th>No</th>
                         <th>Topic</th>
                         <th>Total Questions</th>
+                        <th>Type</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -114,9 +115,10 @@
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Topic</th>
                         <th>Category</th>
                         <th>Question</th>
+                        <th>Type</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -166,6 +168,7 @@
                         <th>Topic</th>
                         <th>Category</th>
                         <th>Question</th>
+                        <th>Type</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -232,6 +235,17 @@
             defaultContent: '0'
           },
           {
+            data: 'type',
+            name: 'type',
+            render: function (data, type, row) {
+              if (data == 1) {
+                return "Pre-test";
+              } else {
+                return "Post-test";
+              }
+            }
+          },
+          {
             data: 'action',
             name: 'action',
             orderable: true,
@@ -259,16 +273,27 @@
             name: 'DT_RowIndex'
           },
           {
-            data: 'user.name',
-            name: 'user.name'
+            data: 'topic',
+            name: 'topic'
           },
           {
-            data: 'category.category',
-            name: 'category.category'
+            data: 'category',
+            name: 'category'
           },
           {
             data: 'total_questions',
             name: 'total_questions'
+          },
+          {
+            data: 'type',
+            name: 'type',
+            render: function (data, type, row) {
+              if (data == 1) {
+                return "Pre-test";
+              } else {
+                return "Post-test";
+              }
+            }
           },
           {
             data: 'action',
@@ -309,6 +334,17 @@
             data: 'total_questions',
             name: 'total_questions',
             defaultContent: '0'
+          },
+          {
+            data: 'type',
+            name: 'type',
+            render: function (data, type, row) {
+              if (data == 1) {
+                return "Pre-test";
+              } else {
+                return "Post-test";
+              }
+            }
           },
           {
             data: 'action',

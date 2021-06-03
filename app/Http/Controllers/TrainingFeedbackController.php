@@ -37,7 +37,7 @@ class TrainingFeedbackController extends Controller
     {
         //
         $training_feedback = new Training_feedback;
-        $training_feedback->exam_id = $request->exam_id;
+        $training_feedback->result_id = $request->result_id;
         $training_feedback->description = $request->description;
         $training_feedback->to = $request->to;
         $training_feedback->from = $request->from;

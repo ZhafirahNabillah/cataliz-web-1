@@ -49,6 +49,19 @@
                 <label for="topic_id">Topic</label>
                 <select class="livesearch-plans form-control @error('topic_id') is-invalid @enderror" name="topic_id"></select>
               </div>
+              <div class="form-group">
+                <label for="exam_type">Exam type</label>
+                <select class="form-control col-sm-12" name="type" id="exam_type">
+                  <option selected disabled>Select exam type</option>
+                  <option value="1">Pre test</option>
+                  <option value="2">Post test</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="exam_duration">Duration</label>
+                <input type="text" name="duration" class="form-control col-sm-12" id="exam_duration" placeholder="Input your exam duration...">
+                <small><i><b>Duration in minutes</b></i></small>
+              </div>
               <div class="question-wrapper" id="1">
                 <div class="title">
                   {{-- <button type="button" data-id="1" name="button" class="btn btn-danger float-right deleteQuestionBtn">Delete Question</button> --}}
@@ -211,7 +224,7 @@
         var option_D = '<div class="form-group"><label for="">Answer D</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="d-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
         var option_E = '<div class="form-group"><label for="">Answer E</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="e-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
         var true_answer = '<div class="form-group"><label for="true_answer">True Answer</label><select class="form-control" id="true_answer" name="true-answer-' + this_question_id + '"><option selected disabled>Select True Answer</option><option value="1">A</option><option value="2">B</option><option value="3">C</option><option value="4">D</option><option value="5">E</option></select></div>';
-        var point = '<div class="form-group"><label for="">Point</label><input type="text" name="point-' + this_question_id + '" class="form-control col-sm-6" id="point-' + this_question_id + '" placeholder="Input your point for this answer..."><small>point must be a number</small></div>';
+        var point = '<div class="form-group"><label for="">Point</label><input type="text" name="point-' + this_question_id + '" class="form-control col-sm-6" id="point-' + this_question_id + '" placeholder="Input your point for this answer..."><small style="color: red"><b>Point must be a number</b></small></div>';
         var question_id = '<input type="hidden" name="all_questions_id[]" value="' + this_question_id + '">';
 
         $(".question-wrapper:last").append(hr, question_title, question_box, option_A, option_B, option_C, option_D, option_E, true_answer, point, question_id);

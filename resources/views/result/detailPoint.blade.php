@@ -222,7 +222,7 @@
                                         <input type="hidden" name="to" value="trainee">
                                       @endrole
                                       <input type="hidden" name="from" value="{{ auth()->user()->getRoleNames()->first() }}">
-                                      <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                      <input type="hidden" name="result_id" value="{{ $exam_result->id }}">
                                     </form>
                                   </div>
                                   <div class="modal-footer">
@@ -301,7 +301,7 @@
                                     </div>
                                     <input type="hidden" name="to" value="mentor">
                                     <input type="hidden" name="from" value="mentee">
-                                    <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    <input type="hidden" name="result_id" value="{{ $exam_result->id }}">
                                   </form>
                                 </div>
                                 <div class="modal-footer">
@@ -347,7 +347,7 @@
                                     </div>
                                     <input type="hidden" name="to" value="trainer">
                                     <input type="hidden" name="from" value="trainee">
-                                    <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    <input type="hidden" name="result_id" value="{{ $exam_result->id }}">
                                   </form>
                                 </div>
                                 <div class="modal-footer">
@@ -406,7 +406,7 @@
                                     </div>
                                     <input type="hidden" name="to" value="coach">
                                     <input type="hidden" name="from" value="{{ auth()->user()->getRoleNames()->first() }}">
-                                    <input type="hidden" name="exam_id" value="{{ $exam_result->id }}">
+                                    <input type="hidden" name="result_id" value="{{ $exam_result->id }}">
                                   </form>
                                 </div>
                                 <div class="modal-footer">

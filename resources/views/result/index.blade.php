@@ -62,6 +62,7 @@
                       <tr>
                         <th>No</th>
                         <th>Topic</th>
+                        <th>Type</th>
                         <th>Grade</th>
                         <th>Action</th>
                       </tr>
@@ -294,6 +295,17 @@
           {
             data: 'topic.topic',
             name: 'topic.topic',
+          },
+          {
+            data: 'exam.type',
+            name: 'exam.type',
+            render: function (data, type, row) {
+              if (data == 1) {
+                return "Pre-test";
+              } else {
+                return "Post-test";
+              }
+            }
           },
           {
             data: 'grade',

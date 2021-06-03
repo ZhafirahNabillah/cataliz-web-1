@@ -717,6 +717,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Documentation' => __DIR__ . '/../..' . '/app/Models/Documentation.php',
         'App\\Models\\Documentation_details' => __DIR__ . '/../..' . '/app/Models/Documentation_details.php',
         'App\\Models\\Education' => __DIR__ . '/../..' . '/app/Models/Education.php',
+        'App\\Models\\Exam' => __DIR__ . '/../..' . '/app/Models/Exam.php',
         'App\\Models\\Exam_result' => __DIR__ . '/../..' . '/app/Models/Exam_result.php',
         'App\\Models\\Feedback' => __DIR__ . '/../..' . '/app/Models/Feedback.php',
         'App\\Models\\Language' => __DIR__ . '/../..' . '/app/Models/Language.php',

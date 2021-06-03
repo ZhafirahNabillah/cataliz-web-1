@@ -11,6 +11,7 @@ class Exam_result extends Model
 
     protected $fillable = [
       'topic_id',
+      'exam_id',
       'grade',
       'user_id',
       'attempt_start',
@@ -25,12 +26,16 @@ class Exam_result extends Model
       return $this->belongsTo('App\Models\User');
     }
 
+    public function exam() {
+      return $this->belongsTo('App\Models\Exam');
+    }
+
     public function answers() {
-      return $this->hasMany('App\Models\Answer', 'exam_id');
+      return $this->hasMany('App\Models\Answer', 'result_id');
     }
 
     public function training_feedbacks()
     {
-      return $this->hasMany('App\Models\Training_feedback', 'exam_id');
+      return $this->hasMany('App\Models\Training_feedback', 'result_id');
     }
 }

@@ -12,10 +12,15 @@ class Answer extends Model
     protected $fillable = [
       'exam_id',
       'question_id',
+      'result_id',
       'answer'
     ];
 
     public function exam() {
+      return $this->belongsTo('App\Models\Exam');
+    }
+
+    public function result() {
       return $this->belongsTo('App\Models\Exam_result');
     }
 
