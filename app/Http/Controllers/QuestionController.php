@@ -119,7 +119,7 @@ class QuestionController extends Controller
         $question->true_answer = $request->true_answer;
         $question->weight = $request->point;
         $question->update();
-        return redirect()->route('exercise.show', ['exercise' => $question->exam_id])->with('success', 'question has been edited successfully');
+        return redirect()->route('exercise.show', ['exercise' => $question->exam_id])->with('success', 'Question has been edited successfully');
     }
 
     public function add_new_question($id)
@@ -141,7 +141,7 @@ class QuestionController extends Controller
         $question->weight = $request->input('point-' . 1);
         $question->exam_id = $id;
         $question->save();
-        return redirect()->route('exercise.show', ['exercise' => $question->exam_id])->with('success', 'question has been edited successfully');
+        return redirect()->route('exercise.show', ['exercise' => $question->exam_id])->with('success', 'Question has been added successfully');
     }
 
     /**
