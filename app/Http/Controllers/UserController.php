@@ -68,15 +68,29 @@ class UserController extends Controller
 
     if (auth()->user()->hasRole('mentor')) {
       $user = User::with('roles')->where('id', $id)->first();
-      $coach = $user->coach;
+      $role = $user->getRoleNames()->first();
 
-      $skill_id = json_decode($coach->skill_id);
-      $skills = Skill::whereIn('id', $skill_id)->get();
+      if ($role == 'trainer') {
+        $coach = $user->coach;
 
-      return response()->json([
-        'user'    => $user,
-        'skills'  => $skills
-      ]);
+        if (is_null($coach->skill_id)) {
+          $skills_name = "Skills not yet available";
+        } else {
+          $skill_id = json_decode($coach->skill_id);
+          $skills = Skill::whereIn('id', $skill_id)->get();
+          $skills_name = $skills->implode('skill_name', ', ');
+        }
+
+        return response()->json([
+          'user'    => $user,
+          'skills'  => $skills_name
+        ]);
+      } else {
+
+        return response()->json([
+          'user'    => $user
+        ]);
+      }
     }
 
     if (auth()->user()->hasRole('coach')) {

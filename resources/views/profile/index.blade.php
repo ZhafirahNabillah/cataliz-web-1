@@ -538,7 +538,7 @@
 								<div class="tab-pane active" id="tabVerticalLeft1" role="tabpanel" aria-labelledby="baseVerticalLeft-tab1">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editCategory"><span data-feather="edit"></span></a>Tell us about the work you do! </h3>
+											<h3><a href="javascript:;" class="editCategory"><span data-feather="edit"></span></a> Tell us about the work you do! </h3>
 											<br>
 											<div id="categories_wrapper">
 												@if ($categories == null)
@@ -613,7 +613,7 @@
 								<div class="tab-pane" id="tabVerticalLeft2" role="tabpanel" aria-labelledby="baseVerticalLeft-tab2">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editExpertise"><span data-feather="edit"></span></a>What is your skill?</h3>
+											<h3><a href="javascript:;" class="editExpertise"><span data-feather="edit"></span></a> What is your skill?</h3>
 											<br>
 											<h5>Skill</h5>
 											<div id="skills_wrapper">
@@ -669,7 +669,7 @@
 								<div class="tab-pane" id="tabVerticalLeft3" role="tabpanel" aria-labelledby="baseVerticalLeft-tab3">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a>The schools you attended, areas of study, and degrees earned!</h3>
+											<h3><a href="javascript:;" class="editEducation"><span data-feather="edit"></span></a> The schools you attended, areas of study, and degrees earned!</h3>
 											<br>
 											<div id="educations_wrapper">
 												@forelse ($educations as $education)
@@ -729,7 +729,7 @@
 																						<select class="form-control" name="education[{{ $loop->index }}][start_year]">
 																							<option disabled selected> Pilih </option>
 																								@for ($i=1950; $i < date('Y')+1; $i++)
-																									@if (isset($education->year))
+																									@if (isset($education->start_year))
 																										<option value="{{ $i }}" @if ($education->start_year == $i) selected @endif>{{ $i }}</option>
 																									@else
 																										<option value="{{ $i }}">{{ $i }}</option>
@@ -744,7 +744,7 @@
 																							<select class="form-control" name="education[{{ $loop->index }}][end_year]">
 																								<option disabled selected> Pilih </option>
 																									@for ($i=1950; $i < date('Y')+5; $i++)
-																										@if (isset($education->year))
+																										@if (isset($education->end_year))
 																											<option value="{{ $i }}" @if ($education->end_year == $i) selected @endif>{{ $i }}</option>
 																										@else
 																											<option value="{{ $i }}">{{ $i }}</option>
@@ -782,7 +782,7 @@
 								<div class="tab-pane" id="tabVerticalLeft4" role="tabpanel" aria-labelledby="baseVerticalLeft-tab4">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editEmployment"><span data-feather="edit"></span></a>My work experience </h3>
+											<h3><a href="javascript:;" class="editEmployment"><span data-feather="edit"></span></a> My work experience </h3>
 											<br>
 											<h5>Beginner</h5>
 											@if ($beginner_status == 1)
@@ -968,7 +968,7 @@
 								<div class="tab-pane" id="tabVerticalLeft5" role="tabpanel" aria-labelledby="baseVerticalLeft-tab5">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a>Add the language you are good at</h3>
+											<h3><a href="javascript:;" class="editLanguages"><span data-feather="edit"></span></a> Add the language you are good at</h3>
 											<br>
 											<div id="languages_wrapper">
 												@forelse ($languages as $language)
@@ -1092,7 +1092,7 @@
 								<div class="tab-pane" id="tabVerticalLeft6" role="tabpanel" aria-labelledby="baseVerticalLeft-tab6">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editOverview"><span data-feather="edit"></span></a>Write a great profile or description about your skills in your category!</h3>
+											<h3><a href="javascript:;" class="editOverview"><span data-feather="edit"></span></a> Write a great profile or description about your skills in your category!</h3>
 											<br>
 											<h5>Tittle</h5>
 											<span id="description_title">{{ $description_title ?? '-' }}</span>
@@ -1140,7 +1140,7 @@
 								<div class="tab-pane" id="tabVerticalLeft7" role="tabpanel" aria-labelledby="baseVerticalLeft-tab7">
 									<div class="card">
 										<div class="card-body">
-											<h3><a href="javascript:;" class="editAddress"><span data-feather="edit"></span></a>My Address</h3>
+											<h3><a href="javascript:;" class="editAddress"><span data-feather="edit"></span></a> My Address</h3>
 											<br>
 											<h5>Street</h5>
 											<span id="location_street">{{ $location->street ?? '-' }}</span>

@@ -192,7 +192,7 @@ Route::middleware(['auth'])->group(function () {
 //Exercise Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('exercise', ExerciseController::class);
-	Route::get('/exercise/{topic}/start', [ExerciseController::class, 'start_exam'])->name('exercise.start');
+	Route::get('/exercise/{exam}/start', [ExerciseController::class, 'start_exam'])->name('exercise.start');
 	Route::post('/exercise/save_answer', [ExerciseController::class, 'save_answer'])->name('exercise.save_answer');
 	Route::get('/exercise/{id}/continue', [ExerciseController::class, 'continue_exam'])->name('exercise.continue');
 	Route::get('/exercise/{exam_result}/submit_all', [ExerciseController::class, 'submit_all'])->name('exercise.submit_all');

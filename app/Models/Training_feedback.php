@@ -10,14 +10,14 @@ class Training_feedback extends Model
     use HasFactory;
 
     protected $fillable = [
-        'exam_id',
+        'result_id',
         'description',
         'owner_id',
         'from',
         'to'
     ];
 
-    public function exam()
+    public function result()
     {
         return $this->belongsTo('App\Models\Exam_result');
     }

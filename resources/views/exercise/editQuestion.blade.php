@@ -56,11 +56,11 @@
                 <label for="true_answer">Select True Answer</label>
                 <select class="form-control col-sm-6" aria-label=" select example" name="true_answer">
                   {{-- <option selected disabled>Select True Answer</option> --}}
-                  <option value="A" @if($question->true_answer == '1') selected @endif>A</option>
-                  <option value="B" @if($question->true_answer == '2') selected @endif>B</option>
-                  <option value="C" @if($question->true_answer == '3') selected @endif>C</option>
-                  <option value="D" @if($question->true_answer == '4') selected @endif>D</option>
-                  <option value="E" @if($question->true_answer == '5') selected @endif>E</option>
+                  <option value="1" @if($question->true_answer == '1') selected @endif>A</option>
+                  <option value="2" @if($question->true_answer == '2') selected @endif>B</option>
+                  <option value="3" @if($question->true_answer == '3') selected @endif>C</option>
+                  <option value="4" @if($question->true_answer == '4') selected @endif>D</option>
+                  <option value="5" @if($question->true_answer == '5') selected @endif>E</option>
                 </select>
               </div>
               <div class="form-group">

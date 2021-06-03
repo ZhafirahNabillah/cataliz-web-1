@@ -35,6 +35,9 @@ class ResultController extends Controller
 
           return $user->client->toArray();
         })
+        ->addColumn('exam', function ($row) {
+          return $row->exam->toArray();
+        })
         ->addColumn('action', function ($row) {
 
           //add detail and whatsapp button if user have permission
@@ -46,7 +49,7 @@ class ResultController extends Controller
 
           return $detail_btn;
         })
-        ->rawColumns(['topic', 'user', 'action'])
+        ->rawColumns(['topic', 'user', 'action','exam'])
         ->make(true);
     }
 

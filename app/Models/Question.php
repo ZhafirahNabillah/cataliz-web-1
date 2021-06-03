@@ -14,7 +14,8 @@ class Question extends Model
         'question',
         'answers',
         'weight',
-        'true_answer'
+        'true_answer',
+        'exam_id'
     ];
 
     protected $casts = [
@@ -25,5 +26,10 @@ class Question extends Model
     public function topic()
     {
         return $this->belongsTo('App\Models\Topic');
+    }
+
+    public function exam()
+    {
+        return $this->belongsTo('App\Models\Exam');
     }
 }

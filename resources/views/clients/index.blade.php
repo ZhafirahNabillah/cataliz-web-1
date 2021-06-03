@@ -362,7 +362,7 @@
                   <dt class="col-sm-6">Skills</dt>
                 </dl>
                 <dl class="row">
-                  <small class="col-sm-6 skills"></small>
+                  <small class="col-sm-12 skills"></small>
                 </dl>
               </div>
               <!-- </Card modal>-->
@@ -1479,9 +1479,9 @@
               console.log(data);
               $('#modal-coachee-detail').modal('show');
               $('#modalHeadingCoachee').html("Detail Coachee");
-              $('.name').html(data.name);
-              $('.phone').html('+62' + data.phone);
-              $('.email').html(data.email);
+              $('.name').html(data.user.name);
+              $('.phone').html('+62' + data.user.phone);
+              $('.email').html(data.user.email);
             })
           });
 

@@ -53,6 +53,11 @@
         <div class="card ">
           <div class="card-body">
             <h4>Topic : {{ $topic->topic }}</h4>
+            @if ($exam->type == 1)
+              <span>Type : Pre-test</span>
+            @else
+              <span>Type : Post-test</span>
+            @endif
             <!-- Basic table -->
             <section id="basic-datatable">
               <div class="row">

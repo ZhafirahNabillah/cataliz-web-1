@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\Exam;
 use Illuminate\Support\Facades\Validator;
 
 class QuestionController extends Controller
@@ -35,6 +36,13 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $exam = new Exam;
+        $exam->topic_id = $request->topic_id;
+        $exam->type = $request->type;
+        $exam->duration = $request->duration;
+        $exam->owner_id = auth()->user()->id;
+        $exam->save();
+
         foreach ($request->all_questions_id as $question_id) {
 
             $validator = Validator::make($request->all(), [
@@ -52,6 +60,7 @@ class QuestionController extends Controller
 
             $question = new Question;
             $question->topic_id = $request->topic_id;
+            $question->exam_id = $exam->id;
             $question->question = $request->input('question-' . $question_id);
             $question->answers = implode(',', $request->input('answer-' . $question_id));
             $question->true_answer = $request->input('true-answer-' . $question_id);
@@ -59,7 +68,7 @@ class QuestionController extends Controller
             $question->save();
         }
 
-        return redirect('/exercise')->with('success', 'exercise has been created successfully');
+        return redirect('/exercise')->with('success', 'Exercise has been created successfully');
     }
 
     /**
