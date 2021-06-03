@@ -80,6 +80,51 @@ class ProfileController extends Controller
           'location',
           'beginner_status'
         ));
+      } elseif (auth()->user()->hasRole('trainer')) {
+        $coach = Coach::where('user_id', auth()->user()->id)->first();
+
+        if ($coach->category_id) {
+          $category_id = json_decode($coach->category_id);
+          $categories = Category::whereIn('id', $category_id)->get();
+        } else {
+          $categories = null;
+        }
+
+        $all_categories = Category::all();
+
+        if ($coach->skill_id) {
+          $skill_id = json_decode($coach->skill_id);
+          $skills = Skill::whereIn('id', $skill_id)->get();
+        } else {
+          $skills = null;
+        }
+
+        $all_skills = Skill::all();
+
+        $educations = collect(json_decode($coach->education));
+        $work_experiences = collect(json_decode($coach->employment));
+        $languages = collect(json_decode($coach->language));
+        $description_title = $coach->skills_description_title;
+        $description_overview = $coach->skills_description_overview;
+        $location = json_decode($coach->location);
+        $beginner_status = $coach->beginner_status;
+
+        return view('profile.index', compact(
+          'user',
+          'contents',
+          'contents_bg',
+          'categories',
+          'all_categories',
+          'skills',
+          'all_skills',
+          'educations',
+          'work_experiences',
+          'languages',
+          'description_title',
+          'description_overview',
+          'location',
+          'beginner_status'
+        ));
       } else {
         return view('profile.index', compact('user', 'contents', 'contents_bg'));
       }
