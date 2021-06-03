@@ -10,10 +10,11 @@
     <div class="content-body">
       <div class="auth-wrapper auth-v2">
         <div class="auth-inner row m-0">
-          <!-- Brand logo-->
-          <a class="brand-logo" href="/">
-            @include('panels.logo')
-          </a>
+     
+            <!-- Brand logo-->
+            <a class="brand-logo" href="/">
+              @include('panels.logo')
+            </a>
           <!-- /Brand logo-->
           <!-- Left Text-->
           <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
@@ -22,8 +23,9 @@
           </div>
           <!-- /Left Text-->
           <!-- Register-->
-          <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
-            <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto">
+
+          <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5 ">
+            <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto ">
               @if ($message = Session::get('success'))
               <div class="alert alert-success alert-dissmisable">
                 <h4 class="alert-heading">Success</h4>
