@@ -653,10 +653,51 @@
 
           @role('coach')
           {{-- calendar --}}
-          <div class="col-sm-12">
+          <div class="col-sm-8">
             <div class="card">
               <div class="card-body">
                 <div id='calendar'></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                  <div class="card-header">
+                    <h4 class="card-title">Upcoming Events
+                      <img class="align-text width=" 15px" height="15px"" src="
+                        {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                        data-placement="top"
+                        data-content="Bagian ini menampilkan jadwal kegiatan yang dilakukan hari ini dan beberapa hari kedepan" />
+                    </h4>
+                  </div>
+                  <hr>
+                  <!-- waktu hari ini -->
+                  <h3 class="badge badge-primary font-weight-bold">Today</h3>
+                  <br>
+                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
+                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan management</a>
+                  <br>
+                  <span class="text-primary pl-3">today,4 June, <span class="text-dark font-weight-bold"> 08.00 am </span></span>
+                  <hr>
+                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
+                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Laravel</a>
+                  <br>
+                  <span class="text-primary pl-3">today,4 June, <span class="text-dark font-weight-bold"> 02.00 pm </span></span>
+                  <!-- next event -->
+                  <br>
+                  <hr>
+                  <h3 class="badge badge-primary font-weight-bold">Next Event</h3>
+                  <br>
+                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
+                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Business</a>
+                  <br>
+                  <span class="text-primary pl-3">Tuesday,15 June, <span class="text-dark font-weight-bold"> 09.00 am </span></span>
+                  <hr>
+                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
+                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Laravel II</a>
+                  <br>
+                  <span class="text-primary pl-3">Wednesday,23 June, <span class="text-dark font-weight-bold"> 03.00 pm </span></span>
               </div>
             </div>
           </div>
