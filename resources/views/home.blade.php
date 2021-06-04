@@ -673,31 +673,23 @@
                   </div>
                   <hr>
                   <!-- waktu hari ini -->
-                  <h3 class="badge badge-primary font-weight-bold">Today</h3>
-                  <br>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan management</a>
-                  <br>
-                  <span class="text-primary pl-3">today,4 June, <span class="text-dark font-weight-bold"> 08.00 am </span></span>
-                  <hr>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Laravel</a>
-                  <br>
-                  <span class="text-primary pl-3">today,4 June, <span class="text-dark font-weight-bold"> 02.00 pm </span></span>
-                  <!-- next event -->
-                  <br>
-                  <hr>
-                  <h3 class="badge badge-primary font-weight-bold">Next Event</h3>
-                  <br>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Business</a>
-                  <br>
-                  <span class="text-primary pl-3">Tuesday,15 June, <span class="text-dark font-weight-bold"> 09.00 am </span></span>
-                  <hr>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Laravel II</a>
-                  <br>
-                  <span class="text-primary pl-3">Wednesday,23 June, <span class="text-dark font-weight-bold"> 03.00 pm </span></span>
+                  <div id="list_event_wrapper">
+                    <h3 class="badge badge-primary font-weight-bold">Today</h3>
+                    <br>
+                    @forelse ($today_events as $event)
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                          <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
+                          <a class="text-primary" style="font-size: 20px" href="{{ $event['url'] }}" >{{ $event['topic'] }}</a>
+                          <br><span>{{ $event['start'] }}</span>
+                        </div>
+                      </div>
+                      <hr>
+                    @empty
+                      <span><i>No Event Available</i></span>
+                    @endforelse
+                  </div>
               </div>
             </div>
           </div>
@@ -1134,9 +1126,18 @@
   document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
+        var today = new Date();
+        var day = today.getDay();
+        var month = today.getMonth()+1;
+        var year = today.getFullYear();
+
+        var formatted_today_date = year+'-'+month+'-'+day;
+        console.log(formatted_today_date);
+
+        var dayElement = null;
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
-          initialDate: '2021-05-07',
           eventDidMount: function(info) {
             console.log(info.el);
             $(info.el).attr('title', "Event Detail");
@@ -1199,6 +1200,37 @@
 
             $('[data-toggle="popover"]').popover({
               trigger: 'hover'
+            });
+          },
+          dateClick: function(info) {
+            if (dayElement != null) {
+              dayElement.css('background-color','');
+            }
+
+            $(info.dayEl).css('background-color','#F5F5F5');
+
+            dayElement = $(info.dayEl);
+
+            $.get("" + '/home/get_date_event?date=' + info.dateStr, function(data) {
+              console.log(data);
+              $('#list_event_wrapper').html(`<h3 class="badge badge-primary font-weight-bold">`+info.dateStr+`</h3><br>`);
+              for (var i = 0; i < data.length; i++) {
+                $('#list_event_wrapper').append(
+                  `<div class="row">
+                    <div class="col-sm-12">
+                      <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                      <span>`+data[i].title+` - `+data[i].coachee+`</span><br>
+                      <a class="text-primary" style="font-size: 20px" href="`+data[i].url+`" >`+data[i].topic+`</a>
+                      <br><span>`+data[i].start+`</span>
+                    </div>
+                  </div>
+                  <hr>`
+                );
+              }
+              if (data.length < 1) {
+                $('#list_event_wrapper').append('<span><i>No Event Available</i></span>');
+              }
+              // $('.trello_icons').load();
             });
           },
           headerToolbar: {

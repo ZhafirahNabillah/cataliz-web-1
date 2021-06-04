@@ -62,6 +62,31 @@ class HomeController extends Controller
       $total_sessions = $agenda_detail->where('status', '!=', 'canceled')->count();
       $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from', 'coachee')->whereNotNull('rating')->avg('rating');
 
+      $today_events = collect([]);
+
+      $today = Carbon::now()->format('Y-m-d');
+
+      foreach ($agenda_detail->where('date', $today) as $session) {
+        $client = null;
+        $agenda = $session->agenda;
+        $plan = $agenda->plan;
+        if ($plan->client_id == null) {
+          $client = $plan->group_id;
+        } else {
+          $client = $plan->client->name;
+        }
+        $today_events->push([
+          'title'       => $session->session_name,
+          'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
+          'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
+          'topic'       => $session->topic,
+          'type'        => 'coaching',
+          'coachee'     => $client,
+          'id'          => $session->id,
+          'url'         => route('agendas.show', $session->id)
+        ]);
+      }
+
       // return $total_sessions;
 
 
@@ -88,7 +113,7 @@ class HomeController extends Controller
       //         ->make(true);
       // }
 
-      return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings'));
+      return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings', 'today_events'));
     } elseif (auth()->user()->hasRole('admin')) {
 
       $total_coach = User::role('coach')->count();
@@ -424,6 +449,36 @@ class HomeController extends Controller
     $plans = $coach->plan;
     $agenda = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
     $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+
+    $data = collect([]);
+
+    foreach ($agenda_detail as $session) {
+      $client = null;
+      $agenda = $session->agenda;
+      $plan = $agenda->plan;
+      if ($plan->client_id == null) {
+        $client = $plan->group_id;
+      } else {
+        $client = $plan->client->name;
+      }
+      $data->push([
+        'title'       => $session->session_name,
+        'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
+        'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
+        'topic'       => $session->topic,
+        'type'        => 'coaching',
+        'coachee'     => $client,
+        'id'          => $session->id,
+        'url'         => route('agendas.show', $session->id)
+      ]);
+    }
+
+    return response()->json($data);
+  }
+
+  public function get_date_event(Request $request){
+    $date = $request->get('date');
+    $agenda_detail = Agenda_detail::where('date', $date)->get();
 
     $data = collect([]);
 
