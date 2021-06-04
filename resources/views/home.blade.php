@@ -663,7 +663,7 @@
           <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
-                  <div class="card-header">
+                  <div class="card-header px-0">
                     <h4 class="card-title">Upcoming Events
                       <img class="align-text width=" 15px" height="15px"" src="
                         {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
