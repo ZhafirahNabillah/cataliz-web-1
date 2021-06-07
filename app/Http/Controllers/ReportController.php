@@ -23,7 +23,7 @@ class ReportController extends Controller
      */
     public function create()
     {
-        //
+        return view('reports.create');
     }
 
     /**
@@ -45,7 +45,7 @@ class ReportController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('reports.show');
     }
 
     /**
