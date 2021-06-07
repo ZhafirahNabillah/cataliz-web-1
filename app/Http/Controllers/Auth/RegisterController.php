@@ -93,10 +93,11 @@ class RegisterController extends Controller
     ]);
 
     if ($request->role == 'coach') {
+
       Coach::create([
-        'user_id' => $user->id,
-        'skill' => null
+        'user_id' => $user->id
       ]);
+
       $user->assignRole('coach');
     } elseif ($request->role == 'coachee') {
       Client::create([
@@ -111,6 +112,10 @@ class RegisterController extends Controller
       ]);
       $user->assignRole('coachee');
     } elseif ($request->role == 'trainer') {
+
+      Coach::create([
+        'user_id' => $user->id
+      ]);
 
       $user->assignRole('trainer');
 

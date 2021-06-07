@@ -149,6 +149,27 @@ class HomeController extends Controller
       $total_sessions = $agenda_detail->where('status', '!=', 'canceled')->count();
       $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from', 'coachee')->where('user_id', auth()->user()->id)->whereNotNull('rating')->count();
 
+      $today_events = collect([]);
+
+      $today = Carbon::now()->format('Y-m-d');
+
+      foreach ($agenda_detail->where('date', $today)->whereIn('status', ['scheduled', 'rescheduled', 'finished']) as $session) {
+        $agenda = $session->agenda;
+        $plan = $agenda->plan;
+        $coach = $plan->owner;
+        $coach_data = $coach->user->name;
+        $today_events->push([
+          'title'       => $session->session_name,
+          'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
+          'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
+          'topic'       => $session->topic,
+          'type'        => 'coaching',
+          'coach'       => $coach_data,
+          'id'          => $session->id,
+          'url'         => route('agendas.show', $session->id)
+        ]);
+      }
+
       // return $plan_id;
 
       // $total_coach = User::role('coach')->count();
@@ -161,7 +182,7 @@ class HomeController extends Controller
       //     ->where('clients.user_id', Auth::user()->id)
       //     ->first();
 
-      return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'total_ratings', 'client'));
+      return view('home', compact('total_hours', 'total_coach', 'total_sessions', 'total_ratings', 'client', 'today_events'));
     } elseif (auth()->user()->hasRole('trainer')) {
       $total_topic = Topic::where('trainer_id', auth()->user()->id)->count();
       $topic = Topic::where('trainer_id', auth()->user()->id)->pluck('id');
@@ -445,21 +466,35 @@ class HomeController extends Controller
   }
 
   public function load_calendar_data(Request $request){
-    $coach = Coach::where('user_id', auth()->user()->id)->first();
-    $plans = $coach->plan;
-    $agenda = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
-    $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+    if (auth()->user()->hasRole('coach')) {
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+      $plans = $coach->plan;
+      $agenda = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+      $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+    } elseif (auth()->user()->hasRole('coachee')) {
+      $client = Client::where('user_id', auth()->user()->id)->first();
+      $plan_id = $client->plans->pluck('id');
+      $agenda_id = Agenda::whereIn('plan_id', $plan_id)->pluck('id');
+      $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->get();
+    } else {
+      $agenda_detail = null;
+    }
 
     $data = collect([]);
 
-    foreach ($agenda_detail as $session) {
-      $client = null;
+    foreach ($agenda_detail->whereIn('status', ['scheduled', 'rescheduled', 'finished']) as $session) {
+      $user = null;
       $agenda = $session->agenda;
       $plan = $agenda->plan;
-      if ($plan->client_id == null) {
-        $client = $plan->group_id;
-      } else {
-        $client = $plan->client->name;
+      if (auth()->user()->hasRole('coach')) {
+        if ($plan->client_id == null) {
+          $user = $plan->group_id;
+        } else {
+          $user = $plan->client->name;
+        }
+      } elseif (auth()->user()->hasRole('coachee')) {
+        $coach = $plan->owner;
+        $user = $coach->user->name;
       }
       $data->push([
         'title'       => $session->session_name,
@@ -467,7 +502,7 @@ class HomeController extends Controller
         'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
         'topic'       => $session->topic,
         'type'        => 'coaching',
-        'coachee'     => $client,
+        'target'      => $user,
         'id'          => $session->id,
         'url'         => route('agendas.show', $session->id)
       ]);
@@ -478,18 +513,36 @@ class HomeController extends Controller
 
   public function get_date_event(Request $request){
     $date = $request->get('date');
-    $agenda_detail = Agenda_detail::where('date', $date)->get();
+
+    if (auth()->user()->hasRole('coach')) {
+      $coach = Coach::where('user_id', auth()->user()->id)->first();
+      $plans = $coach->plan;
+      $agenda = Agenda::whereIn('plan_id', $plans->pluck('id'))->get();
+      $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda->pluck('id'))->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+    } elseif (auth()->user()->hasRole('coachee')) {
+      $client = Client::where('user_id', auth()->user()->id)->first();
+      $plan_id = $client->plans->pluck('id');
+      $agenda_id = Agenda::whereIn('plan_id', $plan_id)->pluck('id');
+      $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+    } else {
+      $agenda_detail = null;
+    }
 
     $data = collect([]);
 
-    foreach ($agenda_detail as $session) {
-      $client = null;
+    foreach ($agenda_detail->where('date', $date) as $session) {
+      $user = null;
       $agenda = $session->agenda;
       $plan = $agenda->plan;
-      if ($plan->client_id == null) {
-        $client = $plan->group_id;
-      } else {
-        $client = $plan->client->name;
+      if (auth()->user()->hasRole('coach')) {
+        if ($plan->client_id == null) {
+          $user = $plan->group_id;
+        } else {
+          $user = $plan->client->name;
+        }
+      } elseif (auth()->user()->hasRole('coachee')) {
+        $coach = $plan->owner;
+        $user = $coach->user->name;
       }
       $data->push([
         'title'       => $session->session_name,
@@ -497,7 +550,7 @@ class HomeController extends Controller
         'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
         'topic'       => $session->topic,
         'type'        => 'coaching',
-        'coachee'     => $client,
+        'target'      => $user,
         'id'          => $session->id,
         'url'         => route('agendas.show', $session->id)
       ]);

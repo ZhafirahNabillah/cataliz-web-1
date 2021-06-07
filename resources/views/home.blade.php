@@ -651,7 +651,7 @@
             </div>
           </div>
 
-          @role('coach')
+          @role('coach|coachee')
           {{-- calendar --}}
           <div class="col-sm-8">
             <div class="card">
@@ -680,7 +680,12 @@
                       <div class="row">
                         <div class="col-sm-12">
                           <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                          @role('coach')
                           <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
+                          @endrole
+                          @role('coachee')
+                          <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
+                          @endrole
                           <a class="text-primary" style="font-size: 20px" href="{{ $event['url'] }}" >{{ $event['topic'] }}</a>
                           <br><span>{{ $event['start'] }}</span>
                         </div>
@@ -690,75 +695,6 @@
                       <span><i>No Event Available</i></span>
                     @endforelse
                   </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="event_coaching_modal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Event Detail</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Event Type</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-type">
-                      Coaching Session
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Session name</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-session">
-                      Session 1
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Title</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-topic">
-                      Making front end website with HTML5
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Coachee</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-coachee">
-                      User Coachee
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Start Time</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-start-time">
-                      21-02-2021 10:00:00
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>End Time</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-end-time">
-                      21-02-2021 11:00:00
-                    </div>
-                  </div>
-                  <div class="row justify-content-center mt-1">
-                    <div class="col-auto">
-                      <a href="#" class="btn btn-primary" id="go-to-event-btn">Go to event</a>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1175,7 +1111,7 @@
                     <b>Coachee</b>
                   </div>
                   <div class="col-sm-12" id="coaching-coachee">
-                    `+info.event.extendedProps.coachee+`
+                    `+info.event.extendedProps.target+`
                   </div>
                 </div>
                 <div class="row">
@@ -1219,7 +1155,7 @@
                   `<div class="row">
                     <div class="col-sm-12">
                       <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
-                      <span>`+data[i].title+` - `+data[i].coachee+`</span><br>
+                      <span>`+data[i].title+` - `+data[i].target+`</span><br>
                       <a class="text-primary" style="font-size: 20px" href="`+data[i].url+`" >`+data[i].topic+`</a>
                       <br><span>`+data[i].start+`</span>
                     </div>
