@@ -75,7 +75,11 @@
                 <a class="d-flex align-items-center" href="{{route('class.index')}}"><i data-feather="monitor"></i><span class="menu-title text-truncate" data-i18n="Todo">Class</span></a>
             </li>
             @endcan
-
+            @can('list-report', 'create-report', 'detail-report')
+            <li class=" nav-item {{ 'class' == request()->path() ? 'active show' : '' }}">
+                <a class="d-flex align-items-center" href="#"><i data-feather="book-open"></i><span class="menu-title text-truncate" data-i18n="Todo">Report</span></a>
+            </li>
+            @endcan
             @canany('list-role','list-permission')
             <div class="navigation-header"><span><b>Role and
                         Permission</b></span><i class="float-right mr-2 mb-2"></i></div>
