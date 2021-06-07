@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '8bd068046dd29d8b72505cd1760b6e1694e65689',
+    'reference' => '11090fac19a8a44e6bf20aac62dd3f3f04d04db0',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -241,13 +241,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '3c921a1cdba35b68a7f0ccffc6dffc1995b18267',
-    ),
-    'facebook/webdriver' => 
-    array (
-      'replaced' => 
-      array (
-        0 => '*',
-      ),
     ),
     'fakerphp/faker' => 
     array (
@@ -563,15 +556,6 @@ private static $installed = array (
         0 => '*',
       ),
     ),
-    'laravel/dusk' => 
-    array (
-      'pretty_version' => 'v6.15.0',
-      'version' => '6.15.0.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '45b55fa20321086c4f8cc4e712cbe54db644e21c',
-    ),
     'laravel/framework' => 
     array (
       'pretty_version' => 'v8.36.1',
@@ -588,7 +572,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '8bd068046dd29d8b72505cd1760b6e1694e65689',
+      'reference' => '11090fac19a8a44e6bf20aac62dd3f3f04d04db0',
     ),
     'laravel/sail' => 
     array (
@@ -787,15 +771,6 @@ private static $installed = array (
       array (
       ),
       'reference' => '5fa61b65e612ce1ae15f69b3d223cb14ecc60e32',
-    ),
-    'php-webdriver/webdriver' => 
-    array (
-      'pretty_version' => '1.11.1',
-      'version' => '1.11.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'da16e39968f8dd5cfb7d07eef91dc2b731c69880',
     ),
     'phpdocumentor/reflection-common' => 
     array (

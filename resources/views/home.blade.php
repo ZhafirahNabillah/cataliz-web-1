@@ -45,6 +45,8 @@
     <div class="content-header row">
     </div>
     <div class="content-body">
+      <a href="{{route('report.index')}}">lshdkjdhsf</a>
+
 
       @role('admin')
       <section id="card-demo-example">
@@ -663,38 +665,39 @@
           <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
-                  <div class="card-header px-0">
-                    <h4 class="card-title">Upcoming Events
-                      <img class="align-text width=" 15px" height="15px"" src="
-                        {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                        data-placement="top"
-                        data-content="Bagian ini menampilkan jadwal kegiatan yang dilakukan hari ini dan beberapa hari kedepan" />
-                    </h4>
+                <div class="card-header px-0">
+                  <h4 class="card-title">Upcoming Events
+                    <img class="align-text width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top"
+                      data-content="Bagian ini menampilkan jadwal kegiatan yang dilakukan hari ini dan beberapa hari kedepan" />
+                  </h4>
+                </div>
+                <hr>
+                <!-- waktu hari ini -->
+                <div id="list_event_wrapper">
+                  <h3 class="badge badge-primary font-weight-bold">Today</h3>
+                  <br>
+                  @forelse ($today_events as $event)
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                      @role('coach')
+                      <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
+                      @endrole
+                      @role('coachee')
+                      <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
+                      @endrole
+                      <a class="text-primary" style="font-size: 20px"
+                        href="{{ $event['url'] }}">{{ $event['topic'] }}</a>
+                      <br><span>{{ $event['start'] }}</span>
+                    </div>
                   </div>
                   <hr>
-                  <!-- waktu hari ini -->
-                  <div id="list_event_wrapper">
-                    <h3 class="badge badge-primary font-weight-bold">Today</h3>
-                    <br>
-                    @forelse ($today_events as $event)
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
-                          @role('coach')
-                          <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
-                          @endrole
-                          @role('coachee')
-                          <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
-                          @endrole
-                          <a class="text-primary" style="font-size: 20px" href="{{ $event['url'] }}" >{{ $event['topic'] }}</a>
-                          <br><span>{{ $event['start'] }}</span>
-                        </div>
-                      </div>
-                      <hr>
-                    @empty
-                      <span><i>No Event Available</i></span>
-                    @endforelse
-                  </div>
+                  @empty
+                  <span><i>No Event Available</i></span>
+                  @endforelse
+                </div>
               </div>
             </div>
           </div>

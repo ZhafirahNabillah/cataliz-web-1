@@ -26,6 +26,7 @@ use App\Http\Controllers\LessonController;
 use App\Http\Controllers\ResultController;
 use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Controllers\TrainingMeetingController;
+use App\Http\Controllers\ReportController;
 
 
 /*
@@ -249,4 +250,9 @@ Route::middleware(['auth'])->group(function () {
 // Training Feedback Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('training_meeting', TrainingMeetingController::class);
+});
+
+// Report Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('report', ReportController::class);
 });
