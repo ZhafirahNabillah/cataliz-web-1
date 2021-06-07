@@ -651,7 +651,7 @@
             </div>
           </div>
 
-          @role('coach')
+          @role('coach|coachee')
           {{-- calendar --}}
           <div class="col-sm-8">
             <div class="card">
@@ -663,7 +663,7 @@
           <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
-                  <div class="card-header">
+                  <div class="card-header px-0">
                     <h4 class="card-title">Upcoming Events
                       <img class="align-text width=" 15px" height="15px"" src="
                         {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
@@ -673,100 +673,28 @@
                   </div>
                   <hr>
                   <!-- waktu hari ini -->
-                  <h3 class="badge badge-primary font-weight-bold">Today</h3>
-                  <br>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan management</a>
-                  <br>
-                  <span class="text-primary pl-3">today,4 June, <span class="text-dark font-weight-bold"> 08.00 am </span></span>
-                  <hr>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Laravel</a>
-                  <br>
-                  <span class="text-primary pl-3">today,4 June, <span class="text-dark font-weight-bold"> 02.00 pm </span></span>
-                  <!-- next event -->
-                  <br>
-                  <hr>
-                  <h3 class="badge badge-primary font-weight-bold">Next Event</h3>
-                  <br>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Business</a>
-                  <br>
-                  <span class="text-primary pl-3">Tuesday,15 June, <span class="text-dark font-weight-bold"> 09.00 am </span></span>
-                  <hr>
-                  <img class="float-left" src="{{ url('assets\images\icons\trello.svg') }}" alt="">
-                  <a class="text-primary pl-1" style="font-size: 20px" href="#" >Pembahasan Laravel II</a>
-                  <br>
-                  <span class="text-primary pl-3">Wednesday,23 June, <span class="text-dark font-weight-bold"> 03.00 pm </span></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="event_coaching_modal" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Event Detail</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Event Type</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-type">
-                      Coaching Session
-                    </div>
+                  <div id="list_event_wrapper">
+                    <h3 class="badge badge-primary font-weight-bold">Today</h3>
+                    <br>
+                    @forelse ($today_events as $event)
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                          @role('coach')
+                          <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
+                          @endrole
+                          @role('coachee')
+                          <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
+                          @endrole
+                          <a class="text-primary" style="font-size: 20px" href="{{ $event['url'] }}" >{{ $event['topic'] }}</a>
+                          <br><span>{{ $event['start'] }}</span>
+                        </div>
+                      </div>
+                      <hr>
+                    @empty
+                      <span><i>No Event Available</i></span>
+                    @endforelse
                   </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Session name</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-session">
-                      Session 1
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Title</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-topic">
-                      Making front end website with HTML5
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Coachee</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-coachee">
-                      User Coachee
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>Start Time</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-start-time">
-                      21-02-2021 10:00:00
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <b>End Time</b>
-                    </div>
-                    <div class="col-sm-6" id="coaching-end-time">
-                      21-02-2021 11:00:00
-                    </div>
-                  </div>
-                  <div class="row justify-content-center mt-1">
-                    <div class="col-auto">
-                      <a href="#" class="btn btn-primary" id="go-to-event-btn">Go to event</a>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -1134,9 +1062,18 @@
   document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
 
+        var today = new Date();
+        var day = today.getDay();
+        var month = today.getMonth()+1;
+        var year = today.getFullYear();
+
+        var formatted_today_date = year+'-'+month+'-'+day;
+        console.log(formatted_today_date);
+
+        var dayElement = null;
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
           initialView: 'dayGridMonth',
-          initialDate: '2021-05-07',
           eventDidMount: function(info) {
             console.log(info.el);
             $(info.el).attr('title', "Event Detail");
@@ -1174,7 +1111,7 @@
                     <b>Coachee</b>
                   </div>
                   <div class="col-sm-12" id="coaching-coachee">
-                    `+info.event.extendedProps.coachee+`
+                    `+info.event.extendedProps.target+`
                   </div>
                 </div>
                 <div class="row">
@@ -1199,6 +1136,37 @@
 
             $('[data-toggle="popover"]').popover({
               trigger: 'hover'
+            });
+          },
+          dateClick: function(info) {
+            if (dayElement != null) {
+              dayElement.css('background-color','');
+            }
+
+            $(info.dayEl).css('background-color','#F5F5F5');
+
+            dayElement = $(info.dayEl);
+
+            $.get("" + '/home/get_date_event?date=' + info.dateStr, function(data) {
+              console.log(data);
+              $('#list_event_wrapper').html(`<h3 class="badge badge-primary font-weight-bold">`+info.dateStr+`</h3><br>`);
+              for (var i = 0; i < data.length; i++) {
+                $('#list_event_wrapper').append(
+                  `<div class="row">
+                    <div class="col-sm-12">
+                      <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                      <span>`+data[i].title+` - `+data[i].target+`</span><br>
+                      <a class="text-primary" style="font-size: 20px" href="`+data[i].url+`" >`+data[i].topic+`</a>
+                      <br><span>`+data[i].start+`</span>
+                    </div>
+                  </div>
+                  <hr>`
+                );
+              }
+              if (data.length < 1) {
+                $('#list_event_wrapper').append('<span><i>No Event Available</i></span>');
+              }
+              // $('.trello_icons').load();
             });
           },
           headerToolbar: {

@@ -129,6 +129,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/home/show_topics', [HomeController::class, 'show_topics'])->name('home.show_topics');
 	Route::post('/home/{id}/store', [HomeController::class, 'store_data'])->name('home.store_data');
 	Route::get('/home/calendar', [HomeController::class, 'load_calendar_data'])->name('home.get_calendar_data');
+	Route::get('/home/get_date_event', [HomeController::class, 'get_date_event'])->name('home.get_date_event');
 });
 
 //Plan Controller
