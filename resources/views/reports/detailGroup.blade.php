@@ -5,8 +5,6 @@
 @push('styles')
 
 <link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-<link rel="stylesheet" href="jquery.rateyo.css"/>
 @endpush
 
 @section('content')
@@ -71,8 +69,8 @@
                               <div class="col-sm-2">
                                 <b>Program</b>
                               </div>
-                              <div class="card col-sm-2">
-                                <div id="rateYo"></div>
+                              <div class="col-sm-2">
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -80,7 +78,7 @@
                                 <b>Awarness</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -88,7 +86,7 @@
                                 <b>Mindset</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -96,7 +94,7 @@
                                 <b>Behaviour</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -104,7 +102,7 @@
                                 <b>Engagement</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -112,7 +110,7 @@
                                 <b>Result</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -120,7 +118,7 @@
                                 <b>Note</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                           </div>
@@ -137,7 +135,7 @@
                                 <b>Program</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -145,7 +143,7 @@
                                 <b>Awarness</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -153,7 +151,7 @@
                                 <b>Mindset</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -161,7 +159,7 @@
                                 <b>Behaviour</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -169,7 +167,7 @@
                                 <b>Engagement</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -177,7 +175,7 @@
                                 <b>Result</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
                               </div>
                             </div>
                             <div class="row mb-2">
@@ -185,7 +183,72 @@
                                 <b>Note</b>
                               </div>
                               <div class="col-sm-2">
-                                <div id="rateYo"></div>
+                                #
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="card">
+                        <div id="headingCollapse3" class="card-header" data-toggle="collapse" role="button" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                          <span class="lead collapse-title"><b>Chochee Name 2</b> Chochee Name</span>
+                        </div>
+                        <div id="collapse3" role="tabpanel" aria-labelledby="headingCollapse3" class="collapse" data-parent="#accordionExample">
+                          <div class="card-body">
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Program</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Awarness</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Mindset</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Behaviour</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Engagement</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Result</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
+                              </div>
+                            </div>
+                            <div class="row mb-2">
+                              <div class="col-sm-2">
+                                <b>Note</b>
+                              </div>
+                              <div class="col-sm-2">
+                                #
                               </div>
                             </div>
                           </div>
@@ -207,9 +270,6 @@
 
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-<script src="jquery.js"></script>
-<script src="jquery.rateyo.js"></script>
 <script type="text/javascript">
  // popover
  $(function() {
@@ -221,12 +281,6 @@
           return '<img src="' + $(this).data('img') + '" />';
         }
       });
-
-      $("#rateYo").rateYo({
-        ratedFill: "#F1AF33",
-        numStars: 10
-      });
-
   });
 </script>
 @endpush
