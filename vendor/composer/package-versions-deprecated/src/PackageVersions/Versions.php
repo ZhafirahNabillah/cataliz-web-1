@@ -128,12 +128,14 @@ final class Versions
   'fakerphp/faker' => 'v1.14.1@ed22aee8d17c7b396f74a58b1e7fefa4f90d5ef1',
   'filp/whoops' => '2.12.0@d501fd2658d55491a2295ff600ae5978eaad7403',
   'hamcrest/hamcrest-php' => 'v2.0.1@8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
+  'laravel/dusk' => 'v6.15.0@45b55fa20321086c4f8cc4e712cbe54db644e21c',
   'laravel/sail' => 'v0.0.5@d9b0575ece889a35b9741789452c1c7abca5bc2f',
   'mockery/mockery' => '1.4.3@d1339f64479af1bee0e82a0413813fe5345a54ea',
   'myclabs/deep-copy' => '1.10.2@776f831124e9c62e1a2c601ecc52e776d8bb7220',
   'nunomaduro/collision' => 'v5.3.0@aca63581f380f63a492b1e3114604e411e39133a',
   'phar-io/manifest' => '2.0.1@85265efd3af7ba3ca4b2a2c34dbfc5788dd29133',
   'phar-io/version' => '3.1.0@bae7c545bef187884426f042434e561ab1ddb182',
+  'php-webdriver/webdriver' => '1.11.1@da16e39968f8dd5cfb7d07eef91dc2b731c69880',
   'phpdocumentor/reflection-common' => '2.2.0@1d01c49d4ed62f25aa84a747ad35d5a16924662b',
   'phpdocumentor/reflection-docblock' => '5.2.2@069a785b2141f5bcf49f3e353548dc1cce6df556',
   'phpdocumentor/type-resolver' => '1.4.0@6a467b8989322d92aa1c8bf2bebcc6e5c2ba55c0',
@@ -161,7 +163,7 @@ final class Versions
   'sebastian/type' => '2.3.1@81cd61ab7bbf2de744aba0ea61fae32f721df3d2',
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-main@44de1d73c864b9e3cf08d6c63e1fa5ea1f1565cf',
+  'laravel/laravel' => 'dev-main@8bd068046dd29d8b72505cd1760b6e1694e65689',
 );
 
     private function __construct()
