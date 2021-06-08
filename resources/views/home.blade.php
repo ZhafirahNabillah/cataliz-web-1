@@ -45,8 +45,6 @@
     <div class="content-header row">
     </div>
     <div class="content-body">
-      <a href="{{route('report.index')}}">lshdkjdhsf</a>
-
 
       @role('admin')
       <section id="card-demo-example">
