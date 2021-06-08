@@ -622,7 +622,8 @@ class AgendaController extends Controller
     $coach = Coach::where('user_id', auth()->user()->id)->first();
     if ($request->has('q')) {
       $search = $request->q;
-      $plans = $coach->plan->where('objective', 'LIKE', "%$search%");
+      $plans_id = $coach->plan->pluck('id');
+      $plans = Plan::whereIn('id', $plans_id)->where('objective', 'LIKE', '%'.$search.'%')->get();
     } else {
       $plans = $coach->plan;
     }

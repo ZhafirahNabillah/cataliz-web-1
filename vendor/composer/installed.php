@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'd2b232fa2bc41f89116ebe7557dc17313f5c5b1e',
+    'reference' => '202dab6ec135c25c690d6b07abeb993e3727a191',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -564,7 +564,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'd2b232fa2bc41f89116ebe7557dc17313f5c5b1e',
+      'reference' => '202dab6ec135c25c690d6b07abeb993e3727a191',
     ),
     'laravel/sail' => 
     array (
@@ -1022,6 +1022,15 @@
       array (
         0 => '4.1.1',
       ),
+    ),
+    'roquie/laravel-dusk-select2' => 
+    array (
+      'pretty_version' => '2.1.0',
+      'version' => '2.1.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'eb13801b753d77384948b8447ebe82beab76f5c5',
     ),
     'sabberworm/php-css-parser' => 
     array (
