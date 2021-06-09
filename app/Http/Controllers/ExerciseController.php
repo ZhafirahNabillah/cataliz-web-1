@@ -171,6 +171,46 @@ class ExerciseController extends Controller
           ->rawColumns(['action', 'topic' ,'total_questions', 'category'])
           ->make(true);
       }
+    } else {
+
+      $data = Exam::get();
+
+      if ($request->ajax()) {
+
+        //return data as datatable json
+        return Datatables::of($data)
+          ->addIndexColumn()
+          ->addColumn('total_questions', function ($row) {
+            $total_questions = $row->questions->count();
+            return $total_questions;
+          })
+          ->addColumn('topic', function ($row) {
+            $topic = $row->topic->topic;
+            return $topic;
+          })
+          ->addColumn('category', function ($row) {
+            $topic = $row->topic;
+            $category = $topic->category->category;
+            return $category;
+          })
+          ->addColumn('action', function ($row) {
+
+            //add detail button if user have permission
+            if (auth()->user()->can('detail-exercise')) {
+              $detail_btn = '<a href="' . route('exercise.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
+            } else {
+              $detail_btn = null;
+              // $detail_participant_btn = null;
+            }
+
+            //final button that shows on view
+            $actionBtn = $detail_btn;
+
+            return $actionBtn;
+          })
+          ->rawColumns(['action','category','total_questions','topic'])
+          ->make(true);
+        }
     }
 
     return view('exercise.index');
