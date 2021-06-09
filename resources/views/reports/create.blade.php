@@ -49,15 +49,15 @@
             </div>
 
             <div class="card-body">
-              <div class="row mb-2 pl-1">
+              <div class="row mb-2 ">
                 <div class="col-sm-2">
-                  <b>Group Code</b>
+                  <b>Coachee Name</b>
                 </div>
                 <div class="col-sm-2">
                   #
                 </div>
               </div>
-              <div class="row mb-2 pl-1">
+              <div class="row mb-2 ">
                 <div class="col-sm-2">
                   <b>Program</b>
                 </div>
@@ -65,227 +65,127 @@
                   #
                 </div>
               </div>
-              <div class="collapse-icon">
-                <div class="accordion" id="accordionExample">
-                  <div class="card">
-                    <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                      <span class="lead collapse-title"><b>Chochee Name 1</b> #Chochee Name</span>
-                    </div>
-                    <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                      <div class="card-body">
-                        <!-- awarness -->
-                        <div class="col-sm-2">
-                          <b>Awarness</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="awarness"></div>
-                        </div>
-
-                        <!-- mindset -->
-                        <div class="col-sm-2">
-                          <b>Mindset</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="mindset"></div>
-                        </div>
-
-                        <!-- behaviour -->
-
-                        <div class="col-sm-2">
-                          <b>Behaviour</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="behaviour"></div>
-                        </div>
-
-                        <!-- engagement -->
-
-                        <div class="col-sm-2">
-                          <b>Engagement</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="engagement"></div>
-                        </div>
-
-                        <!-- result -->
-                        <div class="col-sm-2">
-                          <b>Result</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="result"></div>
-                        </div>
-
-                        <!-- note -->
-                        <div class="col-sm-2">
-                          <b>Note</b>
-                        </div>
-                        <div class="col-md-12 form-group">
-                          <textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
-                        </div>
-
-                      </div>
-                    </div>
+              <div class="card">
+                <div class="card-body">
+                  <!-- awarness -->
+                  <div class="col-sm-2">
+                    <b>Awarness</b>
                   </div>
-                  <div class="card">
-                    <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                      <span class="lead collapse-title"><b>Chochee Name 2</b> Chochee Name</span>
-                    </div>
-                    <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse" data-parent="#accordionExample">
-                      <div class="card-body">
-                        <!-- awarness -->
-                        <div class="col-sm-2">
-                          <b>Awarness</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="awarness2"></div>
-                        </div>
+                  <div class="col-sm-2">
+                    <div class="border p-1" id="awarness"></div>
+                  </div>
 
-                        <!-- mindset -->
-                        <div class="col-sm-2">
-                          <b>Mindset</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="mindset2"></div>
-                        </div>
+                  <!-- mindset -->
+                  <div class="col-sm-2">
+                    <b>Mindset</b>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="border p-1" id="mindset"></div>
+                  </div>
 
-                        <!-- behaviour -->
+                  <!-- behaviour -->
 
-                        <div class="col-sm-2">
-                          <b>Behaviour</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="behaviour2"></div>
-                        </div>
+                  <div class="col-sm-2">
+                    <b>Behaviour</b>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="border p-1" id="behaviour"></div>
+                  </div>
 
-                        <!-- engagement -->
+                  <!-- engagement -->
 
-                        <div class="col-sm-2">
-                          <b>Engagement</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="engagement2"></div>
-                        </div>
+                  <div class="col-sm-2">
+                    <b>Engagement</b>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="border p-1" id="engagement"></div>
+                  </div>
 
-                        <!-- result -->
-                        <div class="col-sm-2">
-                          <b>Result</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="result2"></div>
-                        </div>
+                  <!-- result -->
+                  <div class="col-sm-2">
+                    <b>Result</b>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="border p-1" id="result"></div>
+                  </div>
 
-                        <!-- note -->
-                        <div class="col-sm-2">
-                          <b>Note</b>
-                        </div>
-                        <div class="col-md-12 form-group">
-                          <textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
-                        </div>
-
-                      </div>
-                    </div>
+                  <!-- note -->
+                  <div class="col-sm-2">
+                    <b>Note</b>
+                  </div>
+                  <div class="col-md-12 form-group">
+                    <textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
                   </div>
                 </div>
-              </div>
 
-              <div class="col-md-12 text-right">
-                <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
-                <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
+
+                <div class="col-md-12 text-right">
+                  <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
+                  <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
+                </div>
               </div>
             </div>
+
           </div>
 
         </div>
-
       </div>
     </div>
   </div>
-</div>
-<!-- END: Content-->
-@endsection
+  <!-- END: Content-->
+  @endsection
 
-@push('scripts')
-<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-<script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="jquery.js"></script>
-<script src="jquery.rateyo.js"></script>
-<script type="text/javascript">
-  $(function() {
-    // popover
-    $('[data-toggle="popover"]').popover({
-      html: true,
-      trigger: 'hover',
-      placement: 'top',
-      content: function() {
-        return '<img src="' + $(this).data('img') + '" />';
-      }
-    });
+  @push('scripts')
+  <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+  <script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="jquery.js"></script>
+  <script src="jquery.rateyo.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      // popover
+      $('[data-toggle="popover"]').popover({
+        html: true,
+        trigger: 'hover',
+        placement: 'top',
+        content: function() {
+          return '<img src="' + $(this).data('img') + '" />';
+        }
+      });
 
-    $("#awarness").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
+      $("#awarness").rateYo({
+        ratedFill: "#F1AF33",
+        numStars: 10,
+        spacing: "30px"
+      });
 
-    $("#mindset").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
+      $("#mindset").rateYo({
+        ratedFill: "#F1AF33",
+        numStars: 10,
+        spacing: "30px"
+      });
 
-    $("#behaviour").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
+      $("#behaviour").rateYo({
+        ratedFill: "#F1AF33",
+        numStars: 10,
+        spacing: "30px"
+      });
 
-    $("#engagement").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
+      $("#engagement").rateYo({
+        ratedFill: "#F1AF33",
+        numStars: 10,
+        spacing: "30px"
+      });
 
-    $("#result").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
-    // next
+      $("#result").rateYo({
+        ratedFill: "#F1AF33",
+        numStars: 10,
+        spacing: "30px"
+      });
 
-    $("#awarness2").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
+      tinymce.init({
+        selector: 'textarea',
+      });
     });
-
-    $("#mindset2").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
-
-    $("#behaviour2").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
-
-    $("#engagement2").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
-
-    $("#result2").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 10,
-      spacing: "30px"
-    });
-
-    tinymce.init({
-      selector: 'textarea',
-    });
-  });
-</script>
-@endpush
+  </script>
+  @endpush
