@@ -185,7 +185,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Topic Controller
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'HtmlSanitizer'])->group(function () {
 	Route::resource('topic', TopicController::class);
 	Route::get('/topic/{topic}/download', [TopicController::class, 'topic_pdf_download'])->name('topic.download');
 	Route::get('/topic_search', [TopicController::class, 'topic_search'])->name('topic.search');
@@ -201,7 +201,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Question Controller
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'HtmlSanitizer'])->group(function () {
 	Route::resource('question', QuestionController::class);
 	Route::get('/add_new_question/{id}', [QuestionController::class, 'add_new_question'])->name('question.add_new');
 	Route::post('/add_new_question/{exam}/new', [QuestionController::class, 'store_new_question'])->name('question.store_new');
