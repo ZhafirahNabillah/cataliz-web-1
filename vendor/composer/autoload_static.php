@@ -43,9 +43,9 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'eb7e98e63c68d07fafdbd92bdcaa497e' => __DIR__ . '/..' . '/deployer/recipes/autoload.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        '67a8251cebeeca63fd3b1fc35cc0eb21' => __DIR__ . '/..' . '/roquie/laravel-dusk-select2/src/macro.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
-        '67a8251cebeeca63fd3b1fc35cc0eb21' => __DIR__ . '/..' . '/roquie/laravel-dusk-select2/src/macro.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -7061,6 +7061,9 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
         'Tests\\Browser\\ClickCreateAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickCreateAgendaButton.php',
+        'Tests\\Browser\\ClickDeleteAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickDeleteAgendaButton.php',
+        'Tests\\Browser\\ClickDetailAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickDetailAgendaButton.php',
+        'Tests\\Browser\\ClickEditAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickEditAgendaButton.php',
         'Tests\\Browser\\CreateAgendaSubmit' => __DIR__ . '/../..' . '/tests/Browser/CreateAgendaSubmit.php',
         'Tests\\Browser\\LoginTest' => __DIR__ . '/../..' . '/tests/Browser/LoginTest.php',
         'Tests\\Browser\\Pages\\HomePage' => __DIR__ . '/../..' . '/tests/Browser/Pages/HomePage.php',
