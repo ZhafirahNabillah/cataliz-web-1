@@ -22,14 +22,14 @@ class CreatePlansTest extends DuskTestCase
             $first->loginAs(User::find(1))
                 ->visitRoute('plans.index');
 
-            // Check the Add New Plans Button Redirect 
-            $first->clickLink('Add New')
-                ->visitRoute('plans.create')
-                ->assertSee('Coaching Plans');
+            // // Check the Add New Plans Button Redirect 
+            // $first->clickLink('Add New')
+            //     ->visitRoute('plans.create')
+            //     ->assertSee('Coaching Plans');
 
-            // Check Submit Button When Form is Totaly Null
-            $first->press('Submit')
-                ->assertRouteIs('plans.index');
+            // // Check Submit Button When Form is Totaly Null
+            // $first->press('Submit')
+            //     ->assertRouteIs('plans.index');
         });
     }
 }
