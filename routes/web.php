@@ -27,6 +27,7 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Controllers\TrainingMeetingController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\GraduateController;
 
 
 /*
@@ -255,4 +256,11 @@ Route::middleware(['auth'])->group(function () {
 // Report Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('report', ReportController::class);
+});
+
+// Alumni Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('graduates', GraduateController::class);
+	Route::get('/load_graduates_data', [GraduateController::class, 'load_graduates_data'])->name('graduates.load_graduates_data');
+	Route::get('/load_clients_data', [GraduateController::class, 'load_clients_data'])->name('graduates.search_clients');
 });

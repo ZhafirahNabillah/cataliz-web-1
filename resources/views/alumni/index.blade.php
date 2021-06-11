@@ -2,6 +2,10 @@
 
 @section('title','Alumni')
 
+@push('styles')
+<link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+@endpush
+
 @section('content')
 
 @include('panels.navbar')
@@ -16,14 +20,14 @@
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
           <div class="col-12">
-            <h2 class="content-header-title float-left mb-0">Alumni List
+            <h2 class="content-header-title float-left mb-0">Graduate List
               <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar role yang dapat mengakses website." />
             </h2>
             <div class="breadcrumb-wrapper">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                 </li>
-                <li class="breadcrumb-item active">Alumni
+                <li class="breadcrumb-item active">Graduate
                 </li>
 
               </ol>
@@ -46,7 +50,7 @@
       <div class="row">
 
         <div class="col-12 mb-1">
-          <button type="button" name="button" class="btn btn-primary" id="addAlumni" data-id="">+ Add Alumni</button>
+          <button type="button" name="button" class="btn btn-primary" id="addAlumni" data-id="">+ Add Graduate</button>
         </div>
 
       </div>
@@ -55,11 +59,11 @@
         <div class="row">
           <div class="col-12">
             <div class="card style=" border-radius: 15px;>
-              <table class="datatables-basic table ">
+              <table class="datatables-basic table datatable-graduates">
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Alumni Name</th>
+                    <th>Name</th>
                     <th>Program</th>
                     <th>Action</th>
                   </tr>
@@ -76,7 +80,7 @@
           <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="modalHeading">Add Alumni</h5>
+                <h5 class="modal-title" id="modalHeading">Add Graduate</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -85,11 +89,11 @@
                 <div class="container">
                   <div class="row">
                     <div class="card-body" style="border-radius: 11px">
-                      <form id="addClientForm">
-                        <input type="hidden" name="coach_id" value="{{ $coach->id }}">
+                      <form id="addGraduateForm">
+                        <input type="hidden" name="user_id" value="">
                         <div class="form-group">
-                          <label class="fp-default" for="basic-icon-default-fullname">Alumni Name</label>
-                          <select id="state" class="livesearch-plans form-control @error('client') is-invalid @enderror" name="client[]" multiple></select>
+                          <label class="fp-default" for="basic-icon-default-fullname">Name</label>
+                          <select id="state" class="livesearch-graduates form-control @error('graduates') is-invalid @enderror" name="graduates[]" multiple></select>
                           @error('')
                           <strong class="text-danger">{{ $message }}</strong>
                           @enderror
@@ -106,9 +110,6 @@
         <!-- End Modal -->
       </section>
       <!--/ Basic table -->
-
-
-
     </div>
   </div>
 </div>
@@ -119,7 +120,7 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-<script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <style>
   label.error.fail-alert {
     color: red;
@@ -135,13 +136,76 @@
       content: function() {
         return '<img src="' + $(this).data('img') + '" />';
       }
-    })
+    });
 
-    $('body').on('click', '#addClient', function() {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    $('.livesearch-graduates').select2({
+      placeholder: 'Select Graduates',
+      ajax: {
+        url: "{{route('graduates.search_clients')}}",
+        dataType: 'json',
+        delay: 250,
+        processResults: function(data) {
+          return {
+            results: $.map(data, function(item) {
+              console.log(item)
+              return {
+                text: item.name,
+                id: item.id,
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+
+    var graduates_table = $('.datatable-graduates').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('graduates.load_graduates_data') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'user_data.name',
+          name: 'user_data.name'
+        },
+        {
+          data: 'user_data.program',
+          name: 'user_data.program'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: true,
+          searchable: true
+        },
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        // render: '<i data-feather="search"></i>',
+        // search: '<i data-feather="search"/>',
+        searchPlaceholder: "Search records"
+      }
+    });
+
+    $('body').on('click', '#addAlumni', function() {
       console.log('tes');
-      var coach_id = $(this).data('id');
-      $('#saveBtn').val("add-alumni");
-      $("#state").val(null).trigger('change');
+      // var coach_id = $(this).data('id');
+      // $('#saveBtn').val("add-alumni");
+      // $("#state").val(null).trigger('change');
       $('#add-alumni-modal').modal('show');
       // $.get("" + '/class/' + coach_id + '/edit', function(data) {
       //   // console.log(data[0].name);
@@ -153,6 +217,91 @@
       // });
     });
 
+    $('#saveBtn').click(function(e) {
+      e.preventDefault();
+      $('#saveBtn').html('Sending..');
+      var data = $('#addGraduateForm').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('graduates.store') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#addGraduateForm').trigger("reset");
+          $('#saveBtn').html('Submit');
+          $('#add-alumni-modal').modal('hide');
+          Swal.fire({
+              icon: 'success',
+              title: 'Graduates added!',
+          });
+          graduates_table.draw();
+        },
+        error: function(data) {
+          console.log('Error:', data);
+          $('#saveBtn').html('Submit');
+        }
+      });
+      return false;
+    });
+
+    $('body').on('click', '#removeGraduateBtn', function(e) {
+
+			var graduate_id = $(this).data("id");
+			console.log(graduate_id);
+
+			Swal.fire({
+				title: "Are you sure?",
+				text: "You'll remove this client from graduates",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: "Yes, Sure",
+				cancelButtonText: "Cancel"
+			}).then((result) => {
+				if (result.isConfirmed) {
+
+					// $.ajaxSetup({
+					// 	headers: {
+					// 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+					// 	}
+					// });
+
+					// $.ajax({
+          //   data: {client_id: client_id},
+					// 	type: "POST",
+					// 	url: "",
+					// 	success: function(data) {
+					// 		Swal.fire({
+					// 			icon: 'success',
+					// 			title: 'Removed Successfully!',
+					// 		});
+					// 		graduates_table.draw();
+					// 	},
+					// 	error: function(data) {
+					// 		console.log('Error:', data);
+					// 	}
+					// });
+
+          $.ajax({
+            type: "DELETE",
+            url: "" + '/graduates/' + graduate_id,
+            success: function(data) {
+              Swal.fire({
+								icon: 'success',
+								title: 'Removed Successfully!',
+							});
+              graduates_table.draw();
+            },
+            error: function(data) {
+              console.log('Error:', data);
+            }
+          });
+				}
+			});
+		});
   });
 </script>
 @endpush
