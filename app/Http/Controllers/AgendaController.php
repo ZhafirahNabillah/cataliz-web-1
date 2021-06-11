@@ -496,6 +496,7 @@ class AgendaController extends Controller
     if ($request->filled('feedback')) {
       //add feeback form coachee to database session
       $feedback->feedback = $request->feedback;
+      $agenda_detail->status = 'finished';
     }
 
     //check if feedback attachment was filled
@@ -514,15 +515,17 @@ class AgendaController extends Controller
       Storage::disk('s3')->put('attachment/' . $filenameSave, file_get_contents($request->file('feedback_attachment')));
       // $path = $request->file('feedback_attachment')->storeAs('public/attachment', $filenameSave);
       $feedback->attachment = $filenameSave;
+      $agenda_detail->status = 'finished';
     }
 
     //check if rating from coachee was filled
     if ($request->filled('coach_rating')) {
       //add rating from coachee to database session
       $feedback->rating = $request->coach_rating;
+      $agenda_detail->status = 'finished';
     }
 
-    $agenda_detail->status = 'finished';
+    // $agenda_detail->status = 'finished';
     $agenda_detail->update();
     $feedback->update();
 
