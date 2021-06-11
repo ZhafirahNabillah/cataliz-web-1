@@ -5,8 +5,7 @@
 @push('styles')
 
 <link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
-<link rel="stylesheet" href="jquery.rateyo.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 @endpush
 
 @section('content')
@@ -159,11 +158,9 @@
 
   @push('scripts')
   <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
   <script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
-  <script src="jquery.js"></script>
-  <script src="jquery.rateyo.js"></script>
   <script type="text/javascript">
     $(function() {
       // popover
@@ -204,7 +201,7 @@
       $("#behaviour").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
-        spacing: "30px"
+        spacing: "30px",
         fullStar: true,
       });
       $('#behaviour').click(function() {
@@ -216,7 +213,7 @@
       $("#engagement").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
-        spacing: "30px"
+        spacing: "30px",
         fullStar: true,
       });
       $('#engagement').click(function() {
@@ -228,7 +225,7 @@
       $("#result").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
-        spacing: "30px"
+        spacing: "30px",
         fullStar: true,
       });
       $('#result').click(function() {
