@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Report;
 use Illuminate\Http\Request;
 
 class ReportController extends Controller
@@ -34,7 +35,16 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $report = new Report;
+        $report->awarness = $request->coachee_awarness;
+        $report->mindset = $request->coachee_mindset;
+        $report->behaviour = $request->coachee_behaviour;
+        $report->engagement = $request->coachee_engagement;
+        $report->result = $request->coachee_result;
+        $report->note = $request->note;
+        $report->save();
+
+        return redirect('/report')->with('success', 'Report Successfully created!');
     }
 
     /**
