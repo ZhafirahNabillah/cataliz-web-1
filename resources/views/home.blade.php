@@ -730,11 +730,19 @@
                     <div class="col-sm-12">
                       <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
                       @role('coach')
-                      <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
+                      <span>{{ $event['title'].' - '.$event['coachee'] }}</span>
                       @endrole
                       @role('coachee')
-                      <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
+                      <span>{{ $event['title'].' - '.$event['coach'] }}</span>
                       @endrole
+                      @if ($event['status'] == 'scheduled')
+                        <span class="badge badge-pill badge-warning float-right" style="background-color: #CADB05;">scheduled</span>
+                      @elseif ($event['status'] == 'rescheduled')
+                        <span class="badge badge-pill badge-primary float-right">rescheduled</span>
+                      @elseif ($event['status'] == 'finished')
+                        <span class="badge badge-pill badge-success float-right">finished</span>
+                      @endif
+                      <br>
                       <a class="text-primary" style="font-size: 20px"
                         href="{{ $event['url'] }}">{{ $event['topic'] }}</a>
                       <br><span>{{ $event['start'] }}</span>
@@ -1201,11 +1209,21 @@
               console.log(data);
               $('#list_event_wrapper').html(`<h3 class="badge badge-primary font-weight-bold">`+info.dateStr+`</h3><br>`);
               for (var i = 0; i < data.length; i++) {
+                var status = null;
+
+                if (data[i].status == 'scheduled') {
+                  status = `<span class="badge badge-pill badge-warning float-right" style="background-color: #CADB05;">scheduled</span>`;
+                } else if (data[i].status == 'rescheduled') {
+                  status = `<span class="badge badge-pill badge-primary float-right">rescheduled</span>`;
+                } else if (data[i].status == 'finished') {
+                  status = `<span class="badge badge-pill badge-success float-right">finished</span>`;
+                }
+
                 $('#list_event_wrapper').append(
                   `<div class="row">
                     <div class="col-sm-12">
                       <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
-                      <span>`+data[i].title+` - `+data[i].target+`</span><br>
+                      <span>`+data[i].title+` - `+data[i].target+`</span>`+status+`<br>
                       <a class="text-primary" style="font-size: 20px" href="`+data[i].url+`" >`+data[i].topic+`</a>
                       <br><span>`+data[i].start+`</span>
                     </div>
