@@ -140,7 +140,7 @@
 									<div class="col-md-12 form-group">
 										<label for="fp-default">Feedback</label>
 										@if($feedback->feedback == null)
-										<textarea class="form-control" name="feedback"></textarea>
+										<textarea class="form-control" name="feedback" id="feedback"></textarea>
 										@endif
 										@if($feedback->feedback != null)
 										<div class="overflow-auto p-2" style="max-height: 300px;">

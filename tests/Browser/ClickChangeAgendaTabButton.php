@@ -38,13 +38,52 @@ class ClickChangeAgendaTabButton extends DuskTestCase
       });
     }
 
-    public function testSubmitFeedback()
+    public function testSubmitFeedbackAllFilled()
     {
       $this->browse(function (Browser $browser) {
-          $browser->loginAs(User::find(2))
-                  ->visit('/agendas/3')
-                  ->keys('#tinymce', 'Lorem Ipsum dolor sit Amet')
-                  ->assertValue('textarea','Lorem Ipsum dolor sit Amet');
+        $browser->loginAs(User::find(2));
+
+        //Go to page and wait for TinyMCE to load
+        $browser->visit('/agendas/3')
+                ->waitFor('#feedback_ifr');
+
+        $browser->driver->executeScript('tinyMCE.get(\'feedback\').setContent(\'<p>Lorem Ipsum dolor sit Amet</p>\')');
+
+        $browser->attach('feedback_attachment', storage_path('app/public/testing_files/Lorem Ipsum Dolor Sit Amet.docx'))
+                ->click('#saveBtn')
+                ->assertPathIs('/agendas')
+                ->assertSee('Success');
+      });
+    }
+
+    public function testSubmitFeedbackOnlyFeedbackFilled()
+    {
+      $this->browse(function (Browser $browser) {
+        $browser->loginAs(User::find(2));
+
+        //Go to page and wait for TinyMCE to load
+        $browser->visit('/agendas/4')
+                ->waitFor('#feedback_ifr');
+
+        $browser->driver->executeScript('tinyMCE.get(\'feedback\').setContent(\'<p>Lorem Ipsum dolor sit Amet</p>\')');
+
+        $browser->click('#saveBtn')
+                ->assertPathIs('/agendas')
+                ->assertSee('Success');
+      });
+    }
+
+    public function testSubmitFeedbackOnlyFeedbackAttachmentFilled()
+    {
+      $this->browse(function (Browser $browser) {
+        $browser->loginAs(User::find(2));
+
+        //Go to page and wait for TinyMCE to load
+        $browser->visit('/agendas/4')
+                ->attach('feedback_attachment', storage_path('app/public/testing_files/Lorem Ipsum Dolor Sit Amet.docx'))
+                ->click('#saveBtn')
+                ->assertPathIs('/agendas')
+                ->assertSee('Success');
       });
     }
 }

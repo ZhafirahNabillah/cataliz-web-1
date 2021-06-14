@@ -7060,6 +7060,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
         'Symfony\\Polyfill\\Php80\\Php80' => __DIR__ . '/..' . '/symfony/polyfill-php80/Php80.php',
+        'Tests\\Browser\\ClickChangeAgendaTabButton' => __DIR__ . '/../..' . '/tests/Browser/ClickChangeAgendaTabButton.php',
         'Tests\\Browser\\ClickCreateAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickCreateAgendaButton.php',
         'Tests\\Browser\\ClickDeleteAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickDeleteAgendaButton.php',
         'Tests\\Browser\\ClickDetailAgendaButton' => __DIR__ . '/../..' . '/tests/Browser/ClickDetailAgendaButton.php',
