@@ -20,7 +20,7 @@
         <div class="row breadcrumbs-top">
           <div class="col-12">
             <h2 class="content-header-title float-left mb-0">Report
-             <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
+              <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}"
                 alt="Card image cap" data-toggle="popover" data-placement="top"
                 data-content="Halaman ini menampilkan report yang anda miliki" />
             </h2>
@@ -39,7 +39,7 @@
       </div>
     </div>
     <div class="content-body">
- 
+
       <div class="row">
         <div class="col-12">
           <div class="card">
@@ -47,14 +47,14 @@
               <h4 class="card-title"><b>Detail Report</b>
               </h4>
             </div>
-    
+
             <div class="card-body">
               <div class="row mb-2">
                 <div class="col-sm-2">
-                  <b>Chochee Name</b>
+                  <b>Coachee Name</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$client_name}}
                 </div>
               </div>
               <div class="row mb-2">
@@ -62,7 +62,7 @@
                   <b>Program</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$report->program}}
                 </div>
               </div>
               <div class="row mb-2">
@@ -70,7 +70,7 @@
                   <b>Awarness</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$report->awarness}}/5
                 </div>
               </div>
               <div class="row mb-2">
@@ -78,7 +78,7 @@
                   <b>Mindset</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$report->mindset}}/5
                 </div>
               </div>
               <div class="row mb-2">
@@ -86,7 +86,7 @@
                   <b>Behaviour</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$report->behaviour}}/5
                 </div>
               </div>
               <div class="row mb-2">
@@ -94,7 +94,7 @@
                   <b>Engagement</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$report->engagement}}/5
                 </div>
               </div>
               <div class="row mb-2">
@@ -102,7 +102,7 @@
                   <b>Result</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {{$report->result}}/5
                 </div>
               </div>
               <div class="row mb-2">
@@ -110,13 +110,13 @@
                   <b>Note</b>
                 </div>
                 <div class="col-sm-2">
-                  #
+                  {!!$report->note!!}
                 </div>
               </div>
 
             </div>
-          </div> 
-  
+          </div>
+
         </div>
 
       </div>
@@ -131,7 +131,7 @@
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
- // popover
+  // popover
  $(function() {
       $('[data-toggle="popover"]').popover({
         html: true,

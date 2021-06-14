@@ -255,4 +255,6 @@ Route::middleware(['auth'])->group(function () {
 // Report Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('report', ReportController::class);
+	Route::get('/report_group', [ReportController::class, 'create_group'])->name('report.create_group');
+	Route::get('/ajaxGroup', [ReportController::class, 'search_group'])->name('report.search_group');
 });

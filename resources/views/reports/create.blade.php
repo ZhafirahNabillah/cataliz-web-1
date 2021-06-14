@@ -48,41 +48,41 @@
               <h4 class="card-title pl-1"><b>Create Report</b>
               </h4>
             </div>
-
-            <div class="card-body">
-              <div class="row mb-2 ml-3">
-                <div class="col-sm-2">
-                  <b>Coachee Name</b>
+            <form action="{{route('report.store')}}" method="post">
+              @csrf
+              <div class="card-body">
+                <div class="row mb-1 ml-3">
+                  <div class="col-sm-2">
+                    <b>Coachee Name</b>
+                  </div>
+                  <div class="col-sm-12 form-group">
+                    <select class="livesearch-coachee form-control @error('coachee_id') is-invalid @enderror"
+                      name="coachee_id">
+                    </select>
+                    @error('coachee_id')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
                 </div>
-                <div class="col-sm-2 form-group">
-                  <select class="livesearch-coachee form-control @error('coachee_id') is-invalid @enderror"
-                    name="coachee_id">
-                  </select>
-                  @error('coachee_id')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
+                <div class="row mb-1 ml-3">
+                  <div class="col-sm-2">
+                    <b>Program</b>
+                  </div>
+                  <div class="col-sm-12 form-group">
+                    <select class="livesearch-program form-control @error('program') is-invalid @enderror"
+                      name="program">
+                    </select>
+                    @error('program')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
                 </div>
-              </div>
-              <div class="row mb-1 ml-3">
-                <div class="col-sm-2">
-                  <b>Program</b>
-                </div>
-                <div class="col-sm-2 form-group">
-                  <select class="livesearch-program form-control @error('program_id') is-invalid @enderror"
-                    name="program_id">
-                  </select>
-                  @error('program_id')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                  @enderror
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body ml-0">
-                  <form action="#" method="post">
+                <div class="card">
+                  <div class="card-body ml-0">
                     <!-- awarness -->
                     <div class="col-sm-2">
                       <b>Awarness</b>
@@ -137,32 +137,32 @@
                     <div class="col-md-12 form-group">
                       <textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
                     </div>
-                </div>
+                  </div>
 
-                <div class="col-md-12 text-right">
-                  <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
-                  <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
-                </div>
-                </form>
-              </div>
-            </div>
-
+                  <div class="col-md-12 text-right">
+                    <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
+                    <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
+                  </div>
+            </form>
           </div>
-
         </div>
+
       </div>
+
     </div>
   </div>
-  <!-- END: Content-->
-  @endsection
+</div>
+</div>
+<!-- END: Content-->
+@endsection
 
-  @push('scripts')
-  <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-  <script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
-    referrerpolicy="origin"></script>
-  <script type="text/javascript">
-    $(function() {
+@push('scripts')
+<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+<script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
+  referrerpolicy="origin"></script>
+<script type="text/javascript">
+  $(function() {
       // popover
       $('[data-toggle="popover"]').popover({
         html: true,
@@ -173,7 +173,6 @@
         }
       });
 
-			var awarness = $('#awarness').data("awarness");
       $("#awarness").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
@@ -181,11 +180,11 @@
 				fullStar: true,
       });
       $('#awarness').click(function() {
-				var awarness = $('#awarness').rateYo("awarness");
+        console.log('ok');
+				var awarness = $('#awarness').rateYo("rating");
 				$('#coachee_awarness').val(awarness);
 			});
 
-			var mindset = $('#mindset').data("mindset");
       $("#mindset").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
@@ -193,11 +192,10 @@
         fullStar: true,
       });
       $('#mindset').click(function() {
-				var mindset = $('#mindset').rateYo("mindset");
+				var mindset = $('#mindset').rateYo("rating");
 				$('#coachee_mindset').val(mindset);
 			});
 
-			var behaviour = $('#behaviour').data("behaviour");
       $("#behaviour").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
@@ -205,11 +203,10 @@
         fullStar: true,
       });
       $('#behaviour').click(function() {
-				var behaviour = $('#behaviour').rateYo("behaviour");
+				var behaviour = $('#behaviour').rateYo("rating");
 				$('#coachee_behaviour').val(behaviour);
 			});
 
-			var engagement = $('#engagement').data("engagement");
       $("#engagement").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
@@ -217,11 +214,10 @@
         fullStar: true,
       });
       $('#engagement').click(function() {
-				var engagement = $('#engagement').rateYo("engagement");
+				var engagement = $('#engagement').rateYo("rating");
 				$('#coachee_engagement').val(engagement);
 			});
 
-			var result = $('#result').data("result");
       $("#result").rateYo({
         ratedFill: "#F1AF33",
         numStars: 5,
@@ -229,7 +225,7 @@
         fullStar: true,
       });
       $('#result').click(function() {
-				var result = $('#result').rateYo("result");
+				var result = $('#result').rateYo("rating");
 				$('#coachee_result').val(result);
 			});
 
@@ -237,5 +233,37 @@
         selector: 'textarea',
       });
     });
-  </script>
-  @endpush
+
+    $('.livesearch-coachee').select2({
+      placeholder: 'Select Coachee',
+      ajax: {
+        url: "{{route('users.search')}}",
+        dataType: 'json',
+        delay: 250,
+        data: function(params) {
+          return {
+            q: $.trim(params.term)
+          };
+        },
+        processResults: function(data) {
+          return {
+            results: $.map(data, function(item) {
+              // console.log(item)
+              return {
+                text: item.name,
+                id: item.id,
+                client_id: item.client_id,
+              }
+            })
+          };
+        },
+        cache: true
+      }
+    });
+
+    $('.livesearch-program').select2({
+      placeholder: 'Select program',
+      tags: true
+    });
+</script>
+@endpush

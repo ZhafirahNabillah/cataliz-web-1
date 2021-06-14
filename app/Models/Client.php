@@ -45,4 +45,9 @@ class Client extends Model
     {
         return $this->hasMany('App\Models\Plan');
     }
+
+    public function report()
+    {
+        return $this->hasOne('App\Models\Report');
+    }
 }
