@@ -83,7 +83,8 @@ class HomeController extends Controller
           'type'        => 'coaching',
           'coachee'     => $client,
           'id'          => $session->id,
-          'url'         => route('agendas.show', $session->id)
+          'url'         => route('agendas.show', $session->id),
+          'status'      => $session->status
         ]);
       }
 
@@ -144,7 +145,8 @@ class HomeController extends Controller
           'type'        => 'coaching',
           'coachee'     => $client,
           'id'          => $session->id,
-          'url'         => route('agendas.show', $session->id)
+          'url'         => route('agendas.show', $session->id),
+          'status'      => $session->status
         ]);
       }
 
@@ -193,7 +195,8 @@ class HomeController extends Controller
           'type'        => 'coaching',
           'coach'       => $coach_data,
           'id'          => $session->id,
-          'url'         => route('agendas.show', $session->id)
+          'url'         => route('agendas.show', $session->id),
+          'status'      => $session->status
         ]);
       }
 
@@ -531,7 +534,8 @@ class HomeController extends Controller
         'type'        => 'coaching',
         'target'      => $user,
         'id'          => $session->id,
-        'url'         => route('agendas.show', $session->id)
+        'url'         => route('agendas.show', $session->id),
+        'status'      => $session->status
       ]);
     }
 
@@ -579,7 +583,8 @@ class HomeController extends Controller
         'type'        => 'coaching',
         'target'      => $user,
         'id'          => $session->id,
-        'url'         => route('agendas.show', $session->id)
+        'url'         => route('agendas.show', $session->id),
+        'status'      => $session->status
       ]);
     }
 
