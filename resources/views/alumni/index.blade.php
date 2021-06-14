@@ -93,10 +93,20 @@
                         <input type="hidden" name="user_id" value="">
                         <div class="form-group">
                           <label class="fp-default" for="basic-icon-default-fullname">Name</label>
-                          <select id="state" class="livesearch-graduates form-control @error('graduates') is-invalid @enderror" name="graduates[]" multiple></select>
+                          <select id="state" class="livesearch-graduates form-control @error('graduates') is-invalid @enderror" name="name"></select>
                           @error('')
                           <strong class="text-danger">{{ $message }}</strong>
                           @enderror
+                          <div id="graduate-error"></div>
+                        </div>
+                        <div class="form-group">
+                          <label for="graduate_as">Graduate as</label>
+                          <select class="form-control" name="graduate_as" id="graduate_as">
+                            <option hidden disabled selected>Select Graduate As</option>
+                            <option value="1">SCP</option>
+                            <option value="2">SSCP</option>
+                          </select>
+                          <div id="graduate_as-error"></div>
                         </div>
                         <button id="saveBtn" type="button" name="button" class="btn btn-primary">Submit</button>
                       </form>
@@ -161,7 +171,6 @@
             })
           };
         },
-        cache: true
       }
     });
 
@@ -179,7 +188,14 @@
         },
         {
           data: 'user_data.program',
-          name: 'user_data.program'
+          name: 'user_data.program',
+          render: function (data, type, row) {
+            if (row.graduate_as == 1) {
+              return data + ' SCP';
+            } else if (row.graduate_as == 2) {
+              return data + ' SSCP';
+            }
+          }
         },
         {
           data: 'action',
@@ -221,6 +237,8 @@
       e.preventDefault();
       $('#saveBtn').html('Sending..');
       var data = $('#addGraduateForm').serialize();
+      $('#graduate-error').empty();
+      $('#graduate_as-error').empty();
       console.log(data);
 
       $.ajax({
@@ -231,6 +249,7 @@
         success: function(data) {
           console.log(data);
           $('#addGraduateForm').trigger("reset");
+          $('.livesearch-graduates').val('').trigger("change");
           $('#saveBtn').html('Submit');
           $('#add-alumni-modal').modal('hide');
           Swal.fire({
@@ -239,9 +258,18 @@
           });
           graduates_table.draw();
         },
-        error: function(data) {
+        error: function(reject, data) {
           console.log('Error:', data);
           $('#saveBtn').html('Submit');
+          if (reject.status === 422) {
+            var errors = JSON.parse(reject.responseText);
+            if (errors.name) {
+              $('#graduate-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+            }
+            if (errors.graduate_as) {
+              $('#graduate_as-error').html('<strong class="text-danger">' + errors.graduate_as[0] + '</strong>'); // and so on
+            }
+          }
         }
       });
       return false;
