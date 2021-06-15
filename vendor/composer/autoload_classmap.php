@@ -83,6 +83,7 @@ return array(
     'App\\Models\\Lesson' => $baseDir . '/app/Models/Lesson.php',
     'App\\Models\\Lesson_history' => $baseDir . '/app/Models/Lesson_history.php',
     'App\\Models\\Plan' => $baseDir . '/app/Models/Plan.php',
+    'App\\Models\\Program' => $baseDir . '/app/Models/Program.php',
     'App\\Models\\Question' => $baseDir . '/app/Models/Question.php',
     'App\\Models\\Report' => $baseDir . '/app/Models/Report.php',
     'App\\Models\\Skill' => $baseDir . '/app/Models/Skill.php',

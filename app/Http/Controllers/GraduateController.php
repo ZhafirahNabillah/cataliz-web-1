@@ -32,8 +32,17 @@ class GraduateController extends Controller
             $client = $user->client->toArray();
 
             return $client;
-          })
-          ->addColumn('action', function ($row) {
+          })->addColumn('program', function ($row) {
+            $user = $row->user;
+            $client = $user->client;
+            $program = $client->program;
+
+            if (is_null($program)) {
+              return 'Not Registered to Any program';
+            } else {
+              return $program->program_name;
+            }
+          })->addColumn('action', function ($row) {
             $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';
 
             $actionBtn = $remove_btn;
@@ -64,8 +73,7 @@ class GraduateController extends Controller
     {
         //
         $validator = Validator::make($request->all(), [
-          'name'        => 'required',
-          'graduate_as' => 'required',
+          'name'        => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -77,7 +85,7 @@ class GraduateController extends Controller
 
         $graduate = new Graduate;
         $graduate->user_id = $user->id;
-        $graduate->graduate_as = $request->graduate_as;
+        // $graduate->graduate_as = $request->graduate_as;
         $graduate->save();
 
         return response()->json([

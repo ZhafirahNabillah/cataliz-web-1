@@ -107,7 +107,7 @@ class RegisterController extends Controller
         'occupation' => null,
         'company' => null,
         'organization' => null,
-        'program' => 'Starco',
+        'program_id' => null,
         'user_id' => $user->id,
       ]);
       $user->assignRole('coachee');

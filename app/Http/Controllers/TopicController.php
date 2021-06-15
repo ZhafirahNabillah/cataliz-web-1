@@ -166,8 +166,16 @@ class TopicController extends Controller
           $email = str_pad(substr($row->email, -15), strlen($row->email), 'x', STR_PAD_LEFT);
 
           return $email;
+        })->addColumn('program', function ($row) {
+          $program = $row->program;
+
+          if (is_null($program)) {
+            return 'Not Registered to Any program';
+          } else {
+            return $program->program_name;
+          }
         })
-        ->rawColumns(['email'])
+        ->rawColumns(['email', 'program'])
         ->make(true);
     }
 
