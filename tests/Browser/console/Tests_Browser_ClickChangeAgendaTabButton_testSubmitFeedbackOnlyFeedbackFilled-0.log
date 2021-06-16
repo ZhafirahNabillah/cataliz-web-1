@@ -1,8 +1,0 @@
-[
-    {
-        "level": "SEVERE",
-        "message": "http:\/\/localhost:8000\/app-assets\/data\/locales\/en.json - Failed to load resource: the server responded with a status of 404 (Not Found)",
-        "source": "network",
-        "timestamp": 1623653497625
-    }
-]

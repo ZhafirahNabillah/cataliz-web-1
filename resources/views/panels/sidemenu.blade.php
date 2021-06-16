@@ -39,7 +39,7 @@
 
                 @role('coachee')
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Coaches</span></a>
+                        class="menu-title text-truncate" data-i18n="Email" dusk="list-user">Coaches</span></a>
                 @endrole
 
                 @role('mentor')
