@@ -121,7 +121,7 @@
                 </div>
               </div>
               <div class="card">
-                <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                <div id="headingCollapse4" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                   <span class="lead collapse-title"><b>Support</b></span>
                 </div>
                 <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">
@@ -196,7 +196,7 @@
                 </div>
               </div>
               <div class="card">
-                <div id="headingCollapse34" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                <div id="headingCollapse4" class="card-header collapse-header" data-toggle="collapse" role="button" data-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
                   <span class="lead collapse-title"><b>Support</b></span>
                 </div>
                 <div id="collapse4" role="tabpanel" aria-labelledby="headingCollapse4" class="collapse" aria-expanded="false">

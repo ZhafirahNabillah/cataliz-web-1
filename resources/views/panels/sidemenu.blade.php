@@ -71,7 +71,7 @@
             @can('list-plan')
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('plans.index')}}"><i
-                        data-feather="check-square"></i><span class="menu-title text-truncate"
+                        data-feather="check-square" dusk="list-plan"></i><span class="menu-title text-truncate"
                         data-i18n="Todo">Plans</span></a>
             </li>
             @endcan
