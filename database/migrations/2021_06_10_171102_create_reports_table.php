@@ -16,13 +16,14 @@ class CreateReportsTable extends Migration
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->integer('coach_id')->nullable();
+            $table->string('program')->nullable();
             $table->double('awarness')->nullable();
             $table->double('mindset')->nullable();
             $table->double('behaviour')->nullable();
             $table->double('engagement')->nullable();
             $table->double('result')->nullable();
             $table->string('note', 1000)->nullable();
-            $table->integer('coachee_id')->nullable();
+            $table->integer('client_id')->nullable();
             $table->timestamps();
         });
     }

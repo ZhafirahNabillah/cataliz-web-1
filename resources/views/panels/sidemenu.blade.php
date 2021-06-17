@@ -7,7 +7,10 @@
                     @include('panels.logo')
                 </a>
             </li>
-            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li>
+            <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i
+                        class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i
+                        class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc"
+                        data-ticon="disc"></i></a></li>
         </ul>
     </div>
     <div class="shadow-bottom"></div>
@@ -25,19 +28,23 @@
 
             <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
                 @role('admin')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Users</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Users</span></a>
                 @endrole
 
                 @role('coach')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Users</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Users</span></a>
                 @endrole
 
                 @role('coachee')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">Coaches</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Coaches</span></a>
                 @endrole
 
                 @role('mentor')
-                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Email">User</span></a>
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">User</span></a>
                 @endrole
 
             </li>
@@ -55,7 +62,8 @@
             @endrole --}}
             @role('admin')
             <li class=" nav-item {{ 'docs' == request()->path() ? 'active show' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
+                <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="book"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
             </li>
             @endrole
 
@@ -67,22 +75,29 @@
 
             @can('list-plan')
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('plans.index')}}"><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Plans</span></a>
+                <a class="d-flex align-items-center" href="{{route('plans.index')}}"><i
+                        data-feather="check-square"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Plans</span></a>
             </li>
             @endcan
             @can('list-agenda')
             <li class=" nav-item {{ 'agendas' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i data-feather="calendar"></i><span class="menu-title text-truncate" data-i18n="Todo">Agenda</span></a>
+                <a class="d-flex align-items-center" href="{{route('agendas.index')}}"><i
+                        data-feather="calendar"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Agenda</span></a>
             </li>
             @endcan
             @canany('list-class', 'create-class', 'detail-class')
             <li class=" nav-item {{ 'class' == request()->path() ? 'active show' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('class.index')}}"><i data-feather="monitor"></i><span class="menu-title text-truncate" data-i18n="Todo">Class</span></a>
+                <a class="d-flex align-items-center" href="{{route('class.index')}}"><i data-feather="monitor"></i><span
+                        class="menu-title text-truncate" data-i18n="Todo">Class</span></a>
             </li>
             @endcan
-            @canany('list-report', 'create-report', 'detail-report')
+            @canany('list-report', 'create-report', 'detail-report','update-report')
             <li class=" nav-item {{ 'report' == request()->path() ? 'active show' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('report.index')}}"><i data-feather="book-open"></i><span class="menu-title text-truncate" data-i18n="Todo">Report</span></a>
+                <a class="d-flex align-items-center" href="{{route('report.index')}}"><i
+                        data-feather="book-open"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Report</span></a>
             </li>
             @endcan
             @canany('list-role','list-permission')
@@ -92,12 +107,15 @@
 
             @can('list-role')
             <li class=" nav-item {{ 'roles' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="inbox"></i><span class="menu-title text-truncate" data-i18n="Email">Role</span></a>
+                <a class="d-flex align-items-center" href="{{route('roles.index')}}"><i data-feather="inbox"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Role</span></a>
             </li>
             @endcan
             @can('list-permission')
             <li class=" nav-item {{ 'permissions' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i data-feather="edit-3"></i><span class="menu-title text-truncate" data-i18n="Email">Permission</span></a>
+                <a class="d-flex align-items-center" href="{{route('permissions.index')}}"><i
+                        data-feather="edit-3"></i><span class="menu-title text-truncate"
+                        data-i18n="Email">Permission</span></a>
             </li>
             @endcan
 
@@ -112,23 +130,31 @@
 
             @can('list-topic')
             <li class="nav-item {{ 'topic' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('topic.index')}}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Topic</span></a>
+                <a class="d-flex align-items-center" href="{{route('topic.index')}}"><i
+                        data-feather="file-text"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Topic</span></a>
             </li>
             @endcan
             @can('list-exercise')
             <li class="nav-item {{ 'exercise' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('exercise.index')}}"><i data-feather="edit-3"></i><span class="menu-title text-truncate" data-i18n="Todo">Exam</span></a>
+                <a class="d-flex align-items-center" href="{{route('exercise.index')}}"><i
+                        data-feather="edit-3"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Exam</span></a>
             </li>
             @endcan
 
             @can('list-category')
             <li class=" nav-item {{ 'category' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{route('category.index')}}"><i data-feather="folder-plus"></i><span class="menu-title text-truncate" data-i18n="Email">Category</span></a>
+                <a class="d-flex align-items-center" href="{{route('category.index')}}"><i
+                        data-feather="folder-plus"></i><span class="menu-title text-truncate"
+                        data-i18n="Email">Category</span></a>
             </li>
             @endcan
             @can('list-result')
             <li class=" nav-item {{ 'result' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{ route('result.index') }}"><i data-feather="trending-up"></i><span class="menu-title text-truncate" data-i18n="Email">Result</span></a>
+                <a class="d-flex align-items-center" href="{{ route('result.index') }}"><i
+                        data-feather="trending-up"></i><span class="menu-title text-truncate"
+                        data-i18n="Email">Result</span></a>
             </li>
             @endcan
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>

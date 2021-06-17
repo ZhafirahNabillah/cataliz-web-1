@@ -520,6 +520,7 @@
                         <th>Coachee Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
+                        <th>Program</th>
                         <th style="line-height: 40px;">Action</th>
                       </tr>
                     </thead>
@@ -605,7 +606,7 @@
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
                 <input id="name" name="name" type="text" class="form-control dt-full-name"
-                  id="basic-icon-default-fullname" value="" />
+                  id="basic-icon-default-fullname" value="" placeholder="Full name here..."/>
                 <div id="name-error"></div>
               </div>
               <div class="form-group">
@@ -615,14 +616,14 @@
                     <span class="input-group-text" id="basic-addon5">+62</span>
                   </div>
                   <input id="phone" name="phone" type="text" onkeypress="return isNumberKey(event)" class="form-control"
-                    value="">
+                    value="" placeholder="Phone number here...">
                 </div>
                 <div id="phone-error"></div>
               </div>
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-email">Email</label>
                 <input id="email" name="email" type="text" id="basic-icon-default-email"
-                  class="form-control dt-email" />
+                  class="form-control dt-email" placeholder="Email here..."/>
                 <small class="form-text text-muted"> You can use letters, numbers & periods</small>
                 <div id="email-error"></div>
               </div>
@@ -632,6 +633,12 @@
                   <input class="form-check-input" type="radio" name="roles" id="permission-check-coach" value="coach">
                   <label class="form-check-label" for="permission-check-coach">
                     Coach
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
+                  <label class="form-check-label" for="permission-check-coachee">
+                    Coachee
                   </label>
                 </div>
                 <div class="form-check">
@@ -659,6 +666,18 @@
                   </label>
                 </div> --}}
                 <div id="roles-error"></div>
+              </div>
+              <div class="form-group" id="program-field-wrapper">
+                <label class="form-label" for="basic-icon-default-fullname">Program</label>
+                @foreach ($programs as $program)
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="program" id="program-{{ $program->id }}" value="{{ $program->id }}">
+                    <label class="form-check-label" for="program-{{ $program->id }}">
+                      {{ $program->program_name }}
+                    </label>
+                  </div>
+                @endforeach
+                <div id="program-error"></div>
               </div>
               <input type="hidden" name="action_type" id="action_type">
               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
@@ -729,6 +748,7 @@
                             <th>Name</th>
                             <th>Email</th>
                             <th>Handphone</th>
+                            <th>Program</th>
                             <th>Action</th>
                           </tr>
                         </thead>
@@ -1243,6 +1263,10 @@
                 }
               },
               {
+                data: 'program',
+                name: 'program',
+              },
+              {
                 data: 'action',
                 name: 'action',
                 orderable: true,
@@ -1397,6 +1421,7 @@
             $('#user_id').val('');
             $('#createUserForm').trigger("reset");
             $('#modalHeading').html("Create New User");
+            $('#program-field-wrapper').hide();
             $('#name').prop('readonly', false);
             $('#phone').prop('readonly', false);
             $('#email').prop('readonly', false);
@@ -1407,9 +1432,23 @@
             $('#modal-user-slide-in').modal('show');
           });
 
+          //Show program option when role coachee is selected
+          $('input[name="roles"]').click(function(){
+            var selectedRole = $(this).val();
+
+            if (selectedRole == 'coachee') {
+              console.log(selectedRole);
+              $('#program-field-wrapper').show(500);
+            } else {
+              console.log(selectedRole);
+              $('#program-field-wrapper').hide(500);
+            }
+          });
+
           // edit user in admin page
           $('body').on('click', '.editUser', function() {
             var user_id = $(this).data('id');
+            $('#program-field-wrapper').hide();
             $.get("" + '/users/' + user_id + '/edit', function(data) {
               $('#modalHeading').html("Edit User");
               $('#action_type').val("edit-user");
@@ -1418,14 +1457,20 @@
               $('#phone-error').empty();
               $('#email-error').empty();
               $('#roles-error').empty();
-              $('#user_id').val(data.id);
-              $('#name').val(data.name).prop('readonly', true);
-              $('#phone').val(data.phone).prop('readonly', true);
-              $('#email').val(data.email).prop('readonly', true);
-              $.each(data.roles, function(i, item) {
-                var role_name = data.roles[i].name;
-                $('#permission-check-' + role_name).prop('checked', true);
-              });
+              $('#user_id').val(data.user.id);
+              $('#name').val(data.user.name).prop('readonly', true);
+              $('#phone').val(data.user.phone).prop('readonly', true);
+              $('#email').val(data.user.email).prop('readonly', true);
+              $('#permission-check-' + data.role).prop('checked', true);
+              // $.each(data.role, function(i, item) {
+              //   var role_name = data.roles[i].name;
+              // });
+              if (data.program != null) {
+                $('#program-' + data.program.id).prop('checked', true);
+              }
+              if (data.role == 'coachee') {
+                $('#program-field-wrapper').show();
+              }
               $('#modal-user-slide-in').modal('show');
             })
           });
