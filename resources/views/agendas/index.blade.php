@@ -47,14 +47,15 @@
 			<section id="card-demo-example ">
 				<div class="container">
 					<div class="row match-height align-item-start">
-						<div class="col">
+						<div class="card-deck">
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
 									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang belum terjadwal" />
 								</div>
+
 								<div class="card-body" style="padding-top: 1px;margin-top: -25px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\alert-circle.svg') }}" alt="Card image cap" />
-									<small class="card text-center  mb-1" style="word-spacing: 11em; margin-top: 5px;">
+									<small class="card text-center  mb-1" style="word-spacing: 11em; margin-top: 1em;">
 										Unscheduled Sessions
 									</small>
 								</div>
@@ -62,13 +63,14 @@
 									{{ $total_unscheduled_sessions }}
 								</h2>
 							</div>
-						</div>
 
-						<div class="col">
+
+
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
 									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang sudah terjadwal" />
 								</div>
+
 								<div class="card-body" style="padding-top: 1px;margin-top: -25px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\calendar.svg') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
@@ -79,13 +81,14 @@
 									{{ $total_scheduled_sessions }}
 								</h2>
 							</div>
-						</div>
 
-						<div class="col">
+
+
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
 									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang dijadwal ulang" />
 								</div>
+
 								<div class="card-body" style="padding-top: 1px;margin-top: -25px;">
 									<img class="img-fluid rounded float-center mx-auto d-block center width=" 120px" height="120px"" src=" {{ url('assets\images\icons\agenda\refresh-cw.svg') }}" alt="Card image cap" />
 									<small class="card text-center  mb-1" style="word-spacing: 11em;margin-top: 1em;">
@@ -96,9 +99,9 @@
 									{{ $total_rescheduled_sessions }}
 								</h2>
 							</div>
-						</div>
 
-						<div class="col">
+
+
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
 									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang dibatalkan" />
@@ -113,9 +116,9 @@
 									{{ $total_canceled_sessions }}
 								</h2>
 							</div>
-						</div>
 
-						<div class="col">
+
+
 							<div class="card">
 								<div class="card-title" style="margin-top: 12px; margin-right: 12px;">
 									<img class=" rounded float-right width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Jumlah sesi yang sudah dilaksanakan" />
