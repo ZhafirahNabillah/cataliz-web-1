@@ -390,7 +390,7 @@
 
           @role('coachee')
           <div class="col-md-3 col-lg-3">
-            <a href="{{ route('agendas.index') }}">
+            <a href="{{ route('agendas.index') }}" id="TotalCoachingHourBtn">
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
@@ -420,7 +420,7 @@
             </a>
           </div>
           <div class="col-md-3 col-lg-3">
-            <a href="{{ route('clients.index') }}">
+            <a href="{{ route('clients.index') }}" id="TotalCoachesBtn">
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
@@ -466,7 +466,7 @@
             </div>
           </div>
           <div class="col-md-3 col-lg-3">
-            <a href="{{ route('agendas.index') }}">
+            <a href="{{ route('agendas.index') }}" id="TotalSessionsBtn">
               <div class="card">
                 <div class="card-body">
                   <div class="card-title">
@@ -508,11 +508,11 @@
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#upcoming-individual"
+                    <a class="nav-link active" id="upcoming-individual-tab" data-toggle="tab" href="#upcoming-individual"
                       aria-controls="coach" role="tab" aria-selected="true">Individual</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#upcoming-group"
+                    <a class="nav-link" id="upcoming-group-tab" data-toggle="tab" href="#upcoming-group"
                       aria-controls="profile" role="tab" aria-selected="false">Group</a>
                   </li>
                 </ul>
@@ -587,11 +587,11 @@
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual"
+                    <a class="nav-link active" id="agenda-individual-tab" data-toggle="tab" href="#agenda-individual"
                       aria-controls="coach" role="tab" aria-selected="true">Individual</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile"
+                    <a class="nav-link" id="agenda-group-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile"
                       role="tab" aria-selected="false">Group</a>
                   </li>
                 </ul>

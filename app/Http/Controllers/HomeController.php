@@ -224,7 +224,7 @@ class HomeController extends Controller
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->join('clients', 'plans.client_id', '=', 'clients.id')
         ->where('plans.group_id', null)
-        ->where('agenda_details.status', 'scheduled')
+        ->whereIn('agenda_details.status', ['scheduled','rescheduled'])
         ->latest()
         ->get();
     } elseif (auth()->user()->hasRole('coach')) {
@@ -235,7 +235,7 @@ class HomeController extends Controller
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->join('clients', 'plans.client_id', '=', 'clients.id')
         ->where('plans.group_id', null)
-        ->where('agenda_details.status', 'scheduled')
+        ->whereIn('agenda_details.status', ['scheduled','rescheduled'])
         ->where('plans.owner_id', $coach->id)->latest()
         ->get();
     } elseif (auth()->user()->hasRole('coachee')) {
@@ -246,7 +246,7 @@ class HomeController extends Controller
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->join('clients', 'plans.client_id', '=', 'clients.id')
         ->where('plans.group_id', null)
-        ->where('agenda_details.status', 'scheduled')
+        ->whereIn('agenda_details.status', ['scheduled','rescheduled'])
         ->where('plans.client_id', $client->id)->latest()
         ->get();
     }
@@ -265,7 +265,7 @@ class HomeController extends Controller
         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->where('plans.client_id', null)
-        ->where('agenda_details.status', 'scheduled')
+        ->whereIn('agenda_details.status', ['scheduled','rescheduled'])
         ->get();
     } elseif (auth()->user()->hasRole('coach')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
@@ -274,7 +274,7 @@ class HomeController extends Controller
         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->where('plans.client_id', null)
-        ->where('agenda_details.status', 'scheduled')
+        ->whereIn('agenda_details.status', ['scheduled','rescheduled'])
         ->where('plans.owner_id', $coach->id)->latest()
         ->get();
     } elseif (auth()->user()->hasRole('coachee')) {
@@ -285,7 +285,7 @@ class HomeController extends Controller
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->join('client_plan', 'client_plan.plan_id', '=', 'plans.id')
         ->where('plans.client_id', null)
-        ->where('agenda_details.status', 'scheduled')
+        ->whereIn('agenda_details.status', ['scheduled','rescheduled'])
         ->where('client_plan.client_id', $client->id)->latest()
         ->get();
     }
