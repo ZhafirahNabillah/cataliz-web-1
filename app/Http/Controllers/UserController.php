@@ -145,10 +145,16 @@ class UserController extends Controller
             'program' => 'required',
             'batch'   => 'required'
           ]);
+
+          if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+          }
         }
 
-        if ($validator->fails()) {
-          return response()->json($validator->errors(), 422);
+        if ($user->hasRole('coachee')) {
+          $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program_id' => $request->program, 'batch' => $request->batch]);
+        } elseif ($user->hasRole('coach')) {
+          $coach = Coach::updateOrCreate(['user_id' => $user->id]);
         }
 
         $client = Client::where('user_id', $user->id)->first();

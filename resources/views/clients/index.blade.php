@@ -1465,6 +1465,7 @@
           $('body').on('click', '.editUser', function() {
             var user_id = $(this).data('id');
             $('#program-field-wrapper').hide();
+            $('#batch-field-wrapper').hide();
             $.get("" + '/users/' + user_id + '/edit', function(data) {
               $('#modalHeading').html("Edit User");
               $('#action_type').val("edit-user");
@@ -1486,10 +1487,6 @@
               // });
               if (data.program != null) {
                 $('#program-' + data.program.id).prop('checked', true);
-                $("#batch-field-wrapper select").val(data.client.batch).change();
-              }
-
-              if (data.client.batch != null) {
                 $("#batch-field-wrapper select").val(data.client.batch).change();
               }
 

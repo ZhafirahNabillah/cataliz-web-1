@@ -28,15 +28,32 @@ class ResultController extends Controller
       return Datatables::of($exam_results)
         ->addIndexColumn()
         ->addColumn('topic', function ($row) {
-          return $row->topic->toArray();
+          $topic = $row->topic;
+
+          if ($topic) {
+            return $topic->toArray();
+          } else {
+            return null;
+          }
         })
         ->addColumn('user', function ($row) {
           $user = $row->user;
 
-          return $user->client->toArray();
+          if ($user) {
+            return $user->client->toArray();
+          } else {
+            return null;
+          }
+
         })
         ->addColumn('exam', function ($row) {
-          return $row->exam->toArray();
+          $exam = $row->exam;
+
+          if ($exam) {
+            return $exam->toArray();
+          } else {
+            return null;
+          }
         })
         ->addColumn('action', function ($row) {
 
