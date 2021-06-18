@@ -307,7 +307,7 @@ class ClientController extends Controller
           if (is_null($program)) {
             return 'Not Registered to Any program';
           } else {
-            return $program->program_name;
+            return $program->program_name.' Batch '.$client->batch;
           }
         })
         ->rawColumns(['action', 'program'])

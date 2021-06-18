@@ -19,6 +19,7 @@ class Client extends Model
         'occupation',
         'owner_id',
         'user_id',
+        'batch'
     ];
 
     public function user()

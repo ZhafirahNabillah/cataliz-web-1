@@ -56,12 +56,14 @@ class UserController extends Controller
         $program = $client->program;
       } else {
         $program = null;
+        $client = null;
       }
 
       return response()->json([
         'user'    => $user,
         'role'    => $role,
-        'program' => $program
+        'program' => $program,
+        'client'  => $client
       ]);
     }
     if (auth()->user()->hasRole('coachee')) {
@@ -137,17 +139,41 @@ class UserController extends Controller
       $user->syncRoles($request->input('roles'));
 
       if ($user->getRoleNames()->first() == 'coachee') {
+
+        if ($request->has('program') || $request->has('batch')) {
+          $validator = Validator::make($request->all(), [
+            'program' => 'required',
+            'batch'   => 'required'
+          ]);
+        }
+
+        if ($validator->fails()) {
+          return response()->json($validator->errors(), 422);
+        }
+
         $client = Client::where('user_id', $user->id)->first();
         $client->program_id = $request->program;
+        $client->batch = $request->batch;
         $client->update();
       }
     } elseif ($request->action_type == 'create-user') {
-      $validator = Validator::make($request->all(), [
-        'name'  => 'required',
-        'phone' => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
-        'email' => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
-        'roles' => 'required',
-      ]);
+      if ($request->has('program') || $request->has('batch')) {
+        $validator = Validator::make($request->all(), [
+          'name'    => 'required',
+          'phone'   => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+          'email'   => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+          'roles'   => 'required',
+          'program' => 'required',
+          'batch'   => 'required'
+        ]);
+      } else {
+        $validator = Validator::make($request->all(), [
+          'name'    => 'required',
+          'phone'   => 'required|numeric|regex:/^[1-9][0-9]/|digits_between:10,12',
+          'email'   => 'required|email|unique:users|regex:/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix',
+          'roles'   => 'required'
+        ]);
+      }
 
       if ($validator->fails()) {
         return response()->json($validator->errors(), 422);
@@ -157,7 +183,7 @@ class UserController extends Controller
       $user->syncRoles($request->input('roles'));
 
       if ($user->hasRole('coachee')) {
-        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program_id' => $request->program]);
+        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program_id' => $request->program, 'batch' => $request->batch]);
       } elseif ($user->hasRole('coach')) {
         $coach = Coach::updateOrCreate(['user_id' => $user->id]);
       }

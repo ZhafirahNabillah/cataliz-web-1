@@ -679,6 +679,17 @@
                 @endforeach
                 <div id="program-error"></div>
               </div>
+              <div class="form-group" id="batch-field-wrapper">
+                <label class="form-label" for="">Batch</label>
+                <select class="form-control" name="batch">
+                  <option disabled selected hidden value="0">Select batch</option>
+                  @for ($i=1; $i <= 10; $i++)
+                    <option value="{{ $i }}">Batch {{ $i }}</option>
+                  @endfor
+                </select>
+                <div id="batch-error"></div>
+                <small class="form-text text-muted">Batch must be filled if program was chosen</small>
+              </div>
               <input type="hidden" name="action_type" id="action_type">
               <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
               <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
@@ -1422,6 +1433,7 @@
             $('#createUserForm').trigger("reset");
             $('#modalHeading').html("Create New User");
             $('#program-field-wrapper').hide();
+            $('#batch-field-wrapper').hide();
             $('#name').prop('readonly', false);
             $('#phone').prop('readonly', false);
             $('#email').prop('readonly', false);
@@ -1429,6 +1441,8 @@
             $('#phone-error').empty();
             $('#email-error').empty();
             $('#roles-error').empty();
+            $('#program-error').empty();
+            $('#batch-error').empty();
             $('#modal-user-slide-in').modal('show');
           });
 
@@ -1439,9 +1453,11 @@
             if (selectedRole == 'coachee') {
               console.log(selectedRole);
               $('#program-field-wrapper').show(500);
+              $('#batch-field-wrapper').show(500);
             } else {
               console.log(selectedRole);
               $('#program-field-wrapper').hide(500);
+              $('#batch-field-wrapper').hide(500);
             }
           });
 
@@ -1457,19 +1473,29 @@
               $('#phone-error').empty();
               $('#email-error').empty();
               $('#roles-error').empty();
+              $('#program-error').empty();
+              $('#batch-error').empty();
               $('#user_id').val(data.user.id);
               $('#name').val(data.user.name).prop('readonly', true);
               $('#phone').val(data.user.phone).prop('readonly', true);
               $('#email').val(data.user.email).prop('readonly', true);
               $('#permission-check-' + data.role).prop('checked', true);
+              $("#batch-field-wrapper select").val(0).change();
               // $.each(data.role, function(i, item) {
               //   var role_name = data.roles[i].name;
               // });
               if (data.program != null) {
                 $('#program-' + data.program.id).prop('checked', true);
+                $("#batch-field-wrapper select").val(data.client.batch).change();
               }
+
+              if (data.client.batch != null) {
+                $("#batch-field-wrapper select").val(data.client.batch).change();
+              }
+
               if (data.role == 'coachee') {
                 $('#program-field-wrapper').show();
+                $('#batch-field-wrapper').show();
               }
               $('#modal-user-slide-in').modal('show');
             })
@@ -1537,6 +1563,8 @@
             $('#phone-error').empty();
             $('#email-error').empty();
             $('#roles-error').empty();
+            $('#program-error').empty();
+            $('#batch-error').empty();
 
             var data = $('#createUserForm').serialize();
             console.log(data);
@@ -1583,6 +1611,12 @@
                   }
                   if (errors.roles) {
                     $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+                  }
+                  if (errors.program) {
+                    $('#program-error').html('<strong class="text-danger">' + errors.program[0] + '</strong>'); // and so on
+                  }
+                  if (errors.batch) {
+                    $('#batch-error').html('<strong class="text-danger">' + errors.batch[0] + '</strong>'); // and so on
                   }
                 }
               }
