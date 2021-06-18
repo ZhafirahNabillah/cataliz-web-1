@@ -181,4 +181,47 @@ class coachee_ProfileIndexTest extends DuskTestCase
                     });
         });
     }
+
+    public function testChangeProfileInformationOnProfileIndexPage()
+    {
+        $login_user = User::find(2);
+
+        $this->browse(function (Browser $browser) use ($login_user){
+
+            $browser->loginAs($login_user)
+                    ->visit('/'.$login_user->id.'/profil')
+                    ->click('#edit_profil')
+                    ->whenAvailable('#modals_profil', function ($modal) use($login_user) {
+                        $modal->pause(1000)
+                              ->click('#btn_edit_profil');
+                    })
+                    ->typeSlowly('name', 'Testing')
+                    ->click('#saveProfileCoacheeBtn')
+                    ->assertSee('Testing');
+        });
+    }
+
+    public function testChangeProfileBackgroundOnProfileIndexPage()
+    {
+        $login_user = User::find(2);
+
+        $this->browse(function (Browser $browser) use ($login_user){
+
+            $browser->loginAs($login_user)
+                    ->visit('/'.$login_user->id.'/profil')
+                    ->click('#edit_profil')
+                    ->whenAvailable('#modals_profil', function ($modal) use($login_user) {
+                        $modal->pause(1000)
+                              ->click('#btn_edit_background');
+                    })
+                    ->attach('background_picture', storage_path('app/public/testing_files/profile_background.jpg'))
+                    ->click('#saveBackgroundPictureBtn');
+
+            $login_user_update = User::find(2);
+
+            $browser->visit('/'.$login_user->id.'/profil')
+                    ->assertAttribute('.profile-header img', 'src', 'https://cataliz-s3.s3.ap-southeast-1.amazonaws.com/images/background_picture/'.$login_user_update->background_picture);
+
+        });
+    }
 }
