@@ -96,7 +96,7 @@
 												@endrole
 												@role('coachee')
 												<li class="nav-item">
-													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
+													<a class="nav-link " id="feedback-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
 												</li>
 												@endrole
 											</ul>
