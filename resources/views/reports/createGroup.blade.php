@@ -348,6 +348,20 @@
     //     var count = $('.livesearch-group').val();
     //     console.log(count);
     // });
+
+
+    $('body').on('change', '.livesearch-group', function() {
+      var group_id = $(this).val();
+      //get en id group e iso teko select seng dipilih
+
+      $.get("" + '/group/' + group_id, function(data) {
+        //gae route anyar seng isine get data user seng group_id ne iku
+        //variable data iku isine return response e
+        //kari di for sesuai banyaknya return data user e
+        //opo nek gaperlu data user e return en count e tok ae
+      })
+    });
+    
   });
 </script>
 @endpush
