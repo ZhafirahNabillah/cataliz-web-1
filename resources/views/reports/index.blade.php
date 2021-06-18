@@ -178,14 +178,14 @@
       var table_report_group = $('.report-datatable-group').DataTable({
           processing: true,
           serverSide: true,
-          ajax: "",
+          ajax: "{{ route('report.show_group_table') }}",
           columns: [{
                   data: 'DT_RowIndex',
                   name: 'DT_RowIndex'
               },
               {
-                  name: 'group_code',
-                  data: 'group_code'
+                  name: 'group_id',
+                  data: 'group_id'
               },
               {
                   data: 'action',

@@ -258,7 +258,11 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 	Route::resource('report', ReportController::class);
 	Route::get('/report_group', [ReportController::class, 'create_group'])->name('report.create_group');
+	Route::post('/report_group/store_group', [ReportController::class, 'store_group'])->name('report.store_group');
 	Route::get('/ajaxGroup', [ReportController::class, 'search_group'])->name('report.search_group');
+	Route::get('/report_group/show_group_data', [ReportController::class, 'show_group_datatable'])->name('report.show_group_table');
+	Route::get('/report_group/show_group/{id}', [ReportController::class, 'show_group'])->name('report.show_group');
+	Route::get('/report_group/count', [ReportController::class, 'show_group_count'])->name('report.show_group_count');
 });
 
 // Alumni Controller
