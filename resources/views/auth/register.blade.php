@@ -10,16 +10,15 @@
     <div class="content-body">
       <div class="auth-wrapper auth-v2">
         <div class="auth-inner row m-0">
-     
-            <!-- Brand logo-->
-            <a class="brand-logo pb-2" href="/">
-              @include('panels.logo')
-            </a>
+
+          <!-- Brand logo-->
+          <a class="brand-logo pb-2" href="/">
+            @include('panels.logo')
+          </a>
           <!-- /Brand logo-->
           <!-- Left Text-->
           <div class="d-none d-lg-flex col-lg-8 align-items-center p-5">
-            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid"
-                src="{{asset('assets/images/pages/login-v2.svg')}}" alt="Login V2" /></div>
+            <div class="w-100 d-lg-flex align-items-center justify-content-center px-5"><img class="img-fluid" src="{{asset('assets/images/pages/login-v2.svg')}}" alt="Login V2" /></div>
           </div>
           <!-- /Left Text-->
           <!-- Register-->
@@ -50,9 +49,7 @@
                 @csrf
                 <div class="form-group">
                   <label class="form-label" for="register-username">Fullname</label>
-                  <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name"
-                    placeholder="John Doe" aria-describedby="name" value="{{ old('name') }}" autocomplete="name"
-                    autofocus tabindex="1" />
+                  <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="John Doe" aria-describedby="name" value="{{ old('name') }}" autocomplete="name" autofocus tabindex="1" />
                   @error('name')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -65,9 +62,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text" id="basic-addon5">+62</span>
                     </div>
-                    <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text"
-                      onkeypress="return isNumberKey(event)" name="phone" placeholder="081xxxxx"
-                      aria-describedby="phone" value="{{ old('phone') }}" autocomplete="phone" tabindex="2" />
+                    <input class="form-control @error('phone') is-invalid @enderror" id="phone" type="text" onkeypress="return isNumberKey(event)" name="phone" placeholder="081xxxxx" aria-describedby="phone" value="{{ old('phone') }}" autocomplete="phone" tabindex="2" />
                   </div>
                   @error('phone')
                   <strong class="text-danger">{{ $message }}</strong>
@@ -75,9 +70,7 @@
                 </div>
                 <div class="form-group">
                   <label class="form-label" for="register-email">Email</label>
-                  <input class="form-control @error('email') is-invalid @enderror" id="email" type="text" name="email"
-                    placeholder="john@example.com" aria-describedby="email" value="{{ old('email') }}"
-                    autocomplete="email" tabindex="3" />
+                  <input class="form-control @error('email') is-invalid @enderror" id="email" type="text" name="email" placeholder="john@example.com" aria-describedby="email" value="{{ old('email') }}" autocomplete="email" tabindex="3" />
                   @error('email')
                   <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -87,11 +80,8 @@
                 <div class="form-group">
                   <label class="form-label" for="register-password">Password</label>
                   <div class="input-group input-group-merge form-password-toggle">
-                    <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="password"
-                      type="password" name="password" autocomplete="new-password" placeholder="············"
-                      aria-describedby="password" tabindex="3" />
-                    <div class="input-group-append"><span class="input-group-text cursor-pointer "><i
-                          data-feather="eye"></i></span></div>
+                    <input class="form-control form-control-merge @error('password') is-invalid @enderror" id="password" type="password" name="password" autocomplete="new-password" placeholder="············" aria-describedby="password" tabindex="3" />
+                    <div class="input-group-append"><span class="input-group-text cursor-pointer "><i data-feather="eye"></i></span></div>
                     @error('password')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -102,35 +92,28 @@
                 <div class="form-group">
                   <label class="form-label" for="register-password">Confirm Password</label>
                   <div class="input-group input-group-merge form-password-toggle">
-                    <input class="form-control form-control-merge" id="password-confirm" type="password"
-                      name="password_confirmation" placeholder="············" aria-describedby="password_confirmation"
-                      autocomplete="new-password" tabindex="4" />
-                    <div class="input-group-append"><span class="input-group-text cursor-pointer"><i
-                          data-feather="eye"></i></span></div>
+                    <input class="form-control form-control-merge" id="password-confirm" type="password" name="password_confirmation" placeholder="············" aria-describedby="password_confirmation" autocomplete="new-password" tabindex="4" />
+                    <div class="input-group-append"><span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span></div>
                   </div>
                 </div>
                 <h5>Register as</h5>
                 <div class="form-group demo-inline-spacing" style="margin-top: -18px;">
                   <div class="custom-control custom-radio col-3">
-                    <input type="radio" id="role_coach" name="role"
-                      class="custom-control-input @error('role') is-invalid @enderror" value="coach" />
+                    <input type="radio" id="role_coach" name="role" class="custom-control-input @error('role') is-invalid @enderror" value="coach" />
                     <label class="custom-control-label" for="role_coach">Coach</label>
                   </div>
                   <div class="custom-control custom-radio col text-left">
-                    <input type="radio" id="role_coachee" name="role"
-                      class="custom-control-input @error('role') is-invalid @enderror" value="coachee" />
+                    <input type="radio" id="role_coachee" name="role" class="custom-control-input @error('role') is-invalid @enderror" value="coachee" />
                     <label class="custom-control-label" for="role_coachee">Coachee</label>
                   </div>
                 </div>
                 <div class="form-group demo-inline-spacing" style="margin-top: -25px;">
                   <div class="custom-control custom-radio col-3">
-                    <input type="radio" id="role_trainer" name="role"
-                      class="custom-control-input @error('role') is-invalid @enderror" value="trainer" />
+                    <input type="radio" id="role_trainer" name="role" class="custom-control-input @error('role') is-invalid @enderror" value="trainer" />
                     <label class="custom-control-label" for="role_trainer">Trainer</label>
                   </div>
                   <div class="custom-control custom-radio col text-left">
-                    <input type="radio" id="role_mentor" name="role"
-                      class="custom-control-input @error('role') is-invalid @enderror" value="mentor" />
+                    <input type="radio" id="role_mentor" name="role" class="custom-control-input @error('role') is-invalid @enderror" value="mentor" />
                     <label class="custom-control-label" for="role_mentor">Mentor</label>
                   </div>
                   @error('role')
@@ -139,10 +122,8 @@
                 </div>
                 <div class="form-group">
                   <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input @error('privacy') is-invalid @enderror"
-                      id="register-privacy-policy" name="privacy" value="ok" type="checkbox" tabindex="4" />
-                    <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:;"
-                        id="showPrivacy">&nbsp;privacy policy & terms</a></label>
+                    <input class="custom-control-input @error('privacy') is-invalid @enderror" id="register-privacy-policy" name="privacy" value="ok" type="checkbox" tabindex="4" />
+                    <label class="custom-control-label" for="register-privacy-policy">I agree to<a href="javascript:;" id="showPrivacy">&nbsp;privacy policy & terms</a></label>
                   </div>
                   @error('privacy')
                   <strong class="text-danger">{{ $message }}</strong>
@@ -150,8 +131,7 @@
                 </div>
 
                 <!-- Modal Privacy policy & terms -->
-                <div class="modal fade" id="privacy" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
-                  aria-hidden="true">
+                <div class="modal fade" id="privacy" tabindex="-1" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                   <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -165,12 +145,10 @@
                         <div class="card-body">
                           <ul class="nav nav-tabs justify-content-center" role="tablist">
                             <li class="nav-item">
-                              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach"
-                                aria-controls="coach" role="tab" aria-selected="true">Privacy and Policy</a>
+                              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">Privacy and Policy</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee"
-                                aria-controls="profile" role="tab" aria-selected="false">Terms and Conditions</a>
+                              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Terms and Conditions</a>
                             </li>
                           </ul>
 
@@ -179,8 +157,7 @@
                             <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
 
                               <h2 class="text-warning">Privacy Policy for cataliz.id</h2>
-                              <p class="text-justify">At cataliz.id, accessible from <a
-                                  href="http://app.cataliz.id">http://app.cataliz.id</a> , one of our main priorities is
+                              <p class="text-justify">At cataliz.id, accessible from <a href="http://app.cataliz.id">http://app.cataliz.id</a> , one of our main priorities is
                                 the privacy of our visitors. This Privacy Policy document contains types of information
                                 that is collected and recorded by cataliz.id and how we use it.</p>
                               <p class="text-justify">If you have additional questions or require more information about
@@ -193,8 +170,7 @@
                                 stamp, referring/exit pages, and possibly the number of clicks. These are not linked to
                                 any information that is personally identifiable. The purpose of the information is for
                                 analyzing trends, administering the site, tracking users' movement on the website, and
-                                gathering demographic information. Our Privacy Policy was created with the help of the
-                                Privacy Policy Generator and the Privacy Policy Generator.</p>
+                                gathering demographic information. </p>
                               <h4 class="text-primary">Cookies and Web Beacons</h4>
                               <p class="text-justify">Like any other website, cataliz.id uses 'cookies'. These cookies
                                 are used to store information including visitors' preferences, and the pages on the
@@ -249,8 +225,7 @@
                               <h2 class="text-warning">Terms and Conditions</h2>
                               <p class="text-justify">Welcome to cataliz.id!</p>
                               <p class="text-justify">These terms and conditions outline the rules and regulations for
-                                the use of cataliz.id's Website, located at <a
-                                  href="http://app.cataliz.id">http://app.cataliz.id</a>.</p>
+                                the use of cataliz.id's Website, located at <a href="http://app.cataliz.id">http://app.cataliz.id</a>.</p>
                               <p class="text-justify">By accessing this website we assume you accept these terms and
                                 conditions. Do not continue to use cataliz.id if you do not agree to take all of the
                                 terms and conditions stated on this page.</p>
@@ -264,9 +239,7 @@
                                 meeting the Client’s needs in respect of provision of the Company’s stated services, in
                                 accordance with and subject to, prevailing law of Netherlands. Any use of the above
                                 terminology or other words in the singular, plural, capitalization and/or he/she or
-                                they, are taken as interchangeable and therefore as referring to same. Our Terms and
-                                Conditions were created with the help of the Terms & Conditions Generator and the
-                                Privacy Policy Generator.</p>
+                                they, are taken as interchangeable and therefore as referring to same.</p>
 
                               <h4 class="text-primary">Cookies</h4>
                               <p class="text-justify">We employ the use of cookies. By accessing cataliz.id, you agreed
@@ -458,8 +431,7 @@
 
                 <button class="btn btn-primary btn-block" tabindex="5">Sign up</button>
               </form>
-              <p class="text-center mt-2"><span>Already have an account?</span><a
-                  href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
+              <p class="text-center mt-2"><span>Already have an account?</span><a href="{{route('login')}}"><span>&nbsp;Sign in instead</span></a></p>
             </div>
           </div>
           <!-- /Register-->
