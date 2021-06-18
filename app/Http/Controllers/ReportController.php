@@ -21,7 +21,7 @@ class ReportController extends Controller
     {
         if ($request->ajax()) {
             // $client = Client::pluck('name');
-            $data = Report::with('client')->where('coach_id', auth()->user()->id)->latest()->get();
+            $data = Report::with('client')->where('coach_id', auth()->user()->id)->where('group_id', 0)->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -48,6 +48,39 @@ class ReportController extends Controller
                 ->make(true);
         }
         return view('reports.index');
+    }
+
+    public function show_group_datatable(Request $request)
+    {
+        if ($request->ajax()) {
+            // $client = Client::pluck('name');
+            $data = Report::where('coach_id', auth()->user()->id)->where('client_id', NULL)->latest()->get();
+            // $group_id = Report::where('coach_id', auth()->user()->id)->where('client_id', NULL)->pluck('group_id')
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    // if (auth()->user()->can('update-report')) {
+                    //     $edit_btn = '<a href="' . route('report.edit', $row->id) . '" class="dropdown-item"  data-id="' . $row->id . '" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4 mr-50"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>Edit</a>';
+                    // } else {
+                    //     $edit_btn = null;
+                    // };
+
+                    //add detail and whatsapp button if user have permission
+                    if (auth()->user()->can('detail-report')) {
+                        $detail_btn = '<a href="' . route('report.show_group', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Details</a>';
+                    } else {
+                        $detail_btn = null;
+                    };
+
+                    $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
+                <div class="dropdown-menu dropdown-menu-right">' . $detail_btn . '</div>';
+
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     /**
@@ -89,6 +122,24 @@ class ReportController extends Controller
         return redirect('/report')->with('success', 'Report Successfully created!');
     }
 
+    public function store_group(Request $request)
+    {
+        // return $request;
+        $report = new Report;
+        $report->coach_id = auth()->user()->id;
+        $report->group_id = $request->group_id;
+        $report->program = $request->program;
+        $report->awarness = $request->coachee_awarness;
+        $report->mindset = $request->coachee_mindset;
+        $report->behaviour = $request->coachee_behaviour;
+        $report->engagement = $request->coachee_engagement;
+        $report->result = $request->coachee_result;
+        $report->note = $request->summary;
+        $report->save();
+
+        return redirect('/report')->with('success', 'Report Successfully created!');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -103,11 +154,26 @@ class ReportController extends Controller
         return view('reports.detail', compact('report', 'client_name'));
     }
 
+    public function show_group($id)
+    {
+        $report = Report::where('group_id', $id)->first();
+        return view('reports.detailGroup', compact('report'));
+    }
+
+    // public function show_group($id)
+    // {
+    //     $report = Report::where('id', $id)->first();
+    //     // return $client_name;
+    //     return view('reports.detail', compact('report'));
+    // }
+
     public function search_group(Request $request)
     {
         $group_code = [];
         $coach = Coach::where('user_id', auth()->user()->id)->first();
-        $code = Plan::where('owner_id', $coach->id)->where('client_id', null)->latest()->get();
+        $code = Plan::where('owner_id', $coach->id)->where('client_id', null)->with('clients')->latest()->get();
+
+        // $client = $coach->plan->where('client_id', null)->groupBy('group_id')->count();
 
         $search = trim($request->q);
 
@@ -117,9 +183,16 @@ class ReportController extends Controller
             $plan_id = $coach->plans->pluck('id');
             $group_code = Plan::whereIn('id', $plan_id)->where('gorup_id', 'LIKE', "%$search%")->get();
         }
-       
-        return response()->json($group_code);
 
+        return response()->json($group_code);
+    }
+
+    public function show_group_count()
+    {
+        $coach = Coach::where('user_id', auth()->user()->id)->first();
+        $data = $coach->plan->where('client_id', null)->groupBy('group_id')->count();
+
+        return response()->json($data);
     }
 
     /**
