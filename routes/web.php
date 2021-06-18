@@ -28,6 +28,7 @@ use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Controllers\TrainingMeetingController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GraduateController;
+use App\Http\Controllers\ProgramController;
 
 
 /*
@@ -265,4 +266,9 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('graduates', GraduateController::class);
 	Route::get('/load_graduates_data', [GraduateController::class, 'load_graduates_data'])->name('graduates.load_graduates_data');
 	Route::get('/load_clients_data', [GraduateController::class, 'load_clients_data'])->name('graduates.search_clients');
+});
+
+//Program Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('program', ProgramController::class);
 });

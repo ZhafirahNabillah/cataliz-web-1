@@ -31,7 +31,7 @@
 'plans.show', 'dashboard','roles.index','agendas.show_group','permissions.index','users.index', 'class.index',
 'class.show', 'profil','auth.register', 'group.show', 'docs.index',
 'topic.index','topic.show','exercise.index','exercise.create',
-'exercise.show', 'topic','category.index', 'result.index', 'report.index', 'graduates.index']))
+'exercise.show', 'topic','category.index', 'result.index', 'report.index', 'graduates.index', 'program.index']))
 
 <!-- BEGIN: Vendor JS-->
 
