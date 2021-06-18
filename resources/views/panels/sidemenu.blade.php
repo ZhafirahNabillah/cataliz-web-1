@@ -52,6 +52,9 @@
             <li class=" nav-item ">
                 <a class="d-flex align-items-center" href="{{ route('graduates.index') }}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Graduate</span></a>
             </li>
+            <li class=" nav-item ">
+                <a class="d-flex align-items-center" href="{{ route('program.index') }}"><i data-feather="columns"></i><span class="menu-title text-truncate" data-i18n="Email">Program</span></a>
+            </li>
             @endrole
             @endcan
             {{-- @role('mentor')

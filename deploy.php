@@ -66,7 +66,6 @@ task('deploy', [
     'cleanup',
     'phpmyadmin:symlink',
     'reload-nginx',
-    //'queue:work',
     'scheduler'
 ]);
 
@@ -77,10 +76,6 @@ task ('phpmyadmin:symlink', function(){
 task ('reload-nginx',function(){
     run('sudo systemctl reload nginx');
 });
-
-//task ('queue:work',function(){
-//    run('php /var/www/html/current/artisan queue:work sqs --sleep=3 --tries=3');
-//});
 
 task ('scheduler',function(){
     run('php /var/www/html/current/artisan schedule:run 1>> /dev/null 2>&1');
