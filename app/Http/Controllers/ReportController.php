@@ -187,10 +187,11 @@ class ReportController extends Controller
         return response()->json($group_code);
     }
 
-    public function show_group_count()
+    public function show_group_count($id)
     {
         $coach = Coach::where('user_id', auth()->user()->id)->first();
-        $data = $coach->plan->where('client_id', null)->groupBy('group_id')->count();
+        $plan = Plan::where('owner_id', $coach->id)->where('group_id', $id)->first();
+        $data = $plan->clients->count();
 
         return response()->json($data);
     }

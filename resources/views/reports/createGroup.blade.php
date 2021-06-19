@@ -51,7 +51,7 @@
             </div>
             <form action="{{route('report.store_group')}}" method="post">
               @csrf
-              <div class="card-body">
+              <div class="card-body form-wrapper" id="1">
                 <div class="row mb-2 pl-1">
                   <div class="col-sm-2">
                     <b>Group Code</b>
@@ -84,131 +84,144 @@
                 </div>
                 <div class="collapse-icon">
                   <div class="accordion" id="accordionExample">
-                    <div class="card-body ml-0">
-                      <!-- awarness -->
-                      <div class="col-sm-2">
-                        <b>Awarness</b>
+                    <div class="card">
+                      <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse"
+                        role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
+                        <span class="lead collapse-title"><b>Chochee Name 1</b> Chochee Name</span>
                       </div>
-                      <div class="col-sm-2 mb-1">
-                        <div class="border p-1" id="awarness"></div>
-                        <input name="coachee_awarness" id="coachee_awarness" type="hidden" value="">
-                      </div>
+                      <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show"
+                        data-parent="#accordionExample">
 
-                      <!-- mindset -->
-                      <div class="col-sm-2">
-                        <b>Mindset</b>
-                      </div>
-                      <div class="col-sm-2 mb-1">
-                        <div class="border p-1" id="mindset"></div>
-                        <input name="coachee_mindset" id="coachee_mindset" type="hidden" value="">
-                      </div>
+                        <div class="card-body ml-0">
 
-                      <!-- behaviour -->
+                          <!-- awarness -->
+                          <div class="col-sm-2">
+                            <b>Awarness</b>
+                          </div>
+                          <div class="col-sm-2 mb-1">
+                            <div class="border p-1" id="awarness"></div>
+                            <input name="coachee_awarness" id="coachee_awarness" type="hidden" value="">
+                          </div>
 
-                      <div class="col-sm-2">
-                        <b>Behaviour</b>
-                      </div>
-                      <div class="col-sm-2 mb-1">
-                        <div class="border p-1" id="behaviour"></div>
-                        <input name="coachee_behaviour" id="coachee_behaviour" type="hidden" value="">
-                      </div>
+                          <!-- mindset -->
+                          <div class="col-sm-2">
+                            <b>Mindset</b>
+                          </div>
+                          <div class="col-sm-2 mb-1">
+                            <div class="border p-1" id="mindset"></div>
+                            <input name="coachee_mindset" id="coachee_mindset" type="hidden" value="">
+                          </div>
 
-                      <!-- engagement -->
+                          <!-- behaviour -->
 
-                      <div class="col-sm-2">
-                        <b>Engagement</b>
-                      </div>
-                      <div class="col-sm-2 mb-1">
-                        <div class="border p-1" id="engagement"></div>
-                        <input name="coachee_engagement" id="coachee_engagement" type="hidden" value="">
-                      </div>
+                          <div class="col-sm-2">
+                            <b>Behaviour</b>
+                          </div>
+                          <div class="col-sm-2 mb-1">
+                            <div class="border p-1" id="behaviour"></div>
+                            <input name="coachee_behaviour" id="coachee_behaviour" type="hidden" value="">
+                          </div>
 
-                      <!-- result -->
-                      <div class="col-sm-2">
-                        <b>Result</b>
-                      </div>
-                      <div class="col-sm-2 mb-1">
-                        <div class="border p-1" id="result"></div>
-                        <input name="coachee_result" id="coachee_result" type="hidden" value="">
-                      </div>
+                          <!-- engagement -->
 
-                      <!-- note -->
-                      <div class="col-sm-2">
-                        <b>Note</b>
-                      </div>
-                      <div class="col-md-12 form-group">
-                        <textarea class="form-control @error('summary') is-invalid @enderror" name="summary"></textarea>
+                          <div class="col-sm-2">
+                            <b>Engagement</b>
+                          </div>
+                          <div class="col-sm-2 mb-1">
+                            <div class="border p-1" id="engagement"></div>
+                            <input name="coachee_engagement" id="coachee_engagement" type="hidden" value="">
+                          </div>
+
+                          <!-- result -->
+                          <div class="col-sm-2">
+                            <b>Result</b>
+                          </div>
+                          <div class="col-sm-2 mb-1">
+                            <div class="border p-1" id="result"></div>
+                            <input name="coachee_result" id="coachee_result" type="hidden" value="">
+                          </div>
+
+                          <!-- note -->
+                          <div class="col-sm-2">
+                            <b>Note</b>
+                          </div>
+                          <div class="col-md-12 form-group">
+                            <textarea class="form-control @error('summary') is-invalid @enderror"
+                              name="summary"></textarea>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    {{-- <div class="card">
-                    <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
-                      data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                      <span class="lead collapse-title"><b>Chochee Name 2</b> Chochee Name</span>
-                    </div>
-                    <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse"
-                      data-parent="#accordionExample">
-                      <div class="card-body">
-                        <!-- awarness -->
-                        <div class="col-sm-2">
-                          <b>Awarness</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="awarness2"></div>
-                        </div>
 
-                        <!-- mindset -->
-                        <div class="col-sm-2">
-                          <b>Mindset</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="mindset2"></div>
-                        </div>
+                    <div class="card">
+                      <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
+                        data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                        <span class="lead collapse-title"><b>Chochee Name 2</b> Chochee Name</span>
+                      </div>
+                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                          <!-- awarness -->
+                          <div class="col-sm-2">
+                            <b>Awarness</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="awarness2"></div>
+                          </div>
 
-                        <!-- behaviour -->
+                          <!-- mindset -->
+                          <div class="col-sm-2">
+                            <b>Mindset</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="mindset2"></div>
+                          </div>
 
-                        <div class="col-sm-2">
-                          <b>Behaviour</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="behaviour2"></div>
-                        </div>
+                          <!-- behaviour -->
 
-                        <!-- engagement -->
+                          <div class="col-sm-2">
+                            <b>Behaviour</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="behaviour2"></div>
+                          </div>
 
-                        <div class="col-sm-2">
-                          <b>Engagement</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="engagement2"></div>
-                        </div>
+                          <!-- engagement -->
 
-                        <!-- result -->
-                        <div class="col-sm-2">
-                          <b>Result</b>
-                        </div>
-                        <div class="col-sm-2">
-                          <div class="border p-1" id="result2"></div>
-                        </div>
+                          <div class="col-sm-2">
+                            <b>Engagement</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="engagement2"></div>
+                          </div>
 
-                        <!-- note -->
-                        <div class="col-sm-2">
-                          <b>Note</b>
-                        </div>
-                        <div class="col-md-12 form-group">
-                          <textarea class="form-control @error('summary') is-invalid @enderror"
-                            name="summary"></textarea>
-                        </div>
+                          <!-- result -->
+                          <div class="col-sm-2">
+                            <b>Result</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="result2"></div>
+                          </div>
 
+                          <!-- note -->
+                          <div class="col-sm-2">
+                            <b>Note</b>
+                          </div>
+                          <div class="col-md-12 form-group">
+                            <textarea class="form-control @error('summary') is-invalid @enderror"
+                              name="summary"></textarea>
+                          </div>
+
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div> --}}
 
-                    <div class="col-md-12 text-right">
-                      <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
-                      <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
-                    </div>
+                <div class="col-md-12 text-right">
+                  <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
+                  <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
+                </div>
             </form>
 
           </div>
@@ -334,22 +347,7 @@
       selector: 'textarea',
     });
 
-    $.ajax({
-      url: "{{route('show_group_count')}}",
-      dataType: 'json',
-        data: function(params) {
-          return {
-            q: $.trim(params.term)
-          };
-        },
-    });
-
-    // $('.livesearch-group').on('change', function() {
-    //     var count = $('.livesearch-group').val();
-    //     console.log(count);
-    // });
-
-
+   
     $('body').on('change', '.livesearch-group', function() {
       var group_id = $(this).val();
       //get en id group e iso teko select seng dipilih
@@ -359,6 +357,28 @@
         //variable data iku isine return response e
         //kari di for sesuai banyaknya return data user e
         //opo nek gaperlu data user e return en count e tok ae
+        for (var i; i<data; i++){
+          function append_form() {
+            var last_form_index = $('.form-wrapper:last').attr('id');
+            var this_form_id = parseInt(last_form_index) + 1;
+            $('.form-wrapper:last').after('<div class="form-wrapper" id="' + this_form_id + '"></div>');
+            // console.log(this_question_id);
+            var hr = '<hr>';
+            var form_title = '<div class="title"><button type="button" data-id="' + this_form_id + '" class="btn btn-danger float-right deleteQuestionBtn">Delete Question</button><h4>Question ' + this_question_id + '</h4></div>';
+            var form_box = '<div class="form-group"><label for="question">Question</label><textarea name="question-' + this_form_id + '" id="question-' + this_question_id + '" placeholder="Your question here..."></textarea></div>';
+            var awarness_form = '<div class="form-group"><label for="">Answer A</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="a-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
+            var mindset_form = '<div class="form-group"><label for="">Answer B</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="b-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
+            var behaviour_form = '<div class="form-group"><label for="">Answer C</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="c-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
+            var engagement_form = '<div class="form-group"><label for="">Answer D</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="d-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
+            var result_form = '<div class="form-group"><label for="">Answer E</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="e-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
+            var form_id = '<input type="hidden" name="all_forms_id[]" value="' + this_form_id + '">';
+
+            $(".question-wrapper:last").append(hr, question_title, question_box, option_A, option_B, option_C, option_D, option_E, true_answer, point, question_id);
+
+            // question_length = question_length + 1;
+            // $('#question_length').val(question_length);
+          }
+        }
       })
     });
     

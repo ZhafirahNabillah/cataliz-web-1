@@ -262,7 +262,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/ajaxGroup', [ReportController::class, 'search_group'])->name('report.search_group');
 	Route::get('/report_group/show_group_data', [ReportController::class, 'show_group_datatable'])->name('report.show_group_table');
 	Route::get('/report_group/show_group/{id}', [ReportController::class, 'show_group'])->name('report.show_group');
-	Route::get('/report_group/count', [ReportController::class, 'show_group_count'])->name('report.show_group_count');
+	Route::get('/group/{group_id}', [ReportController::class, 'show_group_count'])->name('report.show_group_count');
 });
 
 // Alumni Controller
