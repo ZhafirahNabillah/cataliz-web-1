@@ -74,38 +74,39 @@
 
                   <!-- Kalo group -->
                   @if ($plan->group_id)
-                    <div class="row">
-                      <div class="col-md-12 form-group">
-                        <label for="fp-default">Group ID</label>
-                        <input class="form-control" value="{{$plan->group_id}}" disabled>
-                      </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Group ID</label>
+                      <input class="form-control" value="{{$plan->group_id}}" disabled>
                     </div>
+                  </div>
                   @endif
 
                   @if ($plan->client_id)
-                    <div class="row">
-                      <div class="col-md-12 form-group">
-                        <label for="fp-default">Full Name</label>
-                        <input class="form-control" value="{{$clients->first()->name}}" disabled>
-                        <input type="hidden" name="id" value="{{$agenda->id}}">
-                      </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="fp-default">Full Name</label>
+                      <input class="form-control" value="{{$clients->first()->name}}" disabled>
+                      <input type="hidden" name="id" value="{{$agenda->id}}">
                     </div>
+                  </div>
 
-                    <div class="row">
-                      <div class="col-md-6 form-group">
-                        <label for="fp-default">Organization</label>
-                        <input class="form-control" value="{{$clients->first()->organization}}" disabled>
-                      </div>
-                      <div class="col-md-6 form-group">
-                        <label for="fp-default">Company</label>
-                        <input class="form-control" value="{{$clients->first()->company}}" disabled>
-                      </div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Organization</label>
+                      <input class="form-control" value="{{$clients->first()->organization}}" disabled>
                     </div>
+                    <div class="col-md-6 form-group">
+                      <label for="fp-default">Company</label>
+                      <input class="form-control" value="{{$clients->first()->company}}" disabled>
+                    </div>
+                  </div>
                   @endif
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Topic</label>
-                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic" value="{{ $agenda_detail->topic }}" placeholder="Insert a topic..." id="topic" disabled>
+                      <input type="text" class="form-control @error('topic') is-invalid @enderror" name="topic"
+                        value="{{ $agenda_detail->topic }}" placeholder="Insert a topic..." id="topic" disabled>
                       @error('topic')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -117,11 +118,14 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
-                      <select class="form-control @error('media') is-invalid @enderror" id="media" aria-label=".form-select-lg example" name="media" disabled>
+                      <select class="form-control @error('media') is-invalid @enderror" id="media"
+                        aria-label=".form-select-lg example" name="media" disabled>
                         <option value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
                           Room') selected @endif>Meeting Room</option>
                         <option value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
                           'Whatsapp') selected @endif>Whatsapp</option>
+                        <option value="Offline" id="Offline" @if($agenda_detail->media ==
+                          'Offline') selected @endif>Offline</option>
                       </select>
                       @error('media')
                       <small class="text-danger">
@@ -133,7 +137,9 @@
                   <div class="row media_url" @if ($agenda_detail->media == 'Whatsapp') style="display: none" @endif>
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
-                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url" value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url" disabled>
+                      <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
+                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url"
+                        disabled>
                       @error('media_url')
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -145,7 +151,8 @@
                   <div class="row">
                     <div class="col-md-8 form-group">
                       <label for="fp-default">Activity Date</label>
-                      <input type="date" id="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ $agenda_detail->date }}" disabled>
+                      <input type="date" id="date" class="form-control @error('date') is-invalid @enderror" name="date"
+                        value="{{ $agenda_detail->date }}" disabled>
                       <input type="hidden" id="time_hidden" value="{{ $agenda_detail->time }}">
                       @error('date')
                       <span class="invalid-feedback" role="alert">
@@ -155,56 +162,59 @@
                     </div>
                     {{-- <div class="col-md-4 form-group">
                       <label for="fp-default">Activity Time</label>
-                      <input type="text" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}" id="time" disabled>
-                      @error('time')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div> --}}
-                    <div class="form-group col-md-4">
-                      <label for="time">Activity Time</label>
-                      <select name="time" class="form-control @error('time') is-invalid @enderror" id="time" disabled>
-                        <option hidden selected value>Pilih Jam Mulai</option>
-                      </select>
-                      @error('time')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
+                      <input type="text" class="form-control @error('time') is-invalid @enderror" name="time" value="{{ $agenda_detail->time }}"
+                    id="time" disabled>
+                    @error('time')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div> --}}
+                  <div class="form-group col-md-4">
+                    <label for="time">Activity Time</label>
+                    <select name="time" class="form-control @error('time') is-invalid @enderror" id="time" disabled>
+                      <option hidden selected value>Pilih Jam Mulai</option>
+                    </select>
+                    @error('time')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
                   </div>
-                  <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label class="form-label" for="basic-icon-default-fullname">Duration</label>
-                      <select class="form-control @error('duration') is-invalid @enderror" aria-label=".form-select-lg example" id="duration" name="duration" disabled>
-                        <option hidden selected value>Choose a duration</option>
-                        <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Minutes</option>
-                        <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Minutes</option>
-                        <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Minutes</option>
-                        <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Minutes</option>
-                      </select>
-                      @error('duration')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
-                      @enderror
-                    </div>
-                  </div>
-                  <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
-                  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
-                  $agenda_detail->status == 'unschedule')
-                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
-                  @endif
                 </div>
+                <div class="row">
+                  <div class="col-md-12 form-group">
+                    <label class="form-label" for="basic-icon-default-fullname">Duration</label>
+                    <select class="form-control @error('duration') is-invalid @enderror"
+                      aria-label=".form-select-lg example" id="duration" name="duration" disabled>
+                      <option hidden selected value>Choose a duration</option>
+                      <option value="30" @if($agenda_detail->duration == '30') selected @endif>30 Minutes</option>
+                      <option value="60" @if($agenda_detail->duration == '60') selected @endif>60 Minutes</option>
+                      <option value="90" @if($agenda_detail->duration == '90') selected @endif>90 Minutes</option>
+                      <option value="120" @if($agenda_detail->duration == '120') selected @endif>120 Minutes</option>
+                    </select>
+                    @error('duration')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                  </div>
+                </div>
+                <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
+                @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
+                $agenda_detail->status == 'unschedule')
+                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
+                  value="create">Submit</button>
+                @endif
               </div>
             </div>
           </div>
-        </form>
-      </section>
-      <!--/ Basic table -->
     </div>
+    </form>
+    </section>
+    <!--/ Basic table -->
   </div>
+</div>
 
 <!-- END: Content-->
 @endsection
@@ -212,7 +222,6 @@
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script type="text/javascript">
-
   $(document).ready(function() {
 
     var SelectedTime = $('#time_hidden').val();
@@ -312,8 +321,13 @@
       }
     }
 
-    $("#media").on('change', function() {
-      $(".media_url").toggle(500);
+    $("#media").on('click', function() {
+        // console.log('ok');
+      if($("#media").val() == 'Whatsapp' || $("#media").val() == 'Offline'){
+        $(".media_url").hide(500);
+      } else {
+        $(".media_url").show(500);
+      }
     });
 
     $('#date').attr('min', maxDate);
@@ -417,7 +431,6 @@
 </script>
 
 <script type="text/javascript">
-
   // $('.livesearch-plans').select2({
   //   placeholder: 'Select plans',
   //   ajax: {

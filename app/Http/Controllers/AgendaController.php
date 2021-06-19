@@ -436,7 +436,7 @@ class AgendaController extends Controller
     if ($agenda_detail->status == 'unschedule' && $agenda_detail->date == null) {
       $agenda_detail->status = 'scheduled';
       $was_scheduled = true;
-    //check if status schedule or rescheduled and the date and time was changed
+      //check if status schedule or rescheduled and the date and time was changed
     } elseif (($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled') && ($request->date != $agenda_detail->date || $request->time != $agenda_detail->time)) {
       $agenda_detail->status = 'rescheduled';
       $was_rescheduled = true;
@@ -448,7 +448,7 @@ class AgendaController extends Controller
     $agenda_detail->media = $request->media;
 
     //checking the media
-    if ($agenda_detail->media == 'Whatsapp') {
+    if ($agenda_detail->media == 'Whatsapp' || $agenda_detail->media == 'Offline') {
       $agenda_detail->media_url = null;
     } else {
       $agenda_detail->media_url = $request->media_url;
