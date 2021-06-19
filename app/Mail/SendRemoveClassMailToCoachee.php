@@ -29,6 +29,6 @@ class SendRemoveClassMailToCoachee extends Mailable
      */
     public function build()
     {
-        return $this->subject("Cataliz.id - Remove Client")->view('email_template.remove_class_coachee', ['email_data' => $this->email_data])->from('no-reply@cataliz.id');
+        return $this->subject("Cataliz.id - Remove Client")->view('email_template.remove_class_coachee', ['email_data' => $this->email_data]);
     }
 }

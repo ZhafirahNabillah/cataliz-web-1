@@ -34,7 +34,7 @@ class MailController extends Controller
       ];
 
       // Mail::to($email)->send(new SendForgotPasswordMail($data));
-      SendForgotPasswordMailJob::dispatch($data);
+      SendForgotPasswordMailJob::dispatch($data)->onConnection('sqs');
     }
 
     public static function SendSignUpMail($user){
@@ -135,7 +135,7 @@ class MailController extends Controller
           'admin_email'     => auth()->user()->email
         ];
 
-        SendAddClassMailJob::dispatch($data);
+        SendAddClassMailJob::dispatch($data)->onConnection('sqs');
       }
 
       return response('email sent');
@@ -154,7 +154,7 @@ class MailController extends Controller
         'admin_email'     => auth()->user()->email
       ];
 
-      SendRemoveClassMailJob::dispatch($data);
+      SendRemoveClassMailJob::dispatch($data)->onConnection('sqs');
 
       return response($data);
 
