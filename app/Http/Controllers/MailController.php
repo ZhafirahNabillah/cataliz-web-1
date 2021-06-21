@@ -24,7 +24,7 @@ class MailController extends Controller
       ];
 
       // Mail::to($email)->send(new SendResetPasswordMail($data));
-      SendResetPasswordMailJob::dispatch($data);
+      SendResetPasswordMailJob::dispatch($data)->onConnection('sqs');
     }
 
     public static function SendForgotPasswordMail($email, $reset_code){
@@ -45,7 +45,7 @@ class MailController extends Controller
       ];
 
       // Mail::to($user->email)->send(new SendSignUpMail($data));
-      SendSignUpMailJob::dispatch($data);
+      SendSignUpMailJob::dispatch($data)->onConnection('sqs');
     }
 
     public static function SendSessionScheduledMail($agenda_detail, $clients, $coach){
@@ -62,7 +62,7 @@ class MailController extends Controller
         'duration' => $agenda_detail->duration
       ];
 
-      SendSessionScheduledMailJob::dispatch($data_for_coach);
+      SendSessionScheduledMailJob::dispatch($data_for_coach)->onConnection('sqs');
 
       foreach ($clients as $client) {
         $data_for_coachee = [
@@ -78,7 +78,7 @@ class MailController extends Controller
           'duration' => $agenda_detail->duration
         ];
 
-        SendSessionScheduledMailJob::dispatch($data_for_coachee);
+        SendSessionScheduledMailJob::dispatch($data_for_coachee)->onConnection('sqs');
       }
 
     }
@@ -99,7 +99,7 @@ class MailController extends Controller
         'duration' => $agenda_detail->duration
       ];
 
-      SendSessionRescheduledMailJob::dispatch($data_for_coach);
+      SendSessionRescheduledMailJob::dispatch($data_for_coach)->onConnection('sqs');
 
       foreach ($clients as $client) {
         $data_for_coachee = [
@@ -117,7 +117,7 @@ class MailController extends Controller
           'duration' => $agenda_detail->duration
         ];
 
-        SendSessionRescheduledMailJob::dispatch($data_for_coachee);
+        SendSessionRescheduledMailJob::dispatch($data_for_coachee)->onConnection('sqs');
       }
 
     }
@@ -138,7 +138,7 @@ class MailController extends Controller
         SendAddClassMailJob::dispatch($data)->onConnection('sqs');
       }
 
-      return response('email sent');
+      // return response('email sent');
 
       // Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
     }
@@ -156,7 +156,7 @@ class MailController extends Controller
 
       SendRemoveClassMailJob::dispatch($data)->onConnection('sqs');
 
-      return response($data);
+      // return response($data);
 
       // Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
     }
