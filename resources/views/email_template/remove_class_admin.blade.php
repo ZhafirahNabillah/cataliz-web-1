@@ -319,7 +319,7 @@
                 <tr style="text-align: center;">
                   <td style="">
                     <a href="https://www.instagram.com/cataliz.id/">
-                      <img src="{{{{ $message->embed(public_path().'/assets/images/icons/email/white_instagram.png') }}">
+                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_instagram.png') }}">
                     </a>
                     <a href="https://cataliz.id/">
                       <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_link.png') }}">

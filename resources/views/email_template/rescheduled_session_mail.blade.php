@@ -225,14 +225,10 @@
   <table align="center" cellpadding="0" cellspacing="0" width="100%" height="100%">
     <tr>
       <td align="center" valign="top" style="background-color:#eeebeb" width="100%">
-
         <center>
-
           <table cellspacing="0" cellpadding="0" width="600" class="w320">
             <tr>
               <td align="center" valign="top" style="background-color: #E9E7FF;">
-
-
                 <table style="margin:0 auto;" cellspacing="0" cellpadding="0" width="100%">
                   <tr style="padding-left: 20px;">
                     <td style="text-align: left;">
@@ -240,11 +236,9 @@
                         <img src="{{ $message->embed(public_path().'/assets/images/icons/email/catalizlogo.png') }}">
                         <img src="{{ $message->embed(public_path().'/assets/images/icons/email/cataliz.png') }}">
                       </div>
-
                     </td>
                     <div>
                       <td rowspan="3" style="text-align:center; vertical-align:middle;width: 200px;background-color:#685FCD ;">
-
                         <img class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/4.png') }}" alt="" style="width:150px; height:150px;">
                       </td>
                     </div>
@@ -258,7 +252,6 @@
                   </tr>
                   <tr style="height: 80px;">
                     <td style="text-align: left;">
-
                     </td>
                   </tr>
             </tr>

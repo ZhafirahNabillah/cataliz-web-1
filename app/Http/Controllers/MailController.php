@@ -24,7 +24,7 @@ class MailController extends Controller
       ];
 
       // Mail::to($email)->send(new SendResetPasswordMail($data));
-      SendResetPasswordMailJob::dispatch($data)->onConnection('sqs');
+      SendResetPasswordMailJob::dispatch($data);
     }
 
     public static function SendForgotPasswordMail($email, $reset_code){
@@ -33,8 +33,14 @@ class MailController extends Controller
         'email' => $email
       ];
 
+      try {
+        SendForgotPasswordMailJob::dispatch($data);
+      } catch (\Exception $e) {
+        return $e;
+      }
+
+
       // Mail::to($email)->send(new SendForgotPasswordMail($data));
-      SendForgotPasswordMailJob::dispatch($data)->onConnection('sqs');
     }
 
     public static function SendSignUpMail($user){
@@ -45,7 +51,7 @@ class MailController extends Controller
       ];
 
       // Mail::to($user->email)->send(new SendSignUpMail($data));
-      SendSignUpMailJob::dispatch($data)->onConnection('sqs');
+      SendSignUpMailJob::dispatch($data);
     }
 
     public static function SendSessionScheduledMail($agenda_detail, $clients, $coach){
@@ -62,7 +68,7 @@ class MailController extends Controller
         'duration' => $agenda_detail->duration
       ];
 
-      SendSessionScheduledMailJob::dispatch($data_for_coach)->onConnection('sqs');
+      SendSessionScheduledMailJob::dispatch($data_for_coach);
 
       foreach ($clients as $client) {
         $data_for_coachee = [
@@ -78,7 +84,7 @@ class MailController extends Controller
           'duration' => $agenda_detail->duration
         ];
 
-        SendSessionScheduledMailJob::dispatch($data_for_coachee)->onConnection('sqs');
+        SendSessionScheduledMailJob::dispatch($data_for_coachee);
       }
 
     }
@@ -99,7 +105,7 @@ class MailController extends Controller
         'duration' => $agenda_detail->duration
       ];
 
-      SendSessionRescheduledMailJob::dispatch($data_for_coach)->onConnection('sqs');
+      SendSessionRescheduledMailJob::dispatch($data_for_coach);
 
       foreach ($clients as $client) {
         $data_for_coachee = [
@@ -117,30 +123,27 @@ class MailController extends Controller
           'duration' => $agenda_detail->duration
         ];
 
-        SendSessionRescheduledMailJob::dispatch($data_for_coachee)->onConnection('sqs');
+        SendSessionRescheduledMailJob::dispatch($data_for_coachee);
       }
 
     }
 
-    public static function SendAddClassMail($clients, $coach_detail){
-      foreach ($clients as $client) {
-        // code...
-        $data = [
-          'client_name'     => $client->name,
-          'client_email'    => $client->email,
-          'client_company'  => $client->company,
-          'coach_name'      => $coach_detail->name,
-          'coach_email'     => $coach_detail->email,
-          'admin_name'      => auth()->user()->name,
-          'admin_email'     => auth()->user()->email
-        ];
+    public static function SendAddClassMail($client, $coach_detail){
+      $data = [
+        'client_name'     => $client->name,
+        'client_email'    => $client->email,
+        'client_company'  => $client->company,
+        'coach_name'      => $coach_detail->name,
+        'coach_email'     => $coach_detail->email,
+        'admin_name'      => auth()->user()->name,
+        'admin_email'     => auth()->user()->email
+      ];
 
-        SendAddClassMailJob::dispatch($data)->onConnection('sqs');
+      try {
+        SendAddClassMailJob::dispatch($data);
+      } catch (\Exception $e) {
+        return $e;
       }
-
-      // return response('email sent');
-
-      // Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
     }
 
     public static function SendRemoveClassMail($client, $coach_detail){
@@ -154,10 +157,10 @@ class MailController extends Controller
         'admin_email'     => auth()->user()->email
       ];
 
-      SendRemoveClassMailJob::dispatch($data)->onConnection('sqs');
-
-      // return response($data);
-
-      // Mail::to(auth()->user()->email)->send(new SendRemoveClassMailToCoach($data));
+      try {
+        SendRemoveClassMailJob::dispatch($data);
+      } catch (\Exception $e) {
+        return $e;
+      }
     }
 }
