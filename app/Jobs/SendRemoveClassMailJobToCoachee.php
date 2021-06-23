@@ -2,16 +2,16 @@
 
 namespace App\Jobs;
 
-use Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\SendForgotPasswordMail;
+use App\Mail\SendRemoveClassMailToCoachee;
+use Mail;
 
-class SendForgotPasswordMailJob implements ShouldQueue
+class SendRemoveClassMailJobToCoachee implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -37,6 +37,6 @@ class SendForgotPasswordMailJob implements ShouldQueue
     public function handle()
     {
         //
-        Mail::to($this->data['email'])->send(new SendForgotPasswordMail($this->data));
+        Mail::to($this->data['coachee_email'])->send(new SendRemoveClassMailToCoachee($this->data));
     }
 }

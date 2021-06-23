@@ -153,7 +153,9 @@ class ClassController extends Controller
         // MailController::SendAddClassMailToAdmin($new_clients, $coach_detail);
 
         //sending email
-        MailController::SendAddClassMail($new_clients, $coach_detail);
+        foreach ($new_clients as $client) {
+          MailController::SendAddClassMail($client, $coach_detail);
+        }
 
         // if ($new_clients_id) {
         //

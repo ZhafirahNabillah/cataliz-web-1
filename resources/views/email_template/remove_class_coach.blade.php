@@ -225,9 +225,9 @@
                       <img style="text-align: center;width:200px; height:200px;" class="img-rounded" src="{{ $message->embed(public_path().'/assets/images/avatars/1.png') }}" alt="">
                       <!-- /foto profile -->
                       <br>
-                      <b style="padding-top: 10px;">{{ $email_data['client_name'] }}</b>
+                      <b style="padding-top: 10px;">{{ $email_data['coachee_name'] }}</b>
                       <br>
-                      <span style="font-size: 12px;">{{ $email_data['client_company'] }}</span>
+                      <span style="font-size: 12px;">{{ $email_data['coachee_company'] ?? 'Data not available'}}</span>
                       <p>
                         Thank you for giving your best contribution and help them in improving their business. You are
                         not a coach of this client again.

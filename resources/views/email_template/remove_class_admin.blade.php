@@ -238,9 +238,9 @@
                       <td><b style="padding-top: 10px;">{{ $email_data['coach_name'] }}</b></td>
                       <td><br></td>
                       <td>
-                        <b style="padding-top: 10px;">{{ $email_data['client_name'] }}</b>
+                        <b style="padding-top: 10px;">{{ $email_data['coachee_name'] }}</b>
                         <br>
-                        <span style="font-size: 12px;">{{ $email_data['client_company'] ?? 'Data not available' }}</span>
+                        <span style="font-size: 12px;">{{ $email_data['coachee_company'] ?? 'Data not available' }}</span>
                       </td>
                     </tr>
                     <tr>
@@ -319,7 +319,7 @@
                 <tr style="text-align: center;">
                   <td style="">
                     <a href="https://www.instagram.com/cataliz.id/">
-                      <img src="{{{{ $message->embed(public_path().'/assets/images/icons/email/white_instagram.png') }}">
+                      <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_instagram.png') }}">
                     </a>
                     <a href="https://cataliz.id/">
                       <img src="{{ $message->embed(public_path().'/assets/images/icons/email/white_link.png') }}">
