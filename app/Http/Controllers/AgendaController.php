@@ -413,14 +413,21 @@ class AgendaController extends Controller
   //method to update agenda detail/session on agenda edit page and send the email for scheduled and rescheduled session
   public function update(Request $request, $id)
   {
-    //
-    $this->validate($request, [
-      'topic'         => 'required',
-      'date'          => 'required',
-      'time'          => 'required',
-      'media'         => 'required',
-      'duration'      => 'required',
-    ]);
+    if (auth()->user()->hasRole('admin')) {
+      $this->validate($request, [
+        'topic'         => 'required',
+        'media'         => 'required',
+        'duration'      => 'required',
+      ]);
+    } else {
+      $this->validate($request, [
+        'topic'         => 'required',
+        'date'          => 'required',
+        'time'          => 'required',
+        'media'         => 'required',
+        'duration'      => 'required',
+      ]);
+    }
 
     $agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
     $old_agenda_detail = Agenda_detail::with('agenda')->where('id', $id)->first();
@@ -443,9 +450,17 @@ class AgendaController extends Controller
     }
 
     $agenda_detail->topic = $request->topic;
-    $agenda_detail->date = $request->date;
-    $agenda_detail->time = $request->time;
     $agenda_detail->media = $request->media;
+
+    //checking if has date request
+    if ($request->has('date')) {
+      $agenda_detail->date = $request->date;
+    }
+
+    //checking if has time request
+    if ($request->has('time')) {
+      $agenda_detail->time = $request->time;
+    }
 
     //checking the media
     if ($agenda_detail->media == 'Whatsapp' || $agenda_detail->media == 'Offline') {

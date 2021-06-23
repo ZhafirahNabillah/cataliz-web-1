@@ -201,11 +201,13 @@
                   </div>
                 </div>
                 <a href="{{route('agendas.index')}}" class="btn btn-secondary">Back</a>
-                @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' ||
-                $agenda_detail->status == 'unschedule')
-                <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"
-                  value="create">Submit</button>
-                @endif
+                @role('admin')
+                  <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn"value="create">Submit</button>
+                @else
+                  @if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
+                    <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Submit</button>
+                  @endif
+                @endrole
               </div>
             </div>
           </div>
@@ -416,7 +418,7 @@
     });
   });
 
-  @if($agenda_detail->status == 'scheduled' || $agenda_detail-> status == 'rescheduled' || $agenda_detail-> status == 'unschedule')
+  @if($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled' || $agenda_detail->status == 'unschedule')
   $(function() {
     // $('#plan_id').prop('disabled', false);
     // $('#client_id').prop('disabled', false);
@@ -428,36 +430,18 @@
     $('#duration').prop('disabled', false);
   });
   @endif
-</script>
 
-<script type="text/javascript">
-  // $('.livesearch-plans').select2({
-  //   placeholder: 'Select plans',
-  //   ajax: {
-  //     url: "{{route('plans.search')}}",
-  //     dataType: 'json',
-  //     delay: 250,
-  //     processResults: function(data) {
-  //       return {
-  //         results: $.map(data, function(item) {
-  //           console.log(item)
-  //           return {
-  //             text: item.objective,
-  //             id: item.id,
-  //           }
-  //         })
-  //       };
-  //     },
-  //     cache: true
-  //   }
-  // });
-  //
-  // $(".livesearch-plans").on('change', function(e) {
-  //   // Access to full data
-  //   console.log($(this).select2('data'));
-  //   console.log($(this).select2('data')[0].id);
-  //   var dd = $(this).select2('data')[0];
-  // });
-
+  @role('admin')
+  $(function() {
+    // $('#plan_id').prop('disabled', false);
+    // $('#client_id').prop('disabled', false);
+    $('#topic').prop('disabled', false);
+    $('#media').prop('disabled', false);
+    $('#media_url').prop('disabled', false);
+    // $('#date').prop('disabled', false);
+    // $('#time').prop('disabled', false);
+    $('#duration').prop('disabled', false);
+  });
+  @endrole
 </script>
 @endpush
