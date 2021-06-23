@@ -65,8 +65,7 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
     'phpmyadmin:symlink',
-    'reload-nginx',
-    'scheduler'
+    'reload-nginx'
 ]);
 
 task ('phpmyadmin:symlink', function(){
