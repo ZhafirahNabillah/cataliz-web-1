@@ -106,6 +106,13 @@
 							<div class="mt-2">
 								<h5 class="mb-75">Media Url:</h5>
 								<p class="card-text">{{$agenda_detail->media_url ?? '-'}}</p>
+
+								@if ($agenda_detail->media_url)
+									<span>
+										<a href="{{ $agenda_detail->media_url }}" class="btn btn-sm btn-primary" id="urlVisitBtn">Visit Link</a>
+										<button type="button" class="btn btn-sm btn-primary" id="urlCopyBtn">Copy Link</button>
+									</span>
+								@endif
 							</div>
 							<div class="mt-2">
 								<h5 class="mb-75">Duration:</h5>
@@ -524,6 +531,33 @@
 		tinymce.init({
       selector: 'textarea',
     });
+
+		$('#urlCopyBtn').on('click', function() {
+			var url = $('#urlVisitBtn').attr('href');
+
+			document.addEventListener('copy', function(e) {
+	      e.clipboardData.setData('text/plain', url);
+	      e.preventDefault();
+   		}, true);
+
+			document.execCommand('copy');
+
+			$(this).attr('data-toggle', "popover");
+			$(this).attr('data-placement', "top");
+			$(this).attr(
+				'data-content',
+				`<div>Successfully Copied!</div>`
+			);
+			$(this).attr('data-html', "true");
+
+			$('[data-toggle="popover"]').popover('show');
+		});
+
+		$('#urlCopyBtn').on('shown.bs.popover', function() {
+		    setTimeout(function() {
+		        $('#urlCopyBtn').popover('hide');
+		    }, 3000);
+		});
 	});
 </script>
 @endpush

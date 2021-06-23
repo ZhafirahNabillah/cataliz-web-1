@@ -120,12 +120,10 @@
                       <label class="form-label" for="basic-icon-default-fullname">Media</label>
                       <select class="form-control @error('media') is-invalid @enderror" id="media"
                         aria-label=".form-select-lg example" name="media" disabled>
-                        <option value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting
-                          Room') selected @endif>Meeting Room</option>
-                        <option value="Whatsapp" id="Whatsapp" @if($agenda_detail->media ==
-                          'Whatsapp') selected @endif>Whatsapp</option>
-                        <option value="Offline" id="Offline" @if($agenda_detail->media ==
-                          'Offline') selected @endif>Offline</option>
+                        <option hidden selected disabled>Please select your session media</option>
+                        <option value="Meeting Room" id="Meeting Room" @if($agenda_detail->media == 'Meeting Room') selected @endif>Meeting Room</option>
+                        <option value="Whatsapp" id="Whatsapp" @if($agenda_detail->media == 'Whatsapp') selected @endif>Whatsapp</option>
+                        <option value="Offline" id="Offline" @if($agenda_detail->media == 'Offline') selected @endif>Offline</option>
                       </select>
                       @error('media')
                       <small class="text-danger">
@@ -138,7 +136,7 @@
                     <div class="col-md-12 form-group">
                       <label for="fp-default">Media url</label>
                       <input type="text" class="form-control @error('media_url') is-invalid @enderror" name="media_url"
-                        value="{{ $agenda_detail->media_url }}" placeholder="Insert a url media..." id="media_url"
+                        value="{{ $agenda_detail->media_url }}" placeholder="https://zoom.us/my/your-personal-meeting-id" id="media_url"
                         disabled>
                       @error('media_url')
                       <span class="invalid-feedback" role="alert">
@@ -321,6 +319,12 @@
           }
         }
       }
+    }
+
+    if($("#media").val() == 'Whatsapp' || $("#media").val() == 'Offline'){
+      $(".media_url").hide(500);
+    } else {
+      $(".media_url").show(500);
     }
 
     $("#media").on('click', function() {
