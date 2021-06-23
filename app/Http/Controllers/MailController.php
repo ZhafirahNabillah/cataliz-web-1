@@ -7,8 +7,12 @@ use Illuminate\Support\Facades\Mail;
 use App\Jobs\SendResetPasswordMailJob;
 use App\Jobs\SendForgotPasswordMailJob;
 use App\Jobs\SendSignUpMailJob;
-use App\Jobs\SendRemoveClassMailJob;
-use App\Jobs\SendAddClassMailJob;
+use App\Jobs\SendRemoveClassMailJobToAdmin;
+use App\Jobs\SendRemoveClassMailJobToCoach;
+use App\Jobs\SendRemoveClassMailJobToCoachee;
+use App\Jobs\SendAddClassMailJobToAdmin;
+use App\Jobs\SendAddClassMailJobToCoach;
+use App\Jobs\SendAddClassMailJobToCoachee;
 use App\Jobs\SendSessionScheduledMailJob;
 use App\Jobs\SendSessionRescheduledMailJob;
 use Carbon\Carbon;
@@ -23,7 +27,6 @@ class MailController extends Controller
           'email' => $email
       ];
 
-      // Mail::to($email)->send(new SendResetPasswordMail($data));
       SendResetPasswordMailJob::dispatch($data);
     }
 
@@ -38,9 +41,6 @@ class MailController extends Controller
       } catch (\Exception $e) {
         return $e;
       }
-
-
-      // Mail::to($email)->send(new SendForgotPasswordMail($data));
     }
 
     public static function SendSignUpMail($user){
@@ -50,7 +50,6 @@ class MailController extends Controller
         'email' => $user->email
       ];
 
-      // Mail::to($user->email)->send(new SendSignUpMail($data));
       SendSignUpMailJob::dispatch($data);
     }
 
@@ -130,37 +129,34 @@ class MailController extends Controller
 
     public static function SendAddClassMail($client, $coach_detail){
       $data = [
-        'client_name'     => $client->name,
-        'client_email'    => $client->email,
-        'client_company'  => $client->company,
         'coach_name'      => $coach_detail->name,
         'coach_email'     => $coach_detail->email,
+        'coachee_name'     => $client->name,
+        'coachee_email'    => $client->email,
+        'coachee_company'  => $client->company,
         'admin_name'      => auth()->user()->name,
         'admin_email'     => auth()->user()->email
+
       ];
 
-      try {
-        SendAddClassMailJob::dispatch($data);
-      } catch (\Exception $e) {
-        return $e;
-      }
+      SendAddClassMailJobToCoach::dispatch($data);
+      SendAddClassMailJobToCoachee::dispatch($data);
+      SendAddClassMailJobToAdmin::dispatch($data);
     }
 
     public static function SendRemoveClassMail($client, $coach_detail){
       $data = [
-        'client_name'     => $client->name,
-        'client_email'    => $client->email,
-        'client_company'  => $client->company,
         'coach_name'      => $coach_detail->name,
         'coach_email'     => $coach_detail->email,
+        'coachee_name'     => $client->name,
+        'coachee_email'    => $client->email,
+        'coachee_company'  => $client->company,
         'admin_name'      => auth()->user()->name,
         'admin_email'     => auth()->user()->email
       ];
 
-      try {
-        SendRemoveClassMailJob::dispatch($data);
-      } catch (\Exception $e) {
-        return $e;
-      }
+      SendRemoveClassMailJobToCoach::dispatch($data);
+      SendRemoveClassMailJobToCoachee::dispatch($data);
+      SendRemoveClassMailJobToAdmin::dispatch($data);
     }
 }

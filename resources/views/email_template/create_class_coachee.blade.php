@@ -219,7 +219,7 @@
                   <table cellspacing="0" cellpadding="0" class="force-full-width">
                     <tr>
                       <!-- Nama user coach -->
-                      <h3 style="color: black;">Hai, {{ $email_data['client_name'] }}</h3>
+                      <h3 style="color: black;">Hai, {{ $email_data['coachee_name'] }}</h3>
                       <p style="color: black;">Admin has been assigned you to a new coach. Let’s introduce your new
                         coach
                       </p>

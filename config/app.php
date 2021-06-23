@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Cataliz'),
+    'name' => env('APP_NAME', 'Cataliz Coaching Platform'),
 
     /*
     |--------------------------------------------------------------------------

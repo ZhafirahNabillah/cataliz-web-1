@@ -84,8 +84,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'cataliz.mail@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Cataliz Indonesia'),
+        'address' => env('MAIL_FROM_ADDRESS', 'no-reply@cataliz.id'),
+        'name' => env('MAIL_FROM_NAME', 'Cataliz Coaching Platform'),
     ],
 
     /*
