@@ -76,6 +76,6 @@ task ('reload-nginx',function(){
     run('sudo systemctl reload nginx');
 });
 
-task ('scheduler',function(){
-    run('php /var/www/html/current/artisan schedule:run 1>> /dev/null 2>&1');
-});
+//task ('scheduler',function(){
+//    run('php /var/www/html/current/artisan schedule:run 1>> /dev/null 2>&1');
+//});
