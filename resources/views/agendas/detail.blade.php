@@ -2,6 +2,10 @@
 
 @section('title','Client')
 
+@push('styles')
+<script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+@endpush
+
 @section('content')
 
 @include('panels.navbar')
@@ -119,10 +123,39 @@
 								<p class="card-text">{{$agenda_detail->duration ?? '-'}} Menit
 								</p>
 							</div>
+							@if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled')
+								<div class="mt-2">
+								<div title="Add to Calendar" class="addeventatc">
+							    Add to Calendar
+							    <span class="start">{{ Carbon\Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->format('Y-m-d H:i:s') }}</span>
+							    <span class="end">{{ Carbon\Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addMinutes($agenda_detail->duration)->format('Y-m-d H:i:s') }}</span>
+							    <span class="timezone">Asia/Jakarta</span>
+							    <span class="title">{{ $agenda_detail->session_name.' - '.$agenda_detail->topic }}</span>
+							    <span class="description">
+										Session : {{ $agenda_detail->session_name }}
+										Topic		: {{ $agenda_detail->topic }}
+										Media 	: {{ $agenda_detail->media }}
+										Coach		: {{ $coach->name }}
+										Client	: {{ $clients->implode('name', ', ') }}
+									</span>
+								</div>
+							</div>
+							@endif
 						</div>
 					</div>
 				</div>
 			</div>
+			@if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled')
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card text-white bg-warning">
+						<div class="card-body">
+							Please fill your feedback before <b>1x24 hours</b> before sessions get <b>canceled</b> automatically!
+						</div>
+					</div>
+				</div>
+			</div>
+			@endif
 			<!--/ Show Detail Agendas -->
 			@role('coachee')
 			<div class="row match-height">

@@ -371,12 +371,16 @@ class AgendaController extends Controller
 
     $coaching_note = Coaching_note::where('agenda_detail_id', $id)->first();
 
+    $owner = $plan->owner;
+    $coach = $owner->user;
+    $clients = $plan->clients;
+
     if (auth()->user()->hasRole('admin')) {
-      return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback_from_coach', 'feedback_from_coachee'));
+      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback_from_coach', 'feedback_from_coachee'));
     } elseif (auth()->user()->hasRole('coach')) {
-      return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback', 'feedback_from_coachee'));
+      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback', 'feedback_from_coachee'));
     } else {
-      return view('agendas.detail', compact('agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback'));
+      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback'));
     }
   }
 
