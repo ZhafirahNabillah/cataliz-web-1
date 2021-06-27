@@ -56,7 +56,7 @@
             <form action="{{url('/plans')}}" id="plan_form" method="post">
               @csrf
               <div class="card-body">
-                <input type="hidden" name="id" value="{{ $plan->id }}">
+                <input type="hidden" name="id" value="{{ $plan->id }}" id="id">
                 {{-- <input type="hidden" name="group_id" value="{{ $plan->group_id }}"> --}}
                 <div class="form-group">
                   <label class="fp-default" for="basic-icon-default-fullname">Client Name</label>
