@@ -5334,6 +5334,52 @@
             "install-path": "../ramsey/uuid"
         },
         {
+            "name": "roquie/laravel-dusk-select2",
+            "version": "2.1.0",
+            "version_normalized": "2.1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/roquie/laravel-dusk-select2.git",
+                "reference": "eb13801b753d77384948b8447ebe82beab76f5c5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/roquie/laravel-dusk-select2/zipball/eb13801b753d77384948b8447ebe82beab76f5c5",
+                "reference": "eb13801b753d77384948b8447ebe82beab76f5c5",
+                "shasum": ""
+            },
+            "require-dev": {
+                "laravel/dusk": "^5 || ^6",
+                "php": ">=7.1",
+                "phpunit/phpunit": "^8 || ^9",
+                "symfony/var-dumper": "^4 || ^5"
+            },
+            "time": "2020-09-03T12:55:45+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/macro.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "roquie",
+                    "email": "roquie0@gmail.com"
+                }
+            ],
+            "description": "Select2.js support for the Laravel Dusk testing.",
+            "support": {
+                "issues": "https://github.com/roquie/laravel-dusk-select2/issues",
+                "source": "https://github.com/roquie/laravel-dusk-select2/tree/2.1.0"
+            },
+            "install-path": "../roquie/laravel-dusk-select2"
+        },
+        {
             "name": "sabberworm/php-css-parser",
             "version": "8.3.1",
             "version_normalized": "8.3.1.0",
@@ -9106,6 +9152,7 @@
         "phpunit/php-text-template",
         "phpunit/php-timer",
         "phpunit/phpunit",
+        "roquie/laravel-dusk-select2",
         "sebastian/cli-parser",
         "sebastian/code-unit",
         "sebastian/code-unit-reverse-lookup",

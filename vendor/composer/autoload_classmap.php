@@ -6639,6 +6639,7 @@ return array(
     'Symfony\\Polyfill\\Php80\\Php80' => $vendorDir . '/symfony/polyfill-php80/Php80.php',
     'Tests\\Browser\\CreatePlansTest' => $baseDir . '/tests/Browser/CreatePlansTest.php',
     'Tests\\Browser\\DetailPlansTest' => $baseDir . '/tests/Browser/DetailPlansTest.php',
+    'Tests\\Browser\\EditPlansTest' => $baseDir . '/tests/Browser/EditPlansTest.php',
     'Tests\\Browser\\Pages\\Dashboard' => $baseDir . '/tests/Browser/Pages/Dashboard.php',
     'Tests\\Browser\\Pages\\HomePage' => $baseDir . '/tests/Browser/Pages/HomePage.php',
     'Tests\\Browser\\Pages\\Page' => $baseDir . '/tests/Browser/Pages/Page.php',
