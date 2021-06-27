@@ -16,7 +16,7 @@ class DetailPlansTest extends DuskTestCase
      */
     public function testExample()
     {
-        $this->browse(function ($first, $second) {
+        $this->browse(function ($first) {
             // Login as Coach and Check the Plans Page
             $first->loginAs(User::find(1))
                 ->visitRoute('plans.index');
@@ -37,8 +37,8 @@ class DetailPlansTest extends DuskTestCase
                 });
 
             // Login as Coachee and Check the Plans Page
-            $second->loginAs(User::find(2))
-                ->visit('/plans');
+            // $second->loginAs(User::find(2))
+            //     ->visit('/plans');
         });
     }
 }

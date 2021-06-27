@@ -179,7 +179,8 @@ return [
         Yajra\DataTables\DataTablesServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        Laravel\Dusk\DuskServiceProvider::class
+        Laravel\Dusk\DuskServiceProvider::class,
+        Stevebauman\Purify\PurifyServiceProvider::class
     ],
 
     /*

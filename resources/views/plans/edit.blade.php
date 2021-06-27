@@ -26,7 +26,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="{{route('plans.index')}}">Coaching Plans</a>
                 </li>
-                <li class="breadcrumb-item active">Create Coaching Plans
+                <li class="breadcrumb-item active">Edit Coaching Plans
                 </li>
               </ol>
             </div>
@@ -51,7 +51,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title">Create Plan</h4>
+              <h4 class="card-title">Edit Plan</h4>
             </div>
             <form action="{{url('/plans')}}" id="plan_form" method="post">
               @csrf
@@ -88,7 +88,8 @@
               <div class="row group_wrapper" style="display: none;">
                 <div class="col-md-12 form-group">
                   <label for="fp-default">Group Code</label>
-                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code" id="group_code" value="{{ $plan->group_id }}" placeholder="Fill group code here..">
+                  <input type="text" class="form-control @error('group_code') is-invalid @enderror" name="group_code"
+                    id="group_code" value="{{ $plan->group_id }}" placeholder="Fill group code here..">
                   <small><strong>group code can consist of number and character</strong></small>
                   <div id="group_code-error"></div>
                   {{-- @error('group_code')
@@ -195,7 +196,8 @@
 <script src="//unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
 <link href="//unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 <script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-<script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js"
+  referrerpolicy="origin"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <style>
   label.error.fail-alert {
