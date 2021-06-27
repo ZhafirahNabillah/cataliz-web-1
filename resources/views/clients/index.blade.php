@@ -606,7 +606,7 @@
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
                 <input id="name" name="name" type="text" class="form-control dt-full-name"
-                  id="basic-icon-default-fullname" value="" placeholder="Full name here..."/>
+                  id="basic-icon-default-fullname" value="" placeholder="Full name here..." />
                 <div id="name-error"></div>
               </div>
               <div class="form-group">
@@ -622,8 +622,8 @@
               </div>
               <div class="form-group">
                 <label class="form-label" for="basic-icon-default-email">Email</label>
-                <input id="email" name="email" type="text" id="basic-icon-default-email"
-                  class="form-control dt-email" placeholder="Email here..."/>
+                <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+                  placeholder="Email here..." />
                 <small class="form-text text-muted"> You can use letters, numbers & periods</small>
                 <div id="email-error"></div>
               </div>
@@ -636,7 +636,8 @@
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee"
+                    value="coachee">
                   <label class="form-check-label" for="permission-check-coachee">
                     Coachee
                   </label>
@@ -670,12 +671,13 @@
               <div class="form-group" id="program-field-wrapper">
                 <label class="form-label" for="basic-icon-default-fullname">Program</label>
                 @foreach ($programs as $program)
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="program" id="program-{{ $program->id }}" value="{{ $program->id }}">
-                    <label class="form-check-label" for="program-{{ $program->id }}">
-                      {{ $program->program_name }}
-                    </label>
-                  </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="program" id="program-{{ $program->id }}"
+                    value="{{ $program->id }}">
+                  <label class="form-check-label" for="program-{{ $program->id }}">
+                    {{ $program->program_name }}
+                  </label>
+                </div>
                 @endforeach
                 <div id="program-error"></div>
               </div>
@@ -683,9 +685,8 @@
                 <label class="form-label" for="">Batch</label>
                 <select class="form-control" name="batch">
                   <option disabled selected hidden value="0">Select batch</option>
-                  @for ($i=1; $i <= 10; $i++)
-                    <option value="{{ $i }}">Batch {{ $i }}</option>
-                  @endfor
+                  @for ($i=1; $i <= 10; $i++) <option value="{{ $i }}">Batch {{ $i }}</option>
+                    @endfor
                 </select>
                 <div id="batch-error"></div>
                 <small class="form-text text-muted">Batch must be filled if program was chosen</small>
@@ -868,8 +869,7 @@
       @endsection
 
       @push('scripts')
-      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
-        id="theme-styles">
+      <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
       <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
       <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
@@ -1495,6 +1495,39 @@
                 $('#batch-field-wrapper').show();
               }
               $('#modal-user-slide-in').modal('show');
+            })
+          });
+
+          $('body').on('click', '.deleteUser', function() {
+            Swal.fire({
+              title: "Are you sure?",
+              text: "The user you choose will be suspended!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#DD6B55",
+              confirmButtonText: "Yes, Sure",
+              cancelButtonText: "Cancel"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                var user_id = $(this).data('id');
+                  $.ajax({
+                    type: "DELETE",
+                    url: "" + '/users/' + user_id,
+                    success: function(data) {
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'Account deleted successfully!',
+                      });
+                      table_coach.draw();
+                      table_admin.draw();
+                      table_coachee.draw();
+                      table_trainer.draw();
+                      table_mentor.draw();                    },
+                    error: function(data) {
+                      console.log('Error:', data);
+                    }
+                  });
+              }
             })
           });
 

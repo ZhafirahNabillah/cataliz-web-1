@@ -217,4 +217,10 @@ class UserController extends Controller
 
     return response()->json(['success' => 'User has been activated!']);
   }
+
+  public function destroy($id)
+  {
+    User::find($id)->delete();
+    return response()->json(['success' => 'Client deleted!']);
+  }
 }

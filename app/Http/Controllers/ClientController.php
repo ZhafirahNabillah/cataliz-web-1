@@ -208,7 +208,7 @@ class ClientController extends Controller
             return $program->program_name;
           }
         })
-        ->rawColumns(['action','program'])
+        ->rawColumns(['action', 'program'])
         ->make(true);
     }
 
@@ -219,49 +219,22 @@ class ClientController extends Controller
   public function show_coach_list(Request $request)
   {
     if ($request->ajax()) {
-      // $data = User::role('coach')->select('users.*')->selectRaw('avg(agenda_details.rating_from_coachee) as average')
-      //   ->leftJoin('agendas', function ($join) {
-      //     $join->on('agendas.owner_id', '=', 'users.id');
-      //   })
-      //   ->leftJoin('agenda_details', function ($join) {
-      //     $join->on('agenda_details.agenda_id', '=', 'agendas.id');
-      //   })
-      //   ->groupBy('users.id', 'users.name', 'users.phone', 'users.email', 'users.email_verified_at', 'users.password', 'users.profil_picture', 'users.background_picture', 'users.remember_token', 'users.created_at', 'users.updated_at', 'users.suspend_status', 'users.reset_code','users.verification_code','users.is_verified', 'agendas.id', 'agendas.client_id', 'agendas.plan_id', 'agendas.session', 'agendas.type_session', 'agendas.owner_id', 'agendas.created_at', 'agendas.updated_at')
-      //   // // ->whereNull('agenda_details.agenda_id')
-      //   ->get();
-
       $data = User::role('coach')->get();
 
       return DataTables::of($data)
         ->addIndexColumn()
-        // ->addColumn('rating', function ($row) {
-
-        //   // if ($row->average != null) {
-        //   //   $rating = $row->average . '/5';
-        //   // } else {
-        //   //   $rating = $row->average;
-        //   // }
-        //   $coach = Coach::where('user_id', $row->id)->first();
-        //   $plans = $coach->plan->pluck('id');
-        //   $agenda = Agenda::whereIn('plan_id', $plans)->pluck('id');
-        //   // $agenda_id = Agenda::where('owner_id', $row->id)->pluck('id');
-        //   // $rating = Agenda_detail::whereIn('agenda_id', $agenda)->pluck('rating_from_coachee')->avg();
-
-        //   // if ($rating) {
-        //   //   $rating = $rating.'/5';
-        //   // }
-
-        //   // return $rating;
-        // })
         ->addColumn('action', function ($row) {
           $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div></div>';
           $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
           $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+          if (auth()->user()->hasRole('admin')) {
+            $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
+          }
 
           if ($row->suspend_status == 1) {
-            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+            $actionBtn = $detail_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
           } else {
-            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
           }
           return $actionBtn;
         })
@@ -285,12 +258,12 @@ class ClientController extends Controller
             $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
             $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
             $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+            $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
 
             if ($row->suspend_status == 1) {
-              // code...
-              $actionBtn = $update_btn . ' ' . $suspend_btn;
+              $actionBtn = $update_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
             } else {
-              $actionBtn = $update_btn . ' ' . $unsuspend_btn;
+              $actionBtn = $update_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
             }
             return $actionBtn;
           } elseif (auth()->user()->hasRole('mentor')) {
@@ -307,7 +280,7 @@ class ClientController extends Controller
           if (is_null($program)) {
             return 'Not Registered to Any program';
           } else {
-            return $program->program_name.' Batch '.$client->batch;
+            return $program->program_name . ' Batch ' . $client->batch;
           }
         })
         ->rawColumns(['action', 'program'])
@@ -327,12 +300,13 @@ class ClientController extends Controller
           $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
           $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
           $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
 
           if ($row->suspend_status == 1) {
             // code...
-            $actionBtn = $detail_btn . ' ' . $suspend_btn;
+            $actionBtn = $detail_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
           } else {
-            $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
+            $actionBtn = $detail_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
           }
           return $actionBtn;
         })
@@ -355,12 +329,13 @@ class ClientController extends Controller
             $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
             $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
             $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+            $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
 
             if ($row->suspend_status == 1) {
               // code...
-              $actionBtn = $update_btn . ' ' . $suspend_btn;
+              $actionBtn = $update_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
             } else {
-              $actionBtn = $update_btn . ' ' . $unsuspend_btn;
+              $actionBtn = $update_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
             }
             return $actionBtn;
           } elseif (auth()->user()->hasRole('coach')) {
@@ -397,12 +372,13 @@ class ClientController extends Controller
             $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
             $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
             $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+            $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
 
             if ($row->suspend_status == 1) {
               // code...
-              $actionBtn = $update_btn . ' ' . $suspend_btn;
+              $actionBtn = $update_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
             } else {
-              $actionBtn = $update_btn . ' ' . $unsuspend_btn;
+              $actionBtn = $update_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
             }
             return $actionBtn;
           } elseif (auth()->user()->hasRole('coach')) {
@@ -711,7 +687,6 @@ class ClientController extends Controller
 
   public function destroy($id)
   {
-    //
     Client::find($id)->delete();
     return response()->json(['success' => 'Client deleted!']);
   }
