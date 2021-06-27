@@ -38,7 +38,7 @@ class EditPlansTest extends DuskTestCase
                 ->visit('/plans/' . $plan_individual->id . '/edit')
                 ->pause(3000)
                 ->select2('.livesearch-plans', 'User')
-                ->executeScript('tinyMCE.get(\'plans\$plan_individual->id\edit\').setContent(\'<p>Lorem Ipsum dolor sit Amet</p>\')')
+                ->driver->executeScript('tinyMCE.get(\'plans\$plan_individual->id\edit\').setContent(\'<p>Lorem Ipsum dolor sit Amet</p>\')')
                 ->type('date','2021-06-27');
                 // ->press('Submit')
                 // ->assertRouteIs('plans.index');
