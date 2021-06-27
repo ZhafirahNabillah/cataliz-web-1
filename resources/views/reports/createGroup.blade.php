@@ -51,7 +51,7 @@
             </div>
             <form action="{{route('report.store_group')}}" method="post">
               @csrf
-              <div class="card-body form-wrapper" id="1">
+              <div class="card-body">
                 <div class="row mb-2 pl-1">
                   <div class="col-sm-2">
                     <b>Group Code</b>
@@ -84,12 +84,12 @@
                 </div>
                 <div class="collapse-icon">
                   <div class="accordion" id="accordionExample">
-                    <div class="card">
-                      <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse"
+                    <div class="card form-wrapper" id='0'>
+                      {{-- <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse"
                         role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
                         <span class="lead collapse-title"><b>Chochee Name 1</b> Chochee Name</span>
                       </div>
-                      <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show"
+                      <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse"
                         data-parent="#accordionExample">
 
                         <div class="card-body ml-0">
@@ -150,78 +150,16 @@
                               name="summary"></textarea>
                           </div>
                         </div>
-                      </div>
-                    </div>
-
-                    <div class="card">
-                      <div id="headingCollapse2" class="card-header" data-toggle="collapse" role="button"
-                        data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                        <span class="lead collapse-title"><b>Chochee Name 2</b> Chochee Name</span>
-                      </div>
-                      <div id="collapse2" role="tabpanel" aria-labelledby="headingCollapse2" class="collapse"
-                        data-parent="#accordionExample">
-                        <div class="card-body">
-                          <!-- awarness -->
-                          <div class="col-sm-2">
-                            <b>Awarness</b>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="border p-1" id="awarness2"></div>
-                          </div>
-
-                          <!-- mindset -->
-                          <div class="col-sm-2">
-                            <b>Mindset</b>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="border p-1" id="mindset2"></div>
-                          </div>
-
-                          <!-- behaviour -->
-
-                          <div class="col-sm-2">
-                            <b>Behaviour</b>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="border p-1" id="behaviour2"></div>
-                          </div>
-
-                          <!-- engagement -->
-
-                          <div class="col-sm-2">
-                            <b>Engagement</b>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="border p-1" id="engagement2"></div>
-                          </div>
-
-                          <!-- result -->
-                          <div class="col-sm-2">
-                            <b>Result</b>
-                          </div>
-                          <div class="col-sm-2">
-                            <div class="border p-1" id="result2"></div>
-                          </div>
-
-                          <!-- note -->
-                          <div class="col-sm-2">
-                            <b>Note</b>
-                          </div>
-                          <div class="col-md-12 form-group">
-                            <textarea class="form-control @error('summary') is-invalid @enderror"
-                              name="summary"></textarea>
-                          </div>
-
-                        </div>
-                      </div>
+                      </div> --}}
                     </div>
                   </div>
                 </div>
+              </div>
 
-                <div class="col-md-12 text-right">
-                  <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
-                  <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
-                </div>
+              <div class="col-md-12 text-right">
+                <a href="{{route('report.index')}}" class="btn btn-secondary">Kembali</a>
+                <button type="submit" class="btn btn-primary data-submit" id="saveBtn">Submit</button>
+              </div>
             </form>
 
           </div>
@@ -254,62 +192,6 @@
         return '<img src="' + $(this).data('img') + '" />';
       }
     });
-
-    $("#awarness").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 5,
-      spacing: "30px",
-			fullStar: true,
-    });
-    $('#awarness').click(function() {
-      console.log('ok');
-			var awarness = $('#awarness').rateYo("rating");
-			$('#coachee_awarness').val(awarness);
-		});
-
-    $("#mindset").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 5,
-      spacing: "30px",
-      fullStar: true,
-    });
-    $('#mindset').click(function() {
-			var mindset = $('#mindset').rateYo("rating");
-			$('#coachee_mindset').val(mindset);
-		});
-
-    $("#behaviour").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 5,
-      spacing: "30px",
-      fullStar: true,
-    });
-    $('#behaviour').click(function() {
-			var behaviour = $('#behaviour').rateYo("rating");
-			$('#coachee_behaviour').val(behaviour);
-		});
-
-    $("#engagement").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 5,
-      spacing: "30px",
-      fullStar: true,
-    });
-    $('#engagement').click(function() {
-			var engagement = $('#engagement').rateYo("rating");
-			$('#coachee_engagement').val(engagement);
-		});
-
-    $("#result").rateYo({
-      ratedFill: "#F1AF33",
-      numStars: 5,
-      spacing: "30px",
-      fullStar: true,
-    });
-    $('#result').click(function() {
-			var result = $('#result').rateYo("rating");
-			$('#coachee_result').val(result);
-		});
 
     $('.livesearch-group').select2({
       placeholder: 'Select Group Code',
@@ -349,6 +231,9 @@
 
    
     $('body').on('change', '.livesearch-group', function() {
+      $('.form-wrapper').empty();
+      $('.form-wrapper').attr('id','0');
+      // this_form_id = 0;
       var group_id = $(this).val();
       //get en id group e iso teko select seng dipilih
 
@@ -357,27 +242,142 @@
         //variable data iku isine return response e
         //kari di for sesuai banyaknya return data user e
         //opo nek gaperlu data user e return en count e tok ae
-        for (var i; i<data; i++){
-          function append_form() {
-            var last_form_index = $('.form-wrapper:last').attr('id');
-            var this_form_id = parseInt(last_form_index) + 1;
+        for (var i=0; i<data[0]; i++){
+            // console.log('ok');
+          // function append_form() {
+            // var last_form_index = $('.form-wrapper:last').attr('id');
+            var this_form_id = i + 1;
+            // console.log(this_form_id);
             $('.form-wrapper:last').after('<div class="form-wrapper" id="' + this_form_id + '"></div>');
-            // console.log(this_question_id);
-            var hr = '<hr>';
-            var form_title = '<div class="title"><button type="button" data-id="' + this_form_id + '" class="btn btn-danger float-right deleteQuestionBtn">Delete Question</button><h4>Question ' + this_question_id + '</h4></div>';
-            var form_box = '<div class="form-group"><label for="question">Question</label><textarea name="question-' + this_form_id + '" id="question-' + this_question_id + '" placeholder="Your question here..."></textarea></div>';
-            var awarness_form = '<div class="form-group"><label for="">Answer A</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="a-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
-            var mindset_form = '<div class="form-group"><label for="">Answer B</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="b-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
-            var behaviour_form = '<div class="form-group"><label for="">Answer C</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="c-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
-            var engagement_form = '<div class="form-group"><label for="">Answer D</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="d-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
-            var result_form = '<div class="form-group"><label for="">Answer E</label><input type="text" class="form-control col-sm-6" name="answer-' + this_question_id + '[]" id="e-answer-' + this_question_id + '" placeholder="Input your Answer..."></div>';
+            var form = `<div class="card">
+                      <div id="headingCollapse`+this_form_id+`" class="card-header" data-toggle="collapse" role="button"
+                        data-target="#collapse`+ this_form_id +`" aria-expanded="false" aria-controls="collapse2">
+                        <span class="lead collapse-title"><b>Coachee `+ this_form_id +`</b> `+data[1][this_form_id - 1]['name']+`</span>
+                      </div>
+                      <div id="collapse`+ this_form_id +`" role="tabpanel" aria-labelledby="headingCollapse`+ this_form_id +`" class="collapse"
+                        data-parent="#accordionExample">
+                        <div class="card-body">
+                          <!-- awarness -->
+                          <div class="col-sm-2">
+                            <b>Awarness</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="awarness`+this_form_id+`"></div>
+                            <input name="coachee_awarness-`+this_form_id+`" id="coachee_awarness-`+this_form_id+`" type="hidden" value="">
+                          </div>
+
+                          <!-- mindset -->
+                          <div class="col-sm-2">
+                            <b>Mindset</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="mindset`+this_form_id+`"></div>
+                            <input name="coachee_mindset-`+this_form_id+`" id="coachee_mindset-`+this_form_id+`" type="hidden" value="">
+                          </div>
+
+                          <!-- behaviour -->
+
+                          <div class="col-sm-2">
+                            <b>Behaviour</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="behaviour`+this_form_id+`"></div>
+                            <input name="coachee_behaviour-`+this_form_id+`" id="coachee_behaviour-`+this_form_id+`" type="hidden" value="">
+                          </div>
+
+                          <!-- engagement -->
+
+                          <div class="col-sm-2">
+                            <b>Engagement</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="engagement`+this_form_id+`"></div>
+                            <input name="coachee_engagement-`+this_form_id+`" id="coachee_engagement-`+this_form_id+`" type="hidden" value="">
+                          </div>
+
+                          <!-- result -->
+                          <div class="col-sm-2">
+                            <b>Result</b>
+                          </div>
+                          <div class="col-sm-2">
+                            <div class="border p-1" id="result`+this_form_id+`"></div>
+                            <input name="coachee_result-`+this_form_id+`" id="coachee_result-`+this_form_id+`" type="hidden" value="">
+                          </div>
+
+                          <!-- note -->
+                          <div class="col-sm-2">
+                            <b>Note</b>
+                          </div>
+                          <div class="col-md-12 form-group">
+                            <textarea class="form-control @error('summary') is-invalid @enderror"
+                              name="summary"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>`
             var form_id = '<input type="hidden" name="all_forms_id[]" value="' + this_form_id + '">';
 
-            $(".question-wrapper:last").append(hr, question_title, question_box, option_A, option_B, option_C, option_D, option_E, true_answer, point, question_id);
+            $(".form-wrapper:last").append(form, form_id);
+
+            $("#awarness"+this_form_id).rateYo({
+              ratedFill: "#F1AF33",
+              numStars: 5,
+              spacing: "30px",
+			        fullStar: true,
+            })
+            $('#awarness'+this_form_id).click(function() {
+              // console.log('ok');
+		        	$('#coachee_awarness-'+this_form_id).val($('#awarness'+this_form_id).rateYo("rating"));
+              console.log(this_form_id + $('#coachee_awarness-'+this_form_id).val());
+		        });
+          
+            $("#mindset"+this_form_id).rateYo({
+              ratedFill: "#F1AF33",
+              numStars: 5,
+              spacing: "30px",
+              fullStar: true,
+            });
+            $('#mindset'+this_form_id).click(function() {
+		        	var mindset = $('#mindset'+this_form_id).rateYo("rating");
+		        	$('#coachee_mindset-'+this_form_id).val(mindset);
+		        });
+          
+            $("#behaviour"+this_form_id).rateYo({
+              ratedFill: "#F1AF33",
+              numStars: 5,
+              spacing: "30px",
+              fullStar: true,
+            });
+            $('#behaviour'+this_form_id).click(function() {
+		        	var behaviour = $('#behaviour'+this_form_id).rateYo("rating");
+		        	$('#coachee_behaviour-'+this_form_id).val(behaviour);
+		        });
+          
+            $("#engagement"+this_form_id).rateYo({
+              ratedFill: "#F1AF33",
+              numStars: 5,
+              spacing: "30px",
+              fullStar: true,
+            });
+            $('#engagement'+this_form_id).click(function() {
+		        	var engagement = $('#engagement'+this_form_id).rateYo("rating");
+		        	$('#coachee_engagement-'+this_form_id).val(engagement);
+		        });
+          
+            $("#result"+this_form_id).rateYo({
+              ratedFill: "#F1AF33",
+              numStars: 5,
+              spacing: "30px",
+              fullStar: true,
+            });
+            $('#result'+this_form_id).click(function() {
+		        	var result = $('#result'+this_form_id).rateYo("rating");
+		        	$('#coachee_result-'+this_form_id).val(result);
+		        });
 
             // question_length = question_length + 1;
             // $('#question_length').val(question_length);
-          }
+          // }
         }
       })
     });

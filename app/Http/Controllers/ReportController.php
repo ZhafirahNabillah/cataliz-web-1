@@ -124,20 +124,20 @@ class ReportController extends Controller
 
     public function store_group(Request $request)
     {
-        // return $request;
-        $report = new Report;
-        $report->coach_id = auth()->user()->id;
-        $report->group_id = $request->group_id;
-        $report->program = $request->program;
-        $report->awarness = $request->coachee_awarness;
-        $report->mindset = $request->coachee_mindset;
-        $report->behaviour = $request->coachee_behaviour;
-        $report->engagement = $request->coachee_engagement;
-        $report->result = $request->coachee_result;
-        $report->note = $request->summary;
-        $report->save();
+        return $request;
+        // $report = new Report;
+        // $report->coach_id = auth()->user()->id;
+        // $report->group_id = $request->group_id;
+        // $report->program = $request->program;
+        // $report->awarness = $request->coachee_awarness;
+        // $report->mindset = $request->coachee_mindset;
+        // $report->behaviour = $request->coachee_behaviour;
+        // $report->engagement = $request->coachee_engagement;
+        // $report->result = $request->coachee_result;
+        // $report->note = $request->summary;
+        // $report->save();
 
-        return redirect('/report')->with('success', 'Report Successfully created!');
+        // return redirect('/report')->with('success', 'Report Successfully created!');
     }
 
     /**
@@ -191,7 +191,7 @@ class ReportController extends Controller
     {
         $coach = Coach::where('user_id', auth()->user()->id)->first();
         $plan = Plan::where('owner_id', $coach->id)->where('group_id', $id)->first();
-        $data = $plan->clients->count();
+        $data = [$plan->clients->count(), $plan->clients];
 
         return response()->json($data);
     }
