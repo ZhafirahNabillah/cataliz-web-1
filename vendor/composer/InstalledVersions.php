@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '0751f3fa3e06adf8b02e906a3e65a1c224f34677',
+    'reference' => '3299ad57694ef0f46f48aa56e27dd378f52fe4ce',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -597,7 +597,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '0751f3fa3e06adf8b02e906a3e65a1c224f34677',
+      'reference' => '3299ad57694ef0f46f48aa56e27dd378f52fe4ce',
     ),
     'laravel/sail' => 
     array (
@@ -1209,6 +1209,15 @@ private static $installed = array (
       ),
       'reference' => 'c6c1022351a901512170118436c764e473f6de8c',
     ),
+    'spatie/calendar-links' => 
+    array (
+      'pretty_version' => '1.6.0',
+      'version' => '1.6.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'aa984fb84d218cc8962b8f89ef46437298534c24',
+    ),
     'spatie/laravel-permission' => 
     array (
       'pretty_version' => '3.18.0',
@@ -1779,6 +1788,7 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
+
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];

@@ -88,6 +88,10 @@
 								<h5 class="mb-75">Topic:</h5>
 								<p class="card-text">{{ $agenda_detail->topic ?? '-' }}</p>
 							</div>
+							<div class="mt-2">
+								<h5 class="mb-75">Date:</h5>
+								<p class="card-text">{{$agenda_detail->date ?? '-'}}</p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -97,8 +101,6 @@
 							<h7 class="card-title"> </h7>
 						</div>
 						<div class="card-body">
-							<h5 class="mb-75">Date:</h5>
-							<p class="card-text">{{$agenda_detail->date ?? '-'}}</p>
 							<div class="mt-2">
 								<h5 class="mb-75">Time:</h5>
 								<p class="card-text">{{$agenda_detail->time ?? '-'}}</p>
@@ -125,7 +127,7 @@
 							</div>
 							@if ($agenda_detail->status == 'scheduled' || $agenda_detail->status == 'rescheduled')
 								<div class="mt-2">
-								<div title="Add to Calendar" class="addeventatc">
+								{{-- <div title="Add to Calendar" class="addeventatc">
 							    Add to Calendar
 							    <span class="start">{{ Carbon\Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->format('Y-m-d H:i:s') }}</span>
 							    <span class="end">{{ Carbon\Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addMinutes($agenda_detail->duration)->format('Y-m-d H:i:s') }}</span>
@@ -138,8 +140,13 @@
 										Coach		: {{ $coach->name }}
 										Client	: {{ $clients->implode('name', ', ') }}
 									</span>
+								</div> --}}
+									<h5>Add to</h5>
+									<a href="{{ $calendar_links->get('google_calendar_link') }}" class="btn btn-sm btn-primary">Google Calendar</a>
+									<a href="{{ $calendar_links->get('yahoo_calendar_link') }}" class="btn btn-sm btn-primary">Yahoo Calendar</a>
+									<a href="{{ $calendar_links->get('outlook_calendar_link') }}" class="btn btn-sm btn-primary">Outlook Calendar</a>
+									<a href="{{ $calendar_links->get('ics_calendar_link') }}" class="btn btn-sm btn-primary">Others Calendar (.ics)</a>
 								</div>
-							</div>
 							@endif
 						</div>
 					</div>

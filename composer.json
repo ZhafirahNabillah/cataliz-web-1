@@ -24,6 +24,7 @@
         "laravelcollective/html": "^6.2",
         "league/flysystem-aws-s3-v3": "^1.0",
         "pion/laravel-chunk-upload": "^1.4",
+        "spatie/calendar-links": "^1.6",
         "spatie/laravel-permission": "^3.18",
         "stevebauman/purify": "^4.0",
         "yajra/laravel-datatables-oracle": "^9.15"

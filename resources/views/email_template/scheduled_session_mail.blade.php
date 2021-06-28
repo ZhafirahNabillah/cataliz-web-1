@@ -356,6 +356,13 @@
                           <span>{{ $email_data['media'] }}</span>
                         </td>
                       </tr>
+                      <tr>
+                        <td><span>Add to</span></td>
+                        <td><a href="{{ $email_data['google_calendar_link'] }}" class="button button1">Google Calendar</a></td>
+                        <td><a href="{{ $email_data['outlook_calendar_link'] }}" class="button button1">Outlook Calendar</a></td>
+                        <td><a href="{{ $email_data['yahoo_calendar_link'] }}" class="button button1">Yahoo Calendar</a></td>
+                        <td><a href="{{ $email_data['ics_calendar_link'] }}" class="button button1">Other Calendar(.ics)</a></td>
+                      </tr>
                     </table>
                   </div>
                   <table cellspacing="0" cellpadding="0" width="100%" style="border: 1px solid #9B93EF;background-color:#E9E7FF">

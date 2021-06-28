@@ -16,6 +16,8 @@ use App\Jobs\SendAddClassMailJobToCoachee;
 use App\Jobs\SendSessionScheduledMailJob;
 use App\Jobs\SendSessionRescheduledMailJob;
 use Carbon\Carbon;
+use Spatie\CalendarLinks\Link;
+use DateTime;
 
 class MailController extends Controller
 {
@@ -54,6 +56,25 @@ class MailController extends Controller
     }
 
     public static function SendSessionScheduledMail($agenda_detail, $clients, $coach){
+      $start_time = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->format('Y-m-d H:i');
+      $end_time = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addMinutes($agenda_detail->duration)->format('Y-m-d H:i');
+
+      $from = DateTime::createFromFormat('Y-m-d H:i', $start_time);
+      $to = DateTime::createFromFormat('Y-m-d H:i', $end_time);
+
+      $description = 'Cataliz Coaching Agenda via '.$agenda_detail->media;
+
+      if ($agenda_detail->media_url != null) {
+        $description = $description.' on Link: '.$agenda_detail->media_url;
+      }
+
+      $calendar_link = Link::create($agenda_detail->session_name.' - '.$agenda_detail->topic, $from, $to)->description($description);
+
+      $google_calendar_link = $calendar_link->google();
+      $yahoo_calendar_link = $calendar_link->yahoo();
+      $outlook_calendar_link = $calendar_link->webOutlook();
+      $ics_calendar_link = $calendar_link->ics();
+
       $data_for_coach = [
         'receiver_email' => $coach->email,
         'receiver_name' => $coach->name,
@@ -62,9 +83,13 @@ class MailController extends Controller
         'session_name' => $agenda_detail->session_name,
         'topic' => $agenda_detail->topic,
         'media' => $agenda_detail->media,
-        'date' => Carbon::parse($agenda_detail->date)->format('l jS \\of F Y'),
-        'time' => Carbon::parse($agenda_detail->time)->format('H:i'),
-        'duration' => $agenda_detail->duration
+        'date' => $agenda_detail->date,
+        'time' => $agenda_detail->time,
+        'duration' => $agenda_detail->duration,
+        'google_calendar_link' => $google_calendar_link,
+        'yahoo_calendar_link' => $yahoo_calendar_link,
+        'outlook_calendar_link' => $outlook_calendar_link,
+        'ics_calendar_link' => $ics_calendar_link
       ];
 
       SendSessionScheduledMailJob::dispatch($data_for_coach);
@@ -78,9 +103,14 @@ class MailController extends Controller
           'session_name' => $agenda_detail->session_name,
           'topic' => $agenda_detail->topic,
           'media' => $agenda_detail->media,
-          'date' => Carbon::parse($agenda_detail->date)->format('l jS \\of F Y'),
-          'time' => Carbon::parse($agenda_detail->time)->format('H:i'),
-          'duration' => $agenda_detail->duration
+          'date' => $agenda_detail->date,
+          'time' => $agenda_detail->time,
+          'duration' => $agenda_detail->duration,
+          'clients' => $clients,
+          'google_calendar_link' => $google_calendar_link,
+          'yahoo_calendar_link' => $yahoo_calendar_link,
+          'outlook_calendar_link' => $outlook_calendar_link,
+          'ics_calendar_link' => $ics_calendar_link
         ];
 
         SendSessionScheduledMailJob::dispatch($data_for_coachee);
@@ -89,6 +119,25 @@ class MailController extends Controller
     }
 
     public static function SendSessionRescheduledMail($old_agenda_detail, $agenda_detail, $clients, $coach){
+      $start_time = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->format('Y-m-d H:i');
+      $end_time = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addMinutes($agenda_detail->duration)->format('Y-m-d H:i');
+
+      $from = DateTime::createFromFormat('Y-m-d H:i', $start_time);
+      $to = DateTime::createFromFormat('Y-m-d H:i', $end_time);
+
+      $description = 'Cataliz Coaching Agenda via '.$agenda_detail->media;
+
+      if ($agenda_detail->media_url != null) {
+        $description = $description.' on Link: '.$agenda_detail->media_url;
+      }
+
+      $calendar_link = Link::create($agenda_detail->session_name.' - '.$agenda_detail->topic, $from, $to)->description($description);
+
+      $google_calendar_link = $calendar_link->google();
+      $yahoo_calendar_link = $calendar_link->yahoo();
+      $outlook_calendar_link = $calendar_link->webOutlook();
+      $ics_calendar_link = $calendar_link->ics();
+
       $data_for_coach = [
         'receiver_email' => $coach->email,
         'receiver_name' => $coach->name,
@@ -101,7 +150,11 @@ class MailController extends Controller
         'time' => Carbon::parse($agenda_detail->time)->format('H:i'),
         'old_date' => Carbon::parse($old_agenda_detail->date)->format('l jS \\of F Y'),
         'old_time' => Carbon::parse($old_agenda_detail->time)->format('H:i'),
-        'duration' => $agenda_detail->duration
+        'duration' => $agenda_detail->duration,
+        'google_calendar_link' => $google_calendar_link,
+        'yahoo_calendar_link' => $yahoo_calendar_link,
+        'outlook_calendar_link' => $outlook_calendar_link,
+        'ics_calendar_link' => $ics_calendar_link
       ];
 
       SendSessionRescheduledMailJob::dispatch($data_for_coach);
@@ -119,7 +172,12 @@ class MailController extends Controller
           'time' => Carbon::parse($agenda_detail->time)->format('H:i'),
           'old_date' => Carbon::parse($old_agenda_detail->date)->format('l jS \\of F Y'),
           'old_time' => Carbon::parse($old_agenda_detail->time)->format('H:i'),
-          'duration' => $agenda_detail->duration
+          'duration' => $agenda_detail->duration,
+          'clients' => $clients,
+          'google_calendar_link' => $google_calendar_link,
+          'yahoo_calendar_link' => $yahoo_calendar_link,
+          'outlook_calendar_link' => $outlook_calendar_link,
+          'ics_calendar_link' => $ics_calendar_link
         ];
 
         SendSessionRescheduledMailJob::dispatch($data_for_coachee);

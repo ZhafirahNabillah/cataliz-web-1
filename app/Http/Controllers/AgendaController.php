@@ -17,6 +17,9 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Models\Coach;
 use App\Models\Feedback;
+use Spatie\CalendarLinks\Link;
+use DateTime;
+use carbon\Carbon;
 
 class AgendaController extends Controller
 {
@@ -375,12 +378,39 @@ class AgendaController extends Controller
     $coach = $owner->user;
     $clients = $plan->clients;
 
+    //calendar links
+    $start_time = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->format('Y-m-d H:i');
+    $end_time = Carbon::parse($agenda_detail->date.' '.$agenda_detail->time)->addMinutes($agenda_detail->duration)->format('Y-m-d H:i');
+
+    $from = DateTime::createFromFormat('Y-m-d H:i', $start_time);
+    $to = DateTime::createFromFormat('Y-m-d H:i', $end_time);
+
+    $description = 'Cataliz Coaching Agenda via '.$agenda_detail->media;
+
+    if ($agenda_detail->media_url != null) {
+      $description = $description.' on Link: '.$agenda_detail->media_url;
+    }
+
+    $calendar_link = Link::create($agenda_detail->session_name.' - '.$agenda_detail->topic, $from, $to)->description($description);
+
+    // $google_calendar_link = $calendar_link->google();
+    // $yahoo_calendar_link = $calendar_link->yahoo();
+    // $outlook_calendar_link = $calendar_link->webOutlook();
+    // $ics_calendar_link = $calendar_link->ics();
+
+    $calendar_links = collect([
+      'google_calendar_link'  => $calendar_link->google(),
+      'yahoo_calendar_link'   => $calendar_link->yahoo(),
+      'outlook_calendar_link' => $calendar_link->webOutlook(),
+      'ics_calendar_link'     => $calendar_link->ics()
+    ]);
+
     if (auth()->user()->hasRole('admin')) {
-      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback_from_coach', 'feedback_from_coachee'));
+      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback_from_coach', 'feedback_from_coachee', 'calendar_links'));
     } elseif (auth()->user()->hasRole('coach')) {
-      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback', 'feedback_from_coachee'));
+      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback', 'feedback_from_coachee', 'calendar_links'));
     } else {
-      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback'));
+      return view('agendas.detail', compact('coach','clients','agenda_detail', 'agenda', 'coaching_note', 'plan', 'feedback', 'calendar_links'));
     }
   }
 

@@ -107,6 +107,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
             'Svg\\' => 4,
             'Stevebauman\\Purify\\' => 19,
             'Spatie\\Permission\\' => 18,
+            'Spatie\\CalendarLinks\\' => 21,
         ),
         'R' => 
         array (
@@ -375,6 +376,10 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'Spatie\\Permission\\' => 
         array (
             0 => __DIR__ . '/..' . '/spatie/laravel-permission/src',
+        ),
+        'Spatie\\CalendarLinks\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/spatie/calendar-links/src',
         ),
         'Ramsey\\Uuid\\' => 
         array (
@@ -6507,6 +6512,13 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'SebastianBergmann\\Type\\UnknownType' => __DIR__ . '/..' . '/sebastian/type/src/UnknownType.php',
         'SebastianBergmann\\Type\\VoidType' => __DIR__ . '/..' . '/sebastian/type/src/VoidType.php',
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
+        'Spatie\\CalendarLinks\\Exceptions\\InvalidLink' => __DIR__ . '/..' . '/spatie/calendar-links/src/Exceptions/InvalidLink.php',
+        'Spatie\\CalendarLinks\\Generator' => __DIR__ . '/..' . '/spatie/calendar-links/src/Generator.php',
+        'Spatie\\CalendarLinks\\Generators\\Google' => __DIR__ . '/..' . '/spatie/calendar-links/src/Generators/Google.php',
+        'Spatie\\CalendarLinks\\Generators\\Ics' => __DIR__ . '/..' . '/spatie/calendar-links/src/Generators/Ics.php',
+        'Spatie\\CalendarLinks\\Generators\\WebOutlook' => __DIR__ . '/..' . '/spatie/calendar-links/src/Generators/WebOutlook.php',
+        'Spatie\\CalendarLinks\\Generators\\Yahoo' => __DIR__ . '/..' . '/spatie/calendar-links/src/Generators/Yahoo.php',
+        'Spatie\\CalendarLinks\\Link' => __DIR__ . '/..' . '/spatie/calendar-links/src/Link.php',
         'Spatie\\Permission\\Commands\\CacheReset' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CacheReset.php',
         'Spatie\\Permission\\Commands\\CreatePermission' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreatePermission.php',
         'Spatie\\Permission\\Commands\\CreateRole' => __DIR__ . '/..' . '/spatie/laravel-permission/src/Commands/CreateRole.php',

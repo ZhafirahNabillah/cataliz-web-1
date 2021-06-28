@@ -50,6 +50,10 @@ Route::get('/home', function () {
 	return redirect('login');
 });
 
+Route::get('/email_show', function () {
+	return view('email_template.scheduled_session_mail');
+});
+
 // Route::get('/pdf_show', function () {
 // 	return view('pdf_template.plans_detail_pdf');
 // });
