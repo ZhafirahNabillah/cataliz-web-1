@@ -89,7 +89,7 @@
 												<li class="nav-item">
 													<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" aria-controls="home" role="tab" aria-selected="true">Home</a>
 												</li>
-												@role('mentor')
+												@role('mentor|coach|trainer')
 												<li class="nav-item">
 													<a class="nav-link " id="detailProfile-tab" data-toggle="tab" href="#detailProfile" aria-controls="detailProfile" role="tab" aria-selected="true">Detail Profile</a>
 												</li>
@@ -506,7 +506,7 @@
 				@endrole
 
 
-				@role('mentor|trainer')
+				@role('mentor|trainer|coach')
 				{{-- detailProfile tab --}}
 				<div class="tab-pane" id="detailProfile" aria-labelledby="about-tab" role="tabpanel">
 
