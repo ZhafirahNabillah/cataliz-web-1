@@ -88,6 +88,12 @@ class HomeController extends Controller
         ]);
       }
 
+      if (is_null($coach->category_id) && is_null($coach->skill_id) && is_null($coach->skills_description_title) && is_null($coach->skills_description_overview) && is_null($coach->education) && is_null($coach->employment) && is_null($coach->language) && is_null($coach->location)) {
+        $empty_profile = true;
+      } else {
+        $empty_profile = false;
+      }
+
       // return $total_sessions;
 
 
@@ -114,7 +120,7 @@ class HomeController extends Controller
       //         ->make(true);
       // }
 
-      return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings', 'today_events'));
+      return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings', 'today_events', 'empty_profile'));
     } elseif (auth()->user()->hasRole('admin')) {
 
       $total_coach = User::role('coach')->count();

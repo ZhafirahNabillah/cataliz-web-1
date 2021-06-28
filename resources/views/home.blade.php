@@ -166,7 +166,7 @@
             </a>
           </div>
 
-          
+
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
@@ -319,6 +319,20 @@
                   </div>
                 </div>
               </div>
+
+              @role('coach')
+                @if ($empty_profile == true)
+                <div class="col-md-12">
+                  <div class="card text-white bg-warning mb-3">
+                    <div class="card-body">
+                      <a class="text-white" href="{{route('profil.detail', Auth::user()->id)}}"> Yuk, segera lengkapi data
+                        diri kamu!
+                        <b> Klik Disini</b> </a>
+                    </div>
+                  </div>
+                </div>
+                @endif
+              @endrole
 
               @role('coachee')
               @if (($client->organization && $client->company && $client->occupation) == null)
