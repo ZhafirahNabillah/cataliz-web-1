@@ -4,7 +4,7 @@
 <style>
   @media only screen and (min-device-width : 769px) and (max-device-width : 1639px) {
     .imgDashboardWrapper {
-      height: 5% !;
+      height: 5%;
       width: 5%;
       float: left;
     }
@@ -13,6 +13,8 @@
       text-align: left !important;
       padding-top: 4%;
       font-size: 3%;
+      
+
     }
   }
 
@@ -78,7 +80,7 @@
                   </div>
                   <div class="row pl-2">
                     <div class="float-md-start">
-                      <img class="rounded mx-auto " src="{{ url('assets\images\icons\clock.svg') }}"
+                      <img class="rounded mx-auto" src="{{ url('assets\images\icons\clock.svg') }}"
                         alt="Card image cap" />
                     </div>
                     <div class="textCard">
