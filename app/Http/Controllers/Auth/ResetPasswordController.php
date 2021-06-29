@@ -51,6 +51,7 @@ class ResetPasswordController extends Controller
 
             $user->password = Hash::make($request->password);
             $user->reset_code = null;
+            $user->is_verified = 1;
             $user->update();
 
             return redirect('login')->with('success', 'Password changed successfully. Please login!');
