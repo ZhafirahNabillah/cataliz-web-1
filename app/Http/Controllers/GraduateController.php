@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Graduate;
 use App\Models\Client;
 use DataTables;
+use Image;
 
 class GraduateController extends Controller
 {
@@ -44,8 +45,9 @@ class GraduateController extends Controller
             }
           })->addColumn('action', function ($row) {
             $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';
+            $certificate_btn = '<a href="'.route('graduates.certificate', $row->id).'" id="downloadCertificate" class="btn-sm btn-primary">Certificate</a>';
 
-            $actionBtn = $remove_btn;
+            $actionBtn = $remove_btn.' '.$certificate_btn;
             return $actionBtn;
           })
           ->rawColumns(['action', 'user_data'])
@@ -152,5 +154,21 @@ class GraduateController extends Controller
             $coachee = Client::get();
         }
         return response()->json($coachee);
+    }
+
+    public function create_certificate($id)
+    {
+      $graduate = Graduate::find($id);
+      $user = $graduate->user;
+
+      $certificate = Image::make(public_path().'\assets\images\certificate.png');
+
+      $certificate->text($user->name, 1800, 1250, function($font) {
+        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->size(100);
+        $font->align('center');
+      });
+
+      return $certificate->response('png');
     }
 }
