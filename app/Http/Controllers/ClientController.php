@@ -292,7 +292,8 @@ class ClientController extends Controller
   public function show_admin_list(Request $request)
   {
     if ($request->ajax()) {
-      $data = User::role('admin')->get();
+
+      $data = User::role('admin')->get()->except(auth()->user()->id);
 
       return DataTables::of($data)
         ->addIndexColumn()
