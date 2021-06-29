@@ -114,8 +114,10 @@ class ClientController extends Controller
           ->rawColumns(['action', 'phone', 'email', 'program'])
           ->make(true);
       } elseif (auth()->user()->hasRole('coachee')) {
+        $coachee = Client::where('user_id', auth()->user()->id)->first();
+        $coaches_id = $coachee->coaches->pluck('user_id');
 
-        $data = User::role('coach')->get();
+        $data = User::role('coach')->whereIn('id', $coaches_id)->get();
 
         return DataTables::of($data)
           ->addIndexColumn()
