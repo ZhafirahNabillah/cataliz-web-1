@@ -124,6 +124,26 @@
       padding-left: 25px;
       padding-top: 25px;
     }
+    .button2 {
+      background-color: white;
+      /* Green */
+      border: 2px solid purple;
+      color: white;
+      padding: 11px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 25px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 10px;
+      
+      border-color: #685FCD;
+      outline: none;
+      box-shadow: 0 3px #685FCD;
+      width: 250px;
+      height: 50px;
+    }
 
     .button {
       background-color: #685FCD;
@@ -358,10 +378,11 @@
                       </tr>
                       <tr>
                         <td><span>Add to</span></td>
-                        <td><a href="{{ $email_data['google_calendar_link'] }}" class="button button1">Google Calendar</a></td>
-                        <td><a href="{{ $email_data['outlook_calendar_link'] }}" class="button button1">Outlook Calendar</a></td>
-                        <td><a href="{{ $email_data['yahoo_calendar_link'] }}" class="button button1">Yahoo Calendar</a></td>
-                        <td><a href="{{ $email_data['ics_calendar_link'] }}" class="button button1">Other Calendar(.ics)</a></td>
+                        <td><a style="color: black;" href="{{ $email_data['google_calendar_link'] }}" class=" button2"><img style="width: 30px;margin-right: 5px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/google-calendar.png') }}">Google Calendar</a></td>
+                        <td><a style="color: black;text-align:s;" href="{{ $email_data['outlook_calendar_link'] }}" class="button2"><img style="width: 
+                        30px;margin-right: 5px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/microsoft-outlook.png') }}">Outlook Calendar</a></td>
+                        <td><a style="color: black;" href="{{ $email_data['yahoo_calendar_link'] }}" class=" button2"><img style="width: 30px;margin-right: 5px;" src="{{ $message->embed(public_path().'/assets/images/icons/email/yahoo-calendar.png') }}">Yahoo Calendar</a></td>
+                        <td><a style="color: black;" href="{{ $email_data['ics_calendar_link'] }}" class="button2">Other Calendar(.ics)</a></td>
                       </tr>
                     </table>
                   </div>
