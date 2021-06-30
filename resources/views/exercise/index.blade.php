@@ -52,7 +52,6 @@
           @endif
           <div class="row">
             <div class="col-12">
-
               <a href={{ route('exercise.create')}} class="create-new btn btn-primary">New Exam</a>
             </div>
           </div>

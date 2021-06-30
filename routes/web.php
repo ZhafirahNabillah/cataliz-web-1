@@ -27,6 +27,7 @@ use App\Http\Controllers\ResultController;
 use App\Http\Controllers\TrainingFeedbackController;
 use App\Http\Controllers\TrainingMeetingController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\GraduateController;
 
 
 /*
@@ -185,7 +186,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Topic Controller
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'HtmlSanitizer'])->group(function () {
 	Route::resource('topic', TopicController::class);
 	Route::get('/topic/{topic}/download', [TopicController::class, 'topic_pdf_download'])->name('topic.download');
 	Route::get('/topic_search', [TopicController::class, 'topic_search'])->name('topic.search');
@@ -201,7 +202,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 //Question Controller
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'HtmlSanitizer'])->group(function () {
 	Route::resource('question', QuestionController::class);
 	Route::get('/add_new_question/{id}', [QuestionController::class, 'add_new_question'])->name('question.add_new');
 	Route::post('/add_new_question/{exam}/new', [QuestionController::class, 'store_new_question'])->name('question.store_new');
@@ -255,4 +256,13 @@ Route::middleware(['auth'])->group(function () {
 // Report Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('report', ReportController::class);
+	Route::get('/report_group', [ReportController::class, 'create_group'])->name('report.create_group');
+	Route::get('/ajaxGroup', [ReportController::class, 'search_group'])->name('report.search_group');
+});
+
+// Alumni Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('graduates', GraduateController::class);
+	Route::get('/load_graduates_data', [GraduateController::class, 'load_graduates_data'])->name('graduates.load_graduates_data');
+	Route::get('/load_clients_data', [GraduateController::class, 'load_clients_data'])->name('graduates.search_clients');
 });

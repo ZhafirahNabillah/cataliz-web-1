@@ -83,7 +83,8 @@ class HomeController extends Controller
           'type'        => 'coaching',
           'coachee'     => $client,
           'id'          => $session->id,
-          'url'         => route('agendas.show', $session->id)
+          'url'         => route('agendas.show', $session->id),
+          'status'      => $session->status
         ]);
       }
 
@@ -121,6 +122,34 @@ class HomeController extends Controller
       $total_plans = Plan::get()->count();
       $total_sessions = Agenda_detail::get()->count();
 
+      $agenda_detail = Agenda_detail::whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
+
+      $today_events = collect([]);
+
+      $today = Carbon::now()->format('Y-m-d');
+
+      foreach ($agenda_detail->where('date', $today) as $session) {
+        $client = null;
+        $agenda = $session->agenda;
+        $plan = $agenda->plan;
+        if ($plan->client_id == null) {
+          $client = $plan->group_id;
+        } else {
+          $client = $plan->client->name;
+        }
+        $today_events->push([
+          'title'       => $session->session_name,
+          'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
+          'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
+          'topic'       => $session->topic,
+          'type'        => 'coaching',
+          'coachee'     => $client,
+          'id'          => $session->id,
+          'url'         => route('agendas.show', $session->id),
+          'status'      => $session->status
+        ]);
+      }
+
       // if ($request->ajax()) {
       //     //list all sessions
       //     $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status')
@@ -133,7 +162,7 @@ class HomeController extends Controller
       //         ->make(true);
       // }
 
-      return view('home', compact('total_coach', 'total_coachee', 'total_plans', 'total_sessions'));
+      return view('home', compact('total_coach', 'total_coachee', 'total_plans', 'total_sessions', 'today_events'));
     } elseif (auth()->user()->hasRole('coachee')) {
 
       $client = Client::where('user_id', auth()->user()->id)->first();
@@ -166,7 +195,8 @@ class HomeController extends Controller
           'type'        => 'coaching',
           'coach'       => $coach_data,
           'id'          => $session->id,
-          'url'         => route('agendas.show', $session->id)
+          'url'         => route('agendas.show', $session->id),
+          'status'      => $session->status
         ]);
       }
 
@@ -477,7 +507,7 @@ class HomeController extends Controller
       $agenda_id = Agenda::whereIn('plan_id', $plan_id)->pluck('id');
       $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->get();
     } else {
-      $agenda_detail = null;
+      $agenda_detail = Agenda_detail::all();
     }
 
     $data = collect([]);
@@ -486,7 +516,7 @@ class HomeController extends Controller
       $user = null;
       $agenda = $session->agenda;
       $plan = $agenda->plan;
-      if (auth()->user()->hasRole('coach')) {
+      if (auth()->user()->hasAnyRole('coach', 'admin')) {
         if ($plan->client_id == null) {
           $user = $plan->group_id;
         } else {
@@ -504,7 +534,8 @@ class HomeController extends Controller
         'type'        => 'coaching',
         'target'      => $user,
         'id'          => $session->id,
-        'url'         => route('agendas.show', $session->id)
+        'url'         => route('agendas.show', $session->id),
+        'status'      => $session->status
       ]);
     }
 
@@ -525,7 +556,7 @@ class HomeController extends Controller
       $agenda_id = Agenda::whereIn('plan_id', $plan_id)->pluck('id');
       $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
     } else {
-      $agenda_detail = null;
+      $agenda_detail = Agenda_detail::whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
     }
 
     $data = collect([]);
@@ -534,7 +565,7 @@ class HomeController extends Controller
       $user = null;
       $agenda = $session->agenda;
       $plan = $agenda->plan;
-      if (auth()->user()->hasRole('coach')) {
+      if (auth()->user()->hasAnyRole('coach', 'admin')) {
         if ($plan->client_id == null) {
           $user = $plan->group_id;
         } else {
@@ -552,7 +583,8 @@ class HomeController extends Controller
         'type'        => 'coaching',
         'target'      => $user,
         'id'          => $session->id,
-        'url'         => route('agendas.show', $session->id)
+        'url'         => route('agendas.show', $session->id),
+        'status'      => $session->status
       ]);
     }
 
