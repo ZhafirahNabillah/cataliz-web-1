@@ -69,26 +69,18 @@
               </div>
             </div>
           </div>
+          <!-- new -->
           <div class="col-md-3 col-lg-3">
             <a href="{{ route('agendas.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src="
-                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top" data-content="Jumlah waktu mengajar yang telah dilaksanakan" />
-                  </div>
-                  <div class="row pl-2">
-                    <div class="float-md-start">
-                      <img class="rounded mx-auto" src="{{ url('assets\images\icons\clock.svg') }}"
-                        alt="Card image cap" />
-                    </div>
-                    <div class="textCard">
-                      <small class=" text-muted mb-1">Total Coach
-                      </small>
-                      <h2 class="font-weight-bolder">{{$total_coach}} Coaches</h2>
-                    </div>
-                  </div>
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}"
+                  alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Coach</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_coach}} Coaches</h2>
                 </div>
               </div>
             </a>
@@ -98,69 +90,44 @@
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src="
-                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top" data-content="Jumlah coachee" />
-                  </div>
-                  <div class="row pl-2">
-                    <div class="float-md-start">
-                      <img class="rounded mx-auto" src="{{ url('assets\images\icons\users.svg') }}"
-                        alt="Card image cap" />
-                    </div>
-                    <div class="textCard">
-                      <small class=" text-muted mb-1">Total Coachee
-                      </small>
-                      <h2 class="font-weight-bolder">{{$total_coachee}} Coachee</h2>
-                    </div>
-                  </div>
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}"
+                  alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Coachee</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
                 </div>
               </div>
             </a>
           </div>
 
           <div class="col-md-3 col-lg-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <img class="rounded float-right width=" 15px" height="15px"" src="
-                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                    data-placement="top" data-content="Jumlah rating yang diberikan oleh client" />
-                </div>
-                <div class="row pl-2">
-                  <div class="float-md-start">
-                    <img class="rounded mx-auto " src="{{ url('assets\images\icons\trending-up.svg') }}"
-                      alt="Card image cap" />
-                  </div>
-                  <div class="textCard">
-                    <small class=" text-muted mb-1">Total Plan</small>
-                    <h2 class="font-weight-bolder">{{$total_plans}} Plan</h2>
-                  </div>
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}"
+                  alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Plan</small>
+                  <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
                 </div>
               </div>
-            </div>
+            </a>
           </div>
-
           <div class="col-md-3 col-lg-3">
             <a href="{{ route('agendas.index') }}">
               <div class="card">
                 <div class="card-body">
-                  <div class="card-title">
-                    <img class="rounded float-right width=" 15px" height="15px"" src="
-                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top" data-content="Total sesi yang telah dilaksanakan" />
-                  </div>
-                  <div class="row pl-2">
-                    <div class="float-md-start">
-                      <img class="rounded mx-auto " src="{{ url('assets\images\icons\airplay.svg') }}"
-                        alt="Card image cap" />
-                    </div>
-                    <div class="textCard">
-                      <small class=" text-muted mb-1">Total Session
-                      </small>
-                      <h2 class="font-weight-bolder ">{{ $total_sessions }} Sessions</h2>
-                    </div>
-                  </div>
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}"
+                  alt="Card image cap" />
+                  <small class="card text-center text-muted my-1">Total Session</small>
+                  <h2 class="font-weight-bolder text-center">{{ $total_sessions }} Sessions</h2>
                 </div>
               </div>
             </a>

@@ -142,7 +142,7 @@
       outline: none;
       box-shadow: 0 3px #685FCD;
       width: 250px;
-      height: 50px;
+      height: 25px;
     }
 
     .button {
