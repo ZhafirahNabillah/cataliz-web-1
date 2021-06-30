@@ -24,7 +24,7 @@ class ClickDeleteAgendaButton extends DuskTestCase
                 ->click('#deleteIndividualAgendaButton13')
                 ->waitFor('.swal2-modal')
                 ->click('.swal2-confirm')
-                ->waitFor('.swal2-modal')
+                ->waitFor('.swal2-modal');
                 // ->assertSee('Deleted Successfully');
       });
     }
