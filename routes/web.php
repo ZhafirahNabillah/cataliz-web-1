@@ -189,6 +189,14 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/groups/{id}', [ClientController::class, 'show_group_detail'])->name('group.show');
 	Route::get('/coachee_pdf', [ClientController::class, 'coachee_pdf_download'])->name('coachee_pdf');
 	Route::get('/coach_pdf', [ClientController::class, 'coach_pdf_download'])->name('coach_pdf');
+	Route::get('/show_deleted_admin_list', [ClientController::class, 'show_deleted_admin_list'])->name('show_deleted_admin_list');
+	Route::get('/show_deleted_coach_list', [ClientController::class, 'show_deleted_coach_list'])->name('show_deleted_coach_list');
+	Route::get('/show_deleted_coachee_list', [ClientController::class, 'show_deleted_coachee_list'])->name('show_deleted_coachee_list');
+	Route::get('/show_deleted_trainer_list', [ClientController::class, 'show_deleted_trainer_list'])->name('show_deleted_trainer_list');
+	Route::get('/show_deleted_mentor_list', [ClientController::class, 'show_deleted_mentor_list'])->name('show_deleted_mentor_list');
+	Route::get('/restore_user/{id}', [ClientController::class, 'restore_user'])->name('restore_user');
+	Route::get('/restore_all_user', [ClientController::class, 'restore_all_user'])->name('restore_all_user');
+	Route::post('/delete_permanently', [ClientController::class, 'delete_permanently'])->name('delete_permanently');
 });
 
 //Topic Controller
@@ -238,11 +246,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/chunk_upload', [LessonController::class, 'lesson_chunk_upload'])->name('lesson.chunk_upload');
 	Route::post('/add_to_lesson_history', [LessonController::class, 'add_to_lesson_history'])->name('lesson.add_to_lesson_history');
 });
-
-// //Participant Controller
-// Route::middleware(['auth'])->group(function () {
-// 	Route::resource('participant', ParticipantController::class);
-// });
 
 // Result Controller
 Route::middleware(['auth'])->group(function () {

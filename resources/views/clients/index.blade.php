@@ -423,6 +423,8 @@
       <div class="">
         <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
           class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
+        <a href="{{route('show_deleted_admin_list')}}" style="margin-top: 10px;margin-bottom: 10px;"
+          class="btn btn-dark mr-1">All Deleted User</a>
       </div>
       <div class="card">
         <div class="card-body">
@@ -672,8 +674,8 @@
                 <label class="form-label" for="basic-icon-default-fullname">Program</label>
                 @foreach ($programs as $program)
                 <div class="form-check">
-                  <input class="form-check-input program-choice" type="radio" name="program" data-id="{{ $program->id }}" id="program-{{ $program->id }}"
-                    value="{{ $program->id }}">
+                  <input class="form-check-input program-choice" type="radio" name="program"
+                    data-id="{{ $program->id }}" id="program-{{ $program->id }}" value="{{ $program->id }}">
                   <label class="form-check-label" for="program-{{ $program->id }}">
                     {{ $program->program_name }}
                   </label>

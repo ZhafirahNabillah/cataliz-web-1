@@ -25,7 +25,8 @@
 'plans.show', 'dashboard','roles.index','agendas.show_group' ,'permissions.index','users.index', 'class.index',
 'class.show','profil','auth.register', 'group.show', 'docs.index',
 'topic.index','topic.show','exercise.index','exercise.create', 'exercise.show','category.index',
-'result.index','profil.detail', 'report.index', 'graduates.index', 'program.index', 'program.show']))
+'result.index','profil.detail', 'report.index', 'graduates.index', 'program.index', 'program.show',
+'show_deleted_admin_list']))
 
 <!-- BEGIN: Vendor CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/vendors.min.css') }}">

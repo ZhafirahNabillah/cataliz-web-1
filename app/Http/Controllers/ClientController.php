@@ -723,4 +723,136 @@ class ClientController extends Controller
     $client = Client::find($id);
     return response()->json($client);
   }
+
+  public function show_deleted_admin_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::onlyTrashed()->role('admin')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+
+          $actionBtn = $restore_btn;
+
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+    return view('clients.deleted_user');
+  }
+
+  public function show_deleted_coach_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::onlyTrashed()->role('coach')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+
+          $actionBtn = $restore_btn;
+
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
+  public function show_deleted_coachee_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::onlyTrashed()->role('coachee')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $actionBtn = $restore_btn;
+          return $actionBtn;
+        })
+        ->addColumn('program', function ($row) {
+          $client = $row->client;
+          $batch = $client->batch;
+
+          if ($batch) {
+            $program = $batch->program;
+          } else {
+            $program = null;
+          }
+
+          if (is_null($program)) {
+            return 'Not Registered to Any program';
+          } else {
+            return $program->program_name . ' Batch ' . $batch->batch_number;
+          }
+        })
+        ->rawColumns(['action', 'program'])
+        ->make(true);
+    }
+  }
+
+  public function show_deleted_trainer_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::onlyTrashed()->role('trainer')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+
+          $actionBtn = $restore_btn;
+
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
+  public function show_deleted_mentor_list(Request $request)
+  {
+    if ($request->ajax()) {
+      $data = User::onlyTrashed()->role('coach')->get();
+
+      return DataTables::of($data)
+        ->addIndexColumn()
+        ->addColumn('action', function ($row) {
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+
+          $actionBtn = $restore_btn;
+
+          return $actionBtn;
+        })
+        ->rawColumns(['action'])
+        ->make(true);
+    }
+  }
+
+  public function restore_user($id)
+  {
+    $user = User::onlyTrashed()->where('id', $id);
+    $user->restore();
+    return response()->json(['success' => 'User is restored!']);
+  }
+
+  public function restore_all_user()
+  {
+    $user = User::onlyTrashed();
+    $user->restore();
+    return response()->json(['success' => 'All user are restored!']);
+  }
+
+  public function delete_permanently()
+  {
+    $user = User::onlyTrashed();
+    $user->forceDelete();
+    return response()->json(['success' => 'All user are permanently deleted!']);
+  }
 }
