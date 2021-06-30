@@ -71,7 +71,7 @@
           </div>
           <!-- new -->
           <div class="col-md-3 col-lg-3">
-            <a href="{{ route('agendas.index') }}">
+            <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px"
@@ -103,7 +103,7 @@
           </div>
 
           <div class="col-md-3 col-lg-3">
-            <a href="{{ route('clients.index') }}">
+            <a href="{{ route('plans.index') }}">
               <div class="card">
                 <div class="card-body">
                   <img class="rounded float-right" width="15px" height="15px"
