@@ -35,12 +35,19 @@ class GraduateController extends Controller
           })->addColumn('program', function ($row) {
             $user = $row->user;
             $client = $user->client;
-            $program = $client->program;
+
+            $batch = $client->batch;
+
+            if ($batch) {
+              $program = $batch->program;
+            } else {
+              $program = null;
+            }
 
             if (is_null($program)) {
               return 'Not Registered to Any program';
             } else {
-              return $program->program_name;
+              return $program->program_name . ' Batch ' . $batch->batch_number;
             }
           })->addColumn('action', function ($row) {
             $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';

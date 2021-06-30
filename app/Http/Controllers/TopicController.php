@@ -167,12 +167,18 @@ class TopicController extends Controller
 
           return $email;
         })->addColumn('program', function ($row) {
-          $program = $row->program;
+          $batch = $row->batch;
+
+          if ($batch) {
+            $program = $batch->program;
+          } else {
+            $program = null;
+          }
 
           if (is_null($program)) {
             return 'Not Registered to Any program';
           } else {
-            return $program->program_name;
+            return $program->program_name . ' Batch ' . $batch->batch_number;
           }
         })
         ->rawColumns(['email', 'program'])

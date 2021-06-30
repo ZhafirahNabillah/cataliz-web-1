@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Program;
+use App\Models\Batch;
 use DataTables;
 
 class ProgramController extends Controller
@@ -24,7 +25,9 @@ class ProgramController extends Controller
             ->addColumn('action', function ($row) {
               $edit_btn = '<a href="javascript:;" id="editProgram" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
               $delete_btn = '<a href="javascript:;" id="deleteProgram" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
-              $actionBtn = $edit_btn . ' ' . $delete_btn;
+              $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailProgram" class="btn-sm btn-warning">Detail</a>';
+
+              $actionBtn = $edit_btn . ' ' . $delete_btn . ' ' . $detail_btn;
               return $actionBtn;
             })
             ->rawColumns(['action'])
@@ -67,9 +70,26 @@ class ProgramController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Program $program, Request $request)
     {
         //
+        if ($request->ajax()) {
+          $data = Batch::where('program_id', $program->id)->get();
+
+          return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+              $update_btn = '<a href="javascript:;" id="updateBatchBtn" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
+              $delete_btn = '<a href="javascript:;" id="deleteBatchBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
+
+              $actionBtn = $update_btn . ' ' . $delete_btn;
+              return $actionBtn;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+        }
+
+        return view('program.detail', compact('program'));
     }
 
     /**
@@ -110,5 +130,11 @@ class ProgramController extends Controller
         $program->delete();
 
         return response()->json(['success' => 'Program deleted!']);
+    }
+
+    public function get_batch($id){
+      $program = Program::find($id);
+      $batches = Batch::where('program_id', $program->id)->get();
+      return response()->json($batches);
     }
 }
