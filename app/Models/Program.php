@@ -13,7 +13,7 @@ class Program extends Model
         'program_name'
     ];
 
-    public function clients() {
-  		return $this->hasMany('App\Models\Client');
+    public function batches() {
+  		return $this->hasMany('App\Models\Batch');
   	}
 }

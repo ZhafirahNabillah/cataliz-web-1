@@ -13,13 +13,12 @@ class Client extends Model
         'name',
         'phone',
         'email',
-        'program_id',
         'company',
         'organization',
         'occupation',
         'owner_id',
         'user_id',
-        'batch'
+        'batch_id'
     ];
 
     public function user()
@@ -27,9 +26,9 @@ class Client extends Model
         return $this->belongsTo('App\Models\User');
     }
 
-    public function program()
+    public function batch()
     {
-        return $this->belongsTo('App\Models\Program');
+        return $this->belongsTo('App\Models\Batch');
     }
 
     public function coaches()

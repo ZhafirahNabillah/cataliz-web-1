@@ -75,6 +75,7 @@ return array(
     'App\\Models\\Agenda' => $baseDir . '/app/Models/Agenda.php',
     'App\\Models\\Agenda_detail' => $baseDir . '/app/Models/Agenda_detail.php',
     'App\\Models\\Answer' => $baseDir . '/app/Models/Answer.php',
+    'App\\Models\\Batch' => $baseDir . '/app/Models/Batch.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Client' => $baseDir . '/app/Models/Client.php',
     'App\\Models\\Coach' => $baseDir . '/app/Models/Coach.php',

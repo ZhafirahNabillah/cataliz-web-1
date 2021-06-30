@@ -277,12 +277,18 @@ class ClientController extends Controller
         })
         ->addColumn('program', function ($row) {
           $client = $row->client;
-          $program = $client->program;
+          $batch = $client->batch;
+
+          if ($batch) {
+            $program = $batch->program;
+          } else {
+            $program = null;
+          }
 
           if (is_null($program)) {
             return 'Not Registered to Any program';
           } else {
-            return $program->program_name . ' Batch ' . $client->batch;
+            return $program->program_name . ' Batch ' . $batch->batch_number;
           }
         })
         ->rawColumns(['action', 'program'])
