@@ -102,9 +102,13 @@ class BatchController extends Controller
         ]);
     }
 
-    public function max()
+    public function max($id)
     {
-      $max_batch = Batch::get()->max('batch_number');
+      $max_batch = Batch::where('program_id', $id)->get()->max('batch_number');
+
+      if (is_null($max_batch)) {
+        $max_batch = 0;
+      }
       return response()->json($max_batch);
     }
 }

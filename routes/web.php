@@ -283,5 +283,5 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('program', ProgramController::class);
 	Route::get('/{id}/get_batch', [ProgramController::class, 'get_batch'])->name('program.get_batch');
 	Route::resource('batch', BatchController::class);
-	Route::get('/batch_max', [BatchController::class, 'max'])->name('batch.max');
+	Route::get('/{id}/batch_max', [BatchController::class, 'max'])->name('batch.max');
 });

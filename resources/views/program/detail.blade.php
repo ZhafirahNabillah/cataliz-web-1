@@ -294,8 +294,11 @@
       $('#addBatchForm').trigger("reset");
       $('#batch_id').val('');
       //get maximum batch number
-      $.get("/batch_max" , function( data ) {
+      program_id = {{ $program->id }};
+      console.log(program_id);
+      $.get("/"+ program_id +"/batch_max" , function( data ) {
         $('#batch_number').val(data + 1);
+        console.log(data);
       });
 
       $('#saveBatchBtn').val("add-batch");
