@@ -210,6 +210,7 @@
               <div class="card-body" style="border-radius: 11px">
                 <form id="addBatchForm">
                   <input type="hidden" name="program_id" value="{{ $program->id }}">
+                  <input type="hidden" name="batch_id" value="" id="batch_id">
                   <div class="form-group">
                     <label for="fp-default">Batch Number</label>
                     <input type="text" class="form-control" name="batch_number" value="" id="batch_number" readonly>
@@ -290,7 +291,8 @@
 
 
     $('body').on('click', '#addBatchBtn', function() {
-
+      $('#addBatchForm').trigger("reset");
+      $('#batch_id').val('');
       //get maximum batch number
       $.get("/batch_max" , function( data ) {
         $('#batch_number').val(data + 1);
@@ -306,6 +308,24 @@
 			// 		$('#client-' + client_id).prop('selected', true);
 			// 	});
 			// });
+		});
+
+    $('body').on('click', '#updateBatchBtn', function() {
+
+      //get maximum batch number
+      // $.get("/batch_max" , function( data ) {
+      //   $('#batch_number').val(data + 1);
+      // });
+
+      $('#saveBatchBtn').val("update-batch");
+      $('#add-batch-modal').modal('show');
+      batch_id = $(this).data('id');
+			$.get('/batch/' + batch_id, function(data) {
+        $('#batch_id').val(data.id);
+        $('#batch_number').val(data.batch_number);
+        $('#start_date').val(data.start_date);
+        $('#end_date').val(data.end_date);
+			});
 		});
 
     // $("#state").select2({
@@ -352,10 +372,19 @@
           $('#addBatchForm').trigger("reset");
           $('#saveBatchBtn').html('Submit');
           $('#add-batch-modal').modal('hide');
-          Swal.fire({
+
+          if ($('#saveBatchBtn').val() == 'add-batch') {
+            Swal.fire({
               icon: 'success',
-              title: 'Batch added!',
-          });
+              title: 'Batch created successfully!',
+            });
+          } else if ($('#saveBatchBtn').val() == 'update-batch') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Batch updated successfully!',
+            });
+          }
+
           table.draw();
         },
         error: function(data) {

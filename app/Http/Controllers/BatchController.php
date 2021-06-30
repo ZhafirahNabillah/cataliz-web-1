@@ -35,12 +35,17 @@ class BatchController extends Controller
      */
     public function store(Request $request)
     {
-        $batch = new Batch;
-        $batch->program_id = $request->program_id;
-        $batch->batch_number = $request->batch_number;
-        $batch->start_date = $request->start_date;
-        $batch->end_date = $request->end_date;
-        $batch->save();
+        // $batch = new Batch;
+        // $batch->program_id = $request->program_id;
+        // $batch->batch_number = $request->batch_number;
+        // $batch->start_date = $request->start_date;
+        // $batch->end_date = $request->end_date;
+        // $batch->save();
+
+        $batch = Batch::updateOrCreate(
+          ['id' => $request->batch_id],
+          ['program_id' => $request->program_id, 'batch_number' => $request->batch_number, 'start_date' => $request->start_date, 'end_date' => $request->end_date]
+        );
 
         return response()->json([
           'success' => 'Batch successfully created!'
@@ -55,7 +60,8 @@ class BatchController extends Controller
      */
     public function show($id)
     {
-        //
+        $batch = Batch::find($id);
+        return response()->json($batch);
     }
 
     /**
