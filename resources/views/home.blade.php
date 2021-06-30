@@ -77,10 +77,25 @@
                   <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}"
-                  alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Coach</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_coach}} Coaches</h2>
+
+                  <table>
+                    <div class="container-fluid row">
+                      <tr>
+                        <td>
+                          <div colspan="10">
+                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}" alt="Card image cap" />
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pl-2" >
+                            <small class="text-muted text-left">Total Coach</small>
+                            <h3 class="font-weight-bolder text-left">{{$total_coach}} Coaches</h3>
+                          </div>
+                        </td>
+                      </tr>
+                    </div>
+                  </table>
+                  
                 </div>
               </div>
             </a>
@@ -93,10 +108,23 @@
                   <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}"
-                  alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Coachee</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_coachee}} Coachee</h2>
+                  <table>
+                    <div class="container-fluid row">
+                      <tr>
+                        <td>
+                          <div colspan="10">
+                            <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}"alt="Card image cap" />
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pl-2" >
+                            <small class="text-muted text-left">Total Coachee</small>
+                            <h3 class="font-weight-bolder text-left">{{$total_coachee}} Coachee</h3>
+                          </div>
+                        </td>
+                      </tr>
+                    </div>
+                  </table>
                 </div>
               </div>
             </a>
@@ -109,10 +137,25 @@
                   <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}"
-                  alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Plan</small>
-                  <h2 class="font-weight-bolder text-center">{{$total_plans}} Plan</h2>
+                  <table>
+                    <div class="container-fluid row">
+                    <tr>
+                    <td>
+                      <div colspan="10">
+                        <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}"
+                        alt="Card image cap" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="pl-2" >
+                        <small class="text-muted text-left">Total Plan</small>
+                        
+                        <h3 class="font-weight-bolder text-left">{{$total_plans}} Plan</h3>
+                      </div>
+                    </td>
+                    </tr>
+                    </div>
+                  </table>
                 </div>
               </div>
             </a>
@@ -124,10 +167,24 @@
                   <img class="rounded float-right" width="15px" height="15px"
                   src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                   data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}"
-                  alt="Card image cap" />
-                  <small class="card text-center text-muted my-1">Total Session</small>
-                  <h2 class="font-weight-bolder text-center">{{ $total_sessions }} Sessions</h2>
+                  <table>
+                    <div class="container-fluid row">
+                      <tr>
+                        <td>
+                          <div colspan="10">
+                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pl-2" >
+                            <small class="text-muted text-left">Total Session</small>
+                            <h3 class="font-weight-bolder text-left">{{ $total_sessions }} Sessions</h3>
+                          </div>
+                        </td>
+                      </tr>
+                    </div>
+                  </table>
+
                 </div>
               </div>
             </a>
