@@ -29,6 +29,7 @@ use App\Http\Controllers\TrainingMeetingController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\BatchController;
 
 
 /*
@@ -272,11 +273,15 @@ Route::middleware(['auth'])->group(function () {
 // Alumni Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('graduates', GraduateController::class);
+	Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_certificate'])->name('graduates.certificate');
 	Route::get('/load_graduates_data', [GraduateController::class, 'load_graduates_data'])->name('graduates.load_graduates_data');
 	Route::get('/load_clients_data', [GraduateController::class, 'load_clients_data'])->name('graduates.search_clients');
 });
 
-//Program Controller
+//Program and batch Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('program', ProgramController::class);
+	Route::get('/{id}/get_batch', [ProgramController::class, 'get_batch'])->name('program.get_batch');
+	Route::resource('batch', BatchController::class);
+	Route::get('/{id}/batch_max', [BatchController::class, 'max'])->name('batch.max');
 });

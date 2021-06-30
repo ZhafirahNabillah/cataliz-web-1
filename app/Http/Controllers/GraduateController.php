@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use App\Models\Graduate;
 use App\Models\Client;
 use DataTables;
+use Image;
 
 class GraduateController extends Controller
 {
@@ -35,17 +37,25 @@ class GraduateController extends Controller
           })->addColumn('program', function ($row) {
             $user = $row->user;
             $client = $user->client;
-            $program = $client->program;
+
+            $batch = $client->batch;
+
+            if ($batch) {
+              $program = $batch->program;
+            } else {
+              $program = null;
+            }
 
             if (is_null($program)) {
               return 'Not Registered to Any program';
             } else {
-              return $program->program_name;
+              return $program->program_name . ' Batch ' . $batch->batch_number;
             }
           })->addColumn('action', function ($row) {
             $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';
+            $certificate_btn = '<a href="'.route('graduates.certificate', $row->certificate_id).'" id="downloadCertificate" class="btn-sm btn-primary">Certificate</a>';
 
-            $actionBtn = $remove_btn;
+            $actionBtn = $remove_btn.' '.$certificate_btn;
             return $actionBtn;
           })
           ->rawColumns(['action', 'user_data'])
@@ -85,7 +95,7 @@ class GraduateController extends Controller
 
         $graduate = new Graduate;
         $graduate->user_id = $user->id;
-        // $graduate->graduate_as = $request->graduate_as;
+        $graduate->certificate_id = (string) Str::uuid();
         $graduate->save();
 
         return response()->json([
@@ -152,5 +162,21 @@ class GraduateController extends Controller
             $coachee = Client::get();
         }
         return response()->json($coachee);
+    }
+
+    public function create_certificate($id)
+    {
+      $graduate = Graduate::where('certificate_id', $id)->first();
+      $user = $graduate->user;
+
+      $certificate = Image::make(public_path().'\assets\images\certificate.png');
+
+      $certificate->text($user->name, 1800, 1250, function($font) {
+        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->size(100);
+        $font->align('center');
+      });
+
+      return $certificate->response('png');
     }
 }

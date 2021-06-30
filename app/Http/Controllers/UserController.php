@@ -53,9 +53,15 @@ class UserController extends Controller
 
       if ($role == 'coachee') {
         $client = $user->client;
-        $program = $client->program;
+        $batch = $client->batch;
+        if ($batch) {
+          $program = $batch->program;
+        } else {
+          $program = null;
+        }
       } else {
         $program = null;
+        $batch = null;
         $client = null;
       }
 
@@ -63,6 +69,7 @@ class UserController extends Controller
         'user'    => $user,
         'role'    => $role,
         'program' => $program,
+        'batch'   => $batch,
         'client'  => $client
       ]);
     }
@@ -152,14 +159,13 @@ class UserController extends Controller
         }
 
         if ($user->hasRole('coachee')) {
-          $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program_id' => $request->program, 'batch' => $request->batch]);
+          $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'batch_id' => $request->batch]);
         } elseif ($user->hasRole('coach')) {
           $coach = Coach::updateOrCreate(['user_id' => $user->id]);
         }
 
         $client = Client::where('user_id', $user->id)->first();
-        $client->program_id = $request->program;
-        $client->batch = $request->batch;
+        $client->batch_id = $request->batch;
         $client->update();
       }
     } elseif ($request->action_type == 'create-user') {
@@ -189,7 +195,7 @@ class UserController extends Controller
       $user->syncRoles($request->input('roles'));
 
       if ($user->hasRole('coachee')) {
-        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program_id' => $request->program, 'batch' => $request->batch]);
+        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'batch_id' => $request->batch]);
       } elseif ($user->hasRole('coach')) {
         $coach = Coach::updateOrCreate(['user_id' => $user->id]);
       }
@@ -197,7 +203,7 @@ class UserController extends Controller
       MailController::SendResetPasswordMail($user->name, $user->email, $user->reset_code);
     }
 
-    return response()->json(['success' => 'Customer saved successfully!']);
+    return response()->json(['success' => 'User saved successfully!']);
   }
 
   public function suspend_user(Request $request)

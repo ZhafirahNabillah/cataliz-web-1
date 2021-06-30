@@ -749,6 +749,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Agenda' => __DIR__ . '/../..' . '/app/Models/Agenda.php',
         'App\\Models\\Agenda_detail' => __DIR__ . '/../..' . '/app/Models/Agenda_detail.php',
         'App\\Models\\Answer' => __DIR__ . '/../..' . '/app/Models/Answer.php',
+        'App\\Models\\Batch' => __DIR__ . '/../..' . '/app/Models/Batch.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Client' => __DIR__ . '/../..' . '/app/Models/Client.php',
         'App\\Models\\Coach' => __DIR__ . '/../..' . '/app/Models/Coach.php',

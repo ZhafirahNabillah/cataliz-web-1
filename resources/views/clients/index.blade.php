@@ -672,7 +672,7 @@
                 <label class="form-label" for="basic-icon-default-fullname">Program</label>
                 @foreach ($programs as $program)
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="program" id="program-{{ $program->id }}"
+                  <input class="form-check-input program-choice" type="radio" name="program" data-id="{{ $program->id }}" id="program-{{ $program->id }}"
                     value="{{ $program->id }}">
                   <label class="form-check-label" for="program-{{ $program->id }}">
                     {{ $program->program_name }}
@@ -683,10 +683,8 @@
               </div>
               <div class="form-group" id="batch-field-wrapper">
                 <label class="form-label" for="">Batch</label>
-                <select class="form-control" name="batch">
+                <select class="form-control" name="batch" id="batch">
                   <option disabled selected hidden value="0">Select batch</option>
-                  @for ($i=1; $i <= 10; $i++) <option value="{{ $i }}">Batch {{ $i }}</option>
-                    @endfor
                 </select>
                 <div id="batch-error"></div>
                 <small class="form-text text-muted">Batch must be filled if program was chosen</small>
@@ -1486,8 +1484,12 @@
               //   var role_name = data.roles[i].name;
               // });
               if (data.program != null) {
-                $('#program-' + data.program.id).prop('checked', true);
-                $("#batch-field-wrapper select").val(data.client.batch).change();
+                $('#program-' + data.program.id).prop('checked', true).trigger('change')
+
+                //need to be resctrutured
+                setTimeout(function(){
+                  $("#batch").val(data.batch.id).change();
+                }, 500);
               }
 
               if (data.role == 'coachee') {
@@ -1585,6 +1587,21 @@
               $('.email').html(data.user.email);
             })
           });
+
+          $('.program-choice').change(function() {
+            $('#batch').empty();
+            $('#batch').append('<option disabled selected hidden>Select batch</option>');
+            var program_id = $(this).data('id')
+            $.get("/"+ program_id +"/get_batch" , function( data ) {
+              if (data.length == 0) {
+                $('#batch').append('<option disabled>No batch available</option>');
+              } else {
+                for (var i = 0; i < data.length; i++) {
+                  $('#batch').append('<option value="'+ data[i].id +'">Batch '+ data[i].batch_number +'</option>');
+                }
+              }
+            });
+          })
 
           $("#saveBtn").click(function(e) {
             e.preventDefault();
