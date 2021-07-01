@@ -80,9 +80,14 @@ class ProgramController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
               $update_btn = '<a href="javascript:;" id="updateBatchBtn" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
-              $delete_btn = '<a href="javascript:;" id="deleteBatchBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
+              $close_btn = '<a href="javascript:;" id="closeBatchBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" >Close</a>';
+              $open_btn = '<a href="javascript:;" id="openBatchBtn" class="btn-sm btn-success" data-id="' . $row->id . '" >Open</a>';
 
-              $actionBtn = $update_btn . ' ' . $delete_btn;
+              if ($row->status == 1) {
+                $actionBtn = $update_btn . ' ' . $close_btn;
+              } else {
+                $actionBtn = $update_btn . ' ' . $open_btn;
+              }
               return $actionBtn;
             })
             ->rawColumns(['action'])

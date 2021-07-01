@@ -290,5 +290,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/program/store_certificate', [ProgramController::class, 'store_certificate'])->name('program.store_certificate');
 	Route::post('/program/remove_certificate', [ProgramController::class, 'remove_certificate'])->name('program.remove_certificate');
 	Route::resource('batch', BatchController::class);
-	Route::get('/{id}/batch_max', [BatchController::class, 'max'])->name('batch.max');
+	Route::get('/batch_max', [BatchController::class, 'max'])->name('batch.max');
+	Route::post('/batch/close', [BatchController::class, 'close_batch'])->name('close_batch');
+	Route::post('/batch/open', [BatchController::class, 'open_batch'])->name('open_batch');
 });

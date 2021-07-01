@@ -44,7 +44,13 @@ class BatchController extends Controller
 
         $batch = Batch::updateOrCreate(
           ['id' => $request->batch_id],
-          ['program_id' => $request->program_id, 'batch_number' => $request->batch_number, 'start_date' => $request->start_date, 'end_date' => $request->end_date]
+          [
+            'program_id' => $request->program_id,
+            'batch_number' => $request->batch_number,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'status'  => 1
+        ]
         );
 
         return response()->json([
@@ -110,5 +116,23 @@ class BatchController extends Controller
         $max_batch = 0;
       }
       return response()->json($max_batch);
+    }
+
+    public function close_batch(Request $request)
+    {
+      $batch = Batch::find($request->id);
+      $batch->status = 0;
+      $batch->update();
+
+      return response()->json(['success' => 'User has been suspended!']);
+    }
+
+    public function open_batch(Request $request)
+    {
+      $batch = Batch::find($request->id);
+      $batch->status = 1;
+      $batch->update();
+
+      return response()->json(['success' => 'User has been activated!']);
     }
 }
