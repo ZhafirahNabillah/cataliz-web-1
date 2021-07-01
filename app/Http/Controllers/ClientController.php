@@ -732,9 +732,10 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger deletePermanently" data-id = "' . $row->id . '">Delete</a></div>';
 
-          $actionBtn = $restore_btn;
+          $actionBtn = $restore_btn . ' ' . $delete_btn;
 
           return $actionBtn;
         })
@@ -752,9 +753,10 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger deletePermanently" data-id = "' . $row->id . '">Delete</a></div>';
 
-          $actionBtn = $restore_btn;
+          $actionBtn = $restore_btn . ' ' . $delete_btn;
 
           return $actionBtn;
         })
@@ -772,8 +774,10 @@ class ClientController extends Controller
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
 
-          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
-          $actionBtn = $restore_btn;
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger deletePermanently" data-id = "' . $row->id . '">Delete</a></div>';
+
+          $actionBtn = $restore_btn . ' ' . $delete_btn;
           return $actionBtn;
         })
         ->addColumn('program', function ($row) {
@@ -805,9 +809,10 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger deletePermanently" data-id = "' . $row->id . '">Delete</a></div>';
 
-          $actionBtn = $restore_btn;
+          $actionBtn = $restore_btn . ' ' . $delete_btn;
 
           return $actionBtn;
         })
@@ -824,10 +829,10 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $restore_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success restoreUser" data-id = "' . $row->id . '">Restore</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger deletePermanently" data-id = "' . $row->id . '">Delete</a></div>';
 
-          $actionBtn = $restore_btn;
-
+          $actionBtn = $restore_btn . ' ' . $delete_btn;
           return $actionBtn;
         })
         ->rawColumns(['action'])
@@ -849,7 +854,14 @@ class ClientController extends Controller
     return response()->json(['success' => 'All user are restored!']);
   }
 
-  public function delete_permanently()
+  public function delete_user_permanently($id)
+  {
+    $user = User::onlyTrashed()->where('id', $id);
+    $user->forceDelete();
+    return response()->json(['success' => 'User are permanently deleted!']);
+  }
+
+  public function delete_all_permanently()
   {
     $user = User::onlyTrashed();
     $user->forceDelete();

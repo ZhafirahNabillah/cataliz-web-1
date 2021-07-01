@@ -196,7 +196,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/show_deleted_mentor_list', [ClientController::class, 'show_deleted_mentor_list'])->name('show_deleted_mentor_list');
 	Route::get('/restore_user/{id}', [ClientController::class, 'restore_user'])->name('restore_user');
 	Route::get('/restore_all_user', [ClientController::class, 'restore_all_user'])->name('restore_all_user');
-	Route::post('/delete_permanently', [ClientController::class, 'delete_permanently'])->name('delete_permanently');
+	Route::post('/delete_user_permanently/{id}', [ClientController::class, 'delete_user_permanently'])->name('delete_user_permanently');
+	Route::post('/delete_all_permanently', [ClientController::class, 'delete_all_permanently'])->name('delete_all_permanently');
 });
 
 //Topic Controller

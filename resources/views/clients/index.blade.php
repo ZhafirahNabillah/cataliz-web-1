@@ -424,7 +424,7 @@
         <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
           class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
         <a href="{{route('show_deleted_admin_list')}}" style="margin-top: 10px;margin-bottom: 10px;"
-          class="btn btn-dark mr-1">All Deleted User</a>
+          class="btn btn-dark mr-1">Deleted User</a>
       </div>
       <div class="card">
         <div class="card-body">
@@ -1505,7 +1505,7 @@
           $('body').on('click', '.deleteUser', function() {
             Swal.fire({
               title: "Are you sure?",
-              text: "The user you choose will be suspended!",
+              text: "The user you choose will be deleted!",
               icon: "warning",
               showCancelButton: true,
               confirmButtonColor: "#DD6B55",
