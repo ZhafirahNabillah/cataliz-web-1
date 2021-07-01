@@ -283,4 +283,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/{id}/get_batch', [ProgramController::class, 'get_batch'])->name('program.get_batch');
 	Route::resource('batch', BatchController::class);
 	Route::get('/batch_max', [BatchController::class, 'max'])->name('batch.max');
+	Route::post('/batch/close', [BatchController::class, 'close_batch'])->name('close_batch');
+	Route::post('/batch/open', [BatchController::class, 'open_batch'])->name('open_batch');
 });

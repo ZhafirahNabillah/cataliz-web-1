@@ -13,7 +13,8 @@ class Batch extends Model
       'program_id',
       'batch_number',
       'start_date',
-      'end_date'
+      'end_date',
+      'status'
   ];
 
   public function program() {

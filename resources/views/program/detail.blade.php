@@ -400,44 +400,44 @@
 		// 	console.log(client_id);
     // });
 
-    $('body').on('click', '#deleteBatchBtn', function(e) {
-
-			var batch_id = $(this).data("id");
-
-			Swal.fire({
-				title: "Are you sure?",
-				text: "You'll remove this batch!",
-				icon: "warning",
-				showCancelButton: true,
-				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Yes, Sure",
-				cancelButtonText: "Cancel"
-			}).then((result) => {
-				if (result.isConfirmed) {
-
-					$.ajaxSetup({
-						headers: {
-							'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-						}
-					});
-
-					$.ajax({
-						type: "DELETE",
-						url: "/batch/"+batch_id,
-						success: function(data) {
-							Swal.fire({
-								icon: 'success',
-								title: 'Removed Successfully!',
-							});
-							table.draw();
-						},
-						error: function(data) {
-							console.log('Error:', data);
-						}
-					});
-				}
-			})
-		});
+    // $('body').on('click', '#deleteBatchBtn', function(e) {
+    //
+		// 	var batch_id = $(this).data("id");
+    //
+		// 	Swal.fire({
+		// 		title: "Are you sure?",
+		// 		text: "You'll remove this batch!",
+		// 		icon: "warning",
+		// 		showCancelButton: true,
+		// 		confirmButtonColor: "#DD6B55",
+		// 		confirmButtonText: "Yes, Sure",
+		// 		cancelButtonText: "Cancel"
+		// 	}).then((result) => {
+		// 		if (result.isConfirmed) {
+    //
+		// 			$.ajaxSetup({
+		// 				headers: {
+		// 					'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		// 				}
+		// 			});
+    //
+		// 			$.ajax({
+		// 				type: "DELETE",
+		// 				url: "/batch/"+batch_id,
+		// 				success: function(data) {
+		// 					Swal.fire({
+		// 						icon: 'success',
+		// 						title: 'Removed Successfully!',
+		// 					});
+		// 					table.draw();
+		// 				},
+		// 				error: function(data) {
+		// 					console.log('Error:', data);
+		// 				}
+		// 			});
+		// 		}
+		// 	})
+		// });
 
     // $('#search').keyup(function(){
     //   var search_value = new RegExp($(this).val(), 'i');
@@ -449,6 +449,86 @@
     //     }
     //   });
 	  // });
+    // suspend user
+    $('body').on('click', '#closeBatchBtn', function(e) {
+      console.log('tes');
+
+      let user_id = $(this).attr('data-id');
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "This batch will be closed!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Sure",
+        cancelButtonText: "Cancel"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var data = {
+            id: user_id
+          };
+          console.log(data);
+
+          $.ajax({
+            data: data,
+            type: "POST",
+            url: "{{ route('close_batch') }}",
+            success: function(data) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Closed Successfully!',
+              });
+              table.draw();
+            },
+            error: function(data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+      })
+    });
+
+    // unsuspend user
+    $('body').on('click', '#openBatchBtn', function(e) {
+      console.log('tes');
+
+      let batch_id = $(this).attr('data-id');
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Batch will be re-opened again!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Sure",
+        cancelButtonText: "Cancel"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          var data = {
+            id: batch_id
+          };
+          console.log(data);
+
+          $.ajax({
+            data: data,
+            type: "POST",
+            url: "{{ route('open_batch') }}",
+            success: function(data) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Openend Successfully!',
+              });
+              table.draw();
+            },
+            error: function(data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+      })
+    });
   });
+
 </script>
 @endpush

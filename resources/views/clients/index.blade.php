@@ -1597,7 +1597,11 @@
                 $('#batch').append('<option disabled>No batch available</option>');
               } else {
                 for (var i = 0; i < data.length; i++) {
-                  $('#batch').append('<option value="'+ data[i].id +'">Batch '+ data[i].batch_number +'</option>');
+                  if (data[i].status == 0) {
+                    $('#batch').append('<option value="'+ data[i].id +'" disabled>Batch '+ data[i].batch_number +' (closed)</option>');
+                  } else {
+                    $('#batch').append('<option value="'+ data[i].id +'">Batch '+ data[i].batch_number +'</option>');
+                  }
                 }
               }
             });
