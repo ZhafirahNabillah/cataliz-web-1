@@ -113,9 +113,9 @@ class coach_UsersMenuTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                 ->visit('/clients')
-                ->clickLink('Client Group');
+                ->clickLink('Client Trainer');
 
-            $browser->with('.client-datatable-group', function ($table) {
+            $browser->with('.coach-datatable-trainer', function ($table) {
                 $trainer = User::find(5);
                 $table->waitFor('.odd')
                     ->click('.detailTrainer')
@@ -133,12 +133,12 @@ class coach_UsersMenuTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                 ->visit('/clients')
-                ->clickLink('Client Group');
+                ->clickLink('Client Mentor');
 
-            $browser->with('.client-datatable-group', function ($table) {
+            $browser->with('.coach-datatable-mentor', function ($table) {
                 $mentor = User::find(5);
                 $table->waitFor('.odd')
-                    ->click('.detailTrainer')
+                    ->click('.detailMentor')
                     ->whenAvailable('#modals-slide-in-coach', function ($modal) use ($mentor) {
                         $modal->pause(3000)
                             ->assertSee($mentor->name)
@@ -148,16 +148,35 @@ class coach_UsersMenuTest extends DuskTestCase
         });
     }
 
-    // public function testSearchCoachUsingDatatableSearchBox()
-    // {
-    //     $this->browse(function (Browser $browser) {
-    //         $coach = User::find(1);
-    //         $browser->loginAs(User::find(2))
-    //             ->visit('/clients')
-    //             ->waitFor('tbody > tr')
-    //             ->type('.dataTables_filter input', 'user')
-    //             ->pause(3000)
-    //             ->assertSee($coach->name);
-    //     });
-    // }
+    public function testClickCreateAgendaClientIndex()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                ->visit('/clients');
+
+            $browser->with('.client-datatable-group', function ($table) {
+                $table->waitFor('.odd')
+                    ->click('.dropdown-toggle')
+                    ->click('.createAgenda')
+                    ->assertSee('Coaching Plans')
+                    ->assertSee('Create Plan');
+            });
+        });
+    }
+
+    public function testClickCreateAgendaClientGroupIndex()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                ->visit('/clients');
+
+            $browser->with('.yajra-datatable', function ($table) {
+                $table->waitFor('.odd')
+                    ->click('.dropdown-toggle')
+                    ->click('.createAgenda')
+                    ->assertSee('Coaching Plans')
+                    ->assertSee('Create Plan');
+            });
+        });
+    }
 }
