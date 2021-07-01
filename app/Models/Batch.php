@@ -23,4 +23,8 @@ class Batch extends Model
   public function clients() {
 		return $this->hasMany('App\Models\Client');
 	}
+
+  public function graduates() {
+		return $this->hasMany('App\Models\Graduate');
+	}
 }

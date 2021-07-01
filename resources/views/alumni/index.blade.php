@@ -64,6 +64,7 @@
                   <tr>
                     <th>No</th>
                     <th>Name</th>
+                    <th>Certificate Number</th>
                     <th>Program</th>
                     <th>Action</th>
                   </tr>
@@ -94,11 +95,9 @@
                         <div class="form-group">
                           <label class="fp-default" for="basic-icon-default-fullname">Name</label>
                           <select id="state" class="livesearch-graduates form-control @error('graduates') is-invalid @enderror" name="name"></select>
-                          @error('')
-                          <strong class="text-danger">{{ $message }}</strong>
-                          @enderror
                           <div id="graduate-error"></div>
                         </div>
+                        <input type="hidden" name="batch_id" id="batch_id" value="">
                         {{-- <div class="form-group">
                           <label for="graduate_as">Graduate as</label>
                           <select class="form-control" name="graduate_as" id="graduate_as">
@@ -109,6 +108,38 @@
                           <div id="graduate_as-error"></div>
                         </div> --}}
                         <button id="saveBtn" type="button" name="button" class="btn btn-primary">Submit</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Modal to create certificate -->
+        <div class="modal fade" id="certificate-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalHeading">Certificate</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <div class="row">
+                    <div class="card-body" style="border-radius: 11px">
+                      <form id="certificateForm">
+                        <input type="hidden" name="graduate_id" id="graduate_id" value="">
+                        <div class="form-group">
+                          <label for="fp-default">Certificate Number</label>
+                          <input class="form-control" type="text" value="" name="certificate_number" id="certificate_number" placeholder="Certificate Number here...">
+                          <div id="certificate-number-error"></div>
+                        </div>
+                        <button id="downloadCertificate" type="button" name="button" class="btn btn-primary">Download</button>
                       </form>
                     </div>
                   </div>
@@ -165,13 +196,34 @@
             results: $.map(data, function(item) {
               console.log(item)
               return {
-                text: item.name,
+                text: item.name +'  ('+ item.batch.program.program_name +' - Batch'+ item.batch.batch_number + ')',
                 id: item.id,
+                batch_id: item.batch.id
               }
             })
           };
         },
       }
+    });
+
+    $(".livesearch-graduates").on('change', function(e) {
+      // Access to full data
+      var selected_data = $(this).select2('data')[0];
+      console.log(selected_data);
+      $('#batch_id').val(selected_data.batch_id);
+      // if (dd.client_id != null) {
+      //   $(".group_id_wrapper").hide();
+      //   $.get("" + '/get_client_data/' + dd.client_id, function(data) {
+      //     $("#client_name").val(data.name);
+      //     $("#client_organization").val(data.organization);
+      //     $("#client_company").val(data.company);
+      //   });
+      //   $(".client_data_wrapper").show();
+      // } else if (dd.group_id != null) {
+      //   $(".client_data_wrapper").hide();
+      //   $(".group_id_wrapper").show();
+      //   $("#group_id").val(dd.group_id);
+      // }
     });
 
     var graduates_table = $('.datatable-graduates').DataTable({
@@ -185,6 +237,17 @@
         {
           data: 'user_data.name',
           name: 'user_data.name'
+        },
+        {
+          data: 'certificate_number',
+          name: 'certificate_number',
+          render: function (data) {
+            if (data == 0) {
+              return '-';
+            } else {
+              return data;
+            }
+          }
         },
         {
           data: 'program',
@@ -218,7 +281,7 @@
     });
 
     $('body').on('click', '#addAlumni', function() {
-      console.log('tes');
+      // console.log('tes');
       // var coach_id = $(this).data('id');
       // $('#saveBtn').val("add-alumni");
       // $("#state").val(null).trigger('change');
@@ -231,6 +294,24 @@
       // 		$('#client-' + client_id).prop('selected', true);
       // 	});
       // });
+    });
+
+    $('body').on('click', '#createCertificateBtn', function() {
+      // console.log('tes');
+      $('#downloadCertificate').html('Download');
+      $('#certificate-number-error').empty();
+      $('#certificateForm').trigger("reset");
+      var graduate_id = $(this).data('id');
+      // $('#saveBtn').val("add-alumni");
+      // $("#state").val(null).trigger('change');
+      $('#certificate-modal').modal('show');
+      $('#graduate_id').val(graduate_id)
+      $.get('/graduates/' + graduate_id + '/edit', function(data) {
+        // console.log(data[0].name);
+        if (data.certificate_number != 0) {
+          $('#certificate_number').val(data.certificate_number);
+        }
+      });
     });
 
     $('#saveBtn').click(function(e) {
@@ -249,7 +330,6 @@
         success: function(data) {
           console.log(data);
           $('#addGraduateForm').trigger("reset");
-          $('.livesearch-graduates').val('').trigger("change");
           $('#saveBtn').html('Submit');
           $('#add-alumni-modal').modal('hide');
           Swal.fire({
@@ -257,6 +337,7 @@
               title: 'Graduates added!',
           });
           graduates_table.draw();
+          $('.livesearch-graduates').val('').trigger("change");
         },
         error: function(reject, data) {
           console.log('Error:', data);
@@ -265,6 +346,42 @@
             var errors = JSON.parse(reject.responseText);
             if (errors.name) {
               $('#graduate-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+            }
+            // if (errors.graduate_as) {
+            //   $('#graduate_as-error').html('<strong class="text-danger">' + errors.graduate_as[0] + '</strong>'); // and so on
+            // }
+          }
+        }
+      });
+      return false;
+    });
+
+    $('#downloadCertificate').click(function(e) {
+      e.preventDefault();
+      $(this).html('Creating..');
+      var data = $('#certificateForm').serialize();
+      $('#certificate-number-error').empty();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('graduates.store_certificate_data') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          $('#certificateForm').trigger("reset");
+          $(this).html('Download');
+          $('#cerificate-modal').modal('hide');
+          window.open(data, "_blank");
+        },
+        error: function(reject, data) {
+          console.log('Error:', data);
+          $(this).html('Download');
+          if (reject.status === 422) {
+            var errors = JSON.parse(reject.responseText);
+            if (errors.certificate_number) {
+              $('#certificate-number-error').html('<strong class="text-danger">' + errors.certificate_number[0] + '</strong>'); // and so on
             }
             // if (errors.graduate_as) {
             //   $('#graduate_as-error').html('<strong class="text-danger">' + errors.graduate_as[0] + '</strong>'); // and so on

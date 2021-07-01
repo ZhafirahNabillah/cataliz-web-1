@@ -276,6 +276,7 @@ Route::middleware(['auth'])->group(function () {
 // Alumni Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('graduates', GraduateController::class);
+	Route::post('/graduates/store_certificate', [GraduateController::class, 'store_certificate_data'])->name('graduates.store_certificate_data');
 	Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_certificate'])->name('graduates.certificate');
 	Route::get('/load_graduates_data', [GraduateController::class, 'load_graduates_data'])->name('graduates.load_graduates_data');
 	Route::get('/load_clients_data', [GraduateController::class, 'load_clients_data'])->name('graduates.search_clients');
