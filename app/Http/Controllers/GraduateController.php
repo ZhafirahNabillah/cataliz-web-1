@@ -36,10 +36,7 @@ class GraduateController extends Controller
 
             return $client;
           })->addColumn('program', function ($row) {
-            $user = $row->user;
-            $client = $user->client;
-
-            $batch = $client->batch;
+            $batch = $row->batch;
 
             if ($batch) {
               $program = $batch->program;
@@ -53,10 +50,10 @@ class GraduateController extends Controller
               return $program->program_name . ' Batch ' . $batch->batch_number;
             }
           })->addColumn('action', function ($row) {
-            $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';
+            // $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';
             $certificate_btn = '<a href="javascript:;" id="createCertificateBtn" class="btn-sm btn-primary" data-id="' . $row->id . '">Certificate</a>';
 
-            $actionBtn = $remove_btn.' '.$certificate_btn;
+            $actionBtn = $certificate_btn;
             return $actionBtn;
           })
           ->rawColumns(['action', 'user_data'])
@@ -100,6 +97,9 @@ class GraduateController extends Controller
         $graduate->certificate_id = (string) Str::uuid();
         $graduate->certificate_number = 0;
         $graduate->save();
+
+        $client->batch_id = 0;
+        $client->save();
 
         return response()->json([
           'success' => 'Graduate saved successfully!'
@@ -158,13 +158,13 @@ class GraduateController extends Controller
     public function load_clients_data(Request $request)
     {
         $coachee = [];
-        $graduated_coachee = Graduate::pluck('user_id');
+        // $graduated_coachee = Graduate::pluck('user_id');
 
         if ($request->has('q')) {
             $search = $request->q;
-            $coachee = Client::with('batch.program')->whereNotIn('batch_id', [0])->whereNotIn('user_id', $graduated_coachee)->where('name', 'LIKE', "%$search%")->get();
+            $coachee = Client::with('batch.program')->whereNotIn('batch_id', [0])->where('name', 'LIKE', "%$search%")->get();
         } else {
-            $coachee = Client::with('batch.program')->whereNotIn('batch_id', [0])->whereNotIn('user_id', $graduated_coachee)->get();
+            $coachee = Client::with('batch.program')->whereNotIn('batch_id', [0])->get();
         }
         return response()->json($coachee);
     }

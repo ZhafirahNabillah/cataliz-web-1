@@ -51,9 +51,10 @@ Route::get('/home', function () {
 	return redirect('login');
 });
 
-Route::get('/email_show', function () {
-	return view('email_template.scheduled_session_mail');
-});
+
+// Route::get('/email_show', function () {
+// 	return view('email_template.scheduled_session_mail');
+// });
 
 // Route::get('/pdf_show', function () {
 // 	return view('pdf_template.plans_detail_pdf');
@@ -73,6 +74,8 @@ Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name(
 
 //Login Controller
 Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_certificate'])->name('graduates.certificate');
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {
@@ -278,7 +281,6 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth'])->group(function () {
 	Route::resource('graduates', GraduateController::class);
 	Route::post('/graduates/store_certificate', [GraduateController::class, 'store_certificate_data'])->name('graduates.store_certificate_data');
-	Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_certificate'])->name('graduates.certificate');
 	Route::get('/load_graduates_data', [GraduateController::class, 'load_graduates_data'])->name('graduates.load_graduates_data');
 	Route::get('/load_clients_data', [GraduateController::class, 'load_clients_data'])->name('graduates.search_clients');
 });
