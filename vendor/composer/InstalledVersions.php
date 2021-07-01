@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'd2b232fa2bc41f89116ebe7557dc17313f5c5b1e',
+    'reference' => 'f26b9cfcd8b071dca9dd5eb4fdc276f054c92b62',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -214,6 +214,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
+    ),
+    'ezyang/htmlpurifier' => 
+    array (
+      'pretty_version' => 'v4.13.0',
+      'version' => '4.13.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '08e27c97e4c6ed02f37c5b2b20488046c8d90d75',
     ),
     'facade/flare-client-php' => 
     array (
@@ -588,7 +597,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'd2b232fa2bc41f89116ebe7557dc17313f5c5b1e',
+      'reference' => 'f26b9cfcd8b071dca9dd5eb4fdc276f054c92b62',
     ),
     'laravel/sail' => 
     array (
@@ -1209,6 +1218,15 @@ private static $installed = array (
       ),
       'reference' => '1c51a5fa12131565fe3860705163e53d7a26258a',
     ),
+    'stevebauman/purify' => 
+    array (
+      'pretty_version' => 'v4.0.0',
+      'version' => '4.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '823ad75e35f94139ca99701dcbdab9851ad52105',
+    ),
     'swiftmailer/swiftmailer' => 
     array (
       'pretty_version' => 'v6.2.7',
@@ -1761,6 +1779,7 @@ self::$canGetVendors = method_exists('Composer\Autoload\ClassLoader', 'getRegist
 $installed = array();
 
 if (self::$canGetVendors) {
+
 foreach (ClassLoader::getRegisteredLoaders() as $vendorDir => $loader) {
 if (isset(self::$installedByVendor[$vendorDir])) {
 $installed[] = self::$installedByVendor[$vendorDir];

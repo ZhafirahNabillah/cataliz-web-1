@@ -48,6 +48,11 @@
                 @endrole
 
             </li>
+            @role('admin')
+            <li class=" nav-item ">
+                <a class="d-flex align-items-center" href="{{ route('graduates.index') }}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Graduate</span></a>
+            </li>
+            @endrole
             @endcan
             {{-- @role('mentor')
             <li class=" nav-item ">
@@ -88,7 +93,7 @@
                         class="menu-title text-truncate" data-i18n="Todo">Class</span></a>
             </li>
             @endcan
-            @canany('list-report', 'create-report', 'detail-report')
+            @canany('list-report', 'create-report', 'detail-report','update-report')
             <li class=" nav-item {{ 'report' == request()->path() ? 'active show' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('report.index')}}"><i
                         data-feather="book-open"></i><span class="menu-title text-truncate"

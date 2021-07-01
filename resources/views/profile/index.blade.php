@@ -96,7 +96,7 @@
 												@endrole
 												@role('coachee')
 												<li class="nav-item">
-													<a class="nav-link " id="profile-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
+													<a class="nav-link " id="feedback-tab" data-toggle="tab" href="#feedback" aria-controls="feedback" role="tab" aria-selected="true">Feedback</a>
 												</li>
 												@endrole
 											</ul>
@@ -359,8 +359,7 @@
 
 							{{-- change password  --}}
 							<div class="col-lg-8 col-4 order-1 order-lg-2">
-								<form action="{{route('simpan_password', Auth::user()->id)}}" method="post">
-									@csrf
+								<form id="changePasswordForm">
 									<div class="row match-height">
 										<div class="col-sm-12 col-md-12">
 											<div class="card">
@@ -380,6 +379,7 @@
 														<strong>{{ $message }}</strong>
 													</span>
 													@enderror
+													<div id="old_password_error"></div>
 												</div>
 
 												<div class="col-md-12 form-group">
@@ -390,6 +390,7 @@
 														<strong>{{ $message }}</strong>
 													</span>
 													@enderror
+													<div id="new_password_error"></div>
 												</div>
 
 												<div class="col-md-12 form-group">
@@ -400,10 +401,11 @@
 														<strong>{{ $message }}</strong>
 													</span>
 													@enderror
+													<div id="new_password_confirm_error"></div>
 												</div>
 
 												<div class="col-md-12 form-group">
-													<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="create">Save Change</button>
+													<button type="button" class="btn btn-primary data-submit mr-1" id="changePasswordBtn" value="change-password">Save Change</button>
 												</div>
 											</div>
 										</div>
@@ -1845,8 +1847,6 @@
 			$('.others_languange_wrapper').append(others_language_html);
 		}
 
-
-
 		$(function() {
 			// Cropping Image For Profil Picture
 			$('.profil_picture').ijaboCropTool({
@@ -2091,6 +2091,49 @@
 				}
 			});
 		});
+
+		$('#changePasswordBtn').click(function(e) {
+			console.log('tes');
+			e.preventDefault();
+      $(this).html('Submitting..');
+			$('#old_password_error').empty();
+			$('#new_password_error').empty();
+      $('#new_password_confirm_error').empty();
+
+      var data = $('#changePasswordForm').serialize();
+      console.log(data);
+
+      $.ajax({
+        data: data,
+        url: "{{ route('simpan_password') }}",
+        type: "POST",
+        dataType: 'json',
+        success: function(data) {
+
+          $('#changePasswordBtn').html('Submit');
+					Swal.fire({
+            icon: 'success',
+            title: 'Your Password updated succesfully!',
+          });
+					$('#changePasswordForm').trigger('reset');
+        },
+        error: function(reject) {
+          $('#changePasswordBtn').html('Submit');
+          if (reject.status === 422) {
+            var errors = JSON.parse(reject.responseText);
+            if (errors.old_password) {
+              $('#old_password_error').html('<small><strong class="text-danger">' + errors.old_password[0] + '</strong></small>'); // and so on
+            }
+            if (errors.new_password) {
+              $('#new_password_error').html('<small><strong class="text-danger">' + errors.new_password[0] + '</strong></small>'); // and so on
+            }
+            if (errors.new_confirm_password) {
+              $('#new_password_confirm_error').html('<small><strong class="text-danger">' + errors.new_confirm_password[0] + '</strong></small>'); // and so on
+            }
+          }
+        }
+      });
+		})
 
 		//submit edit background picture and validation
 		$('#saveBackgroundPictureBtn').click(function(e) {

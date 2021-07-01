@@ -129,8 +129,7 @@
 							</div>
 							<div class="card-body">
 								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' ||
-								$agenda_detail->status == 'rescheduled') && ($agenda_detail->date.'
-								'.$agenda_detail->time) >
+								$agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) >
 								(\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
 								<span>Feedback belum tersedia</span>
 								@elseif($agenda_detail->status == 'canceled')
@@ -180,8 +179,7 @@
 							</div>
 							<div class="card-body">
 								@if($agenda_detail->status == 'unschedule' || (($agenda_detail->status == 'scheduled' ||
-								$agenda_detail->status == 'rescheduled') && ($agenda_detail->date.'
-								'.$agenda_detail->time) >
+								$agenda_detail->status == 'rescheduled') && ($agenda_detail->date.' '.$agenda_detail->time) >
 								(\Carbon\Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d H:i:s'))))
 								<span>Rating belum tersedia</span>
 								@elseif($agenda_detail->status == 'canceled')

@@ -133,6 +133,14 @@
                   <a class="nav-link" id="profile-tab" data-toggle="tab" href="#feedback_to_mentor" aria-controls="profile" role="tab" aria-selected="false">Feedback to Mentor</a>
                 </li>
                 @endrole
+                @role('admin|coach')
+                <li class="nav-item">
+                  <a class="nav-link" id="coach-tab" data-toggle="tab" href="#feedback" aria-controls="coach" role="tab" aria-selected="true">Feedback</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="coach-tab" data-toggle="tab" href="#report" aria-controls="coach" role="tab" aria-selected="true">Report</a>
+                </li>
+                @endrole
               </ul>
               <div class="tab-content">
                 @role('mentor|trainer|admin|coach')
@@ -425,6 +433,58 @@
                 </div>
                 </div>
                 <!-- /Report -->
+                @endrole
+
+                @role('admin|coach')
+                <div class="tab-pane" id="feedback" aria-labelledby="feedback-tab" role="tabpanel">
+                  <div class="collapse-icon">
+                    <div class="collapse-default">
+                      @forelse ($feedback as $feedback_data)
+                        <div class="card">
+                          <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#feedback-{{ $loop->index }}" aria-expanded="false" aria-controls="collapse1">
+                            <span class="lead collapse-title"><b>Feedback {{ ucfirst(trans($feedback_data->from)) }} to {{ ucfirst(trans($feedback_data->to)) }}</b></span>
+                          </div>
+                          <div id="feedback-{{ $loop->index }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                            <div class="card-body">
+                              <div id="feedback_wrapper">
+                                {!! $feedback_data->description !!}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      @empty
+                        <div class="card">
+                          No report available
+                        </div>
+                      @endforelse
+                    </div>
+                  </div>
+                </div>
+
+                <div class="tab-pane" id="report" aria-labelledby="report-tab" role="tabpanel">
+                  <div class="collapse-icon">
+                    <div class="collapse-default">
+                      @forelse ($report as $report_data)
+                        <div class="card">
+                          <div id="headingCollapse1" class="card-header" data-toggle="collapse" role="button" data-target="#report-{{ $loop->index }}" aria-expanded="false" aria-controls="collapse1">
+                            <span class="lead collapse-title"><b>Report {{ ucfirst(trans($report_data->from)) }} to {{ ucfirst(trans($report_data->to)) }}</b></span>
+                          </div>
+                          <div id="report-{{ $loop->index }}" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse">
+                            <div class="card-body">
+                              <div id="feedback_wrapper">
+                                {!! $report_data->description !!}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      @empty
+                        <div class="card">
+                          No report available
+                        </div>
+                      @endforelse
+                    </div>
+                  </div>
+                </div>
                 @endrole
               </div>
             </div>

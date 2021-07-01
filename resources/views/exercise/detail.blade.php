@@ -60,9 +60,11 @@
             @else
             <span>Type : Post-test</span>
             @endif
+            @can('create-question')
             <div class="mt-1">
               <a class="btn btn-primary" href="{{route('question.add_new', $exam->id)}}">New Question</a>
             </div>
+            @endcan
             <!-- Basic table -->
             <section id="basic-datatable">
               <div class="row">

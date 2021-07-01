@@ -48,9 +48,21 @@ class UserController extends Controller
   {
     //
     if (auth()->user()->hasRole('admin')) {
-      $user = User::with('roles')->where('id', $id)->first();
+      $user = User::find($id);
+      $role = $user->getRoleNames()->first();
 
-      return response()->json($user);
+      if ($role == 'coachee') {
+        $client = $user->client;
+        $program = $client->program;
+      } else {
+        $program = null;
+      }
+
+      return response()->json([
+        'user'    => $user,
+        'role'    => $role,
+        'program' => $program
+      ]);
     }
     if (auth()->user()->hasRole('coachee')) {
       $user = User::with('roles')->where('id', $id)->first();
@@ -123,6 +135,12 @@ class UserController extends Controller
     if ($request->action_type == 'edit-user') {
       $user = User::find($request->user_id);
       $user->syncRoles($request->input('roles'));
+
+      if ($user->getRoleNames()->first() == 'coachee') {
+        $client = Client::where('user_id', $user->id)->first();
+        $client->program_id = $request->program;
+        $client->update();
+      }
     } elseif ($request->action_type == 'create-user') {
       $validator = Validator::make($request->all(), [
         'name'  => 'required',
@@ -139,7 +157,7 @@ class UserController extends Controller
       $user->syncRoles($request->input('roles'));
 
       if ($user->hasRole('coachee')) {
-        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program' => 'Starco']);
+        $client = Client::updateOrCreate(['user_id' => $user->id], ['name' => $user->name, 'email' => $user->email, 'phone' => $user->phone, 'program_id' => $request->program]);
       } elseif ($user->hasRole('coach')) {
         $coach = Coach::updateOrCreate(['user_id' => $user->id]);
       }

@@ -160,17 +160,24 @@ class ProfileController extends Controller
     return response()->json($skill);
   }
 
-  public function simpan_password(Request $request, $id)
+  public function simpan_password(Request $request)
   {
-    $request->validate([
+
+    $validator = Validator::make($request->all(), [
       'old_password' => ['required', new MatchOldPassword],
       'new_password' => ['required'],
       'new_confirm_password' => ['same:new_password'],
     ]);
 
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), 422);
+    }
+
     User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
 
-    return redirect(route('profil', Auth::user()->id))->with('success', 'Your Password has been updated!');
+    return response()->json([
+      'success' => 'Your Password has been updated!'
+    ]);
   }
 
   public function store_data(Request $request, $id)

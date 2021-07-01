@@ -13,6 +13,7 @@ use App\Models\Plan;
 use App\Models\User;
 use App\Models\Coach;
 use App\Models\Feedback;
+use App\Models\Program;
 use App\Models\Class_model;
 use App\Models\Class_has_client;
 use DataTables;
@@ -37,6 +38,7 @@ class ClientController extends Controller
 
   public function index(Request $request)
   {
+    $programs = Program::all();
 
     if ($request->ajax()) {
       //get data of table
@@ -100,8 +102,16 @@ class ClientController extends Controller
             $email = str_pad(substr($row->email, -11), strlen($row->email), 'x', STR_PAD_LEFT);
 
             return $email;
+          })->addColumn('program', function ($row) {
+            $program = $row->program;
+
+            if (is_null($program)) {
+              return 'Not Registered to Any program';
+            } else {
+              return $program->program_name;
+            }
           })
-          ->rawColumns(['action', 'phone', 'email'])
+          ->rawColumns(['action', 'phone', 'email', 'program'])
           ->make(true);
       } elseif (auth()->user()->hasRole('coachee')) {
 
@@ -125,7 +135,7 @@ class ClientController extends Controller
           ->make(true);
       }
     }
-    return view('clients.index');
+    return view('clients.index', compact('programs'));
   }
 
   public function show_group_list(Request $request)
@@ -189,8 +199,16 @@ class ClientController extends Controller
         ->addColumn('action', function ($row) {
           $actionBtn = '<a href="' . route('group.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
           return $actionBtn;
+        })->addColumn('program', function ($row) {
+          $program = $row->program;
+
+          if (is_null($program)) {
+            return 'Not Registered to Any program';
+          } else {
+            return $program->program_name;
+          }
         })
-        ->rawColumns(['action'])
+        ->rawColumns(['action','program'])
         ->make(true);
     }
 
@@ -282,7 +300,17 @@ class ClientController extends Controller
             return $actionBtn;
           }
         })
-        ->rawColumns(['action'])
+        ->addColumn('program', function ($row) {
+          $client = $row->client;
+          $program = $client->program;
+
+          if (is_null($program)) {
+            return 'Not Registered to Any program';
+          } else {
+            return $program->program_name;
+          }
+        })
+        ->rawColumns(['action', 'program'])
         ->make(true);
     }
   }

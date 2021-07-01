@@ -13,7 +13,7 @@ class Client extends Model
         'name',
         'phone',
         'email',
-        'program',
+        'program_id',
         'company',
         'organization',
         'occupation',
@@ -24,6 +24,11 @@ class Client extends Model
     public function user()
     {
         return $this->belongsTo('App\Models\User');
+    }
+
+    public function program()
+    {
+        return $this->belongsTo('App\Models\Program');
     }
 
     public function coaches()
@@ -44,5 +49,10 @@ class Client extends Model
     public function plan()
     {
         return $this->hasMany('App\Models\Plan');
+    }
+
+    public function report()
+    {
+        return $this->hasOne('App\Models\Report');
     }
 }

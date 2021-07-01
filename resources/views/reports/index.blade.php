@@ -57,24 +57,24 @@
 
         <ul class="nav nav-tabs justify-content-center" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab"
-              aria-selected="true">Individual</a>
+            <a class="nav-link active" id="individual-tab" data-toggle="tab" href="#individual"
+              aria-controls="individual" role="tab" aria-selected="true">Individual</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
+            <a class="nav-link" id="group-tab" data-toggle="tab" href="#group" aria-controls="group" role="tab"
               aria-selected="false">Group</a>
           </li>
         </ul>
 
         <div class="tab-content">
           <!-- Panel Individu -->
-          <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+          <div class="tab-pane active" id="individual" aria-labelledby="individual-tab" role="tabpanel">
             <!-- Basic table -->
             <section id="basic-datatable">
               <div class="row">
                 <div class="col-12">
                   <div class="card style=" border-radius: 15px;>
-                    <table class="datatables-basic table-striped report-datatable-indivdual">
+                    <table class="datatables-basic table-striped report-datatable-individual">
                       <thead>
                         <tr>
                           <th>No</th>
@@ -94,7 +94,7 @@
           <!-- /panel individu -->
 
           <!-- Panel Grup -->
-          <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+          <div class="tab-pane" id="group" aria-labelledby="group-tab" role="tabpanel">
             <!-- Basic table -->
             <section id="basic-datatable">
               <div class="row">
@@ -152,8 +152,8 @@
                             name: 'DT_RowIndex'
                         },
                         {
-                            data: 'coachee_name',
-                            name: 'coachee_name'
+                            data: 'client.name',
+                            name: 'client.name'
                         },
                         {
                             data: 'action',
@@ -163,47 +163,56 @@
                         },
                     ],
                     dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-                    language: {
-                        paginate: {
-                            // remove previous & next text from pagination
-                            previous: '&nbsp;',
-                            next: '&nbsp;'
-                        },
-                        search: "<i data-feather='search'></i>",
-                        searchPlaceholder: "Search records"
-                    }
-                });
+				language: {
+					paginate: {
+						// remove previous & next text from pagination
+						previous: '&nbsp;',
+						next: '&nbsp;'
+					},
+					// render: '<i data-feather="search"></i>',
+					// search: '<i data-feather="search"/>',
+					searchPlaceholder: "Search records"
+				}
+      });
 
-                var table_report_group = $('.report-datatable-group').DataTable({
-                    processing: true,
-                    serverSide: true,
-                    ajax: "",
-                    columns: [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex'
-                        },
-                        {
-                            name: 'group_code'
-                            data: 'group_code',
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: true,
-                            searchable: true
-                        },
-                    ],
-                    dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-                    language: {
-                        paginate: {
-                            // remove previous & next text from pagination
-                            previous: '&nbsp;',
-                            next: '&nbsp;'
-                        },
-                        search: "<i data-feather='search'></i>",
-                        searchPlaceholder: "Search records"
-                    }
-                });
+      var table_report_group = $('.report-datatable-group').DataTable({
+          processing: true,
+          serverSide: true,
+          ajax: "",
+          columns: [{
+                  data: 'DT_RowIndex',
+                  name: 'DT_RowIndex'
+              },
+              {
+                  name: 'group_code',
+                  data: 'group_code'
+              },
+              {
+                  data: 'action',
+                  name: 'action',
+                  orderable: true,
+                  searchable: true
+              },
+          ],
+          dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+          language: {
+              paginate: {
+                  // remove previous & next text from pagination
+                  previous: '&nbsp;',
+                  next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+          }
+      });
+
+      $('#group-tab').click(function() {
+        $('.create-new').attr("href","{{route('report.create_group')}}");
+      });
+
+      $('#individual-tab').click(function() {
+        $('.create-new').attr("href", "{{route('report.create')}}");
+      });
     });
   </script>
 
