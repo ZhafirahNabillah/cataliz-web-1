@@ -9,6 +9,7 @@ use App\Models\Graduate;
 use App\Models\Client;
 use DataTables;
 use Image;
+use Carbon\Carbon;
 
 class GraduateController extends Controller
 {
@@ -53,7 +54,7 @@ class GraduateController extends Controller
             }
           })->addColumn('action', function ($row) {
             $remove_btn = '<a href="javascript:;" id="removeGraduateBtn" class="btn-sm btn-danger" data-id="' . $row->id . '" data-original-title="Remove Graduate">Remove</a>';
-            $certificate_btn = '<a href="'.route('graduates.certificate', $row->certificate_id).'" id="downloadCertificate" class="btn-sm btn-primary">Certificate</a>';
+            $certificate_btn = '<a href="javascript:;" id="createCertificateBtn" class="btn-sm btn-primary" data-id="' . $row->id . '">Certificate</a>';
 
             $actionBtn = $remove_btn.' '.$certificate_btn;
             return $actionBtn;
@@ -95,7 +96,9 @@ class GraduateController extends Controller
 
         $graduate = new Graduate;
         $graduate->user_id = $user->id;
+        $graduate->batch_id = $request->batch_id;
         $graduate->certificate_id = (string) Str::uuid();
+        $graduate->certificate_number = 0;
         $graduate->save();
 
         return response()->json([
@@ -120,9 +123,10 @@ class GraduateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Graduate $graduate)
     {
         //
+        return response()->json($graduate);
     }
 
     /**
@@ -154,12 +158,13 @@ class GraduateController extends Controller
     public function load_clients_data(Request $request)
     {
         $coachee = [];
+        $graduated_coachee = Graduate::pluck('user_id');
 
         if ($request->has('q')) {
             $search = $request->q;
-            $coachee = Client::where('name', 'LIKE', "%$search%")->get();
+            $coachee = Client::with('batch.program')->whereNotIn('batch_id', [0])->whereNotIn('user_id', $graduated_coachee)->where('name', 'LIKE', "%$search%")->get();
         } else {
-            $coachee = Client::get();
+            $coachee = Client::with('batch.program')->whereNotIn('batch_id', [0])->whereNotIn('user_id', $graduated_coachee)->get();
         }
         return response()->json($coachee);
     }
@@ -169,14 +174,58 @@ class GraduateController extends Controller
       $graduate = Graduate::where('certificate_id', $id)->first();
       $user = $graduate->user;
 
-      $certificate = Image::make(public_path().'\assets\images\certificate.png');
+      $batch = $graduate->batch;
+      $program = $batch->program;
 
-      $certificate->text($user->name, 1800, 1250, function($font) {
+      $certificate_filename = strtolower($program->program_name).'.png';
+
+      $certificate = Image::make(public_path().'/assets/images/certificate/'.$certificate_filename);
+
+      $months = array(1=>"I","II","III", "IV", "V","VI","VII","VIII","IX","X", "XI","XII");
+      $month_formatted = $months[date('n')];
+
+      $certificate_number = $graduate->certificate_number.'/'.$program->program_name.'/Batch-'.$batch->batch_number.'/'.$month_formatted.'/'.date('Y');
+
+      $start_date = Carbon::parse($batch->start_date)->isoFormat('MMMM Do YYYY');
+      $end_date = Carbon::parse($batch->end_date)->isoFormat('MMMM Do YYYY');
+
+      $certificate->text($user->name, 640, 350, function($font) {
         $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
-        $font->size(100);
+        $font->size(30);
         $font->align('center');
       });
 
+      $certificate->text($certificate_number, 580, 225, function($font) {
+        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->size(15);
+        $font->align('left');
+      });
+
+      $certificate->text($start_date.' - '.$end_date, 675, 425, function($font) {
+        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->size(15);
+        $font->align('left');
+      });
+
       return $certificate->response('png');
+    }
+
+    public function store_certificate_data(Request $request)
+    {
+      $validator = Validator::make($request->all(), [
+        'certificate_number'        => 'required'
+      ]);
+
+      if ($validator->fails()) {
+        return response()->json($validator->errors(), 422);
+      }
+
+      $graduate = Graduate::find($request->graduate_id);
+      $graduate->certificate_number = $request->certificate_number;
+      $graduate->save();
+
+      $url = route('graduates.certificate', $graduate->certificate_id);
+
+      return response()->json($url);
     }
 }
