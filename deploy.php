@@ -65,13 +65,13 @@ task('deploy', [
     'deploy:unlock',
     'cleanup',
     'phpmyadmin:symlink',
-    'reload-nginx'
+    'reload:nginx'
 ]);
 
 task ('phpmyadmin:symlink', function(){
     run('sudo ln -s /var/www/html/db-cataliz /var/www/html/current/public');
 });
 
-task ('reload-nginx',function(){
+task ('reload:nginx',function(){
     run('sudo systemctl reload nginx');
 });
