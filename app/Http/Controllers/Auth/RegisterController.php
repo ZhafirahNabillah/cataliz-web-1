@@ -109,6 +109,7 @@ class RegisterController extends Controller
         'organization' => null,
         'program_id' => null,
         'user_id' => $user->id,
+        'batch_id'  => 0
       ]);
       $user->assignRole('coachee');
     } elseif ($request->role == 'trainer') {

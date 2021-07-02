@@ -190,19 +190,19 @@ class GraduateController extends Controller
       $end_date = Carbon::parse($batch->end_date)->isoFormat('MMMM Do YYYY');
 
       $certificate->text($user->name, 640, 350, function($font) {
-        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->file(public_path().'/assets/fonts/Rubik-Bold.ttf');
         $font->size(30);
         $font->align('center');
       });
 
       $certificate->text($certificate_number, 580, 225, function($font) {
-        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->file(public_path().'/assets/fonts/Rubik-Bold.ttf');
         $font->size(15);
         $font->align('left');
       });
 
       $certificate->text($start_date.' - '.$end_date, 675, 425, function($font) {
-        $font->file(public_path().'\assets\fonts\Rubik-Bold.ttf');
+        $font->file(public_path().'/assets/fonts/Rubik-Bold.ttf');
         $font->size(15);
         $font->align('left');
       });
