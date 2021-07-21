@@ -56,12 +56,14 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'list-exercise']);
         Permission::create(['name' => 'create-exercise']);
         Permission::create(['name' => 'update-exercise']);
+        Permission::create(['name' => 'detail-exercise']);
         Permission::create(['name' => 'delete-exercise']);
 
         // crud topic
         Permission::create(['name' => 'list-topic']);
         Permission::create(['name' => 'create-topic']);
         Permission::create(['name' => 'update-topic']);
+        Permission::create(['name' => 'detail-topic']);
         Permission::create(['name' => 'delete-topic']);
 
         // crud result

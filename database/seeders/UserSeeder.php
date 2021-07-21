@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Client;
+use App\Models\Coach;
 
 class UserSeeder extends Seeder
 {
@@ -28,7 +29,7 @@ class UserSeeder extends Seeder
 
     $coach_coach = Coach::create([
       'user_id'   => $coach->id,
-      'skill'     => 'Bussiness'
+      'skill_id'    => 1
     ]);
 
     //create coachee seeder
@@ -47,7 +48,7 @@ class UserSeeder extends Seeder
       'name'          => $coachee->name,
       'phone'         => $coachee->phone,
       'email'         => $coachee->email,
-      'program'       => 'starco',
+      //'program'       => 'starco',
       'company'       => 'Cataliz.id',
       'occupation'    => 'Developer',
       'organization'  => 'Universitas Jember'
