@@ -370,42 +370,28 @@
 													</h4>
 												</div>
 
+												<div class="card-body">
+													<div class="form-group">
+														<label for="fp-default">Old password</label>
+														<input class="form-control" type="password" name="old_password" placeholder="Type old password here...">
+														<div id="old_password_error"></div>
+													</div>
 
-												<div class="col-md-12 form-group">
-													<label for="fp-default">Old password</label>
-													<input class="form-control @error('old_password') is-invalid @enderror" type="password" name="old_password" placeholder="Type old password here...">
-													@error('old_password')
-													<span class="invalid-feedback" role="alert">
-														<strong>{{ $message }}</strong>
-													</span>
-													@enderror
-													<div id="old_password_error"></div>
-												</div>
+													<div class="form-group">
+														<label for="fp-default">New Password</label>
+														<input class="form-control" type="password" name="new_password" placeholder="Type new password here...">
+														<div id="new_password_error"></div>
+													</div>
 
-												<div class="col-md-12 form-group">
-													<label for="fp-default">New Password</label>
-													<input class="form-control @error('new_password') is-invalid @enderror" type="password" name="new_password" placeholder="Type new password here...">
-													@error('new_password')
-													<span class="invalid-feedback" role="alert">
-														<strong>{{ $message }}</strong>
-													</span>
-													@enderror
-													<div id="new_password_error"></div>
-												</div>
+													<div class="form-group">
+														<label for="fp-default">Confirm New Password</label>
+														<input class="form-control" type="password" name="new_confirm_password" placeholder="New password confirmation">
+														<div id="new_password_confirm_error"></div>
+													</div>
 
-												<div class="col-md-12 form-group">
-													<label for="fp-default">Confirm New Password</label>
-													<input class="form-control @error('new_confirm_password') is-invalid @enderror" type="password" name="new_confirm_password" placeholder="New password confirmation">
-													@error('new_confirm_password')
-													<span class="invalid-feedback" role="alert">
-														<strong>{{ $message }}</strong>
-													</span>
-													@enderror
-													<div id="new_password_confirm_error"></div>
-												</div>
-
-												<div class="col-md-12 form-group">
-													<button type="button" class="btn btn-primary data-submit mr-1" id="changePasswordBtn" value="change-password">Save Change</button>
+													<div class="form-group">
+														<button type="button" class="btn btn-primary data-submit mr-1" id="changePasswordBtn" value="change-password">Save Change</button>
+													</div>
 												</div>
 											</div>
 										</div>

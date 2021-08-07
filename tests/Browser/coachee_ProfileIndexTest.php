@@ -174,6 +174,7 @@ class coachee_ProfileIndexTest extends DuskTestCase
                     ->visit('/'.$login_user->id.'/profil')
                     ->click('#feedback-tab')
                     ->assertVisible('#feedback')
+                    ->pause(3000)
                     ->click('#detailFeedback[data-id="'.$feedback->id.'"]')
                     ->whenAvailable('#show_feedback', function ($modal) use($login_user, $feedback) {
                         $modal->pause(1000)
