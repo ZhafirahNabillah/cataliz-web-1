@@ -254,9 +254,11 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user"><a class="dropdown-item"
                         href="{{route('profil', Auth::user()->id)}}"><i class="mr-50" data-feather="user"></i>
-                        Profile</a><a class=" dropdown-item
+                        Profile</a>
+                        <a class="dropdown-item" href="{{route('log_activity.index')}}"><i class="mr-50" data-feather="clock"></i>
+                        Log Activity</a><a class=" dropdown-item
                         href=" {{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i class="
+                        document.getElementById('logout-form').submit();"><i class="
                         mr-50" data-feather="power"></i> Logout</a>
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

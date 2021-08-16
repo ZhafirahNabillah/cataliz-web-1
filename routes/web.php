@@ -30,6 +30,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BatchController;
+use App\Http\Controllers\LogActivityController;
 
 
 /*
@@ -121,6 +122,11 @@ Route::middleware(['auth'])->group(function () {
 	Route::post('/{id}/detail/save_address', [ProfileController::class, 'save_address'])->name('profile.save_address');
 	Route::get('profile/{id}/review', [ProfileController::class, 'profile_review'])->name('profile.review');
 });
+
+//Log Activity Controller
+Route::middleware(['auth'])->group(function () {
+	Route::resource('log_activity', LogActivityController::class);
+}) ;
 
 //User Controller
 Route::middleware(['auth'])->group(function () {
