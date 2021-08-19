@@ -36,121 +36,139 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="content-body">
-                            <!-- Basic table -->
-                            <section id="basic-datatable">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            @role('admin')
-                                            <table class="datatables-basic table-striped table logadmin-datatable" id="datatables">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>DATE TIME</th>
-                                                        <th>ROLE</th>
-                                                        <th>E-MAIL</th>
-                                                        <th>DESCRIPTION</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                            @endrole
-                                            @role('coach')
-                                            <table class="datatables-basic table-striped table logcoach-datatable" id="datatables">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ID</th>
-                                                        <th>DATE TIME</th>
-                                                        <th>E-MAIL</th>
-                                                        <th>DESCRIPTION</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                </tbody>
-                                            </table>
-                                            @endrole
+                        <!-- Basic table -->
+                        <section id="basic-datatable">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <!-- @role('admin') -->
+                                        <table class="datatables-basic table-striped table logadmin-datatable" id="datatables">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>DATE TIME</th>
+                                                    <!-- <th>ROLE</th> -->
+                                                    <th>E-MAIL</th>
+                                                    <th>DESCRIPTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- @foreach($data as $e=>$dtActivity)
+                                                <tr>
+                                                    <td>{{ $dtActivity->id }}</td>
+                                                    <td>{{ $dtActivity->created_at }}</td>
+                                                    <td>{{ $dtActivity->causer->name }}</td>
+                                                    <td>{{ $dtActivity->causer->email }}</td>
+                                                    <td>{{ $dtActivity->description }}</td>
+                                                </tr>
+                                                @endforeach -->
+                                            </tbody>
+                                        </table>
+                                        <!-- @endrole
+                                        @role('coach')
+                                        <table class="datatables-basic table-striped table logcoach-datatable" id="datatables">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>DATE TIME</th>
+                                                    <th>E-MAIL</th>
+                                                    <th>DESCRIPTION</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($data as $e=>$dtActivity)
+                                                <tr>
+                                                    <td>{{ $dtActivity->id }}</td>
+                                                    <td>{{ $dtActivity->created_at }}</td>
+                                                    <td>{{ $dtActivity->causer->email }}</td>
+                                                    <td>{{ $dtActivity->description }}</td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                        @endrole -->
 
-                                        </div>
                                     </div>
                                 </div>
-                            </section>
-                            <!--/ Basic table -->
+                            </div>
+                        </section>
+                        <!--/ Basic table -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-<!-- END: Content-->
-@endsection
+    <!-- END: Content-->
+    @endsection
 
-        @push('scripts')
-        <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-        <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-        <!-- <script src="assets/dataTables/datatables.min.js"></script> -->
-        <script type="text/javascript">
-
-            // $(document).ready( function () {
-            //     $('#myTable').DataTable();
-            // } );
-            // popover
-            $(function() {
+    @push('scripts')
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+    <!-- <script src="assets/dataTables/datatables.min.js"></script> -->
+    <script type="text/javascript">
+        // $(document).ready( function () {
+        //     $('#myTable').DataTable();
+        // } );
+        // popover
+        $(function() {
             $('[data-toggle="popover"]').popover({
                 html: true,
                 trigger: 'hover',
                 placement: 'top',
                 content: function() {
-                return '<img src="' + $(this).data('img') + '" />';
+                    return '<img src="' + $(this).data('img') + '" />';
                 }
             });
-            });
+        });
 
-            $(function() {
+        $(function() {
             $.ajaxSetup({
                 headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
             var table_log = $('.logadmin-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "",
+                ajax: "{{ route('activity.index') }}",
                 columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                {
-                    data: 'topic',
-                    name: 'topic'
-                },
-                {
-                    data: 'category.category',
-                    name: 'category.category'
-                },
-                {
-                    data: 'sub_topic',
-                    name: 'sub_topic',
-                    defaultContent: '0'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                },
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'created_at',
+                        name: 'created_at'
+                    },
+                    {
+                        data: 'causer_id',
+                        name: 'causer_id'
+                    },
+                    {
+                        data: 'email',
+                        name: 'email'
+                    },
+                    {
+                        data: 'description',
+                        name: 'description'
+                    },
+
                 ],
                 dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
                 language: {
-                paginate: {
-                    // remove previous & next text from pagination
-                    previous: '&nbsp;',
-                    next: '&nbsp;'
-                },
-                search: "<i data-feather='search'></i>",
-                searchPlaceholder: "Search records"
+                    paginate: {
+                        // remove previous & next text from pagination
+                        previous: '&nbsp;',
+                        next: '&nbsp;'
+                    },
+                    search: "<i data-feather='search'></i>",
+                    searchPlaceholder: "Search records"
                 }
             });
 
@@ -168,25 +186,25 @@
                     confirmButtonText: "Yes, Sure",
                     cancelButtonText: "Cancel"
                 }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                    type: "DELETE",
-                    url: "" + '/topic/' + topic_id,
-                    success: function(data) {
-                        Swal.fire({
-                        icon: 'success',
-                        title: 'Deleted Successfully!',
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            type: "DELETE",
+                            url: "" + '/topic/' + topic_id,
+                            success: function(data) {
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Deleted Successfully!',
+                                });
+                                table_topic.draw();
+                            },
+                            error: function(data) {
+                                console.log('Error:', data);
+                            }
                         });
-                        table_topic.draw();
-                    },
-                    error: function(data) {
-                        console.log('Error:', data);
                     }
-                    });
-                }
                 })
             });
-            });
-        </script>
+        });
+    </script>
 
-        @endpush
+    @endpush

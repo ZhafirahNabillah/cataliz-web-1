@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles, SoftDeletes;
-    
+
 
     /**
      * The attributes that are mass assignable.
@@ -88,18 +88,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Training_feedback', 'owner_id');
     }
-
-    // protected $appends = ['profil_picture_url', 'background_picture_url'];
-
-    // public function getAvatarUrlAttribute($value)
-    // {
-    //     $url = 'https://' . env('AWS_BUCKET') . '.s3-' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/images/profil_picture/';
-    //     return $url . $this->profil_picture;
-    // }
-
-    // public function getBackgroundUrlAttribute($value)
-    // {
-    //     $url = 'https://' . env('AWS_BUCKET') . '.s3-' . env('AWS_DEFAULT_REGION') . '.amazonaws.com/images/background_picture/';
-    //     return $url . $this->background_picture;
-    // }
 }

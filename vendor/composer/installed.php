@@ -1,12 +1,12 @@
 <?php return array (
   'root' => 
   array (
-    'pretty_version' => 'dev-main',
-    'version' => 'dev-main',
+    'pretty_version' => '1.0.0+no-version-set',
+    'version' => '1.0.0.0',
     'aliases' => 
     array (
     ),
-    'reference' => 'da0a2c36b6c2e751e7a469a68c4b9e037be6c82e',
+    'reference' => NULL,
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -568,12 +568,12 @@
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => 'dev-main',
-      'version' => 'dev-main',
+      'pretty_version' => '1.0.0+no-version-set',
+      'version' => '1.0.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'da0a2c36b6c2e751e7a469a68c4b9e037be6c82e',
+      'reference' => NULL,
     ),
     'laravel/sail' => 
     array (
@@ -1193,6 +1193,15 @@
       array (
       ),
       'reference' => 'aa984fb84d218cc8962b8f89ef46437298534c24',
+    ),
+    'spatie/laravel-activitylog' => 
+    array (
+      'pretty_version' => '3.17.0',
+      'version' => '3.17.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'bdc44862aaca39ecbd824133b80dbd7c8017ed7f',
     ),
     'spatie/laravel-permission' => 
     array (

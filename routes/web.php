@@ -126,7 +126,8 @@ Route::middleware(['auth'])->group(function () {
 //Log Activity Controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('log_activity', LogActivityController::class);
-}) ;
+	Route::get('/activity', [LogActivityController::class, 'index'])->name('activity.index');
+});
 
 //User Controller
 Route::middleware(['auth'])->group(function () {

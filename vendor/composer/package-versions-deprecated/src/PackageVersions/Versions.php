@@ -88,6 +88,7 @@ final class Versions
   'ramsey/uuid' => '4.1.1@cd4032040a750077205918c86049aa0f43d22947',
   'sabberworm/php-css-parser' => '8.3.1@d217848e1396ef962fb1997cf3e2421acba7f796',
   'spatie/calendar-links' => '1.6.0@aa984fb84d218cc8962b8f89ef46437298534c24',
+  'spatie/laravel-activitylog' => '3.17.0@bdc44862aaca39ecbd824133b80dbd7c8017ed7f',
   'spatie/laravel-permission' => '3.18.0@1c51a5fa12131565fe3860705163e53d7a26258a',
   'stevebauman/purify' => 'v4.0.0@823ad75e35f94139ca99701dcbdab9851ad52105',
   'swiftmailer/swiftmailer' => 'v6.2.7@15f7faf8508e04471f666633addacf54c0ab5933',
@@ -166,7 +167,7 @@ final class Versions
   'sebastian/type' => '2.3.1@81cd61ab7bbf2de744aba0ea61fae32f721df3d2',
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'theseer/tokenizer' => '1.2.0@75a63c33a8577608444246075ea0af0d052e452a',
-  'laravel/laravel' => 'dev-main@05fb4014abaa91f38d0ce8241a3896039c8af820',
+  'laravel/laravel' => '1.0.0+no-version-set@',
 );
 
     private function __construct()

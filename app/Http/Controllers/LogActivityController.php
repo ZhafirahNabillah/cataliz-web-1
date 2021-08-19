@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 // use App\Models\LogActivity;
 use App\Models\Plan;
 use DataTables;
+use Spatie\Activitylog\Models\Activity;
 
 class LogActivityController extends Controller
 {
@@ -21,29 +22,24 @@ class LogActivityController extends Controller
         $this->middleware('permission:list-class', ['only' => 'index']);
         $this->middleware('permission:create-class', ['only' => ['create', 'store']]);
         $this->middleware('permission:detail-class', ['only' => 'show']);
-    } 
+    }
 
     public function index(Request $request)
     {
-        $data=Plan::all();
+        $data = Activity::with('causer')->get();
+        // $stringActivity = Activity::where('id', $row->id)->first();
         if ($request->ajax()) {
+            $data = Activity::with('causer')->get();
             return Datatables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
-    
-              $detail_btn = '<a href="' . route('class.show', $row->id) . '" class="btn-sm btn-primary">Detail</a>';
-    
-              return $detail_btn;
-            })
-            ->addColumn('Total Client', function ($row) {
-              $coach = Coach::where('id', $row->id)->first();
-    
-              return $coach->clients->count();
-            })
-            ->rawColumns(['action', 'Total Client'])
-            ->make(true);
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
-        return view('log_activity.index');
+        return view('log_activity.index', compact('data'));
     }
 
     /**
