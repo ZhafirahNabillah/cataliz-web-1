@@ -47,13 +47,13 @@
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>DATE TIME</th>
-                                                    <!-- <th>ROLE</th> -->
+                                                    <th>ROLE</th>
                                                     <th>E-MAIL</th>
                                                     <th>DESCRIPTION</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- @foreach($data as $e=>$dtActivity)
+                                                @foreach($data as $e=>$dtActivity)
                                                 <tr>
                                                     <td>{{ $dtActivity->id }}</td>
                                                     <td>{{ $dtActivity->created_at }}</td>
@@ -61,7 +61,7 @@
                                                     <td>{{ $dtActivity->causer->email }}</td>
                                                     <td>{{ $dtActivity->description }}</td>
                                                 </tr>
-                                                @endforeach -->
+                                                @endforeach
                                             </tbody>
                                         </table>
                                         <!-- @endrole
