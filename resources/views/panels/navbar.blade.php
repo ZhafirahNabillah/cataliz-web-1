@@ -3,8 +3,7 @@
     <div class="navbar-container d-flex content">
         <div class="bookmark-wrapper d-flex align-items-center">
             <ul class="nav navbar-nav d-xl-none">
-                <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon"
-                            data-feather="menu"></i></a></li>
+                <li class="nav-item"><a class="nav-link menu-toggle" href="javascript:void(0);"><i class="ficon" data-feather="menu"></i></a></li>
             </ul>
             <!-- <ul class="nav navbar-nav bookmark-icons">
                     <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip" data-placement="top" title="Email"><i class="ficon" data-feather="mail"></i></a></li>
@@ -26,14 +25,11 @@
             <!-- <li class="nav-item dropdown dropdown-language"><a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag"><a class="dropdown-item" href="javascript:void(0);" data-language="en"><i class="flag-icon flag-icon-us"></i> English</a><a class="dropdown-item" href="javascript:void(0);" data-language="fr"><i class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item" href="javascript:void(0);" data-language="de"><i class="flag-icon flag-icon-de"></i> German</a><a class="dropdown-item" href="javascript:void(0);" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></div>
                 </li> -->
-            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i id="ic" class="ficon"
-                        data-feather="moon"></i></a></li>
-            <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon"
-                        data-feather="search"></i></a>
+            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i id="ic" class="ficon" data-feather="moon"></i></a></li>
+            <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
                 <div class="search-input">
                     <div class="search-input-icon"><i data-feather="search"></i></div>
-                    <input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1"
-                        data-search="search">
+                    <input class="form-control input" type="text" placeholder="Explore Vuexy..." tabindex="-1" data-search="search">
                     <div class="search-input-close"><i data-feather="x"></i></div>
                     <ul class="search-list search-list-main"></ul>
                 </div>
@@ -215,33 +211,21 @@
                             all notifications</a></li>
                 </ul>
             </li> --}}
-            <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
-                    id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
+            <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     @role('coach')
-                    <div class="user-nav d-sm-flex d-none"><span
-                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
-                            class="user-status">Coach</span></div>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Coach</span></div>
                     @endrole
                     @role('coachee')
-                    <div class="user-nav d-sm-flex d-none"><span
-                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
-                            class="user-status">Coachee</span></div>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Coachee</span></div>
                     @endrole
                     @role('admin')
-                    <div class="user-nav d-sm-flex d-none"><span
-                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
-                            class="user-status">Admin</span></div>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Admin</span></div>
                     @endrole
                     @role('trainer')
-                    <div class="user-nav d-sm-flex d-none"><span
-                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
-                            class="user-status">Trainer</span></div>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Trainer</span></div>
                     @endrole
                     @role('mentor')
-                    <div class="user-nav d-sm-flex d-none"><span
-                            class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span
-                            class="user-status">Mentor</span></div>
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Mentor</span></div>
                     @endrole
 
                     <span class="avatar bg-light-secondary avatar-lg">
@@ -252,10 +236,9 @@
                         <span class="avatar-status-online"></span>
                     </span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user"><a class="dropdown-item"
-                        href="{{route('profil', Auth::user()->id)}}"><i class="mr-50" data-feather="user"></i>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user"><a class="dropdown-item" href="{{route('profil', Auth::user()->id)}}"><i class="mr-50" data-feather="user"></i>
                         Profile</a>
-                        <a class="dropdown-item" href="{{route('log_activity.index')}}"><i class="mr-50" data-feather="clock"></i>
+                    <a class="dropdown-item" href="{{route('log_activity.index')}}"><i class="mr-50" data-feather="clock"></i>
                         Log Activity</a><a class=" dropdown-item
                         href=" {{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"><i class="

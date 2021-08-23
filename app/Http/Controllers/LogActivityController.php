@@ -26,10 +26,9 @@ class LogActivityController extends Controller
 
     public function index(Request $request)
     {
-        $data = Activity::with('causer')->get();
-        // $stringActivity = Activity::where('id', $row->id)->first();
+        //$data = Activity::with('causer')->orderBy('id', 'asc');
         if ($request->ajax()) {
-            $data = Activity::with('causer')->get();
+            $data = Activity::with('causer')->orderby('id', 'desc')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -39,7 +38,8 @@ class LogActivityController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('log_activity.index', compact('data'));
+        return view('log_activity.index');
+        //return response()->json($data);
     }
 
     /**

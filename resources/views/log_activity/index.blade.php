@@ -41,10 +41,10 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="card">
-                                        <!-- @role('admin') -->
                                         <table class="datatables-basic table-striped table logadmin-datatable" id="datatables">
                                             <thead>
                                                 <tr>
+                                                    <th>NO</th>
                                                     <th>ID</th>
                                                     <th>DATE TIME</th>
                                                     <th>ROLE</th>
@@ -53,41 +53,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($data as $e=>$dtActivity)
-                                                <tr>
-                                                    <td>{{ $dtActivity->id }}</td>
-                                                    <td>{{ $dtActivity->created_at }}</td>
-                                                    <td>{{ $dtActivity->causer->name }}</td>
-                                                    <td>{{ $dtActivity->causer->email }}</td>
-                                                    <td>{{ $dtActivity->description }}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        <!-- @endrole
-                                        @role('coach')
-                                        <table class="datatables-basic table-striped table logcoach-datatable" id="datatables">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>DATE TIME</th>
-                                                    <th>E-MAIL</th>
-                                                    <th>DESCRIPTION</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($data as $e=>$dtActivity)
-                                                <tr>
-                                                    <td>{{ $dtActivity->id }}</td>
-                                                    <td>{{ $dtActivity->created_at }}</td>
-                                                    <td>{{ $dtActivity->causer->email }}</td>
-                                                    <td>{{ $dtActivity->description }}</td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                        @endrole -->
 
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -147,12 +115,12 @@
                         name: 'created_at'
                     },
                     {
-                        data: 'causer_id',
-                        name: 'causer_id'
+                        data: 'causer.name',
+                        name: 'causer.name'
                     },
                     {
-                        data: 'email',
-                        name: 'email'
+                        data: 'causer.email',
+                        name: 'causer.email'
                     },
                     {
                         data: 'description',
