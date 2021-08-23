@@ -86,5 +86,16 @@ class UserSeeder extends Seeder
     ]);
 
     $trainer->assignRole('trainer');
+
+    //create manager seeder
+    $manager = User::create([
+      'name'        => 'User Manager',
+      'phone'       => '81234567890',
+      'email'       => 'manager@cataliz.id',
+      'password'    => bcrypt('manager123'),
+      'is_verified' => 1
+    ]);
+
+    $manager->assignRole('manager');
   }
 }

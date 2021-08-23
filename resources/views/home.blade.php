@@ -1152,6 +1152,281 @@
 </section>
 <!-- /card -->
 @endrole
+
+@role('manager')
+      <section id="card-demo-example">
+        <div class="row match-height">
+          <div class="container-fluid">
+            <div class="row justify-content-left">
+              <div class="col-md-12">
+                <div class="card text-white " style="background-color: #7367F0;">
+                  <div class="card-body">
+                    @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                      {{ session('status') }}
+                    </div>
+                    @endif
+                    Welcome, {{auth()->user()->name . ", You are logged in!"}} <a style="color: white;"
+                      href="{{route('documentation')}}" target="_blank"><u>See
+                        Documentations</u></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- new -->
+          <div class="col-md-3 col-lg-3">
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+
+                  <table>
+                    <div class="container-fluid row">
+                      <tr>
+                        <td>
+                          <div colspan="10">
+                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}" alt="Card image cap" />
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pl-2" >
+                            <small class="text-muted text-left">Total Coach</small>
+                            <h3 class="font-weight-bolder text-left">{{$total_coach}} Coaches</h3>
+                          </div>
+                        </td>
+                      </tr>
+                    </div>
+                  </table>
+                  
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+            <a href="{{ route('clients.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <table>
+                    <div class="container-fluid row">
+                      <tr>
+                        <td>
+                          <div colspan="10">
+                            <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}"alt="Card image cap" />
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pl-2" >
+                            <small class="text-muted text-left">Total Coachee</small>
+                            <h3 class="font-weight-bolder text-left">{{$total_coachee}} Coachee</h3>
+                          </div>
+                        </td>
+                      </tr>
+                    </div>
+                  </table>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
+            <a href="{{ route('plans.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <table>
+                    <div class="container-fluid row">
+                    <tr>
+                    <td>
+                      <div colspan="10">
+                        <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}"
+                        alt="Card image cap" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="pl-2" >
+                        <small class="text-muted text-left">Total Plan</small>
+                        
+                        <h3 class="font-weight-bolder text-left">{{$total_plans}} Plan</h3>
+                      </div>
+                    </td>
+                    </tr>
+                    </div>
+                  </table>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="col-md-3 col-lg-3">
+            <a href="{{ route('agendas.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <table>
+                    <div class="container-fluid row">
+                      <tr>
+                        <td>
+                          <div colspan="10">
+                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
+                          </div>
+                        </td>
+                        <td>
+                          <div class="pl-2" >
+                            <small class="text-muted text-left">Total Session</small>
+                            <h3 class="font-weight-bolder text-left">{{ $total_sessions }} Sessions</h3>
+                          </div>
+                        </td>
+                      </tr>
+                    </div>
+                  </table>
+
+                </div>
+              </div>
+            </a>
+          </div>
+
+
+          <div class="col-sm-12">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="card-title">List Agenda
+                  <img class="align-text width=" 15px" height="15px"" src="
+                    {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                    data-placement="top"
+                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                </h5>
+              </div>
+              <div class="card-body">
+                <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual"
+                      aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile"
+                      role="tab" aria-selected="false">Group</a>
+                  </li>
+                </ul>
+
+                <div class="tab-content">
+                  <!-- start agenda Individu -->
+                  <div class="tab-pane active" id="agenda-individual" role="tabpanel">
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <table class="datatables-basic table-striped table agenda-datatable-individual">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Name</th>
+                                  <th>Session</th>
+                                  <th>Date</th>
+                                  <th>Duration</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  <!-- /end agenda individu -->
+
+                  <!-- start tab agenda group -->
+                  <div class="tab-pane" id="agenda-group" role="tabpanel">
+                    <section id="basic-datatable">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="card">
+                            <table class="datatables-basic table-striped table agenda-datatable-group">
+                              <thead>
+                                <tr>
+                                  <th>No</th>
+                                  <th>Group Code</th>
+                                  <th>Session</th>
+                                  <th>Date</th>
+                                  <th>Duration</th>
+                                  <th>Status</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  <!-- /end tab agenda group -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-8">
+            <div class="card">
+              <div class="card-body">
+                <div id='calendar'></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-header px-0">
+                  <h4 class="card-title">Upcoming Events
+                    <img class="align-text width=" 15px" height="15px"" src="
+                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                      data-placement="top"
+                      data-content="Bagian ini menampilkan jadwal kegiatan yang dilakukan hari ini dan beberapa hari kedepan" />
+                  </h4>
+                </div>
+                <hr>
+                <!-- waktu hari ini -->
+                <div id="list_event_wrapper">
+                  <h3 class="badge badge-primary font-weight-bold">Today</h3>
+                  <br>
+                  @forelse ($today_events as $event)
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
+                      @role('coach')
+                      <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
+                      @endrole
+                      @role('coachee')
+                      <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
+                      @endrole
+                      <a class="text-primary" style="font-size: 20px"
+                        href="{{ $event['url'] }}">{{ $event['topic'] }}</a>
+                      <br><span>{{ $event['start'] }}</span>
+                    </div>
+                  </div>
+                  <hr>
+                  @empty
+                  <span><i>No Event Available</i></span>
+                  @endforelse
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /card -->
+      @endrole
 </div>
 
 <div class="sidenav-overlay"></div>
