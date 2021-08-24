@@ -14,6 +14,7 @@ class Program extends Model
         'program_name'
     ];
 
+    //Log activity
     protected static $logAttributes = ['program_name'];
 
     protected static $logName = 'Program';
@@ -24,6 +25,7 @@ class Program extends Model
     }
 
     protected static $logOnlyDirty = true;
+    //end Log Activity
 
     public function batches()
     {
