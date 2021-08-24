@@ -223,7 +223,6 @@ class HomeController extends Controller
 
       $total_coach = User::role('coach')->count();
       $total_coachee = User::role('coachee')->count();
-      $total_plans = Plan::get()->count();
       $total_sessions = Agenda_detail::get()->count();
 
       $agenda_detail = Agenda_detail::whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
@@ -266,7 +265,7 @@ class HomeController extends Controller
       //         ->make(true);
       // }
 
-      return view('home', compact('total_coach', 'total_coachee', 'total_plans', 'total_sessions', 'today_events')); 
+      return view('home', compact('total_coach', 'total_coachee', 'total_sessions', 'today_events')); 
     
     }elseif (auth()->user()->hasRole('trainer')) {
       $total_topic = Topic::where('trainer_id', auth()->user()->id)->count();

@@ -1175,7 +1175,7 @@
             </div>
           </div>
           <!-- new -->
-          <div class="col-md-3 col-lg-3">
+          <div class="col-md-4 col-lg-4">
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
@@ -1206,7 +1206,7 @@
             </a>
           </div>
 
-          <div class="col-md-3 col-lg-3">
+          <div class="col-md-4 col-lg-4">
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
@@ -1235,7 +1235,7 @@
             </a>
           </div>
 
-          <div class="col-md-3 col-lg-3">
+          <div class="col-md-4 col-lg-4">
             <a href="{{ route('plans.index') }}">
               <div class="card">
                 <div class="card-body">
@@ -1252,35 +1252,6 @@
                       </div>
                     </td>
                     <td>
-                      <div class="pl-2" >
-                        <small class="text-muted text-left">Total Plan</small>
-                        
-                        <h3 class="font-weight-bolder text-left">{{$total_plans}} Plan</h3>
-                      </div>
-                    </td>
-                    </tr>
-                    </div>
-                  </table>
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="col-md-3 col-lg-3">
-            <a href="{{ route('agendas.index') }}">
-              <div class="card">
-                <div class="card-body">
-                  <img class="rounded float-right" width="15px" height="15px"
-                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
-                  <table>
-                    <div class="container-fluid row">
-                      <tr>
-                        <td>
-                          <div colspan="10">
-                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\airplay.svg') }}" alt="Card image cap" />
-                          </div>
-                        </td>
-                        <td>
                           <div class="pl-2" >
                             <small class="text-muted text-left">Total Session</small>
                             <h3 class="font-weight-bolder text-left">{{ $total_sessions }} Sessions</h3>
@@ -1299,7 +1270,7 @@
           <div class="col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h5 class="card-title">List Agenda
+                <h5 class="card-title">Users
                   <img class="align-text width=" 15px" height="15px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top"
@@ -1309,12 +1280,20 @@
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
                   <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#agenda-individual"
-                      aria-controls="coach" role="tab" aria-selected="true">Individual</a>
+                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href=""
+                      aria-controls="coach" role="tab" aria-selected="true">Coach</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#agenda-group" aria-controls="profile"
-                      role="tab" aria-selected="false">Group</a>
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="" aria-controls="profile"
+                      role="tab" aria-selected="false">Coachee</a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="" aria-controls="profile"
+                      role="tab" aria-selected="false">Trainers</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="" data-toggle="tab" href="" aria-controls="profile"
+                      role="tab" aria-selected="false">Mentors</a>
                   </li>
                 </ul>
 
@@ -1376,55 +1355,6 @@
               </div>
             </div>
           </div>
-
-          <div class="col-sm-8">
-            <div class="card">
-              <div class="card-body">
-                <div id='calendar'></div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-header px-0">
-                  <h4 class="card-title">Upcoming Events
-                    <img class="align-text width=" 15px" height="15px"" src="
-                      {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
-                      data-placement="top"
-                      data-content="Bagian ini menampilkan jadwal kegiatan yang dilakukan hari ini dan beberapa hari kedepan" />
-                  </h4>
-                </div>
-                <hr>
-                <!-- waktu hari ini -->
-                <div id="list_event_wrapper">
-                  <h3 class="badge badge-primary font-weight-bold">Today</h3>
-                  <br>
-                  @forelse ($today_events as $event)
-                  <div class="row">
-                    <div class="col-sm-12">
-                      <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
-                      @role('coach')
-                      <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
-                      @endrole
-                      @role('coachee')
-                      <span>{{ $event['title'].' - '.$event['coach'] }}</span><br>
-                      @endrole
-                      <a class="text-primary" style="font-size: 20px"
-                        href="{{ $event['url'] }}">{{ $event['topic'] }}</a>
-                      <br><span>{{ $event['start'] }}</span>
-                    </div>
-                  </div>
-                  <hr>
-                  @empty
-                  <span><i>No Event Available</i></span>
-                  @endforelse
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
       <!-- /card -->
       @endrole
 </div>
