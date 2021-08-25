@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Plan;
 use DataTables;
 use Spatie\Activitylog\Models\Activity;
+use Carbon\Carbon;
 
 class LogActivityController extends Controller
 {
@@ -26,20 +27,27 @@ class LogActivityController extends Controller
 
     public function index(Request $request)
     {
-        //$data = Activity::with('causer')->orderBy('id', 'asc');
+        //$data = Activity::with('causer')->orderby('id', 'desc')->get();
         if ($request->ajax()) {
             $data = Activity::with('causer')->orderby('id', 'desc')->get();
             return Datatables::of($data)
+                ->editColumn('created_at', function ($data) {
+                    return $data->created_at ? with(new Carbon($data->created_at))->format('d/m/Y H:i:s') : '';
+                })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
+                // ->editColumn('created_at', function ($data) {
+                //     $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y');
+                //     return $formatedDate;
+                // })
                 ->make(true);
         }
-        return view('log_activity.index');
         //return response()->json($data);
+        return view('log_activity.index');
     }
 
     /**

@@ -204,7 +204,7 @@ class ActivityLogger
 
             $attribute = Str::before(Str::after($match, ':'), '.');
 
-            if (! in_array($attribute, ['subject', 'causer', 'properties'])) {
+            if (!in_array($attribute, ['subject', 'causer', 'properties'])) {
                 return $match;
             }
 
@@ -224,7 +224,7 @@ class ActivityLogger
 
     protected function getActivity(): ActivityContract
     {
-        if (! $this->activity instanceof ActivityContract) {
+        if (!$this->activity instanceof ActivityContract) {
             $this->activity = ActivitylogServiceProvider::getActivityModelInstance();
             $this
                 ->useLog($this->defaultLogName)
