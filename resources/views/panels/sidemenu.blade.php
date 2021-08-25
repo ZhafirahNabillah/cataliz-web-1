@@ -48,7 +48,7 @@
                 @endrole
 
                 @role('manager')
-                <a class="d-flex align-items-center" href="{}"><i data-feather="user"></i><span
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
                         class="menu-title text-truncate" data-i18n="Email">User</span></a>
                 @endrole
 
