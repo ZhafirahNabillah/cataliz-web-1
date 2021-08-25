@@ -74,12 +74,10 @@
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-    <!-- <script src="assets/dataTables/datatables.min.js"></script> -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
     <script type="text/javascript">
-        // $(document).ready( function () {
-        //     $('#myTable').DataTable();
-        // } );
-        // popover
         $(function() {
             $('[data-toggle="popover"]').popover({
                 html: true,
@@ -140,38 +138,20 @@
                 }
             });
 
-            $('body').on('click', '.deleteTopic', function(e) {
+            $(document).ready(function() {
 
-                var topic_id = $(this).data("id");
-                console.log(topic_id);
-                // ganti sweetalert
-                Swal.fire({
-                    title: "Are you sure?",
-                    text: "You'll delete your topic",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#DD6B55",
-                    confirmButtonText: "Yes, Sure",
-                    cancelButtonText: "Cancel"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "DELETE",
-                            url: "" + '/topic/' + topic_id,
-                            success: function(data) {
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Deleted Successfully!',
-                                });
-                                table_topic.draw();
-                            },
-                            error: function(data) {
-                                console.log('Error:', data);
-                            }
-                        });
-                    }
-                })
+                moment.updateLocale(moment.locale(), {
+                    invalidDate: "Invalid Date Example"
+                });
+
+                var table = $('#datatables').DataTable({
+                    columnDefs: [{
+                        targets: 4,
+                        render: $.fn.dataTable.render.moment('DD/MM/YYYY')
+                    }]
+                });
             });
+
         });
     </script>
 

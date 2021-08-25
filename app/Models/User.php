@@ -31,23 +31,23 @@ class User extends Authenticatable
     ];
 
     //Log activity
-    protected static $logAttributes = [
-        'name',
-        'phone',
-        'email',
-        'reset_code',
-        'verification_code',
-        'is_verified'
-    ];
+    // protected static $logAttributes = [
+    //     'name',
+    //     'phone',
+    //     'email',
+    //     'reset_code',
+    //     'verification_code',
+    //     'is_verified'
+    // ];
 
-    protected static $logName = 'Users';
+    // protected static $logName = 'Users';
 
-    public function getDescriptionForEvent(string $eventName): string
-    {
-        return "This user has been {$eventName} data Users";
-    }
+    // public function getDescriptionForEvent(string $eventName): string
+    // {
+    //     return "This user has been {$eventName} data Users";
+    // }
 
-    protected static $logOnlyDirty = true;
+    // protected static $logOnlyDirty = true;
     //end Log Activity
 
     // protected $guarded = [];
