@@ -90,15 +90,11 @@
 								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
 							</div>
 							<!-- </form>-->
-
 					</div>
 				</div>
 				<!-- End Modal -->
 			</section>
 			<!--/ Basic table -->
-
-
-
 		</div>
 	</div>
 </div>
