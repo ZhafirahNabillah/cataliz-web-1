@@ -4,24 +4,41 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Agenda_detail extends Model
 {
-    use HasFactory;
+  use HasFactory, LogsActivity;
 
-    protected $fillable = ['agenda_id','session_name','topic','date','time','media','media_url','duration','status'];
+  protected $fillable = ['agenda_id', 'session_name', 'topic', 'date', 'time', 'media', 'media_url', 'duration', 'status'];
 
-    // protected $dates = ['date'];
+  //Log activity
+  protected static $logAttributes = ['agenda_id', 'session_name', 'topic', 'date', 'time', 'media', 'media_url', 'duration', 'status'];
 
-    public function agenda() {
-      return $this->belongsTo('App\Models\Agenda');
-    }
+  protected static $logName = 'Agenda Detail';
 
-    public function note(){
-  		return $this->hasOne('App\Models\Coaching_note');
-  	}
+  public function getDescriptionForEvent(string $eventName): string
+  {
+    return "This user has been {$eventName} data Agenda Detail";
+  }
 
-    public function feedbacks(){
-  		return $this->hasMany('App\Models\Feedback');
-  	}
+  protected static $logOnlyDirty = true;
+  //end Log Activity
+
+  // protected $dates = ['date'];
+
+  public function agenda()
+  {
+    return $this->belongsTo('App\Models\Agenda');
+  }
+
+  public function note()
+  {
+    return $this->hasOne('App\Models\Coaching_note');
+  }
+
+  public function feedbacks()
+  {
+    return $this->hasMany('App\Models\Feedback');
+  }
 }

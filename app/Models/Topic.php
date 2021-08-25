@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Topic extends Model
 {
-  use HasFactory;
+  use HasFactory, LogsActivity;
 
   protected $fillable = [
     'topic',
@@ -17,6 +18,26 @@ class Topic extends Model
     'client_requirement',
     'client_target'
   ];
+
+  //Log activity
+  protected static $logAttributes = [
+    'topic',
+    'category_id',
+    'description',
+    'trainer_id',
+    'client_requirement',
+    'client_target'
+  ];
+
+  protected static $logName = 'Topic';
+
+  public function getDescriptionForEvent(string $eventName): string
+  {
+    return "This user has been {$eventName} data Topic";
+  }
+
+  protected static $logOnlyDirty = true;
+  //end Log Activity
 
   public function trainer()
   {

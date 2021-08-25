@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Training_feedback extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'result_id',
@@ -16,6 +17,25 @@ class Training_feedback extends Model
         'from',
         'to'
     ];
+
+    //Log activity
+    protected static $logAttributes = [
+        'result_id',
+        'description',
+        'owner_id',
+        'from',
+        'to'
+    ];
+
+    protected static $logName = 'Training Feedback';
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "This user has been {$eventName} data Training Feedback";
+    }
+
+    protected static $logOnlyDirty = true;
+    //end Log Activity
 
     public function result()
     {
