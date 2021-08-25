@@ -32,7 +32,7 @@ class LogActivityController extends Controller
             $data = Activity::with('causer')->orderby('id', 'desc')->get();
             return Datatables::of($data)
                 ->editColumn('created_at', function ($data) {
-                    return $data->created_at ? with(new Carbon($data->created_at))->format('d/m/Y H:i:s') : '';
+                    return $data->created_at ? with(new Carbon($data->created_at))->format('D, d-m-Y H:i:s') : '';
                 })
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -40,10 +40,6 @@ class LogActivityController extends Controller
                     return $btn;
                 })
                 ->rawColumns(['action'])
-                // ->editColumn('created_at', function ($data) {
-                //     $formatedDate = Carbon::createFromFormat('Y-m-d H:i:s', $data->created_at)->format('d-m-Y');
-                //     return $formatedDate;
-                // })
                 ->make(true);
         }
         //return response()->json($data);

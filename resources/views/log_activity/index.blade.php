@@ -47,7 +47,7 @@
                                                     <th>NO</th>
                                                     <th>ID</th>
                                                     <th>DATE TIME</th>
-                                                    <th>ROLE</th>
+                                                    <th>NAME</th>
                                                     <th>E-MAIL</th>
                                                     <th>DESCRIPTION</th>
                                                 </tr>

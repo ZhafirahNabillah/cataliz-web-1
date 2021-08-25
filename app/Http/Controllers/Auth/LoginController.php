@@ -49,32 +49,33 @@ class LoginController extends Controller
   protected function authenticated(Request $request)
   {
     $user       = Auth::User();
-    Session::put('user',$user);
+    Session::put('user', $user);
     $user       = Session::get('user');
 
     $id         = $user->id;
-    
+
     $id         = $user->id;
-    $date         = Carbon::now();
-    $todayDate  = $date->toDayDateTimeString();
-    
+    // $date         = Carbon::now();
+    // $todayDate  = $date->toDayDateTimeString();
+
     $activityLog = [
       'log_name'      => 'Log In',
       'description'   => 'This user has been log in',
       'causer_type'   => 'App\Models\User',
-      'causer_id'     =>  $id,     
+      'causer_id'     =>  $id,
+      'created_at'     =>  date('Y-m-d H:1:s')
     ];
 
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1, 'is_verified' => 1])) {
       DB::table('activity_log')->insert($activityLog);
       return redirect()->intended('dashboard');
-    } else if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 0, 'is_verified' => 1])){
+    } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 0, 'is_verified' => 1])) {
       Auth::logout();
       return redirect('login')->with('error', 'Your account has been suspended!');
-    } else if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1, 'is_verified' => 0])){
+    } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 1, 'is_verified' => 0])) {
       Auth::logout();
       return redirect('login')->with('error', 'Please verify your account before proceed!');
-    } else if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 0, 'is_verified' => 0])){
+    } else if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'suspend_status' => 0, 'is_verified' => 0])) {
       Auth::logout();
       return redirect('login')->with('error', 'Your account has been suspended and not verified!');
     }
@@ -83,20 +84,21 @@ class LoginController extends Controller
   public function logout(Request $request)
   {
     $user       = Auth::User();
-    Session::put('user',$user);
+    Session::put('user', $user);
     $user       = Session::get('user');
 
     $id         = $user->id;
-    
+
     $id         = $user->id;
-    $date         = Carbon::now();
-    $todayDate  = $date->toDayDateTimeString();
-    
+    // $date         = Carbon::now();
+    // $todayDate  = $date->toDayDateTimeString();
+
     $activityLog = [
       'log_name'      => 'Log Out',
       'description'   => 'This user has been log out',
       'causer_type'   => 'App\Models\User',
-      'causer_id'     =>  $id,     
+      'causer_id'     =>  $id,
+      'created_at'     =>  date('Y-m-d H:1:s')
     ];
     // return dd($activityLog);
     DB::table('activity_log')->insert($activityLog);
