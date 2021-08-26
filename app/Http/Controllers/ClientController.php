@@ -268,7 +268,7 @@ class ClientController extends Controller
               $actionBtn = $update_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
             }
             return $actionBtn;
-          } elseif (auth()->user()->hasRole('mentor')) {
+          } elseif (auth()->user()->hasRole('mentor|manager')) {
             $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
 
             $actionBtn = $detail_btn;
