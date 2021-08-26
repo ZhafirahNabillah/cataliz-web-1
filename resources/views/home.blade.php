@@ -1279,77 +1279,34 @@
               </div>
               <div class="card-body">
                 <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="coach-tab" data-toggle="tab" href=""
-                      aria-controls="coach" role="tab" aria-selected="true">Coach</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="" aria-controls="profile"
-                      role="tab" aria-selected="false">Coachee</a>
-                  </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="" aria-controls="profile"
-                      role="tab" aria-selected="false">Trainers</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="" data-toggle="tab" href="" aria-controls="profile"
-                      role="tab" aria-selected="false">Mentors</a>
-                  </li>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
+                aria-selected="false">Mentor</a>
+              </li>
                 </ul>
 
-                <div class="tab-content">
-                  <!-- start agenda Individu -->
-                  <div class="tab-pane active" id="agenda-individual" role="tabpanel">
-                    <section id="basic-datatable">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="card">
-                            <table class="datatables-basic table-striped table agenda-datatable-individual">
-                              <thead>
-                                <tr>
-                                  <th>No</th>
-                                  <th>Name</th>
-                                  <th>Session</th>
-                                  <th>Date</th>
-                                  <th>Duration</th>
-                                  <th>Status</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                  <!-- /end agenda individu -->
+                <div class="tab-pane" id="mentor" aria-labelledby="mentor-tab" role="tabpanel">
+              <!-- mentorlist card -->
 
-                  <!-- start tab agenda group -->
-                  <div class="tab-pane" id="agenda-group" role="tabpanel">
-                    <section id="basic-datatable">
-                      <div class="row">
-                        <div class="col-12">
-                          <div class="card">
-                            <table class="datatables-basic table-striped table agenda-datatable-group">
-                              <thead>
-                                <tr>
-                                  <th>No</th>
-                                  <th>Group Code</th>
-                                  <th>Session</th>
-                                  <th>Date</th>
-                                  <th>Duration</th>
-                                  <th>Status</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      </div>
-                    </section>
-                  </div>
+              <div class="row">
+                <div class="col-12">
+                  <hr class="mb-0">
+                  <table class="datatables-basic table-striped table admin-datatable-mentor">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Mentor Name</th>
+                        <th>Email</th>
+                        <th>Handphone</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
                   <!-- /end tab agenda group -->
                 </div>
               </div>
