@@ -20,9 +20,9 @@ class LogActivityController extends Controller
 
     function __construct()
     {
-        $this->middleware('permission:list-class', ['only' => 'index']);
-        $this->middleware('permission:create-class', ['only' => ['create', 'store']]);
-        $this->middleware('permission:detail-class', ['only' => 'show']);
+        $this->middleware('permission:activity-log', ['only' => 'index']);
+        $this->middleware('permission:activity-log', ['only' => ['create', 'store']]);
+        $this->middleware('permission:activity-log', ['only' => 'show']);
     }
 
     public function index(Request $request)
