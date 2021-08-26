@@ -1277,28 +1277,31 @@
                     data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
                 </h5>
               </div>
-              <div class="card-body">
-                <ul class="nav nav-tabs justify-content-center mb-0" role="tablist">
-                <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
-                aria-selected="false">Mentor</a>
-              </li>
-                </ul>
+              <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
+                aria-selected="false">Coachee</a>
+            </li>
+          </ul>
 
-                <div class="tab-pane" id="mentor" aria-labelledby="mentor-tab" role="tabpanel">
-              <!-- mentorlist card -->
+          <div class="tab-content">
+            <!-- Panel Coachee -->
+            <div class="tab-pane active" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+              <!-- coacheelist card -->
 
               <div class="row">
                 <div class="col-12">
                   <hr class="mb-0">
-                  <table class="datatables-basic table-striped table admin-datatable-mentor">
+                  <table class="datatables-basic table-striped table admin-datatable-coachee">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Mentor Name</th>
+                        <th>Coachee Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
+                        <th>Program</th>
                         <th>Action</th>
+                        <th style="line-height: 40px;"></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1307,7 +1310,7 @@
                 </div>
               </div>
             </div>
-                  <!-- /end tab agenda group -->
+                  <!-- /coachee list -->
                 </div>
               </div>
             </div>
