@@ -8,7 +8,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Coach extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'user_id',
@@ -24,27 +24,27 @@ class Coach extends Model
     ];
 
     //Log activity
-    // protected static $logAttributes = [
-    //     'user_id',
-    //     'skill_id',
-    //     'category_id',
-    //     'skills_description_title',
-    //     'skills_description_overview',
-    //     'education',
-    //     'employment',
-    //     'language',
-    //     'beginner_status',
-    //     'location'
-    // ];
+    protected static $logAttributes = [
+        'user_id',
+        'skill_id',
+        'category_id',
+        'skills_description_title',
+        'skills_description_overview',
+        'education',
+        'employment',
+        'language',
+        'beginner_status',
+        'location'
+    ];
 
-    // protected static $logName = 'Coach';
+    protected static $logName = 'Coach';
 
-    // public function getDescriptionForEvent(string $eventName): string
-    // {
-    //     return "This user has been {$eventName} data Coach";
-    // }
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "This user has been {$eventName} data Coach";
+    }
 
-    // protected static $logOnlyDirty = true;
+    protected static $logOnlyDirty = true;
     //end Log Activity
 
     public function clients()
