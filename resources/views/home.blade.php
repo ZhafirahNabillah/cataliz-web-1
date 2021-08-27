@@ -1267,14 +1267,14 @@
           </div>
 
 
-          <div class="col-sm-12">
-            <div class="card">
+    <div class="col-sm-12">
+      <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Users
                   <img class="align-text width=" 15px" height="15px"" src="
                     {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
                     data-placement="top"
-                    data-content="Bagian ini menampilkan daftar seluruh sesi yang dimiliki oleh client yang dipilih." />
+                    data-content="Halaman ini menampilkan daftar pengguna yang terdaftar dalam website baik coach maupun coachee." />
                 </h5>
               </div>
               <ul class="nav nav-tabs justify-content-center" role="tablist">
@@ -1311,13 +1311,11 @@
               </div>
             </div>
                   <!-- /coachee list -->
-                </div>
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+    </div>
       <!-- /card -->
       @endrole
-</div>
 
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
@@ -1471,12 +1469,59 @@
     // });
     //
     // calendar.render();
-
+    
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+
+    var table_coachee = $('.admin-datatable-coachee').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('show_coachee_list') }}",
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+              },
+              {
+                data: 'name',
+                name: 'name'
+              },
+              {
+                data: 'email',
+                name: 'email',
+                defaultContent: '<i>-</i>'
+              },
+              {
+                data: 'phone',
+                name: 'phone',
+                render: function(data, type, row) {
+                  return '+62' + data;
+                }
+              },
+              {
+                data: 'program',
+                name: 'program',
+              },
+              {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+              },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+              paginate: {
+                // remove previous & next text from pagination
+                previous: '&nbsp;',
+                next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+            }
+          });
 
 
     @role('admin')
