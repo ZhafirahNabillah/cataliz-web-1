@@ -29,7 +29,10 @@ class LogActivityController extends Controller
     {
         //$data = Activity::with('causer')->orderby('id', 'desc')->get();
         if ($request->ajax()) {
-            $data = Activity::with('causer')->orderby('id', 'desc')->get();
+            $data = Activity::with('causer')
+                ->whereNotNull('causer_id')
+                ->orderby('id', 'desc')
+                ->get();
             return Datatables::of($data)
                 ->editColumn('created_at', function ($data) {
                     return $data->created_at ? with(new Carbon($data->created_at))->format('D, d-m-Y H:i:s') : '';

@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Coach;
+use Spatie\Activitylog\Models\Activity;
 
 class UserSeeder extends Seeder
 {
@@ -31,6 +32,13 @@ class UserSeeder extends Seeder
       'user_id'   => $coach->id,
       'skill_id'    => 1
     ]);
+    $activity_coach = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data coach',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $coach->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
 
     //create coachee seeder
     $coachee = User::create([
@@ -54,6 +62,14 @@ class UserSeeder extends Seeder
       'organization'  => 'Universitas Jember'
     ]);
 
+    $activity_coachee = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data coachee',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $coachee->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
+
     //create admin seeder
     $admin = User::create([
       'name'        => 'User Admin',
@@ -64,6 +80,14 @@ class UserSeeder extends Seeder
     ]);
 
     $admin->assignRole('admin');
+
+    $activity_admin = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data Admin',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $admin->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
 
     //create mentor seeder
     $mentor = User::create([
@@ -76,6 +100,14 @@ class UserSeeder extends Seeder
 
     $mentor->assignRole('mentor');
 
+    $activity_mentor = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data Mentor',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $mentor->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
+
     //create trainer seeder
     $trainer = User::create([
       'name'        => 'User Trainer',
@@ -87,6 +119,14 @@ class UserSeeder extends Seeder
 
     $trainer->assignRole('trainer');
 
+    $activity_trainer = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data Trainer',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $trainer->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
+
     //create manager seeder
     $manager = User::create([
       'name'        => 'User Manager',
@@ -97,5 +137,13 @@ class UserSeeder extends Seeder
     ]);
 
     $manager->assignRole('manager');
+
+    $activity_manager = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data Manager',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $manager->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
   }
 }
