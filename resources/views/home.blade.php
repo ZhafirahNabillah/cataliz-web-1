@@ -1188,7 +1188,7 @@
                       <tr>
                         <td>
                           <div colspan="10">
-                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\clock.svg') }}" alt="Card image cap" />
+                          <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\users.svg') }}" alt="Card image cap" />
                           </div>
                         </td>
                         <td>
@@ -1224,7 +1224,7 @@
                         <td>
                           <div class="pl-2" >
                             <small class="text-muted text-left">Total Coachee</small>
-                            <h3 class="font-weight-bolder text-left">{{$total_coachee}} Coachee</h3>
+                            <h3 class="font-weight-bolder text-left">{{$total_coachee}} Client</h3>
                           </div>
                         </td>
                       </tr>
