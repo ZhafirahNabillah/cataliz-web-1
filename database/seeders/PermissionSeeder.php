@@ -76,5 +76,8 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'create-category']);
         Permission::create(['name' => 'update-category']);
         Permission::create(['name' => 'delete-category']);
+
+        // Activity Log
+        Permission::create(['name' => 'activity-log']);
     }
 }

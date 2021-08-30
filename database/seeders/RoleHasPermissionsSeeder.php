@@ -29,6 +29,8 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_coach->givePermissionTo(['list-exercise', 'detail-exercise']);
         //give permission to coach to list and detail result
         $role_coach->givePermissionTo(['list-result', 'detail-result']);
+        //give permission to coach to activity log
+        $role_coach->givePermissionTo(['activity-log']);
 
         $role_admin = Role::where('name', 'admin')->first();
 
@@ -44,6 +46,8 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_admin->givePermissionTo(['list-permission', 'create-permission', 'update-permission', 'delete-permission']);
         //give permission to admin to see,create,update class
         $role_admin->givePermissionTo(['list-class', 'create-class', 'detail-class']);
+        //give permission to admin to activity log
+        $role_admin->givePermissionTo(['activity-log']);
 
         $role_coachee = Role::where('name', 'coachee')->first();
 
@@ -53,7 +57,9 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_coachee->givePermissionTo(['list-plan', 'detail-plan']);
         //give permission to coachee see agendas
         $role_coachee->givePermissionTo(['list-agenda', 'detail-agenda']);
-
+        //give permission to coachee to activity log
+        $role_coachee->givePermissionTo(['activity-log']);
+        
         $role_mentor = Role::where('name', 'mentor')->first();
 
         //give permission to mentor to list and detail exam
@@ -62,17 +68,21 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_mentor->givePermissionTo(['list-exercise', 'detail-exercise']);
         //give permission to mentor to list and detail result
         $role_mentor->givePermissionTo(['list-result', 'detail-result']);
+        //give permission to mentor to activity log
+        $role_mentor->givePermissionTo(['activity-log']);
 
         $role_trainer = Role::where('name', 'trainer')->first();
 
-        //give permission to mentor to list, create, update, delete and detail exam
+        //give permission to trainer to list, create, update, delete and detail exam
         $role_trainer->givePermissionTo(['list-topic', 'create-topic', 'update-topic', 'delete-topic', 'detail-topic']);
-        //give permission to mentor to list and detail exam
+        //give permission to trainer to list and detail exam
         $role_trainer->givePermissionTo(['list-exercise', 'detail-exercise']);
-        //give permission to mentor to list and detail result
+        //give permission to trainer to list and detail result
         $role_trainer->givePermissionTo(['list-result', 'detail-result']);
-        //give permission to mentor to list, create, update, delete category
+        //give permission to trainer to list, create, update, delete category
         $role_trainer->givePermissionTo(['list-category', 'create-category', 'update-category', 'delete-category']);
+        //give permission to trainer to activity log
+        $role_trainer->givePermissionTo(['activity-log']);
        
         $role_manager = Role::where('name', 'manager')->first();
 
@@ -92,6 +102,8 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_manager->givePermissionTo(['list-category', 'create-category', 'update-category', 'delete-category']);
         //give permission to manager to list and detail result
         $role_manager->givePermissionTo(['list-result', 'detail-result']);
+        //give permission to manager to activity log
+        $role_manager->givePermissionTo(['activity-log']);
 
     
     }
