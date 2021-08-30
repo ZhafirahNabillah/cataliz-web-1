@@ -20,11 +20,11 @@ class ExerciseController extends Controller
    */
   public function index(Request $request)
   {
-    if (auth()->user()->hasRole('trainer') || auth()->user()->hasRole('mentor')) {
+    if (auth()->user()->hasRole('trainer') || auth()->user()->hasRole('mentor') || auth()->user()->hasRole('manager')) {
       // $data = Topic::where('trainer_id', auth()->user()->id)->get();
       if (auth()->user()->hasRole('trainer')) {
         $data = Exam::where('owner_id', auth()->user()->id)->get();
-      } elseif (auth()->user()->hasRole('mentor')) {
+      } elseif (auth()->user()->hasRole('mentor') || auth()->user()->hasRole('manager')) {
         $data = Exam::get();
       }
 
