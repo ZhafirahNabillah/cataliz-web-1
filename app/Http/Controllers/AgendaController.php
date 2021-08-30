@@ -42,9 +42,7 @@ class AgendaController extends Controller
   //method to show agenda index page and get summary data of agenda (top of the page)
   public function index(Request $request)
   {
-
     if (auth()->user()->hasRole('admin')) {
-
       $total_unscheduled_sessions = Agenda_detail::where('status', 'unschedule')->get()->count();
       $total_scheduled_sessions = Agenda_detail::where('status', 'scheduled')->get()->count();
       $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
@@ -74,8 +72,15 @@ class AgendaController extends Controller
       $total_rescheduled_sessions = $sessions->where('status', 'rescheduled')->count();
       $total_finished_sessions = $sessions->where('status', 'finished')->count();
       $total_canceled_sessions = $sessions->where('status', 'canceled')->count();
+    }  elseif (auth()->user()->hasRole('manager')) {
+      $total_unscheduled_sessions = Agenda_detail::where('status', 'unschedule')->get()->count();
+      $total_scheduled_sessions = Agenda_detail::where('status', 'scheduled')->get()->count();
+      $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
+      $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
+      $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
     }
 
+    
     return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
   }
 
