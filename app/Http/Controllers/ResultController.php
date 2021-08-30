@@ -109,6 +109,9 @@ class ResultController extends Controller
     } elseif (auth()->user()->hasRole('coachee')) {
       $feedback_from = $exam_result->training_feedbacks->whereIn('from', ['trainee', 'mentee']);
       $feedback_to = $exam_result->training_feedbacks->whereIn('to', ['trainee', 'mentee']);
+    } elseif (auth()->user()->hasRole('coach')) {
+      $feedback = $exam_result->training_feedbacks->whereNotIn('to', ['coach']);
+      $report = $exam_result->training_feedbacks()->where('to','coach')->get();
     } else {
       $feedback = $exam_result->training_feedbacks->whereNotIn('to', ['coach']);
       $report = $exam_result->training_feedbacks->where('to', 'coach');

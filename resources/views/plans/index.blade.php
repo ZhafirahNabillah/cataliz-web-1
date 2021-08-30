@@ -348,7 +348,7 @@
                 });
                 @endrole
 
-                @role('coachee|manager')
+                @role('coachee')
                 var table_plans_individual = $('.plan-datatable-individual').DataTable({
                     processing: true,
                     serverSide: true,
@@ -389,7 +389,48 @@
                     }
                 });
                 @endrole
-
+                
+                @role('manager')
+                var table_plans_individual = $('.plan-datatable-individual').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    ajax: "",
+                    columns: [{
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex'
+                        },
+                        {
+                            data: 'client_name',
+                            name: 'client_name'
+                        },
+                        {
+                            data: 'program',
+                            name: 'program'
+                        },
+                        {
+                            data: 'date',
+                            name: 'date',
+                            defaultContent: '<i>-</i>'
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: true,
+                            searchable: true
+                        },
+                    ],
+                    dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+                    language: {
+                        paginate: {
+                            // remove previous & next text from pagination
+                            previous: '&nbsp;',
+                            next: '&nbsp;'
+                        },
+                        search: "<i data-feather='search'></i>",
+                        searchPlaceholder: "Search records"
+                    }
+                });
+                @endrole
                 var table_plans_group = $('.plan-datatable-group').DataTable({
                     processing: true,
                     serverSide: true,
