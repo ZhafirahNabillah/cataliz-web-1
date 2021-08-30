@@ -348,7 +348,7 @@
                 });
                 @endrole
 
-                @role('coachee')
+                @role('coachee|manager')
                 var table_plans_individual = $('.plan-datatable-individual').DataTable({
                     processing: true,
                     serverSide: true,
