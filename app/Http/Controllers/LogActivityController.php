@@ -9,6 +9,7 @@ use App\Models\Plan;
 use DataTables;
 use Spatie\Activitylog\Models\Activity;
 use Carbon\Carbon;
+use Auth;
 
 class LogActivityController extends Controller
 {
@@ -27,12 +28,21 @@ class LogActivityController extends Controller
 
     public function index(Request $request)
     {
-        //$data = Activity::with('causer')->orderby('id', 'desc')->get();
+        $user = Auth::user();
+        $id = $user->id;
         if ($request->ajax()) {
-            $data = Activity::with('causer')
-                ->whereNotNull('causer_id')
-                ->orderby('id', 'desc')
-                ->get();
+            if (auth()->user()->hasRole('admin')) {
+                $data = Activity::with('causer')
+                    ->whereNotNull('causer_id')
+                    ->orderby('id', 'desc')
+                    ->get();
+            } else {
+                $data = Activity::with('causer')
+                    ->where('causer_id', '=', $id)
+                    ->whereNotNull('causer_id')
+                    ->orderby('id', 'desc')
+                    ->get();
+            }
             return Datatables::of($data)
                 ->editColumn('created_at', function ($data) {
                     return $data->created_at ? with(new Carbon($data->created_at))->format('D, d-m-Y H:i:s') : '';
@@ -45,8 +55,8 @@ class LogActivityController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        //return response()->json($data);
         return view('log_activity.index');
+        //return response()->json($data);
     }
 
     /**
