@@ -227,6 +227,9 @@
                     @role('mentor')
                     <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Mentor</span></div>
                     @endrole
+                    @role('manager')
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Manager</span></div>
+                    @endrole
 
                     <span class="avatar bg-light-secondary avatar-lg">
                         <!--

@@ -53,7 +53,7 @@
                 @endrole
 
             </li>
-            @role('admin')
+            @role('admin|manager')
             <li class=" nav-item ">
                 <a class="d-flex align-items-center" href="{{ route('graduates.index') }}"><i data-feather="users"></i><span class="menu-title text-truncate" data-i18n="Email">Graduate</span></a>
             </li>
@@ -68,7 +68,7 @@
                         class="menu-title text-truncate" data-i18n="Email">Participant</span></a>
             </li>
             @endrole --}}
-            @role('admin')
+            @role('admin|manager')
             <li class=" nav-item {{ 'docs' == request()->path() ? 'active show' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="book"></i><span
                         class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
