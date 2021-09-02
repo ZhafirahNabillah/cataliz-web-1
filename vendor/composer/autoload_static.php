@@ -44,9 +44,9 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'eb7e98e63c68d07fafdbd92bdcaa497e' => __DIR__ . '/..' . '/deployer/recipes/autoload.php',
         'ed962a97bd972bc82007176b647d4e36' => __DIR__ . '/..' . '/facade/ignition/src/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
+        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
         '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
-        '72b1e3f4a2af9b30b3f137b3ec2057fc' => __DIR__ . '/..' . '/spatie/laravel-activitylog/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -758,6 +758,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Agenda_detail' => __DIR__ . '/../..' . '/app/Models/Agenda_detail.php',
         'App\\Models\\Answer' => __DIR__ . '/../..' . '/app/Models/Answer.php',
         'App\\Models\\Batch' => __DIR__ . '/../..' . '/app/Models/Batch.php',
+        'App\\Models\\Booking' => __DIR__ . '/../..' . '/app/Models/Booking.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Client' => __DIR__ . '/../..' . '/app/Models/Client.php',
         'App\\Models\\Coach' => __DIR__ . '/../..' . '/app/Models/Coach.php',
@@ -772,7 +773,6 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Language' => __DIR__ . '/../..' . '/app/Models/Language.php',
         'App\\Models\\Lesson' => __DIR__ . '/../..' . '/app/Models/Lesson.php',
         'App\\Models\\Lesson_history' => __DIR__ . '/../..' . '/app/Models/Lesson_history.php',
-        'App\\Models\\LogActivity' => __DIR__ . '/../..' . '/app/Models/LogActivity.php',
         'App\\Models\\Log_activity' => __DIR__ . '/../..' . '/app/Models/Log_activity.php',
         'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
         'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
