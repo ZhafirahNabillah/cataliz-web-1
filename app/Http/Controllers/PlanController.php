@@ -35,9 +35,7 @@ class PlanController extends Controller
   public function index(Request $request)
   {
     if ($request->ajax()) {
-
-
-      if (auth()->user()->hasRole('admin')) {
+      if (auth()->user()->hasRole('manager|admin')) {
         $data = Plan::with('client')->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coach')) {
         $coach = Coach::where('user_id', auth()->user()->id)->first();
@@ -382,7 +380,7 @@ class PlanController extends Controller
   //method to show plan group list on plan index page (plan tab)
   public function show_group_list(Request $request)
   {
-    if (auth()->user()->hasRole('admin')) {
+    if (auth()->user()->hasRole('admin|manager')) {
       $data = Plan::where('client_id', null)->latest()->get();
     } elseif (auth()->user()->hasRole('coach')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();

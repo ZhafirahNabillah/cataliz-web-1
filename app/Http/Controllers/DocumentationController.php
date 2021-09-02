@@ -20,7 +20,7 @@ class DocumentationController extends Controller
   {
     $roles = Role::all();
     if ($request->ajax()) {
-      $data = Documentation::where('role', 'admin')->get();
+      $data = Documentation::where('role', 'admin|manager')->get();
 
       //return data as datatable json
       return DataTables::of($data)

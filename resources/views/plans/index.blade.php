@@ -146,7 +146,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card">
-                                            @hasanyrole('coach|admin')
+                                            @hasanyrole('coach|admin|manager')
                                             <table class="datatables-basic table-striped table plan-datatable-group">
                                                 <thead>
                                                     <tr>
@@ -217,7 +217,7 @@
                     }
                 });
 
-                @role('coach|admin')
+                @role('coach|admin|manager')
                 var table_plans_individual = $('.plan-datatable-individual').DataTable({
                     processing: true,
                     serverSide: true,

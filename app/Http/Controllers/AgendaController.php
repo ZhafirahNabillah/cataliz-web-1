@@ -95,6 +95,14 @@ class AgendaController extends Controller
         ->where('plans.group_id', null)
         ->latest()
         ->get();
+    } elseif (auth()->user()->hasRole('manager')) {
+      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->join('clients', 'plans.client_id', '=', 'clients.id')
+        ->where('plans.group_id', null)
+        ->latest()
+        ->get();
     } elseif (auth()->user()->hasRole('coach')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
 
@@ -186,6 +194,12 @@ class AgendaController extends Controller
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->where('plans.client_id', null)
         ->get();
+    } elseif (auth()->user()->hasRole('manager')) {
+      $data = Agenda_detail::select('agenda_details.id', 'plans.group_id as group', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
+        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
+        ->where('plans.client_id', null)
+        ->get(); 
     } elseif (auth()->user()->hasRole('coach')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
 

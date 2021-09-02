@@ -57,7 +57,7 @@ class LogActivityController extends Controller
         }
         return view('log_activity.index');
         //return response()->json($data);
-    }
+        }
 
     /**
      * Show the form for creating a new resource.

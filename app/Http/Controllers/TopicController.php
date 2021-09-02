@@ -20,12 +20,13 @@ class TopicController extends Controller
    */
   public function index(Request $request)
   {
-
     if (auth()->user()->hasRole('trainer')) {
       $data = Topic::where('trainer_id', auth()->user()->id)->get();
     } elseif (auth()->user()->hasRole('mentor')) {
       $data = Topic::all();
     } elseif (auth()->user()->hasRole('coach')) {
+      $data = Topic::all();
+    } elseif (auth()->user()->hasRole('manager')) {
       $data = Topic::all();
     } elseif (auth()->user()->hasRole('coachee')) {
       $client = auth()->user()->client;
