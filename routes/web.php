@@ -31,6 +31,7 @@ use App\Http\Controllers\GraduateController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\LogActivityController;
+use App\Http\Controllers\BookingController;
 
 
 /*
@@ -77,6 +78,9 @@ Route::post('/reset', [ResetPasswordController::class, 'reset_password'])->name(
 Route::get('/logout', [LoginController::class, 'logout']);
 
 Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_certificate'])->name('graduates.certificate');
+
+//Booking controller
+Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {
