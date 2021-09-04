@@ -1175,7 +1175,7 @@
             </div>
           </div>
           <!-- new -->
-          <div class="col-md-4 col-lg-4">
+          <div class="col-md-3 col-lg-3">
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
@@ -1206,7 +1206,7 @@
             </a>
           </div>
 
-          <div class="col-md-4 col-lg-4">
+          <div class="col-md-3 col-lg-3">
             <a href="{{ route('clients.index') }}">
               <div class="card">
                 <div class="card-body">
@@ -1235,7 +1235,38 @@
             </a>
           </div>
 
-          <div class="col-md-4 col-lg-4">
+          <div class="col-md-3 col-lg-3">
+            <a href="{{ route('plans.index') }}">
+              <div class="card">
+                <div class="card-body">
+                  <img class="rounded float-right" width="15px" height="15px"
+                  src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover"
+                  data-placement="top" data-content="Jumlah coach yang terdaftar" />
+                  <table>
+                    <div class="container-fluid row">
+                    <tr>
+                    <td>
+                      <div colspan="10">
+                        <img style="padding-left: 12px;" class="rounded mx-auto d-block center" src="{{ url('assets\images\icons\trending-up.svg') }}"
+                        alt="Card image cap" />
+                      </div>
+                    </td>
+                    <td>
+                      <div class="pl-2" >
+                        <small class="text-muted text-left">Total Plan</small>
+                        
+                        <h3 class="font-weight-bolder text-left">{{$total_coach}} Plan</h3>
+                      </div>
+                    </td>
+                    </tr>
+                    </div>
+                  </table>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-md-3 col-lg-3">
             <a href="{{ route('plans.index') }}">
               <div class="card">
                 <div class="card-body">

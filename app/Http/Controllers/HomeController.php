@@ -223,7 +223,9 @@ class HomeController extends Controller
 
       $total_coach = User::role('coach')->count();
       $total_coachee = User::role('coachee')->count();
+      $total_plans = Plan::get()->count();
       $total_sessions = Agenda_detail::get()->count();
+      
 
       $agenda_detail = Agenda_detail::whereIn('status', ['scheduled','rescheduled', 'finished'])->get();
 
