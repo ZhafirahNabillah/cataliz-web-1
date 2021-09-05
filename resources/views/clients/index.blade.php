@@ -871,22 +871,98 @@
 
       @role('manager')
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
+      <div class="">
+        <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
+          class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
+      </div>
       <div class="card">
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#admin" aria-controls="profile" role="tab"
+                aria-selected="false">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab"
+                aria-selected="true">Coach</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
                 aria-selected="false">Coachee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#trainer" aria-controls="profile" role="tab"
+                aria-selected="false">Trainer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
+                aria-selected="false">Mentor</a>
             </li>
           </ul>
 
           <div class="tab-content">
+            <!-- Panel Coach -->
+            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
+              <!-- coachlist card -->
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-block text-right">
+                    <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table-striped table admin-datatable-coach">
+                    <thead>
+                      <tr>
+                        <th>NO</th>
+                        <th>Coach Name</th>
+                        <th>Email</th>
+                        <th>Handphone</th>
+                        {{-- <th>Rating</th> --}}
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- /coach list admin -->
+            <!-- /panel coach -->
+
+
+            <!-- Panel Admin -->
+            <div class="tab-pane" id="admin" aria-labelledby="admin-tab" role="tabpanel">
+              <!-- adminlist card -->
+              <div class="row">
+                <div class="col-12">
+                  <table class="datatables-basic table-striped table admin-datatable-admin">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Admin Name</th>
+                        <th>Email</th>
+                        <th>Handphone</th>
+                        <th style="line-height: 40px;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- /admin list admin -->
+
             <!-- Panel Coachee -->
-            <div class="tab-pane active" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+            <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
               <!-- coacheelist card -->
 
               <div class="row">
                 <div class="col-12">
+                  <div class="d-block text-right">
+                    <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a>
+                  </div>
                   <hr class="mb-0">
                   <table class="datatables-basic table-striped table admin-datatable-coachee">
                     <thead>
@@ -905,11 +981,174 @@
                 </div>
               </div>
             </div>
-            <!-- /coachee list manager -->
+            <!-- /coachee list admin -->
+
+            <!-- Panel Trainer -->
+            <div class="tab-pane" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
+              <!-- trainerlist card -->
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-block text-right">
+                    {{-- <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a> --}}
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table-striped table admin-datatable-trainer">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Trainer Name</th>
+                        <th>Email</th>
+                        <th>Handphone</th>
+                        <th style="line-height: 40px;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- /trainer list admin -->
+
+            <!-- Panel Mentor -->
+            <div class="tab-pane" id="mentor" aria-labelledby="mentor-tab" role="tabpanel">
+              <!-- mentorlist card -->
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="d-block text-right">
+                    {{-- <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a> --}}
+                  </div>
+                  <hr class="mb-0">
+                  <table class="datatables-basic table-striped table admin-datatable-mentor">
+                    <thead>
+                      <tr>
+                        <th>No</th>
+                        <th>Mentor Name</th>
+                        <th>Email</th>
+                        <th>Handphone</th>
+                        <th style="line-height: 40px;">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- /mentor list admin -->
           </div>
         </div>
       </div>
       <!-- /panel coachee -->
+
+      <!-- Modal to Add User -->
+      <div class="modal modal-slide-in fade" id="modal-user-slide-in" aria-hidden="true">
+        <div class="modal-dialog sidebar-sm">
+          <form class="add-new-record modal-content pt-0" id="createUserForm" name="createUserForm">
+            @csrf
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+              <h5 class="modal-title" id="modalHeading">Add User</h5>
+            </div>
+            <input type="hidden" name="user_id" id="user_id">
+            <div class="modal-body flex-grow-1">
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                <input id="name" name="name" type="text" class="form-control dt-full-name"
+                  id="basic-icon-default-fullname" value="" placeholder="Full name here..." />
+                <div id="name-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-post">Phone</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon5">+62</span>
+                  </div>
+                  <input id="phone" name="phone" type="text" onkeypress="return isNumberKey(event)" class="form-control"
+                    value="" placeholder="Phone number here...">
+                </div>
+                <div id="phone-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-email">Email</label>
+                <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+                  placeholder="Email here..." />
+                <small class="form-text text-muted"> You can use letters, numbers & periods</small>
+                <div id="email-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-fullname">Role</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coach" value="coach">
+                  <label class="form-check-label" for="permission-check-coach">
+                    Coach
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee"
+                    value="coachee">
+                  <label class="form-check-label" for="permission-check-coachee">
+                    Coachee
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-admin" value="admin">
+                  <label class="form-check-label" for="permission-check-admin">
+                    Admin
+                  </label>
+                </div>
+                {{-- <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-admin" value="trainer">
+                  <label class="form-check-label" for="permission-check-trainer">
+                    Trainer
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-admin" value="Mentor">
+                  <label class="form-check-label" for="permission-check-mentor">
+                    Mentor
+                  </label>
+                </div> --}}
+                {{-- <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-coachee" value="coachee">
+                  <label class="form-check-label" for="permission-check-coachee">
+                    Coachee
+                  </label>
+                </div> --}}
+                <div id="roles-error"></div>
+              </div>
+              <div class="form-group" id="program-field-wrapper">
+                <label class="form-label" for="basic-icon-default-fullname">Program</label>
+                @foreach ($programs as $program)
+                <div class="form-check">
+                  <input class="form-check-input program-choice" type="radio" name="program"
+                    data-id="{{ $program->id }}" id="program-{{ $program->id }}" value="{{ $program->id }}">
+                  <label class="form-check-label" for="program-{{ $program->id }}">
+                    {{ $program->program_name }}
+                  </label>
+                </div>
+                @endforeach
+                <div id="program-error"></div>
+              </div>
+              <div class="form-group" id="batch-field-wrapper">
+                <label class="form-label" for="">Batch</label>
+                <select class="form-control" name="batch" id="batch">
+                  <option disabled selected hidden value="0">Select batch</option>
+                </select>
+                <div id="batch-error"></div>
+                <small class="form-text text-muted">Batch must be filled if program was chosen</small>
+              </div>
+              <input type="hidden" name="action_type" id="action_type">
+              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
+              <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+          <!-- </form>-->
+        </div>
+      </div>
+      <!-- End Modal -->
       @endrole
 
       <!-- END: Content-->
