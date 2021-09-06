@@ -6,18 +6,41 @@
 <link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+<style>
+.form-group{
+    width:500px;
+}
+div.card p-2 {
+    display: block;
+    text-align: center;
+}
+form {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+button[type="submit"] {
+    margin-top:10px;
+    width: 500px;
+}
+
+.content-body {
+    margin: -20px 50px;
+}
+</style>
 @endpush
 
 @section('content')
 
 <!-- BEGIN: Content-->
-<div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;">
+<div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-color:#fbea67">
     <div class="content-wrapper">
         <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Create Booking</h2>
                         <div class="breadcrumb-wrapper">
 
                         </div>
@@ -30,6 +53,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card p-2">
+                    <h2 class="text-center">BOOK HERE</h2>
                         <form action="" method="post">
                             @csrf
                             <div class="form-group">
@@ -182,12 +206,12 @@
                             </div>
 
 
-                            <div class="form-group text-right mb-0">
-                                <Button type="submit" class="btn btn-primary">Submit</Button>
+                            <div class="form-group text-center mb-0">
+                                <Button type="submit" class="btn btn-warning">NEXT</Button>
                             </div>
                         </form>
                         <div id="prize">Total Prize:..........</div>
-                        <Button class="btn btn-primary" id="cekPrize">Cek Prize</Button>
+                        <Button class="btn btn-warning" id="cekPrize">Cek Prize</Button>
                     </div>
                 </div>
             </div>
