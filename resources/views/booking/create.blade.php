@@ -114,6 +114,16 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="book_date">Date</label>
+                                <input type="text" id="date" name="book_date" class="form-control @error('book_date') is-invalid @enderror">
+                                @error('book_date')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
                                 <label for="book_demo">Book Demo</label><br>
                                 <input type="checkbox" name="book_demo" value="coaching" id="coaching"> COACHING <br>
                                 <input type="checkbox" name="book_demo" value="training" id="training"> TRAINING <br>
@@ -126,25 +136,45 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="book_date">Date</label>
-                                <input type="text" id="date" name="book_date" class="form-control @error('book_date') is-invalid @enderror">
-                                @error('book_date')
+                                <label for="session_coaching">Coaching Session:</label>
+                                <select id="sessionCoaching" name="session_coaching" class="form-control @error('session_coaching') is-invalid @enderror">
+                                    <option value="" disabled>Choose a session:</option>
+                                    <option value="0">0 Session</option>
+                                    <option value="1">1 Session</option>
+                                    <option value="2">2 Session</option>
+                                    <option value="3">3 Session</option>
+                                </select>
+                                @error('session_coaching')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
-                                <label for="session">Your Session:</label>
-                                <select id="session" name="session" class="form-control @error('session') is-invalid @enderror">
+                                <label for="session_training">Training Session:</label>
+                                <select id="sessionTraining" name="session_training" class="form-control @error('session_training') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
-                                    <option value="1" id="s1">1 Session</option>
-                                    <option value="2" id="s2">2 Session</option>
-                                    <option value="3" id="s3">3 Session</option>
-                                    <option value="4" id="s4">4 Session</option>
+                                    <option value="0">0 Session</option>
+                                    <option value="1">1 Session</option>
+                                    <option value="2">2 Session</option>
+                                    <option value="3">3 Session</option>
                                 </select>
-                                @error('session')
+                                @error('session_training')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="session_mentoring">Mentoring Session:</label>
+                                <select id="sessionMentoring" name="session_mentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
+                                    <option value="" disabled>Choose a session:</option>
+                                    <option value="0">0 Session</option>
+                                    <option value="1">1 Session</option>
+                                    <option value="2">2 Session</option>
+                                    <option value="3">3 Session</option>
+                                </select>
+                                @error('session_mentoring')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -184,17 +214,20 @@
     $(document).ready(function() {
         $("#cekPrize").click(function() {
             var prizeCoaching = parseInt("400000");
-            var prizeMentoring = parseInt("300000");
             var prizeTraining = parseInt("300000");
+            var prizeMentoring = parseInt("300000");
 
-            var session1 = parseInt($("#s1").val());
-            var session2 = parseInt($("#s2").val());
-            var session3 = parseInt($("#s3").val());
-            var session4 = parseInt($("#s4").val());
+            var session = parseInt($("#session").val());
 
-            var totalPrize = prizeCoaching * session2;
+            if ($('#coaching').is(':checked')) {
+                var totalPrize = prizeCoaching * session;
+            } else if ($('#training').is(':checked')) {
+                var totalPrize = prizeTraining * session;
+            } else if ($('#mentoring').is(':checked')) {
+                var totalPrize = prizeMentoring * session;
+            }
 
-            $("#prize").text("Total Pize: " + totalPrize);
+            $("#prize").text("Total Prize: " + totalPrize);
         });
     });
 </script>
