@@ -8,12 +8,8 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <style>
     .form-group {
-        width: 500px;
-    }
-
-    div.card p-2 {
-        display: block;
-        text-align: center;
+        width: 250%;
+        margin-left: -70%;
     }
 
     form {
@@ -24,13 +20,14 @@
     }
 
     button[type="submit"] {
-        margin-top: 10px;
-        width: 500px;
+        margin-top: 2.5%;
+        width: 100%;
     }
 
     .content-body {
-        margin: -20px 50px;
+        margin: -0% 5%;
     }
+
 </style>
 @endpush
 
@@ -38,8 +35,6 @@
 
 <!-- BEGIN: Content-->
 <div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-color:#fbea67">
-    <div class="content-wrapper">
-        <div class="content-header row">
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
@@ -49,13 +44,14 @@
                     </div>
                 </div>
             </div>
-        </div>
 
         <div class="content-body">
             <div class="row">
                 <div class="col-12">
                     <div class="card p-2">
-                        <h2 class="text-center">BOOK HERE</h2>
+                    <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
+                    <div class="card p-3" style="margin: 0% 15%; background-image: url('/assets/images/bg_booking.jpg')">
+                        <h2 class="text-center" style="margin-top: 2.5%;">BOOK HERE</h2>
                         <form action="" method="post">
                             @csrf
                             <div class="form-group">
@@ -214,6 +210,7 @@
                         </form>
                         <div id="prize">Total Prize: Rp. 0</div>
                         <Button class="btn btn-warning" id="cekPrize">Cek Prize</Button>
+                    </div>
                     </div>
                 </div>
             </div>
