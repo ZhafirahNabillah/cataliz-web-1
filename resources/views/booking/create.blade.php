@@ -7,28 +7,30 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <style>
-.form-group{
-    width:500px;
-}
-div.card p-2 {
-    display: block;
-    text-align: center;
-}
-form {
-    display: inline-block;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: left;
-}
+    .form-group {
+        width: 500px;
+    }
 
-button[type="submit"] {
-    margin-top:10px;
-    width: 500px;
-}
+    div.card p-2 {
+        display: block;
+        text-align: center;
+    }
 
-.content-body {
-    margin: -20px 50px;
-}
+    form {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+    }
+
+    button[type="submit"] {
+        margin-top: 10px;
+        width: 500px;
+    }
+
+    .content-body {
+        margin: -20px 50px;
+    }
 </style>
 @endpush
 
@@ -53,7 +55,7 @@ button[type="submit"] {
             <div class="row">
                 <div class="col-12">
                     <div class="card p-2">
-                    <h2 class="text-center">BOOK HERE</h2>
+                        <h2 class="text-center">BOOK HERE</h2>
                         <form action="" method="post">
                             @csrf
                             <div class="form-group">
@@ -210,7 +212,7 @@ button[type="submit"] {
                                 <Button type="submit" class="btn btn-warning">NEXT</Button>
                             </div>
                         </form>
-                        <div id="prize">Total Prize:..........</div>
+                        <div id="prize">Total Prize: Rp. 0</div>
                         <Button class="btn btn-warning" id="cekPrize">Cek Prize</Button>
                     </div>
                 </div>
@@ -241,17 +243,31 @@ button[type="submit"] {
             var prizeTraining = parseInt("300000");
             var prizeMentoring = parseInt("300000");
 
-            var session = parseInt($("#session").val());
+            var timeCoaching = parseInt($("#sessionCoaching").val());
+            var timeTraining = parseInt($("#sessionTraining").val());
+            var timeMentoring = parseInt($("#sessionMentoring").val());
 
             if ($('#coaching').is(':checked')) {
-                var totalPrize = prizeCoaching * session;
+                var totalPrize = prizeCoaching * timeCoaching;
             } else if ($('#training').is(':checked')) {
-                var totalPrize = prizeTraining * session;
+                var totalPrize = prizeTraining * timeTraining;
             } else if ($('#mentoring').is(':checked')) {
-                var totalPrize = prizeMentoring * session;
+                var totalPrize = prizeMentoring * timeMentoring;
+            }
+            if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
+                var totalPrize = (prizeCoaching * timeCoaching) + (prizeTraining * timeTraining);
+            }
+            if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
+                var totalPrize = (prizeCoaching * timeCoaching) + (prizeMentoring * timeMentoring);
+            }
+            if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
+                var totalPrize = (prizeTraining * timeTraining) + (prizeMentoring * timeMentoring);
+            }
+            if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
+                var totalPrize = (prizeCoaching * timeCoaching) + (prizeTraining * timeTraining) + (prizeMentoring * timeMentoring);
             }
 
-            $("#prize").text("Total Prize: " + totalPrize);
+            $("#prize").text("Total Prize: Rp." + totalPrize);
         });
     });
 </script>
