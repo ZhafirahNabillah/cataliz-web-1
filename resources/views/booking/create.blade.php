@@ -49,6 +49,12 @@
             <div class="col-12">
                 <div class="card p-2">
                     <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
+                    @if(session('success'))
+                    <div class="alert alert-success alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
+                    </div>
+                    @endif
                     <div class="card p-3" style="margin: 0% 15%; background-image: url('/assets/images/bg_booking.jpg')">
                         <h2 class="text-center" style="margin-top: 2.5%;">BOOK HERE</h2>
                         <form action="{{ route('booking.store') }}" method="post">
@@ -125,8 +131,8 @@
 
                             <div class="form-group">
                                 <label for="program">Program</label><br>
-                                <input type="radio" name="program" value="starco"> STARCO <br>
-                                <input type="radio" name="program" value="scmp"> SCMP
+                                <input type="radio" name="program" value="starco" {{(old('program') == 'starco') ? ' selected' : ''}}> STARCO <br>
+                                <input type="radio" name="program" value="scmp" {{(old('program') == 'scmp') ? ' selected' : ''}}> SCMP
                                 @error('progam')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -160,10 +166,10 @@
                                 <label for="session_coaching">Coaching Session:</label>
                                 <select id="sessionCoaching" name="session_coaching" class="form-control @error('session_coaching') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
-                                    <option value="0">0 Session</option>
-                                    <option value="1">1 Session</option>
-                                    <option value="2">2 Session</option>
-                                    <option value="3">3 Session</option>
+                                    <option value="0" {{(old('session_coaching') == '0') ? ' selected' : ''}}>0 Session</option>
+                                    <option value="1" {{(old('session_coaching') == '1') ? ' selected' : ''}}>1 Session</option>
+                                    <option value="2" {{(old('session_coaching') == '2') ? ' selected' : ''}}>2 Session</option>
+                                    <option value="3" {{(old('session_coaching') == '3') ? ' selected' : ''}}>3 Session</option>
                                 </select>
                                 @error('session_coaching')
                                 <span class="invalid-feedback" role="alert">

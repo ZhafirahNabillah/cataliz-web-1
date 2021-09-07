@@ -54,6 +54,7 @@ class BookingController extends Controller
             'price' => 'required',
         ]);
 
+        //dd($request->all());
         Booking::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -72,9 +73,8 @@ class BookingController extends Controller
             'created_at' => date('Y-m-d H:1:s'),
         ]);
 
-        return response()->json([
-            'success' => 'Booking successfully created!'
-        ]);
+
+        return redirect('booking/create')->with('success', 'value');
     }
 
     /**
