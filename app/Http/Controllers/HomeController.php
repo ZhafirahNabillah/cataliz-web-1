@@ -267,7 +267,7 @@ class HomeController extends Controller
       //         ->make(true);
       // }
 
-      return view('home', compact('total_coach', 'total_coachee', 'total_sessions', 'today_events')); 
+      return view('home', compact('total_coach', 'total_coachee', 'total_plans', 'total_sessions', 'today_events')); 
     
     }elseif (auth()->user()->hasRole('trainer')) {
       $total_topic = Topic::where('trainer_id', auth()->user()->id)->count();

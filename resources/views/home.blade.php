@@ -1255,7 +1255,7 @@
                       <div class="pl-2" >
                         <small class="text-muted text-left">Total Plan</small>
                         
-                        <h3 class="font-weight-bolder text-left">{{$total_coach}} Plan</h3>
+                        <h3 class="font-weight-bolder text-left">{{$total_plans}} Plan</h3>
                       </div>
                     </td>
                     </tr>

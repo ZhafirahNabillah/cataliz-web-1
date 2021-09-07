@@ -184,6 +184,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::resource('clients', ClientController::class)->except([
 		'store'
 	]);;
+	Route::get('/show_manager_list', [ClientController::class, 'show_manager_list'])->name('show_manager_list');
 	Route::get('/show_coach_list', [ClientController::class, 'show_coach_list'])->name('show_coach_list');
 	Route::get('/show_coachee_list', [ClientController::class, 'show_coachee_list'])->name('show_coachee_list');
 	Route::get('/show_admin_list', [ClientController::class, 'show_admin_list'])->name('show_admin_list');

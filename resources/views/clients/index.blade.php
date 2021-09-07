@@ -879,12 +879,8 @@
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#admin" aria-controls="profile" role="tab"
-                aria-selected="false">Admin</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab"
-                aria-selected="true">Coach</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manager" aria-controls="profile" role="tab"
+                aria-selected="false">Manager</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
@@ -896,7 +892,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
-                aria-selected="false">Mentor</a>
+                aria-selected="false">coachmentors</a>
             </li>
           </ul>
 
@@ -931,16 +927,16 @@
             <!-- /panel coach -->
 
 
-            <!-- Panel Admin -->
-            <div class="tab-pane" id="admin" aria-labelledby="admin-tab" role="tabpanel">
+            <!-- Panel manager -->
+            <div class="tab-pane" id="manager" aria-labelledby="manager-tab" role="tabpanel">
               <!-- adminlist card -->
               <div class="row">
                 <div class="col-12">
-                  <table class="datatables-basic table-striped table admin-datatable-admin">
+                  <table class="datatables-basic table-striped table manager-datatable-manager">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Admin Name</th>
+                        <th>Manager Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
                         <th style="line-height: 40px;">Action</th>
@@ -1358,6 +1354,49 @@
               search: "<i data-feather='search'></i>",
               searchPlaceholder: "Search records"
             }
+          });
+
+          var table_trainer = $('.manager-datatable-manager').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('show_manager_list') }}",
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+              },
+              {
+                data: 'name',
+                name: 'name'
+              },
+              {
+                data: 'email',
+                name: 'email',
+                defaultContent: '<i>-</i>'
+              },
+              {
+                data: 'phone',
+                name: 'phone',
+                render: function(data, type, row) {
+                  return '+62' + data;
+                }
+              },
+              {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+              },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+              paginate: {
+                // remove previous & next text from pagination
+                previous: '&nbsp;',
+                next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+            },
           });
 
           var table_trainer = $('.coach-datatable-trainer').DataTable({

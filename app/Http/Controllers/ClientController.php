@@ -229,6 +229,7 @@ class ClientController extends Controller
           $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div></div>';
           $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
           $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+          $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
           if (auth()->user()->hasRole('admin')) {
             $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
           }
@@ -246,6 +247,41 @@ class ClientController extends Controller
     }
   }
 
+   //method to show manager list
+   public function show_manager_list(Request $request)
+   {
+     if ($request->ajax()) {
+       $data = User::role('manager')->get();
+ 
+       return DataTables::of($data)
+         ->addIndexColumn()
+         ->addColumn('action', function ($row) {
+           if (auth()->user()->hasRole('admin')) {
+           $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div></div>';
+           $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
+           $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
+           $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
+           if ($row->suspend_status == 1) {
+             $actionBtn = $detail_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
+            } else {
+              $actionBtn = $detail_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
+            }
+            return $actionBtn;
+          } elseif (auth()->user()->hasRole('manager')) {
+            $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div></div>';
+            $actionBtn = $detail_btn;
+            return $actionBtn;
+          }
+          })->addColumn('phone', function ($row) {
+          $phone = substr($row->phone, 0, -5) . 'xxxxx';
+
+          return $phone;
+        })
+         ->rawColumns(['action'])
+         ->make(true);
+     }
+   }
+
   //method to show coachee list
   public function show_coachee_list(Request $request)
   {
@@ -256,19 +292,17 @@ class ClientController extends Controller
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
           if (auth()->user()->hasRole('admin')) {
-
             $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
             $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
             $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
             $delete_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-dark deleteUser" data-id = "' . $row->id . '">Delete</a></div>';
-
             if ($row->suspend_status == 1) {
               $actionBtn = $update_btn . ' ' . $suspend_btn . ' ' . $delete_btn;
             } else {
               $actionBtn = $update_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
             }
             return $actionBtn;
-          } elseif (auth()->user()->hasRole('mentor|manager')) {
+          } elseif (auth()->user()->hasRole('mentor')) {
             $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
 
             $actionBtn = $detail_btn;
@@ -405,7 +439,6 @@ class ClientController extends Controller
         ->make(true);
     }
   }
-
 
   /**
    * Show the form for creating a new resource.
