@@ -20,9 +20,7 @@ class Booking extends Model
         'program',
         'book_demo',
         'book_date',
-        'session_coaching',
-        'session_training',
-        'session_mentoring',
+        'session',
         'status',
         'price',
     ];

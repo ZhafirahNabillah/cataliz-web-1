@@ -4,60 +4,31 @@
 
 @push('styles')
 <link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<style>
-    .form-group {
-        width: 250%;
-        margin-left: -70%;
-    }
-
-    form {
-        display: inline-block;
-        margin-left: auto;
-        margin-right: auto;
-        text-align: left;
-    }
-
-    button[type="submit"] {
-        margin-top: 2.5%;
-        width: 100%;
-    }
-
-    .content-body {
-        margin: -0% 5%;
-    }
-</style>
 @endpush
 
 @section('content')
 
 <!-- BEGIN: Content-->
-<div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-color:#fbea67">
-    <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <div class="breadcrumb-wrapper">
+<div class="app-content content ">
+    <div class="content-wrapper">
+        <div class="content-header row">
+            <div class="content-header-left col-md-9 col-12 mb-2">
+                <div class="row breadcrumbs-top">
+                    <div class="col-12">
+                        <h2 class="content-header-title float-left mb-0">Create Booking</h2>
+                        <div class="breadcrumb-wrapper">
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="content-body">
-        <div class="row">
-            <div class="col-12">
-                <div class="card p-2">
-                    <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
-                    @if(session('success'))
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
-                    </div>
-                    @endif
-                    <div class="card p-3" style="margin: 0% 15%; background-image: url('/assets/images/bg_booking.jpg')">
-                        <h2 class="text-center" style="margin-top: 2.5%;">BOOK HERE</h2>
-                        <form action="{{ route('booking.store') }}" method="post">
+        <div class="content-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card p-2">
+                        <form action="{{ route('docs.store') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -68,60 +39,54 @@
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="Input your email...">
+                                <input class="form-control @error('email') is-invalid @enderror" type="text" email="email" value="{{ old('email') }}" placeholder="Input your email...">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label for="whatsapp_number">Whatsapp Number</label>
-                                <input class="form-control @error('whatsapp_number') is-invalid @enderror" type="text" name="whatsapp_number" value="{{ old('whatsapp_number') }}" placeholder="Input your Whatsapp Number...">
+                                <input class="form-control @error('whatsapp_number') is-invalid @enderror" type="text" whatsapp_number="whatsapp_number" value="{{ old('whatsapp_number') }}" placeholder="Input your Whatsapp Number...">
                                 @error('whatsapp_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label for="instance">Instance</label>
-                                <input class="form-control @error('instance') is-invalid @enderror" type="text" name="instance" value="{{ old('instance') }}" placeholder="Input your instance...">
+                                <input class="form-control @error('instance') is-invalid @enderror" type="text" instance="instance" value="{{ old('instance') }}" placeholder="Input your instance...">
                                 @error('instance')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label for="profession">Profession</label>
-                                <input class="form-control @error('profession') is-invalid @enderror" type="text" name="profession" value="{{ old('profession') }}" placeholder="Input your profession...">
+                                <input class="form-control @error('profession') is-invalid @enderror" type="text" profession="profession" value="{{ old('profession') }}" placeholder="Input your profession...">
                                 @error('profession')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input class="form-control @error('address') is-invalid @enderror" type="text" name="address" value="{{ old('address') }}" placeholder="Input your address...">
+                                <input class="form-control @error('address') is-invalid @enderror" type="text" address="address" value="{{ old('address') }}" placeholder="Input your address...">
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
                             </div>
-
                             <div class="form-group">
                                 <label for="goals">goals</label>
-                                <input class="form-control @error('goals') is-invalid @enderror" type="text" name="goals" value="{{ old('goals') }}" placeholder="Input your goals...">
+                                <input class="form-control @error('goals') is-invalid @enderror" type="text" goals="goals" value="{{ old('goals') }}" placeholder="Input your goals...">
                                 @error('goals')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -129,159 +94,86 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="program">Program</label><br>
-                                <input type="radio" name="program" value="starco" {{(old('program') == 'starco') ? ' selected' : ''}}> STARCO <br>
-                                <input type="radio" name="program" value="scmp" {{(old('program') == 'scmp') ? ' selected' : ''}}> SCMP
-                                @error('progam')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="book_date">Date</label>
-                                <input type="text" id="book_date" name="book_date" class="form-control @error('book_date') is-invalid @enderror" value="{{ old('book_date') }}" placeholder="Click to choice date...">
-                                @error('book_date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="book_demo">Book Demo</label><br>
-                                <input type="checkbox" name="book_demo" value="coaching" id="coaching"> COACHING <br>
-                                <input type="checkbox" name="book_demo" value="training" id="training"> TRAINING <br>
-                                <input type="checkbox" name="book_demo" value="mentoring" id="mentoring"> MENTORING <br>
-                                @error('book_demo')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="session_coaching">Coaching Session:</label>
-                                <select id="sessionCoaching" name="session_coaching" class="form-control @error('session_coaching') is-invalid @enderror">
-                                    <option value="" disabled>Choose a session:</option>
-                                    <option value="0" {{(old('session_coaching') == '0') ? ' selected' : ''}}>0 Session</option>
-                                    <option value="1" {{(old('session_coaching') == '1') ? ' selected' : ''}}>1 Session</option>
-                                    <option value="2" {{(old('session_coaching') == '2') ? ' selected' : ''}}>2 Session</option>
-                                    <option value="3" {{(old('session_coaching') == '3') ? ' selected' : ''}}>3 Session</option>
-                                </select>
-                                @error('session_coaching')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="session_training">Training Session:</label>
-                                <select id="sessionTraining" name="session_training" class="form-control @error('session_training') is-invalid @enderror">
-                                    <option value="" disabled>Choose a session:</option>
-                                    <option value="0">0 Session</option>
-                                    <option value="1">1 Session</option>
-                                    <option value="2">2 Session</option>
-                                    <option value="3">3 Session</option>
-                                </select>
-                                @error('session_training')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="session_mentoring">Mentoring Session:</label>
-                                <select id="sessionMentoring" name="session_mentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
-                                    <option value="" disabled>Choose a session:</option>
-                                    <option value="0">0 Session</option>
-                                    <option value="1">1 Session</option>
-                                    <option value="2">2 Session</option>
-                                    <option value="3">3 Session</option>
-                                </select>
-                                @error('session_mentoring')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="" placeholder="Choice Book Demo and Session, Than Klik Check Out...">
-                                @error('price')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
 
 
-                            <div class="form-group text-center mb-0">
-                                <Button type="submit" class="btn btn-warning">NEXT</Button>
+                            <!-- <div class="form-group">
+                                <label for="description">Documentation Content</label>
+                                <textarea name="description" id="description" cols="20" rows="20" placeholder="Your documentation content here...">{{ old('description') }}</textarea>
+                                @error('description')
+                                <small class="text-danger">
+                                    <strong>{{ $message }}</strong>
+                                </small>
+                                @enderror
+                            </div> -->
+
+                            <div class="form-group text-right mb-0">
+                                <Button type="submit" class="btn btn-primary">Submit</Button>
                             </div>
-                        </form><br>
-                        <Button class="btn btn-warning" id="cekPrice">CHECK OUT</Button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 <!-- END: Content-->
 @endsection
 
 @push('scripts')
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-<script>
-    $(function() {
-        $("#book_date").datepicker({
-            beforeShowDay: function(date) {
-                return [date.getDay() == 5 || date.getDay() == 6 || date.getDay() == 0, ""]
-            }
-        });
+<script src="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script src="//cdn.tiny.cloud/1/8kkevq83lhact90cufh8ibbyf1h4ictwst078y31at7z4903/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    $('.category-select').select2({
+        placeholder: 'Select plans',
+        tags: true
     });
 
-    $(document).ready(function() {
-        $("#priceBooking").prop('disabled', true);
-        $("#cekPrice").click(function() {
-            var priceCoaching = parseInt("400000");
-            var priceTraining = parseInt("300000");
-            var priceMentoring = parseInt("300000");
+    tinymce.init({
+        selector: 'textarea',
 
-            var timeCoaching = parseInt($("#sessionCoaching").val());
-            var timeTraining = parseInt($("#sessionTraining").val());
-            var timeMentoring = parseInt($("#sessionMentoring").val());
+        image_class_list: [{
+            title: 'img-fluid',
+            value: 'img-fluid'
+        }, ],
+        height: 700,
+        setup: function(editor) {
+            editor.on('init change', function() {
+                editor.save();
+            });
+        },
+        plugins: [
+            "advlist autolink lists link image charmap print preview anchor",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime media table contextmenu paste imagetools"
+        ],
+        toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image ",
 
-            if ($('#coaching').is(':checked')) {
-                var totalPrice = priceCoaching * timeCoaching;
-            } else if ($('#training').is(':checked')) {
-                var totalPrice = priceTraining * timeTraining;
-            } else if ($('#mentoring').is(':checked')) {
-                var totalPrice = priceMentoring * timeMentoring;
-            }
-            if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
-                var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining);
-            }
-            if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrice = (priceCoaching * timeCoaching) + (priceMentoring * timeMentoring);
-            }
-            if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrice = (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
-            }
-            if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
-            }
+        image_title: true,
+        automatic_uploads: true,
+        images_upload_url: '/docs/upload_image',
+        file_picker_types: 'image',
+        file_picker_callback: function(cb, value, meta) {
+            var input = document.createElement('input');
+            input.setAttribute('type', 'file');
+            input.setAttribute('accept', 'image/*');
+            input.onchange = function() {
+                var file = this.files[0];
 
-            $("#priceBooking").prop('disabled', false);
-            $('#priceBooking').val("Rp. " + totalPrice);
-        });
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function() {
+                    var id = 'blobid' + (new Date()).getTime();
+                    var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                    var base64 = reader.result.split(',')[1];
+                    var blobInfo = blobCache.create(id, file, base64);
+                    blobCache.add(blobInfo);
+                    cb(blobInfo.blobUri(), {
+                        title: file.name
+                    });
+                };
+            };
+            input.click();
+        }
     });
 </script>
 @endpush
