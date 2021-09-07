@@ -27,7 +27,6 @@
     .content-body {
         margin: -0% 5%;
     }
-
 </style>
 @endpush
 
@@ -35,24 +34,24 @@
 
 <!-- BEGIN: Content-->
 <div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-color:#fbea67">
-            <div class="content-header-left col-md-9 col-12 mb-2">
-                <div class="row breadcrumbs-top">
-                    <div class="col-12">
-                        <div class="breadcrumb-wrapper">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <div class="breadcrumb-wrapper">
 
-                        </div>
-                    </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-        <div class="content-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card p-2">
+    <div class="content-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card p-2">
                     <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
                     <div class="card p-3" style="margin: 0% 15%; background-image: url('/assets/images/bg_booking.jpg')">
                         <h2 class="text-center" style="margin-top: 2.5%;">BOOK HERE</h2>
-                        <form action="" method="post">
+                        <form action="{{ route('booking.store') }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name</label>
@@ -137,7 +136,7 @@
 
                             <div class="form-group">
                                 <label for="book_date">Date</label>
-                                <input type="text" id="date" name="book_date" class="form-control @error('book_date') is-invalid @enderror">
+                                <input type="text" id="book_date" name="book_date" class="form-control @error('book_date') is-invalid @enderror" value="{{ old('book_date') }}" placeholder="Click to choice date...">
                                 @error('book_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -203,19 +202,28 @@
                                 @enderror
                             </div>
 
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="" placeholder="Choice Book Demo and Session, Than Klik Check Out...">
+                                @error('price')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+
 
                             <div class="form-group text-center mb-0">
                                 <Button type="submit" class="btn btn-warning">NEXT</Button>
                             </div>
-                        </form>
-                        <div id="prize">Total Prize: Rp. 0</div>
-                        <Button class="btn btn-warning" id="cekPrize">Cek Prize</Button>
-                    </div>
+                        </form><br>
+                        <Button class="btn btn-warning" id="cekPrice">CHECK OUT</Button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- END: Content-->
 @endsection
@@ -227,7 +235,7 @@
 
 <script>
     $(function() {
-        $("#date").datepicker({
+        $("#book_date").datepicker({
             beforeShowDay: function(date) {
                 return [date.getDay() == 5 || date.getDay() == 6 || date.getDay() == 0, ""]
             }
@@ -235,36 +243,38 @@
     });
 
     $(document).ready(function() {
-        $("#cekPrize").click(function() {
-            var prizeCoaching = parseInt("400000");
-            var prizeTraining = parseInt("300000");
-            var prizeMentoring = parseInt("300000");
+        $("#priceBooking").prop('disabled', true);
+        $("#cekPrice").click(function() {
+            var priceCoaching = parseInt("400000");
+            var priceTraining = parseInt("300000");
+            var priceMentoring = parseInt("300000");
 
             var timeCoaching = parseInt($("#sessionCoaching").val());
             var timeTraining = parseInt($("#sessionTraining").val());
             var timeMentoring = parseInt($("#sessionMentoring").val());
 
             if ($('#coaching').is(':checked')) {
-                var totalPrize = prizeCoaching * timeCoaching;
+                var totalPrice = priceCoaching * timeCoaching;
             } else if ($('#training').is(':checked')) {
-                var totalPrize = prizeTraining * timeTraining;
+                var totalPrice = priceTraining * timeTraining;
             } else if ($('#mentoring').is(':checked')) {
-                var totalPrize = prizeMentoring * timeMentoring;
+                var totalPrice = priceMentoring * timeMentoring;
             }
             if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
-                var totalPrize = (prizeCoaching * timeCoaching) + (prizeTraining * timeTraining);
+                var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining);
             }
             if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrize = (prizeCoaching * timeCoaching) + (prizeMentoring * timeMentoring);
+                var totalPrice = (priceCoaching * timeCoaching) + (priceMentoring * timeMentoring);
             }
             if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrize = (prizeTraining * timeTraining) + (prizeMentoring * timeMentoring);
+                var totalPrice = (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
             }
             if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrize = (prizeCoaching * timeCoaching) + (prizeTraining * timeTraining) + (prizeMentoring * timeMentoring);
+                var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
             }
 
-            $("#prize").text("Total Prize: Rp." + totalPrize);
+            $("#priceBooking").prop('disabled', false);
+            $('#priceBooking').val("Rp. " + totalPrice);
         });
     });
 </script>
