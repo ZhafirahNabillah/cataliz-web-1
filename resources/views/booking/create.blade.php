@@ -8,8 +8,8 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <style>
     .form-group {
-        width: 250%;
-        margin-left: -70%;
+        width: 210%;
+        margin-left: 31%;
     }
 
     form {
@@ -56,7 +56,7 @@
                     </div>
                     @endif
                     <div class="card p-3" style="margin: 0% 15%; background-image: url('/assets/images/bg_booking.jpg')">
-                        <h2 class="text-center" style="margin-top: 2.5%;">BOOK HERE</h2>
+                        <h2 class="text-center" style="font-family: Roboto; color:black; margin-left:40%; margin-top: -2%; margin-bottom:3%">BOOK HERE</h2>
                         <form action="{{ route('booking.store') }}" method="post">
                             @csrf
                             <div class="form-group">
@@ -225,7 +225,7 @@
                             </div>
                         </form><br>
                         <div id="buttonCheck">
-                            <Button class="btn btn-warning" id="checkOut" style="width: 70%; margin-left: 16.4%; margin-top:-1%;">CHECK OUT</Button>
+                            <Button class="btn btn-warning" id="checkOut" style="width: 55%; margin-left: 45%; margin-top:-1%;">CHECK OUT</Button>
                         </div>
                     </div>
                 </div>
