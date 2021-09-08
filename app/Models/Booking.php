@@ -17,7 +17,6 @@ class Booking extends Model
         'profession',
         'address',
         'goals',
-        'program',
         'book_demo',
         'book_date',
         'session_coaching',
@@ -25,5 +24,11 @@ class Booking extends Model
         'session_mentoring',
         'status',
         'price',
+        'program_id',
     ];
+
+    public function programs()
+    {
+        return $this->belongsTo('App\Models\Program', 'program_id', 'id');
+    }
 }

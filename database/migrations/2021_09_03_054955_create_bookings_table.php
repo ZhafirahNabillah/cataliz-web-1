@@ -22,7 +22,6 @@ class CreateBookingsTable extends Migration
             $table->string('profession');
             $table->string('address');
             $table->text('goals');
-            $table->enum('program', ['starco', 'scmp']);
             $table->enum('book_demo', ['coaching', 'training', 'mentoring']);
             $table->string('book_date');
             $table->enum('session_coaching', ['0', '1', '2', '3']);
@@ -30,6 +29,7 @@ class CreateBookingsTable extends Migration
             $table->enum('session_mentoring', ['0', '1', '2', '3']);
             $table->enum('status', ['pending', 'reservation'])->default('pending');
             $table->string('price');
+            $table->integer('program_id')->unsigned();
             $table->timestamps();
         });
     }

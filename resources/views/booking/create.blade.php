@@ -81,7 +81,7 @@
 
                             <div class="form-group">
                                 <label for="whatsapp_number">Whatsapp Number</label>
-                                <input class="form-control @error('whatsapp_number') is-invalid @enderror" type="text" name="whatsapp_number" value="{{ old('whatsapp_number') }}" placeholder="Input your Whatsapp Number...">
+                                <input class="form-control @error('whatsapp_number') is-invalid @enderror" type="tel" name="whatsapp_number" value="{{ old('whatsapp_number') }}" maxlength="12" minlength="11" placeholder="ex. 085232982982">
                                 @error('whatsapp_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -131,8 +131,9 @@
 
                             <div class="form-group">
                                 <label for="program">Program</label><br>
-                                <input type="radio" name="program" value="starco"> STARCO <br>
-                                <input type="radio" name="program" value="scmp"> SCMP
+                                @foreach($programs as $listProgram)
+                                <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{$listProgram->program_name}}
+                                @endforeach
                                 @error('progam')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

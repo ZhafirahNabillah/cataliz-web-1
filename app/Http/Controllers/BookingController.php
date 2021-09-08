@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Program;
 use Facade\FlareClient\View;
 
 class BookingController extends Controller
@@ -25,7 +26,10 @@ class BookingController extends Controller
      */
     public function create()
     {
-        return view('booking.create');
+        $programs = Program::where('program_name', 'starco')
+            ->orWhere('program_name', 'scmp')
+            ->get();
+        return view('booking.create', compact('programs'));
     }
 
     /**
@@ -44,13 +48,13 @@ class BookingController extends Controller
             'profession' => 'required',
             'address' => 'required',
             'goals' => 'required',
-            'program' => 'required',
             'book_demo' => 'required',
             'book_date' => 'required',
             'session_coaching' => 'required',
             'session_training' => 'required',
             'session_mentoring' => 'required',
             'price' => 'required',
+            'program_id' => 'required',
         ]);
 
         //dd($request->all());
@@ -62,13 +66,13 @@ class BookingController extends Controller
             'profession' => $request->profession,
             'address' => $request->address,
             'goals' => $request->goals,
-            'program' => $request->program,
             'book_demo' => $request->book_demo,
             'book_date' => $request->book_date,
             'session_coaching' => $request->session_coaching,
             'session_training' => $request->session_training,
             'session_mentoring' => $request->session_mentoring,
             'price' => $request->price,
+            'program_id' => $request->program_id,
             'created_at' => date('Y-m-d H:1:s'),
         ]);
 
