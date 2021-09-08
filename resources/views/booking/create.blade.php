@@ -221,10 +221,12 @@
 
 
                             <div class="form-group text-center mb-0">
-                                <Button type="submit" class="btn btn-warning">NEXT</Button>
+                                <Button id="submit" type="submit" class="btn btn-warning">BOOK NOW</Button>
                             </div>
                         </form><br>
-                        <!-- <Button class="btn btn-warning" id="cekPrice">CHECK OUT</Button> -->
+                        <div id="buttonCheck">
+                            <Button class="btn btn-warning" id="checkOut" style="width: 70%; margin-left: 16.4%; margin-top:-1%;">CHECK OUT</Button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,9 +240,11 @@
 @push('scripts')
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
 <script>
+    var priceCoaching = parseInt("400000");
+    var priceTraining = parseInt("300000");
+    var priceMentoring = parseInt("300000");
+
     $(function() {
         $("#book_date").datepicker({
             beforeShowDay: function(date) {
@@ -251,62 +255,78 @@
 
     $(document).ready(function() {
         $("#priceBooking").hide();
+        $("#submit").hide();
+        $("#buttonCheck").show();
+
         $("#fieldCoaching").hide();
-        $("#fieldTraining").hide();
-        $("#fieldMentoring").hide();
         $("#coaching").change(function() {
             if ($('#coaching').is(':checked')) {
                 $("#fieldCoaching").show();
+
             } else {
                 $("#fieldCoaching").hide();
             }
+            $("#submit").hide();
+            $("#buttonCheck").show();
         });
+        $("#fieldTraining").hide();
         $("#training").change(function() {
             if ($('#training').is(':checked')) {
                 $("#fieldTraining").show();
             } else {
                 $("#fieldTraining").hide();
             }
+            $("#submit").hide();
+            $("#buttonCheck").show();
         });
+        $("#fieldMentoring").hide();
         $("#mentoring").change(function() {
             if ($('#mentoring').is(':checked')) {
                 $("#fieldMentoring").show();
             } else {
                 $("#fieldMentoring").hide();
             }
+            $("#submit").hide();
+            $("#buttonCheck").show();
         });
 
-        var priceCoaching = parseInt("400000");
-        var priceTraining = parseInt("300000");
-        var priceMentoring = parseInt("300000");
-
-        $("#sessionCoaching").on("change", function() {
-            if ($(this).val() != null) {
-                var timeCoaching = parseInt($("#sessionCoaching").val());
-                var totalPrice = priceCoaching * timeCoaching;
-            }
-            $('#informationPrice').text("Rp. " + totalPrice);
+        $("#sessionCoaching").change(function() {
+            $("#submit").hide();
+            $("#buttonCheck").show();
         });
-        if ($('#coaching').is(':checked')) {} else if ($('#training').is(':checked')) {
-            var totalPrice = priceTraining * timeTraining;
-        } else if ($('#mentoring').is(':checked')) {
-            var totalPrice = priceMentoring * timeMentoring;
-        }
-        if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
-            var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining);
-        }
-        if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
-            var totalPrice = (priceCoaching * timeCoaching) + (priceMentoring * timeMentoring);
-        }
-        if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
-            var totalPrice = (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
-        }
-        if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
-            var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
-        }
+        $("#sessionTraining").change(function() {
+            $("#submit").hide();
+            $("#buttonCheck").show();
+        });
+        $("#sessionMentoring").change(function() {
+            $("#submit").hide();
+            $("#buttonCheck").show();
+        });
+
+        // $("#sessionCoaching").change(function() {
+        //     if ($('#coaching').is(':checked')) {
+        //         var timeCoaching = parseInt($("#sessionCoaching").val());
+        //         var totalPrice = priceCoaching * timeCoaching;
+        //     }
+        //     $('#informationPrice').text("Rp. " + totalPrice);
+        // });
+        // $("#sessionTraining").change(function() {
+        //     if ($('#training').is(':checked')) {
+        //         var timeTraining = parseInt($("#sessionTraining").val());
+        //         var totalPrice = priceTraining * timeTraining;
+        //     }
+        //     $('#informationPrice').text("Rp. " + totalPrice);
+        // });
+        // $("#sessionMentoring").change(function() {
+        //     if ($('#mentoring').is(':checked')) {
+        //         var timeMentoring = parseInt($("#sessionMentoring").val());
+        //         var totalPrice = priceMentoring * timeMentoring;
+        //     }
+        //     $('#informationPrice').text("Rp. " + totalPrice);
+        // });
 
 
-        $("#cekPrice").click(function() {
+        $("#checkOut").click(function() {
             var priceCoaching = parseInt("400000");
             var priceTraining = parseInt("300000");
             var priceMentoring = parseInt("300000");
@@ -337,6 +357,8 @@
 
             $('#priceBooking').val("Rp. " + totalPrice);
             $('#informationPrice').text("Rp. " + totalPrice);
+            $("#submit").show();
+            $("#buttonCheck").hide();
         });
     });
 </script>
