@@ -304,27 +304,27 @@
             $("#buttonCheck").show();
         });
 
-        // $("#sessionCoaching").change(function() {
-        //     if ($('#coaching').is(':checked')) {
-        //         var timeCoaching = parseInt($("#sessionCoaching").val());
-        //         var totalPrice = priceCoaching * timeCoaching;
-        //     }
-        //     $('#informationPrice').text("Rp. " + totalPrice);
-        // });
-        // $("#sessionTraining").change(function() {
-        //     if ($('#training').is(':checked')) {
-        //         var timeTraining = parseInt($("#sessionTraining").val());
-        //         var totalPrice = priceTraining * timeTraining;
-        //     }
-        //     $('#informationPrice').text("Rp. " + totalPrice);
-        // });
-        // $("#sessionMentoring").change(function() {
-        //     if ($('#mentoring').is(':checked')) {
-        //         var timeMentoring = parseInt($("#sessionMentoring").val());
-        //         var totalPrice = priceMentoring * timeMentoring;
-        //     }
-        //     $('#informationPrice').text("Rp. " + totalPrice);
-        // });
+        $("#sessionCoaching").change(function() {
+            if ($('#coaching').is(':checked')) {
+                var timeCoaching = parseInt($("#sessionCoaching").val());
+                var totalPrice = priceCoaching * timeCoaching;
+            }
+            $('#informationPrice').text("Rp. " + totalPrice);
+        });
+        $("#sessionTraining").change(function() {
+            if ($('#training').is(':checked')) {
+                var timeTraining = parseInt($("#sessionTraining").val());
+                var totalPrice = priceTraining * timeTraining;
+            }
+            $('#informationPrice').text("Rp. " + totalPrice);
+        });
+        $("#sessionMentoring").change(function() {
+            if ($('#mentoring').is(':checked')) {
+                var timeMentoring = parseInt($("#sessionMentoring").val());
+                var totalPrice = priceMentoring * timeMentoring;
+            }
+            $('#informationPrice').text("Rp. " + totalPrice);
+        });
 
 
         $("#checkOut").click(function() {
