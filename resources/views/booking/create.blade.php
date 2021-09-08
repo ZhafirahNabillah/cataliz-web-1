@@ -162,7 +162,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" id="fieldCoaching">
                                 <label for="session_coaching">Coaching Session:</label>
                                 <select id="sessionCoaching" name="session_coaching" class="form-control @error('session_coaching') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
@@ -177,7 +177,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="fieldTraining">
                                 <label for="session_training">Training Session:</label>
                                 <select id="sessionTraining" name="session_training" class="form-control @error('session_training') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
@@ -192,7 +192,7 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="fieldMentoring">
                                 <label for="session_mentoring">Mentoring Session:</label>
                                 <select id="sessionMentoring" name="session_mentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
@@ -210,6 +210,7 @@
 
                             <div class="form-group">
                                 <label for="price">Price</label>
+                                <h2 id="informationPrice">Rp. 0</h2>
                                 <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="" placeholder="Choice Book Demo and Session, Than Klik Check Out...">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
@@ -223,7 +224,7 @@
                                 <Button type="submit" class="btn btn-warning">NEXT</Button>
                             </div>
                         </form><br>
-                        <Button class="btn btn-warning" id="cekPrice">CHECK OUT</Button>
+                        <!-- <Button class="btn btn-warning" id="cekPrice">CHECK OUT</Button> -->
                     </div>
                 </div>
             </div>
@@ -249,7 +250,62 @@
     });
 
     $(document).ready(function() {
-        $("#priceBooking").prop('disabled', true);
+        $("#priceBooking").hide();
+        $("#fieldCoaching").hide();
+        $("#fieldTraining").hide();
+        $("#fieldMentoring").hide();
+        $("#coaching").change(function() {
+            if ($('#coaching').is(':checked')) {
+                $("#fieldCoaching").show();
+            } else {
+                $("#fieldCoaching").hide();
+            }
+        });
+        $("#training").change(function() {
+            if ($('#training').is(':checked')) {
+                $("#fieldTraining").show();
+            } else {
+                $("#fieldTraining").hide();
+            }
+        });
+        $("#mentoring").change(function() {
+            if ($('#mentoring').is(':checked')) {
+                $("#fieldMentoring").show();
+            } else {
+                $("#fieldMentoring").hide();
+            }
+        });
+
+        var priceCoaching = parseInt("400000");
+        var priceTraining = parseInt("300000");
+        var priceMentoring = parseInt("300000");
+
+        $("#sessionCoaching").on("change", function() {
+            if ($(this).val() != null) {
+                var timeCoaching = parseInt($("#sessionCoaching").val());
+                var totalPrice = priceCoaching * timeCoaching;
+            }
+            $('#informationPrice').text("Rp. " + totalPrice);
+        });
+        if ($('#coaching').is(':checked')) {} else if ($('#training').is(':checked')) {
+            var totalPrice = priceTraining * timeTraining;
+        } else if ($('#mentoring').is(':checked')) {
+            var totalPrice = priceMentoring * timeMentoring;
+        }
+        if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
+            var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining);
+        }
+        if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
+            var totalPrice = (priceCoaching * timeCoaching) + (priceMentoring * timeMentoring);
+        }
+        if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
+            var totalPrice = (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
+        }
+        if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
+            var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
+        }
+
+
         $("#cekPrice").click(function() {
             var priceCoaching = parseInt("400000");
             var priceTraining = parseInt("300000");
@@ -279,8 +335,8 @@
                 var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
             }
 
-            $("#priceBooking").prop('disabled', false);
             $('#priceBooking').val("Rp. " + totalPrice);
+            $('#informationPrice').text("Rp. " + totalPrice);
         });
     });
 </script>
