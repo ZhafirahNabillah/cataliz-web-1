@@ -649,6 +649,12 @@
                   </label>
                 </div>
                 <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-manager" value="manager">
+                  <label class="form-check-label" for="permission-check-manager">
+                    Manager
+                  </label>
+                </div>
+                <div class="form-check">
                   <input class="form-check-input" type="radio" name="roles" id="permission-check-admin" value="admin">
                   <label class="form-check-label" for="permission-check-admin">
                     Admin
@@ -879,8 +885,8 @@
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#manager" aria-controls="profile" role="tab"
-                aria-selected="false">Manager</a>
+              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#manager" aria-controls="profile" role="tab"
+                aria-selected="true">Manager</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
@@ -891,44 +897,15 @@
                 aria-selected="false">Trainer</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
-                aria-selected="false">coachmentors</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile" role="tab"
+                aria-selected="false">Coachmentors</a>
             </li>
           </ul>
 
           <div class="tab-content">
-            <!-- Panel Coach -->
-            <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
-              <!-- coachlist card -->
-              <div class="row">
-                <div class="col-12">
-                  <div class="d-block text-right">
-                    <a href="{{ route('coach_pdf') }}" class="btn btn-primary">Download PDF</a>
-                  </div>
-                  <hr class="mb-0">
-                  <table class="datatables-basic table-striped table admin-datatable-coach">
-                    <thead>
-                      <tr>
-                        <th>NO</th>
-                        <th>Coach Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        {{-- <th>Rating</th> --}}
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-            <!-- /coach list admin -->
-            <!-- /panel coach -->
-
 
             <!-- Panel manager -->
-            <div class="tab-pane" id="manager" aria-labelledby="manager-tab" role="tabpanel">
+            <div class="tab-pane active" id="manager" aria-labelledby="manager-tab" role="tabpanel">
               <!-- adminlist card -->
               <div class="row">
                 <div class="col-12">
@@ -1007,8 +984,8 @@
             </div>
             <!-- /trainer list admin -->
 
-            <!-- Panel Mentor -->
-            <div class="tab-pane" id="mentor" aria-labelledby="mentor-tab" role="tabpanel">
+            <!-- Panel coachmentors -->
+            <div class="tab-pane" id="coachmentors" aria-labelledby="coachmentors-tab" role="tabpanel">
               <!-- mentorlist card -->
 
               <div class="row">
@@ -1017,11 +994,11 @@
                     {{-- <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a> --}}
                   </div>
                   <hr class="mb-0">
-                  <table class="datatables-basic table-striped table admin-datatable-mentor">
+                  <table class="datatables-basic table-striped table manager-datatable-coachmentors">
                     <thead>
                       <tr>
                         <th>No</th>
-                        <th>Mentor Name</th>
+                        <th>CoachMentors Name</th>
                         <th>Email</th>
                         <th>Handphone</th>
                         <th style="line-height: 40px;">Action</th>
@@ -1087,6 +1064,12 @@
                     value="coachee">
                   <label class="form-check-label" for="permission-check-coachee">
                     Coachee
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-manager" value="manager">
+                  <label class="form-check-label" for="permission-check-manager">
+                    Manager
                   </label>
                 </div>
                 <div class="form-check">
@@ -1354,6 +1337,48 @@
               search: "<i data-feather='search'></i>",
               searchPlaceholder: "Search records"
             }
+          });
+          var table_mentor = $('.manager-datatable-coachmentors').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('show_coachmentors_list') }}",
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+              },
+              {
+                data: 'name',
+                name: 'name'
+              },
+              {
+                data: 'email',
+                name: 'email',
+                defaultContent: '<i>-</i>'
+              },
+              {
+                data: 'phone',
+                name: 'phone',
+                render: function(data, type, row) {
+                  return '+62' + data;
+                }
+              },
+              {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+              },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+              paginate: {
+                // remove previous & next text from pagination
+                previous: '&nbsp;',
+                next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+            },
           });
 
           var table_trainer = $('.manager-datatable-manager').DataTable({
