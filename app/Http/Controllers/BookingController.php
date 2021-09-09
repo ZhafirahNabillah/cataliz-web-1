@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Program;
+use Illuminate\Support\Facades\Mail;
 use Facade\FlareClient\View;
 
 class BookingController extends Controller
@@ -75,6 +76,18 @@ class BookingController extends Controller
             'program_id' => $request->program_id,
             'created_at' => date('Y-m-d H:1:s'),
         ]);
+
+        $email = $request->email;
+        $data = array(
+            'name' => $request->name,
+            'book_date' => $request->book_date,
+            'price' => $request->price,
+        );
+        Mail::send('booking/email_template', $data, function ($mail) use ($email) {
+            $mail->to($email, 'no-reply')
+                ->subject("Sample Email Laravel");
+            $mail->from('aditcarlytos61199@gmail.com', 'Booking Cataliz');
+        });
 
 
         return redirect('booking/create')->with('success', 'value');
