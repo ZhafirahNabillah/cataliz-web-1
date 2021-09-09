@@ -120,7 +120,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="goals">goals</label>
+                                <label for="goals">Goals</label>
                                 <input class="form-control @error('goals') is-invalid @enderror" type="text" name="goals" value="{{ old('goals') }}" placeholder="Input your goals...">
                                 @error('goals')
                                 <span class="invalid-feedback" role="alert">
@@ -131,10 +131,13 @@
 
                             <div class="form-group">
                                 <label for="program">Program</label><br>
+                                @error('program_id')
+                                Program is Empty, Please request program to Admin...
+                                @enderror
                                 @foreach($programs as $listProgram)
                                 <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{$listProgram->program_name}}
                                 @endforeach
-                                @error('progam')
+                                @error('progam_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -165,13 +168,14 @@
 
                             <div class="form-group" id="fieldCoaching">
                                 <label for="session_coaching">Coaching Session:</label>
-                                <select id="sessionCoaching" name="session_coaching" class="form-control @error('session_coaching') is-invalid @enderror">
+                                <select id="sessionCoaching" class="form-control @error('session_coaching') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
                                     <option value="0" {{(old('session_coaching') == '0') ? ' selected' : ''}}>0 Session</option>
                                     <option value="1" {{(old('session_coaching') == '1') ? ' selected' : ''}}>1 Session</option>
                                     <option value="2" {{(old('session_coaching') == '2') ? ' selected' : ''}}>2 Session</option>
                                     <option value="3" {{(old('session_coaching') == '3') ? ' selected' : ''}}>3 Session</option>
                                 </select>
+                                <input type="hidden" class="sum" name="session_coaching" id="inputCoaching">
                                 @error('session_coaching')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -180,13 +184,14 @@
                             </div>
                             <div class="form-group" id="fieldTraining">
                                 <label for="session_training">Training Session:</label>
-                                <select id="sessionTraining" name="session_training" class="form-control @error('session_training') is-invalid @enderror">
+                                <select id="sessionTraining" class="form-control @error('session_training') is-invalid @enderror">
                                     <option value="" disabled>Choose a session:</option>
                                     <option value="0" {{(old('session_training') == '0') ? ' selected' : ''}}>0 Session</option>
                                     <option value="1" {{(old('session_training') == '1') ? ' selected' : ''}}>1 Session</option>
                                     <option value="2" {{(old('session_training') == '2') ? ' selected' : ''}}>2 Session</option>
                                     <option value="3" {{(old('session_training') == '3') ? ' selected' : ''}}>3 Session</option>
                                 </select>
+                                <input type="hidden" class="sum" name="session_training" id="inputTraining">
                                 @error('session_training')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -202,6 +207,7 @@
                                     <option value="2" {{(old('session_mentoring') == '2') ? ' selected' : ''}}>2 Session</option>
                                     <option value="3" {{(old('session_mentoring') == '3') ? ' selected' : ''}}>3 Session</option>
                                 </select>
+                                <input type="hidden" class="sum" name="session_mentoring" id="inputMentoring">
                                 @error('session_mentoring')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -210,9 +216,11 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="price">Price</label>
-                                <h2 id="informationPrice">Rp. 0</h2>
-                                <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="" placeholder="Choice Book Demo and Session, Than Klik Check Out...">
+                                <label for="price">Total Price</label>
+                                <h2>
+                                    Rp. <span id="informationPrice">0</span>
+                                </h2>
+                                <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="">
                                 @error('price')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -220,14 +228,13 @@
                                 @enderror
                             </div>
 
-
                             <div class="form-group text-center mb-0">
                                 <Button id="submit" type="submit" class="btn btn-warning">BOOK NOW</Button>
                             </div>
                         </form><br>
-                        <div id="buttonCheck">
+                        <!-- <div id="buttonCheck">
                             <Button class="btn btn-warning" id="checkOut" style="width: 55%; margin-left: 45%; margin-top:-1%;">CHECK OUT</Button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -242,10 +249,6 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-    var priceCoaching = parseInt("400000");
-    var priceTraining = parseInt("300000");
-    var priceMentoring = parseInt("300000");
-
     $(function() {
         $("#book_date").datepicker({
             beforeShowDay: function(date) {
@@ -255,112 +258,187 @@
     });
 
     $(document).ready(function() {
-        $("#priceBooking").hide();
-        $("#submit").hide();
-        $("#buttonCheck").show();
+        let price, pcoach, ptrain, pmentor;
+        $('#fieldCoaching, #fieldTraining, #fieldMentoring').hide();
 
-        $("#fieldCoaching").hide();
-        $("#coaching").change(function() {
-            if ($('#coaching').is(':checked')) {
-                $("#fieldCoaching").show();
-
+        $('input[type="checkbox"]').change(function() {
+            if (this.checked) {
+                switch (this.value) {
+                    case 'coaching':
+                        $('#fieldCoaching').show();
+                        break;
+                    case 'mentoring':
+                        $('#fieldMentoring').show();
+                        break;
+                    default:
+                        $('#fieldTraining').show();
+                }
             } else {
-                $("#fieldCoaching").hide();
-            }
-            $("#submit").hide();
-            $("#buttonCheck").show();
-        });
-        $("#fieldTraining").hide();
-        $("#training").change(function() {
-            if ($('#training').is(':checked')) {
-                $("#fieldTraining").show();
-            } else {
-                $("#fieldTraining").hide();
-            }
-            $("#submit").hide();
-            $("#buttonCheck").show();
-        });
-        $("#fieldMentoring").hide();
-        $("#mentoring").change(function() {
-            if ($('#mentoring').is(':checked')) {
-                $("#fieldMentoring").show();
-            } else {
-                $("#fieldMentoring").hide();
-            }
-            $("#submit").hide();
-            $("#buttonCheck").show();
-        });
 
-        $("#sessionCoaching").change(function() {
-            $("#submit").hide();
-            $("#buttonCheck").show();
-        });
-        $("#sessionTraining").change(function() {
-            $("#submit").hide();
-            $("#buttonCheck").show();
-        });
-        $("#sessionMentoring").change(function() {
-            $("#submit").hide();
-            $("#buttonCheck").show();
-        });
+                switch (this.value) {
+                    case 'coaching':
+                        $('#fieldCoaching').hide();
+                        $('#fieldCoaching option:first').prop('selected', true);
+                        $('#inputCoaching').val("");
 
-        $("#sessionCoaching").change(function() {
-            if ($('#coaching').is(':checked')) {
-                var timeCoaching = parseInt($("#sessionCoaching").val());
-                var totalPrice = priceCoaching * timeCoaching;
-            }
-            $('#informationPrice').text("Rp. " + totalPrice);
-        });
-        $("#sessionTraining").change(function() {
-            if ($('#training').is(':checked')) {
-                var timeTraining = parseInt($("#sessionTraining").val());
-                var totalPrice = priceTraining * timeTraining;
-            }
-            $('#informationPrice').text("Rp. " + totalPrice);
-        });
-        $("#sessionMentoring").change(function() {
-            if ($('#mentoring').is(':checked')) {
-                var timeMentoring = parseInt($("#sessionMentoring").val());
-                var totalPrice = priceMentoring * timeMentoring;
-            }
-            $('#informationPrice').text("Rp. " + totalPrice);
-        });
+                        subtotal();
+                        break;
+                    case 'mentoring':
+                        $('#fieldMentoring').hide();
+                        $('#fieldMentoring option:first').prop('selected', true);
+                        $('#inputMentoring').val("");
 
-
-        $("#checkOut").click(function() {
-            var priceCoaching = parseInt("400000");
-            var priceTraining = parseInt("300000");
-            var priceMentoring = parseInt("300000");
-
-            var timeCoaching = parseInt($("#sessionCoaching").val());
-            var timeTraining = parseInt($("#sessionTraining").val());
-            var timeMentoring = parseInt($("#sessionMentoring").val());
-
-            if ($('#coaching').is(':checked')) {
-                var totalPrice = priceCoaching * timeCoaching;
-            } else if ($('#training').is(':checked')) {
-                var totalPrice = priceTraining * timeTraining;
-            } else if ($('#mentoring').is(':checked')) {
-                var totalPrice = priceMentoring * timeMentoring;
-            }
-            if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
-                var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining);
-            }
-            if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrice = (priceCoaching * timeCoaching) + (priceMentoring * timeMentoring);
-            }
-            if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrice = (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
-            }
-            if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
-                var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
+                        subtotal();
+                        break;
+                    default:
+                        $('#fieldTraining option:first').prop('selected', true);
+                        $('#fieldTraining').hide();
+                        $('#inputTraining').val("");
+                        subtotal();
+                }
             }
 
-            $('#priceBooking').val("Rp. " + totalPrice);
-            $('#informationPrice').text("Rp. " + totalPrice);
-            $("#submit").show();
-            $("#buttonCheck").hide();
+            $("#fieldCoaching").change(function() {
+                var pcoach = $("#fieldCoaching :selected").val() * parseInt(400000);
+                $('#inputCoaching').val(pcoach);
+                subtotal();
+                preventDefault();
+            });
+
+            $("#fieldTraining").change(function() {
+                var ptrain = $("#fieldTraining :selected").val() * parseInt(300000);
+                $('#inputTraining').val(ptrain);
+                subtotal();
+                preventDefault();
+            });
+
+            $("#fieldMentoring").change(function() {
+                var pmentor = $("#fieldMentoring :selected").val() * parseInt(300000);
+                $('#inputMentoring').val(pmentor);
+                subtotal();
+                preventDefault();
+            });
+
+            function subtotal() {
+                var total = 0;
+                $(".sum").each(function(idx, element) {
+                    $this = $(this);
+                    var cost = parseFloat($this.val());
+                    if (cost)
+                        total += cost;
+                });
+                //alert(total);
+                $('#informationPrice').html(total.toLocaleString());
+                $('#priceBooking').val(total.toLocaleString());
+            }
         });
+
+        //     $("#priceBooking").hide();
+        //     $("#submit").hide();
+        //     $("#buttonCheck").show();
+
+        //     $("#fieldCoaching").hide();
+        //     $("#coaching").change(function() {
+        //         if ($('#coaching').is(':checked')) {
+        //             $("#fieldCoaching").show();
+
+        //         } else {
+        //             $("#fieldCoaching").hide();
+        //         }
+        //         $("#submit").hide();
+        //         $("#buttonCheck").show();
+        //     });
+        //     $("#fieldTraining").hide();
+        //     $("#training").change(function() {
+        //         if ($('#training').is(':checked')) {
+        //             $("#fieldTraining").show();
+        //         } else {
+        //             $("#fieldTraining").hide();
+        //         }
+        //         $("#submit").hide();
+        //         $("#buttonCheck").show();
+        //     });
+        //     $("#fieldMentoring").hide();
+        //     $("#mentoring").change(function() {
+        //         if ($('#mentoring').is(':checked')) {
+        //             $("#fieldMentoring").show();
+        //         } else {
+        //             $("#fieldMentoring").hide();
+        //         }
+        //         $("#submit").hide();
+        //         $("#buttonCheck").show();
+        //     });
+
+        //     $("#sessionCoaching").change(function() {
+        //         $("#submit").hide();
+        //         $("#buttonCheck").show();
+        //     });
+        //     $("#sessionTraining").change(function() {
+        //         $("#submit").hide();
+        //         $("#buttonCheck").show();
+        //     });
+        //     $("#sessionMentoring").change(function() {
+        //         $("#submit").hide();
+        //         $("#buttonCheck").show();
+        //     });
+
+        //     $("#sessionCoaching").change(function() {
+        //         if ($('#coaching').is(':checked')) {
+        //             var timeCoaching = parseInt($("#sessionCoaching").val());
+        //             var totalPrice = priceCoaching * timeCoaching;
+        //         }
+        //         $('#informationPrice').text("Rp. " + totalPrice);
+        //     });
+        //     $("#sessionTraining").change(function() {
+        //         if ($('#training').is(':checked')) {
+        //             var timeTraining = parseInt($("#sessionTraining").val());
+        //             var totalPrice = priceTraining * timeTraining;
+        //         }
+        //         $('#informationPrice').text("Rp. " + totalPrice);
+        //     });
+        //     $("#sessionMentoring").change(function() {
+        //         if ($('#mentoring').is(':checked')) {
+        //             var timeMentoring = parseInt($("#sessionMentoring").val());
+        //             var totalPrice = priceMentoring * timeMentoring;
+        //         }
+        //         $('#informationPrice').text("Rp. " + totalPrice);
+        //     });
+
+
+        //     $("#checkOut").click(function() {
+        //         var priceCoaching = parseInt("400000");
+        //         var priceTraining = parseInt("300000");
+        //         var priceMentoring = parseInt("300000");
+
+        //         var timeCoaching = parseInt($("#sessionCoaching").val());
+        //         var timeTraining = parseInt($("#sessionTraining").val());
+        //         var timeMentoring = parseInt($("#sessionMentoring").val());
+
+        //         if ($('#coaching').is(':checked')) {
+        //             var totalPrice = priceCoaching * timeCoaching;
+        //         } else if ($('#training').is(':checked')) {
+        //             var totalPrice = priceTraining * timeTraining;
+        //         } else if ($('#mentoring').is(':checked')) {
+        //             var totalPrice = priceMentoring * timeMentoring;
+        //         }
+        //         if ($('#coaching').is(':checked') && $('#training').is(':checked')) {
+        //             var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining);
+        //         }
+        //         if ($('#coaching').is(':checked') && $('#mentoring').is(':checked')) {
+        //             var totalPrice = (priceCoaching * timeCoaching) + (priceMentoring * timeMentoring);
+        //         }
+        //         if ($('#training').is(':checked') && $('#mentoring').is(':checked')) {
+        //             var totalPrice = (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
+        //         }
+        //         if ($('#coaching').is(':checked') && $('#training').is(':checked') && $('#mentoring').is(':checked')) {
+        //             var totalPrice = (priceCoaching * timeCoaching) + (priceTraining * timeTraining) + (priceMentoring * timeMentoring);
+        //         }
+
+        //         $('#priceBooking').val("Rp. " + totalPrice);
+        //         $('#informationPrice').text("Rp. " + totalPrice);
+        //         $("#submit").show();
+        //         $("#buttonCheck").hide();
+        //     });
     });
 </script>
 @endpush

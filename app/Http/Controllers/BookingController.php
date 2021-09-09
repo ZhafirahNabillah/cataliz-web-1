@@ -40,6 +40,7 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
@@ -57,7 +58,6 @@ class BookingController extends Controller
             'program_id' => 'required',
         ]);
 
-        //dd($request->all());
         Booking::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -77,7 +77,7 @@ class BookingController extends Controller
         ]);
 
 
-        return redirect('booking/create')->with('success', 'value');
+        //return redirect('booking/store')->with('success', 'value');
     }
 
     /**
