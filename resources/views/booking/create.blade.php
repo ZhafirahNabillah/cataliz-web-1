@@ -259,7 +259,8 @@
 
     $(document).ready(function() {
         let price, pcoach, ptrain, pmentor;
-        $('#fieldCoaching, #fieldTraining, #fieldMentoring').hide();
+
+        $('#fieldCoaching, #fieldTraining, #fieldMentoring, #priceBooking').hide();
 
         $('input[type="checkbox"]').change(function() {
             if (this.checked) {
@@ -280,7 +281,6 @@
                         $('#fieldCoaching').hide();
                         $('#fieldCoaching option:first').prop('selected', true);
                         $('#inputCoaching').val("");
-
                         subtotal();
                         break;
                     case 'mentoring':
@@ -330,7 +330,18 @@
                 //alert(total);
                 $('#informationPrice').html(total.toLocaleString());
                 $('#priceBooking').val(total.toLocaleString());
+
             }
+        });
+
+        $("#submit").click(function() {
+            var timeCoaching = parseInt($("#sessionCoaching").val());
+            var timeTraining = parseInt($("#sessionTraining").val());
+            var timeMentoring = parseInt($("#sessionMentoring").val());
+
+            $('#inputCoaching').val(timeCoaching);
+            $('#inputTraining').val(timeTraining);
+            $('#inputMentoring').val(timeMentoring);
         });
 
         //     $("#priceBooking").hide();
