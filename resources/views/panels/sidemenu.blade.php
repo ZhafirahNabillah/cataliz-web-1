@@ -73,6 +73,10 @@
                 <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="book"></i><span
                         class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
             </li>
+            <li class=" nav-item {{ 'book' == request()->path() ? 'active show' : '' }}">
+                <a class="d-flex align-items-center" href="{{route('booking.index')}}"><i data-feather="book"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Book Demo</span></a>
+            </li>
             @endrole
 
             @canany('list-plan','list-agenda','list-class', 'create-class', 'detail-class')

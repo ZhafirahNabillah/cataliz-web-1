@@ -82,6 +82,7 @@ Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_ce
 //Booking controller
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+Route::resource('booking', BookingController::class);
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {
