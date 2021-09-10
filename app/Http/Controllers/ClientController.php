@@ -302,10 +302,15 @@ class ClientController extends Controller
               $actionBtn = $update_btn . ' ' . $unsuspend_btn . ' ' . $delete_btn;
             }
             return $actionBtn;
-          } elseif (auth()->user()->hasRole('mentor|manager')) {
+          } elseif (auth()->user()->hasRole('mentor')) {
             $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
 
             $actionBtn = $detail_btn;
+            return $actionBtn;
+          } elseif (auth()->user()->hasRole('manager')) {
+            $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
+
+            $actionBtn = $update_btn;
             return $actionBtn;
           }
         })
@@ -392,6 +397,13 @@ class ClientController extends Controller
             $actionBtn = $detail_btn;
             return $actionBtn;
           }
+          elseif (auth()->user()->hasRole('manager')) {
+            $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . 
+            $row->id . '">Update</a></div>';
+
+            $actionBtn = $update_btn;
+            return $actionBtn;
+          }
         })->addColumn('phone', function ($row) {
           $phone = substr($row->phone, 0, -5) . 'xxxxx';
 
@@ -448,9 +460,8 @@ class ClientController extends Controller
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
-            $detail_btn = '<a href="javascript:;" class="btn-sm btn-success detailMentor" data-id="' . $row->id . '">Detail</a>';
             $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
-            $actionBtn = $detail_btn . ' ' . $update_btn;
+            $actionBtn = $update_btn;
             return $actionBtn;
         })->addColumn('phone', function ($row) {
           $phone = substr($row->phone, 0, -5) . 'xxxxx';

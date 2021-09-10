@@ -21,14 +21,20 @@ class ProgramController extends Controller
           $data = Program::all();
 
           return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+          ->addIndexColumn()
+          ->addColumn('action', function ($row) {
+              if (auth()->user()->hasRole('admin')) {
               $edit_btn = '<a href="javascript:;" id="editProgram" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
               $delete_btn = '<a href="javascript:;" id="deleteProgram" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
               $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailProgram" class="btn-sm btn-warning">Detail</a>';
 
               $actionBtn = $edit_btn . ' ' . $delete_btn . ' ' . $detail_btn;
               return $actionBtn;
+            } elseif (auth()->user()->hasRole('manager')) {
+              $edit_btn = '<a href="javascript:;" id="editProgram" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
+              $actionBtn = $edit_btn;
+              return $actionBtn;
+            }
             })
             ->rawColumns(['action'])
             ->make(true);
