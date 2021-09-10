@@ -38,6 +38,11 @@ class BookingController extends Controller
         $code_booking = str_shuffle($pin);
         return view('booking.create', compact('programs', 'code_booking'));
     }
+    
+    public function seeEmailTemplate()
+    {
+        return view('booking.email_template');
+    }
 
     /**
      * Store a newly created resource in storage.
