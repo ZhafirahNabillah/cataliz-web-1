@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Program;
 use Illuminate\Support\Facades\Mail;
-use Facade\FlareClient\View;
 
 class BookingController extends Controller
 {
@@ -30,7 +29,14 @@ class BookingController extends Controller
         $programs = Program::where('program_name', 'starco')
             ->orWhere('program_name', 'scmp')
             ->get();
-        return view('booking.create', compact('programs'));
+
+        $characters = '0123456789';
+        $pin = mt_rand(1000000, 9999999)
+            . mt_rand(1000000, 9999999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        $code_booking = str_shuffle($pin);
+        return view('booking.create', compact('programs', 'code_booking'));
     }
 
     /**
@@ -43,6 +49,7 @@ class BookingController extends Controller
     {
         //dd($request->all());
         $this->validate($request, [
+            'code' => 'required',
             'name' => 'required',
             'email' => 'required|email',
             'whatsapp_number' => 'required',
@@ -74,6 +81,7 @@ class BookingController extends Controller
             'session_mentoring' => $request->session_mentoring,
             'price' => $request->price,
             'program_id' => $request->program_id,
+            'code' => $request->code,
             'created_at' => date('Y-m-d H:1:s'),
         ]);
 

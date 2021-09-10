@@ -10,6 +10,7 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = [
+        'code',
         'name',
         'email',
         'whatsapp_number',
@@ -26,6 +27,16 @@ class Booking extends Model
         'price',
         'program_id',
     ];
+
+    public function setBookDemoAttribute($value)
+    {
+        $this->attributes['book_demo'] = json_encode($value);
+    }
+
+    public function getBookDemoAttribute($value)
+    {
+        return $this->attributes['book_demo'] = json_decode($value);
+    }
 
     public function programs()
     {

@@ -15,6 +15,7 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('code');
             $table->string('name');
             $table->string('email');
             $table->string('whatsapp_number');
@@ -22,11 +23,11 @@ class CreateBookingsTable extends Migration
             $table->string('profession');
             $table->string('address');
             $table->text('goals');
-            $table->enum('book_demo', ['coaching', 'training', 'mentoring']);
+            $table->string('book_demo');
             $table->string('book_date');
-            $table->enum('session_coaching', ['0', '1', '2', '3']);
-            $table->enum('session_training', ['0', '1', '2', '3']);
-            $table->enum('session_mentoring', ['0', '1', '2', '3']);
+            $table->enum('session_coaching', ['0', '1', '2', '3'])->default('0');
+            $table->enum('session_training', ['0', '1', '2', '3'])->default('0');
+            $table->enum('session_mentoring', ['0', '1', '2', '3'])->default('0');
             $table->enum('status', ['pending', 'reservation'])->default('pending');
             $table->string('price');
             $table->integer('program_id')->unsigned();

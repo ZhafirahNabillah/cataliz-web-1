@@ -156,9 +156,9 @@
 
                             <div class="form-group">
                                 <label for="book_demo">Book Demo</label><br>
-                                <input type="checkbox" name="book_demo" value="coaching" id="coaching"> COACHING <br>
-                                <input type="checkbox" name="book_demo" value="training" id="training"> TRAINING <br>
-                                <input type="checkbox" name="book_demo" value="mentoring" id="mentoring"> MENTORING <br>
+                                <input type="checkbox" name="book_demo[]" value="coaching" id="coaching"> COACHING <br>
+                                <input type="checkbox" name="book_demo[]" value="training" id="training"> TRAINING <br>
+                                <input type="checkbox" name="book_demo[]" value="mentoring" id="mentoring"> MENTORING <br>
                                 @error('book_demo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -168,8 +168,7 @@
 
                             <div class="form-group" id="fieldCoaching">
                                 <label for="session_coaching">Coaching Session:</label>
-                                <select id="sessionCoaching" class="form-control @error('session_coaching') is-invalid @enderror">
-                                    <option value="" disabled>Choose a session:</option>
+                                <select id="choiceCoaching" class="form-control @error('session_coaching') is-invalid @enderror">
                                     <option value="0" {{(old('session_coaching') == '0') ? ' selected' : ''}}>0 Session</option>
                                     <option value="1" {{(old('session_coaching') == '1') ? ' selected' : ''}}>1 Session</option>
                                     <option value="2" {{(old('session_coaching') == '2') ? ' selected' : ''}}>2 Session</option>
@@ -184,8 +183,7 @@
                             </div>
                             <div class="form-group" id="fieldTraining">
                                 <label for="session_training">Training Session:</label>
-                                <select id="sessionTraining" class="form-control @error('session_training') is-invalid @enderror">
-                                    <option value="" disabled>Choose a session:</option>
+                                <select id="choiceTraining" class="form-control @error('session_training') is-invalid @enderror">
                                     <option value="0" {{(old('session_training') == '0') ? ' selected' : ''}}>0 Session</option>
                                     <option value="1" {{(old('session_training') == '1') ? ' selected' : ''}}>1 Session</option>
                                     <option value="2" {{(old('session_training') == '2') ? ' selected' : ''}}>2 Session</option>
@@ -200,8 +198,7 @@
                             </div>
                             <div class="form-group" id="fieldMentoring">
                                 <label for="session_mentoring">Mentoring Session:</label>
-                                <select id="sessionMentoring" name="session_mentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
-                                    <option value="" disabled>Choose a session:</option>
+                                <select id="choiceMentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
                                     <option value="0" {{(old('session_mentoring') == '0') ? ' selected' : ''}}>0 Session</option>
                                     <option value="1" {{(old('session_mentoring') == '1') ? ' selected' : ''}}>1 Session</option>
                                     <option value="2" {{(old('session_mentoring') == '2') ? ' selected' : ''}}>2 Session</option>
@@ -214,7 +211,7 @@
                                 </span>
                                 @enderror
                             </div>
-
+                            <input class="form-control" type="hidden" name="code" value="{{$code_booking}}">
                             <div class="form-group">
                                 <label for="price">Total Price</label>
                                 <h2>
@@ -335,13 +332,14 @@
         });
 
         $("#submit").click(function() {
-            var timeCoaching = parseInt($("#sessionCoaching").val());
-            var timeTraining = parseInt($("#sessionTraining").val());
-            var timeMentoring = parseInt($("#sessionMentoring").val());
+            var timeCoaching = parseInt($("#choiceCoaching").val());
+            var timeTraining = parseInt($("#choiceTraining").val());
+            var timeMentoring = parseInt($("#choiceMentoring").val());
 
             $('#inputCoaching').val(timeCoaching);
             $('#inputTraining').val(timeTraining);
             $('#inputMentoring').val(timeMentoring);
+
         });
 
         //     $("#priceBooking").hide();
