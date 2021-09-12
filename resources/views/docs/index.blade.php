@@ -38,7 +38,7 @@
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
         </div>
         @endif
-
+        @role('admin')
         <ul class="nav nav-tabs justify-content-center" role="tablist">
           @foreach ($roles as $role)
           <li class="nav-item">
@@ -46,6 +46,27 @@
           </li>
           @endforeach
         </ul>
+        @endrole
+        @role('manager')
+        <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#manager" aria-controls="profile" role="tab"
+                aria-selected="true">Manager</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
+                aria-selected="false">Coachee</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#trainer" aria-controls="profile" role="tab"
+                aria-selected="false">Trainer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile" role="tab"
+                aria-selected="false">Coachmentors</a>
+            </li>
+          </ul>
+        @endrole
         <div class="tab-content">
           @foreach ($roles as $role)
           <div class="tab-pane @if ($loop->first) active @endif" id="{{ $role->name }}" aria-labelledby="coach-tab" role="tabpanel">
@@ -218,6 +239,76 @@
       processing: true,
       serverSide: true,
       ajax: "{{ route('docs.trainer_docs') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'category',
+          name: 'category'
+        },
+        {
+          data: 'title',
+          name: 'title'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: true,
+          searchable: true
+        },
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
+    });
+
+    var documentation_table = $('.docs-datatable-coachmentors').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('docs.coachmentors_docs') }}",
+      columns: [{
+          data: 'DT_RowIndex',
+          name: 'DT_RowIndex'
+        },
+        {
+          data: 'category',
+          name: 'category'
+        },
+        {
+          data: 'title',
+          name: 'title'
+        },
+        {
+          data: 'action',
+          name: 'action',
+          orderable: true,
+          searchable: true
+        },
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
+    });
+
+    var documentation_table = $('.docs-datatable-manager').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "{{ route('docs.manager_docs') }}",
       columns: [{
           data: 'DT_RowIndex',
           name: 'DT_RowIndex'
