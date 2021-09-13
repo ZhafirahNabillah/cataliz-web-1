@@ -7,9 +7,19 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <style>
-    .form-group {
-        width: 210%;
-        margin-left: 31%;
+    .content-body {
+        margin: -0% 5%;
+    }
+
+    .p-3 {
+        margin: 0% 15%;
+        background-image: url('/assets/images/discussion.jpg');
+        align:center;
+    }
+
+    .p-4 {
+        margin: -6% 15%;
+        background-color:#C4C4C4;
     }
 
     form {
@@ -19,13 +29,14 @@
         text-align: left;
     }
 
+    .form-group {
+        width: 210%;
+        margin-left: -50%;
+    }
+
     button[type="submit"] {
         margin-top: 2.5%;
         width: 100%;
-    }
-
-    .content-body {
-        margin: -0% 5%;
     }
 </style>
 @endpush
@@ -55,183 +66,185 @@
                         <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
                     </div>
                     @endif
-                    <div class="card p-3" style="margin: 0% 15%; background-image: url('/assets/images/bg_booking.jpg')">
-                        <h2 class="text-center" style="font-family: Roboto; color:black; margin-left:40%; margin-top: -2%; margin-bottom:3%">BOOK HERE</h2>
-                        <form action="{{ route('booking.store') }}" method="post">
-                            @csrf
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{ old('name') }}" placeholder="Input your name...">
-                                @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                    <div class="card p-3">
+                        <div class="card p-4" style="margin : -6% -6% -6% 30%; background-color:#C4C4C4;">
+                        <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
+                            <form action="{{ route('booking.store') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input class="form-control @error('name') is-invalid @enderror" type="text" name="name" value="{{ old('name') }}" placeholder="Input your name...">
+                                    @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="Input your email...">
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input class="form-control @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}" placeholder="Input your email...">
+                                    @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="whatsapp_number">Whatsapp Number</label>
-                                <input class="form-control @error('whatsapp_number') is-invalid @enderror" type="tel" name="whatsapp_number" value="{{ old('whatsapp_number') }}" maxlength="12" minlength="11" placeholder="ex. 085232982982">
-                                @error('whatsapp_number')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="whatsapp_number">Whatsapp Number</label>
+                                    <input class="form-control @error('whatsapp_number') is-invalid @enderror" type="tel" name="whatsapp_number" value="{{ old('whatsapp_number') }}" maxlength="12" minlength="11" placeholder="ex. 085232982982">
+                                    @error('whatsapp_number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="instance">Instance</label>
-                                <input class="form-control @error('instance') is-invalid @enderror" type="text" name="instance" value="{{ old('instance') }}" placeholder="Input your instance...">
-                                @error('instance')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="instance">Instance</label>
+                                    <input class="form-control @error('instance') is-invalid @enderror" type="text" name="instance" value="{{ old('instance') }}" placeholder="Input your instance...">
+                                    @error('instance')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="profession">Profession</label>
-                                <input class="form-control @error('profession') is-invalid @enderror" type="text" name="profession" value="{{ old('profession') }}" placeholder="Input your profession...">
-                                @error('profession')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="profession">Profession</label>
+                                    <input class="form-control @error('profession') is-invalid @enderror" type="text" name="profession" value="{{ old('profession') }}" placeholder="Input your profession...">
+                                    @error('profession')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="address">Address</label>
-                                <input class="form-control @error('address') is-invalid @enderror" type="text" name="address" value="{{ old('address') }}" placeholder="Input your address...">
-                                @error('address')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input class="form-control @error('address') is-invalid @enderror" type="text" name="address" value="{{ old('address') }}" placeholder="Input your address...">
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="goals">Goals</label>
-                                <input class="form-control @error('goals') is-invalid @enderror" type="text" name="goals" value="{{ old('goals') }}" placeholder="Input your goals...">
-                                @error('goals')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="goals">Goals</label>
+                                    <input class="form-control @error('goals') is-invalid @enderror" type="text" name="goals" value="{{ old('goals') }}" placeholder="Input your goals...">
+                                    @error('goals')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="program">Program</label><br>
-                                @error('program_id')
-                                Program is Empty, Please request program to Admin...
-                                @enderror
-                                @foreach($programs as $listProgram)
-                                <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{$listProgram->program_name}}
-                                @endforeach
-                                @error('progam_id')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="program">Program</label><br>
+                                    @error('program_id')
+                                    Program is Empty, Please request program to Admin...
+                                    @enderror
+                                    @foreach($programs as $listProgram)
+                                    <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{$listProgram->program_name}}
+                                    @endforeach
+                                    @error('progam_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="book_date">Date</label>
-                                <input type="text" id="book_date" name="book_date" class="form-control @error('book_date') is-invalid @enderror" value="{{ old('book_date') }}" placeholder="Click to choice date...">
-                                @error('book_date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="book_date">Date</label>
+                                    <input type="text" id="book_date" name="book_date" class="form-control @error('book_date') is-invalid @enderror" value="{{ old('book_date') }}" placeholder="Click to choice date...">
+                                    @error('book_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group">
-                                <label for="book_demo">Book Demo</label><br>
-                                <input type="checkbox" name="book_demo[]" value="coaching" id="coaching"> COACHING <br>
-                                <input type="checkbox" name="book_demo[]" value="training" id="training"> TRAINING <br>
-                                <input type="checkbox" name="book_demo[]" value="mentoring" id="mentoring"> MENTORING <br>
-                                @error('book_demo')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group">
+                                    <label for="book_demo">Book Demo</label><br>
+                                    <input type="checkbox" name="book_demo[]" value="coaching" id="coaching"> COACHING <br>
+                                    <input type="checkbox" name="book_demo[]" value="training" id="training"> TRAINING <br>
+                                    <input type="checkbox" name="book_demo[]" value="mentoring" id="mentoring"> MENTORING <br>
+                                    @error('book_demo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group" id="fieldCoaching">
-                                <label for="session_coaching">Coaching Session:</label>
-                                <select id="choiceCoaching" class="form-control @error('session_coaching') is-invalid @enderror">
-                                    <option value="0" {{(old('session_coaching') == '0') ? ' selected' : ''}}>0 Session</option>
-                                    <option value="1" {{(old('session_coaching') == '1') ? ' selected' : ''}}>1 Session</option>
-                                    <option value="2" {{(old('session_coaching') == '2') ? ' selected' : ''}}>2 Session</option>
-                                    <option value="3" {{(old('session_coaching') == '3') ? ' selected' : ''}}>3 Session</option>
-                                </select>
-                                <input type="hidden" class="sum" name="session_coaching" id="inputCoaching">
-                                @error('session_coaching')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group" id="fieldTraining">
-                                <label for="session_training">Training Session:</label>
-                                <select id="choiceTraining" class="form-control @error('session_training') is-invalid @enderror">
-                                    <option value="0" {{(old('session_training') == '0') ? ' selected' : ''}}>0 Session</option>
-                                    <option value="1" {{(old('session_training') == '1') ? ' selected' : ''}}>1 Session</option>
-                                    <option value="2" {{(old('session_training') == '2') ? ' selected' : ''}}>2 Session</option>
-                                    <option value="3" {{(old('session_training') == '3') ? ' selected' : ''}}>3 Session</option>
-                                </select>
-                                <input type="hidden" class="sum" name="session_training" id="inputTraining">
-                                @error('session_training')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group" id="fieldMentoring">
-                                <label for="session_mentoring">Mentoring Session:</label>
-                                <select id="choiceMentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
-                                    <option value="0" {{(old('session_mentoring') == '0') ? ' selected' : ''}}>0 Session</option>
-                                    <option value="1" {{(old('session_mentoring') == '1') ? ' selected' : ''}}>1 Session</option>
-                                    <option value="2" {{(old('session_mentoring') == '2') ? ' selected' : ''}}>2 Session</option>
-                                    <option value="3" {{(old('session_mentoring') == '3') ? ' selected' : ''}}>3 Session</option>
-                                </select>
-                                <input type="hidden" class="sum" name="session_mentoring" id="inputMentoring">
-                                @error('session_mentoring')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <input class="form-control" type="hidden" name="code" value="{{$code_booking}}">
-                            <div class="form-group">
-                                <label for="price">Total Price</label>
-                                <h2>
-                                    Rp. <span id="informationPrice">0</span>
-                                </h2>
-                                <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="">
-                                @error('price')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
+                                <div class="form-group" id="fieldCoaching">
+                                    <label for="session_coaching">Coaching Session:</label>
+                                    <select id="choiceCoaching" class="form-control @error('session_coaching') is-invalid @enderror">
+                                        <option value="0" {{(old('session_coaching') == '0') ? ' selected' : ''}}>0 Session</option>
+                                        <option value="1" {{(old('session_coaching') == '1') ? ' selected' : ''}}>1 Session</option>
+                                        <option value="2" {{(old('session_coaching') == '2') ? ' selected' : ''}}>2 Session</option>
+                                        <option value="3" {{(old('session_coaching') == '3') ? ' selected' : ''}}>3 Session</option>
+                                    </select>
+                                    <input type="hidden" class="sum" name="session_coaching" id="inputCoaching">
+                                    @error('session_coaching')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group" id="fieldTraining">
+                                    <label for="session_training">Training Session:</label>
+                                    <select id="choiceTraining" class="form-control @error('session_training') is-invalid @enderror">
+                                        <option value="0" {{(old('session_training') == '0') ? ' selected' : ''}}>0 Session</option>
+                                        <option value="1" {{(old('session_training') == '1') ? ' selected' : ''}}>1 Session</option>
+                                        <option value="2" {{(old('session_training') == '2') ? ' selected' : ''}}>2 Session</option>
+                                        <option value="3" {{(old('session_training') == '3') ? ' selected' : ''}}>3 Session</option>
+                                    </select>
+                                    <input type="hidden" class="sum" name="session_training" id="inputTraining">
+                                    @error('session_training')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group" id="fieldMentoring">
+                                    <label for="session_mentoring">Mentoring Session:</label>
+                                    <select id="choiceMentoring" class="form-control @error('session_mentoring') is-invalid @enderror">
+                                        <option value="0" {{(old('session_mentoring') == '0') ? ' selected' : ''}}>0 Session</option>
+                                        <option value="1" {{(old('session_mentoring') == '1') ? ' selected' : ''}}>1 Session</option>
+                                        <option value="2" {{(old('session_mentoring') == '2') ? ' selected' : ''}}>2 Session</option>
+                                        <option value="3" {{(old('session_mentoring') == '3') ? ' selected' : ''}}>3 Session</option>
+                                    </select>
+                                    <input type="hidden" class="sum" name="session_mentoring" id="inputMentoring">
+                                    @error('session_mentoring')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                                <input class="form-control" type="hidden" name="code" value="{{$code_booking}}">
+                                <div class="form-group">
+                                    <label for="price">Total Price</label>
+                                    <h2>
+                                        Rp. <span id="informationPrice">0</span>
+                                    </h2>
+                                    <input class="form-control @error('price') is-invalid @enderror" type="text" name="price" id="priceBooking" value="">
+                                    @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
 
-                            <div class="form-group text-center mb-0">
-                                <Button id="submit" type="submit" class="btn btn-warning">BOOK NOW</Button>
-                            </div>
-                        </form><br>
-                        <!-- <div id="buttonCheck">
-                            <Button class="btn btn-warning" id="checkOut" style="width: 55%; margin-left: 45%; margin-top:-1%;">CHECK OUT</Button>
-                        </div> -->
+                                <div class="form-group text-center mb-0">
+                                    <Button id="submit" type="submit" class="btn btn-warning">BOOK NOW</Button>
+                                </div>
+                            </form><br>
+                            <!-- <div id="buttonCheck">
+                                <Button class="btn btn-warning" id="checkOut" style="width: 55%; margin-left: 45%; margin-top:-1%;">CHECK OUT</Button>
+                            </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
