@@ -32,7 +32,9 @@ class ProgramController extends Controller
               return $actionBtn;
             } elseif (auth()->user()->hasRole('manager')) {
               $edit_btn = '<a href="javascript:;" id="editProgram" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
-              $actionBtn = $edit_btn;
+              $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailProgram" class="btn-sm btn-warning">Detail</a>';
+
+              $actionBtn = $edit_btn . '  ' . $detail_btn;
               return $actionBtn;
             }
             })

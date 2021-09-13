@@ -98,6 +98,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/docs/coachee_docs', [DocumentationController::class, 'coachee_docs'])->name('docs.coachee_docs');
 	Route::get('/docs/trainer_docs', [DocumentationController::class, 'trainer_docs'])->name('docs.trainer_docs');
 	Route::get('/docs/mentor_docs', [DocumentationController::class, 'mentor_docs'])->name('docs.mentor_docs');
+	Route::get('/docs/coachmentors_docs', [DocumentationController::class, 'coachmentors_docs'])->name('docs.coachmentors_docs');
+	Route::get('/docs/manager_docs', [DocumentationController::class, 'manager_docs'])->name('docs.manager_docs');
 	Route::resource('docs', DocumentationController::class);
 	Route::get('/documentation', [DocumentationController::class, 'documentation_view'])->name('documentation');
 	Route::get('/documentation/{documentation:category}', [DocumentationController::class, 'documentation_view'])->name('documentation.view');
