@@ -18,8 +18,7 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Booking Demo
-                            <img class="align-text width=" 15px" height="15px"" src="{{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top"
-                            data-content="Halaman ini menampilkan daftar pengguna yang terdaftar dalam website baik coach maupun coachee." />
+                            <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Halaman ini menampilkan daftar pengguna yang terdaftar dalam website baik coach maupun coachee." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
@@ -35,8 +34,7 @@
         </div>
         <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
         <div class="">
-          <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
-            class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
+            <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
         </div>
         <div class="card">
             <div class="card-body">
@@ -111,24 +109,26 @@
                         name: 'DT_RowIndex'
                     },
                     {
-                        data: 'id',
-                        name: 'id'
+                        data: 'name',
+                        name: 'name'
                     },
                     {
-                        data: 'created_at',
-                        name: 'created_at'
+                        data: 'email',
+                        name: 'email'
                     },
                     {
-                        data: 'causer.name',
-                        name: 'causer.name'
+                        data: 'whatsapp_number',
+                        name: 'whatsapp_number'
                     },
                     {
-                        data: 'causer.email',
-                        name: 'causer.email'
+                        data: 'status',
+                        name: 'status'
                     },
                     {
-                        data: 'description',
-                        name: 'description'
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
                     },
 
                 ],
