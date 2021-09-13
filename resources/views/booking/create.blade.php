@@ -3,12 +3,20 @@
 @section('title','Booking')
 
 @push('styles')
-<link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="/resources/demos/style.css"> -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <style>
-    .content-body {
+    /* .content-body {
         margin: -0% 5%;
+    }
+
+    .h3 {
+        font-size:2% ;
     }
 
     .p-3 {
@@ -37,7 +45,7 @@
     button[type="submit"] {
         margin-top: 2.5%;
         width: 100%;
-    }
+    } */
 </style>
 @endpush
 
@@ -55,19 +63,19 @@
         </div>
     </div>
 
-    <div class="content-body">
+    <div class="content-body" style="position:relative; margin-right: 30%;  left:15%;">
         <div class="row">
             <div class="col-12">
                 <div class="card p-2">
-                    <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
+                    <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
                     @if(session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
                     </div>
                     @endif
-                    <div class="card p-3">
-                        <div class="card p-4" style="margin : -6% -6% -6% 30%; background-color:#C4C4C4;">
+                    <div class="card p-3" style="background-image: url('/assets/images/discussion.jpg')">
+                        <div class="card p-4" style="background-color:#C4C4C4; position:relative; margin-left: 40%; left:5.4%; margin-top: -5.5% ">
                         <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
                             <form action="{{ route('booking.store') }}" method="post">
                                 @csrf
