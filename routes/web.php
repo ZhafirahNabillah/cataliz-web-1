@@ -84,6 +84,7 @@ Route::get('/booking/create', [BookingController::class, 'create'])->name('booki
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/email_template', [BookingController::class, 'seeEmailTemplate'])->name('booking.email_template');
 Route::resource('booking', BookingController::class);
+Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {

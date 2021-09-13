@@ -14,8 +14,20 @@ class BookingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+            $data = Booking::all();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        //return response()->json($data);
         return view('booking.index');
     }
 
@@ -38,7 +50,7 @@ class BookingController extends Controller
         $code_booking = str_shuffle($pin);
         return view('booking.create', compact('programs', 'code_booking'));
     }
-    
+
     public function seeEmailTemplate()
     {
         return view('booking.email_template');
