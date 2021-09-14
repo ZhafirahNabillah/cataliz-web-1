@@ -33,7 +33,7 @@ class BookingController extends Controller
 
     public function seePayment()
     {
-        $data = Booking::get();
+        $data = Booking::where('name', '');
         return view('booking.payment', compact('data'));
     }
 
