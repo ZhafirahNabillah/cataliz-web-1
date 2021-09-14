@@ -148,7 +148,7 @@
         <td height="40" class="em_height">&nbsp;</td>
       </tr>
       <tr>
-        <td align="center"><a href="#" target="_blank" style="text-decoration:none;"><img src="{{ url('/assets/images/cataliz.png') }}" width="40" height="40" style=" border=" 0" /></a></td>
+        <td align="center"><a href="#" target="_blank" style="text-decoration:none;"><img src='https://cataliz.id/wp-content/uploads/2020/10/logo_emboss.png' width="40" height="40" style=" border=" 0" /></a></td>
       </tr>
       <tr>
         <td height="30" class="em_height">&nbsp;</td>
@@ -162,7 +162,7 @@
               <td height="25" class="em_height">&nbsp;</td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:20px; color:black;">Your name : {{$name}}</td>
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:20px; color:black;">Your name : </td>
             </tr>
             <tr>
               <td height="25" style="font-size:1px; line-height:1px;">&nbsp;</td>
@@ -172,7 +172,7 @@
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999;">Total Price : {{$price}}<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999;">Total Price :<br class="em_hide" />
               </td>
             </tr>
             <tr>
@@ -251,8 +251,8 @@
               <td width="7">&nbsp;</td>
               <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/yt.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Yt" /></a></td>
               <td width="7">&nbsp;</td>
-              <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/link.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Yt" /></a></td>
-              <td width="7">&nbsp;</td>
+              <!-- <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/link.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Yt" /></a></td>
+              <td width="7">&nbsp;</td> -->
             </tr>
           </table>
         </td>
