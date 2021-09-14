@@ -55,9 +55,9 @@
                   <div class="col-md-6">
                     <label for="fp-default">Category</label>
                     <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
-                      @foreach ($documentations as $documentation)
-                        <option>{{ $documentation->first()->category }}</option>
-                      @endforeach
+                        <option value="overview">Overview</option>
+                        <option value="account">Account</option>
+                        <option value="features">Features</option>
                     </select>
                     @error('category')
                       <span class="invalid-feedback" role="alert">

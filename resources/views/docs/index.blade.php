@@ -112,14 +112,13 @@
               <div class="row">
                 <div class="col-12">
                 <hr class="mb-0">
-                  <table class="datatables-basic table-striped table manager-datatable-manager">
+                  <table class="datatables-basic table-striped table docs-datatable-manager">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>Manager Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Action</th>
+                          <th>No</th>
+                          <th>Category</th>
+                          <th>Title</th>
+                          <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -137,15 +136,13 @@
               <div class="row">
                 <div class="col-12">
                   <hr class="mb-0">
-                  <table class="datatables-basic table-striped table admin-datatable-coachee">
+                  <table class="datatables-basic table-striped table docs-datatable-coachee">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>Coachee Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Program</th>
-                        <th>Action</th>
+                          <th>No</th>
+                          <th>Category</th>
+                          <th>Title</th>
+                          <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -166,14 +163,13 @@
                     {{-- <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a> --}}
                   </div>
                   <hr class="mb-0">
-                  <table class="datatables-basic table-striped table admin-datatable-trainer">
+                  <table class="datatables-basic table-striped table docs-datatable-trainer">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>Trainer Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Action</th>
+                          <th>No</th>
+                          <th>Category</th>
+                          <th>Title</th>
+                          <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -194,14 +190,13 @@
                     {{-- <a href="{{ route('coachee_pdf') }}" class="btn btn-primary">Download PDF</a> --}}
                   </div>
                   <hr class="mb-0">
-                  <table class="datatables-basic table-striped table manager-datatable-coachmentors">
+                  <table class="datatables-basic table-striped table docs-datatable-coachmentors">
                     <thead>
                       <tr>
-                        <th>No</th>
-                        <th>CoachMentors Name</th>
-                        <th>Email</th>
-                        <th>Handphone</th>
-                        <th>Action</th>
+                          <th>No</th>
+                          <th>Category</th>
+                          <th>Title</th>
+                          <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>

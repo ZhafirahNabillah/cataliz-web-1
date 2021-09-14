@@ -20,7 +20,7 @@ class DocumentationController extends Controller
   {
     $roles = Role::all();
     if ($request->ajax()) {
-      $data = Documentation::where('role', 'admin|manager')->get();
+      $data = Documentation::where('role', 'admin')->get();
 
       //return data as datatable json
       return DataTables::of($data)
@@ -217,7 +217,8 @@ class DocumentationController extends Controller
   public function coachmentors_docs(Request $request)
   {
     if ($request->ajax()) {
-      $data = Documentation::where('role', 'mentor')->get();
+      $data = Documentation::where('role', 'coach
+      ')->get();
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
