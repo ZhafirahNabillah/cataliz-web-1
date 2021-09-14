@@ -31,6 +31,21 @@ class BookingController extends Controller
         return view('booking.index');
     }
 
+    public function seePayment()
+    {
+        $data = Booking::get();
+        return view('booking.payment', compact('data'));
+    }
+
+    public function search(Request $request)
+    {
+        $searchData = $request->searchBooking;
+        $data = Booking::where('code', 'like', "%" . $searchData . "%")
+            ->whereNull('payment')
+            ->get();
+        return view('booking.payment', compact('data'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -83,6 +83,8 @@ Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_ce
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/email_template', [BookingController::class, 'seeEmailTemplate'])->name('booking.email_template');
+Route::get('/booking/payment', [BookingController::class, 'seePayment'])->name('booking.payment');
+Route::get('/booking/search', [BookingController::class, 'search'])->name('booking.search');
 Route::resource('booking', BookingController::class);
 Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 
