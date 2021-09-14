@@ -14,6 +14,7 @@
       -webkit-text-size-adjust: 100% !important;
       -ms-text-size-adjust: 100% !important;
       -webkit-font-smoothing: antialiased !important;
+      background: #F1AF3399;
       }
       img {
       border: 0 !important;
@@ -27,6 +28,7 @@
       border-collapse: collapse;
       mso-table-lspace: 0px;
       mso-table-rspace: 0px;
+      background: #FFFFFF;
       }
       td, a, span {
       border-collapse: collapse;
@@ -116,7 +118,7 @@
               <td height="40" class="em_height">&nbsp;</td>
             </tr>
             <tr>
-              <td align="float-left"><a href="#" target="_blank" style="text-decoration:none;"><img src="{{ url('/assets/images/cataliz.png') }}" width="40" height="40" style=" border="0"/></a></td>
+              <td align="center"><a href="#" target="_blank" style="text-decoration:none;"><img src="{{ url('/assets/images/cataliz.png') }}" width="40" height="40" style=" border="0"/></a></td>
             </tr>
             <tr>
               <td height="30" class="em_height">&nbsp;</td>
@@ -171,9 +173,9 @@
                   </tr>
                   <tr>
                     <td valign="top" align="center">
-                      <table width="210" border="0" cellspacing="0" cellpadding="0" align="center">
+                      <table width="210" border="0" scellspacing="0" cellpadding="0" align="center">
                         <tr>
-                          <td valign="middle" align="center" height="45" bgcolor="#feae39" style="font-family:'Open Sans', Arial, sans-serif; font-size:17px; font-weight:bold; color:#ffffff; text-transform:uppercase;"><a href="#" target="_blank" style="text-decoration:none; color:#ffffff; display:block; line-height:45px;">UPLOAD PAYMENT</a></td>
+                          <td valign="middle" align="center" height="45" bgcolor="#feae39" style="font-family:'Open Sans', Arial, sans-serif; font-size:17px; font-weight:bold; color:#ffffff; text-transform:uppercase; border-radius:20px"><a href="#" target="_blank" style="text-decoration:none; color:#ffffff; display:block; line-height:45px;">UPLOAD PAYMENT</a></td>
                         </tr>
                       </table>
                     </td>
@@ -182,7 +184,7 @@
                     <td height="25" style="font-size:1px; line-height:1px;">&nbsp;</td>
                   </tr>
                   <tr>
-                    <td height="1" bgcolor="#d8e4f0" style="font-size:0px;line-height:0px;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/spacer.gif" width="1" height="1" alt="" style="display:block;" border="0" /></td>
+                    <td height="3" bgcolor="#d8e4f0" style="font-size:0px;line-height:0px;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/spacer.gif" width="1" height="1" alt="" style="display:block;" border="0" /></td>
                   </tr>
                   <tr>
                     <td height="31" class="em_height">&nbsp;</td>
@@ -206,23 +208,23 @@
               <td valign="top" align="center">
                 <table border="0" cellspacing="0" cellpadding="0" align="center">
                   <tr>
-                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/fb.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Fb" /></a></td>
                     <td width="7">&nbsp;</td>
-                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/tw.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Tw" /></a></td>
+                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/insta.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Insta" /></a></td>
                     <td width="7">&nbsp;</td>
-                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/pint.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="pint" /></a></td>
+                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/fb.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Fb" /></a></td>
                     <td width="7">&nbsp;</td>
-                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/google.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="G+" /></a></td>
+                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/tw.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Tw" /></a></td>
                     <td width="7">&nbsp;</td>
-                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/insta.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Insta" /></a></td>
+                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/yt.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Yt" /></a></td>
                     <td width="7">&nbsp;</td>
-                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/yt.png" width="26" height="26" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Yt" /></a></td>
+                    <td valign="top"><a href="#" target="_blank" style="text-decoration:none;"><img src="https://www.sendwithus.com/assets/img/emailmonks/images/link.png" width="36" height="36" style="display:block;font-family: Arial, sans-serif; font-size:10px; line-height:18px; color:#feae39; " border="0" alt="Yt" /></a></td>
+                    <td width="7">&nbsp;</td>
                   </tr>
                 </table>
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#848789;">
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#848789; ">
                 Cataliz.id All Right Reversed
               </td>
             </tr>
