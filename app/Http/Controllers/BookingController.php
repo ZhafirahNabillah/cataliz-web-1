@@ -79,6 +79,12 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
+        $characters = '0123456789';
+        $pin = mt_rand(1000000, 9999999)
+            . mt_rand(1000000, 9999999)
+            . $characters[rand(0, strlen($characters) - 1)];
+
+        $code_booking = str_shuffle($pin);
         //dd($request->all());
         $this->validate($request, [
             'code' => 'required',
@@ -113,7 +119,7 @@ class BookingController extends Controller
             'session_mentoring' => $request->session_mentoring,
             'price' => $request->price,
             'program_id' => $request->program_id,
-            'code' => $request->code,
+            'code' => $code_booking,
             'created_at' => date('Y-m-d H:1:s'),
         ]);
 
@@ -125,7 +131,7 @@ class BookingController extends Controller
         );
         Mail::send('booking/email_template', $data, function ($mail) use ($email) {
             $mail->to($email, 'no-reply')
-                ->subject("Sample Email Laravel");
+                ->subject("Booking Cataliz");
             $mail->from('aditcarlytos61199@gmail.com', 'Booking Cataliz');
         });
 

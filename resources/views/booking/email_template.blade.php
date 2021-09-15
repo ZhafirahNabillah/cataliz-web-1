@@ -162,7 +162,7 @@
               <td height="25" class="em_height">&nbsp;</td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:20px; color:black;">Your name : </td>
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:20px; color:black;">{{$name}}</td>
             </tr>
             <tr>
               <td height="25" style="font-size:1px; line-height:1px;">&nbsp;</td>

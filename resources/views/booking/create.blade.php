@@ -76,7 +76,7 @@
                     @endif
                     <div class="card p-3" style="background-image: url('/assets/images/discussion.jpg')">
                         <div class="card p-4" style="background-color:#C4C4C4; position:relative; margin-left: 40%; left:5.4%; margin-top: -5.5% ">
-                        <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
+                            <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
                             <form action="{{ route('booking.store') }}" method="post">
                                 @csrf
                                 <div class="form-group">
