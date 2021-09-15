@@ -148,7 +148,7 @@
         <td height="40" class="em_height">&nbsp;</td>
       </tr>
       <tr>
-        <td align="center"><a href="#" target="_blank" style="text-decoration:none;"><img src='https://cataliz.id/wp-content/uploads/2020/10/logo_emboss.png' width="40" height="40" style=" border=" 0" /></a></td>
+        <td align="center"><a href="#" target="_blank" style="text-decoration:none;"><img src='https://cataliz.id/wp-content/uploads/2020/10/logo_emboss.png' width="95" height="45" style=" border=" 0" /></a></td>
       </tr>
       <tr>
         <td height="30" class="em_height">&nbsp;</td>
@@ -234,7 +234,7 @@
 <!-- === FOOTER SECTION === -->
 <tr>
   <td align="center" valign="top" bgcolor="#30373b" class="em_aside">
-    <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" class="em_main_table" style="table-layout:fixed;">
+    <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" class="em_main_table" style="table-layout:fixed; background-color:#C0BEBE">
       <tr>
         <td height="10" class="em_height">&nbsp;</td>
       </tr>
@@ -258,7 +258,7 @@
         </td>
       </tr>
       <tr>
-        <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#848789; ">
+        <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:12px; line-height:18px; color:#FFFFFF; ">
           Cataliz.id All Right Reversed
         </td>
       </tr>
