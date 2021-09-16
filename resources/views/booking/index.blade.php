@@ -34,7 +34,8 @@
         </div>
         <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
         <div class="">
-            <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1 createNewUser">Add New</button>
+            <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
+            class="btn btn-primary data-submit mr-1 createNewBooking">Add New</button>
         </div>
         <div class="card">
             <div class="card-body">
@@ -70,8 +71,113 @@
             </div>
         </div>
     </div>
-
     <!-- END: Content-->
+
+    <!-- Modal to Add User -->
+    <div class="modal modal-slide-in fade" id="modal-user-slide-in" aria-hidden="true">
+        <div class="modal-dialog sidebar-sm">
+          <form class="add-new-record modal-content pt-0" id="createUserForm" name="createUserForm">
+            @csrf
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+            <div class="modal-header mb-1">
+              <h5 class="modal-title" id="modalHeading">Add User</h5>
+            </div>
+            <input type="hidden" name="user_id" id="user_id">
+            <div class="modal-body flex-grow-1">
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
+                <input id="name" name="name" type="text" class="form-control dt-full-name"
+                  id="basic-icon-default-fullname" value="" placeholder="Full name here..." />
+                <div id="name-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-post">Phone</label>
+                <div class="input-group input-group-merge">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon5">+62</span>
+                  </div>
+                  <input id="phone" name="phone" type="text" onkeypress="return isNumberKey(event)" class="form-control"
+                    value="" placeholder="Phone number here...">
+                </div>
+                <div id="phone-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-email">Email</label>
+                <input id="email" name="email" type="text" id="basic-icon-default-email" class="form-control dt-email"
+                  placeholder="Email here..." />
+                <small class="form-text text-muted"> You can use letters, numbers & periods</small>
+                <div id="email-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-agency">Instansi</label>
+                <input id="agency" name="agency" type="text" class="form-control dt-agency"
+                  id="basic-icon-default-agency" value="" placeholder="" />
+                <div id="agency-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-job">Pekerjaan</label>
+                <input id="job" name="job" type="text" class="form-control dt-job"
+                  id="basic-icon-default-job" value="" placeholder="" />
+                <div id="job-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-address">Alamat</label>
+                <input id="address" name="address" type="text" class="form-control dt-address"
+                  id="basic-icon-default-address" value="" placeholder="" />
+                <div id="address-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-goals">Goal yang ingin dicapai</label>
+                <textarea class="form-control dt-goals" name="goals" id="goals" cols="30" rows="5"></textarea>
+                <div id="goals-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-program">Pilih Program</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="program" id="permission-check-starco">
+                  <label class="form-check-label" for="permission-check-starco">
+                    STARCO (Startup Coaching)
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="program" id="permission-check-scmp">
+                  <label class="form-check-label" for="permission-check-scmp">
+                    SCMP (Startup Coaching Mentoring Program)
+                  </label>
+                </div>
+                <div id="program-error"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="basic-icon-default-session">Silahkan Piih Sesi</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="session" id="permission-check-coaching">
+                  <label class="form-check-label" for="permission-check-coaching">
+                    Coaching 400.000/sesi
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="session" id="permission-check-training">
+                  <label class="form-check-label" for="permission-check-training">
+                    Training 300.000/sesi
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="session" id="permission-check-mentoring">
+                  <label class="form-check-label" for="permission-check-mentoring">
+                    Mentoring 300.000/sesi
+                  </label>
+                </div>
+                <div id="session-error"></div>
+              </div>
+              <input type="hidden" name="action_type" id="action_type">
+              <button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn">Create</button>
+              <button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+          </form>
+          <!-- </form>-->
+        </div>
+      </div>
+      <!-- End Modal -->
     @endsection
 
     @push('scripts')
@@ -157,6 +263,13 @@
                     }]
                 });
             });
+
+        // create new user on admin page
+        $('body').on('click', '.createNewBooking', function() {
+
+            $('#modalHeading').html("Add Booking");
+            $('#modal-user-slide-in').modal('show');
+          });
 
         });
     </script>
