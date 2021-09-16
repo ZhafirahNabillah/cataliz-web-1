@@ -137,7 +137,7 @@ class BookingController extends Controller
             $mail->from('aditcarlytos61199@gmail.com', 'Booking Cataliz');
         });
 
-        Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
+        // Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
         $this->seeEmailTemplate($data);
 
         return redirect('booking/create')->with('success', 'value');

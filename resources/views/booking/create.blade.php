@@ -68,12 +68,12 @@
             <div class="col-12">
                 <div class="card p-2">
                     <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
-                    <!-- @if(session('success'))
+                    @if(session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
                     </div>
-                    @endif -->
+                    @endif
                     <div class="card p-3" style="background-image: url('/assets/images/discussion.jpg')">
                         <div class="card p-4" style="background-color:#C4C4C4; position:relative; margin-left: 40%; left:5.4%; margin-top: -5.5% ">
                             <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
