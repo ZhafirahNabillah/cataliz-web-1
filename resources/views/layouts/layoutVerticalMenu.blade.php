@@ -15,15 +15,13 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="icon" href="{{ url('/assets/images/cataliz.png') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
     <!-- Styles -->
     @include('panels.style')
 </head>
 
-<body class="vertical-layout vertical-menu-modern navbar-floating footer-static  " data-open="click"
-    data-menu="vertical-menu-modern" data-col="">
+<body class="vertical-layout vertical-menu-modern navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
     @yield('content')
     @include('sweetalert::alert')
     @include('panels.footer')
