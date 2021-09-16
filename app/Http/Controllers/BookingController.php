@@ -8,16 +8,13 @@ use App\Models\Program;
 use Illuminate\Support\Facades\Mail;
 use Alert;
 
-
 class BookingController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index(Request $request)
     {
         if ($request->ajax()) {
