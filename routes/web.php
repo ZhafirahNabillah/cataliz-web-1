@@ -85,8 +85,10 @@ Route::post('/booking/store', [BookingController::class, 'store'])->name('bookin
 Route::get('/booking/email_template', [BookingController::class, 'seeEmailTemplate'])->name('booking.email_template');
 Route::get('/booking/payment', [BookingController::class, 'seePayment'])->name('booking.payment');
 Route::get('/booking/search', [BookingController::class, 'search'])->name('booking.search');
-Route::resource('booking', BookingController::class);
-Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
+Route::middleware(['auth'])->group(function () {
+	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
+	Route::resource('booking', BookingController::class);
+});
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {
