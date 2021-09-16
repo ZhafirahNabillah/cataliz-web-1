@@ -20,8 +20,6 @@ use Composer\Semver\VersionParser;
 
 
 
-
-
 class InstalledVersions
 {
 private static $installed = array (
@@ -32,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '4e1c92758aafaa418a1ae6cd7ff8be618f97b817',
+    'reference' => '30c2f90c56cb31511e26c90d4f60d7520e841af8',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -626,7 +624,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '4e1c92758aafaa418a1ae6cd7ff8be618f97b817',
+      'reference' => '30c2f90c56cb31511e26c90d4f60d7520e841af8',
     ),
     'laravel/sail' => 
     array (
@@ -1065,8 +1063,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0|2.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0|2.0',
       ),
     ),
     'psr/simple-cache' => 
@@ -1113,6 +1111,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'fe665a03df4f056aa65af552a96e1976df8c8dae',
+    ),
+    'realrashid/sweet-alert' => 
+    array (
+      'pretty_version' => 'v4.0.0',
+      'version' => '4.0.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4923bb91d7144c2ac5dacda0b5e1472fff3d88af',
     ),
     'rhumsaa/uuid' => 
     array (
@@ -1675,6 +1682,7 @@ foreach (self::getInstalled() as $installed) {
 $packages[] = array_keys($installed['versions']);
 }
 
+
 if (1 === \count($packages)) {
 return $packages[0];
 }
@@ -1866,7 +1874,6 @@ public static function reload($data)
 self::$installed = $data;
 self::$installedByVendor = array();
 }
-
 
 
 

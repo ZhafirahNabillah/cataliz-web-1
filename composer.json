@@ -24,6 +24,7 @@
         "laravelcollective/html": "^6.2",
         "league/flysystem-aws-s3-v3": "^1.0",
         "pion/laravel-chunk-upload": "^1.4",
+        "realrashid/sweet-alert": "^4.0",
         "spatie/calendar-links": "^1.6",
         "spatie/laravel-activitylog": "^3.17",
         "spatie/laravel-permission": "^3.18",

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Program;
 use Illuminate\Support\Facades\Mail;
+use Alert;
 
 class BookingController extends Controller
 {
@@ -135,6 +136,7 @@ class BookingController extends Controller
             $mail->from('aditcarlytos61199@gmail.com', 'Booking Cataliz');
         });
 
+        Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
 
         return redirect('booking/create')->with('success', 'value');
     }

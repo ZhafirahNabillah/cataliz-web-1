@@ -91,6 +91,7 @@ final class Versions
   'ralouphie/getallheaders' => '3.0.3@120b605dfeb996808c31b6477290a714d356e822',
   'ramsey/collection' => '1.2.1@eaca1dc1054ddd10cbd83c1461907bee6fb528fa',
   'ramsey/uuid' => '4.2.1@fe665a03df4f056aa65af552a96e1976df8c8dae',
+  'realrashid/sweet-alert' => 'v4.0.0@4923bb91d7144c2ac5dacda0b5e1472fff3d88af',
   'sabberworm/php-css-parser' => '8.3.1@d217848e1396ef962fb1997cf3e2421acba7f796',
   'spatie/calendar-links' => '1.6.0@aa984fb84d218cc8962b8f89ef46437298534c24',
   'spatie/laravel-activitylog' => '3.17.0@bdc44862aaca39ecbd824133b80dbd7c8017ed7f',
@@ -176,7 +177,7 @@ final class Versions
   'sebastian/version' => '3.0.2@c6c1022351a901512170118436c764e473f6de8c',
   'symfony/debug' => 'v4.4.27@2f9160e92eb64c95da7368c867b663a8e34e980c',
   'theseer/tokenizer' => '1.2.1@34a41e998c2183e22995f158c581e7b5e755ab9e',
-  'laravel/laravel' => 'dev-main@4e1c92758aafaa418a1ae6cd7ff8be618f97b817',
+  'laravel/laravel' => 'dev-main@30c2f90c56cb31511e26c90d4f60d7520e841af8',
 );
 
     private function __construct()
