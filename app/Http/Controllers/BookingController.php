@@ -66,9 +66,9 @@ class BookingController extends Controller
         return view('booking.create', compact('programs', 'code_booking'));
     }
 
-    public function seeEmailTemplate()
+    public function seeEmailTemplate($data)
     {
-        return view('booking.email_template');
+        return view('booking.email_template', compact('data'));
     }
 
     /**
@@ -128,6 +128,7 @@ class BookingController extends Controller
             'name' => $request->name,
             'book_date' => $request->book_date,
             'price' => $request->price,
+            'code' => $code_booking,
         );
         Mail::send('booking/email_template', $data, function ($mail) use ($email) {
             $mail->to($email, 'no-reply')
@@ -135,6 +136,7 @@ class BookingController extends Controller
             $mail->from('aditcarlytos61199@gmail.com', 'Booking Cataliz');
         });
 
+        $this->seeEmailTemplate($data);
 
         return redirect('booking/create')->with('success', 'value');
     }
