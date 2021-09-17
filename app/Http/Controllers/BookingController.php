@@ -134,7 +134,7 @@ class BookingController extends Controller
         Mail::send('booking/email_template', $data, function ($mail) use ($email) {
             $mail->to($email, 'no-reply')
                 ->subject("Booking Cataliz");
-            $mail->from('aditcarlytos61199@gmail.com', 'Booking Cataliz');
+            $mail->from('katum61199@gmail.com', 'Booking Cataliz');
         });
 
         // Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
@@ -174,7 +174,13 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $dataBooking = Booking::find($id);
+        Booking::where('id', $dataBooking)->update([
+            'payment' => $request->payment->store('payment'),
+            'bank' => $request->bank,
+        ]);
+
+        return redirect()->back();
     }
 
     /**

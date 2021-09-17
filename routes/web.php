@@ -85,6 +85,8 @@ Route::post('/booking/store', [BookingController::class, 'store'])->name('bookin
 Route::get('/booking/email_template', [BookingController::class, 'seeEmailTemplate'])->name('booking.email_template');
 Route::get('/booking/payment', [BookingController::class, 'seePayment'])->name('booking.payment');
 Route::get('/booking/search', [BookingController::class, 'search'])->name('booking.search');
+Route::post('/{id}/booking/update', [BookingController::class, 'update'])->name('booking.update');
+
 Route::middleware(['auth'])->group(function () {
 	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 	Route::resource('booking', BookingController::class);
