@@ -72,14 +72,14 @@
   </div>
   <!-- END: Content-->
 
-  <!-- Modal to Add User -->
-  <div class="modal modal-slide-in fade" id="modal-user-slide-in" aria-hidden="true">
+  <!-- Modal to Add Booking -->
+  <div class="modal modal-slide-in fade" id="modal-booking-slide-in" aria-hidden="true">
     <div class="modal-dialog sidebar-sm">
-      <form class="add-new-record modal-content pt-0" id="createUserForm" name="createUserForm">
+      <form class="add-new-record modal-content pt-0" id="createBookingForm" name="createBookingForm">
         @csrf
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
         <div class="modal-header mb-1">
-          <h5 class="modal-title" id="modalHeading">Add User</h5>
+          <h5 class="modal-title" id="modalHeading">Create New Booking</h5>
         </div>
         <input type="hidden" name="user_id" id="user_id">
         <div class="modal-body flex-grow-1">
@@ -254,6 +254,11 @@
           }]
         });
       });
+
+      // create new booking on admin page
+      $('body').on('click', '.createNewBooking', function() {
+            $('#modal-booking-slide-in').modal('show');
+          });
 
     });
   </script>
