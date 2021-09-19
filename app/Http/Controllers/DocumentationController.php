@@ -16,6 +16,15 @@ class DocumentationController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+  function __construct()
+  {
+    $this->middleware('permission:list-docs', ['only' => 'index']);
+    $this->middleware('permission:create-docs', ['only' => ['create', 'store', 'ajaxClients']]);
+    $this->middleware('permission:update-docs', ['only' => ['edit', 'store']]);
+    $this->middleware('permission:detail-docs', ['only' => ['show']]);
+    $this->middleware('permission:delete-docs', ['only' => ['destroy']]);
+  }
+
   public function index(Request $request)
   {
     $roles = Role::all();

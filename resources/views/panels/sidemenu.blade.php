@@ -69,10 +69,12 @@
             </li>
             @endrole --}}
             @role('admin|manager')
+            @canany('list-docs')
             <li class=" nav-item {{ 'docs' == request()->path() ? 'active show' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('docs.index')}}"><i data-feather="book"></i><span
-                        class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
+                    class="menu-title text-truncate" data-i18n="Email">Documentations</span></a>
             </li>
+            @endcan
             <li class=" nav-item {{ 'book' == request()->path() ? 'active show' : '' }}">
                 <a class="d-flex align-items-center" href="{{route('booking.index')}}"><i data-feather="book"></i><span
                         class="menu-title text-truncate" data-i18n="Email">Book Demo</span></a>
