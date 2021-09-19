@@ -35,7 +35,7 @@
                     </div>
                     @endif
                     <div class="row p-3">
-                        <div class="col-md-5 rounded-left" style="height:1032px;background-image: url('/assets/images/discussion.jpg');background-repeat:repeat;">
+                        <div class="col-md-5 rounded-left" style="height:1265px;background-image: url('/assets/images/discussion.jpg');background-repeat:repeat;">
                         </div>
                         <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
                             <div class="container">

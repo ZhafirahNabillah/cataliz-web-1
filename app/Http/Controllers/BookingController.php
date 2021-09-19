@@ -67,6 +67,11 @@ class BookingController extends Controller
         return view('booking.create', compact('programs', 'code_booking'));
     }
 
+    public function verif()
+    {
+        return view('booking.verif');
+    }
+
     public function seeEmailTemplate($data)
     {
         return view('booking.email_template', compact('data'));
