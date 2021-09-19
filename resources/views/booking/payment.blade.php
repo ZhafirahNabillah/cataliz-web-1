@@ -33,9 +33,9 @@
         <div class="card p-2">
             <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
             <div class="row p-3">
-                <div class="col-md-6" style="height:500px;background-image: url('/assets/images/discussion.jpg');background-repeat: no-repeat;">
+                <div class="col-md-5 rounded-left" style="height:500px;background-image: url('/assets/images/discussion.jpg');background-repeat: no-repeat;">
                 </div>
-                    <div class="col-md-6 p-5" style="background-color: #c4c4c4">
+                    <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
                         <div class="container">
                             <!-- <div class="card bg-warning text-white">
                                 <div class="card-body">
