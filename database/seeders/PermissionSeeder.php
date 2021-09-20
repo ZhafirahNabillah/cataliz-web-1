@@ -79,5 +79,11 @@ class PermissionSeeder extends Seeder
 
         // Activity Log
         Permission::create(['name' => 'activity-log']);
+
+        // crud documentation
+        Permission::create(['name' => 'list-docs']);
+        Permission::create(['name' => 'update-docs']);
+        Permission::create(['name' => 'detail-docs']);
+        Permission::create(['name' => 'delete-docs']);
     }
 }

@@ -48,6 +48,8 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_admin->givePermissionTo(['list-class', 'create-class', 'detail-class']);
         //give permission to admin to activity log
         $role_admin->givePermissionTo(['activity-log']);
+        //give permission to admin to documentation
+        $role_admin->givePermissionTo(['list-docs', 'update-docs', 'delete-docs', 'detail-docs']);
 
         $role_coachee = Role::where('name', 'coachee')->first();
 
@@ -104,7 +106,8 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_manager->givePermissionTo(['list-result', 'detail-result']);
         //give permission to manager to activity log
         $role_manager->givePermissionTo(['activity-log']);
+        //give permission to manager to documentation
+        $role_manager->givePermissionTo(['list-docs', 'update-docs', 'detail-docs']);
 
-    
     }
 }
