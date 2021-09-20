@@ -168,7 +168,7 @@
               <td height="25" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999;">YOUR CODE BOOKING : {{$code}}<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999;">YOUR CODE BOOKING : {{$code}} <br class="em_hide" />
               </td>
             </tr>
             <tr>
@@ -209,7 +209,7 @@
               <td valign="top" align="center">
                 <table width="210" border="0" scellspacing="0" cellpadding="0" align="center">
                   <tr>
-                    <td valign="middle" align="center" height="45" bgcolor="#feae39" style="font-family:'Open Sans', Arial, sans-serif; font-size:17px; font-weight:bold; color:#ffffff; text-transform:uppercase; border-radius:20px"><a href="{{ route('booking.search') }}?searchBooking={{$code}}" target="_blank" style="text-decoration:none; color:#ffffff; display:block; line-height:45px;">UPLOAD PAYMENT</a></td>
+                    <td valign="middle" align="center" height="45" bgcolor="#feae39" style="font-family:'Open Sans', Arial, sans-serif; font-size:17px; font-weight:bold; color:#ffffff; text-transform:uppercase; border-radius:20px"><a href="{{ route('booking.edit',$id) }}" target="_blank" style="text-decoration:none; color:#ffffff; display:block; line-height:45px;">UPLOAD PAYMENT</a></td>
                   </tr>
                 </table>
               </td>

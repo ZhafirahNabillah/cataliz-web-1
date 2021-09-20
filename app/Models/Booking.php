@@ -27,6 +27,8 @@ class Booking extends Model
         'status',
         'price',
         'program_id',
+        'bank',
+        'payment',
     ];
 
     public function setBookDemoAttribute($value)

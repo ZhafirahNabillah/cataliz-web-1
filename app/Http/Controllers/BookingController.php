@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Program;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Alert;
 
 class BookingController extends Controller
@@ -127,14 +128,16 @@ class BookingController extends Controller
         //     'created_at' => date('Y-m-d H:1:s'),
         // ]);
 
-        // $data = array(
-        //     'name' => $request->name,
-        //     'book_date' => $request->book_date,
-        //     'price' => $request->price,
-        //     'code' => $code_booking,
-        // );
+        $data = array(
+            'id' => $bookingData->id,
+            'name' => $request->name,
+            'book_date' => $request->book_date,
+            'price' => $request->price,
+            'code' => $code_booking,
+        );
+
         $email = $request->email;
-        Mail::send('booking/email_template', $input, function ($mail) use ($email) {
+        Mail::send('booking/email_template', $data, function ($mail) use ($email) {
             $mail->to($email, 'no-reply')
                 ->subject("Booking Cataliz");
             $mail->from('katum61199@gmail.com', 'Booking Cataliz');
@@ -164,7 +167,9 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $dataBooking = Booking::find($id);
+
+        return view('booking.payment', compact('dataBooking'));
     }
 
     /**
@@ -176,13 +181,18 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $dataBooking = Booking::find($id);
-        Booking::where('id', $dataBooking)->update([
+        $this->validate($request, [
+            'bank' => 'required|string|max:30',
+            'payment' => 'required|image|mimes:jpeg,png,jpg',
+
+        ]);
+
+        Booking::where('id', $id)->update([
             'payment' => $request->payment->store('payment'),
             'bank' => $request->bank,
         ]);
 
-        return redirect()->back();
+        return Redirect::back()->with('success', 'value');
     }
 
     /**
