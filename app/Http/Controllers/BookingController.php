@@ -72,11 +72,6 @@ class BookingController extends Controller
         return view('booking.verif');
     }
 
-    public function seeEmailTemplate($data)
-    {
-        return view('booking.email_template', compact('data'));
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -110,40 +105,42 @@ class BookingController extends Controller
             'program_id' => 'required',
         ]);
 
-        Booking::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'whatsapp_number' => $request->whatsapp_number,
-            'instance' => $request->instance,
-            'profession' => $request->profession,
-            'address' => $request->address,
-            'goals' => $request->goals,
-            'book_demo' => $request->book_demo,
-            'book_date' => $request->book_date,
-            'session_coaching' => $request->session_coaching,
-            'session_training' => $request->session_training,
-            'session_mentoring' => $request->session_mentoring,
-            'price' => $request->price,
-            'program_id' => $request->program_id,
-            'code' => $code_booking,
-            'created_at' => date('Y-m-d H:1:s'),
-        ]);
+        $input = $request->all();
+        $bookingData = Booking::create($input);
 
+        // Booking::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'whatsapp_number' => $request->whatsapp_number,
+        //     'instance' => $request->instance,
+        //     'profession' => $request->profession,
+        //     'address' => $request->address,
+        //     'goals' => $request->goals,
+        //     'book_demo' => $request->book_demo,
+        //     'book_date' => $request->book_date,
+        //     'session_coaching' => $request->session_coaching,
+        //     'session_training' => $request->session_training,
+        //     'session_mentoring' => $request->session_mentoring,
+        //     'price' => $request->price,
+        //     'program_id' => $request->program_id,
+        //     'code' => $code_booking,
+        //     'created_at' => date('Y-m-d H:1:s'),
+        // ]);
+
+        // $data = array(
+        //     'name' => $request->name,
+        //     'book_date' => $request->book_date,
+        //     'price' => $request->price,
+        //     'code' => $code_booking,
+        // );
         $email = $request->email;
-        $data = array(
-            'name' => $request->name,
-            'book_date' => $request->book_date,
-            'price' => $request->price,
-            'code' => $code_booking,
-        );
-        Mail::send('booking/email_template', $data, function ($mail) use ($email) {
+        Mail::send('booking/email_template', $input, function ($mail) use ($email) {
             $mail->to($email, 'no-reply')
                 ->subject("Booking Cataliz");
             $mail->from('katum61199@gmail.com', 'Booking Cataliz');
         });
 
         // Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
-        $this->seeEmailTemplate($data);
 
         return redirect('booking/create')->with('success', 'value');
     }

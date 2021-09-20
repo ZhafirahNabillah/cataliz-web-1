@@ -20,15 +20,7 @@
 =======
 <!-- BEGIN: Content-->
 <div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-color:#fbea67">
-    <!-- <div class="content-header-left col-md-9 col-12 mb-2">
-        <div class="row breadcrumbs-top">
-            <div class="col-12">
-                <div class="breadcrumb-wrapper">
 
-                </div>
-            </div>
-        </div>
-    </div> -->
     <div class="container">
         <div class="card p-2">
             <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
@@ -36,19 +28,13 @@
                 <div class="col-md-5 rounded-left" style="height:500px;background-image: url('/assets/images/discussion.jpg');background-repeat: no-repeat;">
                 </div>
                 <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
+                    @foreach($data as $dataBooking)
                     <div class="container">
-                        <!-- <div class="card bg-warning text-white">
-                                <div class="card-body">
-                                <h2 class="text-center" style="font-family: Roboto; color:black; size : 35 px">PAYMENT</h2>
-                                </div>
-                            </div> -->
-                        <h5 class="text-center font-weight-bold" style="font-family: Roboto; color:black" style="font-size: 25px">Your Name</h5>
+                        <h5 class="text-center font-weight-bold" style="font-family: Roboto; color:black" style="font-size: 25px"> {{$dataBooking->name}} </h5>
                         <dl class="text-center" style="font-family: Roboto; color:black">
-                            @foreach($data as $dataBooking)
                             <dt class="font-weight-bold">YOUR CODE BOOKING : {{$dataBooking->code}}</dt>
                             <dt>Total : Rp.{{$dataBooking->price}} </dt>
                             <dt>Transfer To : </dt>
-                            @endforeach
                         </dl>
                         <dl class="text-center " style="font-family: Roboto; color:black">
                             <dd>- BCA 12189512</dd>
@@ -62,24 +48,32 @@
 
                     </div>
                     <br>
-                    <form action="">
+                    {{$dataBooking->id}}
+                    <form action="" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
                         <div class="row-3">
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="" id="" placeholder="Choose File ...">
+                                <label for="bank">Option Bank</label>
+                                <select class="form-control @error('bank') is-invalid @enderror">
+                                    <option value="" disabled>Choise Bank: </option>
+                                    <option value="bca" {{(old('bank') == 'bca') ? ' selected' : ''}}>BCA</option>
+                                    <option value="bri" {{(old('bank') == 'bri') ? ' selected' : ''}}>BRI</option>
+                                    <option value="mandiri" {{(old('bank') == 'mandiri') ? ' selected' : ''}}>MANDIRI</option>
+                                    <option value="bni" {{(old('bank') == 'bni') ? ' selected' : ''}}>BNI</option>
+                                </select>
                             </div>
-                            <div class="col-md-5">
-                                <button class="btn btn-secondary">Browse...</button>
+                            <div class="col-md-9">
+                                <input type="file" class="form-control" name="payment" id="" placeholder="Choose File ...">
+                            </div>
+                            <div class="" style="width: 300px;">
+                                <div class="col-md-6">
+                                    <button type="submit" class="btn btn btn-warning btn-blog">UPLOAD PAYMENT</button>
+                                </div>
                             </div>
                         </div>
                     </form>
-                    </br>
-                    <br>
-                    <br>
-                    <div class="row mx-auto" style="width: 300px;">
-                        <div class="col-md-6">
-                            <button class="btn btn btn-warning btn-blog">UPLOAD PAYMENT</button>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
                 </br>
                 </br>
@@ -112,7 +106,7 @@
                             <h4 class="text-center" style="font-family: Roboto; color:black; size : 35 px">Your Code Booking</h4>
                             </div>
                         </div>
-                       <form class="row g-3" action="{{ route('booking.search') }}" method="GET">  
+                    <form class="row g-3" action="{{ route('booking.search') }}" method="GET">  
                             <div class="col-12">
                             <input id="valueSearch" class="form-control" type="text" name="searchBooking" placeholder="input your Code Booking here ..." value="{{ old('searchBooking') }}"> 
                             </div>
@@ -121,28 +115,28 @@
                             </div>
                         </form>
                         
-                           <!-- <input type="submit" id="search" value="" class="btn btn-warning>
-                            <!-- <div id="buttonCheck">
-                                 -->
+                            <input type="submit" id="search" value="" class="btn btn-warning>
+                            <div id="buttonCheck">
+                                -->
     <!-- </div> -->
     <!-- <div class="card p-4" style="background-color:#C4C4C4; position:relative; margin-left: 40%; left:5.4%; margin-top: -5.5% "> -->
 
-    @if(session('success'))
+    <!-- @if(session('success'))
     <div class="alert alert-success alert-dismissible" role="alert">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <i class="fa fa-check-circle"></i> Your file has been succesfully uploaded!
     </div>
-    @endif
+    @endif -->
     <!-- </div>
                 </div>
             </div>
         </div>
     </div> -->
-</div>
-<!-- END: Content-->
+    <!-- </div> -->
+    <!-- END: Content-->
 
 
-<!-- <div class="app-content content">
+    <!-- <div class="app-content content">
     <div class="content-body" id="dataSearch">
         @foreach($data as $dataBooking)
         <p>Code Booking: {{$dataBooking->code}}</p>
@@ -185,12 +179,12 @@
         @endforeach
     </div>
 </div> -->
-@endsection
+    @endsection
 
-@push('scripts')
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
+    @push('scripts')
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
 
-</script>
-@endpush
+    </script>
+    @endpush
