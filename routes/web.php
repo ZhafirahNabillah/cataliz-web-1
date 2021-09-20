@@ -90,7 +90,7 @@ Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
-	Route::resource('booking', BookingController::class);
+	// Route::resource('booking', BookingController::class);
 });
 
 //Roles and permissions controller
