@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
 use App\Models\Documentation;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Storage;
@@ -16,6 +18,16 @@ class DocumentationController extends Controller
    *
    * @return \Illuminate\Http\Response
    */
+
+  function __construct()
+  {
+    $this->middleware('permission:list-docs', ['only' => 'index']);
+    $this->middleware('permission:create-docs', ['only' => ['create', 'store', 'ajaxClients']]);
+    $this->middleware('permission:update-docs', ['only' => ['edit', 'store']]);
+    $this->middleware('permission:detail-docs', ['only' => ['show']]);
+    $this->middleware('permission:delete-docs', ['only' => ['destroy']]);
+  }
+
   public function index(Request $request)
   {
     $roles = Role::all();
@@ -217,7 +229,7 @@ class DocumentationController extends Controller
   public function coachmentors_docs(Request $request)
   {
     if ($request->ajax()) {
-      $data = Documentation::where('role', 'coach
+      $data = Documentation::where('role', 'manager
       ')->get();
       return DataTables::of($data)
         ->addIndexColumn()
