@@ -35,53 +35,55 @@
             <div class="row p-3">
                 <div class="col-md-5 rounded-left" style="height:500px;background-image: url('/assets/images/discussion.jpg');background-repeat: no-repeat;">
                 </div>
-                    <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
-                        <div class="container">
-                            <!-- <div class="card bg-warning text-white">
+                <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
+                    <div class="container">
+                        <!-- <div class="card bg-warning text-white">
                                 <div class="card-body">
                                 <h2 class="text-center" style="font-family: Roboto; color:black; size : 35 px">PAYMENT</h2>
                                 </div>
                             </div> -->
-                                <h5 class="text-center font-weight-bold" style="font-family: Roboto; color:black" style="font-size: 25px">Your Name</h5>    
-                                    <dl class="text-center" style="font-family: Roboto; color:black">
-                                        <dt  class="font-weight-bold">YOUR CODE BOOKING : 234890</dt>
-                                        <dt>Total : Rp.400.000 </dt>
-                                        <dt>Transfer To : </dt>
-                                    </dl>   
-                                    <dl class="text-center " style="font-family: Roboto; color:black">
-                                        <dd>- BCA 12189512</dd>
-                                        <dd>- BRI 799567845</dd>
-                                        <dd>- MANDIRI 477890909k</dd>
-                                        <dd>- BNI 133896669</dd>
-                                    </dl>
-                                    <dt class="text-center " style="font-family: Roboto; color:black"> Your booking has been successfully created.. Please 
-                                        complete the payment with upload your payment slip
-                                    </dt>
+                        <h5 class="text-center font-weight-bold" style="font-family: Roboto; color:black" style="font-size: 25px">Your Name</h5>
+                        <dl class="text-center" style="font-family: Roboto; color:black">
+                            @foreach($data as $dataBooking)
+                            <dt class="font-weight-bold">YOUR CODE BOOKING : {{$dataBooking->code}}</dt>
+                            <dt>Total : Rp.{{$dataBooking->price}} </dt>
+                            <dt>Transfer To : </dt>
+                            @endforeach
+                        </dl>
+                        <dl class="text-center " style="font-family: Roboto; color:black">
+                            <dd>- BCA 12189512</dd>
+                            <dd>- BRI 799567845</dd>
+                            <dd>- MANDIRI 477890909k</dd>
+                            <dd>- BNI 133896669</dd>
+                        </dl>
+                        <dt class="text-center " style="font-family: Roboto; color:black"> Your booking has been successfully created.. Please
+                            complete the payment with upload your payment slip
+                        </dt>
 
-                            </div>
-                            <br>
-                                <form action="">
-                                    <div class="row-3">
-                                        <div class="col-md-5">
-                                            <input type="text" class="form-control" name="" id="" placeholder="Choose File ...">
-                                        </div>
-                                        <div class="col-md-5">
-                                        <button class="btn btn-secondary" >Browse...</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                </br>
-                                <br>
-                                <br>
-                            <div class="row mx-auto" style="width: 300px;">
-                                        <div class="col-md-6">
-                                            <button class="btn btn btn-warning btn-blog">UPLOAD PAYMENT</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </br>
-                            </br>
                     </div>
+                    <br>
+                    <form action="">
+                        <div class="row-3">
+                            <div class="col-md-5">
+                                <input type="text" class="form-control" name="" id="" placeholder="Choose File ...">
+                            </div>
+                            <div class="col-md-5">
+                                <button class="btn btn-secondary">Browse...</button>
+                            </div>
+                        </div>
+                    </form>
+                    </br>
+                    <br>
+                    <br>
+                    <div class="row mx-auto" style="width: 300px;">
+                        <div class="col-md-6">
+                            <button class="btn btn btn-warning btn-blog">UPLOAD PAYMENT</button>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                </br>
+            </div>
         </div>
     </div>
 
@@ -102,7 +104,7 @@
                                         </div>
                                         <div class="col-md-6 p-5" style="background-color: #c4c4c4">
     </div> -->
-                    <!-- <div class="card p-3" style="background-image: url('/assets/images/discussion.jpg')">
+    <!-- <div class="card p-3" style="background-image: url('/assets/images/discussion.jpg')">
                         <div class="card p-4" style="background-color:#C4C4C4; width : 1000 px ;position:relative; margin-left: 40%; left:7%; margin-top: -6% ">
                         <h2 class="text-center" style="font-family: Roboto; color:black; size : 35 px">PAYMENT</h2>
                         <div class="row g-4">
@@ -122,16 +124,16 @@
                            <!-- <input type="submit" id="search" value="" class="btn btn-warning>
                             <!-- <div id="buttonCheck">
                                  -->
-                                <!-- </div> -->                
-                        <!-- <div class="card p-4" style="background-color:#C4C4C4; position:relative; margin-left: 40%; left:5.4%; margin-top: -5.5% "> -->
-  
-                        @if(session('success'))
-                        <div class="alert alert-success alert-dismissible" role="alert">
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <i class="fa fa-check-circle"></i> Your file has been succesfully uploaded! 
-                        </div>
-                        @endif
-                    <!-- </div>
+    <!-- </div> -->
+    <!-- <div class="card p-4" style="background-color:#C4C4C4; position:relative; margin-left: 40%; left:5.4%; margin-top: -5.5% "> -->
+
+    @if(session('success'))
+    <div class="alert alert-success alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <i class="fa fa-check-circle"></i> Your file has been succesfully uploaded!
+    </div>
+    @endif
+    <!-- </div>
                 </div>
             </div>
         </div>
