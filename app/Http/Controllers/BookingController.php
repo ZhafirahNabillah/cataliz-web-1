@@ -142,7 +142,7 @@ class BookingController extends Controller
 
         // Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
 
-        return redirect('booking/create')->with('success', 'value');
+        return redirect('booking/verif')->with('success', 'value');
     }
 
     /**
