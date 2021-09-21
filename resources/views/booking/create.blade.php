@@ -11,12 +11,61 @@
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 <style>
-    @media screen and (max-width: 768px) {
+@media screen and (max-width: 2560px) {
+    .col-md-7 {
+        padding-top: 30px;
+    }
+    h3 {
+        padding-top:30px;
+        padding-left:30px;
+    }
+    .white-container {
+        margin-top: -px;
+        margin-bottom: auto;
+    }
+
+    .container-fluid {
+        margin-top: -5px;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .col-md-7 {
+        padding-top: 30px;
+        margin-right: -130px;
+    }
+
+    .container-fluid {
+        margin-top: -40px;
+    }
+}
+
+@media screen and (max-width: 767px) {
     .col-md-5 {
     visibility: hidden;
     display: none;
-  }
+    }
+
+    .col-md-7 {
+        padding-top: 30px;
+        margin-right: -130px;
+    }
 }
+
+@media screen and (max-width: 425px) {
+    .col-md-7 {
+        padding-top: 30px;
+    }
+
+    .container-fluid {
+        margin-top: -50px;
+    }
+}
+
+
+
 </style>
 @endpush
 
@@ -33,19 +82,19 @@
         </div>
     </div> -->
 
-    <div class="container">
-        <div class="card p-2">
-            <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
-                    @if(session('success'))
+    <div class="container-fluid">
+        <div class="card p-0">
+            <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:25px; float:left;"> Cataliz</h3>
+                    <!-- @if(session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                         <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
                     </div>
-                    @endif
+                    @endif -->
                     <div class="row p-3">
                         <div class="col-md-5 rounded-left" style="height:1265px;background-image: url('/assets/images/discussion.jpg');background-repeat:repeat;">
                         </div>
-                        <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
+                        <div class="col-md-7 rounded-right" style="background-color: #c4c4c4">
                             <div class="container">
                                 <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
                                 <form action="{{ route('booking.store') }}" method="post" id="BookingForm" name="BookingForm">

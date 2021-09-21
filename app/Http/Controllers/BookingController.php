@@ -68,9 +68,9 @@ class BookingController extends Controller
         return view('booking.create', compact('programs', 'code_booking'));
     }
 
-    public function verif()
+    public function seeEmailTemplate()
     {
-        return view('booking.verif');
+        return view('booking.email_successbooking');
     }
 
     /**
@@ -143,9 +143,9 @@ class BookingController extends Controller
             $mail->from('katum61199@gmail.com', 'Booking Cataliz');
         });
 
-        // Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
+        Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
 
-        return redirect('booking/verif')->with('success', 'value');
+        return redirect('booking/create')->with('success', 'value');
     }
 
     /**

@@ -23,7 +23,7 @@
 
 <body class="vertical-layout vertical-menu-modern navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
     @yield('content')
-    <!-- @include('sweetalert::alert') -->
+    @include('sweetalert::alert')
     @include('panels.footer')
     <script src="{{asset('assets/vendors/js/vendors.min.js')}}"></script>
     @include('panels.script')

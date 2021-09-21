@@ -10,6 +10,15 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+<style>
+@media screen and (max-width: 767px) {
+    .col-md-5 {
+    visibility: hidden;
+    display: none;
+    }
+}
+
+</style>
 @endpush
 
 @section('content')
@@ -27,14 +36,14 @@
 
     <div class="container">
         <div class="card p-2">
-            <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:2.5%; float:left;"> Cataliz</h3>
+            <h3 style="font-size:;"><img src="{{ url('/assets/images/cataliz.png') }}" style="width:25px; float:left;"> Cataliz</h3>
                     <div class="row p-3">
                         <div class="col-md-5 rounded-left" style="height:410px;background-image: url('/assets/images/discussion.jpg');background-repeat:no-repeat;">
                         </div>
                         <div class="col-md-7 p-5 rounded-right" style="background-color: #c4c4c4">
                             <div class="container">
-                                <h2 class="text-center" style="font-family: Roboto; color:black; padding-top:20%">Your booking has been successfully created.. Please check your email to complete the payment</h2>
-                                
+                                <img src="{{ url('/assets/images/Group.png') }}" style="width:80px; padding-top:6%; display: block; margin: 0 auto;">
+                                <h2 class="text-center" style="font-family: Roboto; color:black; padding-top:5%">Your booking has been successfully created.. Please check your email to complete the payment</h2>
                             </div>
                         </div>
                     </div>
