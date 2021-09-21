@@ -11,8 +11,15 @@
 @endpush
 @section('content')
 
+<style>
+.btn-warning{
+    background-color:#F0B445
+    }
+</style>
+
 <!-- BEGIN: Content-->
-<div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-image:url('/assets/images/discussion.jpg')">
+<div class="app-content content" style="margin-top: -5%; margin-left: -0.5%;background-image:url('/assets/images/discussion.jpg');background-repeat: no-repeat; background-size: cover; background-position: center center;">
+            <!-- Mask & flexbox options-->
 
     <div class="container">
         <div class="row justify-content-center align-items-center">
@@ -31,7 +38,7 @@
 
 
                         <div class="container">
-                            <h3 class="text-center font-weight-bold" style="font-family: Montserrat; color:rgba(239, 185, 85, 1); font-size: 175%">PAYMENT</h3>
+                            <h3 class="text-center font-weight-bolder" style="font-family: Montserrat; color:rgba(239, 185, 85, 1); font-size: 200%">PAYMENT</h3>
                             <p class="text-center font-weight-bolder" style="font-family: Montserrat; color:black; font-size:125%"> {{$dataBooking->name}} </p>
                             <dl class="text-center" style="font-family: Montserrat; color:black; font-size: 105%">
                                 <dt class="font-weight-bold">YOUR CODE BOOKING : {{$dataBooking->code}}</dt>
@@ -77,19 +84,44 @@
                             </div>
 
                             <div class="row-3">
-                                <div class="mt-2 mb-2" style="margin-left: 35%;">
+                                <div class="mt-2 mb-4" style="margin-left: 35%;">
                                         <div class="col-md-6">
                                             <div class="row justify-content-center align-items-center">
-                                                <button type="submit" class="btn btn btn-warning ">UPLOAD PAYMENT</button>
+                                                <button type="submit" class="btn btn-warning" >UPLOAD PAYMENT</button>
                                             </div>
                                         </div>
                                 </div>
                             </div>
-                                    
+
+                            <!-- <div class="row-3">
+                                <div class="mt-2 mb-2" style="margin-left: 35%;">
+                                        <div class="col-md-6">
+                                        <div class="col-md-6 p-5 rounded-bottom" style="background-color: #F0B445 ">
+                            <img class="img-fluid" src="{{asset('assets/images/bank.png')}}" alt="Login V2" />
+                            </div>
+                                        </div>
+                                </div>
+                            </div> -->
+
+                        </div>      
                     <!-- </div> -->
-            </div>  
-        </div>
+                    </div> 
+                    </div>
+        
+                        <div class="container" style="margin-top:-5%">
+                            <div class="mt-2 mb-2">
+                                <div class="row justify-content-center align-items-center">
+                                            <div class="col-md-6 p-5 rounded-bottom" style="background-color: #F0B445 ">
+                                            <img class="img-fluid" src="{{asset('assets/images/bank.png')}}" alt="Login V2" />
+                                            </div>
+                </div>
+        </div> 
     </div>
+        
+ 
+
+        
+</div>
     @endsection
 
     @push('scripts')
