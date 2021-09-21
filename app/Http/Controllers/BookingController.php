@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Program;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Crypt;
 use Alert;
 
 class BookingController extends Controller
@@ -165,8 +166,9 @@ class BookingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function payment($id)
     {
+        $id =  Crypt::decrypt($id);
         $dataBooking = Booking::find($id);
 
         return view('booking.payment', compact('dataBooking'));
