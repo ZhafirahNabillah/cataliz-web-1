@@ -28,23 +28,23 @@
                 <!-- <div class="row p-3"> -->
                     <!-- <div class="col-md-5 rounded-left" style="height:500px;background-image: url('/assets/images/discussion.jpg');background-repeat: no-repeat;">
                     </div> -->
-                    <div class="">
+
 
                         <div class="container">
-                            <h3 class="text-center font-weight-bold" style="font-family: Montserrat; color:rgba(239, 185, 85, 1); font-size: 48px">PAYMENT</h3>
-                            <p class="text-center font-weight-bolder" style="font-family: Montserrat; color:black; font-size: 24px"> {{$dataBooking->name}} </p>
-                            <dl class="text-center" style="font-family: Montserrat; color:black; font-size: 18px">
+                            <h3 class="text-center font-weight-bold" style="font-family: Montserrat; color:rgba(239, 185, 85, 1); font-size: 175%">PAYMENT</h3>
+                            <p class="text-center font-weight-bolder" style="font-family: Montserrat; color:black; font-size:125%"> {{$dataBooking->name}} </p>
+                            <dl class="text-center" style="font-family: Montserrat; color:black; font-size: 105%">
                                 <dt class="font-weight-bold">YOUR CODE BOOKING : {{$dataBooking->code}}</dt>
                                 <dt>Total : Rp.{{$dataBooking->price}} </dt>
                                 <dt>Transfer To : </dt>
                             </dl>
-                            <dl class="text-center font-weight-bolder" style="font-family: Montserrat; color:black ;font-size: 24px">
+                            <dl class="text-center font-weight-bolder" style="font-family: Montserrat; color:black ;font-size: 125%">
                                 <dd> BCA 12189512</dd>
                                 <dd> BRI 799567845</dd>
                                 <dd> MANDIRI 477890909</dd>
                                 <dd> BNI 133896669</dd>
                             </dl>
-                            <dt class="text-center " style="font-family: Montserrat; color:black; font-size: 18px"> Your booking has been successfully created.. Please
+                            <dt class="text-center " style="font-family: Montserrat; color:black; font-size: 105%"> Your booking has been successfully created.. Please
                                 complete the payment with upload your payment slip
                             </dt>
                         </div>
@@ -53,9 +53,10 @@
                             @csrf
                             @method('PUT')
                             <div class="row-3">
+                                <div class="mt-2 mb-2">
                                 <div class="col-12">
-                                    <th>
-                                    <label for="bank">Option Bank</label>
+                                    <th> 
+                                    <label class="text-center " style="font-family: Montserrat; color:black" for="bank">Pilihan Bank</label>
                                     <select class="form-control @error('bank') is-invalid @enderror" name="bank">
                                         <option value="" disabled>Choise Bank: </option>
                                         <option value="bca" {{(old('bank') == 'bca') ? ' selected' : ''}}>BCA</option>
@@ -64,23 +65,29 @@
                                         <option value="bni" {{(old('bank') == 'bni') ? ' selected' : ''}}>BNI</option>
                                     </select>
                                     </th>
-                                    <th>
-                                    <input type="file" class="form-control" name="payment" id="" placeholder="Choose File ...">
-                                    </th>
-                                    </div>
-                                    <div class="" style="width: 400px;">
-                                        <div class="col-md-6 ">
-                                            <div class="row justify-content-center align-items-center"></div>
-                                            <button type="submit" class="btn btn btn-warning btn-blog">UPLOAD PAYMENT</button>
+                            </div>
+                            
+                            <div class="row-3">
+                                <div class="mt-2 mb-2">
+                                <div class="col-12">
+                                <label class="text-center " style="font-family: Montserrat; color:black" for="bank">Pilih File</label>
+                                        <input type="file" class="form-control" name="payment" id="" placeholder="Choose File ...">
+                                    </div>     
+                                </div>  
+                            </div>
+
+                            <div class="row-3">
+                                <div class="mt-2 mb-2" style="margin-left: 35%;">
+                                        <div class="col-md-6">
+                                            <div class="row justify-content-center align-items-center">
+                                                <button type="submit" class="btn btn btn-warning ">UPLOAD PAYMENT</button>
+                                            </div>
                                         </div>
-                                    </div>
                                 </div>
-                            </form>
-                        </div>
-                        </br>
-                        </br>
+                            </div>
+                                    
                     <!-- </div> -->
-                </div>
+            </div>  
         </div>
     </div>
     @endsection
