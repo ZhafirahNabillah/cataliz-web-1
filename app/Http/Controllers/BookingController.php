@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Program;
@@ -9,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Crypt;
 use Alert;
+use DataTables;
 
 class BookingController extends Controller
 {
@@ -19,19 +21,20 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->ajax()) {
-            $data = Booking::all();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
-                    return $btn;
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
+        $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')->get(); 
+        // if ($request->ajax()) {
+        //     $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')->get(); 
+        //     return Datatables::of($data)
+        //         ->addIndexColumn()
+        //         ->addColumn('action', function ($row) {
+        //             $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+        //             return $btn;
+        //         })
+        //         ->rawColumns(['action'])
+        //         ->make(true);
+        //     }
         //return response()->json($data);
-        return view('booking.index');
+        return view('booking.index', compact('data'));
     }
 
     public function seePayment()

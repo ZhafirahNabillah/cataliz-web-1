@@ -7,6 +7,12 @@
 @include('panels.navbar')
 
 @include('panels.sidemenu')
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+
 <!-- BEGIN: Content-->
 <!-- <link href="assets/dataTables/datatables.min.css" rel="stylesheet"> -->
 <div class="app-content content ">
@@ -57,7 +63,16 @@
                         </tr>
                       </thead>
                       <tbody>
-
+                          @foreach($data as $e=>$dataBooking)
+                            <tr>
+                              <td>{{$e+1}}</td>
+                              <td>{{$dataBooking->name}}</td>
+                              <td>{{$dataBooking->email}}</td>
+                              <td>{{$dataBooking->whatsapp_number}}</td>
+                              <td>{{$dataBooking->status}}</td>
+                              <td> Action </td>
+                            </tr>
+                          @endforeach
                       </tbody>
                     </table>
                   </div>
@@ -179,88 +194,99 @@
   <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
 
   <script type="text/javascript">
-    $(function() {
-      $('[data-toggle="popover"]').popover({
-        html: true,
-        trigger: 'hover',
-        placement: 'top',
-        content: function() {
-          return '<img src="' + $(this).data('img') + '" />';
-        }
-      });
-    });
 
-    $(function() {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
+    $(document).ready(function() {
+        $('#datatables').DataTable();
 
-      var table_log = $('.logadmin-datatable').DataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('booking.index') }}",
-        columns: [{
-            data: 'DT_RowIndex',
-            name: 'DT_RowIndex'
-          },
-          {
-            data: 'name',
-            name: 'name'
-          },
-          {
-            data: 'email',
-            name: 'email'
-          },
-          {
-            data: 'whatsapp_number',
-            name: 'whatsapp_number'
-          },
-          {
-            data: 'status',
-            name: 'status'
-          },
-          {
-            data: 'price',
-            name: 'price'
-          },
-
-        ],
-        dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-        language: {
-          paginate: {
-            // remove previous & next text from pagination
-            previous: '&nbsp;',
-            next: '&nbsp;'
-          },
-          search: "<i data-feather='search'></i>",
-          searchPlaceholder: "Search records"
-        }
-      });
-
-      $(document).ready(function() {
-
-        moment.updateLocale(moment.locale(), {
-          invalidDate: "Invalid Date Example"
-        });
-
-        var table = $('#datatables').DataTable({
-          columnDefs: [{
-            targets: 4,
-            render: $.fn.dataTable.render.moment('DD/MM/YYYY')
-          }]
-        });
-      });
-
-      // create new booking on admin page
-      $('body').on('click', '.createNewBooking', function() {
+        $('body').on('click', '.createNewBooking', function() {
             $('#modal-booking-slide-in').modal('show');
-          });
+        });
+    } );
+    // $(function() {
+    //   $('[data-toggle="popover"]').popover({
+    //     html: true,
+    //     trigger: 'hover',
+    //     placement: 'top',
+    //     content: function() {
+    //       return '<img src="' + $(this).data('img') + '" />';
+    //     }
+    //   });
+    // });
 
-    });
+    
+
+    // $(function() {
+    //   $.ajaxSetup({
+    //     headers: {
+    //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //     }
+    //   });
+
+    //   var table_log = $('.logadmin-datatable').DataTable({
+    //     processing: true,
+    //     serverSide: true,
+    //     ajax: "{{ route('booking.index') }}",
+    //     columns: [{
+    //         data: 'DT_RowIndex',
+    //         name: 'DT_RowIndex'
+    //       },
+    //       {
+    //         data: 'name',
+    //         name: 'name'
+    //       },
+    //       {
+    //         data: 'email',
+    //         name: 'email'
+    //       },
+    //       {
+    //         data: 'whatsapp_number',
+    //         name: 'whatsapp_number'
+    //       },
+    //       {
+    //         data: 'status',
+    //         name: 'status'
+    //       },
+    //       {
+    //         data: 'price',
+    //         name: 'price'
+    //       },
+
+    //     ],
+    //     dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+    //     language: {
+    //       paginate: {
+    //         // remove previous & next text from pagination
+    //         previous: '&nbsp;',
+    //         next: '&nbsp;'
+    //       },
+    //       search: "<i data-feather='search'></i>",
+    //       searchPlaceholder: "Search records"
+    //     }
+    //   });
+
+    //   $(document).ready(function() {
+
+    //     moment.updateLocale(moment.locale(), {
+    //       invalidDate: "Invalid Date Example"
+    //     });
+
+    //     var table = $('#datatables').DataTable({
+    //       columnDefs: [{
+    //         targets: 4,
+    //         render: $.fn.dataTable.render.moment('DD/MM/YYYY')
+    //       }]
+    //     });
+    //   });
+
+    //   // create new booking on admin page
+    //   $('body').on('click', '.createNewBooking', function() {
+    //         $('#modal-booking-slide-in').modal('show');
+    //       });
+
+    // });
   </script>
 
   @endpush
