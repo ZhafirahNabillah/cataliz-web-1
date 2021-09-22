@@ -82,6 +82,7 @@ class PermissionSeeder extends Seeder
 
         // crud documentation
         Permission::create(['name' => 'list-docs']);
+        Permission::create(['name' => 'create-docs']);
         Permission::create(['name' => 'update-docs']);
         Permission::create(['name' => 'detail-docs']);
         Permission::create(['name' => 'delete-docs']);

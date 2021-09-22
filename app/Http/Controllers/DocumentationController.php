@@ -229,8 +229,7 @@ class DocumentationController extends Controller
   public function coachmentors_docs(Request $request)
   {
     if ($request->ajax()) {
-      $data = Documentation::where('role', 'manager
-      ')->get();
+      $data = Documentation::where('role', 'mentor')->orWhere('role', 'coach')->get();
       return DataTables::of($data)
         ->addIndexColumn()
         ->addColumn('action', function ($row) {
