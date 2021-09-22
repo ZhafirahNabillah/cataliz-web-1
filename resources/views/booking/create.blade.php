@@ -14,18 +14,20 @@
 @media screen and (max-width: 2560px) {
     .col-md-7 {
         padding-top: 30px;
+        border-radius:0px 6px 6px 0px;
     }
     h3 {
         padding-top:30px;
         padding-left:30px;
     }
-    .white-container {
-        margin-top: -px;
-        margin-bottom: auto;
-    }
-
     .container-fluid {
         margin-top: -5px;
+    }
+    .row {
+        padding-top:20px;
+        padding-right:40px;
+        padding-left:40px;
+        padding-bottom:15px;
     }
 
 }
@@ -35,10 +37,14 @@
     .col-md-7 {
         padding-top: 30px;
         margin-right: -130px;
+        border-radius:0px 6px 6px 0px;
     }
-
     .container-fluid {
         margin-top: -40px;
+    }
+    .row {
+        padding-top:10px;
+        padding-bottom:15px;
     }
 }
 
@@ -47,7 +53,6 @@
     visibility: hidden;
     display: none;
     }
-
     .col-md-7 {
         padding-top: 30px;
         margin-right: -130px;
@@ -57,14 +62,18 @@
 @media screen and (max-width: 425px) {
     .col-md-7 {
         padding-top: 30px;
+        border-radius:0px 0px 6px 6px;
     }
-
     .container-fluid {
         margin-top: -50px;
     }
+    .row {
+        padding-top:15px;
+        padding-right:14px;
+        padding-left:14px;
+        padding-bottom:0px;
+    }
 }
-
-
 
 </style>
 @endpush
@@ -83,7 +92,7 @@
     </div> -->
 
     <div class="container-fluid">
-        <div class="card p-0">
+        <div class="card">
             <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:25px; float:left;"> Cataliz</h3>
                     <!-- @if(session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
@@ -91,10 +100,10 @@
                         <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
                     </div>
                     @endif -->
-                    <div class="row p-3">
-                        <div class="col-md-5 rounded-left" style="height:1265px;background-image: url('/assets/images/discussion.jpg');background-repeat:repeat;">
+                    <div class="row" style="height:1000px;">
+                        <div class="col-md-5 rounded-left" style="background-image: url('/assets/images/discussion.jpg');background-repeat:repeat;">
                         </div>
-                        <div class="col-md-7 rounded-right" style="background-color: #c4c4c4">
+                        <div class="col-md-7" style="background-color: #c4c4c4; margin-right">
                             <div class="container">
                                 <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
                                 <form action="{{ route('booking.store') }}" method="post" id="BookingForm" name="BookingForm">
@@ -266,7 +275,7 @@
                                     </div>
 
                                     <div class="form-group text-center mb-0">
-                                        <Button id="submit" type="submit" class="btn btn-warning">BOOK NOW</Button>
+                                        <Button id="submit" type="submit" class="btn btn-warning" style="margin-top:5px">BOOK NOW</Button>
                                     </div>
                                 </form><br>
                                 <!-- <div id="buttonCheck">
