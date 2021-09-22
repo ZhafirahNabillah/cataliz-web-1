@@ -49,7 +49,7 @@ class RoleHasPermissionsSeeder extends Seeder
         //give permission to admin to activity log
         $role_admin->givePermissionTo(['activity-log']);
         //give permission to admin to documentation
-        $role_admin->givePermissionTo(['list-docs', 'update-docs', 'delete-docs', 'detail-docs']);
+        $role_admin->givePermissionTo(['list-docs', 'create-docs', 'update-docs', 'delete-docs', 'detail-docs']);
 
         $role_coachee = Role::where('name', 'coachee')->first();
 
