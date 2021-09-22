@@ -100,8 +100,8 @@
                         <i class="fa fa-check-circle"></i> Your Data Booking has been created, Please make payment...
                     </div>
                     @endif -->
-                    <div class="row" style="height:1000px;">
-                        <div class="col-md-5 rounded-left" style="background-image: url('/assets/images/discussion.jpg');background-repeat:repeat;">
+                    <div class="row">
+                        <div class="col-md-5 rounded-left" style="background-image: url('/assets/images/discussion.jpg'); background-size:cover; background-position:center;">
                         </div>
                         <div class="col-md-7" style="background-color: #c4c4c4; margin-right">
                             <div class="container">
