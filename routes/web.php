@@ -91,14 +91,12 @@ Route::put('/{id}/booking/update', [BookingController::class, 'update'])->name('
 Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking.verif');
 
 Route::middleware(['auth'])->group(function () {
-<<<<<<< HEAD
+
 	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 	Route::get('/booking/edit', [BookingController::class, 'edit'])->name('booking.edit');
 	Route::get('/booking/detail', [BookingController::class, 'show'])->name('booking.detail');
 	//Route::resource('booking', BookingController::class);
-=======
 	Route::resource('booking', BookingController::class);
->>>>>>> 5ea838145d5da4b3d8683bf2e2604e7f395e19e3
 });
 
 //Roles and permissions controller
