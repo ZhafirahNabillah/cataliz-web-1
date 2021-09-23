@@ -92,6 +92,8 @@ Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking
 
 Route::middleware(['auth'])->group(function () {
 	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
+	Route::get('/booking/edit', [BookingController::class, 'edit'])->name('booking.edit');
+	Route::get('/booking/detail', [BookingController::class, 'show'])->name('booking.detail');
 	//Route::resource('booking', BookingController::class);
 });
 

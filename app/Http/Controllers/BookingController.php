@@ -82,6 +82,23 @@ class BookingController extends Controller
         return view('booking.email_verifbooking');
     }
 
+    //method to show edit agenda page
+    public function edit()
+    {
+        return view('booking.edit');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show()
+    {
+        return view('booking.detail');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -149,17 +166,6 @@ class BookingController extends Controller
         Alert::success('Your booking has been successfully created! ', 'Please check your email to complete the payment');
 
         return redirect('booking/create')->with('success', 'value');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
