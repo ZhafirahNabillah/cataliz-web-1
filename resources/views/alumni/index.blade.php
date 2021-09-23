@@ -50,7 +50,11 @@
       <div class="row">
 
         <div class="col-12 mb-1">
+          @can('create-plan')
+         @role('admin')
           <button type="button" name="button" class="btn btn-primary" id="addAlumni" data-id="">+ Add Graduate</button>
+          @endrole
+          @endcan
         </div>
 
       </div>

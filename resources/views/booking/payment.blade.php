@@ -86,7 +86,7 @@
                             </div>
                             <input type="text" class="hidden" name="program" value="{{$dataBooking->programs->program_name}}">
                             <div class="row-3">
-                                <div class="mt-2 mb-4" style="margin-left: 35%;">
+                                <div class="mt-2 mb-5" style="margin-left: 35%;">
                                     <div class="col-md-6 form-group text-center mb-3">
                                         <div class="row justify-content-center align-items-center">
                                             <button type="submit" class="btn btn-warning">UPLOAD PAYMENT</button>
@@ -94,10 +94,6 @@
                                     </div>
                                 </div>
                             </div>
-
-
-
-
                         </div>
                         <!-- </div> -->
                     </div>
@@ -109,7 +105,7 @@
                             <div class="container" style="margin-bottom:-5%">
                                 <div class="row">
                                     <div class="col-md-6 p2" style="margin-left: 43%;">
-                                        <img class="img-fluid mx-auto image-center" style="margin-top: -58%; width:25%;" src="{{asset('assets/images/logo2.png')}}" alt="" />
+                                        <img class="img-fluid mx-auto image-center" style="margin-top: -50%; width:25%;" src="{{asset('assets/images/logo2.png')}}" alt="" />
                                     </div>
                                 </div>
                             </div>

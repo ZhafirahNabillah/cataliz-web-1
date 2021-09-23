@@ -46,7 +46,11 @@
 			<div class="row">
 
 				<div class="col-12 mb-1">
+				@can('create-plan')
+                @role('admin')
 					<a href="javascript:;" class="create-new btn btn-primary createNewProgram">Add New</a>
+					@endrole
+                    @endcan
 				</div>
 
 			</div>
