@@ -91,8 +91,7 @@ Route::put('/{id}/booking/update', [BookingController::class, 'update'])->name('
 Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking.verif');
 
 Route::middleware(['auth'])->group(function () {
-	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
-	//Route::resource('booking', BookingController::class);
+	Route::resource('booking', BookingController::class);
 });
 
 //Roles and permissions controller
