@@ -82,7 +82,24 @@ Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_ce
 //Booking controller
 Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+<<<<<<< Updated upstream
 Route::resource('booking', BookingController::class);
+=======
+Route::get('/booking/email_successbooking', [BookingController::class, 'seeEmailSuccess'])->name('booking.email_successbooking');
+Route::get('/booking/email_verifbooking', [BookingController::class, 'seeEmailVerif'])->name('booking.email_verifbooking');
+// Route::get('/booking/payment', [BookingController::class, 'seePayment'])->name('booking.payment');
+// Route::get('/booking/search', [BookingController::class, 'search'])->name('booking.search');
+Route::get('/{id}/booking/payment', [BookingController::class, 'payment'])->name('booking.payment');
+Route::put('/{id}/booking/update', [BookingController::class, 'update'])->name('booking.update');
+Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking.verif');
+
+
+
+Route::middleware(['auth'])->group(function () {
+	
+	Route::resource('booking', BookingController::class);
+});
+>>>>>>> Stashed changes
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {

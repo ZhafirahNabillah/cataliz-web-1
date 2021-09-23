@@ -8,6 +8,10 @@
 
 @include('panels.sidemenu')
 <!-- BEGIN: Content-->
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 <div class="app-content content ">
   <div class="content-overlay"></div>
   <div class="header-navbar-shadow"></div>
@@ -52,6 +56,7 @@
           class="btn btn-primary data-submit mr-1 createNewUser">Add Boking</button>
       </div>
     <div class="card">
+<<<<<<< Updated upstream
         <div class="card-body">
             <div class="tab-content">
                 <div class="tab-pane active" id="coach" aria-labelledby="coach-tab" role="tabpanel">
@@ -73,6 +78,31 @@
                             </table>
                         </div>
                     </div>
+=======
+      <div class="card-body">
+        <div class="tab-content">
+          <div class="content-body">
+            <!-- Basic table -->
+            <section id="basic-datatable">
+              <div class="row">
+                <div class="col-12">
+                  <div class="card">
+                    <table class="datatables-basic table-striped table docs-datatable-admin ">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Name</th>
+                          <th>E-Mail</th>
+                          <th>No Handphone</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
@@ -1151,6 +1181,7 @@
           // delete
           $('body').on('click', '.deleteClient', function(e) {
 
+<<<<<<< Updated upstream
             var Client_id = $(this).data("id");
             if (confirm("Are You sure want to delete !")) {
 
@@ -1189,3 +1220,118 @@
         });
       </script>
       @endpush
+=======
+  @push('scripts')
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  
+  <script type="text/javascript">
+  // popover
+  $(function() {
+    $('[data-toggle="popover"]').popover({
+      html: true,
+      trigger: 'hover',
+      placement: 'top',
+      content: function() {
+        return '<img src="' + $(this).data('img') + '" />';
+      }
+    });
+  });
+
+  $(function() {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
+    });
+
+    var documentation_table = $('.docs-datatable-admin').DataTable({
+      processing: true,
+      serverSide: true,
+      ajax: "",
+      columns: [{
+            data: 'DT_RowIndex',
+            name: 'DT_RowIndex'
+          },
+          {
+            data: 'name',
+            name: 'name'
+          },
+          {
+            data: 'email',
+            name: 'email'
+          },
+          {
+            data: 'whatsapp_number',
+            name: 'whatsapp_number'
+          },
+          {
+            data: 'status',
+            name: 'status'
+          },     
+          { data: 'action',
+            name: 'action',
+            orderable: true,
+            searchable: true
+         }, 
+      ],
+      dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      language: {
+        paginate: {
+          // remove previous & next text from pagination
+          previous: '&nbsp;',
+          next: '&nbsp;'
+        },
+        search: "<i data-feather='search'></i>",
+        searchPlaceholder: "Search records"
+      }
+    });
+
+  
+    $('body').on('click', '.deleteDocs', function(e) {
+
+      var docs_id = $(this).data("id");
+      console.log(docs_id);
+      // ganti sweetalert
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You'll delete your documentation",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, Sure",
+        cancelButtonText: "Cancel"
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          $.ajaxSetup({
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+          });
+
+          $.ajax({
+            type: "DELETE",
+            url: "" + '/docs/' + docs_id,
+            success: function(data) {
+              Swal.fire({
+                icon: 'success',
+                title: 'Deleted Successfully!',
+              });
+              documentation_table.draw();
+            },
+            error: function(data) {
+              console.log('Error:', data);
+            }
+          });
+        }
+      })
+    });
+  });
+</script>
+
+  @endpush
+>>>>>>> Stashed changes

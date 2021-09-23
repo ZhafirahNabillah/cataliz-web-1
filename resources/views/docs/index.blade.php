@@ -5,7 +5,7 @@
 @section('content')
 
 @include('panels.navbar')
-
+                                                                                                                                                                                        
 @include('panels.sidemenu')
 <!-- BEGIN: Content-->
 <div class="app-content content ">
