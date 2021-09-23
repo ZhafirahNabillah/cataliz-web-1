@@ -21,7 +21,7 @@ class BookingController extends Controller
      */
     public function index(Request $request)
     {
-        $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')->get(); 
+        $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')->get();
         // if ($request->ajax()) {
         //     $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')->get(); 
         //     return Datatables::of($data)
@@ -90,12 +90,6 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        $characters = '0123456789';
-        $pin = mt_rand(1000000, 9999999)
-            . mt_rand(1000000, 9999999)
-            . $characters[rand(0, strlen($characters) - 1)];
-
-        $code_booking = str_shuffle($pin);
         //dd($request->all());
         $this->validate($request, [
             'code' => 'required',
@@ -142,7 +136,7 @@ class BookingController extends Controller
             'name' => $request->name,
             'book_date' => $request->book_date,
             'price' => $request->price,
-            'code' => $code_booking,
+            'code' => $bookingData->code,
         );
 
         $email = $request->email;
@@ -152,7 +146,7 @@ class BookingController extends Controller
             $mail->from('katum61199@gmail.com', 'Booking Cataliz');
         });
 
-        Alert::success('Your booking has been successfully created! ','Please check your email to complete the payment');
+        Alert::success('Your booking has been successfully created! ', 'Please check your email to complete the payment');
 
         return redirect('booking/create')->with('success', 'value');
     }
@@ -196,6 +190,27 @@ class BookingController extends Controller
             'payment' => 'required|image|mimes:jpeg,png,jpg',
 
         ]);
+
+        $bookingData = Booking::find($id);
+        $data = array(
+            'id' => $bookingData->id,
+            'code' => $bookingData->code,
+            'name' => $bookingData->name,
+            'whatsapp_number' => $bookingData->whatsapp_number,
+            'email' => $bookingData->email,
+            'program' => $request->program,
+            'session_coaching' => $bookingData->session_coaching,
+            'session_training' => $bookingData->session_training,
+            'session_mentoring' => $bookingData->session_mentoring,
+            'price' => $bookingData->price,
+        );
+
+        $email = 'admin@cataliz.id';
+        Mail::send('booking/email_successbooking', $data, function ($mail) use ($email) {
+            $mail->to($email, 'no-reply')
+                ->subject("Booking Cataliz");
+            $mail->from('katum61199@gmail.com', 'Booking Cataliz');
+        });
 
         Booking::where('id', $id)->update([
             'payment' => $request->payment->store('payment'),

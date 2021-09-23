@@ -177,40 +177,44 @@
               <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:20px; color:black;">CODE BOOKING :</td>
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:18px; font-weight:bold; line-height:20px; color:black;">CODE BOOKING : {{$code}}</td>
             </tr>
             <tr>
               <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Name : <br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Name : {{$name}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Handphone :<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Handphone : {{$whatsapp_number}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">E-mail :<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">E-mail : {{$email}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
               <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Program : <br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Program : {{$program}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Coaching 2 season<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Coaching {{$session_coaching}} season<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Mentoring 2 season<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Training {{$session_training}} season<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Total Payment : Rp.800.000<br class="em_hide" />
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Mentoring {{$session_mentoring}} season<br class="em_hide" />
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Total Payment : Rp.{{$price}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
@@ -260,11 +264,11 @@
         <td valign="top" align="center">
           <table border="0" cellspacing="0" cellpadding="0" align="center">
             <tr>
-              <a href=""><img src="{{ url('/assets/images/svg/instagram.svg') }}"  style="padding-top:25px; padding-right:30px;"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/facebook.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/twitter.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/youtube.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/link.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/instagram.svg') }}" style="padding-top:25px; padding-right:30px;" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/facebook.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/twitter.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/youtube.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/link.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
             </tr>
           </table>
         </td>

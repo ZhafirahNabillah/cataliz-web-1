@@ -84,7 +84,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <input type="text" class="hidden" name="program" value="{{$dataBooking->programs->program_name}}">
                             <div class="row-3">
                                 <div class="mt-2 mb-4" style="margin-left: 35%;">
                                     <div class="col-md-6 form-group text-center mb-3">
