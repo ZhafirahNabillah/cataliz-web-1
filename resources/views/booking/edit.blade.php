@@ -39,83 +39,89 @@
                 <div class="tab-content">
                     <div class="content-body">
                         <form action="{{ route('booking.store') }}" method="post" id="BookingForm" name="BookingForm">
+                            <div class="form-group">
+                                <label class="form-label" for="name">Full Name</label>
+                                <input class="form-control" type="text" name="name" value="{{$data->name}}" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="basic-icon-default-post">Phone</label>
+                                <div class="input-group input-group-merge">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">+62</span>
+                                    </div>
+                                    <input class="form-control" type="text" name="whatsapp_number" value="{{$data->whatsapp_number}}" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="instance">Instance</label>
+                                <input class="form-control" type="text" name="instance" value="{{$data->instance}}" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="profession">Profession</label>
+                                <input class="form-control" type="text" name="profession" value="{{$data->profession}}" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="address">Address</label>
+                                <input class="form-control" type="text" name="address" value="{{$data->address}}" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="zoom">Link Zoom</label>
+                                <input class="form-control" type="text" name="zoom" value="" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="goals">Goals</label>
+                                <textarea class="form-control dt-goals" name="goals" id="goals" cols="30" rows="3">{{$data->goals}}</textarea>
+                            </div>
+                            <div style="display:inline-table;">
+                                <div style="display:table-cell;">
                                     <div class="form-group">
-                                        <label class="form-label" for="name">Full Name</label>
-                                        <input class="form-control" type="text" name="name" value="" placeholder="">
+                                        <label class="form-label" for="category">Program</label>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->programs->program_name}}</div>
                                     </div>
+                                </div>
+                            </div><br>
+                            <div style="display:inline-table;">
+                                <div style="display:table-cell; padding-right:20px;">
                                     <div class="form-group">
-                                        <label for="basic-icon-default-post">Phone</label>
-                                        <div class="input-group input-group-merge">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">+62</span>
-                                            </div>
-                                            <input class="form-control" type="text" name="phone" value="" placeholder="">
-                                        </div>
+                                        <label class="form-label" for="category">Category</label>
+                                        @foreach($data->book_demo as $dataDemo=>$value)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$value}}</div><br>
+                                        @endforeach
                                     </div>
+                                </div>
+                                <div style="display:table-cell;">
                                     <div class="form-group">
-                                        <label class="form-label" for="instance">Instance</label>
-                                        <input class="form-control" type="text" name="instance" value="" placeholder="">
+                                        <label class="form-label" for="category">Session</label>
+                                        @if($data->session_coaching != 0)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_coaching}} Session</div><br>
+                                        @elseif($data->session_training != 0)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_training}} Session</div><br>
+                                        @elseif($data->session_mentoring != 0)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_mentoring}} Session</div>
+                                        @endif
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" for="date">Date</label>
+                                <input class="form-control" type="text" name="date" value="{{$data->book_date}}" placeholder="">
+                            </div>
+                            <div style="display:inline-table;">
+                                <div style="display:table-cell;">
                                     <div class="form-group">
-                                        <label class="form-label" for="profession">Profession</label>
-                                        <input class="form-control" type="text" name="profession" value="" placeholder="">
+                                        <label class="form-label" for="category">Payment Method</label>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->bank}}</div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="address">Address</label>
-                                        <input class="form-control" type="text" name="address" value="" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="zoom">Link Zoom</label>
-                                        <input class="form-control" type="text" name="zoom" value="" placeholder="">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="goals">Goals</label>
-                                        <textarea class="form-control dt-goals" name="goals" id="goals" cols="30" rows="3"></textarea>
-                                    </div>
-                                    <div style="display:inline-table;">
-                                        <div style="display:table-cell;">
-                                            <div class="form-group">
-                                                <label class="form-label" for="category">Session</label>
-                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">STARCO</div>
-                                            </div>
-                                        </div>
-                                    </div><br>
-                                    <div style="display:inline-table;">
-                                        <div style="display:table-cell; padding-right:20px;">
-                                            <div class="form-group">
-                                                <label class="form-label" for="category">Category</label>
-                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">COACHING</div><br>
-                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">COACHING</div>
-                                            </div>
-                                        </div>
-                                        <div style="display:table-cell;">
-                                            <div class="form-group">
-                                                <label class="form-label" for="category">Session</label>
-                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">COACHING</div><br>
-                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">COACHING</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="date">Date</label>
-                                        <input class="form-control" type="text" name="date" value="" placeholder="">
-                                    </div>
-                                    <div style="display:inline-table;">
-                                        <div style="display:table-cell;">
-                                            <div class="form-group">
-                                                <label class="form-label" for="category">Payment</label>
-                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">BCA</div>
-                                            </div>
-                                        </div>
-                                    </div><br>
-                                    <div class="form-group">
-                                        <label for="status">Status</label><br>
-                                        <input type="checkbox" name="status" value=""> Reservation<br>
-                                    </div>
-                                    <div class="form-group">
-                                        <Button id="submit" type="submit" class="btn btn-primary" style="margin-top:5px; margin-right:5px;">SAVE</Button>
-                                        <Button id="submit" type="submit" class="btn btn-secondary" style="margin-top:5px">BACK</Button>
-                                    </div>
+                                </div>
+                            </div><br>
+                            <div class="form-group">
+                                <label for="status">Status</label><br>
+                                <input type="checkbox" name="status" value=""> Reservation<br>
+                            </div>
+                            <div class="form-group">
+                                <Button id="submit" type="submit" class="btn btn-primary" style="margin-top:5px; margin-right:5px;">SAVE</Button>
+                                <Button id="submit" type="submit" class="btn btn-secondary" style="margin-top:5px">BACK</Button>
+                            </div>
                         </form><br>
                     </div>
                 </div>
