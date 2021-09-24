@@ -94,7 +94,7 @@ Route::middleware(['auth'])->group(function () {
 
 	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 	Route::get('/{id}/booking/edit', [BookingController::class, 'edit'])->name('booking.edit');
-	Route::get('/booking/detail', [BookingController::class, 'show'])->name('booking.detail');
+	Route::get('/{id}/booking/detail', [BookingController::class, 'show'])->name('booking.detail');
 	//Route::resource('booking', BookingController::class);
 	Route::resource('booking', BookingController::class);
 });
