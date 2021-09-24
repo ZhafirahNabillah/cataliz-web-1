@@ -45,13 +45,11 @@
 			@endif
 			<div class="row">
 
-				<div class="col-12 mb-1">
-				@can('create-plan')
                 @role('admin')
+				<div class="col-12 mb-1">
 					<a href="javascript:;" class="create-new btn btn-primary createNewProgram">Add New</a>
-					@endrole
-                    @endcan
 				</div>
+				@endrole
 
 			</div>
 			<!-- Basic table -->
