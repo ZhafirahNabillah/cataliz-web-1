@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Book Demo')
+@section('title','Edit Book Demo')
 
 @section('content')
 
@@ -17,7 +17,7 @@
             <div class="content-header-left col-md-9 col-12 mb-2">
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
-                        <h2 class="content-header-title float-left mb-0">Book Demo
+                        <h2 class="content-header-title float-left mb-0">Edit Book Demo
                             <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini ditampilkan detail log activity dari semua pengguna yang mengakses website ini." />
                         </h2>
                         <div class="breadcrumb-wrapper">

@@ -276,7 +276,7 @@
               <a href=""><img src="{{ url('/assets/images/svg/facebook.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
               <a href=""><img src="{{ url('/assets/images/svg/twitter.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
               <a href=""><img src="{{ url('/assets/images/svg/youtube.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/link.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/link.svg') }}"  style="padding-top:25px;"  alt=""></a>
             </tr>
           </table>
         </td>
