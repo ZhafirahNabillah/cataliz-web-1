@@ -21,7 +21,10 @@
                 <div class="row breadcrumbs-top">
                     <div class="col-12">
                         <h2 class="content-header-title float-left mb-0">Book Demo
-                            <img class="align-text width=" 15px" height="15px"" src=" {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap" data-toggle="popover" data-placement="top" data-content="Pada halaman ini ditampilkan detail log activity dari semua pengguna yang mengakses website ini." />
+                            <img class="align-text width=" 15px" height="15px"" src="
+                                {{asset('assets\images\icons\popovers.png')}}" alt="Card image cap"
+                                data-toggle="popover" data-placement="top"
+                                data-content="Pada halaman ini ditampilkan detail log activity dari semua pengguna yang mengakses website ini." />
                         </h2>
                         <div class="breadcrumb-wrapper">
                             <ol class="breadcrumb">
@@ -37,69 +40,59 @@
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body">
-                <div class="tab-content">
-                    <div class="content-body">
-                        <h4 class="card-title"><b>Detail Book Demo</b>
-                        </h4>
-                        <ul class="list-inline">
-                            <li class="list-inline-item" style="padding-right:10rem ; padding-left-2rem;">
-                                <h6> Name </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:10rem">
-                                <h6> Email </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:10rem">
-                                <h6> Profession </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:10rem">
-                                <h6> Code Booking </h6>
-                            </li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item" style="padding-right:15rem">
-                                <h6> {{$data->name}} </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:14rem">
-                                <h6> {{$data->email}} </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:15rem">
-                                <h6> {{$data->profession}} </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:10rem">
-                                <h6> {{$data->code}} </h6>
-                            </li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item" style="padding-right:11.5rem">
-                                <h6> Phone </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:9rem">
-                                <h6> Instance </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:11rem">
-                                <h6> Address </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:11rem">
-                                <h6> Link Zoom </h6>
-                            </li>
-                        </ul>
-                        <ul class="list-inline">
-                            <li class="list-inline-item" style="padding-right:15rem">
-                                <h6> {{$data->whatsapp_number}} </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:14rem">
-                                <h6> {{$data->instance}} </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:15rem">
-                                <h6> {{$data->address}} </h6>
-                            </li>
-                            <li class="list-inline-item" style="padding-right:10rem">
-                                <h6> # </h6>
-                            </li>
-                        </ul>
-                        <!-- <div class="card border">
+
+        <div class="content-body">
+            <div class="row match-height">
+                <div class="col-sm-6 col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title"><b>Detail Book Demo</b>
+                        </div>
+                        <div class="card-body">
+                            </h4>
+                            <div class="d-block text-right">
+                                <a href="" class="btn btn-primary mb-2">Download PDF</a>
+                            </div>
+                            <ul class="d-flex mb-3">
+                                <li class="list-inline-item" style="padding-right:15% ;">
+                                    <h6> Name </h6>
+                                    <h6> {{$data->name}} </h6>
+                                </li>
+                                <li class="list-inline-item" style="padding-right:10%">
+                                    <h6> Email </h6>
+                                    <h6> {{$data->email}} </h6>
+                                </li>
+                                <li class="list-inline-item" style="padding-right:15%">
+                                    <h6> Profession </h6>
+                                    <h6> {{$data->profession}} </h6>
+                                </li>
+                                <li class="list-inline-item" style="padding-right:15%">
+                                    <h6> Code Booking </h6>
+                                    <h6> {{$data->code}} </h6>
+                                </li>
+                            </ul>
+                            <ul class="d-flex mb-3">
+                                <li class="list-inline-item" style="padding-right:9% ;">
+                                    <h6> Phone </h6>
+                                    <h6> {{$data->whatsapp_number}} </h6>
+                                </li>
+                                <li class="list-inline-item" style="padding-right:22%">
+                                    <h6> Instance </h6>
+                                    <h6> {{$data->instance}} </h6>
+                                </li>
+                                <li class="list-inline-item" style="padding-right:5%">
+                                    <h6> Address </h6>
+                                    <h6> {{$data->address}} </h6>
+                                </li>
+                                <li class="list-inline-item" style="padding-right:22%">
+                                    <h6> Link Zoom </h6>
+                                    <h6> # </h6>
+                                </li>
+                            </ul>
+
+
+
+                            <!-- <div class="card border">
                             <div class="card body">
                             <h6>Goals</h6>
                             </div>
@@ -134,107 +127,126 @@
                             <h6>Status: Reservation</h6>
                             </div>
                         </div> -->
-                        <div class="card-body">
-                            <div class="collapse-icon">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card border">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <h6>Goals</h6>
+                            <div class="card-body">
+                                <div class="collapse-icon">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card border">
+                                            <div id="headingCollapse1" class="card-header" id="headingOne"
+                                                data-toggle="collapse" role="button" data-target="#collapse1"
+                                                aria-expanded="false" aria-controls="collapse1">
+                                                <h6>Goals</h6>
+                                            </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                                class="collapse show" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">{{$data->goals}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">{{$data->goals}}</li>
-                                                </ul>
+                                    </div>
+                                </div>
+                                <div class="collapse-icon">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card border">
+                                            <div id="headingCollapse1" class="card-header" id="headingOne"
+                                                data-toggle="collapse" role="button" data-target="#collapse1"
+                                                aria-expanded="false" aria-controls="collapse1">
+                                                <h6>Program</h6>
+                                            </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                                class="collapse show" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">
+                                                            {{$data->programs->program_name}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse-icon">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card border">
+                                            <div id="headingCollapse1" class="card-header" id="headingOne"
+                                                data-toggle="collapse" role="button" data-target="#collapse1"
+                                                aria-expanded="false" aria-controls="collapse1">
+                                                <h6>Category</h6>
+                                            </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                                class="collapse show" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        @foreach($data->book_demo as $dataDemo=>$value)
+                                                        <li class="list-group-item">{{$value}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse-icon">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card border">
+                                            <div id="headingCollapse1" class="card-header" id="headingOne"
+                                                data-toggle="collapse" role="button" data-target="#collapse1"
+                                                aria-expanded="false" aria-controls="collapse1">
+                                                <h6>Date</h6>
+                                            </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                                class="collapse show" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">{{$data->book_date}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse-icon">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card border">
+                                            <div id="headingCollapse1" class="card-header" id="headingOne"
+                                                data-toggle="collapse" role="button" data-target="#collapse1"
+                                                aria-expanded="false" aria-controls="collapse1">
+                                                <h6>Payment</h6>
+                                            </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                                class="collapse show" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">{{$data->bank}}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="collapse-icon">
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="card border">
+                                            <div id="headingCollapse1" class="card-header" id="headingOne"
+                                                data-toggle="collapse" role="button" data-target="#collapse1"
+                                                aria-expanded="false" aria-controls="collapse1">
+                                                <h6>Status</h6>
+                                            </div>
+                                            <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1"
+                                                class="collapse show" data-parent="#accordionExample">
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item">{{$data->status}}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="collapse-icon">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card border">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <h6>Program</h6>
-                                        </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">{{$data->programs->program_name}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="collapse-icon">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card border">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <h6>Category</h6>
-                                        </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    @foreach($data->book_demo as $dataDemo=>$value)
-                                                    <li class="list-group-item">{{$value}}</li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="collapse-icon">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card border">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <h6>Date</h6>
-                                        </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">{{$data->book_date}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="collapse-icon">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card border">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <h6>Payment</h6>
-                                        </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">{{$data->bank}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="collapse-icon">
-                                <div class="accordion" id="accordionExample">
-                                    <div class="card border">
-                                        <div id="headingCollapse1" class="card-header" id="headingOne" data-toggle="collapse" role="button" data-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                                            <h6>Status</h6>
-                                        </div>
-                                        <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item">{{$data->status}}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="card border">
+                            <!-- <div class="card border">
                             <ul class="list-group list-group-flush">
                             <li class="list-group-item">Goals</li>
                             <li class="list-group-item">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin,</li>
@@ -248,37 +260,41 @@
 
 
 
-                        <div class="form-group">
-                            <Button id="submit" type="submit" class="btn btn-secondary" style="margin-top:5px">BACK</Button>
-                        </div>
+                            <div class="form-group">
+                                <Button id="submit" type="submit" class="btn btn-secondary"
+                                    style="margin-top:5px">BACK</Button>
+                            </div>
 
+                        </div>
                     </div>
                 </div>
+
             </div>
-        </div>
-    </div>
 
-    <!-- END: Content-->
-    @endsection
 
-    @push('scripts')
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+            <!-- END: Content-->
+            @endsection
 
-    <script type="text/javascript">
-        $(function() {
-            $('[data-toggle="popover"]').popover({
-                html: true,
-                trigger: 'hover',
-                placement: 'top',
-                content: function() {
-                    return '<img src="' + $(this).data('img') + '" />';
-                }
-            });
-        });
-    </script>
+            @push('scripts')
+            <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css"
+                id="theme-styles">
+            <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
+            <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
+            <script type="text/javascript" charset="utf8"
+                src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
-    @endpush
+            <script type="text/javascript">
+                $(function () {
+                    $('[data-toggle="popover"]').popover({
+                        html: true,
+                        trigger: 'hover',
+                        placement: 'top',
+                        content: function () {
+                            return '<img src="' + $(this).data('img') + '" />';
+                        }
+                    });
+                });
+            </script>
+
+            @endpush
