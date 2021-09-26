@@ -285,9 +285,7 @@
                                 <Button id="submit" type="submit" class="btn btn-warning" style="margin-top:5px">BOOK NOW</Button>
                             </div>
                         </form><br>
-                        <!-- <div id="buttonCheck">
-                                    <Button class="btn btn-warning" id="checkOut" style="width: 55%; margin-left: 45%; margin-top:-1%;">CHECK OUT</Button>
-                                </div> -->
+
                     </div>
                 </div>
             </div>

@@ -96,7 +96,6 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/{id}/booking/edit', [BookingController::class, 'edit'])->name('booking.edit');
 	Route::get('/{id}/booking/detail', [BookingController::class, 'show'])->name('booking.detail');
 	//Route::resource('booking', BookingController::class);
-	Route::resource('booking', BookingController::class);
 });
 
 //Roles and permissions controller

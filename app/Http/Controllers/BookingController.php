@@ -92,6 +92,7 @@ class BookingController extends Controller
             . $characters[rand(0, strlen($characters) - 1)];
 
         $code_booking = str_shuffle($pin);
+
         return view('booking.create', compact('programs', 'code_booking'));
     }
 
@@ -248,7 +249,11 @@ class BookingController extends Controller
             'bank' => $request->bank,
         ]);
 
-        return Redirect::back()->with('success', 'value');
+        $name = 'Aditya';
+        $message = 'Saya sudah Booking kegiatan dan telah menyelesaikan Pembayaran';
+        $phone = '6285215269015';
+        $urlSendWA = 'https://api.whatsapp.com/send?phone=$phone&text=Nama:%20$name%20%0DPesan:%20$message';
+        return Redirect::to($urlSendWA)->with($phone);
     }
 
     /**
