@@ -22,7 +22,8 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')->get();
+            $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')
+                ->get(['name', 'email', 'whatsapp_number', 'status']);
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {

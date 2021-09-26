@@ -29,6 +29,7 @@ class Booking extends Model
         'program_id',
         'bank',
         'payment',
+        'link',
     ];
 
     public function setBookDemoAttribute($value)
