@@ -83,7 +83,7 @@
                                 <th>
                                     <label class="text-center " style="font-family: Montserrat; color:black" for="bank">Pilihan Bank</label>
                                     <select class="form-control @error('bank') is-invalid @enderror" name="bank">
-                                        <option value="" disabled>Choise Bank: </option>
+                                        <option value="" disabled selected>Choise Bank: </option>
                                         <option value="bca" {{(old('bank') == 'bca') ? ' selected' : ''}}>BCA</option>
                                         <option value="bri" {{(old('bank') == 'bri') ? ' selected' : ''}}>BRI</option>
                                         <option value="mandiri" {{(old('bank') == 'mandiri') ? ' selected' : ''}}>

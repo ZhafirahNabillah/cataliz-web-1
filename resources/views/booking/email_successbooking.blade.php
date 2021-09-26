@@ -201,18 +201,24 @@
               <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Program : {{$program}}<br class="em_hide" />
               </td>
             </tr>
+            @if($session_coaching != 0)
             <tr>
               <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Coaching {{$session_coaching}} season<br class="em_hide" />
               </td>
             </tr>
+            @endif
+            @if($session_training != 0)
             <tr>
               <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Training {{$session_training}} season<br class="em_hide" />
               </td>
             </tr>
+            @endif
+            @if($session_mentoring != 0)
             <tr>
               <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Mentoring {{$session_mentoring}} season<br class="em_hide" />
               </td>
             </tr>
+            @endif
             <tr>
               <td align="center" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black;">Total Payment : Rp.{{$price}}<br class="em_hide" />
               </td>
