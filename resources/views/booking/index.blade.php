@@ -32,10 +32,8 @@
       </div>
     </div>
     <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
-    <div class="">
-      <button style="margin-top: 10px;margin-bottom: 10px;" type="submit" class="btn btn-primary data-submit mr-1 createNewBooking">Add New</button>
-    </div>
-    <div class="card">
+    
+    <div class="card" style="margin-top: 10px;">
       <div class="card-body">
         <div class="tab-content">
           <div class="content-body">
@@ -43,7 +41,7 @@
               <div class="row">
                 <div class="col-12">
                   <div class="card">
-                    <table class="datatables-basic table-striped table docs-datatable-admin">
+                    <table class="datatables-basic table-striped table booking-datatable-admin">
                       <thead>
                       <tr>
                           <th>NO</th>
@@ -193,7 +191,7 @@
       }
     });
 
-    var documentation_table = $('.docs-datatable-admin').DataTable({
+    var documentation_table = $('.booking-datatable-admin').DataTable({
       processing: true,
       serverSide: true,
       ajax: "",
