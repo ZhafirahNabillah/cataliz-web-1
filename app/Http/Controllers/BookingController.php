@@ -256,6 +256,55 @@ class BookingController extends Controller
         return Redirect::to($urlSendWA)->with($phone);
     }
 
+    public function updateAdmin(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'whatsapp_number' => 'required',
+            'instance' => 'required',
+            'profession' => 'required',
+            'address' => 'required',
+            'link' => 'required',
+            'goals' => 'required',
+            'book_date' => 'required',
+        ]);
+
+        $bookingData = Booking::find($id);
+        $data = array(
+
+            'name' => $bookingData->name,
+            'whatsapp_number' => $bookingData->whatsapp_number,
+            'email' => $bookingData->email,
+            'program' => $request->program,
+            'session_coaching' => $bookingData->session_coaching,
+            'session_training' => $bookingData->session_training,
+            'session_mentoring' => $bookingData->session_mentoring,
+            'book_date' => $bookingData->book_date,
+            'link' => $bookingData->link,
+        );
+
+        $email = $bookingData->email;
+        Mail::send('booking/email_verifbooking', $data, function ($mail) use ($email) {
+            $mail->to($email, 'no-reply')
+                ->subject("Booking Cataliz");
+            $mail->from('katum61199@gmail.com', 'Booking Cataliz');
+        });
+
+        Booking::where('id', $id)->update([
+            'name' => $request->name,
+            'whatsapp_number' => $request->whatsapp_number,
+            'instance' => $request->instance,
+            'profession' => $request->profession,
+            'address' => $request->address,
+            'link' => $request->link,
+            'goals' => $request->goals,
+            'book_date' => $request->book_date,
+        ]);
+
+        Alert::success('Your verification successful!');
+        return redirect('booking/index');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

@@ -89,6 +89,7 @@ Route::get('/booking/email_verifbooking', [BookingController::class, 'seeEmailVe
 Route::get('/{id}/booking/payment', [BookingController::class, 'payment'])->name('booking.payment');
 Route::put('/{id}/booking/update', [BookingController::class, 'update'])->name('booking.update');
 Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking.verif');
+Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin'])->name('booking.update_admin');
 
 Route::middleware(['auth'])->group(function () {
 

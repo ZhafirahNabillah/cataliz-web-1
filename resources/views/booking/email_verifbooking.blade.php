@@ -165,39 +165,49 @@
               <td height="30" class="em_height">&nbsp;</td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:20px; font-weight:bold; color:black; padding-left:30px;">Congratulations! Your booking has been verified 
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:20px; font-weight:bold; color:black; padding-left:30px;">Congratulations! Your booking has been verified
                 by @cataliz.id , enjoy your class!</td>
             </tr>
             <tr>
               <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Name : <br class="em_hide" />
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Name : {{$name}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Handphone : <br class="em_hide" />
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Handphone : {{$whatsapp_number}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">E-mail : <br class="em_hide" />
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">E-mail : {{$email}}<br class="em_hide" />
               </td>
             </tr>
             <tr>
               <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Program : <br class="em_hide" />
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Program : {{$program}}<br class="em_hide" />
               </td>
             </tr>
+            @if($session_coaching != 0)
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Coaching 2 session<br class="em_hide" />
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Coaching {{$session_coaching}} session<br class="em_hide" />
               </td>
             </tr>
+            @endif
+            @if($session_training != 0)
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Mentoring 1 session<br class="em_hide" />
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Training {{$session_training}} session<br class="em_hide" />
               </td>
             </tr>
+            @endif
+            @if($session_mentoring != 0)
+            <tr>
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:black; padding-left:30px;">Mentoring {{$session_mentoring}} session<br class="em_hide" />
+              </td>
+            </tr>
+            @endif
             <tr>
               <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
@@ -208,60 +218,60 @@
               <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Date :</td>
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Date : {{$book_date}}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Time :</td>
-            </tr>
+            </tr> -->
             <tr>
               <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Media : Zoom Meeting</td>
             </tr>
             <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Link</td>
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">{{$link}}</td>
             </tr>
             <tr>
               <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Meeting ID :</td>
             </tr>
-              <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
-            </tr>
-            <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px; padding-right:30px;">We also want to remind you to enter the Zoom Meeting 15 mintues before the program begins. Client will receive a certificate that will be sent after the program has ended via this email.</td>
-            </tr>
-            </tr>
-              <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
-            </tr>
-            <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">For more information please contact :</td>
-            </tr>
-            <tr>
-              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Contact Person (Whatsapp +6288888888888)</td>
-            </tr>
-            </tr>
-              <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
-            </tr>
-            <tr>
-              <td height="1" bgcolor="#999999"></td>
-            </tr>
-            <tr>
-              <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
-            </tr>
-            <tr>
-              <td align="right" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999; padding-right:30px">Thankyou !<br class="em_hide" />
-              </td>
-            </tr>
-            <tr>
-              <td align="right" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999; padding-right:30px">Cataliz.id - 2021<br class="em_hide" />
-              </td>
-            </tr>
-            <tr>
-              <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
-            </tr>
-          </table>
-        </td>
+            <td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
       </tr>
-      <!-- === //IMG WITH TEXT AND CTA === -->
-    </table>
+      <tr>
+        <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px; padding-right:30px;">We also want to remind you to enter the Zoom Meeting 15 mintues before the program begins. Client will receive a certificate that will be sent after the program has ended via this email.</td>
+      </tr>
+</tr>
+<td height="10" style="font-size:1px; line-height:1px;">&nbsp;</td>
+</tr>
+<tr>
+  <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">For more information please contact :</td>
+</tr>
+<tr>
+  <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Contact Person (Whatsapp +6288888888888)</td>
+</tr>
+</tr>
+<td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
+</tr>
+<tr>
+  <td height="1" bgcolor="#999999"></td>
+</tr>
+<tr>
+  <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
+</tr>
+<tr>
+  <td align="right" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999; padding-right:30px">Thankyou !<br class="em_hide" />
   </td>
+</tr>
+<tr>
+  <td align="right" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; line-height:22px; color:#999999; padding-right:30px">Cataliz.id - 2021<br class="em_hide" />
+  </td>
+</tr>
+<tr>
+  <td height="15" style="font-size:1px; line-height:1px;">&nbsp;</td>
+</tr>
+</table>
+</td>
+</tr>
+<!-- === //IMG WITH TEXT AND CTA === -->
+</table>
+</td>
 </tr>
 <!-- === BODY === -->
 <!-- === FOOTER SECTION === -->
@@ -272,11 +282,11 @@
         <td valign="top" align="center">
           <table border="0" cellspacing="0" cellpadding="0" align="center">
             <tr>
-              <a href=""><img src="{{ url('/assets/images/svg/instagram.svg') }}"  style="padding-top:25px; padding-right:30px;"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/facebook.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/twitter.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/youtube.svg') }}"  style="padding-top:25px; padding-right:30px"  alt=""></a>
-              <a href=""><img src="{{ url('/assets/images/svg/link.svg') }}"  style="padding-top:25px;"  alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/instagram.svg') }}" style="padding-top:25px; padding-right:30px;" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/facebook.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/twitter.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/youtube.svg') }}" style="padding-top:25px; padding-right:30px" alt=""></a>
+              <a href=""><img src="{{ url('/assets/images/svg/link.svg') }}" style="padding-top:25px;" alt=""></a>
             </tr>
           </table>
         </td>

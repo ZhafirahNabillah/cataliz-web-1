@@ -8,6 +8,9 @@
 
 @include('panels.sidemenu')
 <!-- BEGIN: Content-->
+<link href="//cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <!-- <link href="assets/dataTables/datatables.min.css" rel="stylesheet"> -->
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -38,7 +41,9 @@
             <div class="card-body">
                 <div class="tab-content">
                     <div class="content-body">
-                        <form action="{{ route('booking.store') }}" method="post" id="BookingForm" name="BookingForm">
+                        <form action="{{ route('booking.update_admin',$data->id) }}" method="post" id="BookingForm">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label class="form-label" for="name">Full Name</label>
                                 <input class="form-control" type="text" name="name" value="{{$data->name}}" placeholder="">
@@ -66,7 +71,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="zoom">Link Zoom</label>
-                                <input class="form-control" type="text" name="zoom" value="" placeholder="">
+                                <input class="form-control" type="text" name="link" value="{{$data->link}}" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="goals">Goals</label>
@@ -104,7 +109,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="date">Date</label>
-                                <input class="form-control" type="text" name="date" value="{{$data->book_date}}" placeholder="">
+                                <input class="form-control" type="text" id="book_date" name="book_date" value="{{$data->book_date}}" placeholder="">
                             </div>
                             <div style="display:inline-table;">
                                 <div style="display:table-cell;">
@@ -116,7 +121,7 @@
                             </div><br>
                             <div class="form-group">
                                 <label for="status">Status</label><br>
-                                <input type="checkbox" name="status" value=""> Reservation<br>
+                                <input type="checkbox" name="status" value="reservation"> Reservation<br>
                             </div>
                             <div class="form-group">
                                 <Button id="submit" type="submit" class="btn btn-primary" style="margin-top:5px; margin-right:5px;">SAVE</Button>
@@ -138,15 +143,25 @@
     <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/plug-ins/1.10.20/sorting/datetime-moment.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <script type="text/javascript">
+        // $(function() {
+        //     $('[data-toggle="popover"]').popover({
+        //         html: true,
+        //         trigger: 'hover',
+        //         placement: 'top',
+        //         content: function() {
+        //             return '<img src="' + $(this).data('img') + '" />';
+        //         }
+        //     });
+        // });
+
         $(function() {
-            $('[data-toggle="popover"]').popover({
-                html: true,
-                trigger: 'hover',
-                placement: 'top',
-                content: function() {
-                    return '<img src="' + $(this).data('img') + '" />';
+            $("#book_date").datepicker({
+                beforeShowDay: function(date) {
+                    return [date.getDay() == 5 || date.getDay() == 6 || date.getDay() == 0, ""]
                 }
             });
         });
