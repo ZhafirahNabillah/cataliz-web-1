@@ -47,7 +47,33 @@
       @endif
 
       <!-- Basic table -->
+
+
       <div class="row">
+      <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row mb-2">
+                  <div class="col-sm-2">
+                      <h6> Version  </h6>
+                  </div>
+                  <div class="col-sm-3">
+                      <h6> # </h6>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-sm-2">
+                      <h6> Last Updated  </h6>
+                  </div>
+                  <div class="col-sm-3">
+                      <h6> # </h6>
+                  </div>
+                </div>
+                <!-- {!! $documentation->description !!} -->
+              </div>
+            </div>
+          </div>
+
         <div class="col-12">
           <div class="card p-2">
             <form action="{{ route('docs.store') }}" method="post">
@@ -107,8 +133,9 @@
                 @enderror
               </div>
               <div class="form-group text-right mb-0">
-                <Button type="submit" class="btn btn-primary">Submit</Button>
-              </div>
+                <Button type="submit" class="btn btn-secondary">Cancel</Button>
+                <Button type="submit" class="btn btn-primary">Save</Button>
+              </div>  
             </form>
           </div>
         </div>
