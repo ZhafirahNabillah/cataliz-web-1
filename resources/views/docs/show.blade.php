@@ -46,14 +46,57 @@
       </div>
       @endif
 
-      <!-- Basic table -->
-      <div class="row">
-        <div class="col-12">
-          <div class="card p-2">
-            {!! $documentation->description !!}
+      <div class="content-body">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="row mb-2">
+                  <div class="col-sm-2">
+                      <b> Version  </b>
+                  </div>
+                  <div class="col-sm-3">
+                      <h6> # </h6>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-sm-2">
+                      <b> Last Updated  </b>
+                  </div>
+                  <div class="col-sm-3">
+                      <h6> # </h6>
+                  </div>
+                </div>
+                <!-- {!! $documentation->description !!} -->
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+              <h6 class="card-title"><b>Lorem Ipsum</b></h6>
+              </div>
+              <div class="card-body">
+                <div class="row mb-2">
+                  <div class="col-sm-12">
+                      <h6> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat. </h6>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-sm-4">
+                  <img src="{{asset('assets/images/silver.jpg')}}" class="img-fluid" alt="Responsive image">
+                  </div>
+                </div>
+                <!-- {!! $documentation->description !!} -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
+      <div class="form-group mx-auto">
+                                <a href="{{ URL::previous() }}" type="button" class="btn btn-secondary ">BACK</a>
+                            </div>
     </div>
   </div>
 </div>
@@ -68,9 +111,10 @@
   tinymce.init({
     selector: 'textarea',
 
-    image_class_list: [
-      {title: 'img-responsive', value: 'img-responsive'},
-    ],
+    image_class_list: [{
+      title: 'img-responsive',
+      value: 'img-responsive'
+    }, ],
     height: 700,
     setup: function (editor) {
       editor.on('init change', function () {
@@ -88,22 +132,24 @@
     automatic_uploads: true,
     images_upload_url: '/docs_upload_image',
     file_picker_types: 'image',
-    file_picker_callback: function(cb, value, meta) {
+    file_picker_callback: function (cb, value, meta) {
       var input = document.createElement('input');
       input.setAttribute('type', 'file');
       input.setAttribute('accept', 'image/*');
-      input.onchange = function() {
+      input.onchange = function () {
         var file = this.files[0];
 
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
           var id = 'blobid' + (new Date()).getTime();
-          var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
           var base64 = reader.result.split(',')[1];
           var blobInfo = blobCache.create(id, file, base64);
           blobCache.add(blobInfo);
-          cb(blobInfo.blobUri(), { title: file.name });
+          cb(blobInfo.blobUri(), {
+            title: file.name
+          });
         };
       };
       input.click();
