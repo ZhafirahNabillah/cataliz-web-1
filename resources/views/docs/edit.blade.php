@@ -50,29 +50,29 @@
 
 
       <div class="row">
-      <div class="col-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="row mb-2">
-                  <div class="col-sm-2">
-                      <h6> Version  </h6>
-                  </div>
-                  <div class="col-sm-3">
-                      <h6> # </h6>
-                  </div>
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <div class="row mb-2">
+                <div class="col-sm-2">
+                  <h6> Version </h6>
                 </div>
-                <div class="row mb-2">
-                  <div class="col-sm-2">
-                      <h6> Last Updated  </h6>
-                  </div>
-                  <div class="col-sm-3">
-                      <h6> # </h6>
-                  </div>
+                <div class="col-sm-3">
+                  <h6> # </h6>
                 </div>
-                <!-- {!! $documentation->description !!} -->
               </div>
+              <div class="row mb-2">
+                <div class="col-sm-2">
+                  <h6> Last Updated </h6>
+                </div>
+                <div class="col-sm-3">
+                  <h6> # </h6>
+                </div>
+              </div>
+              <!-- {!! $documentation->description !!} -->
             </div>
           </div>
+        </div>
 
         <div class="col-12">
           <div class="card p-2">
@@ -81,43 +81,45 @@
               <input type="hidden" name="id" value="{{ $documentation->id }}">
               <div class="form-group">
                 <label for="title">Title</label>
-                <input class="form-control @error('title') is-invalid @enderror" type="text" name="title" value="{{ $documentation->title }}" placeholder="Your documentation title here...">
+                <input class="form-control @error('title') is-invalid @enderror" type="text" name="title"
+                  value="{{ $documentation->title }}" placeholder="Your documentation title here...">
                 @error('title')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
                 @enderror
               </div>
               <div class="form-group">
                 <div class="row">
                   <div class="col-md-6">
                     <label for="fp-default">Category</label>
-                    <select class="category-select form-control @error('category') is-invalid @enderror" name="category">
+                    <select class="category-select form-control @error('category') is-invalid @enderror"
+                      name="category">
                       @foreach ($documentations as $doc)
-                        <option @if ($doc->first()->category == $documentation->category)
-                          selected
+                      <option @if ($doc->first()->category == $documentation->category)
+                        selected
                         @endif >{{ $doc->first()->category }}</option>
                       @endforeach
                     </select>
                     @error('category')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                   </div>
                   <div class="col-md-6">
                     <label for="role">Role</label>
                     <select class="form-control @error('role') is-invalid @enderror" name="role">
                       @foreach ($roles as $role)
-                        <option value="{{ $role->name }}" @if ($documentation->role == $role->name)
-                          selected
+                      <option value="{{ $role->name }}" @if ($documentation->role == $role->name)
+                        selected
                         @endif>{{ ucfirst($role->name) }}</option>
                       @endforeach
                     </select>
                     @error('role')
-                      <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                      </span>
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
                   </div>
                 </div>
@@ -127,15 +129,15 @@
                 <textarea name="description" id="description" cols="20" rows="20"
                   placeholder="Your documentation content here...">{{ $documentation->description }}</textarea>
                 @error('description')
-                  <small class="text-danger">
-                    <strong>{{ $message }}</strong>
-                  </small>
+                <small class="text-danger">
+                  <strong>{{ $message }}</strong>
+                </small>
                 @enderror
               </div>
               <div class="form-group text-right mb-0">
                 <Button type="submit" class="btn btn-secondary">Cancel</Button>
                 <Button type="submit" class="btn btn-primary">Save</Button>
-              </div>  
+              </div>
             </form>
           </div>
         </div>
@@ -160,9 +162,10 @@
   tinymce.init({
     selector: 'textarea',
 
-    image_class_list: [
-      {title: 'img-fluid', value: 'img-fluid'},
-    ],
+    image_class_list: [{
+      title: 'img-fluid',
+      value: 'img-fluid'
+    }, ],
     height: 700,
     setup: function (editor) {
       editor.on('init change', function () {
@@ -180,22 +183,24 @@
     automatic_uploads: true,
     images_upload_url: '/docs/upload_image',
     file_picker_types: 'image',
-    file_picker_callback: function(cb, value, meta) {
+    file_picker_callback: function (cb, value, meta) {
       var input = document.createElement('input');
       input.setAttribute('type', 'file');
       input.setAttribute('accept', 'image/*');
-      input.onchange = function() {
+      input.onchange = function () {
         var file = this.files[0];
 
         var reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = function () {
           var id = 'blobid' + (new Date()).getTime();
-          var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+          var blobCache = tinymce.activeEditor.editorUpload.blobCache;
           var base64 = reader.result.split(',')[1];
           var blobInfo = blobCache.create(id, file, base64);
           blobCache.add(blobInfo);
-          cb(blobInfo.blobUri(), { title: file.name });
+          cb(blobInfo.blobUri(), {
+            title: file.name
+          });
         };
       };
       input.click();
