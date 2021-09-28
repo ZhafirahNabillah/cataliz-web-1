@@ -121,7 +121,11 @@
                             </div><br>
                             <div class="form-group">
                                 <label for="status">Status</label><br>
+                                @if($data->status == 'reservation')
+                                <input type="checkbox" name="status" value="reservation" checked> Reservation<br>
+                                @else
                                 <input type="checkbox" name="status" value="reservation"> Reservation<br>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <Button id="submit" type="submit" class="btn btn-primary" style="margin-top:5px; margin-right:5px;">SAVE</Button>

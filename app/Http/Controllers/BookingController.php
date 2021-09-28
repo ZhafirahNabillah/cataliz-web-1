@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Crypt;
 use Alert;
 use DataTables;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -22,45 +23,45 @@ class BookingController extends Controller
 
     function __construct()
     {
-      $this->middleware('permission:list-docs', ['only' => 'index']);
-      $this->middleware('permission:create-docs', ['only' => ['create', 'store', 'ajaxClients']]);
-      $this->middleware('permission:update-docs', ['only' => ['edit', 'store']]);
-      $this->middleware('permission:detail-docs', ['only' => ['show']]);
-      $this->middleware('permission:delete-docs', ['only' => ['destroy']]);
+        $this->middleware('permission:list-docs', ['only' => 'index']);
+        $this->middleware('permission:create-docs', ['only' => ['ajaxClients']]);
+        $this->middleware('permission:update-docs', ['only' => ['edit']]);
+        $this->middleware('permission:detail-docs', ['only' => ['show']]);
+        $this->middleware('permission:delete-docs', ['only' => ['destroy']]);
     }
-    
+
     public function index(Request $request)
     {
         if ($request->ajax()) {
             $data = Booking::orderBy('created_at', 'desc')->whereNotNull('payment')
-                ->get(['id','name', 'email', 'whatsapp_number', 'status']);
-      
+                ->get(['id', 'name', 'email', 'whatsapp_number', 'status']);
+
             //return data as datatable json
             return DataTables::of($data)
-            ->addIndexColumn()
-            ->addColumn('action', function ($row) {
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
 
-                //add update button if user have permission
-                if (auth()->user()->can('update-docs')) {
-                $edit_btn = '<a href="' . route('booking.edit', $row->id) . '" class="dropdown-item"  data-id="' . $row->id . '" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4 mr-50"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>Edit</a>';
-                } else {
-                $edit_btn = null;
-                };
+                    //add update button if user have permission
+                    if (auth()->user()->can('update-docs')) {
+                        $edit_btn = '<a href="' . route('booking.edit', $row->id) . '" class="dropdown-item"  data-id="' . $row->id . '" data-original-title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit font-small-4 mr-50"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>Edit</a>';
+                    } else {
+                        $edit_btn = null;
+                    };
 
-                //add detail button if user have permission
-                if (auth()->user()->can('detail-docs')) {
-                $detail_btn = '<a href="' . route('booking.detail', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Details</a>';
-                } else {
-                $detail_btn = null;
-                };
+                    //add detail button if user have permission
+                    if (auth()->user()->can('detail-docs')) {
+                        $detail_btn = '<a href="' . route('booking.detail', $row->id) . '" class="dropdown-item"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text font-small-4 mr-50"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>Details</a>';
+                    } else {
+                        $detail_btn = null;
+                    };
 
-                //final dropdown button that shows on view
-                $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
+                    //final dropdown button that shows on view
+                    $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
                 <div class="dropdown-menu dropdown-menu-right">' . $edit_btn . $detail_btn . '</div>';
-                return $actionBtn;
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
         return view('booking.index');
     }
@@ -213,6 +214,35 @@ class BookingController extends Controller
         return view('booking.payment', compact('dataBooking'));
     }
 
+    public function invoice($id)
+    {
+        $dataBooking = Booking::find($id);
+        $programId = $dataBooking->program_id;
+        $dataProgram = Program::where('id', $programId)->get();
+        $name = $dataBooking->name;
+        $data = array(
+            'code' => $dataBooking->code,
+            'name' => $dataBooking->name,
+            'email' => $dataBooking->email,
+            'profession' => $dataBooking->profession,
+            'whatsapp_number' => $dataBooking->whatsapp_number,
+            'instance' => $dataBooking->instance,
+            'address' => $dataBooking->address,
+            'goals' => $dataBooking->goals,
+            'program' => $dataBooking->program,
+            'book_date' => $dataBooking->book_date,
+            'book_demo' => $dataBooking->book_demo,
+            'session_coaching' => $dataBooking->session_coaching,
+            'session_training' => $dataBooking->session_training,
+            'session_mentoring' => $dataBooking->session_mentoring,
+            'price' => $dataBooking->price,
+
+        );
+
+        $pdf = PDF::loadView('booking.invoice', $data);
+        return $pdf->download('Booking-Invoice-' . $name . '.pdf', compact('data'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -226,6 +256,11 @@ class BookingController extends Controller
             'bank' => 'required|string|max:30',
             'payment' => 'required|image|mimes:jpeg,png,jpg',
 
+        ]);
+
+        Booking::where('id', $id)->update([
+            'payment' => $request->payment->store('payment'),
+            'bank' => $request->bank,
         ]);
 
         $bookingData = Booking::find($id);
@@ -249,16 +284,14 @@ class BookingController extends Controller
             $mail->from('katum61199@gmail.com', 'Booking Cataliz');
         });
 
-        Booking::where('id', $id)->update([
-            'payment' => $request->payment->store('payment'),
-            'bank' => $request->bank,
-        ]);
 
-        $name = 'Aditya';
+
+        $name = $bookingData->name;
+        $email = $bookingData->email;
         $message = 'Saya sudah Booking kegiatan dan telah menyelesaikan Pembayaran';
         $phone = '6285215269015';
-        $urlSendWA = 'https://api.whatsapp.com/send?phone=$phone&text=Nama:%20$name%20%0DPesan:%20$message';
-        return Redirect::to($urlSendWA)->with($phone);
+        $urlSendWA = 'https://api.whatsapp.com/send?phone=' . $phone . '&text=Nama:%20' . $name . '%20%0AEmail:%20' . $email . '%20%0APesan:%20' . $message;
+        return Redirect::to($urlSendWA);
     }
 
     public function updateAdmin(Request $request, $id)
@@ -274,37 +307,52 @@ class BookingController extends Controller
             'book_date' => 'required',
         ]);
 
-        $bookingData = Booking::find($id);
-        $data = array(
+        if ($request->status == 'reservation') {
 
-            'name' => $bookingData->name,
-            'whatsapp_number' => $bookingData->whatsapp_number,
-            'email' => $bookingData->email,
-            'program' => $request->program,
-            'session_coaching' => $bookingData->session_coaching,
-            'session_training' => $bookingData->session_training,
-            'session_mentoring' => $bookingData->session_mentoring,
-            'book_date' => $bookingData->book_date,
-            'link' => $bookingData->link,
-        );
+            Booking::where('id', $id)->update([
+                'name' => $request->name,
+                'whatsapp_number' => $request->whatsapp_number,
+                'instance' => $request->instance,
+                'profession' => $request->profession,
+                'address' => $request->address,
+                'link' => $request->link,
+                'goals' => $request->goals,
+                'book_date' => $request->book_date,
+                'status' => 'reservation',
+            ]);
 
-        $email = $bookingData->email;
-        Mail::send('booking/email_verifbooking', $data, function ($mail) use ($email) {
-            $mail->to($email, 'no-reply')
-                ->subject("Booking Cataliz");
-            $mail->from('katum61199@gmail.com', 'Booking Cataliz');
-        });
+            $bookingData = Booking::find($id);
+            $data = array(
+                'name' => $bookingData->name,
+                'whatsapp_number' => $bookingData->whatsapp_number,
+                'email' => $bookingData->email,
+                'program' => $request->program,
+                'session_coaching' => $bookingData->session_coaching,
+                'session_training' => $bookingData->session_training,
+                'session_mentoring' => $bookingData->session_mentoring,
+                'book_date' => $bookingData->book_date,
+                'link' => $bookingData->link,
+            );
 
-        Booking::where('id', $id)->update([
-            'name' => $request->name,
-            'whatsapp_number' => $request->whatsapp_number,
-            'instance' => $request->instance,
-            'profession' => $request->profession,
-            'address' => $request->address,
-            'link' => $request->link,
-            'goals' => $request->goals,
-            'book_date' => $request->book_date,
-        ]);
+            $email = $bookingData->email;
+            Mail::send('booking/email_verifbooking', $data, function ($mail) use ($email) {
+                $mail->to($email, 'no-reply')
+                    ->subject("Booking Cataliz");
+                $mail->from('katum61199@gmail.com', 'Booking Cataliz');
+            });
+        } else {
+            Booking::where('id', $id)->update([
+                'name' => $request->name,
+                'whatsapp_number' => $request->whatsapp_number,
+                'instance' => $request->instance,
+                'profession' => $request->profession,
+                'address' => $request->address,
+                'link' => $request->link,
+                'goals' => $request->goals,
+                'book_date' => $request->book_date,
+                'status' => 'pending',
+            ]);
+        }
 
         Alert::success('Your verification successful!');
         return redirect('booking/index');

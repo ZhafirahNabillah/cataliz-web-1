@@ -48,7 +48,7 @@
                         <div class="card-body">
                             </h4>
                             <div class="d-block text-right">
-                                <a href="" class="btn btn-primary mb-2">Download PDF</a>
+                                <a href="{{route('booking.invoice', $data->id)}}" class="btn btn-primary mb-2">Download PDF</a>
                             </div>
                             <ul class="d-flex mb-3">
                                 <li class="list-inline-item" style="padding-right:15% ;">
