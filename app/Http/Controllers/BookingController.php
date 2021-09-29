@@ -112,6 +112,11 @@ class BookingController extends Controller
         return view('booking.email_verifbooking');
     }
 
+    public function seeInvoice()
+    {
+        return view('booking.invoice');
+    }
+
     //method to show edit agenda page
     public function edit($id)
     {

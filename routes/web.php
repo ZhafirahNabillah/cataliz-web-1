@@ -84,6 +84,7 @@ Route::get('/booking/create', [BookingController::class, 'create'])->name('booki
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/email_successbooking', [BookingController::class, 'seeEmailSuccess'])->name('booking.email_successbooking');
 Route::get('/booking/email_verifbooking', [BookingController::class, 'seeEmailVerif'])->name('booking.email_verifbooking');
+Route::get('/booking/invoice', [BookingController::class, 'seeInvoice'])->name('booking.invoice');
 // Route::get('/booking/payment', [BookingController::class, 'seePayment'])->name('booking.payment');
 // Route::get('/booking/search', [BookingController::class, 'search'])->name('booking.search');
 Route::get('/{id}/booking/payment', [BookingController::class, 'payment'])->name('booking.payment');
