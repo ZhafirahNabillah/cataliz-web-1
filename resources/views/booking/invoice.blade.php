@@ -11,11 +11,6 @@
         clear: both;
     }
 
-    a {
-        color: #5D6975;
-        text-decoration: underline;
-    }
-
     body {
         position: relative;
         width: 21cm;  
@@ -23,9 +18,9 @@
         margin: 0 auto; 
         color: #001028;
         background: #FFFFFF; 
-        font-family: Arial, sans-serif; 
-        font-size: 12px; 
-        font-family: Arial;
+        font-size: 14px; 
+        font-family: Roboto;
+        font-weight:500;
     }
 
     header {
@@ -57,83 +52,6 @@
         margin: 20px 0 20px 0;
     }
 
-    #project {
-        float: left;
-    }
-
-    #project span {
-        color: #5D6975;
-        text-align: right;
-        width: 52px;
-        margin-right: 10px;
-        display: inline-block;
-        font-size: 0.8em;
-    }
-
-    #company {
-        float: right;
-        text-align: right;
-    }
-
-    #project div,
-    #company div {
-        white-space: nowrap;        
-    }
-
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-        margin-bottom: 20px;
-    }
-
-    table tr:nth-child(2n-1) td {
-        background: #F5F5F5;
-    }
-
-    table th,
-    table td {
-        text-align: center;
-    }
-
-    table th {
-        padding: 5px 20px;
-        color: #5D6975;
-        border-bottom: 1px solid #C1CED9;
-        white-space: nowrap;        
-        font-weight: normal;
-    }
-
-    table .service,
-    table .desc {
-        text-align: left;
-    }
-
-    table td {
-        padding: 20px;
-        text-align: right;
-    }
-
-    table td.service,
-    table td.desc {
-        vertical-align: top;
-    }
-
-    table td.unit,
-    table td.qty,
-    table td.total {
-        font-size: 1.2em;
-    }
-
-    table td.grand {
-        border-top: 1px solid #5D6975;;
-    }
-
-    #notices .notice {
-        color: #5D6975;
-        font-size: 1.2em;
-    }
-
     footer {
         color: #5D6975;
         width: 100%;
@@ -152,18 +70,37 @@
         <img src="{{ url('/assets/images/header_invoice.png') }}">
       </div>
       <h1>BOOKING DEMO</h1>
-      <div id="project">
-        <div>Code Booking</div>
-        <div>Name</div>
-        <div>Email</div>
-        <div>Phone</div>
-        <div>Address</div>
-        <div>Instance</div>
-        <div>Status</div>
+      <div id="detail">
+        <table border="0">
+          <tbody>
+            <tr><td>Code Booking</td><td>:</td><td>data</td></tr>
+            <tr><td>Name</td><td>:</td><td>data</td></tr>
+            <tr><td>Email</td><td>:</td><td>data</td></tr>
+            <tr><td>Phone</td><td>:</td><td>data</td></tr>
+            <tr><td>Address</td><td>:</td><td>data</td></tr>
+            <tr><td>Instance</td><td>:</td><td>data</td></tr>
+            <tr><td>Status</td><td>:</td><td>data</td></tr>
+          </tbody>
+      </table>
       </div>
     </header>
     <main>
-      <table>
+    <table border="3" bordercolor="#7367F0" style="width:100%; background-color:#FFFFFF; border-collapse: collapse;">
+      <tr style="background-color:#D4D0FF;color:#625F6E;">
+      <th style="padding: 20px">Program</th><th>Category & Session</th><th>Date</th>
+      </tr>
+      <tr>
+        <td style="padding: 30px; text-align: center;">STARCO</td>
+        <td style="padding: 30px; text-align: center;">Coaching 1 Session</td>
+        <td style="padding: 30px; text-align: center;">dd/mm/yyyy</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="border-left: 0px;"></td>
+        <td style="padding: 10px; background-color:#7367F0; color:#FFFFFF">Total : Rp.400.000</td>
+      </tr>
+    </table>
+
+      <!-- <table>
         <thead>
           <tr>
             <th>Program</th>
@@ -182,7 +119,7 @@
             <td class="grand total">Rp.400.000</td>
           </tr>
         </tbody>
-      </table>
+      </table> -->
     </main>
     <footer>
     <div id="footer">
