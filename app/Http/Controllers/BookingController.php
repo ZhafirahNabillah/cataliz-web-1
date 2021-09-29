@@ -217,8 +217,6 @@ class BookingController extends Controller
     public function invoice($id)
     {
         $dataBooking = Booking::find($id);
-        $programId = $dataBooking->program_id;
-        $dataProgram = Program::where('id', $programId)->get();
         $name = $dataBooking->name;
         $data = array(
             'code' => $dataBooking->code,
@@ -229,7 +227,7 @@ class BookingController extends Controller
             'instance' => $dataBooking->instance,
             'address' => $dataBooking->address,
             'goals' => $dataBooking->goals,
-            'program' => $dataBooking->program,
+            'program' => $dataBooking->programs->program_name,
             'book_date' => $dataBooking->book_date,
             'book_demo' => $dataBooking->book_demo,
             'session_coaching' => $dataBooking->session_coaching,

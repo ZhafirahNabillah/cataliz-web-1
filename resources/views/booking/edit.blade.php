@@ -119,6 +119,9 @@
                                     </div>
                                 </div>
                             </div><br>
+                            <ul>
+                                <li class="list-group-item"><img src="{{asset('storage/'.$data->payment)}}" class="img-fluid" alt="Responsive image"></td>
+                            </ul>
                             <div class="form-group">
                                 <label for="status">Status</label><br>
                                 @if($data->status == 'reservation')
