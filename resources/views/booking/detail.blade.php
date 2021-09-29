@@ -171,7 +171,7 @@
                                                             <li class="list-group-item">{{$data->bank}}</li>
                                                         </ul>
                                                         <ul>
-                                                            <li class="list-group-item"><img src="{{asset('storage/'.$data->payment)}}" class="img-fluid" alt="Responsive image"></td>
+                                                            <li class="list-group-item"><img src="{{asset('storage/'.$data->payment)}}" class="img-fluid" alt="Responsive image" width="70%"></td>
                                                         </ul>
                                                     </div>
                                                 </div>
