@@ -239,7 +239,7 @@ class BookingController extends Controller
             'session_training' => $dataBooking->session_training,
             'session_mentoring' => $dataBooking->session_mentoring,
             'price' => $dataBooking->price,
-
+            'status' => $dataBooking->status,
         );
 
         $pdf = PDF::loadView('booking.invoice', $data);

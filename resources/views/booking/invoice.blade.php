@@ -73,13 +73,13 @@
       <div id="detail">
         <table border="0">
           <tbody>
-            <tr><td>Code Booking</td><td>:</td><td>data</td></tr>
-            <tr><td>Name</td><td>:</td><td>data</td></tr>
-            <tr><td>Email</td><td>:</td><td>data</td></tr>
-            <tr><td>Phone</td><td>:</td><td>data</td></tr>
-            <tr><td>Address</td><td>:</td><td>data</td></tr>
-            <tr><td>Instance</td><td>:</td><td>data</td></tr>
-            <tr><td>Status</td><td>:</td><td>data</td></tr>
+            <tr><td>Code Booking </td><td>:</td><td>{{$code}}</td></tr>
+            <tr><td>Name</td><td>:</td><td>{{$name}}</td></tr>
+            <tr><td>Email</td><td>:</td><td>{{$email}}</td></tr>
+            <tr><td>Phone</td><td>:</td><td>{{$whatsapp_number}}</td></tr>
+            <tr><td>Address</td><td>:</td><td>{{$address}}</td></tr>
+            <tr><td>Instance</td><td>:</td><td>{{$instance}}</td></tr>
+            <tr><td>Status</td><td>:</td><td>{{$status}}</td></tr>
           </tbody>
       </table>
       </div>
@@ -90,13 +90,29 @@
       <th style="padding: 20px">Program</th><th>Category & Session</th><th>Date</th>
       </tr>
       <tr>
-        <td style="padding: 30px; text-align: center;">STARCO</td>
-        <td style="padding: 30px; text-align: center;">Coaching 1 Session</td>
-        <td style="padding: 30px; text-align: center;">dd/mm/yyyy</td>
+
+
+        <td style="padding: 30px; text-align: center;">  
+        @foreach ($book_demo as $dataDemo=>$program)
+        {{$program}}
+        @endforeach</td>
+      
+        @if($session_coaching != 0)
+        <td style="padding: 30px; text-align: center;">
+        {{$session_coaching}}</td>
+        @elseif($session_training != 0)
+        <td style="padding: 30px; text-align: center;">
+        {{$session_training}}</td>
+        @elseif($session_mentoring != 0)
+        <td style="padding: 30px; text-align: center;">
+        {{$session_mentoring}}</td>
+        @endif
+  
+        <td style="padding: 30px; text-align: center;">{{$book_date}}</td>
       </tr>
       <tr>
         <td colspan="2" style="border-left: 0px;"></td>
-        <td style="padding: 10px; background-color:#7367F0; color:#FFFFFF">Total : Rp.400.000</td>
+        <td style="padding: 10px; background-color:#7367F0; color:#FFFFFF">Total : {{$price}}</td>
       </tr>
     </table>
 
