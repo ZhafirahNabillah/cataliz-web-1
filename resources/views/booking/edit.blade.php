@@ -148,45 +148,47 @@
                                         <label class="form-label" for="category">Category</label>
                                         @foreach($data->book_demo as $dataDemo=>$value)
                                         <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($value)}}</div><br>
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div style="display:table-cell;">
-                                    <div class="form-group">
-                                        <label class="form-label" for="category">Session</label>
-                                        <div class="tabs">
-                                            <!-- @if($data->session_coaching != 0)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_coaching}} Session</div><br>
-                                        @elseif($data->session_training != 0)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_training}} Session</div><br>
-                                        @elseif($data->session_mentoring != 0)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_mentoring}} Session</div>
-                                        @endif -->
-                                            @if($data->session_coaching == 1 or $data->session_training == 1 or $data->session_mentoring == 1)
-                                            <input type="radio" id="radio-1" name="tabs" checked />
-                                            <label class="tab" for="radio-1">1</label>
-                                            <input type="radio" id="radio-2" name="tabs" disabled />
-                                            <label class="tab" for="radio-2">2</label>
-                                            <input type="radio" id="radio-3" name="tabs" disabled />
-                                            <label class="tab" for="radio-3">3</label>
-                                            @elseif($data->session_coaching == 2 or $data->session_training == 2 or $data->session_mentoring == 2)
-                                            <input type="radio" id="radio-1" name="tabs" disabled />
-                                            <label class="tab" for="radio-1">1</label>
-                                            <input type="radio" id="radio-2" name="tabs" checked />
-                                            <label class="tab" for="radio-2">2</label>
-                                            <input type="radio" id="radio-3" name="tabs" disabled />
-                                            <label class="tab" for="radio-3">3</label>
-                                            @elseif($data->session_coaching == 3 or $data->session_training == 3 or $data->session_mentoring == 3)
-                                            <input type="radio" id="radio-1" name="tabs" disabled />
-                                            <label class="tab" for="radio-1">1</label>
-                                            <input type="radio" id="radio-2" name="tabs" disabled />
-                                            <label class="tab" for="radio-2">2</label>
-                                            <input type="radio" id="radio-3" name="tabs" checked />
-                                            <label class="tab" for="radio-3">3</label>
-                                            @endif
+                                        <div style="display:table-cell;">
+                                            <div class="form-group">
+                                                <label class="form-label" for="category">Session</label>
+                                                <div class="tabs">
+                                                    <!-- @if($data->session_coaching != 0)
+                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_coaching}} Session</div><br>
+                                                @elseif($data->session_training != 0)
+                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_training}} Session</div><br>
+                                                @elseif($data->session_mentoring != 0)
+                                                <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_mentoring}} Session</div>
+                                                @endif -->
 
-                                            <span class="glider"></span>
+                                                    @if($data->session_coaching == 1 or $data->session_training == 1 or $data->session_mentoring == 1)
+                                                    <input type="radio" id="radio-1" name="tabs" checked />
+                                                    <label class="tab" for="radio-1">1</label>
+                                                    <input type="radio" id="radio-2" name="tabs" disabled />
+                                                    <label class="tab" for="radio-2">2</label>
+                                                    <input type="radio" id="radio-3" name="tabs" disabled />
+                                                    <label class="tab" for="radio-3">3</label>
+                                                    @elseif($data->session_coaching == 2 or $data->session_training == 2 or $data->session_mentoring == 2)
+                                                    <input type="radio" id="radio-1" name="tabs" disabled />
+                                                    <label class="tab" for="radio-1">1</label>
+                                                    <input type="radio" id="radio-2" name="tabs" checked />
+                                                    <label class="tab" for="radio-2">2</label>
+                                                    <input type="radio" id="radio-3" name="tabs" disabled />
+                                                    <label class="tab" for="radio-3">3</label>
+                                                    @elseif($data->session_coaching == 3 or $data->session_training == 3 or $data->session_mentoring == 3)
+                                                    <input type="radio" id="radio-1" name="tabs" disabled />
+                                                    <label class="tab" for="radio-1">1</label>
+                                                    <input type="radio" id="radio-2" name="tabs" disabled />
+                                                    <label class="tab" for="radio-2">2</label>
+                                                    <input type="radio" id="radio-3" name="tabs" checked />
+                                                    <label class="tab" for="radio-3">3</label>
+                                                    @endif
+
+                                                    <span class="glider"></span>
+
+                                                </div>
+                                            </div>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
@@ -197,8 +199,9 @@
                             <div style="display:inline-table;">
                                 <div style="display:table-cell;">
                                     <div class="form-group">
-                                        <label class="form-label" for="category">Payment Method</label>
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($data->bank)}}</div>
+                                        <label class="form-label" for="category">Payment</label>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($data->bank)}}</div><br>
+                                        <p>Total price: Rp.{{$data->price}}</p>
                                     </div>
                                 </div>
                             </div><br>
