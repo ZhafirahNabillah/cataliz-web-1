@@ -191,7 +191,7 @@
                                 Program is Empty, Please request program to Admin...
                                 @enderror
                                 @foreach($programs as $listProgram)
-                                <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{$listProgram->program_name}}
+                                <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{strtoupper($listProgram->program_name)}}
                                 @endforeach
                                 @error('progam_id')
                                 <span class="invalid-feedback" role="alert">

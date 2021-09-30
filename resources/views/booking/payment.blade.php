@@ -13,31 +13,33 @@
         background-color: #F0B445
     }
 
-@media screen and (max-width: 2560px) {
-    .dt.text-center {
-        padding-left:250px;
-        padding-right:250px;
-    }
-    .img-fluid {
-        padding-top:-5px;
-    }
-    .card{
-        padding-top:25px;
-        border-radius: 10px 10px 10px 10px;
-    }
-}
+    @media screen and (max-width: 2560px) {
+        .dt.text-center {
+            padding-left: 250px;
+            padding-right: 250px;
+        }
 
-@media screen and (max-width: 768px) {
-    .container-fluid {
-        margin-top:-40px;
-    }
-}
+        .img-fluid {
+            padding-top: -5px;
+        }
 
-@media screen and (max-width: 425px) {
-    .container-fluid {
-        margin-top:-45px;
+        .card {
+            padding-top: 25px;
+            border-radius: 10px 10px 10px 10px;
+        }
     }
-}
+
+    @media screen and (max-width: 768px) {
+        .container-fluid {
+            margin-top: -40px;
+        }
+    }
+
+    @media screen and (max-width: 425px) {
+        .container-fluid {
+            margin-top: -45px;
+        }
+    }
 </style>
 @endpush
 @section('content')
@@ -96,7 +98,7 @@
                                 <div class="mt-2 mb-2">
                                     <div class="col-12">
                                         <label class="text-center " style="font-family: Montserrat; color:black" for="bank">Pilih File</label>
-                                        <input type="file" class="form-control" name="payment" id="" placeholder="Choose File ...">
+                                        <input type="file" class="form-control @error('payment') is-invalid @enderror" name="payment" id="" placeholder="Choose File ...">
                                     </div>
                                 </div>
                             </div>
@@ -109,7 +111,7 @@
                         </div>
                     </div>
                 </form>
-                <img class="img-fluid" src="{{asset('assets/images/bank_payment.png')}}" alt=""/>
+                <img class="img-fluid" src="{{asset('assets/images/bank_payment.png')}}" alt="" />
             </div>
         </div>
     </div>

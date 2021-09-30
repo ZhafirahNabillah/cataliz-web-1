@@ -118,7 +118,7 @@
                                                     <div class="card-body">
                                                         <ul class="list-group list-group-flush">
                                                             <li class="list-group-item">
-                                                                {{$data->programs->program_name}}</li>
+                                                                {{strtoupper($data->programs->program_name)}}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -135,7 +135,7 @@
                                                     <div class="card-body">
                                                         <ul class="list-group list-group-flush">
                                                             @foreach($data->book_demo as $dataDemo=>$value)
-                                                            <li class="list-group-item">{{$value}}</li>
+                                                            <li class="list-group-item">{{strtoupper($value)}}</li>
                                                             @endforeach
                                                         </ul>
                                                     </div>
@@ -168,7 +168,7 @@
                                                 <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item">{{$data->bank}}</li>
+                                                            <li class="list-group-item">{{strtoupper($data->bank)}}</li>
                                                         </ul>
                                                         <ul>
                                                             <li class="list-group-item"><img src="{{asset('storage/'.$data->payment)}}" class="img-fluid" alt="Responsive image" width="70%"></td>
@@ -187,7 +187,7 @@
                                                 <div id="collapse1" role="tabpanel" aria-labelledby="headingCollapse1" class="collapse show" data-parent="#accordionExample">
                                                     <div class="card-body">
                                                         <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item">{{$data->status}}</li>
+                                                            <li class="list-group-item">{{ucwords($data->status)}}</li>
                                                         </ul>
                                                     </div>
                                                 </div>

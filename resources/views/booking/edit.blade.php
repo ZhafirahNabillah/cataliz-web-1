@@ -14,61 +14,60 @@
 <!-- <link href="assets/dataTables/datatables.min.css" rel="stylesheet"> -->
 <style>
     .tabs {
-        display:flex;
-        position:relative;
+        display: flex;
+        position: relative;
         background-color: #7367F0;
-        padding:0.5rem;
-        border-radius:99px;
+        padding: 0.5rem;
+        border-radius: 99px;
     }
 
-    .tabs *{
-        z-index:2;
+    .tabs * {
+        z-index: 2;
     }
 
-    input[type="radio"]{
-        display:none;
+    input[type="radio"] {
+        display: none;
     }
 
-    .tab{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        height:21px;
-        width:50px;
+    .tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 21px;
+        width: 50px;
         font-size: 1.1rem;
-        border-radius:99px;
-        cursor:pointer;
-        transition:color 0.15s ease-in;
+        border-radius: 99px;
+        cursor: pointer;
+        transition: color 0.15s ease-in;
     }
 
-    input[type="radio"]:checked + label {
-        color:white;
+    input[type="radio"]:checked+label {
+        color: white;
     }
 
-    input[id="radio-1"]:checked ~ .glider {
+    input[id="radio-1"]:checked~.glider {
         transform: translateX(0);
     }
 
-    input[id="radio-2"]:checked ~ .glider {
+    input[id="radio-2"]:checked~.glider {
         transform: translateX(100%);
     }
 
-    input[id="radio-3"]:checked ~ .glider {
+    input[id="radio-3"]:checked~.glider {
         transform: translateX(200%);
     }
 
     .glider {
-        position:absolute;
-        display:flex;
-        height:21px;
-        width:50px;
+        position: absolute;
+        display: flex;
+        height: 21px;
+        width: 50px;
         background-color: #ECC373;
-        color:white;
-        z-index:1;
-        border-radius:99px;
-        transition:0.25 ease-out;
+        color: white;
+        z-index: 1;
+        border-radius: 99px;
+        transition: 0.25 ease-out;
     }
-
 </style>
 <div class="app-content content ">
     <div class="content-overlay"></div>
@@ -139,7 +138,7 @@
                                 <div style="display:table-cell;">
                                     <div class="form-group">
                                         <label class="form-label" for="category">Program</label>
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->programs->program_name}}</div>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($data->programs->program_name)}}</div>
                                     </div>
                                 </div>
                             </div><br>
@@ -148,28 +147,36 @@
                                     <div class="form-group">
                                         <label class="form-label" for="category">Category</label>
                                         @foreach($data->book_demo as $dataDemo=>$value)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$value}}</div><br>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($value)}}</div><br>
                                         @endforeach
                                     </div>
                                 </div>
                                 <div style="display:table-cell;">
                                     <div class="form-group">
                                         <label class="form-label" for="category">Session</label>
-                                        <!-- @if($data->session_coaching != 0)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_coaching}} Session</div><br>
-                                        @elseif($data->session_training != 0)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_training}} Session</div><br>
-                                        @elseif($data->session_mentoring != 0)
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_mentoring}} Session</div>
-                                        @endif -->
                                         <div class="tabs">
-                                            <input type="radio" id="radio-1" name="tabs"/>
-                                            <label class="tab" for="radio-1" >1</label>
-                                            <input type="radio" id="radio-2" name="tabs" checked/>
-                                            <label class="tab" for="radio-2" >2</label>
-                                            <input type="radio" id="radio-3" name="tabs"/>
-                                            <label class="tab" for="radio-3" >3</label>
-
+                                            @if($data->session_coaching == 1 or $data->session_training == 1 or $data->session_mentoring == 1)
+                                            <input type="radio" id="radio-1" name="tabs" checked />
+                                            <label class="tab" for="radio-1">1</label>
+                                            <input type="radio" id="radio-2" name="tabs" disabled />
+                                            <label class="tab" for="radio-2">2</label>
+                                            <input type="radio" id="radio-3" name="tabs" disabled />
+                                            <label class="tab" for="radio-3">3</label>
+                                            @elseif($data->session_coaching == 2 or $data->session_training == 2 or $data->session_mentoring == 2)
+                                            <input type="radio" id="radio-1" name="tabs" disabled />
+                                            <label class="tab" for="radio-1">1</label>
+                                            <input type="radio" id="radio-2" name="tabs" checked />
+                                            <label class="tab" for="radio-2">2</label>
+                                            <input type="radio" id="radio-3" name="tabs" disabled />
+                                            <label class="tab" for="radio-3">3</label>
+                                            @elseif($data->session_coaching == 3 or $data->session_training == 3 or $data->session_mentoring == 3)
+                                            <input type="radio" id="radio-1" name="tabs" disabled />
+                                            <label class="tab" for="radio-1">1</label>
+                                            <input type="radio" id="radio-2" name="tabs" disabled />
+                                            <label class="tab" for="radio-2">2</label>
+                                            <input type="radio" id="radio-3" name="tabs" checked />
+                                            <label class="tab" for="radio-3">3</label>
+                                            @endif
                                             <span class="glider"></span>
                                         </div>
                                     </div>
@@ -183,12 +190,12 @@
                                 <div style="display:table-cell;">
                                     <div class="form-group">
                                         <label class="form-label" for="category">Payment Method</label>
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->bank}}</div>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($data->bank)}}</div>
                                     </div>
                                 </div>
                             </div><br>
                             <ul>
-                                <li class="list-group-item"><img src="{{asset('storage/'.$data->payment)}}" class="img-fluid" alt="Responsive image"></td>
+                                <li class="list-group-item"><img src="{{asset('storage/'.$data->payment)}}" class="img-fluid" alt="Responsive image" width="70%"></td>
                             </ul>
                             <div class="form-group">
                                 <label for="status">Status</label><br>
@@ -200,7 +207,7 @@
                             </div>
                             <div class="form-group">
                                 <Button id="submit" type="submit" class="btn btn-primary" style="margin-top:5px; margin-right:5px;">SAVE</Button>
-                                <Button id="submit" type="submit" class="btn btn-secondary" style="margin-top:5px">BACK</Button>
+                                <a href="{{ URL::previous() }}" type="button" class="btn btn-secondary" style="margin-top: 0.5%;">BACK</a>
                             </div>
                         </form><br>
                     </div>
