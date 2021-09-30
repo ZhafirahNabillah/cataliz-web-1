@@ -155,6 +155,13 @@
                                     <div class="form-group">
                                         <label class="form-label" for="category">Session</label>
                                         <div class="tabs">
+                                            <!-- @if($data->session_coaching != 0)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_coaching}} Session</div><br>
+                                        @elseif($data->session_training != 0)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_training}} Session</div><br>
+                                        @elseif($data->session_mentoring != 0)
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{$data->session_mentoring}} Session</div>
+                                        @endif -->
                                             @if($data->session_coaching == 1 or $data->session_training == 1 or $data->session_mentoring == 1)
                                             <input type="radio" id="radio-1" name="tabs" checked />
                                             <label class="tab" for="radio-1">1</label>
@@ -177,6 +184,7 @@
                                             <input type="radio" id="radio-3" name="tabs" checked />
                                             <label class="tab" for="radio-3">3</label>
                                             @endif
+
                                             <span class="glider"></span>
                                         </div>
                                     </div>
