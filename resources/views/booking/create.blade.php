@@ -100,7 +100,7 @@
 
     <div class="container-fluid">
         <div class="card">
-            <h3><img src="{{ url('/assets/images/cataliz.png') }}" style="width:25px; float:left;"> Cataliz</h3>
+            <h3><img src="{{ url('/assets/images/logo.png') }}" style="width:100px; float:left;"> </h3>
             <!-- @if(session('success'))
                     <div class="alert alert-success alert-dismissible" role="alert">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -146,7 +146,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="instance">Instance</label>
+                                <label for="instance">Institution</label>
                                 <input class="form-control @error('instance') is-invalid @enderror" type="text" name="instance" value="{{ old('instance') }}" placeholder="Input your instance...">
                                 @error('instance')
                                 <span class="invalid-feedback" role="alert">
@@ -156,7 +156,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="profession">Profession</label>
+                                <label for="profession">Occupation</label>
                                 <input class="form-control @error('profession') is-invalid @enderror" type="text" name="profession" value="{{ old('profession') }}" placeholder="Input your profession...">
                                 @error('profession')
                                 <span class="invalid-feedback" role="alert">
@@ -198,6 +198,17 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="program">Batch</label><br>
+                                
+                                <input type="radio" name="program_id" value=""> 1 
+                                <input type="radio" name="program_id" value=""> 2
+                                <input type="radio" name="program_id" value=""> 3
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>2</strong>
+                                </span>
+                            
                             </div>
 
                             <div class="form-group">
