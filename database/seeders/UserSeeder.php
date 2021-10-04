@@ -145,5 +145,24 @@ class UserSeeder extends Seeder
       'causer_id'     =>  $manager->id,
       'created_at'     =>  date('Y-m-d H:1:s')
     ]);
+
+    //create manager seeder
+    $coachmentor = User::create([
+      'name'        => 'User Coach Mentor',
+      'phone'       => '81234567890',
+      'email'       => 'coachmentor@cataliz.id',
+      'password'    => bcrypt('coachmentor123'),
+      'is_verified' => 1
+    ]);
+
+    $coachmentor->assignRole('coachmentor');
+
+    $activity_coachmentor = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data Coach Mentor',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $coachmentor->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
   }
 }

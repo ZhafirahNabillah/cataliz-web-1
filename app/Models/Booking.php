@@ -27,6 +27,7 @@ class Booking extends Model
         'status',
         'price',
         'program_id',
+        'batch_id',
         'bank',
         'payment',
         'link',
