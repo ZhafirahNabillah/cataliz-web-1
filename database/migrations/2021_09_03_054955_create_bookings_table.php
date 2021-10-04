@@ -31,6 +31,7 @@ class CreateBookingsTable extends Migration
             $table->enum('status', ['pending', 'reservation'])->default('pending');
             $table->string('price');
             $table->integer('program_id')->unsigned();
+            $table->integer('batch_id')->unsigned();
             $table->enum('bank', ['bca', 'bri', 'mandiri', 'bni'])->nullable();
             $table->string('payment')->nullable();
             $table->string('link')->nullable();

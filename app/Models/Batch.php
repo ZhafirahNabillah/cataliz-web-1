@@ -51,4 +51,9 @@ class Batch extends Model
   {
     return $this->hasMany('App\Models\Graduate');
   }
+
+  public function bookings()
+  {
+    return $this->hasMany('App\Models\Booking');
+  }
 }

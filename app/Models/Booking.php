@@ -46,4 +46,8 @@ class Booking extends Model
     {
         return $this->belongsTo('App\Models\Program', 'program_id', 'id');
     }
+    public function batchs()
+    {
+        return $this->belongsTo('App\Models\Batch', 'batch_id', 'id');
+    }
 }
