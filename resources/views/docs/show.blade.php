@@ -64,7 +64,7 @@
                       <b> Last Updated  </b>
                   </div>
                   <div class="col-sm-3">
-                      <h6> # </h6>
+                      <h6> {{$documentation->updated_at}} </h6>
                   </div>
                 </div>
                 <!-- {!! $documentation->description !!} -->
@@ -75,12 +75,12 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-              <h6 class="card-title"><b>Lorem Ipsum</b></h6>
+              <h6 class="card-title"><b>{{$documentation->title}}</b></h6>
               </div>
               <div class="card-body">
                 <div class="row mb-2">
                   <div class="col-sm-12">
-                      <h6> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis ornare facilisis nulla et consequat. Vivamus vulputate, est vel pulvinar cursus, leo odio vehicula dui, eget consectetur ante velit id orci. Phasellus enim ante, accumsan ut eros non, viverra egestas lectus. Proin in metus sollicitudin, rhoncus ipsum ac, auctor dui. Morbi rutrum sem tellus, sed mollis tortor scelerisque a. Vestibulum malesuada consequat consectetur. Proin vitae vestibulum sapien. Curabitur tempus maximus sapien, sit amet cursus diam volutpat viverra. Ut ornare arcu sit amet lectus dignissim, et convallis tellus viverra. In eget cursus diam, posuere hendrerit ex. Mauris sit amet sem lacinia, mattis quam et, blandit orci. Duis in scelerisque odio. Cras convallis, leo sit amet tincidunt dignissim, lorem nibh posuere metus, sit amet convallis diam diam eget magna. Nam auctor sodales nisi, quis euismod nisl aliquam sit amet. Proin sed ipsum convallis mi ultrices lacinia. Integer at arcu id risus imperdiet sagittis id ut erat. </h6>
+                      <h6> {!!$documentation->description!!} </h6>
                   </div>
                 </div>
                 <div class="row mb-2">

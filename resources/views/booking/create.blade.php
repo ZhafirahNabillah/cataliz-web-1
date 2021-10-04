@@ -54,7 +54,7 @@
     }
 
     @media screen and (max-width: 767px) {
-        .col-md-5 {
+        .col-md-4 {
             visibility: hidden;
             display: none;
         }
@@ -108,11 +108,10 @@
                     </div>
                     @endif -->
             <div class="row">
-                <div class="col-md-5 rounded-left" style="background-image: url('/assets/images/discussion.jpg'); background-size:cover; background-position:center;">
-                </div>
+                <div class="col-md-4 rounded-left" style="background-image: url('/assets/images/discussion.jpg'); margin-left:50px; background-size:cover; background-position:center;"></div>
                 <div class="col-md-7" style="background-color: #c4c4c4; margin-right">
                     <div class="container">
-                        <h2 class="text-center" style="font-family: Roboto; color:black;">BOOK HERE</h2>
+                        <h2 class="text-center" style="font-family: montserrat; color:black;">BOOK HERE</h2>
                         <form action="{{ route('booking.store') }}" method="post" id="BookingForm" name="BookingForm">
                             @csrf
                             <div class="form-group">
