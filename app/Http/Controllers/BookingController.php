@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Crypt;
 use Alert;
 use DataTables;
 use PDF;
+use Illuminate\Support\Facades\DB;
 
 class BookingController extends Controller
 {
@@ -89,11 +90,11 @@ class BookingController extends Controller
      */
     public function create()
     {
-        $programs = Program::where('program_name', 'starco')
-            ->orWhere('program_name', 'scmp')
+        $data = DB::table('batches')
+            ->join('programs', 'batches.program_id', '=', 'programs.id')
+            ->where('batches.status', '=', '1')
+            ->whereIn('programs.program_name', ['starco', 'scmp'])
             ->get();
-
-        $data = Batch::get();
 
         $characters = '0123456789';
         $pin = mt_rand(1000000, 9999999)
@@ -102,7 +103,7 @@ class BookingController extends Controller
 
         $code_booking = str_shuffle($pin);
 
-        return view('booking.create', compact('programs', 'code_booking'));
+        return view('booking.create', compact('code_booking', 'data'));
     }
 
     public function seeEmailSuccess()
@@ -163,7 +164,7 @@ class BookingController extends Controller
             'session_training' => 'required',
             'session_mentoring' => 'required',
             'price' => 'required',
-            'program_id' => 'required',
+            'batch_id' => 'required',
         ]);
 
         $input = $request->all();
@@ -218,6 +219,10 @@ class BookingController extends Controller
     {
         $id =  Crypt::decrypt($id);
         $dataBooking = Booking::find($id);
+        // $dataBooking = DB::table('bookings')
+        //     ->join('batches', 'bookings.batch_id', '=', 'batches.id')
+        //     ->join('programs', 'batches.program_id', '=', 'programs.id')
+        //     ->find($id);
 
         return view('booking.payment', compact('dataBooking'));
     }
@@ -235,7 +240,7 @@ class BookingController extends Controller
             'instance' => $dataBooking->instance,
             'address' => $dataBooking->address,
             'goals' => $dataBooking->goals,
-            'program' => $dataBooking->programs->program_name,
+            'program' => $dataBooking->batchs->program->program_name,
             'book_date' => $dataBooking->book_date,
             'book_demo' => $dataBooking->book_demo,
             'session_coaching' => $dataBooking->session_coaching,

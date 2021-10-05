@@ -186,11 +186,9 @@
 
                             <div class="form-group">
                                 <label for="program">Program</label><br>
-                                @error('program_id')
-                                Program is Empty, Please request program to Admin...
-                                @enderror
-                                @foreach($programs as $listProgram)
-                                <input type="radio" name="program_id" value="{{$listProgram->id}}"> {{strtoupper($listProgram->program_name)}}
+                                @foreach($data as $dataProgram)
+                                <input type="radio" name="batch_id" value="{{$dataProgram->id}}"> {{strtoupper($dataProgram->program_name)}}
+                                (Batch {{$dataProgram->batch_number}}) <br>
                                 @endforeach
                                 @error('progam_id')
                                 <span class="invalid-feedback" role="alert">
@@ -198,17 +196,17 @@
                                 </span>
                                 @enderror
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="program">Batch</label><br>
-                                
-                                <input type="radio" name="program_id" value=""> 1 
+
+                                <input type="radio" name="program_id" value=""> 1
                                 <input type="radio" name="program_id" value=""> 2
                                 <input type="radio" name="program_id" value=""> 3
                                 <span class="invalid-feedback" role="alert">
                                     <strong>2</strong>
                                 </span>
-                            
-                            </div>
+
+                            </div> -->
 
                             <div class="form-group">
                                 <label for="book_date">Date</label>

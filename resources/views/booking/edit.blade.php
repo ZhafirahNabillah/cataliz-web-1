@@ -142,7 +142,7 @@
                                 <div style="display:table-cell;">
                                     <div class="form-group">
                                         <label class="form-label" for="category">Program</label>
-                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($data->programs->program_name)}}</div>
+                                        <div style="border:1px #625F6E double; padding: 10px;background-color:#CFCFCF; border-radius:5px; text-align:center; width:100%">{{strtoupper($data->batchs->program->program_name)}} ( Batch {{$data->batchs->batch_number}} )</div>
                                     </div>
                                 </div>
                             </div><br>

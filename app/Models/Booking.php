@@ -26,7 +26,6 @@ class Booking extends Model
         'session_mentoring',
         'status',
         'price',
-        'program_id',
         'batch_id',
         'bank',
         'payment',

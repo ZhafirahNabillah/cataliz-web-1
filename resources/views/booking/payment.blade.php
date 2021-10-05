@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="text" class="hidden" name="program" value="{{$dataBooking->programs->program_name}}">
+                            <input type="text" class="hidden" name="program" value="{{$dataBooking->batchs->program->program_name}}">
                             <div class="row-3">
                                 <div class="row justify-content-center align-items-center">
                                     <button type="submit" class="btn btn-warning">UPLOAD PAYMENT</button>
