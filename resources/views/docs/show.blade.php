@@ -85,7 +85,7 @@
                 </div>
                 <div class="row mb-2">
                   <div class="col-sm-4">
-                  <img src="{{asset('assets/images/silver.jpg')}}" class="img-fluid" alt="Responsive image">
+                  <!-- <img src="{{asset('assets/images/silver.jpg')}}" class="img-fluid" alt="Responsive image"> -->
                   </div>
                 </div>
                 <!-- {!! $documentation->description !!} -->

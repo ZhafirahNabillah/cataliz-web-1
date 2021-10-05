@@ -36,6 +36,11 @@
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
                         class="menu-title text-truncate" data-i18n="Email">Users</span></a>
                 @endrole
+                
+                @role('coachmentor')
+                <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span
+                        class="menu-title text-truncate" data-i18n="Email">Users</span></a>
+                @endrole
 
                 @role('coachee')
                 <a class="d-flex align-items-center" href="{{route('clients.index')}}"><i data-feather="user"></i><span

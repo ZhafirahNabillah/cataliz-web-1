@@ -70,7 +70,7 @@
     </div>
     @endrole
 
-    @role('coach')
+    @role('coach|coachmentor')
     <div class="content-header row">
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
@@ -188,7 +188,7 @@
       </section>
       @endrole
 
-      @role('coach')
+      @role('coach|coachmentor')
       <div class="card">
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
@@ -420,7 +420,7 @@
         </div>
       </div>
       <!-- End Modal -->
-      @endrole
+      @endrole  
 
       @role('admin')
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />

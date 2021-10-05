@@ -361,8 +361,6 @@ class DocumentationController extends Controller
         'title'       => $request->title,
         'category'    => $request->category,
         'description' => $request->description,
-        'menu_id'     => $request->set(menu_id, null),
-        'version'     => $request->set(version, null),
         'role'        => $request->role
       ]
     );

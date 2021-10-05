@@ -121,6 +121,90 @@ class HomeController extends Controller
       // }
 
       return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings', 'today_events', 'empty_profile'));
+    }elseif (auth()->user()->hasRole('coachmentor')) {
+
+        // return (auth()->user());
+        // summary content
+        // $class_id = Class_model::where('coach_id',Auth::user()->id)->pluck('id');
+        // $class_has_clients = Class_has_client::whereIn('class_id', $class_id)->pluck('client_id');
+        // $client = Client::whereIn('id', $class_has_clients)->count();
+  
+        // $agenda_detail = Agenda_detail::where(DB::raw("CONCAT(date,' ',time) + 1"), '<', $date_now)->pluck('id');
+        // return $date_now;
+        // $created_at_date = $agenda_detail->created_at->format('Y-m-d');
+        // $created_at_time = $agenda_detail->created_at->format('H:i:s');
+  
+  
+        $coach = Coach::where('user_id', auth()->user()->id)->first();
+        $total_clients = $coach->clients->count();
+  
+        $plan_id = $coach->plan->pluck('id');
+        $agenda_id = Agenda::whereIn('plan_id', $plan_id)->pluck('id');
+  
+        $agenda_detail = Agenda_detail::whereIn('agenda_id', $agenda_id)->get();
+        $total_hours = $agenda_detail->where('status', 'finished')->sum('duration') / 60;
+        $total_sessions = $agenda_detail->where('status', '!=', 'canceled')->count();
+        $total_ratings = Feedback::whereIn('agenda_detail_id', $agenda_detail->pluck('id'))->where('from', 'coachee')->whereNotNull('rating')->avg('rating');
+  
+        $today_events = collect([]);
+  
+        $today = Carbon::now()->format('Y-m-d');
+  
+        foreach ($agenda_detail->where('date', $today) as $session) {
+          $client = null;
+          $agenda = $session->agenda;
+          $plan = $agenda->plan;
+          if ($plan->client_id == null) {
+            $client = $plan->group_id;
+          } else {
+            $client = $plan->client->name;
+          }
+          $today_events->push([
+            'title'       => $session->session_name,
+            'start'       => Carbon::parse($session->date.' '.$session->time)->format('Y-m-d H:i:s'),
+            'end'         => Carbon::parse($session->date.' '.$session->time)->addMinutes($session->duration)->format('Y-m-d H:i:s'),
+            'topic'       => $session->topic,
+            'type'        => 'coaching',
+            'coachee'     => $client,
+            'id'          => $session->id,
+            'url'         => route('agendas.show', $session->id),
+            'status'      => $session->status
+          ]);
+        }
+  
+        if (is_null($coach->category_id) && is_null($coach->skill_id) && is_null($coach->skills_description_title) && is_null($coach->skills_description_overview) && is_null($coach->education) && is_null($coach->employment) && is_null($coach->language) && is_null($coach->location)) {
+          $empty_profile = true;
+        } else {
+          $empty_profile = false;
+        }
+  
+        // return $total_sessions;
+  
+  
+        // $hours = Agenda::selectRaw('sum(agenda_details.duration)/60 as sum')
+        //     ->join('agenda_details', 'agenda_id', '=', 'agendas.id')
+        //     ->where([
+        //         ['agendas.owner_id', Auth::user()->id],
+        //         ['status', 'finished'],
+        //     ])->first();
+        // $session = Agenda::selectRaw('sum(session) as sum')->where('owner_id', Auth::user()->id)->first();
+  
+        // list upcoming
+        // if ($request->ajax()) {
+        //
+        //     $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.time', 'agenda_details.session_name')
+        //         ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
+        //         ->join('clients', 'clients.id', '=', 'agendas.client_id')
+        //         ->where('status', 'scheduled')
+        //         ->where('clients.owner_id', Auth::user()->id)
+        //         ->orderBy('date', 'asc')->orderBy('time', 'asc')
+        //         ->get();
+        //     return DataTables::of($data)
+        //         ->addIndexColumn()
+        //         ->make(true);
+        // }
+  
+        return view('home', compact('total_clients', 'total_hours', 'total_sessions', 'total_ratings', 'today_events', 'empty_profile'));
     } elseif (auth()->user()->hasRole('admin')) {
 
       $total_coach = User::role('coach')->count();
@@ -291,13 +375,13 @@ class HomeController extends Controller
       $total_participant = Client::whereIn('user_id', $user)->count();
 
       $coach = Coach::where('user_id', auth()->user()->id)->first();
-      // $coach = collect($coach);
+      $coach = collect($coach);
       if (is_null($coach->category_id) && is_null($coach->skill_id) && is_null($coach->skills_description_title) && is_null($coach->skills_description_overview) && is_null($coach->education) && is_null($coach->employment) && is_null($coach->language) && is_null($coach->location)) {
         $empty_profile = true;
       } else {
         $empty_profile = false;
       }
-      // return $empty_profile;
+      return $empty_profile;
       return view('home', compact('total_topic', 'total_participant', 'empty_profile'));
     }
   }

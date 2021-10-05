@@ -299,7 +299,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
-                      @role('coach')
+                      @role('coach|coachmentor')
                       <span>{{ $event['title'].' - '.$event['coachee'] }}</span><br>
                       @endrole
                       @role('coachee')
@@ -323,7 +323,7 @@
       <!-- /card -->
       @endrole
 
-      @role('coach|coachee')
+      @role('coach|coachee|coachmentor')
       <section id="card-demo-example">
         <div class="row match-height">
           <div class="container-fluid">
@@ -344,7 +344,7 @@
                 </div>
               </div>
 
-              @role('coach')
+              @role('coach|coachmentor')
                 @if ($empty_profile == true)
                 <div class="col-md-12">
                   <div class="card text-white bg-warning mb-3">
@@ -376,7 +376,7 @@
             </div>
           </div>
 
-          @role('coach')
+          @role('coach|coachmentor')
           <div class="col-md-3 col-lg-3">
             <a href="{{ route('agendas.index') }}">
               <div class="card">
@@ -745,7 +745,7 @@
             </div>
           </div>
 
-          @role('coach|coachee')
+          @role('coach|coachee|coachmentor')
           {{-- calendar --}}
           <div class="col-sm-8">
             <div class="card">
@@ -774,7 +774,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <img src="{{ url('assets/images/icons/trello.svg') }}" alt="">
-                      @role('coach')
+                      @role('coach|coachmentor')
                       <span>{{ $event['title'].' - '.$event['coachee'] }}</span>
                       @endrole
                       @role('coachee')
@@ -1006,7 +1006,7 @@
                   </div>
                 </div>
               </div>
-              @if ($empty_profile == true)
+              {{--@if ($empty_profile == true)
               <div class="col-md-12">
                 <div class="card text-white bg-warning mb-3">
                   <div class="card-body">
@@ -1016,7 +1016,7 @@
                   </div>
                 </div>
               </div>
-              @endif
+              @endif--}}
             </div>
           </div>
           {{-- <div class="col-md-4 col-lg-4">
