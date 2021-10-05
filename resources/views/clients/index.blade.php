@@ -453,6 +453,10 @@
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
                 aria-selected="false">Mentor</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile" role="tab"
+                aria-selected="false">Coach-mentors</a>
+            </li>
           </ul>
 
           <div class="tab-content">
@@ -889,6 +893,10 @@
                 aria-selected="true">Manager</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coach" aria-controls="profile" role="tab"
+                aria-selected="false">Coach</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
                 aria-selected="false">Coachee</a>
             </li>
@@ -897,8 +905,12 @@
                 aria-selected="false">Trainer</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
+                aria-selected="false">Mentors</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile" role="tab"
-                aria-selected="false">Coachmentors</a>
+                aria-selected="false">Coach-mentors</a>
             </li>
           </ul>
 
