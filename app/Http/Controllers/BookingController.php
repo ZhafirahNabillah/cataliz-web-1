@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Program;
+use App\Models\Batch;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Crypt;
@@ -91,6 +92,8 @@ class BookingController extends Controller
         $programs = Program::where('program_name', 'starco')
             ->orWhere('program_name', 'scmp')
             ->get();
+
+        $data = Batch::get();
 
         $characters = '0123456789';
         $pin = mt_rand(1000000, 9999999)
