@@ -453,6 +453,10 @@
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
                 aria-selected="false">Mentor</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile"
+                role="tab" aria-selected="false">Coach-mentors</a>
+            </li>
           </ul>
 
           <div class="tab-content">
@@ -649,7 +653,8 @@
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="roles" id="permission-check-manager" value="manager">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-manager"
+                    value="manager">
                   <label class="form-check-label" for="permission-check-manager">
                     Manager
                   </label>
@@ -885,8 +890,12 @@
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#manager" aria-controls="profile" role="tab"
-                aria-selected="true">Manager</a>
+              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#manager" aria-controls="profile"
+                role="tab" aria-selected="true">Manager</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coach" aria-controls="profile" role="tab"
+                aria-selected="false">Coach</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
@@ -897,8 +906,12 @@
                 aria-selected="false">Trainer</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile" role="tab"
-                aria-selected="false">Coachmentors</a>
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#mentor" aria-controls="profile" role="tab"
+                aria-selected="false">Mentors</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachmentors" aria-controls="profile"
+                role="tab" aria-selected="false">Coach-mentors</a>
             </li>
           </ul>
 
@@ -1067,7 +1080,8 @@
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="roles" id="permission-check-manager" value="manager">
+                  <input class="form-check-input" type="radio" name="roles" id="permission-check-manager"
+                    value="manager">
                   <label class="form-check-label" for="permission-check-manager">
                     Manager
                   </label>
@@ -1139,9 +1153,9 @@
       <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
       <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
       <script>
-        $(function() {
+        $(function () {
           //custom validation method for phone number
-          $.validator.addMethod("phoneNumber", function(value, element) {
+          $.validator.addMethod("phoneNumber", function (value, element) {
             return this.optional(element) || /^[1-9][0-9]/.test(value);
           }, 'Please enter a valid phone number.');
 
@@ -1185,7 +1199,7 @@
                 // Avatar image/badge, Name and post
                 targets: 1,
                 responsivePriority: 4,
-                render: function(data, type, full, meta) {
+                render: function (data, type, full, meta) {
                   var $user_img = full['avatar'],
                     $name = full['name'],
                     $post = full['company'];
@@ -1193,7 +1207,8 @@
                   if ($user_img) {
                     // For Avatar image
                     var $output =
-                      '<img src="' + assetPath + 'images/avatars/' + $user_img + '" alt="Avatar" width="32" height="32">';
+                      '<img src="' + assetPath + 'images/avatars/' + $user_img +
+                      '" alt="Avatar" width="32" height="32">';
                   } else {
                     // For Avatar badge
                     var stateNum = full['status'];
@@ -1228,7 +1243,7 @@
               },
               {
                 targets: 4,
-                render: function(data, type, full, meta) {
+                render: function (data, type, full, meta) {
                   var $phone = full['phone'],
                     $output = '<div class="d-flex justify-content-left align-items-center"> +62' + $phone +
                     '</div>';
@@ -1252,7 +1267,7 @@
                 'data-toggle': 'modal'
 
               },
-              init: function(api, node, config) {
+              init: function (api, node, config) {
                 $(node).removeClass('btn-secondary');
               }
             }],
@@ -1260,16 +1275,17 @@
             responsive: {
               details: {
                 display: $.fn.dataTable.Responsive.display.modal({
-                  header: function(row) {
+                  header: function (row) {
                     var data = row.data();
                     return 'Details of ' + data['name'];
                   }
                 }),
                 type: 'column',
-                renderer: function(api, rowIdx, columns) {
-                  var data = $.map(columns, function(col, i) {
+                renderer: function (api, rowIdx, columns) {
+                  var data = $.map(columns, function (col, i) {
                     console.log(columns);
-                    return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
+                    return col.title !==
+                      '' // ? Do not show row in modal popup if title is blank (for check box)
                       ?
                       '<tr data-dt-row="' +
                       col.rowIndex +
@@ -1358,7 +1374,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1401,7 +1417,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1444,7 +1460,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1487,7 +1503,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1571,7 +1587,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1619,7 +1635,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1666,7 +1682,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1709,7 +1725,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1752,7 +1768,7 @@
               {
                 data: 'phone',
                 name: 'phone',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                   return '+62' + data;
                 }
               },
@@ -1776,7 +1792,7 @@
           });
 
           // create new user on admin page
-          $('body').on('click', '.createNewUser', function() {
+          $('body').on('click', '.createNewUser', function () {
             console.log('tes');
             $('#action_type').val("create-user");
             $('#user_id').val('');
@@ -1797,7 +1813,7 @@
           });
 
           //Show program option when role coachee is selected
-          $('input[name="roles"]').click(function(){
+          $('input[name="roles"]').click(function () {
             var selectedRole = $(this).val();
 
             if (selectedRole == 'coachee') {
@@ -1812,11 +1828,11 @@
           });
 
           // edit user in admin page
-          $('body').on('click', '.editUser', function() {
+          $('body').on('click', '.editUser', function () {
             var user_id = $(this).data('id');
             $('#program-field-wrapper').hide();
             $('#batch-field-wrapper').hide();
-            $.get("" + '/users/' + user_id + '/edit', function(data) {
+            $.get("" + '/users/' + user_id + '/edit', function (data) {
               $('#modalHeading').html("Edit User");
               $('#action_type').val("edit-user");
               $('#createUserForm').trigger("reset");
@@ -1839,7 +1855,7 @@
                 $('#program-' + data.program.id).prop('checked', true).trigger('change')
 
                 //need to be resctrutured
-                setTimeout(function(){
+                setTimeout(function () {
                   $("#batch").val(data.batch.id).change();
                 }, 500);
               }
@@ -1852,7 +1868,7 @@
             })
           });
 
-          $('body').on('click', '.deleteUser', function() {
+          $('body').on('click', '.deleteUser', function () {
             Swal.fire({
               title: "Are you sure?",
               text: "The user you choose will be deleted!",
@@ -1864,31 +1880,32 @@
             }).then((result) => {
               if (result.isConfirmed) {
                 var user_id = $(this).data('id');
-                  $.ajax({
-                    type: "DELETE",
-                    url: "" + '/users/' + user_id,
-                    success: function(data) {
-                      Swal.fire({
-                        icon: 'success',
-                        title: 'Account deleted successfully!',
-                      });
-                      table_coach.draw();
-                      table_admin.draw();
-                      table_coachee.draw();
-                      table_trainer.draw();
-                      table_mentor.draw();                    },
-                    error: function(data) {
-                      console.log('Error:', data);
-                    }
-                  });
+                $.ajax({
+                  type: "DELETE",
+                  url: "" + '/users/' + user_id,
+                  success: function (data) {
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'Account deleted successfully!',
+                    });
+                    table_coach.draw();
+                    table_admin.draw();
+                    table_coachee.draw();
+                    table_trainer.draw();
+                    table_mentor.draw();
+                  },
+                  error: function (data) {
+                    console.log('Error:', data);
+                  }
+                });
               }
             })
           });
 
           // show detail coach on coachee page
-          $('body').on('click', '.detailCoach', function() {
+          $('body').on('click', '.detailCoach', function () {
             var coach_id = $(this).data('id');
-            $.get("" + '/users/' + coach_id + '/edit', function(data) {
+            $.get("" + '/users/' + coach_id + '/edit', function (data) {
               console.log(data);
               $('#modalHeading').html("Detail Coach");
               $('#saveBtn').val("edit-user");
@@ -1902,9 +1919,9 @@
             })
           });
 
-          $('body').on('click', '.detailTrainer', function() {
+          $('body').on('click', '.detailTrainer', function () {
             var trainer_id = $(this).data('id');
-            $.get("" + '/users/' + trainer_id + '/edit', function(data) {
+            $.get("" + '/users/' + trainer_id + '/edit', function (data) {
               console.log(data);
               $('#modal-trainer-detail').modal('show');
               $('#modalHeadingTrainer').html("Detail Trainer");
@@ -1915,9 +1932,9 @@
             })
           });
 
-          $('body').on('click', '.detailMentor', function() {
+          $('body').on('click', '.detailMentor', function () {
             var mentor_id = $(this).data('id');
-            $.get("" + '/users/' + mentor_id + '/edit', function(data) {
+            $.get("" + '/users/' + mentor_id + '/edit', function (data) {
               console.log(data);
               $('#modal-mentor-detail').modal('show');
               $('#modalHeadingMentor').html("Detail Mentor");
@@ -1928,9 +1945,9 @@
             })
           });
 
-          $('body').on('click', '.detailCoachee', function() {
+          $('body').on('click', '.detailCoachee', function () {
             var coachee_id = $(this).data('id');
-            $.get("" + '/users/' + coachee_id + '/edit', function(data) {
+            $.get("" + '/users/' + coachee_id + '/edit', function (data) {
               console.log(data);
               $('#modal-coachee-detail').modal('show');
               $('#modalHeadingCoachee').html("Detail Coachee");
@@ -1940,26 +1957,28 @@
             })
           });
 
-          $('.program-choice').change(function() {
+          $('.program-choice').change(function () {
             $('#batch').empty();
             $('#batch').append('<option disabled selected hidden>Select batch</option>');
             var program_id = $(this).data('id')
-            $.get("/"+ program_id +"/get_batch" , function( data ) {
+            $.get("/" + program_id + "/get_batch", function (data) {
               if (data.length == 0) {
                 $('#batch').append('<option disabled>No batch available</option>');
               } else {
                 for (var i = 0; i < data.length; i++) {
                   if (data[i].status == 0) {
-                    $('#batch').append('<option value="'+ data[i].id +'" disabled>Batch '+ data[i].batch_number +' (closed)</option>');
+                    $('#batch').append('<option value="' + data[i].id + '" disabled>Batch ' + data[i]
+                      .batch_number + ' (closed)</option>');
                   } else {
-                    $('#batch').append('<option value="'+ data[i].id +'">Batch '+ data[i].batch_number +'</option>');
+                    $('#batch').append('<option value="' + data[i].id + '">Batch ' + data[i].batch_number +
+                      '</option>');
                   }
                 }
               }
             });
           })
 
-          $("#saveBtn").click(function(e) {
+          $("#saveBtn").click(function (e) {
             e.preventDefault();
             $('#saveBtn').html('Sending..');
             $('#name-error').empty();
@@ -1977,7 +1996,7 @@
               url: "{{ route('users.store') }}",
               type: "POST",
               dataType: 'json',
-              success: function(data) {
+              success: function (data) {
 
                 $('#createUserForm').trigger("reset");
                 $('#saveBtn').html('Submit');
@@ -1999,27 +2018,33 @@
                 table_trainer.draw();
                 table_mentor.draw();
               },
-              error: function(reject) {
+              error: function (reject) {
                 $('#saveBtn').html('Submit');
                 if (reject.status === 422) {
                   var errors = JSON.parse(reject.responseText);
                   if (errors.name) {
-                    $('#name-error').html('<strong class="text-danger">' + errors.name[0] + '</strong>'); // and so on
+                    $('#name-error').html('<strong class="text-danger">' + errors.name[0] +
+                    '</strong>'); // and so on
                   }
                   if (errors.phone) {
-                    $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] + '</strong>'); // and so on
+                    $('#phone-error').html('<strong class="text-danger">' + errors.phone[0] +
+                    '</strong>'); // and so on
                   }
                   if (errors.email) {
-                    $('#email-error').html('<strong class="text-danger">' + errors.email[0] + '</strong>'); // and so on
+                    $('#email-error').html('<strong class="text-danger">' + errors.email[0] +
+                    '</strong>'); // and so on
                   }
                   if (errors.roles) {
-                    $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] + '</strong>'); // and so on
+                    $('#roles-error').html('<strong class="text-danger">' + errors.roles[0] +
+                    '</strong>'); // and so on
                   }
                   if (errors.program) {
-                    $('#program-error').html('<strong class="text-danger">' + errors.program[0] + '</strong>'); // and so on
+                    $('#program-error').html('<strong class="text-danger">' + errors.program[0] +
+                      '</strong>'); // and so on
                   }
                   if (errors.batch) {
-                    $('#batch-error').html('<strong class="text-danger">' + errors.batch[0] + '</strong>'); // and so on
+                    $('#batch-error').html('<strong class="text-danger">' + errors.batch[0] +
+                    '</strong>'); // and so on
                   }
                 }
               }
@@ -2028,7 +2053,7 @@
           });
 
           // suspend user
-          $('body').on('click', '.suspendUser', function(e) {
+          $('body').on('click', '.suspendUser', function (e) {
             console.log('tes');
 
             let user_id = $(this).attr('data-id');
@@ -2052,14 +2077,14 @@
                   data: data,
                   type: "POST",
                   url: "{{ route('suspend_user') }}",
-                  success: function(data) {
+                  success: function (data) {
                     table_admin.draw();
                     table_coach.draw();
                     table_coachee.draw();
                     table_trainer.draw();
                     table_mentor.draw();
                   },
-                  error: function(data) {
+                  error: function (data) {
                     console.log('Error:', data);
                   }
                 });
@@ -2068,7 +2093,7 @@
           });
 
           // unsuspend user
-          $('body').on('click', '.unsuspendUser', function(e) {
+          $('body').on('click', '.unsuspendUser', function (e) {
             console.log('tes');
 
             let user_id = $(this).attr('data-id');
@@ -2092,14 +2117,14 @@
                   data: data,
                   type: "POST",
                   url: "{{ route('unsuspend_user') }}",
-                  success: function(data) {
+                  success: function (data) {
                     table_admin.draw();
                     table_coach.draw();
                     table_coachee.draw();
                     table_trainer.draw();
                     table_mentor.draw();
                   },
-                  error: function(data) {
+                  error: function (data) {
                     console.log('Error:', data);
                   }
                 });
@@ -2108,7 +2133,7 @@
           });
 
           // delete
-          $('body').on('click', '.deleteClient', function(e) {
+          $('body').on('click', '.deleteClient', function (e) {
 
             var Client_id = $(this).data("id");
             if (confirm("Are You sure want to delete !")) {
@@ -2116,10 +2141,10 @@
               $.ajax({
                 type: "DELETE",
                 url: "" + '/clients/' + Client_id,
-                success: function(data) {
+                success: function (data) {
                   table.draw();
                 },
-                error: function(data) {
+                error: function (data) {
                   console.log('Error:', data);
                 }
               });
@@ -2129,19 +2154,19 @@
           });
 
           // popover
-          $(function() {
+          $(function () {
             $('[data-toggle="popover"]').popover({
               html: true,
               trigger: 'hover',
               placement: 'top',
-              content: function() {
+              content: function () {
                 return '<img src="' + $(this).data('img') + '" />';
               }
             })
           })
 
           // modal detail
-          $('body').on('click', '#detailTrainer', function() {
+          $('body').on('click', '#detailTrainer', function () {
             $('#modalHeading').html("Edit Client");
             $('#modals-slide-in').modal('show');
           })
