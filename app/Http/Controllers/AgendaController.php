@@ -78,6 +78,12 @@ class AgendaController extends Controller
       $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
       $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
       $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
+    }  elseif (auth()->user()->hasRole('coachmentor')) {
+      $total_unscheduled_sessions = Agenda_detail::where('status', 'unschedule')->get()->count();
+      $total_scheduled_sessions = Agenda_detail::where('status', 'scheduled')->get()->count();
+      $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
+      $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
+      $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
     }
 
     
