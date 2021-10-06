@@ -43,10 +43,6 @@ class Booking extends Model
         return $this->attributes['book_demo'] = json_decode($value);
     }
 
-    public function programs()
-    {
-        return $this->belongsTo('App\Models\Program', 'program_id', 'id');
-    }
     public function batchs()
     {
         return $this->belongsTo('App\Models\Batch', 'batch_id', 'id');

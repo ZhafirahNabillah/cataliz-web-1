@@ -187,10 +187,10 @@
                             <div class="form-group">
                                 <label for="program">Program</label><br>
                                 @foreach($data as $dataProgram)
-                                <input type="radio" name="batch_id" value="{{$dataProgram->id}}"> {{strtoupper($dataProgram->program_name)}}
+                                <input class="@error('batch_id') is-invalid @enderror" type="radio" name="batch_id" value="{{$dataProgram->id}}"> {{strtoupper($dataProgram->program->program_name)}}
                                 (Batch {{$dataProgram->batch_number}}) <br>
                                 @endforeach
-                                @error('progam_id')
+                                @error('batch_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -220,9 +220,9 @@
 
                             <div class="form-group">
                                 <label for="book_demo">Book Demo</label><br>
-                                <input type="checkbox" name="book_demo[]" value="coaching" id="coaching"> COACHING <br>
-                                <input type="checkbox" name="book_demo[]" value="training" id="training"> TRAINING <br>
-                                <input type="checkbox" name="book_demo[]" value="mentoring" id="mentoring"> MENTORING <br>
+                                <input class="@error('book_demo') is-invalid @enderror" type="checkbox" name="book_demo[]" value="coaching" id="coaching"> COACHING <br>
+                                <input class="@error('book_demo') is-invalid @enderror" type="checkbox" name="book_demo[]" value="training" id="training"> TRAINING <br>
+                                <input class="@error('book_demo') is-invalid @enderror" type="checkbox" name="book_demo[]" value="mentoring" id="mentoring"> MENTORING <br>
                                 @error('book_demo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

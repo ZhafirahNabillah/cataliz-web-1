@@ -90,11 +90,16 @@ class BookingController extends Controller
      */
     public function create()
     {
-        $data = DB::table('batches')
-            ->join('programs', 'batches.program_id', '=', 'programs.id')
-            ->where('batches.status', '=', '1')
-            ->whereIn('programs.program_name', ['starco', 'scmp'])
+        // $data = DB::table('batches')
+        //     ->join('programs', 'batches.program_id', '=', 'programs.id')
+        //     ->where('batches.status', '=', '1')
+        //     ->whereIn('programs.program_name', ['starco', 'scmp'])
+        //     ->get();
+
+        $data = Batch::with('program')
+            ->where(['batches.status' => '1'], ['program.program_name' => 'starco'], ['program.program_name' => 'scmp'])
             ->get();
+        // dd($data);
 
         $characters = '0123456789';
         $pin = mt_rand(1000000, 9999999)

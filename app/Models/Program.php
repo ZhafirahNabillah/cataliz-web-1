@@ -31,8 +31,4 @@ class Program extends Model
     {
         return $this->hasMany('App\Models\Batch');
     }
-    public function bookings()
-    {
-        return $this->hasMany('App\Models\Booking');
-    }
 }
