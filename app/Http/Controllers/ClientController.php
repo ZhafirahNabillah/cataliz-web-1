@@ -44,7 +44,7 @@ class ClientController extends Controller
       //get data of table
       if (auth()->user()->hasRole('admin')) {
         $data = Client::with('user')->get();
-      } elseif (auth()->user()->hasRole('coach')) {
+      } elseif (auth()->user()->hasRole('coach|coachmentor')) {
 
         $coach = Coach::where('user_id', auth()->user()->id)->first();
         $data = $coach->clients;
