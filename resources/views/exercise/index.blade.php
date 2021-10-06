@@ -134,7 +134,7 @@
     </div>
     @endrole
 
-    @role('coach|admin|coachee|manager')
+    @role('coach|admin|coachee|manager|coachmentor')
     <div class="card">
       <div class="card-body">
         <div class="content-body">
