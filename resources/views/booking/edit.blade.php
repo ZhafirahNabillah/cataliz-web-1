@@ -132,7 +132,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="time">Time</label>
-                                <input class="form-control" type="text" name="time" value="" placeholder="">
+                                <input class="form-control" type="time" name="time" value="{{$data->time}}" placeholder="">
                             </div>
                             <div class="form-group">
                                 <label class="form-label" for="goals">Goals</label>

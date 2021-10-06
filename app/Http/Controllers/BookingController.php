@@ -316,6 +316,7 @@ class BookingController extends Controller
             'link' => 'required',
             'goals' => 'required',
             'book_date' => 'required',
+            'time' => 'required',
         ]);
 
         if ($request->status == 'reservation') {
@@ -329,6 +330,7 @@ class BookingController extends Controller
                 'link' => $request->link,
                 'goals' => $request->goals,
                 'book_date' => $request->book_date,
+                'time' => $request->time,
                 'status' => 'reservation',
             ]);
 
@@ -361,6 +363,7 @@ class BookingController extends Controller
                 'link' => $request->link,
                 'goals' => $request->goals,
                 'book_date' => $request->book_date,
+                'time' => $request->time,
                 'status' => 'pending',
             ]);
         }

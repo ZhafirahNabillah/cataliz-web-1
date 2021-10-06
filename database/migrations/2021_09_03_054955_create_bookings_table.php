@@ -34,6 +34,7 @@ class CreateBookingsTable extends Migration
             $table->enum('bank', ['bca', 'bri', 'mandiri', 'bni'])->nullable();
             $table->string('payment')->nullable();
             $table->string('link')->nullable();
+            $table->time('time')->nullable();
             $table->timestamps();
         });
     }

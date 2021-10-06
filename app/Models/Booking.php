@@ -30,6 +30,7 @@ class Booking extends Model
         'bank',
         'payment',
         'link',
+        'time',
     ];
 
     public function setBookDemoAttribute($value)
