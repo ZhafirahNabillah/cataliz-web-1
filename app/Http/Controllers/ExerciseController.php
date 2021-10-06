@@ -117,6 +117,8 @@ class ExerciseController extends Controller
         $exam = Exam::whereIn('topic_id', $topics_id)->get();
       } elseif (auth()->user()->hasRole('coach')) {
         $exam = Exam::all();
+      } elseif (auth()->user()->hasRole('coachmentor')) {
+        $exam = Exam::all();
       }
 
       if ($request->ajax()) {
