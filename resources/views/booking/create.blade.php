@@ -146,7 +146,7 @@
 
                             <div class="form-group">
                                 <label for="instance">Institution</label>
-                                <input class="form-control @error('instance') is-invalid @enderror" type="text" name="instance" value="{{ old('instance') }}" placeholder="Input your instance...">
+                                <input class="form-control @error('instance') is-invalid @enderror" type="text" name="instance" value="{{ old('instance') }}" placeholder="Input your institution...">
                                 @error('instance')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -156,7 +156,7 @@
 
                             <div class="form-group">
                                 <label for="profession">Occupation</label>
-                                <input class="form-control @error('profession') is-invalid @enderror" type="text" name="profession" value="{{ old('profession') }}" placeholder="Input your profession...">
+                                <input class="form-control @error('profession') is-invalid @enderror" type="text" name="profession" value="{{ old('profession') }}" placeholder="Input your occupation...">
                                 @error('profession')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

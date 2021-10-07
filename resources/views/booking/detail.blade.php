@@ -66,12 +66,12 @@
                                         <h6> Email </h6>
                                         <h6> {{$data->email}} </h6>
 
-                                        <h6 class=mt-2> Instance </h6>
+                                        <h6 class=mt-2> Institution</h6>
                                         <h6> {{$data->instance}} </h6>
                                     </div>
 
                                     <div class="col-sm-4 mt-2">
-                                        <h6> Profession </h6>
+                                        <h6> Occupation </h6>
                                         <h6> {{$data->profession}} </h6>
 
                                         <h6 class=mt-2> Address </h6>
