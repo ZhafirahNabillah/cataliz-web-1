@@ -96,8 +96,10 @@ class BookingController extends Controller
         //     ->whereIn('programs.program_name', ['starco', 'scmp'])
         //     ->get();
 
-        $data = Batch::with('program')
-            ->where(['batches.status' => '1'], ['program.program_name' => 'starco'], ['program.program_name' => 'scmp'])
+        $data = Batch::select('batches.id', 'batches.program_id', 'batches.batch_number', 'programs.id', 'programs.program_name')
+            ->join('programs', 'batches.program_id', '=', 'programs.id')
+            ->where('batches.status', '1')
+            ->whereIn('programs.program_name', ['starco', 'scmp'])
             ->get();
         // dd($data);
 

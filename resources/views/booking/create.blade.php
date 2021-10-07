@@ -187,8 +187,10 @@
                             <div class="form-group">
                                 <label for="program">Program</label><br>
                                 @foreach($data as $dataProgram)
-                                <input class="@error('batch_id') is-invalid @enderror" type="radio" name="batch_id" value="{{$dataProgram->id}}"> {{strtoupper($dataProgram->program->program_name)}}
+
+                                <input class="@error('batch_id') is-invalid @enderror" type="radio" name="batch_id" value="{{$dataProgram->id}}"> {{strtoupper($dataProgram->program_name)}}
                                 (Batch {{$dataProgram->batch_number}}) <br>
+
                                 @endforeach
                                 @error('batch_id')
                                 <span class="invalid-feedback" role="alert">
