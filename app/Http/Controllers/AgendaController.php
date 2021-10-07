@@ -48,7 +48,7 @@ class AgendaController extends Controller
       $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
       $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
       $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
-    } elseif (auth()->user()->hasRole('coach')) {
+    } elseif (auth()->user()->hasRole('coach|coachmentor')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
       $plans = $coach->plan->pluck('id');
 
@@ -78,8 +78,7 @@ class AgendaController extends Controller
       $total_rescheduled_sessions = Agenda_detail::where('status', 'rescheduled')->get()->count();
       $total_finished_sessions = Agenda_detail::where('status', 'finished')->get()->count();
       $total_canceled_sessions = Agenda_detail::where('status', 'canceled')->get()->count();
-    }
-
+    } 
     
     return view('agendas.index', compact('total_unscheduled_sessions', 'total_scheduled_sessions', 'total_rescheduled_sessions', 'total_canceled_sessions', 'total_finished_sessions'));
   }
@@ -103,7 +102,7 @@ class AgendaController extends Controller
         ->where('plans.group_id', null)
         ->latest()
         ->get();
-    } elseif (auth()->user()->hasRole('coach')) {
+    } elseif (auth()->user()->hasRole('coach|coachmentor')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
 
       $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
@@ -112,16 +111,6 @@ class AgendaController extends Controller
         ->join('clients', 'plans.client_id', '=', 'clients.id')
         ->where('plans.group_id', null)
         ->where('plans.owner_id', $coach->id)->latest()
-        ->get();
-    } elseif (auth()->user()->hasRole('coachmentor')) {
-      $coach = Coach::where('user_id', auth()->user()->id)->first();
-
-      $data = Agenda_detail::select('agenda_details.id', 'clients.name', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')
-        ->join('agendas', 'agendas.id', '=', 'agenda_details.agenda_id')
-        ->join('plans', 'plans.id', '=', 'agendas.plan_id')
-        ->join('clients', 'plans.client_id', '=', 'clients.id')
-        ->where('plans.group_id', null)
-        ->where('plans.owner_id', $coachmentor->id)->latest()
         ->get();
     } elseif (auth()->user()->hasRole('coachee')) {
       $client = Client::where('user_id', auth()->user()->id)->first();
@@ -210,7 +199,7 @@ class AgendaController extends Controller
         ->join('plans', 'plans.id', '=', 'agendas.plan_id')
         ->where('plans.client_id', null)
         ->get(); 
-    } elseif (auth()->user()->hasRole('coach')) {
+    } elseif (auth()->user()->hasRole('coach|coachmentor')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
 
       $data = Agenda_detail::select('agenda_details.id', 'plans.group_id as group', 'agenda_details.date', 'agenda_details.duration', 'agenda_details.session_name', 'agenda_details.status', 'agenda_details.created_at')

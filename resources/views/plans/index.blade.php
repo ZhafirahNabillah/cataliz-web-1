@@ -63,7 +63,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     @can('create-plan')
-                                    @role('coach')
+                                    @role('coach|coachmentor')
                                     <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
                                     @endrole
                                     @endcan
@@ -75,7 +75,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card">
-                                            @hasanyrole('coach|admin|manager')
+                                            @hasanyrole('coach|admin|manager|coachmentor')
                                             <table class="datatables-basic table-striped table plan-datatable-individual">
                                                 <thead>
                                                     <tr>
@@ -134,7 +134,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     @can('create-plan')
-                                    @role('coach')
+                                    @role('coach|coachmentor')
                                     <a href={{ route('plans.create')}} class="create-new btn btn-primary">Add New</a>
                                     @endrole
                                     @endcan
@@ -146,7 +146,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="card">
-                                            @hasanyrole('coach|admin|manager')
+                                            @hasanyrole('coach|admin|manager|coachmentor')
                                             <table class="datatables-basic table-striped table plan-datatable-group">
                                                 <thead>
                                                     <tr>
@@ -217,7 +217,7 @@
                     }
                 });
 
-                @role('coach|admin|manager')
+                @role('coach|admin|manager|coachmentor')
                 var table_plans_individual = $('.plan-datatable-individual').DataTable({
                     processing: true,
                     serverSide: true,

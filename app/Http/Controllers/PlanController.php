@@ -37,7 +37,7 @@ class PlanController extends Controller
     if ($request->ajax()) {
       if (auth()->user()->hasRole('manager|admin')) {
         $data = Plan::with('client')->where('group_id', null)->latest()->get();
-      } elseif (auth()->user()->hasRole('coach')) {
+      } elseif (auth()->user()->hasRole('coach|coachmentor')) {
         $coach = Coach::where('user_id', auth()->user()->id)->first();
         $data = Plan::with('client')->where('owner_id', $coach->id)->where('group_id', null)->latest()->get();
       } elseif (auth()->user()->hasRole('coachee')) {
