@@ -382,7 +382,7 @@ class PlanController extends Controller
   {
     if (auth()->user()->hasRole('admin|manager')) {
       $data = Plan::where('client_id', null)->latest()->get();
-    } elseif (auth()->user()->hasRole('coach')) {
+    } elseif (auth()->user()->hasRole('coach|coachmentor')) {
       $coach = Coach::where('user_id', auth()->user()->id)->first();
       $data = Plan::where('owner_id', $coach->id)->where('client_id', null)->latest()->get();
     } elseif (auth()->user()->hasRole('coachee')) {

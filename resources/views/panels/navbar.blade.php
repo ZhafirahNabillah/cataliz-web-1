@@ -230,6 +230,9 @@
                     @role('manager')
                     <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">Manager</span></div>
                     @endrole
+                    @role('coachmentor')
+                    <div class="user-nav d-sm-flex d-none"><span class="user-name font-weight-bolder">{{Auth::user()->name}}</span><span class="user-status">CoachMentor</span></div>
+                    @endrole
 
                     <span class="avatar bg-light-secondary avatar-lg">
                         <!--
