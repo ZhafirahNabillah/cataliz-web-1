@@ -96,7 +96,7 @@ class BookingController extends Controller
         //     ->whereIn('programs.program_name', ['starco', 'scmp'])
         //     ->get();
 
-        $data = Batch::select('batches.id', 'batches.program_id', 'batches.batch_number', 'programs.id', 'programs.program_name')
+        $data = Batch::select('batches.id', 'batches.batch_number', 'programs.program_name')
             ->join('programs', 'batches.program_id', '=', 'programs.id')
             ->where('batches.status', '1')
             ->whereIn('programs.program_name', ['starco', 'scmp'])
@@ -346,12 +346,13 @@ class BookingController extends Controller
                 'name' => $bookingData->name,
                 'whatsapp_number' => $bookingData->whatsapp_number,
                 'email' => $bookingData->email,
-                'program' => $request->program,
+                'program' => $bookingData->batchs->program->program_name,
                 'session_coaching' => $bookingData->session_coaching,
                 'session_training' => $bookingData->session_training,
                 'session_mentoring' => $bookingData->session_mentoring,
                 'book_date' => $bookingData->book_date,
                 'link' => $bookingData->link,
+                'time' => $bookingData->time,
             );
 
             $email = $bookingData->email;

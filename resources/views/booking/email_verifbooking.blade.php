@@ -220,6 +220,9 @@
             <tr>
               <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Date : {{$book_date}}</td>
             </tr>
+            <tr>
+              <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Time : {{$time}}</td>
+            </tr>
             <!-- <tr>
               <td align="left" style="font-family:'Open Sans', Arial, sans-serif; font-size:15px; font-weight:bold; color:black; padding-left:30px;">Time :</td>
             </tr> -->
