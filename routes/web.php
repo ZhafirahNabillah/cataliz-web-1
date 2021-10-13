@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\RegisterElearningController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
@@ -64,6 +65,9 @@ Route::get('/home', function () {
 
 //Auth Routes
 Auth::routes();
+
+//Register Elearning Controller
+Route::get('/registerelearning', [RegisterElearningController::class, 'index'])->name('index');
 
 //Register Controller
 Route::get('/register', [RegisterController::class, 'show_form_register'])->name('show_register');
