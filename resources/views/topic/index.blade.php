@@ -117,6 +117,10 @@
             name: 'topic'
           },
           {
+            data: 'topic',
+            name: 'topic'
+          },
+          {
             data: 'category.category',
             name: 'category.category'
           },

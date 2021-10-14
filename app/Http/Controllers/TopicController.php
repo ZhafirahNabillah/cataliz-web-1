@@ -60,7 +60,7 @@ class TopicController extends Controller
             $edit_btn = '<a href="' . route('topic.edit', $row->id) . '" id="editBtn" class="btn-sm btn-primary">Edit</a>';
           } else {
             $edit_btn = null;
-          }
+          };
 
           //add detail and whatsapp button if user have permission
           if (auth()->user()->can('detail-topic')) {
@@ -71,7 +71,7 @@ class TopicController extends Controller
           } else {
             $detail_topic_btn = null;
             // $detail_participant_btn = null;
-          }
+          };
 
           //add delete button if user have permission
           if (auth()->user()->can('delete-topic')) {
@@ -79,7 +79,7 @@ class TopicController extends Controller
             $delete_btn = '<a href="javascript:;" class="btn-sm btn-danger deleteTopic" data-id="' . $row->id . '">Delete</a>';
           } else {
             $delete_btn = null;
-          }
+          };
 
           //final dropdown button that shows on view
           // $actionBtn = '<div class="d-inline-flex"><a class="pr-1 dropdown-toggle hide-arrow text-primary" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></a>
@@ -90,7 +90,7 @@ class TopicController extends Controller
           $actionBtn = $detail_topic_btn . ' ' . $edit_btn . ' ' . $delete_btn;
           return $actionBtn;
         })
-        ->rawColumns(['action', 'participant', 'category', 'sub_topic'])
+        ->rawColumns(['topic','action', 'participant', 'category', 'sub_topic'])
         ->make(true);
     }
 

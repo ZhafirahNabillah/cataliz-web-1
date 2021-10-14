@@ -362,8 +362,7 @@ class DocumentationController extends Controller
         'category'    => $request->category,
         'description' => $request->description,
         'role'        => $request->role
-      ]
-    );
+        ]);
     // $documentation = new Documentation;
     // $documentation->title = $request->title;
     // $documentation->category = $request->category;

@@ -78,9 +78,11 @@ class User extends Authenticatable
         foreach ($words as $w) {
             $initials .= $w[0];
         }
-        if (count($words) > 1) {
-            return strtoupper(substr($words[0], 0, 1) . substr(end($words), 0, 1));
-        } else {
+        if (count($words) > 2) {
+            return strtoupper(substr($words[0], 0, 1). substr($words[1], 0, 1). substr(end($words), 0, 1));
+        }elseif (count($words) > 1) {
+            return strtoupper(substr($words[0], 0, 1). substr(end($words), 0, 1));
+        }else {
             return strtoupper(substr($words[0], 0, 1));
         }
     }
