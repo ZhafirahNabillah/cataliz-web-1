@@ -174,6 +174,26 @@
                         data-i18n="Email">Result</span></a>
             </li>
             @endcan
+
+            @role('adminLMS')
+            <li class="navigation-header"><span><b>Main Menu</b></span><i class="float-right mr-2 mb-2"></i>
+            </li>
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href=""><i
+                        data-feather="check-square"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Program</span></a>
+            </li>
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href=""><i
+                        data-feather="check-square"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Our Program</span></a>
+            </li>
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href=""><i
+                        data-feather="check-square"></i><span class="menu-title text-truncate"
+                        data-i18n="Todo">Help Center</span></a>
+            </li>
+            @endrole
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>
