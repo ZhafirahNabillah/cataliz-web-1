@@ -146,7 +146,7 @@ class UserSeeder extends Seeder
       'created_at'     =>  date('Y-m-d H:1:s')
     ]);
 
-    //create manager seeder
+    //create coachmentor seeder
     $coachmentor = User::create([
       'name'        => 'User Coach Mentor',
       'phone'       => '81234567890',
@@ -162,6 +162,25 @@ class UserSeeder extends Seeder
       'description'   => 'This Seeder has been created data Coach Mentor',
       'causer_type'   => 'App\Models\User',
       'causer_id'     =>  $coachmentor->id,
+      'created_at'     =>  date('Y-m-d H:1:s')
+    ]);
+
+    //create adminLMS seeder
+    $adminLMS = User::create([
+      'name'        => 'User adminLMS',
+      'phone'       => '81234567890',
+      'email'       => 'adminLMS@cataliz.id',
+      'password'    => bcrypt('adminLMS123'),
+      'is_verified' => 1
+    ]);
+
+    $adminLMS->assignRole('adminLMS');
+
+    $activity_adminLMS = Activity::create([
+      'log_name'      => 'User Seeder',
+      'description'   => 'This Seeder has been created data adminLMS',
+      'causer_type'   => 'App\Models\User',
+      'causer_id'     =>  $adminLMS->id,
       'created_at'     =>  date('Y-m-d H:1:s')
     ]);
   }
