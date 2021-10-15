@@ -152,7 +152,52 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                <div id='calendar'></div>
+                            <div class="d-flex flex-sm-row flex-column p-1">
+                              <div class="col-sm-5">
+                                <div class="card">
+                                  <div class="card-body">
+                                    <div id='calendar'>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div class="col-sm-7">
+                                <div id='table'>
+                                <table class="table">
+                                  <thead class="thead-dark">
+                                    <tr>
+                                      <th scope="col">No</th>
+                                      <th scope="col">First</th>
+                                      <th scope="col">Last</th>
+                                      <th scope="col">Handle</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">1</th>
+                                      <td>Mark</td>
+                                      <td>Otto</td>
+                                      <td>@mdo</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">2</th>
+                                      <td>Jacob</td>
+                                      <td>Thornton</td>
+                                      <td>@fat</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">3</th>
+                                      <td>Larry</td>
+                                      <td>the Bird</td>
+                                      <td>@twitter</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                </div>
+                              </div>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -168,7 +213,8 @@
 @push('scripts')
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"> 
+
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
