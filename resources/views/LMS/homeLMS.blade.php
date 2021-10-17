@@ -154,13 +154,9 @@
                             <div class="card-body">
                             <div class="d-flex flex-sm-row flex-column p-1">
                               <div class="col-sm-5">
-                                <div class="card">
-                                  <div class="card-body">
-                                    <div id='calendar'>
-                                      
-                                    </div>
-                                  </div>
-                                </div>
+                                
+                                    <div id='calendar'></div>
+                                  
                               </div>
 
                               <div class="col-sm-7">
@@ -214,7 +210,6 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="//cdn.jsdelivr.net/npm/fullcalendar@5.7.0/main.min.js"></script>
 <script type="text/javascript"> 
-
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
 
@@ -329,7 +324,7 @@
                   <hr>`
             );
           }
-          if (data.length <script 1) {
+          if (data.length < 1) {
             $('#list_event_wrapper').append('<span><i>No Event Available</i></span>');
           }
           // $('.trello_icons').load();
