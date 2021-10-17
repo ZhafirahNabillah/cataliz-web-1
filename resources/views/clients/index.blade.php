@@ -717,6 +717,128 @@
       <!-- End Modal -->
       @endrole
 
+      @role('adminLMS')
+      <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
+      <div class="card">
+        <div class="card-body">
+          <div class="tab-content">
+            <!-- Panel AdminLMS -->
+            <div class="tab-pane active" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
+              <!-- AdminLMS card -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card style=" border-radius: 15px;>
+                      <table class="datatables-basic table-striped table admin-datatable-trainer">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Handphone</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- /Panel adminLMS  -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Detail Trainer -->
+      <div class="modal modal-slide-in fade" id="modal-trainer-detail" role="dialog" aria-hidden="true">
+        <div class="modal-dialog sidebar-sm" role="document">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalHeadingTrainer"></h5>
+
+            </div>
+
+            <div class="modal-body flex-grow-1">
+              <div class="card-body">
+                <dl class="row">
+                  <dt class="col-sm-6">Full Name</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 name"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Phone</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 phone"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Email</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 email"></small>
+                </dl>
+                {{-- <dl class="row">
+                  <dt class="col-sm-6">Skills</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 skills"></small>
+                </dl> --}}
+              </div>
+              <!-- </Card modal>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+
+      <!-- Modal Detail Coachee -->
+      <div class="modal modal-slide-in fade" id="modal-coachee-detail" role="dialog" aria-hidden="true">
+        <div class="modal-dialog sidebar-sm" role="document">
+          <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalHeadingCoachee"></h5>
+
+            </div>
+
+            <div class="modal-body flex-grow-1">
+              <div class="card-body">
+                <dl class="row">
+                  <dt class="col-sm-6">Full Name</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 name"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Phone</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 phone"></small>
+                </dl>
+                <dl class="row">
+                  <dt class="col-sm-6">Email</dt>
+                </dl>
+                <dl class="row">
+                  <small class="col-sm-6 email"></small>
+                </dl>
+              </div>
+              <!-- </Card modal>-->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End Modal -->
+      @endrole
+
       @role('mentor')
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
       <div class="card">
