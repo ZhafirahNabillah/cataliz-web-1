@@ -721,10 +721,21 @@
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
       <div class="card">
         <div class="card-body">
+          <ul class="nav nav-tabs justify-content-center" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#trainer" aria-controls="coach"
+                role="tab" aria-selected="true">Admin LMS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab"
+                aria-selected="false">Coachee</a>
+            </li>
+          </ul>
+
           <div class="tab-content">
             <!-- Panel AdminLMS -->
             <div class="tab-pane active" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
-              <!-- AdminLMS card -->
+              <!-- AdminLMSlist card -->
               <section id="basic-datatable">
                 <div class="row">
                   <div class="col-12">
@@ -747,7 +758,37 @@
                 </div>
               </section>
             </div>
-            <!-- /Panel adminLMS  -->
+            <!-- AdminLMSlist admin -->
+
+
+            <!-- Panel Coachee -->
+            <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
+              <!-- Basic table -->
+              <section id="basic-datatable">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="card style=" border-radius: 15px;>
+                      <table class="datatables-basic table-striped table admin-datatable-coachee">
+                        <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Handphone</th>
+                            <th>Program</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!--/ Basic table -->
+            </div>
+            <!-- /Panel Coachee  -->
           </div>
         </div>
       </div>
