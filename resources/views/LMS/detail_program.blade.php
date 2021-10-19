@@ -60,9 +60,7 @@
                                             {{ session('status')}}
                                         </div>
                                         @endif
-                                        Welcome name, You are logged in! <a style="color: white;"
-                                            href="{{route('documentation')}}" target="_blank"><u>See
-                                                Documentations</u></a>
+                                        Welcome name, Lets Enjoy Your Course!
                                     </div>
                                 </div>
                             </div>
@@ -72,126 +70,50 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
+                                <ul class="nav nav-tabs justify-content-center" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">All Programs</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Packages</a>
+                                    </li>
+                                </ul>
                                 <div class="tab-content">
-                                    <div class="card-header">
-                                        <h6 class="card-title">Recently Accesed Program
-                                        </h6>
+                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:10px;">
+                                        <a style="font-family:roboto; font-weight:normal; font-size:35px; font-color:#656565;">STARCO (UI/UX DESIGN)</a><br>
+                                        <button type="button" class="btn btn-primary" disabled>Dashboard</button>
+                                        <button type="button" class="btn btn-secondary" disabled>My Course</button>
+                                        <button type="button" class="btn btn-primary" disabled>STARCO (UI/UX DESIGN)</button>
+                                    </div><br>
+                                    <div style="width:100%;height:75px;border:1px solid #818181;padding:10px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <center style="font-family:roboto; font-weight:normal; font-size:35px; font-color:#656565;">Topic 1</center>
+                                    </div><br>
+                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <img src="{{ url('/assets/images/pdf.png') }}" style="width:35px; height:35px;">
+                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
+                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
                                     </div>
-                                    <div class="row">
-                                        <div class="d-flex flex-sm-row flex-column p-2">
+                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <img src="{{ url('/assets/images/video.png') }}" style="width:35px; height:30px;">
+                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
+                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
+                                    </div><br>
 
-                                            <div class="col-sm-4">
-                                                <div class="card text-silver" style="background-color : #E4E4E4;">
-                                                    <img class="img-fluid"
-                                                        src=" {{asset('assets\images\abstract1.png')}}" alt=" ">
-                                                    <div class="card-body">
-                                                        <p class="card-text">SCMP</p>
-                                                        <p class="card-text">UI/UX Design</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="card text-silver" style="background-color : #E4E4E4;">
-                                                    <img class="img-fluid"
-                                                        src=" {{asset('assets\images\abstract2.png')}}" alt=" ">
-                                                    <div class="card-body">
-                                                        <p class="card-text">SCMP</p>
-                                                        <p class="card-text">Project Manager</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-sm-4">
-                                                <div class="card text-sliver" style="background-color : #E4E4E4;">
-                                                    <img class="img-fluid"
-                                                        src=" {{asset('assets\images\abstract3.png')}}" alt=" ">
-                                                    <div class="card-body">
-                                                        <p class="card-text">SCMP</p>
-                                                        <p class="card-text">Enterprise Arcitect</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div style="width:100%;height:75px;border:1px solid #818181;padding:10px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <center style="font-family:roboto; font-weight:normal; font-size:35px; font-color:#656565;">Topic 2</center>
+                                    </div><br>
+                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <img src="{{ url('/assets/images/pdf.png') }}" style="width:35px; height:35px;">
+                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
+                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
                                     </div>
-                                </div>
-
-                                <div class="card-header">
-                                    <h6 class="card-title">My Program
-                                    </h6>
-                                </div>
-                                <div class="row">
-                                    <div class="d-flex flex-sm-row flex-column p-2">
-
-                                        <div class="col-sm-4">
-                                            <div class="card text-silver" style="background-color : #E4E4E4;">
-                                                <img class="img-fluid" src=" {{asset('assets\images\abstract4.png')}}"
-                                                    alt=" ">
-                                                <div class="card-body">
-                                                    <p class="card-text">STARCO</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-4">
-                                            <div class="card text-silver" style="background-color : #E4E4E4;">
-                                                <img class="img-fluid" src=" {{asset('assets\images\abstract5.png')}}"
-                                                    alt=" ">
-                                                <div class="card-body">
-                                                    <p class="card-text">SCMP</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <img src="{{ url('/assets/images/video.png') }}" style="width:35px; height:30px;">
+                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
+                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
                                     </div>
+                                    
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                            <div class="d-flex flex-sm-row flex-column p-1">
-                              <div class="col-sm-5">
-                                <div id='calendar'></div>
-                              </div>
-
-                              <div class="col-sm-7">
-                                <h6 class="card-title">My Recently Activity</h6>
-                                <div id='table'>
-                                <table class="table">
-                                  <thead class="thead-dark">
-                                    <tr>
-                                      <th scope="col">No</th>
-                                      <th scope="col">Date</th>
-                                      <th scope="col">Time</th>
-                                      <th scope="col">Action</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <th scope="row">1</th>
-                                      <td>Mark</td>
-                                      <td>Otto</td>
-                                      <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">2</th>
-                                      <td>Jacob</td>
-                                      <td>Thornton</td>
-                                      <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                      <th scope="row">3</th>
-                                      <td>Larry</td>
-                                      <td>the Bird</td>
-                                      <td>@twitter</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
-                                </div>
-                              </div>
-                            </div>
                             </div>
                         </div>
                     </div>
