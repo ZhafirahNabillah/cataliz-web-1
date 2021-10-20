@@ -723,7 +723,7 @@
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
             <li class="nav-item">
-              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#trainer" aria-controls="coach"
+              <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#adminLMS" aria-controls="coach"
                 role="tab" aria-selected="true">Admin LMS</a>
             </li>
             <li class="nav-item">
@@ -734,13 +734,13 @@
 
           <div class="tab-content">
             <!-- Panel AdminLMS -->
-            <div class="tab-pane active" id="trainer" aria-labelledby="trainer-tab" role="tabpanel">
+            <div class="tab-pane active" id="adminLMS" aria-labelledby="adminLMS-tab" role="tabpanel">
               <!-- AdminLMSlist card -->
               <section id="basic-datatable">
                 <div class="row">
                   <div class="col-12">
                     <div class="card style=" border-radius: 15px;>
-                      <table class="datatables-basic table-striped table admin-datatable-trainer">
+                      <table class="datatables-basic table-striped table admin-datatable-adminLMS">
                         <thead>
                           <tr>
                             <th>No</th>
@@ -759,8 +759,6 @@
               </section>
             </div>
             <!-- AdminLMSlist admin -->
-
-
             <!-- Panel Coachee -->
             <div class="tab-pane" id="coachee" aria-labelledby="coachee-tab" role="tabpanel">
               <!-- Basic table -->
@@ -1607,6 +1605,49 @@
             processing: true,
             serverSide: true,
             ajax: "{{ route('show_trainer_list') }}",
+            columns: [{
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+              },
+              {
+                data: 'name',
+                name: 'name'
+              },
+              {
+                data: 'email',
+                name: 'email',
+                defaultContent: '<i>-</i>'
+              },
+              {
+                data: 'phone',
+                name: 'phone',
+                render: function (data, type, row) {
+                  return '+62' + data;
+                }
+              },
+              {
+                data: 'action',
+                name: 'action',
+                orderable: true,
+                searchable: true
+              },
+            ],
+            dom: '<"d-flex justify-content-between align-items-center mx-0 row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>t<"d-flex justify-content-between mx-0 row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+            language: {
+              paginate: {
+                // remove previous & next text from pagination
+                previous: '&nbsp;',
+                next: '&nbsp;'
+              },
+              search: "<i data-feather='search'></i>",
+              searchPlaceholder: "Search records"
+            },
+          });
+
+          var table_trainer = $('.admin-datatable-adminLMS').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('show_adminLMS_list') }}",
             columns: [{
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'

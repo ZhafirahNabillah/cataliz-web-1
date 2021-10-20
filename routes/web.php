@@ -211,6 +211,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/show_coachee_list', [ClientController::class, 'show_coachee_list'])->name('show_coachee_list');
 	Route::get('/show_admin_list', [ClientController::class, 'show_admin_list'])->name('show_admin_list');
 	Route::get('/show_trainer_list', [ClientController::class, 'show_trainer_list'])->name('show_trainer_list');
+	Route::get('/show_adminLMS_list', [ClientController::class, 'show_adminLMS_list'])->name('show_adminLMS_list');
 	Route::get('/show_mentor_list', [ClientController::class, 'show_mentor_list'])->name('show_mentor_list');
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}/show_upcoming', [ClientController::class, 'show_upcoming_list'])->name('clients.show_upcoming');

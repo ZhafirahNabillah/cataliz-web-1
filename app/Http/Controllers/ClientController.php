@@ -135,7 +135,7 @@ class ClientController extends Controller
           })
           ->rawColumns(['action', 'phone', 'email'])
           ->make(true);
-      }
+      } 
     }
     return view('clients.index', compact('programs'));
   }
@@ -301,8 +301,10 @@ class ClientController extends Controller
             }
             return $actionBtn;
           } elseif (auth()->user()->hasRole('adminLMS')) {
-            $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div></div>';
-            $actionBtn = $detail_btn;
+            $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="javascript:;" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
+
+            $actionBtn = $detail_btn . ' ' . $update_btn;
             return $actionBtn;
           }
           })->addColumn('phone', function ($row) {
@@ -313,6 +315,7 @@ class ClientController extends Controller
          ->rawColumns(['action'])
          ->make(true);
      }
+     return view('clients.index');
    }
 
   //method to show coachee list
@@ -344,6 +347,12 @@ class ClientController extends Controller
             $update_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div>';
 
             $actionBtn = $update_btn;
+            return $actionBtn;
+          }elseif (auth()->user()->hasRole('adminLMS')) {
+            $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="javascript:;" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
+
+            $actionBtn = $detail_btn . ' ' . $update_btn;
             return $actionBtn;
           }
         })
