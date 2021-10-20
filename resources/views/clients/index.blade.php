@@ -719,6 +719,10 @@
 
       @role('adminLMS')
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
+      <div class="">
+        <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
+          class="btn btn-primary data-submit mr-1 createNewUser">Add User</button>
+      </div>
       <div class="card">
         <div class="card-body">
           <ul class="nav nav-tabs justify-content-center" role="tablist">
