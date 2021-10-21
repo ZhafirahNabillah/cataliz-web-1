@@ -290,19 +290,10 @@ class ClientController extends Controller
        return DataTables::of($data)
          ->addIndexColumn()
          ->addColumn('action', function ($row) {
-           if (auth()->user()->hasRole('admin')) {
-           $detail_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-primary editUser" data-id = "' . $row->id . '">Update</a></div></div>';
-           $suspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-danger suspendUser" data-id = "' . $row->id . '">Suspend</a></div>';
-           $unsuspend_btn = '<div style="line-height: 35px;"><a href="javascript:;" class="btn-sm btn-success unsuspendUser" data-id = "' . $row->id . '">Unsuspend</a></div>';
-           if ($row->suspend_status == 1) {
-             $actionBtn = $detail_btn . ' ' . $suspend_btn;
-            } else {
-              $actionBtn = $detail_btn . ' ' . $unsuspend_btn;
-            }
-            return $actionBtn;
-          } elseif (auth()->user()->hasRole('adminLMS')) {
-            $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
-            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="javascript:;" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
+           
+          if (auth()->user()->hasRole('adminLMS')) {
+            $detail_btn = '<a href="' . route('LMS.edit', $row->id) . '" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="' . route('LMS.detail', $row->id) . '" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
 
             $actionBtn = $detail_btn . ' ' . $update_btn;
             return $actionBtn;
@@ -349,8 +340,8 @@ class ClientController extends Controller
             $actionBtn = $update_btn;
             return $actionBtn;
           }elseif (auth()->user()->hasRole('adminLMS')) {
-            $detail_btn = '<a href="javascript:;" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
-            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="javascript:;" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
+            $detail_btn = '<a href="' . route('LMS.edit', $row->id) . '" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="' . route('LMS.detail', $row->id) . '" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
 
             $actionBtn = $detail_btn . ' ' . $update_btn;
             return $actionBtn;
@@ -975,4 +966,16 @@ class ClientController extends Controller
     $user->forceDelete();
     return response()->json(['success' => 'All user are permanently deleted!']);
   }
+
+  public function editLMS($id)
+    {
+        $data = user::find($id);
+        return view('LMS.edit', compact('data'));
+    }
+
+    public function showLMS($id)
+    {
+        $data = user::find($id);
+        return view('LMS.detail', compact('data'));
+    }
 }

@@ -101,6 +101,7 @@ Route::middleware(['auth'])->group(function () {
 	//Route::resource('booking', BookingController::class);
 });
 
+
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {
 	Route::resource('roles', RoleController::class);
@@ -236,6 +237,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/restore_all_user', [ClientController::class, 'restore_all_user'])->name('restore_all_user');
 	Route::post('/delete_user_permanently/{id}', [ClientController::class, 'delete_user_permanently'])->name('delete_user_permanently');
 	Route::post('/delete_all_permanently', [ClientController::class, 'delete_all_permanently'])->name('delete_all_permanently');
+	Route::get('/{id}/LMS/edit', [ClientController::class, 'editLMS'])->name('LMS.edit');
+	Route::get('/{id}/LMS/detail', [ClientController::class, 'showLMS'])->name('LMS.detail');
 });
 
 //Topic Controller
