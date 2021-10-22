@@ -94,8 +94,9 @@ Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking
 Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin'])->name('booking.update_admin');
 
 //Program Admin LMS
-Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
-
+Route::middleware(['auth'])->group(function () {
+	Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
+});
 
 //Booking Controller Admin
 Route::middleware(['auth'])->group(function () {
