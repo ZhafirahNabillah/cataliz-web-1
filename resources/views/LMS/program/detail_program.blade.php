@@ -70,14 +70,14 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <ul class="nav nav-tabs justify-content-center" role="tablist">
+                                <!-- <ul class="nav nav-tabs justify-content-center" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="coach-tab" data-toggle="tab" href="#coach" aria-controls="coach" role="tab" aria-selected="true">All Programs</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#coachee" aria-controls="profile" role="tab" aria-selected="false">Packages</a>
                                     </li>
-                                </ul>
+                                </ul> -->
                                 <div class="tab-content">
                                     <div style="width:100%;height:120px;border:1px solid #818181;padding:10px;">
                                         <a style="font-family:roboto; font-weight:normal; font-size:35px; font-color:#656565;">STARCO (UI/UX DESIGN)</a><br>
