@@ -32,6 +32,7 @@ use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\BatchController;
 use App\Http\Controllers\LogActivityController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ProgramLmsController;
 
 
 /*
@@ -92,8 +93,12 @@ Route::put('/{id}/booking/update', [BookingController::class, 'update'])->name('
 Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking.verif');
 Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin'])->name('booking.update_admin');
 
-Route::middleware(['auth'])->group(function () {
+//Program Admin LMS
+Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
 
+
+//Booking Controller Admin
+Route::middleware(['auth'])->group(function () {
 	Route::get('/booking/index', [BookingController::class, 'index'])->name('booking.index');
 	Route::get('/{id}/booking/edit', [BookingController::class, 'edit'])->name('booking.edit');
 	Route::get('/{id}/booking/detail', [BookingController::class, 'show'])->name('booking.detail');
