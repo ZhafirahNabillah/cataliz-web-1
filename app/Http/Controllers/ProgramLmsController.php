@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Program_lms;
 
 class ProgramLmsController extends Controller
 {
@@ -14,7 +15,7 @@ class ProgramLmsController extends Controller
      */
     public function index()
     {
-        //
+        return view('LMS.ourProgramLMS');
     }
 
     /**
@@ -35,7 +36,14 @@ class ProgramLmsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'program_name' => 'required',
+
+        ]);
+
+        $input = $request->all();
+        $programLmsData = Program_lms::create($input);
+        return redirect('LMS/');
     }
 
     /**
@@ -57,7 +65,8 @@ class ProgramLmsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Program_lms::find($id);
+        return view('LMS.edit', compact('data'));
     }
 
     /**
@@ -69,7 +78,15 @@ class ProgramLmsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'program_name' => 'required',
+
+        ]);
+
+        Booking::where('id', $id)->update([
+            'program_name' => $request->program_name,
+        ]);
+        return redirect('LMS/edit');
     }
 
     /**
