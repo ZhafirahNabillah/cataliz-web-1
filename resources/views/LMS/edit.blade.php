@@ -87,9 +87,9 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Home</a>
                                 </li>
-                                <li class="breadcrumb-item"><a href="{{route('booking.index')}}">User Demo</a>
+                                <li class="breadcrumb-item"><a href="{{route('booking.index')}}">User </a>
                                 </li>
-                                <li class="breadcrumb-item active">Edit Book Demo
+                                <li class="breadcrumb-item active">Edit User
                                 </li>
                             </ol>
                         </div>
