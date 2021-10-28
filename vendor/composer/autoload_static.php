@@ -823,6 +823,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Client' => __DIR__ . '/../..' . '/app/Models/Client.php',
         'App\\Models\\Coach' => __DIR__ . '/../..' . '/app/Models/Coach.php',
         'App\\Models\\Coaching_note' => __DIR__ . '/../..' . '/app/Models/Coaching_note.php',
+        'App\\Models\\Course' => __DIR__ . '/../..' . '/app/Models/Course.php',
         'App\\Models\\Documentation' => __DIR__ . '/../..' . '/app/Models/Documentation.php',
         'App\\Models\\Documentation_details' => __DIR__ . '/../..' . '/app/Models/Documentation_details.php',
         'App\\Models\\Education' => __DIR__ . '/../..' . '/app/Models/Education.php',
