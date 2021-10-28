@@ -120,6 +120,7 @@ return array(
     'App\\Models\\Lesson' => $baseDir . '/app/Models/Lesson.php',
     'App\\Models\\Lesson_history' => $baseDir . '/app/Models/Lesson_history.php',
     'App\\Models\\Log_activity' => $baseDir . '/app/Models/Log_activity.php',
+    'App\\Models\\Package' => $baseDir . '/app/Models/Package.php',
     'App\\Models\\Plan' => $baseDir . '/app/Models/Plan.php',
     'App\\Models\\Program' => $baseDir . '/app/Models/Program.php',
     'App\\Models\\Program_lms' => $baseDir . '/app/Models/Program_lms.php',

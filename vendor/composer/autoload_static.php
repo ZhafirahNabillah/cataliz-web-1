@@ -835,6 +835,7 @@ class ComposerStaticInit44159d8eb05a4dd54d199e2ed1612850
         'App\\Models\\Lesson' => __DIR__ . '/../..' . '/app/Models/Lesson.php',
         'App\\Models\\Lesson_history' => __DIR__ . '/../..' . '/app/Models/Lesson_history.php',
         'App\\Models\\Log_activity' => __DIR__ . '/../..' . '/app/Models/Log_activity.php',
+        'App\\Models\\Package' => __DIR__ . '/../..' . '/app/Models/Package.php',
         'App\\Models\\Plan' => __DIR__ . '/../..' . '/app/Models/Plan.php',
         'App\\Models\\Program' => __DIR__ . '/../..' . '/app/Models/Program.php',
         'App\\Models\\Program_lms' => __DIR__ . '/../..' . '/app/Models/Program_lms.php',

@@ -292,8 +292,8 @@ class ClientController extends Controller
          ->addColumn('action', function ($row) {
            
           if (auth()->user()->hasRole('adminLMS')) {
-            $detail_btn = '<a href="' . route('LMS.edit', $row->id) . '" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
-            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="' . route('LMS.detail', $row->id) . '" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
+            $detail_btn = '<a href="' . route('LMS.detail', $row->id) . '" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="' . route('LMS.edit', $row->id) . '" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
 
             $actionBtn = $detail_btn . ' ' . $update_btn;
             return $actionBtn;
@@ -340,8 +340,8 @@ class ClientController extends Controller
             $actionBtn = $update_btn;
             return $actionBtn;
           }elseif (auth()->user()->hasRole('adminLMS')) {
-            $detail_btn = '<a href="' . route('LMS.edit', $row->id) . '" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
-            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="' . route('LMS.detail', $row->id) . '" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
+            $detail_btn = '<a href="' . route('LMS.detail', $row->id) . '" class="btn-sm btn-primary detailCoachee" data-id="' . $row->id . '">Detail</a>';
+            $update_btn = '<div style="line-height: 35px; margin-top: 5px;"><a href="' . route('LMS.edit', $row->id) . '" class="btn-sm btn-secondary editUser" data-id = "' . $row->id . '">Edit</a></div>';
 
             $actionBtn = $detail_btn . ' ' . $update_btn;
             return $actionBtn;
