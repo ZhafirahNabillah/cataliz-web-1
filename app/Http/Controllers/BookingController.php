@@ -208,7 +208,7 @@ class BookingController extends Controller
         Mail::send('booking/email_template', $data, function ($mail) use ($email) {
             $mail->to($email, 'no-reply')
                 ->subject("Booking Cataliz");
-            $mail->from('katum61199@gmail.com', 'Booking Cataliz');
+            $mail->from('halo@cataliz.id', 'Booking Cataliz');
         });
 
         Alert::success('Your booking has been successfully created! ', 'Please check your email to complete the payment');
@@ -295,19 +295,18 @@ class BookingController extends Controller
             'price' => $bookingData->price,
         );
 
-        $email = 'admin@cataliz.id';
-        Mail::send('booking/email_successbooking', $data, function ($mail) use ($email) {
+        $fromEmail = $bookingData->email;
+        $email = 'halo@cataliz.id';
+        Mail::send('booking/email_successbooking', $data, function ($mail) use ($email, $fromEmail) {
             $mail->to($email, 'no-reply')
                 ->subject("Booking Cataliz");
-            $mail->from('katum61199@gmail.com', 'Booking Cataliz');
+            $mail->from($fromEmail, 'Booking Cataliz');
         });
-
-
 
         $name = $bookingData->name;
         $email = $bookingData->email;
         $message = 'Saya sudah Booking kegiatan dan telah menyelesaikan Pembayaran';
-        $phone = '6285215269015';
+        $phone = '6282235850005';
         $urlSendWA = 'https://api.whatsapp.com/send?phone=' . $phone . '&text=Nama:%20' . $name . '%20%0AEmail:%20' . $email . '%20%0APesan:%20' . $message;
         return Redirect::to($urlSendWA);
     }
@@ -359,7 +358,7 @@ class BookingController extends Controller
             Mail::send('booking/email_verifbooking', $data, function ($mail) use ($email) {
                 $mail->to($email, 'no-reply')
                     ->subject("Booking Cataliz");
-                $mail->from('katum61199@gmail.com', 'Booking Cataliz');
+                $mail->from('halo@cataliz.id', 'Booking Cataliz');
             });
         } else {
             Booking::where('id', $id)->update([

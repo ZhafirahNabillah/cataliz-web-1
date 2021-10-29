@@ -84,7 +84,7 @@ Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/graduates/{id}/certificate', [GraduateController::class, 'create_certificate'])->name('graduates.certificate');
 
 //Booking controller
-Route::get('/booking/create', [BookingController::class, 'create'])->name('booking.create');
+Route::get('/booking', [BookingController::class, 'create'])->name('booking.create');
 Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 Route::get('/booking/email_successbooking', [BookingController::class, 'seeEmailSuccess'])->name('booking.email_successbooking');
 Route::get('/booking/email_verifbooking', [BookingController::class, 'seeEmailVerif'])->name('booking.email_verifbooking');
