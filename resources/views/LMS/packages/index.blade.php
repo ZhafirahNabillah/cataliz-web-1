@@ -13,9 +13,6 @@
   <div class="header-navbar-shadow"></div>
   <div class="content-wrapper">
     
-    
-
-    @role('adminLMS')
     <div class="content-header row">
       <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
@@ -39,7 +36,6 @@
         </div>
       </div>
     </div>
-    @endrole
 
     <div class="content-body">
       @if ($message = Session::get('success'))
@@ -52,7 +48,6 @@
       </div>
       @endif
 
-      @role('AdminLMS')
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
       <div class="">
         <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
@@ -87,7 +82,6 @@
               </section>
               <!--/ Basic table -->
             </div>
-            
           </div>
         </div>
       </div>
@@ -121,8 +115,6 @@
           </div>
         </div>
       </div>
-      <!-- End Modal -->
-      @endrole  
       <!-- END: Content-->
       @endsection
 
