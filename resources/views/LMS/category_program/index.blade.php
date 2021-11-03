@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Category Program')
+@section('title','Category')
 
 @section('content')
 
@@ -25,13 +25,14 @@
 								</li>
 								<li class="breadcrumb-item active">Category
 								</li>
+
 							</ol>
 						</div>
 					</div>
 				</div>
 			</div>
+
 		</div>
-    <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
 		<div class="content-body">
 			@if ($message = Session::get('success'))
 			<div class="alert alert-success alert-dissmisable">
@@ -42,10 +43,12 @@
 				</button>
 			</div>
 			@endif
-      <div class="row">
-				<div class="col-12 mb-1 mt-1">
-					<a href="javascript:;" class="create-new btn btn-primary createNewCategory">Add Program</a>
+			<div class="row">
+
+				<div class="col-12 mb-1">
+					<a href="javascript:;" class="create-new btn btn-primary createNewCategory">Add New</a>
 				</div>
+
 			</div>
 			<!-- Basic table -->
 			<section id="basic-datatable">
@@ -79,8 +82,8 @@
 							<input type="hidden" name="category_id" id="category_id">
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Program Name</label>
-									<input id="category" name="category" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Program Name Here .." aria-label="John Doe" />
+									<label class="form-label" for="basic-icon-default-fullname">Category Name</label>
+									<input id="category" name="category" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Type here .." aria-label="John Doe" />
 									<div id="category-error"></div>
 								</div>
 								<button type="submit" class="btn btn-primary data-submit mr-1" id="saveBtn" value="">Submit</button>
@@ -161,7 +164,7 @@
 			$('#saveBtn').val("create-category");
 			$('#permission_id').val('');
 			$('#CategoryForm').trigger("reset");
-			$('#modalHeading').html("Create New Program");
+			$('#modalHeading').html("Create New Category");
 			$('#name-error').empty();
 			$('#modals-slide-in').modal('show');
 		});
