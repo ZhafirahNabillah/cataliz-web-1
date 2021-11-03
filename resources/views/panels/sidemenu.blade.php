@@ -149,6 +149,15 @@
             </li>
             @endcan
 
+            @role('coachee')
+
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('dashboardLMS') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Todo">Go To LMS</span></a>
+            </li>
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+        
+            @endrole
+
             @role('adminLMS')
 
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">

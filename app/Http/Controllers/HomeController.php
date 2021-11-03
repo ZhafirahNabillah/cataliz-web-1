@@ -370,7 +370,7 @@ class HomeController extends Controller
       return view('home', compact('total_topic', 'total_participant', 'empty_profile'));
     }elseif (auth()->user()->hasRole('adminLMS')) {
 
-      return view('LMS.program.detail_program');
+      return view('LMS.homeLMS');
       }else {
       $total_topic = Topic::count();
       $topic = Topic::all()->pluck('id');
@@ -387,6 +387,11 @@ class HomeController extends Controller
       return $empty_profile;
       return view('home', compact('total_topic', 'total_participant', 'empty_profile'));
     }
+  }
+
+  public function dashboardLMS(Request $request)
+  {
+    return view('LMS.homeLMS');
   }
 
   public function show_upcoming_individual_events(Request $request)

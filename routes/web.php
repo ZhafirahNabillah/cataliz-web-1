@@ -36,6 +36,7 @@ use App\Http\Controllers\ProgramLmsController;
 use App\Http\Controllers\PackagesController;
 
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -97,6 +98,14 @@ Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin
 //Program Admin LMS
 Route::middleware(['auth'])->group(function () {
 	Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
+	Route::get('/packages/index', [PackageController::class, 'index'])->name('packages.index');
+});
+
+//Course LMS
+Route::middleware(['auth'])->group(function () {
+	Route::get('/course/index', [CourseController::class, 'index'])->name('course.index');
+	Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
+	Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
 });
 
 //Packages Admin LMS
@@ -177,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
 //Home controller
 Route::middleware(['auth'])->group(function () {
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+	Route::get('/dashboardLMS', [HomeController::class, 'dashboardLMS'])->name('dashboardLMS');
 	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
 	Route::get('/home/show_upcoming_individual_events', [HomeController::class, 'show_upcoming_individual_events'])->name('home.show_upcoming_individual_events');
 	Route::get('/home/show_upcoming_group_events', [HomeController::class, 'show_upcoming_group_events'])->name('home.show_upcoming_group_events');

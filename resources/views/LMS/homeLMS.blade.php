@@ -38,7 +38,7 @@
 
 @include('panels.navbar')
 
-@include('panels.sidemenu')
+@include('LMS.sidemenuLMS')
 
 <div class="app-content content ">
     <div class="content-wrapper">

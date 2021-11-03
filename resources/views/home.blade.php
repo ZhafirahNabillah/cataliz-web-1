@@ -1429,9 +1429,6 @@
       </section>
       <!-- /card -->
       @endrole
-      @role('adminLMS')
-      @endrole
-
 <div class="sidenav-overlay"></div>
 <div class="drag-target"></div>
 
