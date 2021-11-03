@@ -95,6 +95,7 @@ Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin
 
 //Program Admin LMS
 Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
+Route::post('/programLms/store', [ProgramLmsController::class, 'store'])->name('programLms.store');
 
 
 //Booking Controller Admin
