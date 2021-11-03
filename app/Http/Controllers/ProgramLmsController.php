@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Program_lms;
+use DataTables;
+use Alert;
 
 class ProgramLmsController extends Controller
 {
@@ -13,9 +15,24 @@ class ProgramLmsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('category_program.index');
+        if ($request->ajax()) {
+            $data = Program_lms::all();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btnEdit = '<a href="javascript:;" id="editCategory" class="btn btn-primary btn-sm">Edit</a>';
+                    $btnDelete = '<a href="javascript:void(0)" class="btn btn-danger btn-sm">Delete</a>';
+                    $btnAction = $btnEdit . ' ' . $btnDelete;
+                    return $btnAction;
+                })
+
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('LMS.category_program.index');
+
     }
 
     /**
@@ -43,7 +60,9 @@ class ProgramLmsController extends Controller
 
         $input = $request->all();
         $programLmsData = Program_lms::create($input);
-        return redirect('LMS/');
+
+        Alert::success('Your program, has been successfully created!');
+        return redirect('programLms/index');
     }
 
     /**

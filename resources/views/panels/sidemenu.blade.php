@@ -168,6 +168,7 @@
             </li>
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('LMS.packages.index') }}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Package</span></a>
+
             </li>
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href=""><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Course</span></a>
