@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Program_lms;
+use App\Models\Package;
+use DataTables;
 
 class PackagesController extends Controller
 {
@@ -13,8 +14,28 @@ class PackagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+         //
+         if ($request->ajax()) {
+            $data = Package::all();
+  
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('action', function ($row) {
+                if (auth()->user()->hasRole('adminLMS')) {
+                $edit_btn = '<a href="javascript:;" id="editProgram" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
+                $delete_btn = '<a href="javascript:;" id="deleteProgram" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
+                $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailProgram" class="btn-sm btn-warning">Detail</a>';
+  
+                $actionBtn = $edit_btn . ' ' . $delete_btn . ' ' . $detail_btn;
+                return $actionBtn;
+              } 
+              })
+              ->rawColumns(['action'])
+              ->make(true);
+          }
+  
         return view('LMS.packages.index');
     }
 
