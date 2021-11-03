@@ -33,6 +33,8 @@ use App\Http\Controllers\BatchController;
 use App\Http\Controllers\LogActivityController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ProgramLmsController;
+use App\Http\Controllers\PackagesController;
+
 
 
 /*
@@ -94,9 +96,22 @@ Route::get('/booking/verif', [BookingController::class, 'verif'])->name('booking
 Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin'])->name('booking.update_admin');
 
 //Program Admin LMS
-Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
-Route::post('/programLms/store', [ProgramLmsController::class, 'store'])->name('programLms.store');
+Route::middleware(['auth'])->group(function () {
+	Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
+  Route::post('/programLms/store', [ProgramLmsController::class, 'store'])->name('programLms.store');
+});
 
+//Course LMS
+Route::middleware(['auth'])->group(function () {
+	Route::get('/course/index', [CourseController::class, 'index'])->name('course.index');
+	Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
+	Route::post('/course/store', [CourseController::class, 'store'])->name('course.store');
+});
+
+//Packages Admin LMS
+Route::middleware(['auth'])->group(function () {
+	Route::get('/LMS/packages/index', [PackagesController::class, 'index'])->name('LMS.packages.index');
+});
 
 //Booking Controller Admin
 Route::middleware(['auth'])->group(function () {
@@ -106,6 +121,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/{id}/booking/invoice', [BookingController::class, 'invoice'])->name('booking.invoice');
 	//Route::resource('booking', BookingController::class);
 });
+
 
 //Roles and permissions controller
 Route::middleware(['auth'])->group(function () {
@@ -170,6 +186,7 @@ Route::middleware(['auth'])->group(function () {
 //Home controller
 Route::middleware(['auth'])->group(function () {
 	Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+	Route::get('/dashboardLMS', [HomeController::class, 'dashboardLMS'])->name('dashboardLMS');
 	Route::get('/home/show_agendas_list', [HomeController::class, 'show_agendas_data'])->name('home.show_agendas_list');
 	Route::get('/home/show_upcoming_individual_events', [HomeController::class, 'show_upcoming_individual_events'])->name('home.show_upcoming_individual_events');
 	Route::get('/home/show_upcoming_group_events', [HomeController::class, 'show_upcoming_group_events'])->name('home.show_upcoming_group_events');
@@ -217,6 +234,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/show_coachee_list', [ClientController::class, 'show_coachee_list'])->name('show_coachee_list');
 	Route::get('/show_admin_list', [ClientController::class, 'show_admin_list'])->name('show_admin_list');
 	Route::get('/show_trainer_list', [ClientController::class, 'show_trainer_list'])->name('show_trainer_list');
+	Route::get('/show_adminLMS_list', [ClientController::class, 'show_adminLMS_list'])->name('show_adminLMS_list');
 	Route::get('/show_mentor_list', [ClientController::class, 'show_mentor_list'])->name('show_mentor_list');
 	Route::post('/clients/{client}/update', [ClientController::class, 'store'])->name('clients.store');
 	Route::get('/clients/{client}/show_upcoming', [ClientController::class, 'show_upcoming_list'])->name('clients.show_upcoming');
@@ -241,6 +259,8 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/restore_all_user', [ClientController::class, 'restore_all_user'])->name('restore_all_user');
 	Route::post('/delete_user_permanently/{id}', [ClientController::class, 'delete_user_permanently'])->name('delete_user_permanently');
 	Route::post('/delete_all_permanently', [ClientController::class, 'delete_all_permanently'])->name('delete_all_permanently');
+	Route::get('/{id}/LMS/edit', [ClientController::class, 'editLMS'])->name('LMS.edit');
+	Route::get('/{id}/LMS/detail', [ClientController::class, 'showLMS'])->name('LMS.detail');
 });
 
 //Topic Controller

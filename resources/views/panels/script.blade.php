@@ -34,6 +34,7 @@
 'exercise.show', 'topic','category.index', 'result.index', 'report.index', 'graduates.index', 'program.index',
 'program.show', 'show_deleted_admin_list', 'log_activity.index','booking.index','programLms.index']))
 
+
 <!-- BEGIN: Vendor JS-->
 
 <!-- BEGIN Vendor JS-->

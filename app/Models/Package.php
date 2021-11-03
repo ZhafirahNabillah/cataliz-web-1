@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Program_lms extends Model
+class Package extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'program_name'
+        'package_name',
+        'program_id'
     ];
 
-    public function packages()
+    public function programs()
     {
-        return $this->hasMany('App\Models\Package');
+        return $this->belongsTo('App\Models\program_lms', 'program_id', 'id');
     }
 }

@@ -149,6 +149,15 @@
             </li>
             @endcan
 
+            @role('coachee')
+
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route('dashboardLMS') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Todo">Go To LMS</span></a>
+            </li>
+            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+        
+            @endrole
+
             @role('adminLMS')
 
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
@@ -158,7 +167,8 @@
                 <a class="d-flex align-items-center" href="{{ route('programLms.index') }}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Todo">Category Program</span></a>
             </li>
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href=""><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Package</span></a>
+                <a class="d-flex align-items-center" href="{{ route('LMS.packages.index') }}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Package</span></a>
+
             </li>
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href=""><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Course</span></a>

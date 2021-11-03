@@ -108,5 +108,9 @@ class RoleHasPermissionsSeeder extends Seeder
         $role_manager->givePermissionTo(['activity-log']);
         //give permission to manager to documentation
         $role_manager->givePermissionTo(['list-docs', 'update-docs', 'detail-docs']);
+
+        $role_adminLMS = Role::where('name', 'adminLMS')->first();
+        //give permission to adminLMS to create,update,delete clients
+        $role_adminLMS->givePermissionTo(['list-user']);
     }
 }

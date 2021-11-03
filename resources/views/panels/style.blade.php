@@ -28,6 +28,7 @@
 'result.index','profil.detail', 'report.index', 'graduates.index', 'program.index', 'program.show',
 'show_deleted_admin_list', 'log_activity.index','booking.index','programLms.index']))
 
+
 <!-- BEGIN: Vendor CSS-->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/vendors.min.css') }}">
 <link rel="stylesheet" type="text/css"

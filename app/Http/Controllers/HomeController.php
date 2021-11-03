@@ -389,6 +389,11 @@ class HomeController extends Controller
     }
   }
 
+  public function dashboardLMS(Request $request)
+  {
+    return view('LMS.homeLMS');
+  }
+
   public function show_upcoming_individual_events(Request $request)
   {
     if (auth()->user()->hasRole('admin')) {
