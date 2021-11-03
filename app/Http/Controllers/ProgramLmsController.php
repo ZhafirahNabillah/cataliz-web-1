@@ -15,7 +15,7 @@ class ProgramLmsController extends Controller
      */
     public function index()
     {
-        return view('LMS.ourProgramLMS');
+        return view('LMS.category_program.index');
     }
 
     /**
