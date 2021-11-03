@@ -6,7 +6,7 @@
 
 @include('panels.navbar')
 
-@include('panels.sidemenu')
+@include('LMS.sidemenuLMS')
 <!-- BEGIN: Content-->
 <div class="app-content content ">
   <div class="content-overlay"></div>
@@ -49,10 +49,12 @@
       @endif
 
       <img class="img-fluid" src=" {{asset('assets\images\icons\user\banner.png')}}" alt="Card image cap" />
-      <div class="">
-        <button style="margin-top: 10px;margin-bottom: 10px;" type="submit"
-          class="btn btn-primary data-submit mr-1 createNewUser">Add New Packages</button>
-      </div>
+
+	  <div class="row">
+		<div class="col-12 mt-1 mb-1">
+			<a href="javascript:;" class="create-new btn btn-primary createNewPackage">Add New Packages</a>
+		</div>
+	</div>		
       <div class="card">
         <div class="card-body">
               <section id="basic-datatable">
@@ -74,43 +76,35 @@
                     </div>
                   </div>
                 </div>
-              </section>
-              <!--/ Basic table -->
-        </div>
-      </div>
-      <!-- /panel  -->
+				<!-- Modal to add new record -->
+				<div class="modal modal-slide-in fade" id="add_modal_package" aria-hidden="true">
+					<div class="modal-dialog sidebar-sm">
+						<form class="add-new-record modal-content pt-0" id="PackageForm" name="PackageForm">
 
-      <!-- Modal Detail Trainer -->
-      <div class="modal modal-slide-in fade" id="modal-trainer-detail" role="dialog" aria-hidden="true">
-        <div class="modal-dialog sidebar-sm" role="document">
-          <div class="modal-content">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalHeadingTrainer"></h5>
-            </div>
-
-            <div class="modal-body flex-grow-1">
-              <div class="card-body">
-                <dl class="row">
-                  <dt class="col-sm-6">Full Name</dt>
-                </dl>
-                <dl class="row">
-                  <small class="col-sm-12 name"></small>
-                </dl>
-                <dl class="row">
-                  <dt class="col-sm-6">Program Name</dt>
-                </dl>
-              </div>
-              <!-- </Card modal>-->
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- END: Content-->
-      @endsection
-      @push('scripts')
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
+							<div class="modal-header mb-1" style="background-color: #CDC8FF;">
+								<h5 class="modal-title" id="modalHeading"></h5>
+							</div>
+							<input type="hidden" name="package_id" id="package_id">
+							<div class="modal-body flex-grow-1">
+								<div class="form-group">
+									<label class="form-label" for="basic-icon-default-fullname">Program Name</label>
+									<input id="program" name="program" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Type here .." aria-label="John Doe" />
+									<div id="program-error"></div>
+								</div>
+								<button type="submit" class="btn btn-primary data-submit mr-1" id="savePackageBtn" value="">Submit</button>
+								<button type="reset" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+							</div>
+					<!-- </form>-->
+				</div>
+			</div>
+		<!-- End Modal -->
+        </section>
+        <!--/ Basic table -->
+    </div>
+</div>
+@endsection
+@push('scripts')
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css" id="theme-styles">
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@10.5.0/dist/sweetalert2.all.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
@@ -165,13 +159,13 @@
 		});
 
 		// create
-		$('body').on('click', '.createNewProgram', function() {
-			$('#saveProgramBtn').val("create-program");
+		$('body').on('click', '.createNewPackage', function() {
+			$('#savePackageBtn').val("create-package");
 			$('#program_id').val('');
 			$('#ProgramForm').trigger("reset");
-			$('#modalHeading').html("Create New Program");
+			$('#modalHeading').html("Create New Package");
 			$('#program-error').empty();
-			$('#add_modal_program').modal('show');
+			$('#add_modal_package').modal('show');
 		});
 
 		// edit
@@ -189,8 +183,8 @@
 		});
 
 		// save data
-		$('#saveProgramBtn').click(function() {
-			$('#ProgramForm').validate({
+		$('#savePackageBtn').click(function() {
+			$('#PackageForm').validate({
 				debug: false,
 				errorClass: "error fail-alert",
 				validClass: "valid success-alert",
@@ -201,17 +195,17 @@
 				},
 				messages: {
 					program: {
-						required: "Program is required!"
+						required: "Package is required!"
 					}
 				},
 				errorPlacement: function(error, element) {
-					if (element.attr("program") == "program") {
-						error.appendTo($("#program-error"));
+					if (element.attr("package") == "package") {
+						error.appendTo($("#package-error"));
 					}
 				},
 				submitHandler: function(form) {
 					$(this).html('Sending..');
-					var data = $('#ProgramForm').serialize();
+					var data = $('#PackageForm').serialize();
 					console.log(data);
 
 					$.ajax({
@@ -221,18 +215,18 @@
 						dataType: 'json',
 						success: function(data) {
 
-							$('#ProgramForm').trigger("reset");
-							$('#saveProgramBtn').html('Submit');
-							$('#add_modal_program').modal('hide');
-							if ($('#saveProgramBtn').val() == 'create-program') {
+							$('#PackageForm').trigger("reset");
+							$('#savePackageBtn').html('Submit');
+							$('#add_modal_package').modal('hide');
+							if ($('#savePackageBtn').val() == 'create-package') {
 								Swal.fire({
 									icon: 'success',
-									title: 'Program created successfully!',
+									title: 'Package created successfully!',
 								});
-							} else if ($('#saveProgramBtn').val() == 'edit-program') {
+							} else if ($('#savePackageBtn').val() == 'edit-package') {
 								Swal.fire({
 									icon: 'success',
-									title: 'Program updated successfully!',
+									title: 'Package updated successfully!',
 								});
 							}
 							table.draw();
@@ -240,7 +234,7 @@
 						},
 						error: function(data) {
 							console.log('Error:', data);
-							$('#saveProgramBtn').html('Submit');
+							$('#savePackageBtn').html('Submit');
 						}
 					});
 					return false;
@@ -249,14 +243,14 @@
 		});
 
 		// delete
-		$('body').on('click', '#deleteProgram', function(e) {
+		$('body').on('click', '#deletePackage', function(e) {
 
-			var program_id = $(this).data("id");
-			console.log(program_id);
+			var package_id = $(this).data("id");
+			console.log(package_id);
 
 			Swal.fire({
 				title: "Are you sure?",
-				text: "You'll delete this category",
+				text: "You'll delete this package",
 				icon: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
@@ -273,7 +267,7 @@
 
 					$.ajax({
 						type: "DELETE",
-						url: "" + '/program/' + program_id,
+						url: "" + '/package/' + package_id,
 						success: function(data) {
 							Swal.fire({
 								icon: 'success',

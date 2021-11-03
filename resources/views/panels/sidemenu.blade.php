@@ -158,21 +158,6 @@
         
             @endrole
 
-            @role('adminLMS')
-
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{ route('clients.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Todo">Users</span></a>
-            </li>
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{ route('programLms.index') }}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Todo">Category Program</span></a>
-            </li>
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{ route('LMS.packages.index') }}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Package</span></a>
-            </li>
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href=""><i data-feather="check-square"></i><span class="menu-title text-truncate" data-i18n="Todo">Course</span></a>
-            </li>
-            @endrole
             <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-email.html"><i data-feather="mail"></i><span class="menu-title text-truncate" data-i18n="Email">Email</span></a>
                 </li>
                 <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i data-feather="message-square"></i><span class="menu-title text-truncate" data-i18n="Chat">Chat</span></a>

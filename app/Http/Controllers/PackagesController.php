@@ -24,9 +24,9 @@ class PackagesController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
                 if (auth()->user()->hasRole('adminLMS')) {
-                $edit_btn = '<a href="javascript:;" id="editProgram" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
-                $delete_btn = '<a href="javascript:;" id="deleteProgram" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
-                $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailProgram" class="btn-sm btn-warning">Detail</a>';
+                $edit_btn = '<a href="javascript:;" id="editPackage" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
+                $delete_btn = '<a href="javascript:;" id="deletePackage" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
+                $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailPackage" class="btn-sm btn-warning">Detail</a>';
   
                 $actionBtn = $edit_btn . ' ' . $delete_btn . ' ' . $detail_btn;
                 return $actionBtn;
@@ -119,5 +119,9 @@ class PackagesController extends Controller
     public function destroy($id)
     {
         //
+        $package = Package::find($id);
+        $package->delete();
+
+        return response()->json(['success' => 'Package deleted!']);
     }
 }

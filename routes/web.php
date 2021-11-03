@@ -110,7 +110,7 @@ Route::middleware(['auth'])->group(function () {
 
 //Packages Admin LMS
 Route::middleware(['auth'])->group(function () {
-	Route::get('/LMS/packages/index', [PackagesController::class, 'index'])->name('LMS.packages.index');
+	Route::resource('packages', PackagesController::class);
 });
 
 //Booking Controller Admin

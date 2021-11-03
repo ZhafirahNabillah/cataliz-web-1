@@ -32,7 +32,7 @@
 'class.show', 'profil','auth.register', 'group.show', 'docs.index',
 'topic.index','topic.show','exercise.index','exercise.create',
 'exercise.show', 'topic','category.index', 'result.index', 'report.index', 'graduates.index', 'program.index',
-'program.show', 'show_deleted_admin_list', 'log_activity.index','booking.index','LMS.course.index','LMS.packages.index']))
+'program.show', 'show_deleted_admin_list', 'log_activity.index','booking.index','LMS.course.index','packages.index']))
 
 <!-- BEGIN: Vendor JS-->
 
