@@ -1,6 +1,6 @@
 @extends('layouts.layoutVerticalMenu')
 
-@section('title','Add New Course')
+@section('title','Edit Course')
 
 @push('styles')
 
@@ -26,7 +26,7 @@
                 </li>
                 <li class="breadcrumb-item"><a href="/">Course</a>
                 </li>
-                <li class="breadcrumb-item active">Add New Course
+                <li class="breadcrumb-item active">Edit Course
                 </li>
               </ol>
             </div>
@@ -96,7 +96,7 @@
                   <input type="file" class="form-control" id="customFile" />
                 </div><br>
               </div>
-              <Button type="submit" class="btn btn-primary">Submit</Button>
+              <Button type="submit" class="btn btn-primary">Update</Button>
               <Button type="submit" class="btn btn-secondary">Cancel</Button>
             </form>
           </div>
