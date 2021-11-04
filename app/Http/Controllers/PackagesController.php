@@ -26,7 +26,7 @@ class PackagesController extends Controller
                 if (auth()->user()->hasRole('adminLMS')) {
                 $edit_btn = '<a href="javascript:;" id="editPackage" class="btn-sm btn-primary" data-id="' . $row->id . '" >Update</a>';
                 $delete_btn = '<a href="javascript:;" id="deletePackage" class="btn-sm btn-danger" data-id="' . $row->id . '" >Delete</a>';
-                $detail_btn = '<a href="'.route('program.show', $row->id).'" id="detailPackage" class="btn-sm btn-warning">Detail</a>';
+                $detail_btn = '<a href="'.route('packages.show', $row->id).'" id="detailPackage" class="btn-sm btn-warning">Detail</a>';
   
                 $actionBtn = $edit_btn . ' ' . $delete_btn . ' ' . $detail_btn;
                 return $actionBtn;
@@ -57,14 +57,13 @@ class PackagesController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'program_name' => 'required',
-
-        ]);
-
-        $input = $request->all();
-        $programLmsData = Program_lms::create($input);
-        return redirect('LMS/');
+        Package::updateOrCreate(
+            ['id' => $request->input('package_id')],
+            ['package_name' => $request->input('package')],
+            ['program_id' => $request->input('programId')]
+          );
+  
+          return response()->json(['success' => 'Program saved successfully!']);
     }
 
     /**
@@ -73,9 +72,11 @@ class PackagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Package $package, Request $request)
     {
-        //
+        $data = Package::all();
+  
+        return view('LMS.packages.detail', compact('package'));
     }
 
     /**
@@ -86,8 +87,8 @@ class PackagesController extends Controller
      */
     public function edit($id)
     {
-        $data = Program_lms::find($id);
-        return view('LMS.edit', compact('data'));
+        $package = Package::find($id);
+        return response()->json($package);
     }
 
     /**
@@ -99,15 +100,7 @@ class PackagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'program_name' => 'required',
-
-        ]);
-
-        Booking::where('id', $id)->update([
-            'program_name' => $request->program_name,
-        ]);
-        return redirect('LMS/edit');
+        //
     }
 
     /**

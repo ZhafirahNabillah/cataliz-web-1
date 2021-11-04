@@ -26,7 +26,7 @@
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a>
                 </li>
-                <li class="breadcrumb-item"><a href="/">Packages</a>
+                <li class="breadcrumb-item"><a href="{{ route('packages.index') }}">Packages</a>
                 </li>
                 <li class="breadcrumb-item active">Add New Packages
                 </li>
@@ -161,24 +161,24 @@
 		// create
 		$('body').on('click', '.createNewPackage', function() {
 			$('#savePackageBtn').val("create-package");
-			$('#program_id').val('');
-			$('#ProgramForm').trigger("reset");
+			$('#package_id').val('');
+			$('#PackageForm').trigger("reset");
 			$('#modalHeading').html("Create New Package");
-			$('#program-error').empty();
+			$('#package-error').empty();
 			$('#add_modal_package').modal('show');
 		});
 
 		// edit
-		$('body').on('click', '#editProgram', function() {
-			var program_id = $(this).data('id');
-			$.get("" + '/program/' + program_id + '/edit', function(data) {
+		$('body').on('click', '#editPackage', function() {
+			var package_id = $(this).data('id');
+			$.get("" + '/packages/' + package_id + '/edit', function(data) {
 				console.log(data);
-				$('#modalHeading').html("Edit Program");
-				$('#saveProgramBtn').val("edit-program");
-				$('#program_id').val(data.id);
-				$('#program').val(data.program_name);
-				$('#program-error').empty();
-				$('#add_modal_program').modal('show');
+				$('#modalHeading').html("Edit Package");
+				$('#savePackageBtn').val("edit-package");
+				$('#package_id').val(data.id);
+				$('#package').val(data.package_name);
+				$('#package-error').empty();
+				$('#add_modal_package').modal('show');
 			})
 		});
 
@@ -267,7 +267,7 @@
 
 					$.ajax({
 						type: "DELETE",
-						url: "" + '/package/' + package_id,
+						url: "" + '/packages/' + package_id,
 						success: function(data) {
 							Swal.fire({
 								icon: 'success',

@@ -20,13 +20,13 @@
                 </a>
             </li>
 
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+            <li class="nav-item {{ 'clients' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('clients.index') }}"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="Todo">Users</span></a>
             </li>
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('programLms.index') }}"><i data-feather="book"></i><span class="menu-title text-truncate" data-i18n="Todo">Category Program</span></a>
             </li>
-            <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
+            <li class="nav-item {{ 'packages' == request()->path() ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route('packages.index') }}"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Todo">Package</span></a>
             </li>
             <li class="nav-item {{ 'plans' == request()->path() ? 'active' : '' }}">
