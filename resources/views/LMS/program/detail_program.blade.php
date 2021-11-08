@@ -88,30 +88,30 @@
                                     <div style="width:100%;height:75px;border:1px solid #818181;padding:10px; border-radius:5px; background-color:#E6E3FF;align-items: center">
                                         <center style="font-family:roboto; font-weight:normal; font-size:35px; font-color:#656565;">Topic 1</center>
                                     </div><br>
-                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
-                                        <img src="{{ url('/assets/images/pdf.png') }}" style="width:35px; height:35px;">
-                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
-                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
-                                    </div>
-                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
-                                        <img src="{{ url('/assets/images/video.png') }}" style="width:35px; height:30px;">
-                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
-                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
+                                    <div style="width:100%;height:235px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <img src="{{ url('/assets/images/coach.png') }}" style="width:35px; height:35px;">
+                                        <a style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565; padding-left:10px">Coach Name</a><br><br>
+                                        <a style="font-family:roboto; font-weight:bold; font-size:20px; font-color:#656565;">Materi Design UI/UX User Experience</a><br><br>
+                                        <a style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565; margin-right:20px">StandWithUs is looking for an experienced, talented, hard-working... </a><br><br>
+                                        <a style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565;">Oct 27 . 6 minutes . </a>
+                                        <a href="#" style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565;">Download PDF</a><br>
+                                        <iframe align="right" width="350" height="200px" style="text-align:right; position:relative; margin-top:-170px"
+                                        src="https://www.youtube.com/embed/mUJIRyF-eKQ"></iframe>
                                     </div><br>
 
                                     <div style="width:100%;height:75px;border:1px solid #818181;padding:10px; border-radius:5px; background-color:#E6E3FF;align-items: center">
                                         <center style="font-family:roboto; font-weight:normal; font-size:35px; font-color:#656565;">Topic 2</center>
                                     </div><br>
-                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
-                                        <img src="{{ url('/assets/images/pdf.png') }}" style="width:35px; height:35px;">
-                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
-                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
-                                    </div>
-                                    <div style="width:100%;height:120px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
-                                        <img src="{{ url('/assets/images/video.png') }}" style="width:35px; height:30px;">
-                                        <a style="font-family:roboto; font-weight:normal; font-size:15px; font-color:#656565; padding-left:10px">Materi Design UI/UX User Experience</a><br><br>
-                                        <button type="button" class="btn btn-primary btn-sm">Mark as Done</button>
-                                    </div>
+                                    <div style="width:100%;height:235px;border:1px solid #818181;padding:20px; border-radius:5px; background-color:#E6E3FF;align-items: center">
+                                        <img src="{{ url('/assets/images/coach.png') }}" style="width:35px; height:35px;">
+                                        <a style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565; padding-left:10px">Coach Name</a><br><br>
+                                        <a style="font-family:roboto; font-weight:bold; font-size:20px; font-color:#656565;">Materi Design UI/UX User Experience</a><br><br>
+                                        <a style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565; margin-right:20px">StandWithUs is looking for an experienced, talented, hard-working... </a><br><br>
+                                        <a style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565;">Oct 27 . 6 minutes . </a>
+                                        <a href="#" style="font-family:roboto; font-weight:bold; font-size:15px; font-color:#656565;">Download PDF</a><br>
+                                        <iframe align="right" width="350" height="200px" style="text-align:right; position:relative; margin-top:-170px"
+                                        src="https://www.youtube.com/embed/mUJIRyF-eKQ"></iframe>
+                                    </div><br>
                                     
                                 </div>
                             </div>
