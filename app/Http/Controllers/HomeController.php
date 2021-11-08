@@ -370,7 +370,7 @@ class HomeController extends Controller
       return view('home', compact('total_topic', 'total_participant', 'empty_profile'));
     }elseif (auth()->user()->hasRole('adminLMS')) {
 
-      return view('LMS.program.detail_program');
+      return view('LMS.email');
       }else {
       $total_topic = Topic::count();
       $topic = Topic::all()->pluck('id');
