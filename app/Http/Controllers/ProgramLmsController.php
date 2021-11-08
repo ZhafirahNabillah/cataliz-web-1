@@ -38,6 +38,7 @@ class ProgramLmsController extends Controller
     {
         return view('LMS.program.ourProgramLMS');
     }
+
     public function detailProgram()
     {
         return view('LMS.program.detail_program');
