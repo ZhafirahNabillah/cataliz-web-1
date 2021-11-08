@@ -98,7 +98,8 @@ Route::put('/{id}/booking/update_admin', [BookingController::class, 'updateAdmin
 //Program Admin LMS
 Route::middleware(['auth'])->group(function () {
 	Route::get('/programLms/index', [ProgramLmsController::class, 'index'])->name('programLms.index');
-  Route::post('/programLms/store', [ProgramLmsController::class, 'store'])->name('programLms.store');
+	Route::post('/programLms/store', [ProgramLmsController::class, 'store'])->name('programLms.store');
+	Route::get('/{id}/programLms/edit', [ProgramLmsController::class, 'edit'])->name('programLms.edit');
 });
 
 //Course LMS

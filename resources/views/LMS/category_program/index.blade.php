@@ -82,8 +82,8 @@
 
 							<div class="modal-body flex-grow-1">
 								<div class="form-group">
-									<label class="form-label" for="basic-icon-default-fullname">Category Name</label>
-									<input id="category" name="program_name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Type here .." aria-label="John Doe" />
+									<label class="form-label" for="basic-icon-default-fullname">Name Program</label>
+									<input id="program_name" name="program_name" type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="Type here .." aria-label="John Doe" />
 									<div id="category-error"></div>
 								</div>
 								<button type="submit" class="btn btn-primary data-submit mr-1">Submit</button>
@@ -93,6 +93,7 @@
 					</div>
 				</div>
 				<!-- End Modal -->
+
 			</section>
 			<!--/ Basic table -->
 
@@ -158,12 +159,10 @@
 			}
 		});
 
-		// create
+		// from create
 		$('body').on('click', '.createNewCategory', function() {
-			$('#saveBtn').val("create-category");
-			$('#permission_id').val('');
 			$('#CategoryForm').trigger("reset");
-			$('#modalHeading').html("Create New Category");
+			$('#modalHeading').html("Create New Category Program");
 			$('#name-error').empty();
 			$('#modals-slide-in').modal('show');
 		});
@@ -171,12 +170,12 @@
 		// edit
 		$('body').on('click', '#editCategory', function() {
 			console.log('tes');
-			var category_id = $(this).data('id');
-			$.get("" + '/category/' + category_id + '/edit', function(data) {
-				$('#modalHeading').html("Edit Category");
+			var program_id = $(this).data('id');
+			$.get("" + '/programLms/' + program_id + '/edit', function(data) {
+				$('#modalHeading').html("Edit Category Program");
 				$('#saveBtn').val("edit-category");
-				$('#category_id').val(data.id);
-				$('#category').val(data.category);
+				$('#program_id').val(data.id);
+				$('#program_name').val(data.program_name);
 				$('#category-error').empty();
 				$('#modals-slide-in').modal('show');
 			})

@@ -22,7 +22,7 @@ class ProgramLmsController extends Controller
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btnEdit = '<a href="javascript:;" id="editCategory" class="btn btn-primary btn-sm">Edit</a>';
+                    $btnEdit = '<a href="javascript:;" id="editCategory" data-id="' . $row->id . '" class="btn btn-primary btn-sm">Edit</a>';
                     $btnDelete = '<a href="javascript:void(0)" class="btn btn-danger btn-sm">Delete</a>';
                     $btnAction = $btnEdit . ' ' . $btnDelete;
                     return $btnAction;
@@ -32,7 +32,6 @@ class ProgramLmsController extends Controller
                 ->make(true);
         }
         return view('LMS.category_program.index');
-
     }
 
     /**
