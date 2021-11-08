@@ -32,7 +32,15 @@ class ProgramLmsController extends Controller
                 ->make(true);
         }
         return view('LMS.category_program.index');
+    }
 
+    public function indexCoach()
+    {
+        return view('LMS.program.ourProgramLMS');
+    }
+    public function detailProgram()
+    {
+        return view('LMS.program.detail_program');
     }
 
     /**
